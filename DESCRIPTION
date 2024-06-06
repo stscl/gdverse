@@ -10,13 +10,24 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Imports: 
+    classInt,
     dplyr,
     knitr,
     magrittr,
     pander,
+    parallel,
     purrr,
     stats,
     tibble,
     tidyr,
     utils
-URL: https://spatlyu.github.io/gdverse/
+URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
+Suggests: 
+    ggspatial,
+    rmarkdown,
+    sf,
+    terra,
+    tidyterra,
+    tidyverse,
+    tmap
+VignetteBuilder: knitr

@@ -1,0 +1,192 @@
+---
+title: "optimal parameters geographic detector(OPGD)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{OPGD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+### Load data and package
+
+
+``` r
+library(terra)
+library(tidyverse)
+library(gdverse)
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc
+## class       : SpatRaster 
+## dimensions  : 418, 568, 13  (nrow, ncol, nlyr)
+## resolution  : 1000, 1000  (x, y)
+## extent      : -92742.16, 475257.8, 3591385, 4009385  (xmin, xmax, ymin, ymax)
+## coord. ref. : Asia_North_Albers_Equal_Area_Conic 
+## source      : FVC.tif 
+## names       :       fvc,   premax,   premin,   presum,    tmpmax,     tmpmin, ... 
+## min values  : 0.1363270, 109.8619,  2.00000, 3783.904,  9.289694, -11.971293, ... 
+## max values  : 0.9596695, 249.9284, 82.74928, 8549.112, 26.781870,   1.322163, ...
+```
+
+
+``` r
+names(fvc)
+##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"   
+## [10] "lulc"   "elev"   "slope"  "aspect"
+```
+
+### Convert data from `SpatRaster` to `tibble`
+
+
+``` r
+fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
+head(fvc)
+## # A tibble: 6 × 13
+##     fvc premax premin presum tmpmax tmpmin tmpavg    pop   ntl  lulc  elev slope aspect
+##   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+## 1 0.198   163.   7.95  3956.   20.8  -7.53   8.05  1.90   6.60    10 1758.  2.65  176. 
+## 2 0.193   161.   6.80  3892.   20.7  -7.55   8.02  1.20   4.91    10 1754.  3.45  170. 
+## 3 0.192   160.   5.24  3842.   20.9  -7.48   8.15  0.547  3.75    10 1722.  3.96  139. 
+## 4 0.189   159.   5     3808.   21.1  -7.39   8.35  0.542  3.99    10 1672.  2.90  111. 
+## 5 0.208   164.   9.98  4051.   20.6  -7.59   7.97 10.4    7.10    10 1780.  1.94   99.5
+## 6 0.196   163.   8.15  3973.   20.7  -7.53   8.03  9.31   6.56    10 1755.  3.01   99.6
+```
+
+### Determine optimal discretization parameters
+
+Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
+We can use `gd_bestunidisc` to discretize them based on geodetector q-statistic.
+
+
+``` r
+tictoc::tic()
+g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
+tictoc::toc()
+## 15.98 sec elapsed
+```
+
+
+``` r
+g
+## $x
+##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg"
+## [10] "tmpmax" "tmpmin"
+## 
+## $k
+##  [1] 15 15 15 15 13 14 15 15 15 15 15
+## 
+## $method
+##  [1] "equal"    "quantile" "fisher"   "quantile" "fisher"   "fisher"   "fisher"  
+##  [8] "fisher"   "quantile" "quantile" "fisher"  
+## 
+## $disv
+## # A tibble: 136,243 × 11
+##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
+##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
+##  1      8    12     3     1      6      2      1     4      4      8      3
+##  2      8    12     2     1      5      1      1     6      4      8      3
+##  3      6    12     2     1      5      1      1     6      4      9      3
+##  4      5    12     2     1      5      1      1     5      5     10      3
+##  5      5    13     3     4      6      2      1     3      4      8      3
+##  6      5    12     3     3      6      2      1     5      4      8      3
+##  7      6    12     2     1      5      1      1     7      4      9      3
+##  8      7    12     2     1      5      1      1     6      5     10      3
+##  9      8    12     2     1      5      1      1     3      5     10      3
+## 10      7    12     3     1      5      1      1     5      5     10      3
+## # ℹ 136,233 more rows
+```
+
+``` r
+new.fvc = g$disv
+new.fvc
+## # A tibble: 136,243 × 11
+##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
+##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
+##  1      8    12     3     1      6      2      1     4      4      8      3
+##  2      8    12     2     1      5      1      1     6      4      8      3
+##  3      6    12     2     1      5      1      1     6      4      9      3
+##  4      5    12     2     1      5      1      1     5      5     10      3
+##  5      5    13     3     4      6      2      1     3      4      8      3
+##  6      5    12     3     3      6      2      1     5      4      8      3
+##  7      6    12     2     1      5      1      1     7      4      9      3
+##  8      7    12     2     1      5      1      1     6      5     10      3
+##  9      8    12     2     1      5      1      1     3      5     10      3
+## 10      7    12     3     1      5      1      1     5      5     10      3
+## # ℹ 136,233 more rows
+```
+
+The `new.fvc`  is the discrete result of the optimal discretization parameter based on the Q statistic of the geographic detector,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+
+
+``` r
+new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
+new.fvc
+## # A tibble: 136,243 × 13
+##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
+##    <dbl> <dbl>  <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
+##  1 0.198    10      8    12     3     1      6      2      1     4      4      8      3
+##  2 0.193    10      8    12     2     1      5      1      1     6      4      8      3
+##  3 0.192    10      6    12     2     1      5      1      1     6      4      9      3
+##  4 0.189    10      5    12     2     1      5      1      1     5      5     10      3
+##  5 0.208    10      5    13     3     4      6      2      1     3      4      8      3
+##  6 0.196    10      5    12     3     3      6      2      1     5      4      8      3
+##  7 0.191    10      6    12     2     1      5      1      1     7      4      9      3
+##  8 0.185    10      7    12     2     1      5      1      1     6      5     10      3
+##  9 0.174    10      8    12     2     1      5      1      1     3      5     10      3
+## 10 0.166    10      7    12     3     1      5      1      1     5      5     10      3
+## # ℹ 136,233 more rows
+```
+
+### Run geodetector
+
+Then ,we can run geodetector model by `gd()` function.
+
+
+``` r
+gd(fvc ~ .,data = new.fvc,type = 'factor')
+## $factor
+## # A tibble: 12 × 3
+##    variable `Q-statistic` `P-value`
+##    <chr>            <dbl>     <dbl>
+##  1 presum         0.641    6.37e-10
+##  2 lulc           0.553    9.11e-10
+##  3 premin         0.443    3.68e-10
+##  4 tmpmin         0.402    5.53e-10
+##  5 tmpmax         0.228    5.11e-10
+##  6 elev           0.209    1.50e-10
+##  7 tmpavg         0.197    6.83e-10
+##  8 slope          0.193    6.30e-10
+##  9 pop            0.186    3.22e-10
+## 10 premax         0.133    5.82e-10
+## 11 ntl            0.0216   7.69e-10
+## 12 aspect         0.00741  5.45e-10
+## 
+## attr(,"class")
+## [1] "factor_detector"
+```
+
+``` r
+gd(fvc ~ .,data = new.fvc,type = 'interaction')
+## $interaction
+## # A tibble: 66 × 6
+##    variable1 variable2 Interaction        `Variable1 Q-statistics` Variable2 Q-statistic…¹
+##    <chr>     <chr>     <chr>                                 <dbl>                   <dbl>
+##  1 lulc      aspect    Enhance, nonlinear                    0.553                 0.00741
+##  2 lulc      elev      Enhance, bi-                          0.553                 0.209  
+##  3 lulc      ntl       Enhance, nonlinear                    0.553                 0.0216 
+##  4 lulc      pop       Enhance, bi-                          0.553                 0.186  
+##  5 lulc      premax    Enhance, bi-                          0.553                 0.133  
+##  6 lulc      premin    Enhance, bi-                          0.553                 0.443  
+##  7 lulc      presum    Enhance, bi-                          0.553                 0.641  
+##  8 lulc      slope     Enhance, bi-                          0.553                 0.193  
+##  9 lulc      tmpavg    Enhance, bi-                          0.553                 0.197  
+## 10 lulc      tmpmax    Enhance, bi-                          0.553                 0.228  
+## # ℹ 56 more rows
+## # ℹ abbreviated name: ¹​`Variable2 Q-statistics`
+## # ℹ 1 more variable: `Variable1 and Variable2 interact Q-statistics` <dbl>
+## 
+## attr(,"class")
+## [1] "interaction_detector"
+```

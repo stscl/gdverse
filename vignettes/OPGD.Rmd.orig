@@ -1,0 +1,72 @@
+---
+title: "optimal parameters geographic detector(OPGD)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{OPGD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+### Load data and package
+
+``` {r}
+library(terra)
+library(tidyverse)
+library(gdverse)
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc
+```
+
+``` {r}
+names(fvc)
+```
+
+### Convert data from `SpatRaster` to `tibble`
+
+``` {r}
+fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
+head(fvc)
+```
+
+### Determine optimal discretization parameters
+
+Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
+We can use `gd_bestunidisc` to discretize them based on geodetector q-statistic.
+
+```{r}
+tictoc::tic()
+g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
+tictoc::toc()
+```
+
+```{r}
+g
+new.fvc = g$disv
+new.fvc
+```
+
+The `new.fvc`  is the discrete result of the optimal discretization parameter based on the Q statistic of the geographic detector,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+
+```{r}
+new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
+new.fvc
+```
+
+### Run geodetector
+
+Then ,we can run geodetector model by `gd()` function.
+
+```{r}
+gd(fvc ~ .,data = new.fvc,type = 'factor')
+gd(fvc ~ .,data = new.fvc,type = 'interaction')
+```
