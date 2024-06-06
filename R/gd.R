@@ -114,6 +114,7 @@ gd = \(formula,data,type = 'factor',...){
 #'
 #' @return Formatted string output
 #' @importFrom pander pander
+#' @export
 print.factor_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
       "\n          Factor detector         \n")
@@ -132,6 +133,7 @@ print.factor_detector = \(x, ...) {
 #' @importFrom magrittr `%>%`
 #' @importFrom pander pander
 #' @importFrom dplyr mutate select
+#' @export
 print.interaction_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
       "\n         Interaction detector          \n")
@@ -156,6 +158,7 @@ print.interaction_detector = \(x, ...) {
 #' @importFrom knitr kable
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr mutate select count pull filter all_of
+#' @export
 print.risk_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
       "\n             Risk detector             \n")
@@ -198,6 +201,7 @@ print.risk_detector = \(x, ...) {
 #' @importFrom knitr kable
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr select all_of
+#' @export
 print.ecological_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
       "\n          ecological detector          \n")
