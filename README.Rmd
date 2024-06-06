@@ -1,0 +1,60 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# gdverse
+
+<!-- badges: start -->
+![CRAN](https://www.r-pkg.org/badges/version/gdverse)
+<!-- badges: end -->
+
+The goal of gdverse is to support the geodetector model and its variants.
+
+## Installation
+
+You can install the development version of gdverse from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("SpatLyu/gdverse",build_vignettes = T,dep = T)
+```
+
+## Example
+
+### OPGD model
+
+```{r example_gd}
+library(sf)
+library(terra)
+library(tidyverse)
+library(gdverse)
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
+head(fvc)
+```
+
+```{r}
+tictoc::tic()
+g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
+tictoc::toc()
+```
+
+```{r}
+new.fvc = bind_cols(select(fvc,fvc,lulc),g$disv)
+gd(fvc ~ .,data = new.fvc,type = 'factor')
+gd(fvc ~ .,data = new.fvc,type = 'interaction')
+```
