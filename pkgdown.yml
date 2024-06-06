@@ -1,8 +1,9 @@
 pandoc: 3.1.11
 pkgdown: 2.0.9
 pkgdown_sha: ~
-articles: {}
-last_built: 2024-06-06T16:38Z
+articles:
+  OPGD: OPGD.html
+last_built: 2024-06-06T17:12Z
 urls:
   reference: https://spatlyu.github.io/gdverse/reference
   article: https://spatlyu.github.io/gdverse/articles

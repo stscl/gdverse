@@ -4,6 +4,12 @@
     <loc>https://spatlyu.github.io/gdverse/404.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/articles/OPGD.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/authors.html</loc>
   </url>
   <url>
@@ -17,6 +23,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/gd.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/gd_bestunidisc.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/index.html</loc>
@@ -38,5 +47,8 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/risk_detector.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/st_unidisc.html</loc>
   </url>
 </urlset>
