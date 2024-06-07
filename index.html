@@ -118,12 +118,13 @@
 <span><span class="co">## # ℹ 1 more variable: aspect &lt;dbl&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">fvc_gd</span> <span class="op">=</span> <span class="fu"><a href="reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">fvc</span>,</span>
+<span>              discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>              cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 14.33 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 14.63 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span>,<span class="va">g</span><span class="op">$</span><span class="va">disv</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">fvc_gd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##           Factor detector</span></span></code></pre></div>
@@ -136,8 +137,8 @@
 <tbody>
 <tr class="odd">
 <td align="center">presum</td>
-<td align="center">0.6395</td>
-<td align="center">9.278e-10</td>
+<td align="center">0.6413</td>
+<td align="center">4.059e-10</td>
 </tr>
 <tr class="even">
 <td align="center">lulc</td>
@@ -146,13 +147,13 @@
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.4434</td>
-<td align="center">8.652e-10</td>
+<td align="center">0.443</td>
+<td align="center">6.77e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.401</td>
-<td align="center">8.888e-10</td>
+<td align="center">0.4065</td>
+<td align="center">4.706e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
@@ -166,13 +167,13 @@
 </tr>
 <tr class="odd">
 <td align="center">tmpavg</td>
-<td align="center">0.197</td>
-<td align="center">6.833e-10</td>
+<td align="center">0.1965</td>
+<td align="center">3.906e-10</td>
 </tr>
 <tr class="even">
 <td align="center">slope</td>
-<td align="center">0.1928</td>
-<td align="center">8.815e-10</td>
+<td align="center">0.1936</td>
+<td align="center">8.571e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">pop</td>
@@ -186,290 +187,13 @@
 </tr>
 <tr class="odd">
 <td align="center">ntl</td>
-<td align="center">0.02171</td>
-<td align="center">6.162e-10</td>
+<td align="center">0.0213</td>
+<td align="center">8.522e-10</td>
 </tr>
 <tr class="even">
 <td align="center">aspect</td>
 <td align="center">0.00741</td>
 <td align="center">5.448e-10</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##          Interaction detector</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="center">Interactive variable</th>
-<th align="center">Interaction</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">lulc ∩ aspect</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ elev</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ pop</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ premax</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ tmpmax</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ elev</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ pop</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ presum</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ pop</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ pop</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ presum</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">pop ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">pop ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">pop ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">premax ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">premax ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">premax ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">premax ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">premax ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">premax ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">premin ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">premin ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">premin ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">premin ∩ tmpmax</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">premin ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">presum ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">presum ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">presum ∩ tmpmax</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">presum ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">slope ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">slope ∩ tmpmax</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">slope ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">tmpavg ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">tmpavg ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">tmpmax ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
 </tr>
 </tbody>
 </table>
