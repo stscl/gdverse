@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdverse <img src="man/figures/logo.png" align="right" height="90"/>
+# gdverse <img src="man/figures/logo.png" align="right" height="120"/>
 
 <!-- badges: start -->
 ![CRAN](https://www.r-pkg.org/badges/version/gdverse)
