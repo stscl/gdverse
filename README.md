@@ -1,9 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdverse
+# gdverse <img src="man/figures/logo.png" align="right" height="120"/>
 
 <!-- badges: start -->
+
 ![CRAN](https://www.r-pkg.org/badges/version/gdverse)
 <!-- badges: end -->
 
@@ -49,7 +50,7 @@ head(fvc)
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 tictoc::toc()
-## 14.33 sec elapsed
+## 16.66 sec elapsed
 ```
 
 ``` r
@@ -62,17 +63,17 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6404    | 6.057e-10 |
+|  presum  |    0.642    | 8.298e-10 |
 |   lulc   |   0.5533    | 9.106e-10 |
-|  premin  |   0.4381    | 5.372e-10 |
-|  tmpmin  |    0.407    | 8.491e-10 |
+|  premin  |   0.4423    | 8.29e-10  |
+|  tmpmin  |   0.4065    | 4.706e-10 |
 |  tmpmax  |   0.2284    | 5.111e-10 |
-|   elev   |    0.209    |  1.5e-10  |
-|  tmpavg  |   0.1972    | 3.432e-10 |
-|  slope   |   0.1945    | 4.206e-10 |
+|   elev   |   0.2089    | 3.485e-10 |
+|  tmpavg  |    0.197    | 6.833e-10 |
+|  slope   |   0.1937    | 8.865e-10 |
 |   pop    |   0.1856    | 3.221e-10 |
-|  premax  |    0.133    | 3.39e-10  |
-|   ntl    |   0.02159   | 6.877e-10 |
+|  premax  |    0.134    | 2.764e-10 |
+|   ntl    |   0.0216    | 5.971e-10 |
 |  aspect  |   0.00741   | 5.448e-10 |
 
 ``` r
@@ -106,7 +107,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 |   aspect ∩ tmpmax    | Enhance, nonlinear |
 |   aspect ∩ tmpmin    | Enhance, nonlinear |
 |      elev ∩ ntl      | Enhance, nonlinear |
-|      elev ∩ pop      |    Enhance, bi-    |
+|      elev ∩ pop      | Enhance, nonlinear |
 |    elev ∩ premax     | Enhance, nonlinear |
 |    elev ∩ premin     |    Enhance, bi-    |
 |    elev ∩ presum     |    Enhance, bi-    |
