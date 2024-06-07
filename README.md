@@ -23,7 +23,7 @@ devtools::install_github("SpatLyu/gdverse",build_vignettes = T,dep = T)
 
 or install `gdverse` from `r-universe`:
 
-```r
+``` r
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
@@ -54,14 +54,15 @@ head(fvc)
 
 ``` r
 tictoc::tic()
-g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
+fvc_gd = opgd(fvc ~ .,data = fvc,
+              discvar = names(select(fvc,-c(fvc,lulc))),
+              cores = 6, type = 'factor')
 tictoc::toc()
-## 14.33 sec elapsed
+## 14.63 sec elapsed
 ```
 
 ``` r
-new.fvc = bind_cols(select(fvc,fvc,lulc),g$disv)
-gd(fvc ~ .,data = new.fvc,type = 'factor')
+fvc_gd
 ## Spatial Stratified Heterogeneity Test 
 ##  
 ##           Factor detector
@@ -69,91 +70,15 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6395    | 9.278e-10 |
+|  presum  |   0.6413    | 4.059e-10 |
 |   lulc   |   0.5533    | 9.106e-10 |
-|  premin  |   0.4434    | 8.652e-10 |
-|  tmpmin  |    0.401    | 8.888e-10 |
+|  premin  |    0.443    | 6.77e-10  |
+|  tmpmin  |   0.4065    | 4.706e-10 |
 |  tmpmax  |   0.2284    | 5.111e-10 |
 |   elev   |    0.209    |  1.5e-10  |
-|  tmpavg  |    0.197    | 6.833e-10 |
-|  slope   |   0.1928    | 8.815e-10 |
+|  tmpavg  |   0.1965    | 3.906e-10 |
+|  slope   |   0.1936    | 8.571e-10 |
 |   pop    |   0.1856    | 3.221e-10 |
 |  premax  |   0.1341    | 8.861e-10 |
-|   ntl    |   0.02171   | 6.162e-10 |
+|   ntl    |   0.0213    | 8.522e-10 |
 |  aspect  |   0.00741   | 5.448e-10 |
-
-``` r
-gd(fvc ~ .,data = new.fvc,type = 'interaction')
-## Spatial Stratified Heterogeneity Test 
-##  
-##          Interaction detector
-```
-
-| Interactive variable |    Interaction     |
-|:--------------------:|:------------------:|
-|    lulc ∩ aspect     | Enhance, nonlinear |
-|     lulc ∩ elev      |    Enhance, bi-    |
-|      lulc ∩ ntl      | Enhance, nonlinear |
-|      lulc ∩ pop      |    Enhance, bi-    |
-|    lulc ∩ premax     |    Enhance, bi-    |
-|    lulc ∩ premin     |    Enhance, bi-    |
-|    lulc ∩ presum     |    Enhance, bi-    |
-|     lulc ∩ slope     |    Enhance, bi-    |
-|    lulc ∩ tmpavg     |    Enhance, bi-    |
-|    lulc ∩ tmpmax     |    Enhance, bi-    |
-|    lulc ∩ tmpmin     |    Enhance, bi-    |
-|    aspect ∩ elev     | Enhance, nonlinear |
-|     aspect ∩ ntl     | Enhance, nonlinear |
-|     aspect ∩ pop     | Enhance, nonlinear |
-|   aspect ∩ premax    | Enhance, nonlinear |
-|   aspect ∩ premin    | Enhance, nonlinear |
-|   aspect ∩ presum    |    Weaken, uni-    |
-|    aspect ∩ slope    | Enhance, nonlinear |
-|   aspect ∩ tmpavg    | Enhance, nonlinear |
-|   aspect ∩ tmpmax    | Enhance, nonlinear |
-|   aspect ∩ tmpmin    | Enhance, nonlinear |
-|      elev ∩ ntl      | Enhance, nonlinear |
-|      elev ∩ pop      |    Enhance, bi-    |
-|    elev ∩ premax     | Enhance, nonlinear |
-|    elev ∩ premin     |    Enhance, bi-    |
-|    elev ∩ presum     |    Enhance, bi-    |
-|     elev ∩ slope     |    Enhance, bi-    |
-|    elev ∩ tmpavg     |    Enhance, bi-    |
-|    elev ∩ tmpmax     | Enhance, nonlinear |
-|    elev ∩ tmpmin     |    Enhance, bi-    |
-|      ntl ∩ pop       | Enhance, nonlinear |
-|     ntl ∩ premax     | Enhance, nonlinear |
-|     ntl ∩ premin     | Enhance, nonlinear |
-|     ntl ∩ presum     | Enhance, nonlinear |
-|     ntl ∩ slope      | Enhance, nonlinear |
-|     ntl ∩ tmpavg     | Enhance, nonlinear |
-|     ntl ∩ tmpmax     | Enhance, nonlinear |
-|     ntl ∩ tmpmin     | Enhance, nonlinear |
-|     pop ∩ premax     | Enhance, nonlinear |
-|     pop ∩ premin     |    Enhance, bi-    |
-|     pop ∩ presum     |    Enhance, bi-    |
-|     pop ∩ slope      |    Enhance, bi-    |
-|     pop ∩ tmpavg     | Enhance, nonlinear |
-|     pop ∩ tmpmax     | Enhance, nonlinear |
-|     pop ∩ tmpmin     |    Enhance, bi-    |
-|   premax ∩ premin    | Enhance, nonlinear |
-|   premax ∩ presum    |    Enhance, bi-    |
-|    premax ∩ slope    | Enhance, nonlinear |
-|   premax ∩ tmpavg    | Enhance, nonlinear |
-|   premax ∩ tmpmax    | Enhance, nonlinear |
-|   premax ∩ tmpmin    | Enhance, nonlinear |
-|   premin ∩ presum    |    Enhance, bi-    |
-|    premin ∩ slope    |    Enhance, bi-    |
-|   premin ∩ tmpavg    |    Enhance, bi-    |
-|   premin ∩ tmpmax    |    Enhance, bi-    |
-|   premin ∩ tmpmin    |    Enhance, bi-    |
-|    presum ∩ slope    |    Enhance, bi-    |
-|   presum ∩ tmpavg    |    Enhance, bi-    |
-|   presum ∩ tmpmax    |    Enhance, bi-    |
-|   presum ∩ tmpmin    |    Enhance, bi-    |
-|    slope ∩ tmpavg    |    Enhance, bi-    |
-|    slope ∩ tmpmax    |    Enhance, bi-    |
-|    slope ∩ tmpmin    |    Enhance, bi-    |
-|   tmpavg ∩ tmpmax    | Enhance, nonlinear |
-|   tmpavg ∩ tmpmin    | Enhance, nonlinear |
-|   tmpmax ∩ tmpmin    | Enhance, nonlinear |

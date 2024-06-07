@@ -34,7 +34,7 @@
 #' fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 #' opgd(fvc ~ ., data = fvc,
 #'      discvar = names(select(fvc,-c(fvc,lulc))),
-#'      cores = 6, type =c(`factor`,`interaction`))
+#'      cores = 6, type =c('factor','interaction'))
 #' }
 opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
          cores = 1,type = 'factor',alpha = 0.95,...){
@@ -55,7 +55,7 @@ opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
     res = vector("list", length(type))
     for (i in seq_along(type)){
       res[[i]] = gd(paste0(yname,' ~ .'),data = newdata,
-                    type = i,alpha = alpha)
+                    type = type[i],alpha = alpha)
     }
   }
 

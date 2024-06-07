@@ -56,12 +56,12 @@ head(fvc)
 
 ```{r}
 tictoc::tic()
-g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
+fvc_gd = opgd(fvc ~ .,data = fvc,
+              discvar = names(select(fvc,-c(fvc,lulc))),
+              cores = 6, type = 'factor')
 tictoc::toc()
 ```
 
 ```{r}
-new.fvc = bind_cols(select(fvc,fvc,lulc),g$disv)
-gd(fvc ~ .,data = new.fvc,type = 'factor')
-gd(fvc ~ .,data = new.fvc,type = 'interaction')
+fvc_gd
 ```

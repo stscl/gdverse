@@ -55,7 +55,7 @@ fvc = terra::rast(paste0("/vsizip/",fvcpath))
 fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 opgd(fvc ~ ., data = fvc,
      discvar = names(select(fvc,-c(fvc,lulc))),
-     cores = 6, type =c(`factor`,`interaction`))
+     cores = 6, type =c('factor','interaction'))
 }
 }
 \author{
