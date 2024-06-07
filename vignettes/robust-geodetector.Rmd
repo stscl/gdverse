@@ -1,5 +1,5 @@
 ---
-title: "Robust geographical detector"
+title: "robust geographical detector(RGD)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{robust-geodetector}
