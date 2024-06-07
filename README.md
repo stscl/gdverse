@@ -4,8 +4,8 @@
 # gdverse <img src="man/figures/logo.png" align="right" height="120"/>
 
 <!-- badges: start -->
-
 ![CRAN](https://www.r-pkg.org/badges/version/gdverse)
+![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)
 <!-- badges: end -->
 
 The goal of gdverse is to support the geodetector model and its
@@ -14,7 +14,7 @@ variants.
 ## Installation
 
 You can install the development version of gdverse from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com/SpatLyu/gdverse) with:
 
 ``` r
 # install.packages("devtools")
@@ -50,7 +50,7 @@ head(fvc)
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 tictoc::toc()
-## 16.66 sec elapsed
+## 14.33 sec elapsed
 ```
 
 ``` r
@@ -63,17 +63,17 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |    0.642    | 8.298e-10 |
+|  presum  |   0.6395    | 9.278e-10 |
 |   lulc   |   0.5533    | 9.106e-10 |
-|  premin  |   0.4423    | 8.29e-10  |
-|  tmpmin  |   0.4065    | 4.706e-10 |
+|  premin  |   0.4434    | 8.652e-10 |
+|  tmpmin  |    0.401    | 8.888e-10 |
 |  tmpmax  |   0.2284    | 5.111e-10 |
-|   elev   |   0.2089    | 3.485e-10 |
+|   elev   |    0.209    |  1.5e-10  |
 |  tmpavg  |    0.197    | 6.833e-10 |
-|  slope   |   0.1937    | 8.865e-10 |
+|  slope   |   0.1928    | 8.815e-10 |
 |   pop    |   0.1856    | 3.221e-10 |
-|  premax  |    0.134    | 2.764e-10 |
-|   ntl    |   0.0216    | 5.971e-10 |
+|  premax  |   0.1341    | 8.861e-10 |
+|   ntl    |   0.02171   | 6.162e-10 |
 |  aspect  |   0.00741   | 5.448e-10 |
 
 ``` r
@@ -107,7 +107,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 |   aspect ∩ tmpmax    | Enhance, nonlinear |
 |   aspect ∩ tmpmin    | Enhance, nonlinear |
 |      elev ∩ ntl      | Enhance, nonlinear |
-|      elev ∩ pop      | Enhance, nonlinear |
+|      elev ∩ pop      |    Enhance, bi-    |
 |    elev ∩ premax     | Enhance, nonlinear |
 |    elev ∩ premin     |    Enhance, bi-    |
 |    elev ∩ presum     |    Enhance, bi-    |

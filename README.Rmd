@@ -19,13 +19,14 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 ![CRAN](https://www.r-pkg.org/badges/version/gdverse)
+![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)
 <!-- badges: end -->
 
 The goal of gdverse is to support the geodetector model and its variants.
 
 ## Installation
 
-You can install the development version of gdverse from [GitHub](https://github.com/) with:
+You can install the development version of gdverse from [GitHub](https://github.com/SpatLyu/gdverse) with:
 
 ``` r
 # install.packages("devtools")
