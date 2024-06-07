@@ -1,0 +1,20 @@
+---
+title: "Robust geographical detector"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{robust-geodetector}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##"
+)
+```
+
+```{r setup}
+library(gdverse)
+reticulate::use_virtualenv("r-gdverse")
+```
