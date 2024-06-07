@@ -3,7 +3,7 @@ pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   OPGD: OPGD.html
-last_built: 2024-06-07T05:13Z
+last_built: 2024-06-07T05:17Z
 urls:
   reference: https://spatlyu.github.io/gdverse/reference
   article: https://spatlyu.github.io/gdverse/articles
