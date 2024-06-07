@@ -7,7 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##"
+)
+```
 
 ### Set up your python dependence
 
@@ -17,10 +22,8 @@ vignette: >
 - 4. install `mamba` by `conda install -c conda-forge mamba -y`.
 - 5. set up python packages use `mamba install -c conda-forge numpy==1.23.5 pandas ruptures -y`
 
-
-``` r
+```{r setup}
 library(gdverse)
 reticulate::use_condaenv('geocompy')
 rpt
-## Module(ruptures)
 ```
