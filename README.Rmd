@@ -39,8 +39,6 @@ or install `gdverse` from `r-universe`:
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
-## Example
-
 ### OPGD model
 
 ```{r example_gd}

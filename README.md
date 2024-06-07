@@ -4,6 +4,7 @@
 # gdverse <img src="man/figures/logo.png" align="right" height="120"/>
 
 <!-- badges: start -->
+
 [![CRAN](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
 [![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)](https://spatlyu.r-universe.dev/gdverse)
 <!-- badges: end -->
@@ -26,8 +27,6 @@ or install `gdverse` from `r-universe`:
 ``` r
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
-
-## Example
 
 ### OPGD model
 
@@ -58,7 +57,7 @@ fvc_gd = opgd(fvc ~ .,data = fvc,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = 'factor')
 tictoc::toc()
-## 14.63 sec elapsed
+## 14.52 sec elapsed
 ```
 
 ``` r
@@ -70,15 +69,15 @@ fvc_gd
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6413    | 4.059e-10 |
+|  presum  |    0.642    | 8.298e-10 |
 |   lulc   |   0.5533    | 9.106e-10 |
-|  premin  |    0.443    | 6.77e-10  |
-|  tmpmin  |   0.4065    | 4.706e-10 |
+|  premin  |    0.443    | 8.559e-10 |
+|  tmpmin  |   0.4058    | 4.982e-10 |
 |  tmpmax  |   0.2284    | 5.111e-10 |
 |   elev   |    0.209    |  1.5e-10  |
-|  tmpavg  |   0.1965    | 3.906e-10 |
-|  slope   |   0.1936    | 8.571e-10 |
+|  tmpavg  |   0.2009    | 7.843e-10 |
+|  slope   |   0.1942    | 5.872e-10 |
 |   pop    |   0.1856    | 3.221e-10 |
-|  premax  |   0.1341    | 8.861e-10 |
-|   ntl    |   0.0213    | 8.522e-10 |
+|  premax  |   0.1324    | 2.448e-10 |
+|   ntl    |   0.02171   | 6.162e-10 |
 |  aspect  |   0.00741   | 5.448e-10 |
