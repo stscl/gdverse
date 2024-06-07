@@ -11,7 +11,6 @@ gd_bestunidisc(
   discmethod = NULL,
   cores = 1,
   return_disc = TRUE,
-  seed = 12345678,
   ...
 )
 }
@@ -31,8 +30,6 @@ object.}
 
 \item{return_disc}{(optional) Whether or not return discretized result used the optimal parameter.
 Default is \code{TRUE}.}
-
-\item{seed}{(optional) Random number seed, default is \code{12345678}}
 
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()}.}
 }

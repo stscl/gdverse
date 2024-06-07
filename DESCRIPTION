@@ -17,6 +17,7 @@ Imports:
     pander,
     parallel,
     purrr,
+    reticulate,
     stats,
     tibble,
     tidyr,

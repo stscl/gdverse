@@ -53,6 +53,7 @@ head(fvc)
 ```
 
 ```{r}
+set.seed(12345678)
 tictoc::tic()
 fvc_gd = opgd(fvc ~ .,data = fvc,
               discvar = names(select(fvc,-c(fvc,lulc))),

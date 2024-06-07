@@ -45,6 +45,7 @@ We can use `gd_bestunidisc` to discretize them based on geodetector q-statistic.
 
 ```{r}
 tictoc::tic()
+set.seed(12345678)
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 tictoc::toc()
 ```
@@ -74,6 +75,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 ### You can also use `opgd()` in one time to get result above.
 
 ```{r}
+set.seed(12345678)
 fvc_gd = opgd(fvc ~ .,data = fvc,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = c('factor','interaction'))

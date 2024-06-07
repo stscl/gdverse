@@ -62,9 +62,10 @@ We can use `gd_bestunidisc` to discretize them based on geodetector q-statistic.
 
 ``` r
 tictoc::tic()
+set.seed(12345678)
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 tictoc::toc()
-## 14.83 sec elapsed
+## 15.33 sec elapsed
 ```
 
 
@@ -75,26 +76,26 @@ g
 ## [10] "tmpmax" "tmpmin"
 ## 
 ## $k
-##  [1] 15 15 15 15 15 14 15 13 15 15 15
+##  [1] 15 15 15 15 13 13 14 13 15 15 15
 ## 
 ## $method
 ##  [1] "equal"    "quantile" "fisher"   "quantile" "fisher"   "fisher"   "fisher"  
-##  [8] "fisher"   "quantile" "quantile" "fisher"  
+##  [8] "fisher"   "fisher"   "quantile" "fisher"  
 ## 
 ## $disv
 ## # A tibble: 136,243 × 11
 ##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1      8    12     3     1      7      1      1     4      4      8      2
-##  2      8    12     2     1      7      1      1     5      4      8      2
-##  3      6    12     2     1      7      1      1     6      4      9      2
-##  4      5    12     2     1      7      1      1     4      5     10      2
-##  5      5    13     3     4      8      2      1     3      4      8      2
-##  6      5    12     3     3      7      2      1     4      4      8      2
-##  7      6    12     2     1      7      1      1     6      4      9      2
-##  8      7    12     2     1      7      1      1     5      5     10      2
-##  9      8    12     2     1      7      1      1     3      5     10      2
-## 10      7    12     3     1      7      1      1     4      5     10      2
+##  1      8    12     3     1      6      1      1     4      6      8      2
+##  2      8    12     2     1      6      1      1     5      6      8      2
+##  3      6    12     2     1      5      1      1     6      6      9      2
+##  4      5    12     2     1      5      1      1     4      7     10      2
+##  5      5    13     3     4      6      2      1     3      6      8      2
+##  6      5    12     3     3      6      2      1     4      6      8      2
+##  7      6    12     2     1      6      1      1     6      6      9      2
+##  8      7    12     2     1      5      1      1     5      7     10      2
+##  9      8    12     2     1      5      1      1     3      7     10      2
+## 10      7    12     3     1      5      1      1     4      7     10      2
 ## # ℹ 136,233 more rows
 ```
 
@@ -104,16 +105,16 @@ new.fvc
 ## # A tibble: 136,243 × 11
 ##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1      8    12     3     1      7      1      1     4      4      8      2
-##  2      8    12     2     1      7      1      1     5      4      8      2
-##  3      6    12     2     1      7      1      1     6      4      9      2
-##  4      5    12     2     1      7      1      1     4      5     10      2
-##  5      5    13     3     4      8      2      1     3      4      8      2
-##  6      5    12     3     3      7      2      1     4      4      8      2
-##  7      6    12     2     1      7      1      1     6      4      9      2
-##  8      7    12     2     1      7      1      1     5      5     10      2
-##  9      8    12     2     1      7      1      1     3      5     10      2
-## 10      7    12     3     1      7      1      1     4      5     10      2
+##  1      8    12     3     1      6      1      1     4      6      8      2
+##  2      8    12     2     1      6      1      1     5      6      8      2
+##  3      6    12     2     1      5      1      1     6      6      9      2
+##  4      5    12     2     1      5      1      1     4      7     10      2
+##  5      5    13     3     4      6      2      1     3      6      8      2
+##  6      5    12     3     3      6      2      1     4      6      8      2
+##  7      6    12     2     1      6      1      1     6      6      9      2
+##  8      7    12     2     1      5      1      1     5      7     10      2
+##  9      8    12     2     1      5      1      1     3      7     10      2
+## 10      7    12     3     1      5      1      1     4      7     10      2
 ## # ℹ 136,233 more rows
 ```
 
@@ -126,16 +127,16 @@ new.fvc
 ## # A tibble: 136,243 × 13
 ##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##    <dbl> <dbl>  <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1 0.198    10      8    12     3     1      7      1      1     4      4      8      2
-##  2 0.193    10      8    12     2     1      7      1      1     5      4      8      2
-##  3 0.192    10      6    12     2     1      7      1      1     6      4      9      2
-##  4 0.189    10      5    12     2     1      7      1      1     4      5     10      2
-##  5 0.208    10      5    13     3     4      8      2      1     3      4      8      2
-##  6 0.196    10      5    12     3     3      7      2      1     4      4      8      2
-##  7 0.191    10      6    12     2     1      7      1      1     6      4      9      2
-##  8 0.185    10      7    12     2     1      7      1      1     5      5     10      2
-##  9 0.174    10      8    12     2     1      7      1      1     3      5     10      2
-## 10 0.166    10      7    12     3     1      7      1      1     4      5     10      2
+##  1 0.198    10      8    12     3     1      6      1      1     4      6      8      2
+##  2 0.193    10      8    12     2     1      6      1      1     5      6      8      2
+##  3 0.192    10      6    12     2     1      5      1      1     6      6      9      2
+##  4 0.189    10      5    12     2     1      5      1      1     4      7     10      2
+##  5 0.208    10      5    13     3     4      6      2      1     3      6      8      2
+##  6 0.196    10      5    12     3     3      6      2      1     4      6      8      2
+##  7 0.191    10      6    12     2     1      6      1      1     6      6      9      2
+##  8 0.185    10      7    12     2     1      5      1      1     5      7     10      2
+##  9 0.174    10      8    12     2     1      5      1      1     3      7     10      2
+## 10 0.166    10      7    12     3     1      5      1      1     4      7     10      2
 ## # ℹ 136,233 more rows
 ```
 
@@ -155,25 +156,25 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 ------------------------------------
  variable   Q-statistic    P-value  
 ---------- ------------- -----------
-  presum       0.642      8.298e-10 
+  presum      0.6402      6.669e-10 
 
    lulc       0.5533      9.106e-10 
 
-  premin      0.4422      6.921e-10 
+  premin       0.443      8.559e-10 
 
-  tmpmin      0.4065      4.706e-10 
+  tmpmin      0.4058      4.982e-10 
 
   tmpmax      0.2284      5.111e-10 
 
    elev        0.209       1.5e-10  
 
-  tmpavg       0.197      6.833e-10 
+  tmpavg      0.2009      7.843e-10 
 
   slope       0.1942      5.872e-10 
 
    pop        0.1856      3.221e-10 
 
-  premax      0.1333      1.891e-10 
+  premax      0.1328      1.735e-10 
 
    ntl        0.02171     6.162e-10 
 
@@ -332,6 +333,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
 
 ``` r
+set.seed(12345678)
 fvc_gd = opgd(fvc ~ .,data = fvc,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = c('factor','interaction'))
@@ -340,8 +342,8 @@ str(fvc_gd)
 ##  $ :List of 1
 ##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)
 ##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...
-##   .. ..$ Q-statistic: num [1:12] 0.642 0.553 0.443 0.406 0.228 ...
-##   .. ..$ P-value    : num [1:12] 8.30e-10 9.11e-10 8.56e-10 4.71e-10 5.11e-10 ...
+##   .. ..$ Q-statistic: num [1:12] 0.64 0.553 0.443 0.406 0.228 ...
+##   .. ..$ P-value    : num [1:12] 6.67e-10 9.11e-10 8.56e-10 4.71e-10 5.11e-10 ...
 ##   ..- attr(*, "class")= chr "factor_detector"
 ##  $ :List of 1
 ##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)
@@ -349,7 +351,7 @@ str(fvc_gd)
 ##   .. ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...
 ##   .. ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...
 ##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.553 0.553 0.553 0.553 0.553 ...
-##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.00741 0.20903 0.02171 0.18561 0.13244 ...
+##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.00741 0.20903 0.02171 0.18561 0.1333 ...
 ##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.563 0.739 0.611 0.636 0.677 ...
 ##   ..- attr(*, "class")= chr "interaction_detector"
 ```
@@ -365,7 +367,7 @@ fvc_gd[[1]]
 ------------------------------------
  variable   Q-statistic    P-value  
 ---------- ------------- -----------
-  presum       0.642      8.298e-10 
+  presum      0.6402      6.669e-10 
 
    lulc       0.5533      9.106e-10 
 
@@ -379,11 +381,11 @@ fvc_gd[[1]]
 
   tmpavg       0.197      6.833e-10 
 
-  slope       0.1942      5.872e-10 
+  slope       0.1938      5.584e-10 
 
    pop        0.1856      3.221e-10 
 
-  premax      0.1324      2.448e-10 
+  premax      0.1333      1.891e-10 
 
    ntl        0.02171     6.162e-10 
 

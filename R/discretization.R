@@ -43,7 +43,6 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' object.
 #' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
 #' Default is `TRUE`.
-#' @param seed (optional) Random number seed, default is `12345678`
 #' @param ... (optional) Other arguments passed to `st_unidisc()`.
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
@@ -71,8 +70,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' gd(fvc ~ .,data = new.fvc,type = 'interaction')
 #' }
 gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
-                   cores = 1,return_disc = TRUE,seed = 12345678,...){
-  set.seed(seed)
+                   cores = 1,return_disc = TRUE,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE

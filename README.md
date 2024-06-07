@@ -52,12 +52,13 @@ head(fvc)
 ```
 
 ``` r
+set.seed(12345678)
 tictoc::tic()
 fvc_gd = opgd(fvc ~ .,data = fvc,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = 'factor')
 tictoc::toc()
-## 14.52 sec elapsed
+## 14.33 sec elapsed
 ```
 
 ``` r
@@ -69,15 +70,15 @@ fvc_gd
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |    0.642    | 8.298e-10 |
+|  presum  |   0.6402    | 6.669e-10 |
 |   lulc   |   0.5533    | 9.106e-10 |
-|  premin  |    0.443    | 8.559e-10 |
-|  tmpmin  |   0.4058    | 4.982e-10 |
+|  premin  |   0.4433    | 6.004e-10 |
+|  tmpmin  |   0.4065    | 4.706e-10 |
 |  tmpmax  |   0.2284    | 5.111e-10 |
 |   elev   |    0.209    |  1.5e-10  |
-|  tmpavg  |   0.2009    | 7.843e-10 |
-|  slope   |   0.1942    | 5.872e-10 |
+|  tmpavg  |    0.197    | 6.833e-10 |
+|  slope   |   0.1937    | 8.865e-10 |
 |   pop    |   0.1856    | 3.221e-10 |
 |  premax  |   0.1324    | 2.448e-10 |
-|   ntl    |   0.02171   | 6.162e-10 |
+|   ntl    |   0.02125   | 6.277e-10 |
 |  aspect  |   0.00741   | 5.448e-10 |
