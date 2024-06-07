@@ -7,10 +7,11 @@
 gd_bestunidisc(
   formula,
   data,
-  discnum,
+  discnum = NULL,
   discmethod = NULL,
   cores = 1,
   return_disc = TRUE,
+  seed = 12345678,
   ...
 )
 }
@@ -19,7 +20,7 @@ gd_bestunidisc(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{discnum}{A vector of number of classes for discretization.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{2:15}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization,default is used
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}
@@ -30,6 +31,8 @@ object.}
 
 \item{return_disc}{(optional) Whether or not return discretized result used the optimal parameter.
 Default is \code{TRUE}.}
+
+\item{seed}{(optional) Random number seed, default is \code{12345678}}
 
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()}.}
 }
@@ -50,8 +53,8 @@ fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 new.fvc = g$disv
 new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-ssh.test(fvc ~ .,data = new.fvc,type = 'factor')
-ssh.test(fvc ~ .,data = new.fvc,type = 'interaction')
+gd(fvc ~ .,data = new.fvc,type = 'factor')
+gd(fvc ~ .,data = new.fvc,type = 'interaction')
 }
 }
 \author{

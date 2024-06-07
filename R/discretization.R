@@ -35,7 +35,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #'
 #' @param formula A formula of spatial stratified heterogeneity test.
 #' @param data A data.frame or tibble of observation data.
-#' @param discnum A vector of number of classes for discretization.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `2:15`.
 #' @param discmethod (optional) A vector of methods for discretization,default is used
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `spEcula`.
 #' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
@@ -43,6 +43,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' object.
 #' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
 #' Default is `TRUE`.
+#' @param seed (optional) Random number seed, default is `12345678`
 #' @param ... (optional) Other arguments passed to `st_unidisc()`.
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
@@ -66,11 +67,12 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 #' new.fvc = g$disv
 #' new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-#' ssh.test(fvc ~ .,data = new.fvc,type = 'factor')
-#' ssh.test(fvc ~ .,data = new.fvc,type = 'interaction')
+#' gd(fvc ~ .,data = new.fvc,type = 'factor')
+#' gd(fvc ~ .,data = new.fvc,type = 'interaction')
 #' }
-gd_bestunidisc = \(formula,data,discnum,discmethod = NULL,
-                   cores = 1,return_disc = TRUE,...){
+gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
+                   cores = 1,return_disc = TRUE,seed = 12345678,...){
+  set.seed(seed)
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE
@@ -81,6 +83,9 @@ gd_bestunidisc = \(formula,data,discnum,discmethod = NULL,
   }
   if (is.null(discmethod)) {
     discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")
+  }
+  if (is.null(discnum)){
+    discnum = 2:15
   }
 
   formula = stats::as.formula(formula)
