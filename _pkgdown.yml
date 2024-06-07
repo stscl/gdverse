@@ -1,6 +1,7 @@
 url: https://spatlyu.github.io/gdverse/
 template:
   bootstrap: 5
+  bootswatch: pulse
 
 on:
   push:

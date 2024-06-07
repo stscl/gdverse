@@ -33,6 +33,12 @@ You can install the development version of gdverse from [GitHub](https://github.
 devtools::install_github("SpatLyu/gdverse",build_vignettes = T,dep = T)
 ```
 
+or install `gdverse` from `r-universe`:
+
+```r
+install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
+```
+
 ## Example
 
 ### OPGD model
