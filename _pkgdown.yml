@@ -18,28 +18,25 @@ jobs:
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
       with:
-          r-version: release
+        r-version: release
 
     - uses: r-lib/actions/setup-r-dependencies@v2
       with:
-      extra-packages: rcmdcheck reticulate
+        extra-packages: rcmdcheck reticulate
 
     - uses: actions/setup-python@v4
       with:
-      python-version: "3.x"
+        python-version: "3.x"
 
     - name: setup r-gdverse venv
       shell: Rscript {0}
       run: |
-
-        path_to_python = reticulate::virtualenv_create(
+        path_to_python <- reticulate::virtualenv_create(
           envname = "r-gdverse",
           python = Sys.which("python"),
-          packages = c("numpy","pandas","ruptures")
+          packages = c("numpy", "pandas", "ruptures")
         )
-
-        writeLines(sprintf("RETICULATE_PYTHON=%s", path_to_python),
-                   Sys.getenv("GITHUB_ENV"))
+        writeLines(sprintf("RETICULATE_PYTHON=%s", path_to_python), con = Sys.getenv("GITHUB_ENV"))
 
     - name: Install dependencies
       run: |
