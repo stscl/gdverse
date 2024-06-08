@@ -10,7 +10,6 @@
 #' @return A list contains the Q-statistic and the p-value.
 #' @importFrom stats var pf
 #' @importFrom tibble tibble
-#' @importFrom magrittr `%>%`
 #' @importFrom dplyr group_by n filter ungroup mutate
 #' @export
 factor_detector = \(y,x){
@@ -91,7 +90,6 @@ interaction_detector = \(y,x1,x2){
 #' @importFrom stats t.test
 #' @importFrom tidyr crossing
 #' @importFrom tibble tibble
-#' @importFrom magrittr `%>%`
 #' @importFrom purrr map2_dfr
 #' @importFrom dplyr filter pull bind_cols
 #'

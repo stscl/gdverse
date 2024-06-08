@@ -20,7 +20,6 @@
 #'
 #' @return A list of the opgd model result.
 #' @importFrom stats as.formula
-#' @importFrom magrittr `%>%`
 #' @importFrom purrr map
 #' @importFrom dplyr select all_of bind_cols
 #' @export

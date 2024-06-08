@@ -12,7 +12,6 @@
 #' @return A tibble of the corresponding result is stored under the corresponding detector type.
 #' @importFrom stats as.formula
 #' @importFrom utils combn
-#' @importFrom magrittr `%>%`
 #' @importFrom purrr map_dfr
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr mutate select arrange desc everything
@@ -130,7 +129,6 @@ print.factor_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom magrittr `%>%`
 #' @importFrom pander pander
 #' @importFrom dplyr mutate select
 #' @export
@@ -154,7 +152,6 @@ print.interaction_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom magrittr `%>%`
 #' @importFrom knitr kable
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr mutate select count pull filter all_of
@@ -197,7 +194,6 @@ print.risk_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom magrittr `%>%`
 #' @importFrom knitr kable
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr select all_of

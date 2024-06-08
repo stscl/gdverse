@@ -50,7 +50,6 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' @importFrom stats as.formula
 #' @importFrom parallel makeCluster stopCluster clusterExport parLapply
 #' @importFrom tidyr crossing
-#' @importFrom magrittr `%>%`
 #' @importFrom tibble as_tibble
 #' @importFrom purrr map_dfr pmap_dfc set_names
 #' @importFrom dplyr bind_cols slice_max group_by ungroup select
