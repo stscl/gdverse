@@ -7,5 +7,5 @@ devtools::load_all()
 knitr::knit("vignettes/OPGD.Rmd.orig",
             "vignettes/OPGD.Rmd")
 
-knitr::knit("vignettes/robust-geodetector.Rmd.orig",
-            "vignettes/robust-geodetector.Rmd")
+knitr::knit("vignettes/RGD.Rmd.orig",
+            "vignettes/RGD.Rmd")

@@ -28,10 +28,10 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
                                       ...,factor = factor))
 }
 
-#' @title Best univariate discretize parameters based on geodetector q-statistic
+#' @title Best univariate discretization based on geodetector q-statistic
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for determining the best univariate discretize parameters based on geodetector q-statistic.
+#' Function for determining the best univariate discretization based on geodetector q-statistic.
 #'
 #' @param formula A formula of spatial stratified heterogeneity test.
 #' @param data A data.frame or tibble of observation data.
@@ -59,14 +59,12 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' \dontrun{
 #' library(terra)
 #' library(tidyverse)
-#' fvcpath = system.file("extdata", "FVC.zip",package = 'spEcula')
-#' fvc = terra::rast(paste0("/vsizip/",fvcpath))
+#' fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+#' fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+#' fvc = terra::aggregate(fvc,fact = 5)
 #' fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 #' g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
-#' new.fvc = g$disv
-#' new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-#' gd(fvc ~ .,data = new.fvc,type = 'factor')
-#' gd(fvc ~ .,data = new.fvc,type = 'interaction')
+#' g
 #' }
 gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
                    cores = 1,return_disc = TRUE,...){

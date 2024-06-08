@@ -1,5 +1,5 @@
 ---
-title: "optimal parameters geographic detector(OPGD)"
+title: "Optimal Parameters Geographic Detector(OPGD)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{OPGD}
@@ -24,6 +24,7 @@ library(tidyverse)
 library(gdverse)
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = aggregate(fvc,fact = 5)
 fvc
 ```
 
@@ -41,11 +42,11 @@ head(fvc)
 ### Determine optimal discretization parameters
 
 Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
-We can use `gd_bestunidisc` to discretize them based on geodetector q-statistic.
+We can use `gd_bestunidisc()` to discretize them based on geodetector q-statistic.
 
 ```{r}
-tictoc::tic()
 set.seed(12345678)
+tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
 tictoc::toc()
 ```
@@ -76,10 +77,10 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
 ```{r}
 set.seed(12345678)
-fvc_gd = opgd(fvc ~ .,data = fvc,
-              discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = c('factor','interaction'))
-str(fvc_gd)
-fvc_gd[[1]]
-fvc_gd[[2]]
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
+                discvar = names(select(fvc,-c(fvc,lulc))),
+                cores = 6, type = c('factor','interaction'))
+str(fvc_opgd)
+fvc_opgd[[1]]
+fvc_opgd[[2]]
 ```

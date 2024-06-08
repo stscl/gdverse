@@ -41,7 +41,7 @@ object.}
 \item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.}
 }
 \value{
-A list of the opgd model result.
+A list of the OPGD model result.
 }
 \description{
 Function for optimal parameters geographic detector(OPGD) model.
@@ -50,13 +50,20 @@ Function for optimal parameters geographic detector(OPGD) model.
 \dontrun{
 library(terra)
 library(tidyverse)
-fvcpath = system.file("extdata", "FVC.zip",package = 'spEcula')
-fvc = terra::rast(paste0("/vsizip/",fvcpath))
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = terra::aggregate(fvc,fact = 5)
 fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 opgd(fvc ~ ., data = fvc,
      discvar = names(select(fvc,-c(fvc,lulc))),
      cores = 6, type =c('factor','interaction'))
 }
+}
+\references{
+Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
+model enhances geographic characteristics of explanatory variables for spatial heterogeneity
+analysis: Cases with different types of spatial data, GIScience & Remote Sensing, 57(5), 593-610.
+doi: 10.1080/15481603.2020.1760434.
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}

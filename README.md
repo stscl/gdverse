@@ -28,7 +28,7 @@ or install `gdverse` from `r-universe`:
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
-### OPGD model
+### Load data and package
 
 ``` r
 library(sf)
@@ -37,32 +37,35 @@ library(tidyverse)
 library(gdverse)
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = terra::aggregate(fvc,fact = 5)
 fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 head(fvc)
 ## # A tibble: 6 × 13
-##     fvc premax premin presum tmpmax tmpmin tmpavg    pop   ntl  lulc  elev slope
-##   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 0.198   163.   7.95  3956.   20.8  -7.53   8.05  1.90   6.60    10 1758.  2.65
-## 2 0.193   161.   6.80  3892.   20.7  -7.55   8.02  1.20   4.91    10 1754.  3.45
-## 3 0.192   160.   5.24  3842.   20.9  -7.48   8.15  0.547  3.75    10 1722.  3.96
-## 4 0.189   159.   5     3808.   21.1  -7.39   8.35  0.542  3.99    10 1672.  2.90
-## 5 0.208   164.   9.98  4051.   20.6  -7.59   7.97 10.4    7.10    10 1780.  1.94
-## 6 0.196   163.   8.15  3973.   20.7  -7.53   8.03  9.31   6.56    10 1755.  3.01
+##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev slope
+##   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.  2.96
+## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.  1.86
+## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.  3.19
+## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.  3.32
+## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.  2.79
+## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93
 ## # ℹ 1 more variable: aspect <dbl>
 ```
+
+### OPGD model
 
 ``` r
 set.seed(12345678)
 tictoc::tic()
-fvc_gd = opgd(fvc ~ .,data = fvc,
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = 'factor')
 tictoc::toc()
-## 14.33 sec elapsed
+## 3.08 sec elapsed
 ```
 
 ``` r
-fvc_gd
+fvc_opgd
 ## Spatial Stratified Heterogeneity Test 
 ##  
 ##           Factor detector
@@ -70,15 +73,53 @@ fvc_gd
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6402    | 6.669e-10 |
-|   lulc   |   0.5533    | 9.106e-10 |
-|  premin  |   0.4433    | 6.004e-10 |
-|  tmpmin  |   0.4065    | 4.706e-10 |
-|  tmpmax  |   0.2284    | 5.111e-10 |
-|   elev   |    0.209    |  1.5e-10  |
-|  tmpavg  |    0.197    | 6.833e-10 |
-|  slope   |   0.1937    | 8.865e-10 |
-|   pop    |   0.1856    | 3.221e-10 |
-|  premax  |   0.1324    | 2.448e-10 |
-|   ntl    |   0.02125   | 6.277e-10 |
-|  aspect  |   0.00741   | 5.448e-10 |
+|  presum  |   0.6642    | 6.083e-10 |
+|   lulc   |   0.6597    | 8.782e-10 |
+|  premin  |   0.4671    | 5.581e-10 |
+|  tmpmin  |   0.4282    | 7.733e-10 |
+|  tmpmax  |   0.2594    | 3.131e-10 |
+|   elev   |   0.2353    | 2.885e-10 |
+|  slope   |   0.2338    | 7.849e-10 |
+|  tmpavg  |   0.2244    | 6.571e-10 |
+|   pop    |   0.1953    | 2.428e-10 |
+|  premax  |   0.1448    | 1.771e-10 |
+|   ntl    |   0.02253   | 0.005407  |
+|  aspect  |   0.0186    |  0.7491   |
+
+### RGD model
+
+To run `RGD`,remember to set up your python dependence, see `RGD`
+vignette to get more details.
+
+``` r
+reticulate::use_condaenv('geocompy')
+set.seed(12345678)
+tictoc::tic()
+fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 10, 
+              discvar = names(select(fvc,-c(fvc,lulc))),
+              cores = 6, type = c('factor','interaction'))
+tictoc::toc()
+## 1879.89 sec elapsed
+```
+
+``` r
+fvc_rgd
+## Spatial Stratified Heterogeneity Test 
+##  
+##           Factor detector
+```
+
+| variable | Q-statistic |  P-value  |
+|:--------:|:-----------:|:---------:|
+|  presum  |   0.6745    | 6.166e-10 |
+|   lulc   |   0.6597    | 8.782e-10 |
+|  premin  |   0.4855    | 5.461e-10 |
+|  tmpmin  |   0.4575    | 6.232e-10 |
+|  tmpmax  |   0.2816    | 5.853e-10 |
+|   elev   |   0.2576    | 5.407e-10 |
+|   pop    |   0.2566    | 4.386e-10 |
+|  slope   |   0.2525    | 9.439e-10 |
+|  tmpavg  |   0.2502    | 4.2e-10   |
+|  premax  |   0.1668    | 9.434e-10 |
+|  aspect  |   0.03427   | 0.06239   |
+|   ntl    |   0.02334   | 4.623e-10 |

@@ -2,6 +2,11 @@
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for optimal parameters geographic detector(OPGD) model.
+#' @references
+#' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
+#' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
+#' analysis: Cases with different types of spatial data, GIScience & Remote Sensing, 57(5), 593-610.
+#' doi: 10.1080/15481603.2020.1760434.
 #'
 #' @param formula A formula of OPGD model.
 #' @param data A data.frame or tibble of observation data.
@@ -18,7 +23,7 @@
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
 #'
-#' @return A list of the opgd model result.
+#' @return A list of the OPGD model result.
 #' @importFrom stats as.formula
 #' @importFrom purrr map
 #' @importFrom dplyr select all_of bind_cols
@@ -28,8 +33,9 @@
 #' \dontrun{
 #' library(terra)
 #' library(tidyverse)
-#' fvcpath = system.file("extdata", "FVC.zip",package = 'spEcula')
-#' fvc = terra::rast(paste0("/vsizip/",fvcpath))
+#' fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+#' fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+#' fvc = terra::aggregate(fvc,fact = 5)
 #' fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 #' opgd(fvc ~ ., data = fvc,
 #'      discvar = names(select(fvc,-c(fvc,lulc))),

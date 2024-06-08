@@ -1,0 +1,93 @@
+---
+title: "Robust Geographical Detector(RGD)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{RGD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##"
+)
+```
+
+### Set up your python dependence
+
+1. install `miniconda`
+2. create a new conda env `geocompy` use `conda create -n geocompy python=3.9 -y`
+3. activate this env `conda activate geocompy`
+4. install `mamba` by `conda install -c conda-forge mamba -y`.
+5. set up python packages use `mamba install -c conda-forge numpy==1.23.5 joblib
+pandas ruptures -y`
+
+### Load data and package
+
+``` {r}
+library(terra)
+library(tidyverse)
+library(gdverse)
+reticulate::use_condaenv('geocompy')
+
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = aggregate(fvc,fact = 5)
+fvc
+```
+
+``` {r}
+names(fvc)
+```
+
+### Convert data from `SpatRaster` to `tibble`
+
+``` {r}
+fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
+head(fvc)
+```
+
+### Determine discretization use offline change point detection
+
+Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
+We can use `robust_disc()` to discretize them based on offline change point detection.
+
+```{r}
+set.seed(12345678)
+tictoc::tic()
+new.fvc = robust_disc(fvc ~ .,data = select(fvc,-lulc),discnum = 15,cores = 6)
+tictoc::toc()
+```
+
+```{r}
+new.fvc
+```
+
+The `new.fvc`  is the discrete result,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+
+```{r}
+new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
+new.fvc
+```
+
+### Run geodetector
+
+Then ,we can run geodetector model by `gd()` function.
+
+```{r}
+gd(fvc ~ .,data = new.fvc,type = 'factor')
+gd(fvc ~ .,data = new.fvc,type = 'interaction')
+```
+
+### You can also use `rgd()` in one time to get result above.
+
+```{r}
+set.seed(12345678)
+fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15,
+              discvar = names(select(fvc,-c(fvc,lulc))),
+              cores = 6, type = c('factor','interaction'))
+str(fvc_rgd)
+fvc_rgd[[1]]
+fvc_rgd[[2]]
+```

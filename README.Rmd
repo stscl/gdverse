@@ -39,28 +39,44 @@ or install `gdverse` from `r-universe`:
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
-### OPGD model
+### Load data and package
 
-```{r example_gd}
+```{r example_gdverse}
 library(sf)
 library(terra)
 library(tidyverse)
 library(gdverse)
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = terra::aggregate(fvc,fact = 5)
 fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 head(fvc)
 ```
 
+### OPGD model
+
 ```{r}
 set.seed(12345678)
 tictoc::tic()
-fvc_gd = opgd(fvc ~ .,data = fvc,
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = 'factor')
 tictoc::toc()
+fvc_opgd
 ```
 
+### RGD model
+
+To run `RGD`,remember to set up your python dependence, see `RGD` vignette to get more details.
+
 ```{r}
-fvc_gd
+reticulate::use_condaenv('geocompy')
+set.seed(12345678)
+tictoc::tic()
+fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 10, 
+              discvar = names(select(fvc,-c(fvc,lulc))),
+              cores = 6, type = 'factor')
+tictoc::toc()
+fvc_rgd
 ```
+

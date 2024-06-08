@@ -2,7 +2,7 @@
 % Please edit documentation in R/discretization.R
 \name{gd_bestunidisc}
 \alias{gd_bestunidisc}
-\title{Best univariate discretize parameters based on geodetector q-statistic}
+\title{Best univariate discretization based on geodetector q-statistic}
 \usage{
 gd_bestunidisc(
   formula,
@@ -38,20 +38,18 @@ A list with the optimal parameter in the provided parameter combination with \co
 \code{method} and \code{disc}(when \code{return_disc} is \code{TRUE}).
 }
 \description{
-Function for determining the best univariate discretize parameters based on geodetector q-statistic.
+Function for determining the best univariate discretization based on geodetector q-statistic.
 }
 \examples{
 \dontrun{
 library(terra)
 library(tidyverse)
-fvcpath = system.file("extdata", "FVC.zip",package = 'spEcula')
-fvc = terra::rast(paste0("/vsizip/",fvcpath))
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc = terra::aggregate(fvc,fact = 5)
 fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
-new.fvc = g$disv
-new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-gd(fvc ~ .,data = new.fvc,type = 'factor')
-gd(fvc ~ .,data = new.fvc,type = 'interaction')
+g
 }
 }
 \author{
