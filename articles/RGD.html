@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="gdverse">
-<title>Optimal Parameters Geographic Detector(OPGD) • gdverse</title>
+<title>Robust Geographical Detector(RGD) • gdverse</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Optimal Parameters Geographic Detector(OPGD)">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Robust Geographical Detector(RGD)">
 <meta property="og:description" content="gdverse">
 <meta property="og:image" content="https://spatlyu.github.io/gdverse/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -76,22 +76,56 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Optimal Parameters Geographic Detector(OPGD)</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Robust Geographical Detector(RGD)</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/SpatLyu/gdverse/blob/HEAD/vignettes/OPGD.Rmd" class="external-link"><code>vignettes/OPGD.Rmd</code></a></small>
-      <div class="d-none name"><code>OPGD.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/SpatLyu/gdverse/blob/HEAD/vignettes/RGD.Rmd" class="external-link"><code>vignettes/RGD.Rmd</code></a></small>
+      <div class="d-none name"><code>RGD.Rmd</code></div>
     </div>
 
     
     
 <div class="section level3">
+<h3 id="set-up-your-python-dependence">Set up your python dependence<a class="anchor" aria-label="anchor" href="#set-up-your-python-dependence"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>install <code>miniconda</code>
+</li>
+<li>create a new conda env <code>geocompy</code> use
+<code>conda create -n geocompy python=3.9 -y</code>
+</li>
+<li>activate this env <code>conda activate geocompy</code>
+</li>
+<li>install <code>mamba</code> by
+<code>conda install -c conda-forge mamba -y</code>.</li>
+<li>set up python packages use
+<code>mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y</code>
+</li>
+</ol>
+</div>
+<div class="section level3">
 <h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
+<span><span class="co">## terra 1.7.78</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="co">## ── Attaching core tidyverse packages ────────────────────────────────── tidyverse 2.0.0 ──</span></span>
+<span><span class="co">## ✔ dplyr     1.1.4     ✔ readr     2.1.5</span></span>
+<span><span class="co">## ✔ forcats   1.0.0     ✔ stringr   1.5.1</span></span>
+<span><span class="co">## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1</span></span>
+<span><span class="co">## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1</span></span>
+<span><span class="co">## ✔ purrr     1.0.2</span></span>
+<span><span class="co">## ── Conflicts ──────────────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
+<span><span class="co">## ✖ tidyr::extract() masks terra::extract()</span></span>
+<span><span class="co">## ✖ dplyr::filter()  masks gdverse::filter(), stats::filter()</span></span>
+<span><span class="co">## ✖ dplyr::lag()     masks stats::lag()</span></span>
+<span><span class="co">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
+<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_condaenv</a></span><span class="op">(</span><span class="st">'geocompy'</span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">fvcpath</span> <span class="op">=</span> <span class="st">"https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"</span></span>
 <span><span class="va">fvc</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"/vsicurl/"</span>,<span class="va">fvcpath</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">fvc</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">fvc</span>,fact <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -105,7 +139,7 @@
 <span><span class="co">## names       :       fvc,   premax,    premin,   presum,   tmpmax,    tmpmin, ... </span></span>
 <span><span class="co">## min values  : 0.1527159, 111.2089,  2.340401, 3834.887, 10.92638, -9.976424, ... </span></span>
 <span><span class="co">## max values  : 0.8905939, 247.1408, 75.933422, 8276.911, 26.72104,  1.101411, ...</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
 <span><span class="co">##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"   </span></span>
 <span><span class="co">## [10] "lulc"   "elev"   "slope"  "aspect"</span></span></code></pre></div>
@@ -114,7 +148,7 @@
 <h3 id="convert-data-from-spatraster-to-tibble">Convert data from <code>SpatRaster</code> to
 <code>tibble</code><a class="anchor" aria-label="anchor" href="#convert-data-from-spatraster-to-tibble"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">fvc</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
 <span><span class="co">## # A tibble: 6 × 13</span></span>
@@ -128,90 +162,60 @@
 <span><span class="co">## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93   137.</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="determine-optimal-discretization-parameters">Determine optimal discretization parameters<a class="anchor" aria-label="anchor" href="#determine-optimal-discretization-parameters"></a>
+<h3 id="determine-discretization-use-offline-change-point-detection">Determine discretization use offline change point detection<a class="anchor" aria-label="anchor" href="#determine-discretization-use-offline-change-point-detection"></a>
 </h3>
 <p>Only <code>lulc</code> is a discrete category variable in the
 <code>fvc</code> data, we need to discretize others. We can use
-<code><a href="../reference/gd_bestunidisc.html">gd_bestunidisc()</a></code> to discretize them based on geodetector
-q-statistic.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code><a href="../reference/robust_disc.html">robust_disc()</a></code> to discretize them based on offline change
+point detection.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345678</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="../reference/robust_disc.html">robust_disc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 4.11 sec elapsed</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">g</span></span>
-<span><span class="co">## $x</span></span>
-<span><span class="co">##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg"</span></span>
-<span><span class="co">## [10] "tmpmax" "tmpmin"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $k</span></span>
-<span><span class="co">##  [1] 12 14 15 14 14 15 14 14 15 15 15</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $method</span></span>
-<span><span class="co">##  [1] "pretty"   "quantile" "fisher"   "quantile" "fisher"   "fisher"   "fisher"  </span></span>
-<span><span class="co">##  [8] "fisher"   "fisher"   "quantile" "fisher"  </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $disv</span></span>
-<span><span class="co">## # A tibble: 5,240 × 11</span></span>
-<span><span class="co">##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
-<span><span class="co">##     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1      7    11     5     2      7      1      1     5      7     10      3</span></span>
-<span><span class="co">##  2      9    10     5     5      6      1      1     3      8     11      3</span></span>
-<span><span class="co">##  3     10    11     4     2      7      1      1     5      7     10      3</span></span>
-<span><span class="co">##  4     11    11     3     2      8      1      1     5      6      8      3</span></span>
-<span><span class="co">##  5      7    11     5     1      7      1      1     4      7     10      3</span></span>
-<span><span class="co">##  6      7    10     5     1      6      1      1     3      8     11      3</span></span>
-<span><span class="co">##  7      7     9     5     3      6      1      1     2      8     12      3</span></span>
-<span><span class="co">##  8     11     9     5     2      6      1      1     3      8     12      3</span></span>
-<span><span class="co">##  9      9    11     6     7      7      1      1     5      7     10      3</span></span>
-<span><span class="co">## 10     11    10     5     3      7      1      1     4      8     11      3</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="va">g</span><span class="op">$</span><span class="va">disv</span></span>
-<span><span class="va">new.fvc</span></span>
-<span><span class="co">## # A tibble: 5,240 × 11</span></span>
-<span><span class="co">##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
-<span><span class="co">##     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1      7    11     5     2      7      1      1     5      7     10      3</span></span>
-<span><span class="co">##  2      9    10     5     5      6      1      1     3      8     11      3</span></span>
-<span><span class="co">##  3     10    11     4     2      7      1      1     5      7     10      3</span></span>
-<span><span class="co">##  4     11    11     3     2      8      1      1     5      6      8      3</span></span>
-<span><span class="co">##  5      7    11     5     1      7      1      1     4      7     10      3</span></span>
-<span><span class="co">##  6      7    10     5     1      6      1      1     3      8     11      3</span></span>
-<span><span class="co">##  7      7     9     5     3      6      1      1     2      8     12      3</span></span>
-<span><span class="co">##  8     11     9     5     2      6      1      1     3      8     12      3</span></span>
-<span><span class="co">##  9      9    11     6     7      7      1      1     5      7     10      3</span></span>
-<span><span class="co">## 10     11    10     5     3      7      1      1     4      8     11      3</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
-<p>The <code>new.fvc</code> is the discrete result of the optimal
-discretization parameter based on the Q statistic of the geographic
-detector,we can combine it with <code>fvc</code> and <code>lulc</code>
-col in <code>fvc</code> tibble now.</p>
+<span><span class="co">## 2745.55 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new.fvc</span></span>
+<span><span class="co">## # A tibble: 5,240 × 11</span></span>
+<span><span class="co">##    premax  premin presum tmpmax tmpmin tmpavg pop     ntl     elev    slope   aspect </span></span>
+<span><span class="co">##    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">##  1 group10 group1 group1 group8 group4 group5 group7  group14 group13 group10 group4 </span></span>
+<span><span class="co">##  2 group10 group1 group1 group9 group4 group7 group10 group14 group11 group10 group14</span></span>
+<span><span class="co">##  3 group11 group1 group1 group8 group4 group5 group8  group14 group13 group10 group14</span></span>
+<span><span class="co">##  4 group13 group1 group1 group8 group2 group4 group7  group14 group13 group11 group14</span></span>
+<span><span class="co">##  5 group10 group1 group1 group8 group4 group5 group1  group14 group13 group10 group7 </span></span>
+<span><span class="co">##  6 group10 group1 group1 group9 group4 group5 group2  group14 group11 group10 group7 </span></span>
+<span><span class="co">##  7 group10 group1 group1 group9 group4 group7 group8  group14 group9  group6  group4 </span></span>
+<span><span class="co">##  8 group10 group1 group1 group9 group4 group7 group8  group14 group9  group10 group14</span></span>
+<span><span class="co">##  9 group10 group1 group1 group8 group4 group5 group10 group14 group13 group10 group14</span></span>
+<span><span class="co">## 10 group11 group1 group1 group8 group4 group5 group9  group14 group9  group10 group14</span></span>
+<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
+<p>The <code>new.fvc</code> is the discrete result,we can combine it
+with <code>fvc</code> and <code>lulc</code> col in <code>fvc</code>
+tibble now.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span>,<span class="va">new.fvc</span><span class="op">)</span></span>
 <span><span class="va">new.fvc</span></span>
 <span><span class="co">## # A tibble: 5,240 × 13</span></span>
-<span><span class="co">##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1 0.188    10      7    11     5     2      7      1      1     5      7     10      3</span></span>
-<span><span class="co">##  2 0.162    10      9    10     5     5      6      1      1     3      8     11      3</span></span>
-<span><span class="co">##  3 0.168    10     10    11     4     2      7      1      1     5      7     10      3</span></span>
-<span><span class="co">##  4 0.186    10     11    11     3     2      8      1      1     5      6      8      3</span></span>
-<span><span class="co">##  5 0.189    10      7    11     5     1      7      1      1     4      7     10      3</span></span>
-<span><span class="co">##  6 0.171    10      7    10     5     1      6      1      1     3      8     11      3</span></span>
-<span><span class="co">##  7 0.153    10      7     9     5     3      6      1      1     2      8     12      3</span></span>
-<span><span class="co">##  8 0.163    10     11     9     5     2      6      1      1     3      8     12      3</span></span>
-<span><span class="co">##  9 0.176    10      9    11     6     7      7      1      1     5      7     10      3</span></span>
-<span><span class="co">## 10 0.177    10     11    10     5     3      7      1      1     4      8     11      3</span></span>
+<span><span class="co">##      fvc  lulc premax  premin presum tmpmax tmpmin tmpavg pop     ntl   elev  slope aspect</span></span>
+<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; </span></span>
+<span><span class="co">##  1 0.188    10 group10 group1 group1 group8 group4 group5 group7  grou… grou… grou… group4</span></span>
+<span><span class="co">##  2 0.162    10 group10 group1 group1 group9 group4 group7 group10 grou… grou… grou… group…</span></span>
+<span><span class="co">##  3 0.168    10 group11 group1 group1 group8 group4 group5 group8  grou… grou… grou… group…</span></span>
+<span><span class="co">##  4 0.186    10 group13 group1 group1 group8 group2 group4 group7  grou… grou… grou… group…</span></span>
+<span><span class="co">##  5 0.189    10 group10 group1 group1 group8 group4 group5 group1  grou… grou… grou… group7</span></span>
+<span><span class="co">##  6 0.171    10 group10 group1 group1 group9 group4 group5 group2  grou… grou… grou… group7</span></span>
+<span><span class="co">##  7 0.153    10 group10 group1 group1 group9 group4 group7 group8  grou… grou… grou… group4</span></span>
+<span><span class="co">##  8 0.163    10 group10 group1 group1 group9 group4 group7 group8  grou… grou… grou… group…</span></span>
+<span><span class="co">##  9 0.176    10 group10 group1 group1 group8 group4 group5 group10 grou… grou… grou… group…</span></span>
+<span><span class="co">## 10 0.177    10 group11 group1 group1 group8 group4 group5 group9  grou… grou… grou… group…</span></span>
 <span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-geodetector">Run geodetector<a class="anchor" aria-label="anchor" href="#run-geodetector"></a>
 </h3>
 <p>Then ,we can run geodetector model by <code><a href="../reference/gd.html">gd()</a></code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
@@ -230,8 +234,8 @@ col in <code>fvc</code> tibble now.</p>
 <tbody>
 <tr class="odd">
 <td align="center">presum</td>
-<td align="center">0.6613</td>
-<td align="center">6.818e-10</td>
+<td align="center">0.6745</td>
+<td align="center">6.166e-10</td>
 </tr>
 <tr class="even">
 <td align="center">lulc</td>
@@ -240,57 +244,57 @@ col in <code>fvc</code> tibble now.</p>
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.465</td>
-<td align="center">4.104e-10</td>
+<td align="center">0.4855</td>
+<td align="center">5.461e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.4351</td>
-<td align="center">3.726e-10</td>
+<td align="center">0.4575</td>
+<td align="center">6.232e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
-<td align="center">0.2594</td>
-<td align="center">3.131e-10</td>
+<td align="center">0.2816</td>
+<td align="center">5.853e-10</td>
 </tr>
 <tr class="even">
 <td align="center">elev</td>
-<td align="center">0.2353</td>
-<td align="center">2.885e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">slope</td>
-<td align="center">0.2296</td>
-<td align="center">9.746e-10</td>
-</tr>
-<tr class="even">
-<td align="center">tmpavg</td>
-<td align="center">0.2167</td>
-<td align="center">7.669e-10</td>
+<td align="center">0.2576</td>
+<td align="center">5.407e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">pop</td>
-<td align="center">0.1953</td>
-<td align="center">2.428e-10</td>
+<td align="center">0.2566</td>
+<td align="center">4.386e-10</td>
+</tr>
+<tr class="even">
+<td align="center">slope</td>
+<td align="center">0.2525</td>
+<td align="center">9.439e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpavg</td>
+<td align="center">0.2502</td>
+<td align="center">4.2e-10</td>
 </tr>
 <tr class="even">
 <td align="center">premax</td>
-<td align="center">0.1393</td>
-<td align="center">4.811e-10</td>
+<td align="center">0.1668</td>
+<td align="center">9.434e-10</td>
 </tr>
 <tr class="odd">
-<td align="center">ntl</td>
-<td align="center">0.02278</td>
-<td align="center">0.08141</td>
+<td align="center">aspect</td>
+<td align="center">0.03427</td>
+<td align="center">0.06239</td>
 </tr>
 <tr class="even">
-<td align="center">aspect</td>
-<td align="center">0.0186</td>
-<td align="center">0.7491</td>
+<td align="center">ntl</td>
+<td align="center">0.02334</td>
+<td align="center">4.623e-10</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
@@ -306,22 +310,6 @@ col in <code>fvc</code> tibble now.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">lulc ∩ aspect</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ elev</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ pop</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
 <td align="center">lulc ∩ premax</td>
 <td align="center">Enhance, bi-</td>
 </tr>
@@ -334,14 +322,6 @@ col in <code>fvc</code> tibble now.</p>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">lulc ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
 <td align="center">lulc ∩ tmpmax</td>
 <td align="center">Enhance, bi-</td>
 </tr>
@@ -350,139 +330,27 @@ col in <code>fvc</code> tibble now.</p>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">aspect ∩ elev</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ pop</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ pop</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ presum</td>
+<td align="center">lulc ∩ tmpavg</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">elev ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ pop</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ presum</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">pop ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ presum</td>
+<td align="center">lulc ∩ pop</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">pop ∩ slope</td>
+<td align="center">lulc ∩ ntl</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">pop ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
+<td align="center">lulc ∩ elev</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">pop ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
+<td align="center">lulc ∩ slope</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">pop ∩ tmpmin</td>
+<td align="center">lulc ∩ aspect</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
@@ -494,14 +362,6 @@ col in <code>fvc</code> tibble now.</p>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">premax ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">premax ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
 <td align="center">premax ∩ tmpmax</td>
 <td align="center">Enhance, nonlinear</td>
 </tr>
@@ -510,15 +370,31 @@ col in <code>fvc</code> tibble now.</p>
 <td align="center">Enhance, nonlinear</td>
 </tr>
 <tr class="even">
-<td align="center">premin ∩ presum</td>
+<td align="center">premax ∩ tmpavg</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">premax ∩ pop</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">premax ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">premax ∩ elev</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">premax ∩ slope</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">premin ∩ slope</td>
-<td align="center">Enhance, bi-</td>
+<td align="center">premax ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
 </tr>
 <tr class="even">
-<td align="center">premin ∩ tmpavg</td>
+<td align="center">premin ∩ presum</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
@@ -530,11 +406,27 @@ col in <code>fvc</code> tibble now.</p>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">presum ∩ slope</td>
+<td align="center">premin ∩ tmpavg</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">presum ∩ tmpavg</td>
+<td align="center">premin ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">premin ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">premin ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">premin ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">premin ∩ aspect</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
@@ -546,60 +438,172 @@ col in <code>fvc</code> tibble now.</p>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">slope ∩ tmpavg</td>
+<td align="center">presum ∩ tmpavg</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">slope ∩ tmpmax</td>
+<td align="center">presum ∩ pop</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">slope ∩ tmpmin</td>
+<td align="center">presum ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">presum ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">presum ∩ slope</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">tmpavg ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
+<td align="center">presum ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">tmpavg ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
 <td align="center">tmpmax ∩ tmpmin</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax ∩ tmpavg</td>
 <td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmax ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmax ∩ elev</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmax ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmin ∩ tmpavg</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmin ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmin ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpavg ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpavg ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">pop ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">pop ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">pop ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">pop ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">ntl ∩ elev</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">ntl ∩ slope</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">ntl ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">elev ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">elev ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">slope ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section level3">
-<h3 id="you-can-also-use-opgd-in-one-time-to-get-result-above-">You can also use <code>opgd()</code> in one time to get result
-above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-time-to-get-result-above-"></a>
+<h3 id="you-can-also-use-rgd-in-one-time-to-get-result-above-">You can also use <code>rgd()</code> in one time to get result
+above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-time-to-get-result-above-"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345678</span><span class="op">)</span></span>
-<span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">15</span>,</span>
-<span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">)</span></span>
+<span><span class="va">fvc_rgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>              discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>              cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fvc_rgd</span><span class="op">)</span></span>
 <span><span class="co">## List of 2</span></span>
 <span><span class="co">##  $ :List of 1</span></span>
 <span><span class="co">##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...</span></span>
-<span><span class="co">##   .. ..$ Q-statistic: num [1:12] 0.663 0.66 0.467 0.43 0.259 ...</span></span>
-<span><span class="co">##   .. ..$ P-value    : num [1:12] 8.33e-10 8.78e-10 5.58e-10 4.12e-10 3.13e-10 ...</span></span>
+<span><span class="co">##   .. ..$ Q-statistic: num [1:12] 0.674 0.66 0.486 0.458 0.282 ...</span></span>
+<span><span class="co">##   .. ..$ P-value    : num [1:12] 6.17e-10 8.78e-10 5.46e-10 6.23e-10 5.85e-10 ...</span></span>
 <span><span class="co">##   ..- attr(*, "class")= chr "factor_detector"</span></span>
 <span><span class="co">##  $ :List of 1</span></span>
 <span><span class="co">##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">##   .. ..$ variable1                                    : chr [1:66] "lulc" "lulc" "lulc" "lulc" ...</span></span>
-<span><span class="co">##   .. ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...</span></span>
-<span><span class="co">##   .. ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...</span></span>
+<span><span class="co">##   .. ..$ variable2                                    : chr [1:66] "premax" "premin" "presum" "tmpmax" ...</span></span>
+<span><span class="co">##   .. ..$ Interaction                                  : chr [1:66] "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" ...</span></span>
 <span><span class="co">##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...</span></span>
-<span><span class="co">##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2353 0.0227 0.1953 0.1399 ...</span></span>
-<span><span class="co">##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.821 0.725 0.756 0.767 ...</span></span>
+<span><span class="co">##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.167 0.486 0.674 0.282 0.458 ...</span></span>
+<span><span class="co">##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.771 0.791 0.817 0.82 0.848 ...</span></span>
 <span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fvc_rgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##           Factor detector</span></span></code></pre></div>
@@ -617,8 +621,8 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <tbody>
 <tr class="odd">
 <td align="center">presum</td>
-<td align="center">0.6629</td>
-<td align="center">8.328e-10</td>
+<td align="center">0.6745</td>
+<td align="center">6.166e-10</td>
 </tr>
 <tr class="even">
 <td align="center">lulc</td>
@@ -627,58 +631,58 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.4671</td>
-<td align="center">5.581e-10</td>
+<td align="center">0.4855</td>
+<td align="center">5.461e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.4302</td>
-<td align="center">4.124e-10</td>
+<td align="center">0.4575</td>
+<td align="center">6.232e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
-<td align="center">0.2594</td>
-<td align="center">3.131e-10</td>
+<td align="center">0.2816</td>
+<td align="center">5.853e-10</td>
 </tr>
 <tr class="even">
 <td align="center">elev</td>
-<td align="center">0.2353</td>
-<td align="center">2.885e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">slope</td>
-<td align="center">0.2338</td>
-<td align="center">7.849e-10</td>
-</tr>
-<tr class="even">
-<td align="center">tmpavg</td>
-<td align="center">0.2163</td>
-<td align="center">3.78e-10</td>
+<td align="center">0.2576</td>
+<td align="center">5.407e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">pop</td>
-<td align="center">0.1953</td>
-<td align="center">2.428e-10</td>
+<td align="center">0.2566</td>
+<td align="center">4.386e-10</td>
+</tr>
+<tr class="even">
+<td align="center">slope</td>
+<td align="center">0.2525</td>
+<td align="center">9.439e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpavg</td>
+<td align="center">0.2502</td>
+<td align="center">4.2e-10</td>
 </tr>
 <tr class="even">
 <td align="center">premax</td>
-<td align="center">0.1399</td>
-<td align="center">8.428e-10</td>
+<td align="center">0.1668</td>
+<td align="center">9.434e-10</td>
 </tr>
 <tr class="odd">
-<td align="center">ntl</td>
-<td align="center">0.02272</td>
-<td align="center">0.0301</td>
+<td align="center">aspect</td>
+<td align="center">0.03427</td>
+<td align="center">0.06239</td>
 </tr>
 <tr class="even">
-<td align="center">aspect</td>
-<td align="center">0.0186</td>
-<td align="center">0.7491</td>
+<td align="center">ntl</td>
+<td align="center">0.02334</td>
+<td align="center">4.623e-10</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fvc_rgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##          Interaction detector</span></span></code></pre></div>
@@ -693,22 +697,6 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">lulc ∩ aspect</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ elev</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">lulc ∩ pop</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
 <td align="center">lulc ∩ premax</td>
 <td align="center">Enhance, bi-</td>
 </tr>
@@ -721,14 +709,6 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">lulc ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">lulc ∩ tmpavg</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
 <td align="center">lulc ∩ tmpmax</td>
 <td align="center">Enhance, bi-</td>
 </tr>
@@ -737,139 +717,27 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">aspect ∩ elev</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ pop</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ presum</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">aspect ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ ntl</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ pop</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ presum</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="odd">
-<td align="center">elev ∩ slope</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ tmpavg</td>
+<td align="center">lulc ∩ tmpavg</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">elev ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">elev ∩ tmpmin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ pop</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ premin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ presum</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">ntl ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ premax</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">pop ∩ premin</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">pop ∩ presum</td>
+<td align="center">lulc ∩ pop</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">pop ∩ slope</td>
+<td align="center">lulc ∩ ntl</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">pop ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
+<td align="center">lulc ∩ elev</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">pop ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
+<td align="center">lulc ∩ slope</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">pop ∩ tmpmin</td>
+<td align="center">lulc ∩ aspect</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
@@ -881,14 +749,6 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">premax ∩ slope</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="odd">
-<td align="center">premax ∩ tmpavg</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
 <td align="center">premax ∩ tmpmax</td>
 <td align="center">Enhance, nonlinear</td>
 </tr>
@@ -897,15 +757,31 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <td align="center">Enhance, nonlinear</td>
 </tr>
 <tr class="even">
-<td align="center">premin ∩ presum</td>
+<td align="center">premax ∩ tmpavg</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">premax ∩ pop</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">premax ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">premax ∩ elev</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">premax ∩ slope</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">premin ∩ slope</td>
-<td align="center">Enhance, bi-</td>
+<td align="center">premax ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
 </tr>
 <tr class="even">
-<td align="center">premin ∩ tmpavg</td>
+<td align="center">premin ∩ presum</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
@@ -917,11 +793,27 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">presum ∩ slope</td>
+<td align="center">premin ∩ tmpavg</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">presum ∩ tmpavg</td>
+<td align="center">premin ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">premin ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">premin ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">premin ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">premin ∩ aspect</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
@@ -933,28 +825,140 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">slope ∩ tmpavg</td>
+<td align="center">presum ∩ tmpavg</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">slope ∩ tmpmax</td>
+<td align="center">presum ∩ pop</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">slope ∩ tmpmin</td>
+<td align="center">presum ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">presum ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">presum ∩ slope</td>
 <td align="center">Enhance, bi-</td>
 </tr>
 <tr class="even">
-<td align="center">tmpavg ∩ tmpmax</td>
-<td align="center">Enhance, nonlinear</td>
+<td align="center">presum ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 <tr class="odd">
-<td align="center">tmpavg ∩ tmpmin</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
 <td align="center">tmpmax ∩ tmpmin</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax ∩ tmpavg</td>
 <td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmax ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmax ∩ elev</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmax ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmin ∩ tmpavg</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmin ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmin ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg ∩ pop</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpavg ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpavg ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">pop ∩ ntl</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">pop ∩ elev</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">pop ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="even">
+<td align="center">pop ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">ntl ∩ elev</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">ntl ∩ slope</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="odd">
+<td align="center">ntl ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">elev ∩ slope</td>
+<td align="center">Enhance, bi-</td>
+</tr>
+<tr class="odd">
+<td align="center">elev ∩ aspect</td>
+<td align="center">Enhance, nonlinear</td>
+</tr>
+<tr class="even">
+<td align="center">slope ∩ aspect</td>
+<td align="center">Enhance, bi-</td>
 </tr>
 </tbody>
 </table>
