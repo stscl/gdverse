@@ -58,8 +58,8 @@ head(fvc)
 set.seed(12345678)
 tictoc::tic()
 fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
-              discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = 'factor')
+                discvar = names(select(fvc,-c(fvc,lulc))),
+                cores = 6, type = 'factor')
 tictoc::toc()
 ## 3.08 sec elapsed
 ```

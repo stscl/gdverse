@@ -3,9 +3,10 @@
 #' @description
 #' Classical geographical detector model.
 #' @references
-#' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010) Geo
-#' graphical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study of the
-#' Heshun Region, China, International Journal of Geographical Information Science, 24:1, 107-127, DOI: 10.1080/13658810802443457
+#' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010) Geographical Det
+#' ectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study of the
+#' Heshun Region, China, International Journal of Geographical Information Science, 24:1, 107-127,
+#' DOI: 10.1080/13658810802443457
 #'
 #' @param formula A formula of geographical detector model.
 #' @param data A data.frame or tibble of observation data.

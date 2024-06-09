@@ -1,5 +1,5 @@
 ---
-title: "Optimal Parameters Geographic Detector(OPGD)"
+title: "Optimal Parameters Geographical Detector(OPGD)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{OPGD}
