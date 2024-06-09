@@ -95,7 +95,7 @@ vignette to get more details.
 reticulate::use_condaenv('geocompy')
 set.seed(12345678)
 tictoc::tic()
-fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 10, 
+fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15, 
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = c('factor','interaction'))
 tictoc::toc()
