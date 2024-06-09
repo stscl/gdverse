@@ -2,7 +2,7 @@
 % Please edit documentation in R/opgd.R
 \name{opgd}
 \alias{opgd}
-\title{optimal parameters geographic detector(OPGD) model}
+\title{optimal parameters geographical detector(OPGD) model}
 \usage{
 opgd(
   formula,
@@ -44,7 +44,7 @@ object.}
 A list of the OPGD model result.
 }
 \description{
-Function for optimal parameters geographic detector(OPGD) model.
+Function for optimal parameters geographical detector(OPGD) model.
 }
 \examples{
 \dontrun{
