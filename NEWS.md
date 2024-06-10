@@ -6,4 +6,4 @@
 
 ## Major changes
 
-* Can now work with OPGD and RGD model!
+* Can now work well with OPGD and RGD model!
