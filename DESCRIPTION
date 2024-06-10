@@ -1,10 +1,10 @@
 Package: gdverse
-Title: Geographic detector models
+Title: Geographical detector models
 Version: 0.0.0.9990
 Authors@R: 
     person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-6003-3800"))
-Description: Family of geographic detector models in R.
+Description: Family of geographical detector models in R.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
