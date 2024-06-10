@@ -1,6 +1,6 @@
 Package: gdverse
 Title: Geographical detector models
-Version: 0.0.0.9990
+Version: 0.0.1
 Authors@R: 
     person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-6003-3800"))
