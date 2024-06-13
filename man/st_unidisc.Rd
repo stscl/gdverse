@@ -2,7 +2,7 @@
 % Please edit documentation in R/discretization.R
 \name{st_unidisc}
 \alias{st_unidisc}
-\title{Univariate discretization}
+\title{univariate discretization}
 \usage{
 st_unidisc(x, k, method = "quantile", factor = FALSE, ...)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/robustdisc.R
 \name{robust_disc}
 \alias{robust_disc}
-\title{Univariate discretization based on offline change point detection.}
+\title{univariate discretization based on offline change point detection.}
 \usage{
 robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
 }

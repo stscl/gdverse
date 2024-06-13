@@ -1,4 +1,4 @@
-#' @title Univariate discretization based on offline change point detection.
+#' @title univariate discretization based on offline change point detection.
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Determines discretization interval breaks using an optimization algorithm for variance-based

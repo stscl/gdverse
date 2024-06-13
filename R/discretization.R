@@ -1,4 +1,4 @@
-#' @title Univariate discretization
+#' @title univariate discretization
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function to classify univariate vector to interval,a wrapper of `classInt::classify_intervals()`.
