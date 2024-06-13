@@ -21,7 +21,8 @@
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`.You can run one or more at a time.
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
-#' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
+#' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.A useful parameter is `seed`,
+#'  which is used to set the random number seed.
 #'
 #' @return A list of the OPGD model result.
 #' @importFrom stats as.formula

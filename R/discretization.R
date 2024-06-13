@@ -5,11 +5,15 @@
 #'
 #' @param x A continuous numerical variable.
 #' @param k (optional) Number of classes required, if missing, `grDevices::nclass.Sturges()` is used;
-#' see also the "dpih" and "headtails" styles for automatic choice of the number of classes.
+#' see also the "dpih" and "headtails" styles for automatic choice of the number of classes. `k` must
+#' greater than 3 !
 #' @param method Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 #' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box".Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
 #' labels rather than integers.
+#' @param seed (optional) Random seed number, default is `12345678`.Setting random seed is useful when
+#' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
+#' by sampling `10%`(the default value for `samp_prop`).
 #' @param ... (optional) Other arguments passed to `classInt::classify_intervals()`,
 #' see `?classInt::classify_intervals()`.
 #'
@@ -23,8 +27,11 @@
 #'          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
 #'          7508, 5203)
 #' st_unidisc(xvar,k = 6,method = 'sd')
-st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
-  return(classInt::classify_intervals(var = x,n = k,style = method,
+st_unidisc = \(x,k,method = "quantile",factor = FALSE,
+               seed = 12345678,...){
+  if (k<=2) {stop(" `k` must greater than 3 !")}
+  set.seed(seed)
+  return(classInt::classify_intervals(var = x,n = k - 1,style = method,
                                       ...,factor = factor))
 }
 
@@ -43,6 +50,9 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' object.
 #' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
 #' Default is `TRUE`.
+#' @param seed (optional) Random seed number, default is `12345678`.Setting random seed is useful when
+#' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
+#' by sampling `10%`(the default value for `samp_prop`).
 #' @param ... (optional) Other arguments passed to `st_unidisc()`.
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
@@ -67,7 +77,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
 #' g
 #' }
 gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
-                   cores = 1,return_disc = TRUE,...){
+                   cores = 1,return_disc = TRUE,seed = 12345678,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE
@@ -80,7 +90,7 @@ gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
     discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")
   }
   if (is.null(discnum)){
-    discnum = 2:15
+    discnum = 3:15
   }
 
   formula = stats::as.formula(formula)
@@ -100,7 +110,8 @@ gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
 
   calcul_disc = \(paramgd){
     xdisc = st_unidisc(explanatory[,paramgd[[1]],drop = TRUE],
-                       k = paramgd[[2]],method = paramgd[[3]],...)
+                       k = paramgd[[2]],method = paramgd[[3]],
+                       seed = seed, ...)
     fd = factor_detector(response,xdisc)
     q = fd[[1]]
     names(q) = "qstatistic"

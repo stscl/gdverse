@@ -2,7 +2,7 @@
 
 * Support SPADE, IDSA, RID model.
 
-# gdverse 0.0.1.9000
+# gdverse 0.0.2
 
 ## Major changes
 

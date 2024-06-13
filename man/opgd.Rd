@@ -38,7 +38,8 @@ object.}
 
 \item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
 
-\item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.}
+\item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.A useful parameter is \code{seed},
+which is used to set the random number seed.}
 }
 \value{
 A list of the OPGD model result.
