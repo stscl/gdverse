@@ -56,9 +56,8 @@ head(fvc)
 ### OPGD model
 
 ```{r}
-set.seed(12345678)
 tictoc::tic()
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
@@ -74,7 +73,7 @@ reticulate::use_condaenv('geocompy')
 tictoc::tic()
 fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15, 
               discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = 'factor')
+              cores = 8, type = 'factor')
 tictoc::toc()
 fvc_rgd
 ```

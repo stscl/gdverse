@@ -34,8 +34,8 @@ fvc
 
 ``` r
 names(fvc)
-##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"   
-## [10] "lulc"   "elev"   "slope"  "aspect"
+##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"    "lulc"  
+## [11] "elev"   "slope"  "aspect"
 ```
 
 ### Convert data from `SpatRaster` to `tibble`
@@ -62,41 +62,40 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 
 
 ``` r
-set.seed(12345678)
 tictoc::tic()
-g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 2:15,cores = 6)
+g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 3.99 sec elapsed
+## 3.79 sec elapsed
 ```
 
 
 ``` r
 g
 ## $x
-##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg"
-## [10] "tmpmax" "tmpmin"
+##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg" "tmpmax"
+## [11] "tmpmin"
 ## 
 ## $k
-##  [1] 12 14 14 14 15 13 15 14 15 15 15
+##  [1] 12 14 12 14 12 14 15 11 15 15 13
 ## 
 ## $method
-##  [1] "pretty"   "quantile" "fisher"   "quantile" "fisher"   "fisher"   "fisher"  
-##  [8] "fisher"   "fisher"   "quantile" "fisher"  
+##  [1] "pretty"   "quantile" "fisher"   "quantile" "fisher"   "fisher"   "fisher"   "equal"   
+##  [9] "fisher"   "quantile" "fisher"  
 ## 
 ## $disv
 ## # A tibble: 5,240 × 11
 ##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1      7    11     5     2      7      1      1     5      7     10      3
-##  2      9    10     5     5      6      1      1     3      8     11      3
-##  3     10    11     4     2      7      1      1     5      7     10      3
-##  4     11    11     3     2      8      1      2     5      6      8      3
-##  5      7    11     5     1      7      1      1     4      7     10      3
-##  6      7    10     5     1      6      1      1     3      8     11      3
-##  7      7     9     5     3      6      1      1     2      8     12      3
-##  8     11     9     5     2      6      1      1     3      8     12      3
-##  9      9    11     6     7      7      1      1     5      7     10      3
-## 10     11    10     5     3      7      1      1     4      8     11      3
+##  1      3    10     3     2      5      1      1     2      6      9      2
+##  2      4     9     4     4      5      1      1     2      7     11      2
+##  3      4    10     3     2      5      1      1     2      6      9      2
+##  4      5    11     2     2      6      1      1     3      5      7      2
+##  5      3    10     4     1      5      1      1     2      6      9      2
+##  6      3     9     4     1      5      1      1     2      7     11      2
+##  7      3     9     3     3      5      1      1     1      7     11      2
+##  8      5     9     4     2      5      1      1     2      7     11      2
+##  9      4    10     5     7      5      1      1     2      6      9      2
+## 10      5     9     3     3      5      1      1     2      7     10      2
 ## # ℹ 5,230 more rows
 ```
 
@@ -106,20 +105,20 @@ new.fvc
 ## # A tibble: 5,240 × 11
 ##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1      7    11     5     2      7      1      1     5      7     10      3
-##  2      9    10     5     5      6      1      1     3      8     11      3
-##  3     10    11     4     2      7      1      1     5      7     10      3
-##  4     11    11     3     2      8      1      2     5      6      8      3
-##  5      7    11     5     1      7      1      1     4      7     10      3
-##  6      7    10     5     1      6      1      1     3      8     11      3
-##  7      7     9     5     3      6      1      1     2      8     12      3
-##  8     11     9     5     2      6      1      1     3      8     12      3
-##  9      9    11     6     7      7      1      1     5      7     10      3
-## 10     11    10     5     3      7      1      1     4      8     11      3
+##  1      3    10     3     2      5      1      1     2      6      9      2
+##  2      4     9     4     4      5      1      1     2      7     11      2
+##  3      4    10     3     2      5      1      1     2      6      9      2
+##  4      5    11     2     2      6      1      1     3      5      7      2
+##  5      3    10     4     1      5      1      1     2      6      9      2
+##  6      3     9     4     1      5      1      1     2      7     11      2
+##  7      3     9     3     3      5      1      1     1      7     11      2
+##  8      5     9     4     2      5      1      1     2      7     11      2
+##  9      4    10     5     7      5      1      1     2      6      9      2
+## 10      5     9     3     3      5      1      1     2      7     10      2
 ## # ℹ 5,230 more rows
 ```
 
-The `new.fvc`  is the discrete result of the optimal discretization parameter based on the Q statistic of the geographic detector,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.fvc` is the discrete result of the optimal discretization parameter based on the Q statistic of the geographic detector,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
 
 
 ``` r
@@ -128,22 +127,22 @@ new.fvc
 ## # A tibble: 5,240 × 13
 ##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##    <dbl> <dbl>  <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1 0.188    10      7    11     5     2      7      1      1     5      7     10      3
-##  2 0.162    10      9    10     5     5      6      1      1     3      8     11      3
-##  3 0.168    10     10    11     4     2      7      1      1     5      7     10      3
-##  4 0.186    10     11    11     3     2      8      1      2     5      6      8      3
-##  5 0.189    10      7    11     5     1      7      1      1     4      7     10      3
-##  6 0.171    10      7    10     5     1      6      1      1     3      8     11      3
-##  7 0.153    10      7     9     5     3      6      1      1     2      8     12      3
-##  8 0.163    10     11     9     5     2      6      1      1     3      8     12      3
-##  9 0.176    10      9    11     6     7      7      1      1     5      7     10      3
-## 10 0.177    10     11    10     5     3      7      1      1     4      8     11      3
+##  1 0.188    10      3    10     3     2      5      1      1     2      6      9      2
+##  2 0.162    10      4     9     4     4      5      1      1     2      7     11      2
+##  3 0.168    10      4    10     3     2      5      1      1     2      6      9      2
+##  4 0.186    10      5    11     2     2      6      1      1     3      5      7      2
+##  5 0.189    10      3    10     4     1      5      1      1     2      6      9      2
+##  6 0.171    10      3     9     4     1      5      1      1     2      7     11      2
+##  7 0.153    10      3     9     3     3      5      1      1     1      7     11      2
+##  8 0.163    10      5     9     4     2      5      1      1     2      7     11      2
+##  9 0.176    10      4    10     5     7      5      1      1     2      6      9      2
+## 10 0.177    10      5     9     3     3      5      1      1     2      7     10      2
 ## # ℹ 5,230 more rows
 ```
 
 ### Run geodetector
 
-Then ,we can run geodetector model by `gd()` function.
+Then, we can run geodetector model by `gd()` function.
 
 
 ``` r
@@ -157,29 +156,29 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 ------------------------------------
  variable   Q-statistic    P-value  
 ---------- ------------- -----------
-  presum       0.662      4.039e-10 
+  presum      0.6626      9.145e-10 
 
    lulc       0.6597      8.782e-10 
 
-  premin      0.4596      3.471e-10 
+  premin      0.4629      4.025e-10 
 
-  tmpmin      0.4351      3.726e-10 
+  tmpmin      0.4247      4.416e-10 
 
-  tmpmax      0.2594      3.131e-10 
+  tmpmax      0.2536      7.849e-10 
 
-   elev       0.2353      2.885e-10 
+   elev       0.2318      8.79e-10  
 
-  slope       0.2296      9.746e-10 
+  slope        0.229      8.967e-10 
 
-  tmpavg      0.2167      7.669e-10 
+  tmpavg      0.2186      6.41e-10  
 
-   pop        0.1953      2.428e-10 
+   pop        0.1896      7.855e-10 
 
-  premax      0.1399      8.428e-10 
+  premax      0.1381      3.287e-10 
 
-   ntl        0.02272      0.0301   
+   ntl        0.01878      0.01942  
 
-  aspect      0.0186       0.7491   
+  aspect      0.0118       0.1859   
 ------------------------------------
 
 
@@ -227,7 +226,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
    aspect ∩ premin      Enhance, nonlinear 
 
-   aspect ∩ presum         Enhance, bi-    
+   aspect ∩ presum      Enhance, nonlinear 
 
     aspect ∩ slope      Enhance, nonlinear 
 
@@ -239,7 +238,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
       elev ∩ ntl        Enhance, nonlinear 
 
-      elev ∩ pop           Enhance, bi-    
+      elev ∩ pop        Enhance, nonlinear 
 
     elev ∩ premax       Enhance, nonlinear 
 
@@ -247,7 +246,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
     elev ∩ presum          Enhance, bi-    
 
-     elev ∩ slope       Enhance, nonlinear 
+     elev ∩ slope          Enhance, bi-    
 
     elev ∩ tmpavg          Enhance, bi-    
 
@@ -289,7 +288,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
    premax ∩ presum         Enhance, bi-    
 
-    premax ∩ slope      Enhance, nonlinear 
+    premax ∩ slope         Enhance, bi-    
 
    premax ∩ tmpavg      Enhance, nonlinear 
 
@@ -323,7 +322,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
    tmpavg ∩ tmpmax      Enhance, nonlinear 
 
-   tmpavg ∩ tmpmin      Enhance, nonlinear 
+   tmpavg ∩ tmpmin         Enhance, bi-    
 
    tmpmax ∩ tmpmin      Enhance, nonlinear 
 -------------------------------------------
@@ -334,8 +333,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
 
 ``` r
-set.seed(12345678)
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = c('factor','interaction'))
 str(fvc_opgd)
@@ -343,8 +341,8 @@ str(fvc_opgd)
 ##  $ :List of 1
 ##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)
 ##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...
-##   .. ..$ Q-statistic: num [1:12] 0.664 0.66 0.467 0.434 0.259 ...
-##   .. ..$ P-value    : num [1:12] 6.08e-10 8.78e-10 5.58e-10 4.67e-10 3.13e-10 ...
+##   .. ..$ Q-statistic: num [1:12] 0.663 0.66 0.465 0.428 0.254 ...
+##   .. ..$ P-value    : num [1:12] 9.15e-10 8.78e-10 4.83e-10 5.54e-10 7.85e-10 ...
 ##   ..- attr(*, "class")= chr "factor_detector"
 ##  $ :List of 1
 ##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)
@@ -352,8 +350,8 @@ str(fvc_opgd)
 ##   .. ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...
 ##   .. ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...
 ##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...
-##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2353 0.0228 0.1953 0.1448 ...
-##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.821 0.725 0.756 0.769 ...
+##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0118 0.2318 0.0225 0.1896 0.1417 ...
+##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.683 0.82 0.724 0.754 0.769 ...
 ##   ..- attr(*, "class")= chr "interaction_detector"
 ```
 
@@ -368,29 +366,29 @@ fvc_opgd[[1]]
 ------------------------------------
  variable   Q-statistic    P-value  
 ---------- ------------- -----------
-  presum      0.6642      6.083e-10 
+  presum      0.6626      9.145e-10 
 
    lulc       0.6597      8.782e-10 
 
-  premin      0.4671      5.581e-10 
+  premin      0.4654      4.831e-10 
 
-  tmpmin      0.4341      4.671e-10 
+  tmpmin      0.4278      5.541e-10 
 
-  tmpmax      0.2594      3.131e-10 
+  tmpmax      0.2536      7.849e-10 
 
-   elev       0.2353      2.885e-10 
+   elev       0.2318      8.79e-10  
 
-  slope       0.2338      7.849e-10 
+  slope        0.229      8.967e-10 
 
-  tmpavg      0.2249      4.787e-10 
+  tmpavg      0.2125      9.658e-10 
 
-   pop        0.1953      2.428e-10 
+   pop        0.1896      7.855e-10 
 
-  premax      0.1448      1.771e-10 
+  premax      0.1417      7.869e-10 
 
-   ntl        0.02278      0.08141  
+   ntl        0.02253     0.005407  
 
-  aspect      0.0186       0.7491   
+  aspect      0.0118       0.1859   
 ------------------------------------
 
 
@@ -438,7 +436,7 @@ fvc_opgd[[2]]
 
    aspect ∩ premin      Enhance, nonlinear 
 
-   aspect ∩ presum         Enhance, bi-    
+   aspect ∩ presum      Enhance, nonlinear 
 
     aspect ∩ slope      Enhance, nonlinear 
 
@@ -450,13 +448,13 @@ fvc_opgd[[2]]
 
       elev ∩ ntl        Enhance, nonlinear 
 
-      elev ∩ pop           Enhance, bi-    
+      elev ∩ pop        Enhance, nonlinear 
 
     elev ∩ premax       Enhance, nonlinear 
 
     elev ∩ premin          Enhance, bi-    
 
-    elev ∩ presum          Weaken, uni-    
+    elev ∩ presum          Enhance, bi-    
 
      elev ∩ slope          Enhance, bi-    
 
@@ -534,7 +532,7 @@ fvc_opgd[[2]]
 
    tmpavg ∩ tmpmax      Enhance, nonlinear 
 
-   tmpavg ∩ tmpmin         Enhance, bi-    
+   tmpavg ∩ tmpmin      Enhance, nonlinear 
 
    tmpmax ∩ tmpmin      Enhance, nonlinear 
 -------------------------------------------

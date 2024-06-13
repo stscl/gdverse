@@ -55,13 +55,12 @@ head(fvc)
 ### OPGD model
 
 ``` r
-set.seed(12345678)
 tictoc::tic()
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 2:15,
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.08 sec elapsed
+## 2.92 sec elapsed
 ```
 
 ``` r
@@ -73,18 +72,18 @@ fvc_opgd
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6642    | 6.083e-10 |
+|  presum  |   0.6626    | 9.145e-10 |
 |   lulc   |   0.6597    | 8.782e-10 |
-|  premin  |   0.4671    | 5.581e-10 |
-|  tmpmin  |   0.4282    | 7.733e-10 |
-|  tmpmax  |   0.2594    | 3.131e-10 |
-|   elev   |   0.2353    | 2.885e-10 |
-|  slope   |   0.2338    | 7.849e-10 |
-|  tmpavg  |   0.2244    | 6.571e-10 |
-|   pop    |   0.1953    | 2.428e-10 |
-|  premax  |   0.1448    | 1.771e-10 |
-|   ntl    |   0.02253   | 0.005407  |
-|  aspect  |   0.0186    |  0.7491   |
+|  premin  |   0.4638    | 8.103e-10 |
+|  tmpmin  |   0.4278    | 5.541e-10 |
+|  tmpmax  |   0.2536    | 7.849e-10 |
+|  slope   |    0.233    | 8.055e-10 |
+|   elev   |   0.2318    | 8.79e-10  |
+|  tmpavg  |   0.2116    | 7.357e-10 |
+|   pop    |   0.1896    | 7.855e-10 |
+|  premax  |   0.1417    | 7.869e-10 |
+|   ntl    |   0.02272   |  0.0301   |
+|  aspect  |   0.0118    |  0.1859   |
 
 ### RGD model
 
@@ -93,13 +92,12 @@ vignette to get more details.
 
 ``` r
 reticulate::use_condaenv('geocompy')
-set.seed(12345678)
 tictoc::tic()
 fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15, 
               discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = c('factor','interaction'))
+              cores = 8, type = 'factor')
 tictoc::toc()
-## 1879.89 sec elapsed
+## 2980.2 sec elapsed
 ```
 
 ``` r
@@ -119,7 +117,7 @@ fvc_rgd
 |   elev   |   0.2576    | 5.407e-10 |
 |   pop    |   0.2566    | 4.386e-10 |
 |  slope   |   0.2525    | 9.439e-10 |
-|  tmpavg  |   0.2502    | 4.2e-10   |
+|  tmpavg  |   0.2502    |  4.2e-10  |
 |  premax  |   0.1668    | 9.434e-10 |
-|  aspect  |   0.03427   | 0.06239   |
+|  aspect  |   0.03427   |  0.06239  |
 |   ntl    |   0.02334   | 4.623e-10 |

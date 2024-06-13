@@ -24,7 +24,7 @@ opgd(
 \item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{2:15}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:15}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization,default is used
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}

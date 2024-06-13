@@ -20,7 +20,7 @@ gd_bestunidisc(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{2:15}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:15}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization,default is used
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}

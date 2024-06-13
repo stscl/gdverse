@@ -6,7 +6,7 @@
 #' @param x A continuous numerical variable.
 #' @param k (optional) Number of classes required, if missing, `grDevices::nclass.Sturges()` is used;
 #' see also the "dpih" and "headtails" styles for automatic choice of the number of classes. `k` must
-#' greater than 3 !
+#' greater than `3` !
 #' @param method Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 #' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box".Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
@@ -42,7 +42,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #'
 #' @param formula A formula of spatial stratified heterogeneity test.
 #' @param data A data.frame or tibble of observation data.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `2:15`.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:15`.
 #' @param discmethod (optional) A vector of methods for discretization,default is used
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `spEcula`.
 #' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
@@ -89,9 +89,7 @@ gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
   if (is.null(discmethod)) {
     discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")
   }
-  if (is.null(discnum)){
-    discnum = 3:15
-  }
+  if (is.null(discnum)){discnum = 3:15}
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)

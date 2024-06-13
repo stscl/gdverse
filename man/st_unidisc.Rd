@@ -11,7 +11,7 @@ st_unidisc(x, k, method = "quantile", factor = FALSE, seed = 12345678, ...)
 
 \item{k}{(optional) Number of classes required, if missing, \code{grDevices::nclass.Sturges()} is used;
 see also the "dpih" and "headtails" styles for automatic choice of the number of classes. \code{k} must
-greater than 3 !}
+greater than \code{3} !}
 
 \item{method}{Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box".Default is \code{quantile}.}
