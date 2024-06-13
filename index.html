@@ -122,13 +122,12 @@
 <h3 id="opgd-model">OPGD model<a class="anchor" aria-label="anchor" href="#opgd-model"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345678</span><span class="op">)</span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">15</span>,</span>
+<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.08 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 2.92 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
@@ -143,8 +142,8 @@
 <tbody>
 <tr class="odd">
 <td align="center">presum</td>
-<td align="center">0.6642</td>
-<td align="center">6.083e-10</td>
+<td align="center">0.6626</td>
+<td align="center">9.145e-10</td>
 </tr>
 <tr class="even">
 <td align="center">lulc</td>
@@ -153,53 +152,53 @@
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.4671</td>
-<td align="center">5.581e-10</td>
+<td align="center">0.4638</td>
+<td align="center">8.103e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.4282</td>
-<td align="center">7.733e-10</td>
+<td align="center">0.4278</td>
+<td align="center">5.541e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
-<td align="center">0.2594</td>
-<td align="center">3.131e-10</td>
-</tr>
-<tr class="even">
-<td align="center">elev</td>
-<td align="center">0.2353</td>
-<td align="center">2.885e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">slope</td>
-<td align="center">0.2338</td>
+<td align="center">0.2536</td>
 <td align="center">7.849e-10</td>
 </tr>
 <tr class="even">
+<td align="center">slope</td>
+<td align="center">0.233</td>
+<td align="center">8.055e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">elev</td>
+<td align="center">0.2318</td>
+<td align="center">8.79e-10</td>
+</tr>
+<tr class="even">
 <td align="center">tmpavg</td>
-<td align="center">0.2244</td>
-<td align="center">6.571e-10</td>
+<td align="center">0.2116</td>
+<td align="center">7.357e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">pop</td>
-<td align="center">0.1953</td>
-<td align="center">2.428e-10</td>
+<td align="center">0.1896</td>
+<td align="center">7.855e-10</td>
 </tr>
 <tr class="even">
 <td align="center">premax</td>
-<td align="center">0.1448</td>
-<td align="center">1.771e-10</td>
+<td align="center">0.1417</td>
+<td align="center">7.869e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">ntl</td>
-<td align="center">0.02253</td>
-<td align="center">0.005407</td>
+<td align="center">0.02272</td>
+<td align="center">0.0301</td>
 </tr>
 <tr class="even">
 <td align="center">aspect</td>
-<td align="center">0.0186</td>
-<td align="center">0.7491</td>
+<td align="center">0.0118</td>
+<td align="center">0.1859</td>
 </tr>
 </tbody>
 </table>
@@ -210,13 +209,12 @@
 <p>To run <code>RGD</code>,remember to set up your python dependence, see <code>RGD</code> vignette to get more details.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_condaenv</a></span><span class="op">(</span><span class="st">'geocompy'</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">12345678</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">fvc_rgd</span> <span class="op">=</span> <span class="fu"><a href="reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">15</span>, </span>
 <span>              discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
+<span>              cores <span class="op">=</span> <span class="fl">8</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 1879.89 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 2980.2 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_rgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
