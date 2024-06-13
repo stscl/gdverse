@@ -28,7 +28,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,...){
                                       ...,factor = factor))
 }
 
-#' @title Best univariate discretization based on geodetector q-statistic
+#' @title best univariate discretization based on geodetector q-statistic
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for determining the best univariate discretization based on geodetector q-statistic.

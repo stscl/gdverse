@@ -2,7 +2,7 @@
 % Please edit documentation in R/discretization.R
 \name{gd_bestunidisc}
 \alias{gd_bestunidisc}
-\title{Best univariate discretization based on geodetector q-statistic}
+\title{best univariate discretization based on geodetector q-statistic}
 \usage{
 gd_bestunidisc(
   formula,
