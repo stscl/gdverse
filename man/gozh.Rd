@@ -15,7 +15,7 @@ gozh(formula, data, cores = 1, ...)
 cluster with that many cores is created and used. You can also supply a cluster
 object.}
 
-\item{...}{(optional) Other arguments passed to \code{rpart::rpart}.}
+\item{...}{(optional) Other arguments passed to \code{rpart::rpart()}.}
 }
 \value{
 A list of the GOZH model result.

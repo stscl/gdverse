@@ -14,7 +14,7 @@
 #' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
-#' @param ... (optional) Other arguments passed to `rpart::rpart`.
+#' @param ... (optional) Other arguments passed to `rpart::rpart()`.
 #'
 #' @return A list of the GOZH model result.
 #' @export
@@ -69,11 +69,17 @@ gozh = \(formula,data,cores = 1,...){
   return(res)
 }
 
-
 #' @title Q-statistics of geographical detector based on Recursive Partitioning
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#'
+#' @param formula A formula.
+#' @param data A data.frame or tibble of observation data.
+#' @param ... (optional) Other arguments passed to `rpart::rpart()`.
+#'
 #' @importFrom rpart rpart
 #' @importFrom tibble as_tibble_row
-#' @noRd
+#' @return A tibble contains the Q-statistic and the p-value.
+#' @export
 gd_rpart = \(formula,data,...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
