@@ -30,8 +30,8 @@ factor_detector = \(y,x){
   v1 = sum(hmean ^ 2)
   v2 = (sum(sqrt(Nh) * hmean)) ^ 2 / N
   lambda = (v1 - v2) / (var(y) * (N - 1) / N)
-  pv = stats::pf(Fv, df1 = (L - 1), df2 = (N - L),
-                 ncp = lambda, lower.tail = FALSE)
+  pv = suppressWarnings(stats::pf(Fv, df1 = (L - 1), df2 = (N - L),
+                                  ncp = lambda, lower.tail = FALSE))
   fd = list("Q-statistic" = qv, "P-value" = pv)
   return(fd)
 }

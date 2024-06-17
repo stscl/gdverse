@@ -40,6 +40,9 @@ rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
+  if (formula.vars[2] != "."){
+    data = dplyr::select(data,dplyr::all_of(formula.vars))
+  }
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   if (is.null(discnum)) {discnum = rep(10,length(discvar))}
   g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),

@@ -47,6 +47,9 @@ opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
+  if (formula.vars[2] != "."){
+    data = dplyr::select(data,dplyr::all_of(formula.vars))
+  }
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   g = gd_bestunidisc(paste0(yname,'~',paste0(discvar,collapse = '+')),
                      data = discdf,discnum = discnum,
