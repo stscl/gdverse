@@ -127,7 +127,7 @@
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 2.92 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 3.11 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
@@ -152,43 +152,43 @@
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.4638</td>
-<td align="center">8.103e-10</td>
+<td align="center">0.4654</td>
+<td align="center">4.831e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.4278</td>
-<td align="center">5.541e-10</td>
+<td align="center">0.4323</td>
+<td align="center">4.367e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
-<td align="center">0.2536</td>
+<td align="center">0.2543</td>
+<td align="center">4.168e-10</td>
+</tr>
+<tr class="even">
+<td align="center">elev</td>
+<td align="center">0.2353</td>
+<td align="center">2.885e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">slope</td>
+<td align="center">0.2338</td>
 <td align="center">7.849e-10</td>
 </tr>
 <tr class="even">
-<td align="center">slope</td>
-<td align="center">0.233</td>
-<td align="center">8.055e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">elev</td>
-<td align="center">0.2318</td>
-<td align="center">8.79e-10</td>
-</tr>
-<tr class="even">
 <td align="center">tmpavg</td>
-<td align="center">0.2116</td>
-<td align="center">7.357e-10</td>
+<td align="center">0.2214</td>
+<td align="center">7.616e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">pop</td>
-<td align="center">0.1896</td>
-<td align="center">7.855e-10</td>
+<td align="center">0.1953</td>
+<td align="center">2.428e-10</td>
 </tr>
 <tr class="even">
 <td align="center">premax</td>
-<td align="center">0.1417</td>
-<td align="center">7.869e-10</td>
+<td align="center">0.1442</td>
+<td align="center">1.682e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">ntl</td>
@@ -197,8 +197,94 @@
 </tr>
 <tr class="even">
 <td align="center">aspect</td>
-<td align="center">0.0118</td>
-<td align="center">0.1859</td>
+<td align="center">0.0186</td>
+<td align="center">0.7491</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="gozh-model">GOZH model<a class="anchor" aria-label="anchor" href="#gozh-model"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">g</span></span>
+<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##           Factor detector</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="center">variable</th>
+<th align="center">Q-statistic</th>
+<th align="center">P-value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">Explanatory Variables Association</td>
+<td align="center">0.8052</td>
+<td align="center">7.146e-10</td>
+</tr>
+<tr class="even">
+<td align="center">presum</td>
+<td align="center">0.6372</td>
+<td align="center">9.492e-11</td>
+</tr>
+<tr class="odd">
+<td align="center">lulc</td>
+<td align="center">0.6106</td>
+<td align="center">4.797e-10</td>
+</tr>
+<tr class="even">
+<td align="center">premin</td>
+<td align="center">0.4658</td>
+<td align="center">5.484e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">tmpmin</td>
+<td align="center">0.4112</td>
+<td align="center">2.948e-10</td>
+</tr>
+<tr class="even">
+<td align="center">tmpmax</td>
+<td align="center">0.2478</td>
+<td align="center">7.308e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">slope</td>
+<td align="center">0.2286</td>
+<td align="center">6.05e-10</td>
+</tr>
+<tr class="even">
+<td align="center">pop</td>
+<td align="center">0.2238</td>
+<td align="center">3.753e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">elev</td>
+<td align="center">0.2237</td>
+<td align="center">4.671e-10</td>
+</tr>
+<tr class="even">
+<td align="center">tmpavg</td>
+<td align="center">0.2188</td>
+<td align="center">6.543e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">premax</td>
+<td align="center">0.1259</td>
+<td align="center">1.436e-10</td>
+</tr>
+<tr class="even">
+<td align="center">ntl</td>
+<td align="center">0.02365</td>
+<td align="center">1.832e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">aspect</td>
+<td align="center">0.01413</td>
+<td align="center">8.938e-09</td>
 </tr>
 </tbody>
 </table>
@@ -207,15 +293,15 @@
 <h3 id="rgd-model">RGD model<a class="anchor" aria-label="anchor" href="#rgd-model"></a>
 </h3>
 <p>To run <code>RGD</code>,remember to set up your python dependence, see <code>RGD</code> vignette to get more details.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_condaenv</a></span><span class="op">(</span><span class="st">'geocompy'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">fvc_rgd</span> <span class="op">=</span> <span class="fu"><a href="reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">15</span>, </span>
+<span><span class="va">fvc_rgd</span> <span class="op">=</span> <span class="fu"><a href="reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">10</span>, </span>
 <span>              discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>              cores <span class="op">=</span> <span class="fl">8</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
+<span>              cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 2980.2 sec elapsed</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<span><span class="co">## 1886.14 sec elapsed</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_rgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
@@ -229,8 +315,8 @@
 <tbody>
 <tr class="odd">
 <td align="center">presum</td>
-<td align="center">0.6745</td>
-<td align="center">6.166e-10</td>
+<td align="center">0.6678</td>
+<td align="center">4.284e-10</td>
 </tr>
 <tr class="even">
 <td align="center">lulc</td>
@@ -239,48 +325,48 @@
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.4855</td>
-<td align="center">5.461e-10</td>
+<td align="center">0.4781</td>
+<td align="center">7.04e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.4575</td>
-<td align="center">6.232e-10</td>
+<td align="center">0.448</td>
+<td align="center">5.718e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
-<td align="center">0.2816</td>
-<td align="center">5.853e-10</td>
+<td align="center">0.2692</td>
+<td align="center">3.296e-10</td>
 </tr>
 <tr class="even">
 <td align="center">elev</td>
-<td align="center">0.2576</td>
-<td align="center">5.407e-10</td>
+<td align="center">0.248</td>
+<td align="center">4.734e-10</td>
 </tr>
 <tr class="odd">
-<td align="center">pop</td>
-<td align="center">0.2566</td>
-<td align="center">4.386e-10</td>
+<td align="center">slope</td>
+<td align="center">0.2464</td>
+<td align="center">8.852e-10</td>
 </tr>
 <tr class="even">
-<td align="center">slope</td>
-<td align="center">0.2525</td>
-<td align="center">9.439e-10</td>
+<td align="center">pop</td>
+<td align="center">0.2446</td>
+<td align="center">9.414e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpavg</td>
-<td align="center">0.2502</td>
-<td align="center">4.2e-10</td>
+<td align="center">0.2405</td>
+<td align="center">5.228e-10</td>
 </tr>
 <tr class="even">
 <td align="center">premax</td>
-<td align="center">0.1668</td>
-<td align="center">9.434e-10</td>
+<td align="center">0.1572</td>
+<td align="center">5.383e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">aspect</td>
-<td align="center">0.03427</td>
-<td align="center">0.06239</td>
+<td align="center">0.02759</td>
+<td align="center">0.003456</td>
 </tr>
 <tr class="even">
 <td align="center">ntl</td>
