@@ -18,6 +18,7 @@ Imports:
     parallel,
     purrr,
     reticulate,
+    rpart,
     stats,
     tibble,
     tidyr,
