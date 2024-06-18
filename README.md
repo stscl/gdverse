@@ -9,22 +9,20 @@
 [![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)](https://spatlyu.r-universe.dev/gdverse)
 <!-- badges: end -->
 
-The goal of gdverse is to support the geodetector model and its
-variants.
+The goal of **gdverse** is to *support the geodetector model and its variants*.
 
 ## Installation
 
-You can install the development version of gdverse from
-[GitHub](https://github.com/SpatLyu/gdverse) with:
+You can install the development version of **gdverse** from [github](https://github.com/SpatLyu/gdverse) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("SpatLyu/gdverse",build_vignettes = T,dep = T)
 ```
 
-or install `gdverse` from `r-universe`:
+or install **gdverse** from [r-universe](https://spatlyu.r-universe.dev/gdverse):
 
-``` r
+```r
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
@@ -88,9 +86,7 @@ fvc_opgd
 ### GOZH model
 
 ``` r
-tictoc::tic()
 g = gozh(fvc ~ ., data = fvc, cores = 6)
-tictoc::tic()
 g
 ## Spatial Stratified Heterogeneity Test 
 ##  

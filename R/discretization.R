@@ -31,8 +31,9 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
                seed = 12345678,...){
   if (k<=2) {stop(" `k` must greater than 3 !")}
   set.seed(seed)
-  return(classInt::classify_intervals(var = x,n = k - 1,style = method,
-                                      ...,factor = factor))
+  return(suppressWarnings(classInt::classify_intervals(var = x,n = k - 1,
+                                                       style = method,
+                                                       ...,factor = factor)))
 }
 
 #' @title best univariate discretization based on geodetector q-statistic
