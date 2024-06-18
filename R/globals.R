@@ -2,5 +2,5 @@
 # or https://forum.posit.co/t/when-programming-with-dplyr-what-is-the-correct-way-to-avoid-undefined-global-variables/55946
 
 utils::globalVariables(c(".", "Ecological", "Interaction", "Interactive variable",
-                         "Q-statistic", "Risk","qstatistic", "variable", "variable1",
+                         "Q-statistic", "Risk", "qstatistic", "variable", "variable1",
                          "variable2", "x", "zone1", "zone2"))
