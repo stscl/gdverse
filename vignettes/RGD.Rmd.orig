@@ -54,7 +54,6 @@ Only `lulc` is a discrete category variable in the `fvc` data, we need to discre
 We can use `robust_disc()` to discretize them based on offline change point detection.
 
 ```{r}
-set.seed(12345678)
 tictoc::tic()
 new.fvc = robust_disc(fvc ~ .,data = select(fvc,-lulc),discnum = 15,cores = 6)
 tictoc::toc()
@@ -64,7 +63,7 @@ tictoc::toc()
 new.fvc
 ```
 
-The `new.fvc`  is the discrete result,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.fvc` is the discrete result,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
 
 ```{r}
 new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
@@ -83,7 +82,6 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 ### You can also use `rgd()` in one time to get result above.
 
 ```{r}
-set.seed(12345678)
 fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = c('factor','interaction'))
