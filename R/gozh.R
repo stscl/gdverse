@@ -69,7 +69,7 @@ gozh = \(formula,data,cores = 1,...){
   return(res)
 }
 
-#' @title Q-statistics of geographical detector based on Recursive Partitioning
+#' @title q-statistics of geographical detector based on recursive partitioning
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #'
 #' @param formula A formula.

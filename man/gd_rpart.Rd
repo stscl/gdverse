@@ -2,7 +2,7 @@
 % Please edit documentation in R/gozh.R
 \name{gd_rpart}
 \alias{gd_rpart}
-\title{Q-statistics of geographical detector based on Recursive Partitioning}
+\title{q-statistics of geographical detector based on recursive partitioning}
 \usage{
 gd_rpart(formula, data, ...)
 }
@@ -17,7 +17,7 @@ gd_rpart(formula, data, ...)
 A tibble contains the Q-statistic and the p-value.
 }
 \description{
-Q-statistics of geographical detector based on Recursive Partitioning
+q-statistics of geographical detector based on recursive partitioning
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
