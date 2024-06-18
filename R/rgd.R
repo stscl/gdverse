@@ -13,7 +13,7 @@
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
 #' Default all `discvar` use `10`.
 #' @param minsize (optional) The min size of each discretization group.Default all use `1`.
-#' @param cores positive integer(default is 1). If cores > 1, use `python`'s `joblib` package to
+#' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python`'s `joblib` package to
 #' parallel computation.
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`.You can run one or more at a time.
