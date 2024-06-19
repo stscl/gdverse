@@ -11,7 +11,7 @@
 #' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box".Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
 #' labels rather than integers.
-#' @param seed (optional) Random seed number, default is `12345678`.Setting random seed is useful when
+#' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
 #' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
 #' by sampling `10%`(the default value for `samp_prop`).
 #' @param ... (optional) Other arguments passed to `classInt::classify_intervals()`,
@@ -28,7 +28,7 @@
 #'          7508, 5203)
 #' st_unidisc(xvar,k = 6,method = 'sd')
 st_unidisc = \(x,k,method = "quantile",factor = FALSE,
-               seed = 12345678,...){
+               seed = 123456789,...){
   if (k<=2) {stop(" `k` must greater than 3 !")}
   set.seed(seed)
   return(suppressWarnings(classInt::classify_intervals(var = x,n = k - 1,
@@ -51,7 +51,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' object.
 #' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
 #' Default is `TRUE`.
-#' @param seed (optional) Random seed number, default is `12345678`.Setting random seed is useful when
+#' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
 #' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
 #' by sampling `10%`(the default value for `samp_prop`).
 #' @param ... (optional) Other arguments passed to `st_unidisc()`.
@@ -78,7 +78,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' g
 #' }
 gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
-                   cores = 1,return_disc = TRUE,seed = 12345678,...){
+                   cores = 1,return_disc = TRUE,seed = 123456789,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE

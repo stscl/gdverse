@@ -4,7 +4,7 @@
 \alias{st_unidisc}
 \title{univariate discretization}
 \usage{
-st_unidisc(x, k, method = "quantile", factor = FALSE, seed = 12345678, ...)
+st_unidisc(x, k, method = "quantile", factor = FALSE, seed = 123456789, ...)
 }
 \arguments{
 \item{x}{A continuous numerical variable.}
@@ -19,7 +19,7 @@ greater than \code{3} !}
 \item{factor}{(optional) Default is \code{FALSE}, if \code{TRUE} returns cols as a factor with intervals as
 labels rather than integers.}
 
-\item{seed}{(optional) Random seed number, default is \code{12345678}.Setting random seed is useful when
+\item{seed}{(optional) Random seed number, default is \code{123456789}.Setting random seed is useful when
 the sample size is greater than \code{3000}(the default value for \code{largeN}) and the data is discretized
 by sampling \verb{10\%}(the default value for \code{samp_prop}).}
 

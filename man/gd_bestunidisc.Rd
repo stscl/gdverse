@@ -11,7 +11,7 @@ gd_bestunidisc(
   discmethod = NULL,
   cores = 1,
   return_disc = TRUE,
-  seed = 12345678,
+  seed = 123456789,
   ...
 )
 }
@@ -32,7 +32,7 @@ object.}
 \item{return_disc}{(optional) Whether or not return discretized result used the optimal parameter.
 Default is \code{TRUE}.}
 
-\item{seed}{(optional) Random seed number, default is \code{12345678}.Setting random seed is useful when
+\item{seed}{(optional) Random seed number, default is \code{123456789}.Setting random seed is useful when
 the sample size is greater than \code{3000}(the default value for \code{largeN}) and the data is discretized
 by sampling \verb{10\%}(the default value for \code{samp_prop}).}
 
