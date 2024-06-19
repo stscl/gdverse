@@ -24,7 +24,7 @@
 #' diag(wt2) = 0
 #' spvar(y,wt1)
 #' spvar(y,wt2)
-#' var(y,wt1)
+#' var(y)
 spvar = \(yn,wtn){
   dn = data.frame(yn,yn) %>%
     stats::dist() %>%

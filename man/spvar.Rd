@@ -28,7 +28,7 @@ wt2 = matrix(1,ncol = length(y),nrow = length(y))
 diag(wt2) = 0
 spvar(y,wt1)
 spvar(y,wt2)
-var(y,wt1)
+var(y)
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

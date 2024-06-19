@@ -3,4 +3,4 @@
 
 utils::globalVariables(c(".", "Ecological", "Interaction", "Interactive variable",
                          "Q-statistic", "Risk", "qstatistic", "variable", "variable1",
-                         "variable2", "x", "zone1", "zone2"))
+                         "variable2", "x", "zone1", "zone2", "id_sample"))
