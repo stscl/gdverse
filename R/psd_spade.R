@@ -11,7 +11,7 @@
 #' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 #'
 #' @param y Variable Y, continuous numeric vector.
-#' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param wt The spatial weight matrix.
 #'
 #' @return A value of power of spatial determinant \eqn{q_s}.

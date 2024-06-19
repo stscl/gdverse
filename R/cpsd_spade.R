@@ -1,3 +1,27 @@
+#' @title compensated power of spatial determinant(CPSD)
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' Function for calculate compensated power of spatial determinant \eqn{Q_s}.
+#' @details
+#' The power of compensated spatial determinant formula is
+#' \eqn{Q_s = \frac{q_s}{q_{s_{inforkep}}}
+#' = \frac{1 - \frac{\sum_{h=1}^L N_h \Gamma_{kdep}}{N \Gamma_{totaldep}}}{1 - \frac{\sum_{h=1}^L N_h \Gamma_{hind}}{N \Gamma_{totalind}}}}
+#'
+#' @references
+#' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
+#' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
+#'
+#' @param yobs Variable Y
+#' @param xobs The original un-discretized covariable X.
+#' @param xdisc The discretized covariable X.
+#' @param wt The spatial weight matrix.
+#'
+#' @return A value of compensated power of spatial determinant \eqn{Q_s}.
+#' @export
+cpsd_spade = \(yobs,xobs,xdisc,wt){
+  return(psd_spade(yobs,xdisc,wt) / psd_spade(xobs,xdisc,wt))
+}
+
 #' @title measure information loss by information entropy
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description

@@ -9,7 +9,7 @@ factor_detector(y, x)
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
 
-\item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x}{Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.}
 }
 \value{
 A list contains the Q-statistic and the p-value.

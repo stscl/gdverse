@@ -5,7 +5,7 @@
 #' or the determinant power of a covariate X of Y.
 #'
 #' @param y Variable Y, continuous numeric vector.
-#' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
 #' @return A list contains the Q-statistic and the p-value.
 #' @importFrom stats var pf
@@ -44,8 +44,8 @@ factor_detector = \(y,x){
 #' on Y are independent of each other.
 #'
 #' @param y Dependent variable, continuous numeric vector.
-#' @param x1 Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
-#' @param x2 Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x1 Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x2 Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
 #' @return A list contains the Q statistic when the factors \eqn{X_1} and \eqn{X_1} act on \eqn{Y} alone
 #' and the Q statistic when the two interact on \eqn{Y} together with the result type of the interaction detector.
@@ -81,7 +81,7 @@ interaction_detector = \(y,x1,x2){
 #' Determine whether there is a significant difference between the attribute means of two subregions.
 #'
 #' @param y Variable Y, continuous numeric vector.
-#' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #'
 #' @return A tibble contains different combinations of covariate \code{X} level and student t-test statistics,
@@ -133,8 +133,8 @@ risk_detector = \(y,x,alpha = 0.95){
 #' Compare the effects of two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 #'
 #' @param y Dependent variable, continuous numeric vector.
-#' @param x1 Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
-#' @param x2 Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x1 Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x2 Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #'
 #' @return A list contains \code{F} statistics, p-values, and is there a significant difference between the

@@ -9,7 +9,7 @@ psd_spade(y, x, wt)
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
 
-\item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x}{Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{wt}{The spatial weight matrix.}
 }

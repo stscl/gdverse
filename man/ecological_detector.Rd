@@ -9,9 +9,9 @@ ecological_detector(y, x1, x2, alpha = 0.95)
 \arguments{
 \item{y}{Dependent variable, continuous numeric vector.}
 
-\item{x1}{Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x1}{Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.}
 
-\item{x2}{Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x2}{Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
 }

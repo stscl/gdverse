@@ -9,7 +9,7 @@ risk_detector(y, x, alpha = 0.95)
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
 
-\item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x}{Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
 }
