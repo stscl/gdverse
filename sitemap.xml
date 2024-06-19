@@ -49,6 +49,9 @@
     <loc>https://spatlyu.github.io/gdverse/reference/interaction_detector.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/inverse_distance_weight.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/opgd.html</loc>
   </url>
   <url>
@@ -74,6 +77,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/robust_disc.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/spvar.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/st_unidisc.html</loc>
