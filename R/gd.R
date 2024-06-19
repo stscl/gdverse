@@ -1,10 +1,10 @@
-#' @title ordinary geographical detector model
+#' @title original geographical detector model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for ordinary geographical detector model.
+#' Function for original geographical detector model.
 #' @references
-#' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010) 
-#' Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study 
+#' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010)
+#' Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study
 #' of the Heshun Region, China, International Journal of Geographical Information Science, 24:1, 107-127,
 #' DOI: 10.1080/13658810802443457
 #'

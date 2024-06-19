@@ -2,7 +2,7 @@
 % Please edit documentation in R/gd.R
 \name{gd}
 \alias{gd}
-\title{ordinary geographical detector model}
+\title{original geographical detector model}
 \usage{
 gd(formula, data, type = "factor", ...)
 }
@@ -20,7 +20,7 @@ gd(formula, data, type = "factor", ...)
 A tibble of the corresponding result is stored under the corresponding detector type.
 }
 \description{
-Function for ordinary geographical detector model.
+Function for original geographical detector model.
 }
 \examples{
 gd(y ~ x1 + x2,
