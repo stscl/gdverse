@@ -60,10 +60,10 @@ wt = inverse_distance_weight(coord[,1],coord[,2])
 usfi = usfi |>
   dplyr::bind_cols(coord) |>
   st_drop_geometry()
-spade('SUHI~.', data = usfi,l ocations = c('X','Y'),
-      discvar = c('BH','SUHI'), cores = 6)
+spade('SUHI~.', data = usfi,locations = c('X','Y'),
+      discvar = c('BH','NDVI'), cores = 6)
 spade('SUHI~.', data = usfi, wt = wt,
-      discvar = c('BH','SUHI'), cores = 6)
+      discvar = c('BH','NDVI'), cores = 6)
 }
 }
 \references{

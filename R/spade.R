@@ -23,7 +23,7 @@
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A list of the SPADE model result.
-#' @importFrom purrr map2_dbl map_dbl
+#' @importFrom purrr map_dbl
 #' @export
 #'
 #' @examples
@@ -38,10 +38,10 @@
 #' usfi = usfi |>
 #'   dplyr::bind_cols(coord) |>
 #'   st_drop_geometry()
-#' spade('SUHI~.', data = usfi,l ocations = c('X','Y'),
-#'       discvar = c('BH','SUHI'), cores = 6)
+#' spade('SUHI~.', data = usfi,locations = c('X','Y'),
+#'       discvar = c('BH','NDVI'), cores = 6)
 #' spade('SUHI~.', data = usfi, wt = wt,
-#'       discvar = c('BH','SUHI'), cores = 6)
+#'       discvar = c('BH','NDVI'), cores = 6)
 #' }
 spade = \(formula,data,wt = NULL,locations = NULL,discvar = NULL,
           discnum = NULL,discmethod = NULL,cores = 1,seed = 123456789,...){
@@ -52,17 +52,20 @@ spade = \(formula,data,wt = NULL,locations = NULL,discvar = NULL,
   }
   yname = formula.vars[1]
   xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
-  xname_spade = xname[which(xname == discvar)]
+  xname_spade = xname[which(xname %in% discvar)]
   if (is.null(discmethod)) {discmethod = rep('quantile',length(xname_spade))}
-  qv_spade = purrr::map2_dbl(xname_spade, discmethod,
-                             \(xvar,discm) psmd_spade(
-      formula = paste(yname,'~',xvar),
-      data = dplyr::select(data,dplyr::all_of(c(yname,xvar,locations))),
-      wt = wt, locations = locations, discnum = discnum, discmethod = discm,
-      cores = cores, seed = seed, ...
-    ))
-  if (length(xname[which(xname != discvar)]) >= 1){
-    qv_psd = xname[which(xname != discvar)] %>%
+  qv_spade = vector("numeric",length = length(xname_spade))
+  for (i in seq_along(xname_spade)){
+    qv_spade[i] = psmd_spade(
+      formula = paste(yname,'~',xname_spade[i]),
+      data = dplyr::select(data,
+                           dplyr::all_of(c(yname,xname_spade[i],locations))),
+      wt = wt, locations = locations,
+      discnum = discnum, discmethod = discmethod[i],
+      cores = cores, seed = seed, ...)
+  }
+  if (length(xname[which(!(xname %in% discvar))]) >= 1){
+    qv_psd = xname[which(!(xname %in% discvar))] %>%
     purrr::map_dbl(\(xvar) psd_spade(data[,yname,drop = TRUE],
                                      data[,xvar,drop = TRUE],wt))
     res = list("variable" = c(xname_spade,xname[which(xname != discvar)]),
