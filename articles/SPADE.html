@@ -118,13 +118,12 @@
 <span><span class="co">##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692</span></span>
 <span><span class="co">## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601</span></span>
 <span><span class="co">## # ℹ 1,027 more rows</span></span>
-<span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;,</span></span>
-<span><span class="co">## #   geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
+<span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;, geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <p>The polygon spatial data are the streets divided based on roads
 within <em>the Ring expressway of Xi’an City</em>, and the attribute
 data are the <em>SUHI</em>(surface urban heat island effect) and its
 influence factors.</p>
-<pre><code><span><span class="co">## Error in knitr::include_graphics("man/figures/spade_studyarea.png"): Cannot find the file(s): "../man/figures/spade_studyarea.png"</span></span></code></pre>
+<pre><code><span><span class="co">## Error in knitr::include_graphics("../man/figures/spade_studyarea.png"): Cannot find the file(s): "../man/figures/spade_studyarea.png"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="spatial-pattern-of-suhi">Spatial pattern of SUHI<a class="anchor" aria-label="anchor" href="#spatial-pattern-of-suhi"></a>
@@ -132,7 +131,7 @@ influence factors.</p>
 <div class="section level4">
 <h4 id="global-spatial-autocorrelation-of-suhi">global spatial autocorrelation of SUHI<a class="anchor" aria-label="anchor" href="#global-spatial-autocorrelation-of-suhi"></a>
 </h4>
-<p>here I use <code>sfdep</code> o calculate the global <strong>Moran’s
+<p>here I use <code>sfdep</code> to calculate the global <strong>Moran’s
 I</strong></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">global_moranI</span> <span class="op">=</span> \<span class="op">(</span><span class="va">data</span>,<span class="va">col</span>,<span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span><span class="op">{</span></span>
@@ -162,18 +161,18 @@ I</strong></p>
 <span><span class="co">## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669</span></span>
 <span><span class="co">## Projected CRS: WGS 84 / UTM zone 49N</span></span>
 <span><span class="co">## # A tibble: 1,037 × 4</span></span>
-<span><span class="co">##     SUHI nb         wt                                                                     geom</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;nb&gt;       &lt;list&gt;                                                        &lt;POLYGON [m]&gt;</span></span>
-<span><span class="co">##  1 1.76  &lt;int [12]&gt; &lt;dbl [12]&gt; ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 297840.…</span></span>
-<span><span class="co">##  2 0.519 &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 297393.…</span></span>
-<span><span class="co">##  3 3.04  &lt;int [9]&gt;  &lt;dbl [9]&gt;  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.1 …</span></span>
-<span><span class="co">##  4 3.22  &lt;int [4]&gt;  &lt;dbl [4]&gt;  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.6 …</span></span>
-<span><span class="co">##  5 3.47  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 296788.…</span></span>
-<span><span class="co">##  6 4.71  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 296467.…</span></span>
-<span><span class="co">##  7 1.24  &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 296347.…</span></span>
-<span><span class="co">##  8 4.30  &lt;int [8]&gt;  &lt;dbl [8]&gt;  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 296144.…</span></span>
-<span><span class="co">##  9 3.76  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.…</span></span>
-<span><span class="co">## 10 4.23  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.…</span></span>
+<span><span class="co">##     SUHI nb         wt                                                                      geom</span></span>
+<span><span class="co">##    &lt;dbl&gt; &lt;nb&gt;       &lt;list&gt;                                                         &lt;POLYGON [m]&gt;</span></span>
+<span><span class="co">##  1 1.76  &lt;int [12]&gt; &lt;dbl [12]&gt; ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 297840.8…</span></span>
+<span><span class="co">##  2 0.519 &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 297393.2…</span></span>
+<span><span class="co">##  3 3.04  &lt;int [9]&gt;  &lt;dbl [9]&gt;  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.1 3…</span></span>
+<span><span class="co">##  4 3.22  &lt;int [4]&gt;  &lt;dbl [4]&gt;  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.6 3…</span></span>
+<span><span class="co">##  5 3.47  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 296788.8…</span></span>
+<span><span class="co">##  6 4.71  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 296467.9…</span></span>
+<span><span class="co">##  7 1.24  &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 296347.5…</span></span>
+<span><span class="co">##  8 4.30  &lt;int [8]&gt;  &lt;dbl [8]&gt;  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 296144.9…</span></span>
+<span><span class="co">##  9 3.76  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.8…</span></span>
+<span><span class="co">## 10 4.23  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.5…</span></span>
 <span><span class="co">## # ℹ 1,027 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -216,7 +215,7 @@ more details see <a href="https://spatlyu.github.io/tidyrgeoda/articles/Local-In
 <span>    legend.key.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">.3</span>, <span class="st">'cm'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="reference/figures/SPADE-SUHI_LISA-1.png" alt="plot of chunk SUHI_LISA" width="75%"><p class="caption">
+<img src="figure/SUHI_LISA-1.png" alt="plot of chunk SUHI_LISA" width="75%"><p class="caption">
 plot of chunk SUHI_LISA
 </p>
 </div>
@@ -231,7 +230,115 @@ the <strong>SPADE</strong> spatial association detector.</p>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">usfi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
-<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">usfi_opgd</span></span>
+<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##           Factor detector</span></span></code></pre></div>
+<table style="width:54%;" class="table">
+<colgroup>
+<col width="15%">
+<col width="19%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">variable</th>
+<th align="center">Q-statistic</th>
+<th align="center">P-value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">DAR</td>
+<td align="center">0.4393</td>
+<td align="center">4.882e-10</td>
+</tr>
+<tr class="even">
+<td align="center">NDVI</td>
+<td align="center">0.3971</td>
+<td align="center">2.024e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">GAR</td>
+<td align="center">0.3823</td>
+<td align="center">8.253e-10</td>
+</tr>
+<tr class="even">
+<td align="center">RFD</td>
+<td align="center">0.267</td>
+<td align="center">7.395e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">BD</td>
+<td align="center">0.265</td>
+<td align="center">3.249e-10</td>
+</tr>
+<tr class="even">
+<td align="center">BH</td>
+<td align="center">0.2478</td>
+<td align="center">8.793e-11</td>
+</tr>
+<tr class="odd">
+<td align="center">NDWI</td>
+<td align="center">0.2081</td>
+<td align="center">6.586e-10</td>
+</tr>
+<tr class="even">
+<td align="center">FAR</td>
+<td align="center">0.198</td>
+<td align="center">1.35e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">SVF</td>
+<td align="center">0.1309</td>
+<td align="center">4.973e-10</td>
+</tr>
+<tr class="even">
+<td align="center">RL</td>
+<td align="center">0.1231</td>
+<td align="center">8.885e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">TER</td>
+<td align="center">0.1164</td>
+<td align="center">6.774e-08</td>
+</tr>
+<tr class="even">
+<td align="center">WAR</td>
+<td align="center">0.1062</td>
+<td align="center">5.574e-10</td>
+</tr>
+<tr class="odd">
+<td align="center">LSI</td>
+<td align="center">0.07673</td>
+<td align="center">3.213e-06</td>
+</tr>
+<tr class="even">
+<td align="center">DTH</td>
+<td align="center">0.07629</td>
+<td align="center">7.669e-06</td>
+</tr>
+<tr class="odd">
+<td align="center">DTP</td>
+<td align="center">0.07479</td>
+<td align="center">7.947e-10</td>
+</tr>
+<tr class="even">
+<td align="center">DTW</td>
+<td align="center">0.05576</td>
+<td align="center">0.0004072</td>
+</tr>
+<tr class="odd">
+<td align="center">DTR</td>
+<td align="center">0.05286</td>
+<td align="center">3.937e-07</td>
+</tr>
+<tr class="even">
+<td align="center">LPI</td>
+<td align="center">0.02876</td>
+<td align="center">0.8158</td>
+</tr>
+</tbody>
+</table>
 <p><strong>You can access the detailed q statistics by
 <code>usfi_opgd$factor</code></strong></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -309,14 +416,21 @@ invoke <code>spdep</code>) or <code>tidyrgeoda</code>(which invoke
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">wt3</span>,<span class="va">wt4</span><span class="op">)</span></span>
 <span><span class="co">## [1] TRUE</span></span></code></pre></div>
+<p><strong>We recommend using the inverse distance weight function
+<code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code> of the <code>gdverse</code>
+package to construct a spatial weight matrix if you’re not sure which
+spatial weight matrix should to be used as the SPADE paper is using
+this.In practice, the appropriate spatial weight matrix is selected
+considering the characteristics of the research object and the research
+area! </strong></p>
 <p>In the following section we will execute <em>SPADE</em> model using
-spatial weight matrix <code>wt3</code>.</p>
+spatial weight matrix <code>wt2</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="run-spade">run SPADE<a class="anchor" aria-label="anchor" href="#run-spade"></a>
 </h4>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>, wt <span class="op">=</span> <span class="va">wt3</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
+<code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>, wt <span class="op">=</span> <span class="va">wt2</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
 <span>                   discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">usfi_spade</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
@@ -335,88 +449,88 @@ spatial weight matrix <code>wt3</code>.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">DAR</td>
-<td align="center">0.5029</td>
+<td align="center">NDVI</td>
+<td align="center">0.4655</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="even">
-<td align="center">NDVI</td>
-<td align="center">0.469</td>
+<td align="center">DAR</td>
+<td align="center">0.4159</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="odd">
+<td align="center">GAR</td>
+<td align="center">0.3953</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="even">
+<td align="center">RFD</td>
+<td align="center">0.3221</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="odd">
 <td align="center">NDWI</td>
-<td align="center">0.4371</td>
+<td align="center">0.2885</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="even">
-<td align="center">GAR</td>
-<td align="center">0.4199</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="odd">
-<td align="center">RFD</td>
-<td align="center">0.3943</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="even">
-<td align="center">TER</td>
-<td align="center">0.3909</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="odd">
 <td align="center">BD</td>
-<td align="center">0.3625</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="even">
-<td align="center">BH</td>
-<td align="center">0.3207</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="odd">
-<td align="center">FAR</td>
-<td align="center">0.2161</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="even">
-<td align="center">DTR</td>
-<td align="center">0.2002</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="odd">
-<td align="center">LSI</td>
-<td align="center">0.1685</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="even">
-<td align="center">DTP</td>
-<td align="center">0.1538</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="odd">
-<td align="center">RL</td>
-<td align="center">0.1436</td>
-<td align="center">0.01</td>
-</tr>
-<tr class="even">
-<td align="center">LPI</td>
-<td align="center">0.1424</td>
+<td align="center">0.2762</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="odd">
 <td align="center">DTW</td>
-<td align="center">0.1365</td>
+<td align="center">0.2532</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="even">
+<td align="center">DTR</td>
+<td align="center">0.2465</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="odd">
+<td align="center">BH</td>
+<td align="center">0.2414</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="even">
+<td align="center">DTP</td>
+<td align="center">0.2412</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="odd">
+<td align="center">FAR</td>
+<td align="center">0.2237</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="even">
+<td align="center">TER</td>
+<td align="center">0.2173</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="odd">
+<td align="center">LPI</td>
+<td align="center">0.1646</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="even">
 <td align="center">SVF</td>
-<td align="center">0.1268</td>
+<td align="center">0.1547</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="odd">
+<td align="center">RL</td>
+<td align="center">0.1317</td>
+<td align="center">0.01</td>
+</tr>
+<tr class="even">
+<td align="center">LSI</td>
+<td align="center">0.1312</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="odd">
 <td align="center">DTH</td>
-<td align="center">0.08443</td>
+<td align="center">0.09689</td>
 <td align="center">0.01</td>
 </tr>
 <tr class="even">
@@ -433,25 +547,280 @@ spatial weight matrix <code>wt3</code>.</p>
 <span><span class="co">## # A tibble: 18 × 3</span></span>
 <span><span class="co">##    variable `Q-statistic` `P-value`</span></span>
 <span><span class="co">##    &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 DAR             0.503       0.01</span></span>
-<span><span class="co">##  2 NDVI            0.469       0.01</span></span>
-<span><span class="co">##  3 NDWI            0.437       0.01</span></span>
-<span><span class="co">##  4 GAR             0.420       0.01</span></span>
-<span><span class="co">##  5 RFD             0.394       0.01</span></span>
-<span><span class="co">##  6 TER             0.391       0.01</span></span>
-<span><span class="co">##  7 BD              0.362       0.01</span></span>
-<span><span class="co">##  8 BH              0.321       0.01</span></span>
-<span><span class="co">##  9 FAR             0.216       0.01</span></span>
-<span><span class="co">## 10 DTR             0.200       0.01</span></span>
-<span><span class="co">## 11 LSI             0.169       0.01</span></span>
-<span><span class="co">## 12 DTP             0.154       0.01</span></span>
-<span><span class="co">## 13 RL              0.144       0.01</span></span>
-<span><span class="co">## 14 LPI             0.142       0.01</span></span>
-<span><span class="co">## 15 DTW             0.136       0.01</span></span>
-<span><span class="co">## 16 SVF             0.127       0.01</span></span>
-<span><span class="co">## 17 DTH             0.0844      0.01</span></span>
+<span><span class="co">##  1 NDVI            0.465       0.01</span></span>
+<span><span class="co">##  2 DAR             0.416       0.01</span></span>
+<span><span class="co">##  3 GAR             0.395       0.01</span></span>
+<span><span class="co">##  4 RFD             0.322       0.01</span></span>
+<span><span class="co">##  5 NDWI            0.288       0.01</span></span>
+<span><span class="co">##  6 BD              0.276       0.01</span></span>
+<span><span class="co">##  7 DTW             0.253       0.01</span></span>
+<span><span class="co">##  8 DTR             0.247       0.01</span></span>
+<span><span class="co">##  9 BH              0.241       0.01</span></span>
+<span><span class="co">## 10 DTP             0.241       0.01</span></span>
+<span><span class="co">## 11 FAR             0.224       0.01</span></span>
+<span><span class="co">## 12 TER             0.217       0.01</span></span>
+<span><span class="co">## 13 LPI             0.165       0.01</span></span>
+<span><span class="co">## 14 SVF             0.155       0.01</span></span>
+<span><span class="co">## 15 RL              0.132       0.01</span></span>
+<span><span class="co">## 16 LSI             0.131       0.01</span></span>
+<span><span class="co">## 17 DTH             0.0969      0.01</span></span>
 <span><span class="co">## 18 WAR           NaN          NA</span></span></code></pre></div>
+<p>The result of <code>WAR</code> is <code>NA</code>,and you can see a
+big difference between the OPGD and SPADE model. The results of SPADE
+are more reliable in most cases.</p>
+<p>We demonstrate the rationality of NA values calculated of
+<code>WAR</code> in the following section:</p>
 </div>
+</div>
+<div class="section level3">
+<h3 id="spade-na-results-explained">SPADE NA results explained<a class="anchor" aria-label="anchor" href="#spade-na-results-explained"></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">WAR</span> <span class="op">=</span> <span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span></span>
+<span><span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">WAR</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">1037</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table">
+<colgroup>
+<col width="18%">
+<col width="13%">
+<col width="18%">
+<col width="6%">
+<col width="6%">
+<col width="4%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="6%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">data</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.01</td>
+<td align="right">0.04</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.73</td>
+<td align="left">▇▁▁▁▁</td>
+</tr></tbody>
+</table>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="figure/skewness_WAR-1.png" alt="plot of chunk skewness_WAR" width="75%"><p class="caption">
+plot of chunk skewness_WAR
+</p>
+</div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">moments</span><span class="fu">::</span><span class="fu">skewness</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
+<span><span class="co">## [1] 11.6917</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">shapiro.test</a></span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Shapiro-Wilk normality test</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## data:  WAR</span></span>
+<span><span class="co">## W = 0.14693, p-value &lt; 2.2e-16</span></span></code></pre></div>
+<p>From the histogram of <code>WAR</code>,its skewness and the result of
+shapiro.test, you will find that the WAR variable is heavily skewed,
+with a large number of zeros, which do not provide sufficient
+information for modeling SUHI.</p>
+<p>In fact, the WAR variable represents the proportion of the water area
+of each block, and the WAR value is NA in the SPADE result probably
+because provide sufficient information for modeling SUHI.</p>
+<p>In most cases, we use linear regression to explore linear
+relationships between variables and select appropriate variables for
+subsequent modeling through methods such as VIF.Here we examine the
+effect of removing the WAR variable on VIF and linear models</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lm.modelOne</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## lm(formula = SUHI ~ ., data = st_drop_geometry(usfi))</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">## -4.1991 -0.6899 -0.0366  0.6837  3.7666 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)  22.156854   5.003326   4.428 1.05e-05 ***</span></span>
+<span><span class="co">## LPI          -0.002280   0.002701  -0.844  0.39872    </span></span>
+<span><span class="co">## LSI          -0.004190   0.023320  -0.180  0.85746    </span></span>
+<span><span class="co">## GAR           6.869974   0.902865   7.609 6.27e-14 ***</span></span>
+<span><span class="co">## DAR           6.746594   0.829310   8.135 1.19e-15 ***</span></span>
+<span><span class="co">## WAR           5.283058   1.784052   2.961  0.00313 ** </span></span>
+<span><span class="co">## TER          -1.388985   0.670337  -2.072  0.03851 *  </span></span>
+<span><span class="co">## NDVI        -15.268701   1.620501  -9.422  &lt; 2e-16 ***</span></span>
+<span><span class="co">## NDWI        -15.408610   2.127737  -7.242 8.72e-13 ***</span></span>
+<span><span class="co">## DTH           0.015604   0.012255   1.273  0.20318    </span></span>
+<span><span class="co">## DTP           0.091178   0.098705   0.924  0.35584    </span></span>
+<span><span class="co">## DTR          -0.069387   0.064638  -1.073  0.28331    </span></span>
+<span><span class="co">## DTW          -0.195546   0.067418  -2.901  0.00381 ** </span></span>
+<span><span class="co">## BH            0.197986   0.034505   5.738 1.26e-08 ***</span></span>
+<span><span class="co">## BD            6.151962   2.181999   2.819  0.00490 ** </span></span>
+<span><span class="co">## RL            0.008593   0.228118   0.038  0.96996    </span></span>
+<span><span class="co">## RFD           0.117208   0.741697   0.158  0.87447    </span></span>
+<span><span class="co">## SVF         -22.397352   4.954590  -4.521 6.89e-06 ***</span></span>
+<span><span class="co">## FAR          -1.260657   0.112759 -11.180  &lt; 2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 1.06 on 1018 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.6173, Adjusted R-squared:  0.6106 </span></span>
+<span><span class="co">## F-statistic: 91.23 on 18 and 1018 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu">vif</span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble_row</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                      names_to <span class="op">=</span> <span class="st">'variable'</span>,</span>
+<span>                      values_to <span class="op">=</span> <span class="st">'VIF'</span><span class="op">)</span></span>
+<span><span class="co">## # A tibble: 18 × 2</span></span>
+<span><span class="co">##    variable    VIF</span></span>
+<span><span class="co">##    &lt;chr&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">##  1 LPI        1.68</span></span>
+<span><span class="co">##  2 LSI        1.50</span></span>
+<span><span class="co">##  3 GAR       31.1 </span></span>
+<span><span class="co">##  4 DAR       28.5 </span></span>
+<span><span class="co">##  5 WAR        5.85</span></span>
+<span><span class="co">##  6 TER        1.18</span></span>
+<span><span class="co">##  7 NDVI      20.5 </span></span>
+<span><span class="co">##  8 NDWI      13.2 </span></span>
+<span><span class="co">##  9 DTH        1.15</span></span>
+<span><span class="co">## 10 DTP        2.06</span></span>
+<span><span class="co">## 11 DTR        1.15</span></span>
+<span><span class="co">## 12 DTW        2.00</span></span>
+<span><span class="co">## 13 BH        31.9 </span></span>
+<span><span class="co">## 14 BD       105.  </span></span>
+<span><span class="co">## 15 RL         2.96</span></span>
+<span><span class="co">## 16 RFD       89.4 </span></span>
+<span><span class="co">## 17 SVF        3.02</span></span>
+<span><span class="co">## 18 FAR       31.3</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lm.modelTwo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">WAR</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Call:</span></span>
+<span><span class="co">## lm(formula = SUHI ~ ., data = select(st_drop_geometry(usfi), </span></span>
+<span><span class="co">##     -WAR))</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residuals:</span></span>
+<span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">## -4.1752 -0.7118 -0.0227  0.6896  3.6784 </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Coefficients:</span></span>
+<span><span class="co">##               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)  21.011090   5.007323   4.196 2.95e-05 ***</span></span>
+<span><span class="co">## LPI          -0.000917   0.002671  -0.343 0.731475    </span></span>
+<span><span class="co">## LSI          -0.002172   0.023399  -0.093 0.926046    </span></span>
+<span><span class="co">## GAR           5.283103   0.729402   7.243 8.64e-13 ***</span></span>
+<span><span class="co">## DAR           5.300795   0.672909   7.877 8.53e-15 ***</span></span>
+<span><span class="co">## TER          -1.174510   0.668949  -1.756 0.079431 .  </span></span>
+<span><span class="co">## NDVI        -13.026040   1.438097  -9.058  &lt; 2e-16 ***</span></span>
+<span><span class="co">## NDWI        -10.693806   1.416860  -7.548 9.82e-14 ***</span></span>
+<span><span class="co">## DTH           0.011362   0.012217   0.930 0.352593    </span></span>
+<span><span class="co">## DTP           0.115158   0.098747   1.166 0.243809    </span></span>
+<span><span class="co">## DTR          -0.058443   0.064778  -0.902 0.367161    </span></span>
+<span><span class="co">## DTW          -0.226617   0.066850  -3.390 0.000726 ***</span></span>
+<span><span class="co">## BH            0.192503   0.034587   5.566 3.34e-08 ***</span></span>
+<span><span class="co">## BD            5.951972   2.189252   2.719 0.006665 ** </span></span>
+<span><span class="co">## RL            0.061282   0.228288   0.268 0.788413    </span></span>
+<span><span class="co">## RFD           0.100502   0.744497   0.135 0.892644    </span></span>
+<span><span class="co">## SVF         -19.414910   4.869603  -3.987 7.17e-05 ***</span></span>
+<span><span class="co">## FAR          -1.227348   0.112624 -10.898  &lt; 2e-16 ***</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Residual standard error: 1.064 on 1019 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-squared:  0.614,  Adjusted R-squared:  0.6076 </span></span>
+<span><span class="co">## F-statistic: 95.36 on 17 and 1019 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu">vif</span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble_row</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                      names_to <span class="op">=</span> <span class="st">'variable'</span>,</span>
+<span>                      values_to <span class="op">=</span> <span class="st">'VIF'</span><span class="op">)</span></span>
+<span><span class="co">## # A tibble: 17 × 2</span></span>
+<span><span class="co">##    variable    VIF</span></span>
+<span><span class="co">##    &lt;chr&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">##  1 LPI        1.63</span></span>
+<span><span class="co">##  2 LSI        1.50</span></span>
+<span><span class="co">##  3 GAR       20.2 </span></span>
+<span><span class="co">##  4 DAR       18.6 </span></span>
+<span><span class="co">##  5 TER        1.16</span></span>
+<span><span class="co">##  6 NDVI      16.0 </span></span>
+<span><span class="co">##  7 NDWI       5.83</span></span>
+<span><span class="co">##  8 DTH        1.13</span></span>
+<span><span class="co">##  9 DTP        2.05</span></span>
+<span><span class="co">## 10 DTR        1.15</span></span>
+<span><span class="co">## 11 DTW        1.96</span></span>
+<span><span class="co">## 12 BH        31.8 </span></span>
+<span><span class="co">## 13 BD       104.  </span></span>
+<span><span class="co">## 14 RL         2.94</span></span>
+<span><span class="co">## 15 RFD       89.4 </span></span>
+<span><span class="co">## 16 SVF        2.90</span></span>
+<span><span class="co">## 17 FAR       31.0</span></span></code></pre></div>
+<p>You can see that the model does not change much before and after
+removing the WAR variable.In other words, WAR does not do much to model
+SUHI.</p>
+<p>This suggests another use of <code>SPADE</code> for selection
+modeling variables</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
