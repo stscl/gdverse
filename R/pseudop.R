@@ -1,8 +1,155 @@
-# pseudo_p = \(qs,
-#              alpha = 0.05,
-#              permutations = 999,
-#              permutation_method = "complete",
-#              seed = 123456789){
-#   M = permutations
-#   pp = (R + 1) / (M + 1)
-# }
+#' @title calculate power of spatial determinant(PSD) and the corresponding pseudo-p value
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' Function for calculate power of spatial determinant \eqn{q_s}.
+#' @details
+#' The power of spatial determinant formula is
+#' \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
+#'
+#' @references
+#' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
+#' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
+#'
+#' @param y Variable Y, continuous numeric vector.
+#' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param wt The spatial weight matrix.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
+#' @param seed (optional) Random seed number, default is `123456789`.
+#' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
+#'
+#' @return A list of power of spatial determinant and the corresponding pseudo-p value.
+#' @importFrom stats runif
+#' @export
+#'
+psd_pseudop = \(y,x,wt,cores = 6,
+                seed = 123456789,
+                permutations = 99){
+  set.seed(seed)
+  permutation = stats::runif(permutations, min = 0, max = 1)
+  qs = psd_spade(y,x,wt)
+
+  doclust = FALSE
+  if (cores > 1) {
+    doclust = TRUE
+    cores = parallel::makeCluster(cores)
+    on.exit(parallel::stopCluster(cores), add=TRUE)
+  }
+
+  calcul_psd = \(p){
+    xobs_shffule = shuffle_vector(x,p,seed = seed)
+    return(psd_spade(y,xobs_shffule,wt))
+  }
+
+  if (doclust) {
+    parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar',
+                                    'psd_spade',"shuffle_vector"))
+    out_g = parallel::parLapply(cores,permutation,calcul_psd)
+    out_g = as.numeric(do.call(rbind, out_g))
+  } else {
+    out_g = purrr::map_dbl(permutation,calcul_psd)
+  }
+
+  R = sum(out_g >= qs)
+  pp = (R + 1) / (permutations + 1)
+  fd = list("Q-statistic" = qs, "P-value" = pp)
+  return(fd)
+}
+
+#' @title power of spatial and multilevel discretization determinant(PSMD) and the corresponding pseudo-p value
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' Function for calculate power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
+#' @details
+#' The power of spatial and multilevel discretization determinant formula is
+#' \eqn{PSMDQ_s = MEAN(Q_s)}
+#'
+#' @references
+#' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
+#' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
+#'
+#' @param formula A formula of calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+#' @param data A data.frame or tibble of observation data.
+#' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
+#' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
+#' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
+#' Useful and must provided when `wt` is not provided.
+#' @param discnum (optional) Number of multilevel discretization.Default will use `3:15`.
+#' @param discmethod (optional) The discretization methods. Default will use `quantile`.
+#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
+#' one `discmethod` at one time.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
+#' @param seed (optional) Random seed number, default is `123456789`.
+#' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
+#' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
+#'
+#' @return A list of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
+#' @importFrom stats runif
+#' @export
+#' @examples
+#' \dontrun{
+#' library(sf)
+#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+#' coord = usfi |>
+#'   st_centroid() |>
+#'   st_coordinates()
+#' usfi = usfi |>
+#'   dplyr::bind_cols(coord) |>
+#'   st_drop_geometry()
+#' tictoc::tic()
+#' psmd_pseudop('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#'              locations = c('X','Y'),cores = 6)
+#' tictoc::toc()
+#' }
+#'
+psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
+                 cores = 6,seed = 123456789,permutations = 99, ...){
+  set.seed(seed)
+  permutation = stats::runif(permutations, min = 0, max = 1)
+  qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
+
+  doclust = FALSE
+  if (cores > 1) {
+    doclust = TRUE
+    cores = parallel::makeCluster(cores)
+    on.exit(parallel::stopCluster(cores), add=TRUE)
+  }
+
+  formula = stats::as.formula(formula)
+  formula.vars = all.vars(formula)
+  if (formula.vars[2] == "."){
+    if (length(!(which(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
+      stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data` .')
+    } else {
+      xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
+    }
+  } else {
+    xname = formula.vars[2][-which(formula.vars[2] %in% c(formula.vars[1],locations))]
+  }
+
+  xobs = data[,xname,drop = TRUE]
+  calcul_psmd = \(p){
+    xobs_shffule = shuffle_vector(xobs,p,seed = seed)
+    data[,xname] = xobs_shffule
+    return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
+  }
+
+  if (doclust) {
+    parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar','shuffle_vector',
+                                    'psd_spade','cpsd_spade','psmd_spade',
+                                    'inverse_distance_weight'))
+    out_g = parallel::parLapply(cores,permutation,calcul_psmd)
+    out_g = as.numeric(do.call(rbind, out_g))
+  } else {
+    out_g = purrr::map_dbl(permutation,calcul_psmd)
+  }
+
+  R = sum(out_g >= qs)
+  pp = (R + 1) / (permutations + 1)
+  fd = list("Q-statistic" = qs, "P-value" = pp)
+  return(fd)
+}
+
+
+
+
