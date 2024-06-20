@@ -98,8 +98,7 @@
 <h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
 <span><span class="va">fvcpath</span> <span class="op">=</span> <span class="st">"https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"</span></span>
@@ -127,7 +126,7 @@
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.11 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 2.91 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
@@ -142,8 +141,8 @@
 <tbody>
 <tr class="odd">
 <td align="center">presum</td>
-<td align="center">0.6626</td>
-<td align="center">9.145e-10</td>
+<td align="center">0.6609</td>
+<td align="center">8.344e-10</td>
 </tr>
 <tr class="even">
 <td align="center">lulc</td>
@@ -152,28 +151,28 @@
 </tr>
 <tr class="odd">
 <td align="center">premin</td>
-<td align="center">0.4654</td>
-<td align="center">4.831e-10</td>
+<td align="center">0.4655</td>
+<td align="center">3.606e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpmin</td>
-<td align="center">0.4323</td>
-<td align="center">4.367e-10</td>
+<td align="center">0.4356</td>
+<td align="center">8.537e-10</td>
 </tr>
 <tr class="odd">
 <td align="center">tmpmax</td>
-<td align="center">0.2543</td>
-<td align="center">4.168e-10</td>
+<td align="center">0.2536</td>
+<td align="center">7.849e-10</td>
 </tr>
 <tr class="even">
-<td align="center">elev</td>
-<td align="center">0.2353</td>
-<td align="center">2.885e-10</td>
+<td align="center">slope</td>
+<td align="center">0.2357</td>
+<td align="center">8.826e-10</td>
 </tr>
 <tr class="odd">
-<td align="center">slope</td>
-<td align="center">0.2338</td>
-<td align="center">7.849e-10</td>
+<td align="center">elev</td>
+<td align="center">0.2355</td>
+<td align="center">7.287e-10</td>
 </tr>
 <tr class="even">
 <td align="center">tmpavg</td>
@@ -187,18 +186,18 @@
 </tr>
 <tr class="even">
 <td align="center">premax</td>
-<td align="center">0.1442</td>
-<td align="center">1.682e-10</td>
+<td align="center">0.1451</td>
+<td align="center">5.961e-10</td>
 </tr>
 <tr class="odd">
-<td align="center">ntl</td>
-<td align="center">0.02272</td>
-<td align="center">0.0301</td>
-</tr>
-<tr class="even">
 <td align="center">aspect</td>
 <td align="center">0.0186</td>
 <td align="center">0.7491</td>
+</tr>
+<tr class="even">
+<td align="center">ntl</td>
+<td align="center">0.01726</td>
+<td align="center">0.1384</td>
 </tr>
 </tbody>
 </table>
@@ -298,7 +297,7 @@
 <span>              discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>              cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 1886.14 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 1844.56 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_rgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
