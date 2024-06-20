@@ -66,8 +66,9 @@
 <span>  discvar <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  discnum <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  discmethod <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cores <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">123456789</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">99</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -107,11 +108,15 @@ When <code>discmethod</code> is <code>robust</code> use <code><a href="robust_di
 
 
 <dt>cores</dt>
-<dd><p>(optional) A positive integer(default is 1). If cores &gt; 1, use parallel computation.</p></dd>
+<dd><p>(optional) A positive integer(default is 6). If cores &gt; 1, use parallel computation.</p></dd>
 
 
 <dt>seed</dt>
 <dd><p>(optional) Random seed number, default is <code>123456789</code>.</p></dd>
+
+
+<dt>permutations</dt>
+<dd><p>(optional) The number of permutations for the PSD computation. Default is <code>99</code>.</p></dd>
 
 
 <dt>...</dt>
@@ -150,7 +155,7 @@ Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/136
 <span class="r-in"><span><span class="fu">spade</span><span class="op">(</span><span class="st">'SUHI~.'</span>, data <span class="op">=</span> <span class="va">usfi</span>,locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'X'</span>,<span class="st">'Y'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'BH'</span>,<span class="st">'NDVI'</span><span class="op">)</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">spade</span><span class="op">(</span><span class="st">'SUHI~.'</span>, data <span class="op">=</span> <span class="va">usfi</span>, wt <span class="op">=</span> <span class="va">wt</span>,</span></span>
-<span class="r-in"><span>      discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'BH'</span>,<span class="st">'NDVI'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'BH'</span>,<span class="st">'NDVI'</span><span class="op">)</span>,locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'X'</span>,<span class="st">'Y'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>      discmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sd'</span>,<span class="st">'equal'</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
