@@ -26,6 +26,22 @@ The power of compensated spatial determinant formula is
 \eqn{Q_s = \frac{q_s}{q_{s_{inforkep}}}
 = \frac{1 - \frac{\sum_{h=1}^L N_h \Gamma_{kdep}}{N \Gamma_{totaldep}}}{1 - \frac{\sum_{h=1}^L N_h \Gamma_{hind}}{N \Gamma_{totalind}}}}
 }
+\examples{
+\dontrun{
+library(sf)
+usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+coord = usfi |>
+  st_centroid() |>
+  st_coordinates()
+wt = inverse_distance_weight(coord[,1],coord[,2])
+BH = usfi$BH
+BH_disc = st_unidisc(usfi$BH,12)
+SUHI = usfi$SUHI
+cpsd_spade(SUHI,BH,BH_disc,wt)
+}
+
+}
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693

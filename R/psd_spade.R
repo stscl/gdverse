@@ -78,6 +78,21 @@ psd_spade = \(y,x,wt){
 #'
 #' @return A value of compensated power of spatial determinant \eqn{Q_s}.
 #' @export
+#' @examples
+#' \dontrun{
+#' library(sf)
+#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+#' coord = usfi |>
+#'   st_centroid() |>
+#'   st_coordinates()
+#' wt = inverse_distance_weight(coord[,1],coord[,2])
+#' BH = usfi$BH
+#' BH_disc = st_unidisc(usfi$BH,12)
+#' SUHI = usfi$SUHI
+#' cpsd_spade(SUHI,BH,BH_disc,wt)
+#' }
+#'
 cpsd_spade = \(yobs,xobs,xdisc,wt){
   return(psd_spade(yobs,xdisc,wt) / psd_spade(xobs,xdisc,wt))
 }
