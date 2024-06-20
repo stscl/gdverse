@@ -11,7 +11,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "##",
-  out.width = "75%",
+  out.width = "100%",
   warning = FALSE,
   message = FALSE
 )
