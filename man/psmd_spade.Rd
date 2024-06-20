@@ -10,7 +10,7 @@ psmd_spade(
   wt = NULL,
   locations = NULL,
   discnum = NULL,
-  discmethod = "quantile",
+  discmethod = NULL,
   cores = 1,
   seed = 123456789,
   ...

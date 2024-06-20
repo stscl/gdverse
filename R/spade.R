@@ -41,7 +41,8 @@
 #' spade('SUHI~.', data = usfi,locations = c('X','Y'),
 #'       discvar = c('BH','NDVI'), cores = 6)
 #' spade('SUHI~.', data = usfi, wt = wt,
-#'       discvar = c('BH','NDVI'), cores = 6)
+#'       discvar = c('BH','NDVI'),
+#'       discmethod = c('sd','equal'),cores = 6)
 #' }
 spade = \(formula,data,wt = NULL,locations = NULL,discvar = NULL,
           discnum = NULL,discmethod = NULL,cores = 1,seed = 123456789,...){

@@ -45,10 +45,12 @@ psd_spade = \(y,x,wt){
     dplyr::group_by(x) %>%
     dplyr::filter(dplyr::n() > 1) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(x = factor(x))
+    dplyr::mutate(x = factor(x),
+                  id_sample_new = seq_along(y))
   x = gdf$x
   y = gdf$y
-  indices = gdf$id_sample
+  wt = wt[gdf$id_sample,gdf$id_sample]
+  indices = gdf$id_sample_new
   sprss = \(indice){
     yn = y[indice]
     wtn = wt[indice,indice]
@@ -142,7 +144,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' }
 #'
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
-               discmethod = 'quantile',cores = 1,seed = 123456789,...){
+               discmethod = NULL,cores = 1,seed = 123456789,...){
   doclust = FALSE
   if (cores > 1) {
     doclust = TRUE
@@ -180,6 +182,11 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   } else {
     discn = discnum
   }
+  if (is.null(discmethod)){
+    discm = 'quantile'
+  } else {
+    discm = discmethod
+  }
 
   spade_disc = \(yv,xv,discn,discm,cores,...){
     if (discm == 'robust') {
@@ -204,7 +211,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 
     return(discdf)
   }
-  discdf = spade_disc(yobs,xobs,discn,discmethod,cores_rdisc,...)
+  discdf = spade_disc(yobs,xobs,discn,discm,cores_rdisc,...)
 
   calcul_cpsd = \(paramn){
     yvar = discdf[,'yobs',drop = TRUE]
