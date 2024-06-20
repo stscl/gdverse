@@ -102,22 +102,21 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' Useful and must provided when `wt` is not provided.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:15`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
-#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster
-#' object.
+#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
+#' one `discmethod` at one time.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A value of power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+#' @importFrom purrr map_dbl map_dfc set_names
 #' @export
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
                discmethod = 'quantile',cores = 1,seed = 123456789,...){
   doclust = FALSE
-  if (inherits(cores, "cluster")) {
+  if (cores > 1) {
     doclust = TRUE
-  } else if (cores > 1) {
-    doclust = TRUE
+    cores_rdisc = cores # distinguish between python and r parallel.
     cores = parallel::makeCluster(cores)
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
@@ -156,7 +155,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
       names(discdf) = paste0('xobs_',discn)
       discdf = tibble::tibble(yobs = yv,
                               xobs = xv) %>%
-        bind_cols(tibble::as_tibble(discdf))
+        dplyr::bind_cols(tibble::as_tibble(discdf))
       discdf = robust_disc("yobs ~ .",
                            data = discdf,
                            discnum = discn,
@@ -168,17 +167,29 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
         purrr::set_names(paste0('xobs_',discn))
       discdf = tibble::tibble(yobs = yv,
                               xobs = xv) %>%
-        bind_cols(discdf)
+        dplyr::bind_cols(discdf)
     }
 
     return(discdf)
   }
-  discdf = spade_disc(yobs,xobs,discn,discmethod,cores,...)
+  discdf = spade_disc(yobs,xobs,discn,discmethod,cores_rdisc,...)
 
   calcul_cpsd = \(paramn){
+    yvar = discdf[,'yobs',drop = TRUE]
+    xvar = discdf[,'xobs',drop = TRUE]
+    xdisc = discdf[,paramn,drop = TRUE]
+    return(cpsd_spade(yvar,xvar,xdisc,wt_spade))
   }
 
+  if (doclust) {
+    parallel::clusterExport(cores,c('st_unidisc','robust_disc','cpsd_spade'))
+    out_g = parallel::parLapply(cores,paste0('xobs_',discn),calcul_cpsd)
+    out_g = as.numeric(do.call(rbind, out_g))
+  } else {
+    out_g = purrr::map_dbl(paste0('xobs_',discn),calcul_cpsd)
+  }
 
+    return(mean(out_g))
 }
 
 #' @title measure information loss by information entropy
