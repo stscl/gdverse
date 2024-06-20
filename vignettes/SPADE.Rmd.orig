@@ -1,0 +1,185 @@
+---
+title: "Spatial Association Detector(SPADE)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SPADE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  fig.path = "man/figures/SPADE-",
+  out.width = "75%",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+### Load data and package
+
+``` {r}
+library(sf)
+library(gdverse)
+library(magrittr)
+library(tidyverse)
+usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse'))
+usfi
+```
+
+The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
+
+```{r echo=FALSE, fig.align="center",fig.cap="The study area map of USFI_Xian data"}
+knitr::include_graphics('../man/figures/spade_studyarea.png')
+```
+
+### Spatial pattern of SUHI
+
+#### global spatial autocorrelation of SUHI
+
+here I use `sfdep` o calculate the global **Moran's I**
+
+```{r}
+global_moranI = \(data,col,nb,wt){
+  I = sfdep::global_moran(dplyr::pull(data,{{col}}),
+                          dplyr::pull(data,{{nb}}),
+                          dplyr::pull(data,{{wt}}),
+                          na_ok = T)$I
+  PValue = sfdep::global_moran_test(dplyr::pull(data,{{col}}),
+                                    dplyr::pull(data,{{nb}}),
+                                    dplyr::pull(data,{{wt}}),
+                                    na.action = na.omit)$p.value
+  moranI = c(I,PValue)
+  names(moranI) = c("Moran'I Index","P Value")
+  return(moranI)
+}
+
+usfi |>
+  dplyr::filter(!if_any(everything(),is.na)) |>
+  mutate(nb = sfdep::st_contiguity(geom),
+         wt = sfdep::st_weights(nb)) |>
+  dplyr::select(SUHI,nb,wt) -> new_usfi
+
+new_usfi
+
+set.seed(123456789)
+
+gmi = new_usfi |>
+  global_moranI(SUHI,nb,wt)
+gmi
+```
+
+The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
+
+#### local spatial autocorrelation of SUHI
+
+We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
+
+```{r SUHI_LISA,fig.width=7.5,fig.height=4}
+library(tidyrgeoda)
+
+new_usfi %>%
+  mutate(lisa = st_local_moran(.,'SUHI',
+                               wt = st_contiguity_weights(.),
+                               significance_cutoff = 0.05)) %>%
+  select(lisa) %>%
+  ggplot() +
+  geom_sf(aes(fill = lisa),lwd = .1,color = 'grey') +
+  scale_fill_lisa(name = 'SUHI-LISA') +
+  theme_bw() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    legend.title = element_text(size = 5),
+    legend.text = element_text(size = 5),
+    legend.key.size = unit(.3, 'cm')
+  )
+```
+
+The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
+
+Spatial dependence was neglected in native geodetector, which led to the **SPADE** spatial association detector.
+
+### OPGD modeling
+
+```{r}
+usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
+                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+```
+
+**You can access the detailed q statistics by `usfi_opgd$factor`**
+
+```{r}
+usfi_opgd$factor
+```
+
+### SPADE modeling
+
+*SPADE* explicitly considers the spatial variance by assigning the weight of the influence based on spatial distribution and also minimizes the influence of the number of levels on PD values by using the multilevel discretization and considering information loss due to discretization.
+
+When response variable has a strong spatial dependence, maybe *SPADE* is a best choice.
+
+The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
+
+In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight**, which can be created by `inverse_distance_weight()`.
+
+```{r}
+coords = usfi |>
+  st_centroid() |>
+  st_coordinates()
+
+wt1 = inverse_distance_weight(coords[,1],coords[,2])
+```
+
+You can also use gravity weight by assigning `power` parameter in `inverse_distance_weight()` function.
+
+```{r}
+wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
+```
+
+You can also use spatial weight matrix from `sfdep`(which invoke `spdep`) or `tidyrgeoda`(which invoke `rgeoda``)
+
+#### using spatial weight matrix from sfdep
+
+```{r}
+wt3 = usfi |>
+  dplyr::filter(!if_any(everything(),is.na)) |>
+  mutate(nb = sfdep::st_contiguity(geom),
+         wt = sfdep::st_weights(nb)) %$%
+  sfdep::wt_as_matrix(nb,wt)
+```
+
+#### using spatial weight matrix from tidyrgeoda
+
+```{r}
+wt4 = tidyrgeoda::st_contiguity_weights(usfi) |>
+  as.matrix() |>
+  apply(1,\(x) x/sum(x)) |>
+  t()
+```
+
+The `wt3` is identical `wt4`
+
+```{r}
+identical(wt3,wt4)
+```
+
+In the following section we will execute *SPADE* model using  spatial weight matrix `wt3`.
+
+#### run SPADE
+
+```{r}
+usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
+                   discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+usfi_spade
+```
+
+**You can also access the detailed q statistics by `usfi_spade$factor`**
+
+```{r}
+usfi_spade$factor
+```

@@ -29,6 +29,7 @@ Suggests:
     ggspatial,
     rmarkdown,
     sf,
+    sfdep,
     terra,
     tidyterra,
     tidyverse,
