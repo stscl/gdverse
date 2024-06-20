@@ -111,6 +111,21 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @return A value of power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
 #' @importFrom purrr map_dbl map_dfc set_names
 #' @export
+#' @examples
+#' \dontrun{
+#' library(sf)
+#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+#' coord = usfi |>
+#'   st_centroid() |>
+#'   st_coordinates()
+#' usfi = usfi |>
+#'   dplyr::bind_cols(coord) |>
+#'   st_drop_geometry()
+#' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#'            locations = c('X','Y'),cores = 6)
+#' }
+#'
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
                discmethod = 'quantile',cores = 1,seed = 123456789,...){
   doclust = FALSE
@@ -138,7 +153,9 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
     if (is.null(locations)) {
       stop("When `wt` is not provided, please provided `locations` coordinate columns name which in `data` !")
     } else {
-      wt_spade = inverse_distance_weight(locations[,1],locations[,2],power = 1)
+      locations = data[, locations]
+      wt_spade = inverse_distance_weight(locations[,1,drop = TRUE],
+                                         locations[,2,drop = TRUE])
     }
   } else {
     wt_spade = wt
@@ -182,7 +199,8 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','robust_disc','cpsd_spade'))
+    parallel::clusterExport(cores,c('st_unidisc','robust_disc',
+                                    'psd_spade','cpsd_spade','spvar'))
     out_g = parallel::parLapply(cores,paste0('xobs_',discn),calcul_cpsd)
     out_g = as.numeric(do.call(rbind, out_g))
   } else {

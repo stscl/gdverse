@@ -49,6 +49,22 @@ Function for calculate power of spatial and multilevel discretization determinan
 The power of spatial and multilevel discretization determinant formula is
 \eqn{PSMDQ_s = MEAN(Q_s)}
 }
+\examples{
+\dontrun{
+library(sf)
+usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+coord = usfi |>
+  st_centroid() |>
+  st_coordinates()
+usfi = usfi |>
+  dplyr::bind_cols(coord) |>
+  st_drop_geometry()
+psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+           locations = c('X','Y'),cores = 6)
+}
+
+}
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
