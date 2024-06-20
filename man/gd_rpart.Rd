@@ -19,6 +19,13 @@ A tibble contains the Q-statistic and the p-value.
 \description{
 q-statistics of geographical detector based on recursive partitioning
 }
+\references{
+Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
+spatio-temporal disparities in soil moisture of the Northern Hemisphere using a geographically optimal
+zones-based heterogeneity model. ISPRS Journal of Photogrammetry and Remote Sensing: Official
+Publication of the International Society for Photogrammetry and Remote Sensing (ISPRS), 185, 111–128.
+https://doi.org/10.1016/j.isprsjprs.2022.01.009
+}
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
 }

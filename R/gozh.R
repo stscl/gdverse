@@ -71,6 +71,12 @@ gozh = \(formula,data,cores = 1,...){
 
 #' @title q-statistics of geographical detector based on recursive partitioning
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @references
+#' Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
+#' spatio-temporal disparities in soil moisture of the Northern Hemisphere using a geographically optimal
+#' zones-based heterogeneity model. ISPRS Journal of Photogrammetry and Remote Sensing: Official
+#' Publication of the International Society for Photogrammetry and Remote Sensing (ISPRS), 185, 111–128.
+#' https://doi.org/10.1016/j.isprsjprs.2022.01.009
 #'
 #' @param formula A formula.
 #' @param data A data.frame or tibble of observation data.

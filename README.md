@@ -9,27 +9,29 @@
 [![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)](https://spatlyu.r-universe.dev/gdverse)
 <!-- badges: end -->
 
-The goal of **gdverse** is to *support the geodetector model and its variants*.
+The goal of **gdverse** is to *support the geodetector model and its
+variants*.
 
 ## Installation
 
-You can install the development version of **gdverse** from [github](https://github.com/SpatLyu/gdverse) with:
+You can install the development version of **gdverse** from
+[github](https://github.com/SpatLyu/gdverse) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("SpatLyu/gdverse",build_vignettes = T,dep = T)
 ```
 
-or install **gdverse** from [r-universe](https://spatlyu.r-universe.dev/gdverse):
+or install **gdverse** from
+[r-universe](https://spatlyu.r-universe.dev/gdverse):
 
-```r
+``` r
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
 ### Load data and package
 
 ``` r
-library(sf)
 library(terra)
 library(tidyverse)
 library(gdverse)
@@ -58,7 +60,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.11 sec elapsed
+## 2.91 sec elapsed
 ```
 
 ``` r
@@ -70,18 +72,18 @@ fvc_opgd
 
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6626    | 9.145e-10 |
+|  presum  |   0.6609    | 8.344e-10 |
 |   lulc   |   0.6597    | 8.782e-10 |
-|  premin  |   0.4654    | 4.831e-10 |
-|  tmpmin  |   0.4323    | 4.367e-10 |
-|  tmpmax  |   0.2543    | 4.168e-10 |
-|   elev   |   0.2353    | 2.885e-10 |
-|  slope   |   0.2338    | 7.849e-10 |
+|  premin  |   0.4655    | 3.606e-10 |
+|  tmpmin  |   0.4356    | 8.537e-10 |
+|  tmpmax  |   0.2536    | 7.849e-10 |
+|  slope   |   0.2357    | 8.826e-10 |
+|   elev   |   0.2355    | 7.287e-10 |
 |  tmpavg  |   0.2214    | 7.616e-10 |
 |   pop    |   0.1953    | 2.428e-10 |
-|  premax  |   0.1442    | 1.682e-10 |
-|   ntl    |   0.02272   |  0.0301   |
+|  premax  |   0.1451    | 5.961e-10 |
 |  aspect  |   0.0186    |  0.7491   |
+|   ntl    |   0.01726   |  0.1384   |
 
 ### GOZH model
 
@@ -121,7 +123,7 @@ fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 10,
               discvar = names(select(fvc,-c(fvc,lulc))),
               cores = 6, type = 'factor')
 tictoc::toc()
-## 1886.14 sec elapsed
+## 1844.56 sec elapsed
 ```
 
 ``` r
