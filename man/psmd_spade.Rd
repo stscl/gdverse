@@ -24,11 +24,13 @@ psmd_spade(
 \item{wt}{(optional) The spatial weight matrix.When \code{wt} is not provided, must provide \code{locations}.
 And gdverse will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
 
-\item{locations}{(optional) The geospatial locations column name in \code{data}. Useful when \code{wt} is not provided.}
+\item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
+Useful and must provided when \code{wt} is not provided.}
 
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{2:15}.}
+\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:15}.}
 
-\item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.}
+\item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
+When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}.}
 
 \item{cores}{positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster

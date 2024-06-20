@@ -98,9 +98,11 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @param data A data.frame or tibble of observation data.
 #' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
 #' And gdverse will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
-#' @param locations (optional) The geospatial locations column name in `data`. Useful when `wt` is not provided.
-#' @param discnum (optional) Number of multilevel discretization.Default will use `2:15`.
+#' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
+#' Useful and must provided when `wt` is not provided.
+#' @param discnum (optional) Number of multilevel discretization.Default will use `3:15`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
+#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.
 #' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
@@ -124,8 +126,8 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   formula.vars = all.vars(formula)
   yobs = data[, formula.vars[1], drop = TRUE]
   if (formula.vars[2] == "."){
-    if (length(which(colnames(data) %in% c(formula.vars[1],locations))) > 1) {
-      stop('please only keey `dependent` and `independent` column in `data`;When `wt` is not provided, please also contain `locations` column in `data` .')
+    if (length(!(which(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
+      stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data` .')
     } else {
       xobs = data[, -which(colnames(data) %in% c(formula.vars[1],locations)), drop = TRUE]
     }
@@ -135,7 +137,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 
   if (is.null(wt)) {
     if (is.null(locations)) {
-      stop("When `wt` is not provided, please provided `locations` coordinataion column in `data` !")
+      stop("When `wt` is not provided, please provided `locations` coordinate columns name which in `data` !")
     } else {
       wt_spade = inverse_distance_weight(locations[,1],locations[,2],power = 1)
     }

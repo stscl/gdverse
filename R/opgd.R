@@ -13,7 +13,7 @@
 #' @param discvar Name of continuous variable columns that need to be discretized.Noted that
 #' when `formula` has `discvar`, `data` must have these columns.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:15`.
-#' @param discmethod (optional) A vector of methods for discretization,default is used
+#' @param discmethod (optional) A vector of methods for discretization,default is using
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `spEcula`.
 #' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster

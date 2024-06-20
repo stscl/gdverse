@@ -26,7 +26,7 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:15}.}
 
-\item{discmethod}{(optional) A vector of methods for discretization,default is used
+\item{discmethod}{(optional) A vector of methods for discretization,default is using
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}
 
 \item{cores}{positive integer(default is 1). If cores > 1, a 'parallel' package
