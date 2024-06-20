@@ -150,16 +150,35 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
     discn = discnum
   }
 
-  calcul_psmd = \(param){
-    discm = param[[1]]
-    discn = param[[2]]
-
-    if (discm == 'robust'){
-
+  spade_disc = \(yv,xv,discn,discm,cores,...){
+    if (discm == 'robust') {
+      discdf = rep(list("xobs" = xv),length(discn))
+      names(discdf) = paste0('xobs_',discn)
+      discdf = tibble::tibble(yobs = yv,
+                              xobs = xv) %>%
+        bind_cols(tibble::as_tibble(discdf))
+      discdf = robust_disc("yobs ~ .",
+                           data = discdf,
+                           discnum = discn,
+                           cores = cores,
+                           ...)
     } else {
-
+      discdf = discn %>%
+        purrr::map_dfc(\(kn) st_unidisc(xv,kn,method = discm,...)) %>%
+        purrr::set_names(paste0('xobs_',discn))
+      discdf = tibble::tibble(yobs = yv,
+                              xobs = xv) %>%
+        bind_cols(discdf)
     }
+
+    return(discdf)
   }
+  discdf = spade_disc(yobs,xobs,discn,discmethod,cores,...)
+
+  calcul_cpsd = \(paramn){
+  }
+
+
 }
 
 #' @title measure information loss by information entropy
