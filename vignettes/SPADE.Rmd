@@ -46,7 +46,7 @@ The polygon spatial data are the streets divided based on roads within *the Ring
 
 
 ```
-## Error in knitr::include_graphics("../man/figures/spade_studyarea.png"): Cannot find the file(s): "../man/figures/spade_studyarea.png"
+## Error in knitr::include_graphics("man/figures/spade_studyarea.png"): Cannot find the file(s): "../man/figures/spade_studyarea.png"
 ```
 
 ### Spatial pattern of SUHI
