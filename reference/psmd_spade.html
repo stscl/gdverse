@@ -97,13 +97,12 @@ Useful and must provided when <code>wt</code> is not provided.</p></dd>
 
 <dt>discmethod</dt>
 <dd><p>(optional) The discretization methods. Default will use <code>quantile</code>.
-When <code>discmethod</code> is <code>robust</code> use <code><a href="robust_disc.html">robust_disc()</a></code>, others use <code><a href="st_unidisc.html">st_unidisc()</a></code>.</p></dd>
+When <code>discmethod</code> is <code>robust</code> use <code><a href="robust_disc.html">robust_disc()</a></code>, others use <code><a href="st_unidisc.html">st_unidisc()</a></code>.Now only support
+one <code>discmethod</code> at one time.</p></dd>
 
 
 <dt>cores</dt>
-<dd><p>(optional) A positive integer(default is 1). If cores &gt; 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.</p></dd>
+<dd><p>(optional) A positive integer(default is 1). If cores &gt; 1, use parallel computation.</p></dd>
 
 
 <dt>seed</dt>
