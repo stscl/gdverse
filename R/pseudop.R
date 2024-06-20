@@ -26,6 +26,10 @@ psd_pseudop = \(y,x,wt,cores = 6,
                 permutations = 99){
   set.seed(seed)
   permutation = stats::runif(permutations, min = 0, max = 1)
+  set.seed(seed)
+  xperm = sample(unique(x),size = length(x), replace = TRUE)
+  set.seed(seed)
+  yperm = sample(y,size = length(y))
   qs = psd_spade(y,x,wt)
 
   doclust = FALSE
@@ -35,9 +39,9 @@ psd_pseudop = \(y,x,wt,cores = 6,
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
 
-  calcul_psd = \(p){
-    xobs_shffule = shuffle_vector(x,p,seed = seed)
-    return(psd_spade(y,xobs_shffule,wt))
+  calcul_psd = \(p_shuffle){
+    xobs_shffule = shuffle_vector(xperm,p_shuffle,seed = seed)
+    return(psd_spade(yperm,xobs_shffule,wt))
   }
 
   if (doclust) {
@@ -126,18 +130,22 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
   } else {
     xname = formula.vars[2][-which(formula.vars[2] %in% c(formula.vars[1],locations))]
   }
-
-  xobs = data[,xname,drop = TRUE]
-  calcul_psmd = \(p){
-    xobs_shffule = shuffle_vector(xobs,p,seed = seed)
+  data = as.data.frame(data)
+  xobs =
+  set.seed(seed)
+  randomnum = runif(1)
+  xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
+  yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
+  data[,formula.vars[1]] = yperm
+  calcul_psmd = \(p_shuffle){
+    xobs_shffule = shuffle_vector(xperm,p_shuffle,seed = seed)
     data[,xname] = xobs_shffule
     return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
   }
 
   if (doclust) {
     parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar','shuffle_vector',
-                                    'psd_spade','cpsd_spade','psmd_spade',
-                                    'inverse_distance_weight'))
+                                    'psd_spade','cpsd_spade','psmd_spade','inverse_distance_weight'))
     out_g = parallel::parLapply(cores,permutation,calcul_psmd)
     out_g = as.numeric(do.call(rbind, out_g))
   } else {
