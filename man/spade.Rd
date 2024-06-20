@@ -12,8 +12,9 @@ spade(
   discvar = NULL,
   discnum = NULL,
   discmethod = NULL,
-  cores = 1,
+  cores = 6,
   seed = 123456789,
+  permutations = 99,
   ...
 )
 }
@@ -36,9 +37,11 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
+\item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
+
+\item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{99}.}
 
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()} or \code{robust_disc()}.}
 }
@@ -63,7 +66,7 @@ usfi = usfi |>
 spade('SUHI~.', data = usfi,locations = c('X','Y'),
       discvar = c('BH','NDVI'), cores = 6)
 spade('SUHI~.', data = usfi, wt = wt,
-      discvar = c('BH','NDVI'),
+      discvar = c('BH','NDVI'),locations = c('X','Y'),
       discmethod = c('sd','equal'),cores = 6)
 }
 }

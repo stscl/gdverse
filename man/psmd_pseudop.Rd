@@ -34,7 +34,7 @@ Useful and must provided when \code{wt} is not provided.}
 When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}.Now only support
 one \code{discmethod} at one time.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
+\item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
@@ -43,7 +43,7 @@ one \code{discmethod} at one time.}
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()} or \code{robust_disc()}.}
 }
 \value{
-A list of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
+A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
 }
 \description{
 Function for calculate power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.

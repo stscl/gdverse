@@ -13,11 +13,11 @@
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param wt The spatial weight matrix.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
+#' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
 #'
-#' @return A list of power of spatial determinant and the corresponding pseudo-p value.
+#' @return A tibble of power of spatial determinant and the corresponding pseudo-p value.
 #' @importFrom stats runif
 #' @export
 #'
@@ -26,10 +26,6 @@ psd_pseudop = \(y,x,wt,cores = 6,
                 permutations = 99){
   set.seed(seed)
   permutation = stats::runif(permutations, min = 0, max = 1)
-  set.seed(seed)
-  xperm = sample(unique(x),size = length(x), replace = TRUE)
-  set.seed(seed)
-  yperm = sample(y,size = length(y))
   qs = psd_spade(y,x,wt)
 
   doclust = FALSE
@@ -39,6 +35,10 @@ psd_pseudop = \(y,x,wt,cores = 6,
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
 
+  set.seed(seed)
+  randomnum = runif(1)
+  xperm = shuffle_vector(x,randomnum,seed = seed)
+  yperm = shuffle_vector(y,randomnum,seed = seed)
   calcul_psd = \(p_shuffle){
     xobs_shffule = shuffle_vector(xperm,p_shuffle,seed = seed)
     return(psd_spade(yperm,xobs_shffule,wt))
@@ -55,7 +55,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 
   R = sum(out_g >= qs)
   pp = (R + 1) / (permutations + 1)
-  fd = list("Q-statistic" = qs, "P-value" = pp)
+  fd = tibble::tibble("Q-statistic" = qs, "P-value" = pp)
   return(fd)
 }
 
@@ -81,12 +81,12 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
 #' one `discmethod` at one time.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
+#' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
-#' @return A list of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
+#' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
 #' @importFrom stats runif
 #' @export
 #' @examples
@@ -131,7 +131,6 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
     xname = formula.vars[2][-which(formula.vars[2] %in% c(formula.vars[1],locations))]
   }
   data = as.data.frame(data)
-  xobs =
   set.seed(seed)
   randomnum = runif(1)
   xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
@@ -154,7 +153,7 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
 
   R = sum(out_g >= qs)
   pp = (R + 1) / (permutations + 1)
-  fd = list("Q-statistic" = qs, "P-value" = pp)
+  fd = tibble::tibble("Q-statistic" = qs, "P-value" = pp)
   return(fd)
 }
 

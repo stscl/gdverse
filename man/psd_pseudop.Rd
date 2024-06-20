@@ -13,14 +13,14 @@ psd_pseudop(y, x, wt, cores = 6, seed = 123456789, permutations = 99)
 
 \item{wt}{The spatial weight matrix.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
+\item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
 \item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{99}.}
 }
 \value{
-A list of power of spatial determinant and the corresponding pseudo-p value.
+A tibble of power of spatial determinant and the corresponding pseudo-p value.
 }
 \description{
 Function for calculate power of spatial determinant \eqn{q_s}.
