@@ -15,7 +15,7 @@ robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
 
 \item{minsize}{(optional) The min size of each discretization group.Default all use \code{1}.}
 
-\item{cores}{(optional) Positive integer(default is 1). If cores > 1, use \code{python}'s \code{joblib} package to
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use \code{python}'s \code{joblib} package to
 parallel computation.}
 }
 \value{

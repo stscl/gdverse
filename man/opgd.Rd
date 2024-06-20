@@ -29,7 +29,7 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 \item{discmethod}{(optional) A vector of methods for discretization,default is using
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}
 
-\item{cores}{positive integer(default is 1). If cores > 1, a 'parallel' package
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster
 object.}
 

@@ -103,7 +103,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:15`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.
-#' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
 #' @param seed (optional) Random seed number, default is `123456789`.
@@ -144,9 +144,15 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   } else {
     wt_spade = wt
   }
-  if (is.null(discnum)) {discnum = 3:15}
+  if (is.null(discnum)) {
+    discn = 3:15
+  } else {
+    discn = discnum
+  }
 
-  calcul_psmd = \(discm){
+  calcul_psmd = \(param){
+    discm = param[[1]]
+
     if (discm == 'robust'){
 
     } else {

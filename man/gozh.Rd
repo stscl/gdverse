@@ -11,7 +11,7 @@ gozh(formula, data, cores = 1, ...)
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{cores}{positive integer(default is 1). If cores > 1, a 'parallel' package
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster
 object.}
 

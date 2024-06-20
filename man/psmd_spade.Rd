@@ -32,7 +32,7 @@ Useful and must provided when \code{wt} is not provided.}
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
 When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}.}
 
-\item{cores}{positive integer(default is 1). If cores > 1, a 'parallel' package
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster
 object.}
 

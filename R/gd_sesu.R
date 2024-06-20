@@ -17,7 +17,7 @@
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `2:15`.
 #' @param discmethod (optional) A vector of methods for discretization,default is used
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `spEcula`.
-#' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
