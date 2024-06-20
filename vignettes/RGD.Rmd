@@ -27,6 +27,7 @@ library(terra)
 ```
 
 ``` r
+library(gdverse)
 library(tidyverse)
 ## ── Attaching core tidyverse packages ─────────────────────────────────────── tidyverse 2.0.0 ──
 ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -42,7 +43,6 @@ library(tidyverse)
 ```
 
 ``` r
-library(gdverse)
 reticulate::use_condaenv('geocompy')
 
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
@@ -94,7 +94,7 @@ We can use `robust_disc()` to discretize them based on offline change point dete
 tictoc::tic()
 new.fvc = robust_disc(fvc ~ .,data = select(fvc,-lulc),discnum = 15,cores = 6)
 tictoc::toc()
-## 2595.78 sec elapsed
+## 2661.41 sec elapsed
 ```
 
 

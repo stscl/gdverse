@@ -27,8 +27,8 @@ pandas ruptures -y`
 
 ``` {r}
 library(terra)
-library(tidyverse)
 library(gdverse)
+library(tidyverse)
 reticulate::use_condaenv('geocompy')
 
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"

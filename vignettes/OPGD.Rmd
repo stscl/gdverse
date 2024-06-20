@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 3.79 sec elapsed
+## 4.8 sec elapsed
 ```
 
 
@@ -76,26 +76,26 @@ g
 ## [11] "tmpmin"
 ## 
 ## $k
-##  [1] 12 14 12 14 12 14 15 11 15 15 13
+##  [1] 13 15 15 15 15 15 15 15 10 15 15
 ## 
 ## $method
-##  [1] "pretty"   "quantile" "fisher"   "quantile" "fisher"   "fisher"   "fisher"   "equal"   
-##  [9] "fisher"   "quantile" "fisher"  
+##  [1] "pretty"   "fisher"   "fisher"   "quantile" "fisher"   "fisher"   "fisher"   "fisher"  
+##  [9] "sd"       "quantile" "fisher"  
 ## 
 ## $disv
 ## # A tibble: 5,240 × 11
 ##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1      3    10     3     2      5      1      1     2      6      9      2
-##  2      4     9     4     4      5      1      1     2      7     11      2
-##  3      4    10     3     2      5      1      1     2      6      9      2
-##  4      5    11     2     2      6      1      1     3      5      7      2
-##  5      3    10     4     1      5      1      1     2      6      9      2
-##  6      3     9     4     1      5      1      1     2      7     11      2
-##  7      3     9     3     3      5      1      1     1      7     11      2
-##  8      5     9     4     2      5      1      1     2      7     11      2
-##  9      4    10     5     7      5      1      1     2      6      9      2
-## 10      5     9     3     3      5      1      1     2      7     10      2
+##  1      7     9     3     2      7      1      1     5      8      9      2
+##  2      9     8     3     5      7      1      1     3      8     11      2
+##  3     10     9     3     2      7      1      1     5      8      9      2
+##  4     11     9     2     2      8      1      1     5      7      7      2
+##  5      7     9     4     1      7      2      1     4      8      9      2
+##  6      7     8     3     1      7      1      1     3      8     11      3
+##  7      7     8     3     3      6      1      1     2      8     11      3
+##  8     11     8     3     2      7      1      1     3      8     11      3
+##  9      9     9     4     7      7      1      1     5      8      9      2
+## 10     11     8     3     3      7      1      1     4      8     10      2
 ## # ℹ 5,230 more rows
 ```
 
@@ -105,16 +105,16 @@ new.fvc
 ## # A tibble: 5,240 × 11
 ##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##     <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1      3    10     3     2      5      1      1     2      6      9      2
-##  2      4     9     4     4      5      1      1     2      7     11      2
-##  3      4    10     3     2      5      1      1     2      6      9      2
-##  4      5    11     2     2      6      1      1     3      5      7      2
-##  5      3    10     4     1      5      1      1     2      6      9      2
-##  6      3     9     4     1      5      1      1     2      7     11      2
-##  7      3     9     3     3      5      1      1     1      7     11      2
-##  8      5     9     4     2      5      1      1     2      7     11      2
-##  9      4    10     5     7      5      1      1     2      6      9      2
-## 10      5     9     3     3      5      1      1     2      7     10      2
+##  1      7     9     3     2      7      1      1     5      8      9      2
+##  2      9     8     3     5      7      1      1     3      8     11      2
+##  3     10     9     3     2      7      1      1     5      8      9      2
+##  4     11     9     2     2      8      1      1     5      7      7      2
+##  5      7     9     4     1      7      2      1     4      8      9      2
+##  6      7     8     3     1      7      1      1     3      8     11      3
+##  7      7     8     3     3      6      1      1     2      8     11      3
+##  8     11     8     3     2      7      1      1     3      8     11      3
+##  9      9     9     4     7      7      1      1     5      8      9      2
+## 10     11     8     3     3      7      1      1     4      8     10      2
 ## # ℹ 5,230 more rows
 ```
 
@@ -127,16 +127,16 @@ new.fvc
 ## # A tibble: 5,240 × 13
 ##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
 ##    <dbl> <dbl>  <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
-##  1 0.188    10      3    10     3     2      5      1      1     2      6      9      2
-##  2 0.162    10      4     9     4     4      5      1      1     2      7     11      2
-##  3 0.168    10      4    10     3     2      5      1      1     2      6      9      2
-##  4 0.186    10      5    11     2     2      6      1      1     3      5      7      2
-##  5 0.189    10      3    10     4     1      5      1      1     2      6      9      2
-##  6 0.171    10      3     9     4     1      5      1      1     2      7     11      2
-##  7 0.153    10      3     9     3     3      5      1      1     1      7     11      2
-##  8 0.163    10      5     9     4     2      5      1      1     2      7     11      2
-##  9 0.176    10      4    10     5     7      5      1      1     2      6      9      2
-## 10 0.177    10      5     9     3     3      5      1      1     2      7     10      2
+##  1 0.188    10      7     9     3     2      7      1      1     5      8      9      2
+##  2 0.162    10      9     8     3     5      7      1      1     3      8     11      2
+##  3 0.168    10     10     9     3     2      7      1      1     5      8      9      2
+##  4 0.186    10     11     9     2     2      8      1      1     5      7      7      2
+##  5 0.189    10      7     9     4     1      7      2      1     4      8      9      2
+##  6 0.171    10      7     8     3     1      7      1      1     3      8     11      3
+##  7 0.153    10      7     8     3     3      6      1      1     2      8     11      3
+##  8 0.163    10     11     8     3     2      7      1      1     3      8     11      3
+##  9 0.176    10      9     9     4     7      7      1      1     5      8      9      2
+## 10 0.177    10     11     8     3     3      7      1      1     4      8     10      2
 ## # ℹ 5,230 more rows
 ```
 
@@ -156,29 +156,29 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 ------------------------------------
  variable   Q-statistic    P-value  
 ---------- ------------- -----------
-  presum      0.6626      9.145e-10 
+  presum      0.6609      8.344e-10 
 
    lulc       0.6597      8.782e-10 
 
-  premin      0.4629      4.025e-10 
+  premin      0.4655      3.606e-10 
 
-  tmpmin      0.4247      4.416e-10 
+  tmpmin      0.4356      8.537e-10 
 
   tmpmax      0.2536      7.849e-10 
 
-   elev       0.2318      8.79e-10  
+  slope       0.2357      8.826e-10 
 
-  slope        0.229      8.967e-10 
+   elev       0.2355      7.287e-10 
 
-  tmpavg      0.2186      6.41e-10  
+  tmpavg      0.2214      7.616e-10 
 
-   pop        0.1896      7.855e-10 
+   pop        0.1953      2.428e-10 
 
-  premax      0.1381      3.287e-10 
+  premax      0.1451      5.961e-10 
 
-   ntl        0.01878      0.01942  
+  aspect      0.0186       0.7491   
 
-  aspect      0.0118       0.1859   
+   ntl        0.01726      0.1384   
 ------------------------------------
 
 
@@ -226,217 +226,7 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 
    aspect ∩ premin      Enhance, nonlinear 
 
-   aspect ∩ presum      Enhance, nonlinear 
-
-    aspect ∩ slope      Enhance, nonlinear 
-
-   aspect ∩ tmpavg      Enhance, nonlinear 
-
-   aspect ∩ tmpmax      Enhance, nonlinear 
-
-   aspect ∩ tmpmin      Enhance, nonlinear 
-
-      elev ∩ ntl        Enhance, nonlinear 
-
-      elev ∩ pop        Enhance, nonlinear 
-
-    elev ∩ premax       Enhance, nonlinear 
-
-    elev ∩ premin          Enhance, bi-    
-
-    elev ∩ presum          Enhance, bi-    
-
-     elev ∩ slope          Enhance, bi-    
-
-    elev ∩ tmpavg          Enhance, bi-    
-
-    elev ∩ tmpmax       Enhance, nonlinear 
-
-    elev ∩ tmpmin          Enhance, bi-    
-
-      ntl ∩ pop         Enhance, nonlinear 
-
-     ntl ∩ premax       Enhance, nonlinear 
-
-     ntl ∩ premin       Enhance, nonlinear 
-
-     ntl ∩ presum       Enhance, nonlinear 
-
-     ntl ∩ slope        Enhance, nonlinear 
-
-     ntl ∩ tmpavg       Enhance, nonlinear 
-
-     ntl ∩ tmpmax       Enhance, nonlinear 
-
-     ntl ∩ tmpmin       Enhance, nonlinear 
-
-     pop ∩ premax       Enhance, nonlinear 
-
-     pop ∩ premin          Enhance, bi-    
-
-     pop ∩ presum          Enhance, bi-    
-
-     pop ∩ slope           Enhance, bi-    
-
-     pop ∩ tmpavg       Enhance, nonlinear 
-
-     pop ∩ tmpmax       Enhance, nonlinear 
-
-     pop ∩ tmpmin          Enhance, bi-    
-
-   premax ∩ premin      Enhance, nonlinear 
-
-   premax ∩ presum         Enhance, bi-    
-
-    premax ∩ slope         Enhance, bi-    
-
-   premax ∩ tmpavg      Enhance, nonlinear 
-
-   premax ∩ tmpmax      Enhance, nonlinear 
-
-   premax ∩ tmpmin      Enhance, nonlinear 
-
-   premin ∩ presum         Enhance, bi-    
-
-    premin ∩ slope         Enhance, bi-    
-
-   premin ∩ tmpavg         Enhance, bi-    
-
-   premin ∩ tmpmax         Enhance, bi-    
-
-   premin ∩ tmpmin         Enhance, bi-    
-
-    presum ∩ slope         Enhance, bi-    
-
-   presum ∩ tmpavg         Enhance, bi-    
-
-   presum ∩ tmpmax         Enhance, bi-    
-
-   presum ∩ tmpmin         Enhance, bi-    
-
-    slope ∩ tmpavg         Enhance, bi-    
-
-    slope ∩ tmpmax         Enhance, bi-    
-
-    slope ∩ tmpmin         Enhance, bi-    
-
-   tmpavg ∩ tmpmax      Enhance, nonlinear 
-
-   tmpavg ∩ tmpmin         Enhance, bi-    
-
-   tmpmax ∩ tmpmin      Enhance, nonlinear 
--------------------------------------------
-
-
-
-### You can also use `opgd()` in one time to get result above.
-
-
-``` r
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
-                discvar = names(select(fvc,-c(fvc,lulc))),
-                cores = 6, type = c('factor','interaction'))
-str(fvc_opgd)
-## List of 2
-##  $ :List of 1
-##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)
-##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...
-##   .. ..$ Q-statistic: num [1:12] 0.663 0.66 0.465 0.428 0.254 ...
-##   .. ..$ P-value    : num [1:12] 9.15e-10 8.78e-10 4.83e-10 5.54e-10 7.85e-10 ...
-##   ..- attr(*, "class")= chr "factor_detector"
-##  $ :List of 1
-##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)
-##   .. ..$ variable1                                    : chr [1:66] "lulc" "lulc" "lulc" "lulc" ...
-##   .. ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...
-##   .. ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...
-##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...
-##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0118 0.2318 0.0225 0.1896 0.1417 ...
-##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.683 0.82 0.724 0.754 0.769 ...
-##   ..- attr(*, "class")= chr "interaction_detector"
-```
-
-``` r
-fvc_opgd[[1]]
-## Spatial Stratified Heterogeneity Test 
-##  
-##           Factor detector
-```
-
-
-------------------------------------
- variable   Q-statistic    P-value  
----------- ------------- -----------
-  presum      0.6626      9.145e-10 
-
-   lulc       0.6597      8.782e-10 
-
-  premin      0.4654      4.831e-10 
-
-  tmpmin      0.4278      5.541e-10 
-
-  tmpmax      0.2536      7.849e-10 
-
-   elev       0.2318      8.79e-10  
-
-  slope        0.229      8.967e-10 
-
-  tmpavg      0.2125      9.658e-10 
-
-   pop        0.1896      7.855e-10 
-
-  premax      0.1417      7.869e-10 
-
-   ntl        0.02253     0.005407  
-
-  aspect      0.0118       0.1859   
-------------------------------------
-
-
-
-``` r
-fvc_opgd[[2]]
-## Spatial Stratified Heterogeneity Test 
-##  
-##          Interaction detector
-```
-
-
--------------------------------------------
- Interactive variable      Interaction     
----------------------- --------------------
-    lulc ∩ aspect       Enhance, nonlinear 
-
-     lulc ∩ elev           Enhance, bi-    
-
-      lulc ∩ ntl        Enhance, nonlinear 
-
-      lulc ∩ pop           Enhance, bi-    
-
-    lulc ∩ premax          Enhance, bi-    
-
-    lulc ∩ premin          Enhance, bi-    
-
-    lulc ∩ presum          Enhance, bi-    
-
-     lulc ∩ slope          Enhance, bi-    
-
-    lulc ∩ tmpavg          Enhance, bi-    
-
-    lulc ∩ tmpmax          Enhance, bi-    
-
-    lulc ∩ tmpmin          Enhance, bi-    
-
-    aspect ∩ elev       Enhance, nonlinear 
-
-     aspect ∩ ntl       Enhance, nonlinear 
-
-     aspect ∩ pop       Enhance, nonlinear 
-
-   aspect ∩ premax      Enhance, nonlinear 
-
-   aspect ∩ premin      Enhance, nonlinear 
-
-   aspect ∩ presum      Enhance, nonlinear 
+   aspect ∩ presum         Enhance, bi-    
 
     aspect ∩ slope      Enhance, nonlinear 
 
@@ -532,7 +322,217 @@ fvc_opgd[[2]]
 
    tmpavg ∩ tmpmax      Enhance, nonlinear 
 
-   tmpavg ∩ tmpmin      Enhance, nonlinear 
+   tmpavg ∩ tmpmin         Enhance, bi-    
+
+   tmpmax ∩ tmpmin      Enhance, nonlinear 
+-------------------------------------------
+
+
+
+### You can also use `opgd()` in one time to get result above.
+
+
+``` r
+fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
+                discvar = names(select(fvc,-c(fvc,lulc))),
+                cores = 6, type = c('factor','interaction'))
+str(fvc_opgd)
+## List of 2
+##  $ :List of 1
+##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)
+##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...
+##   .. ..$ Q-statistic: num [1:12] 0.661 0.66 0.466 0.436 0.254 ...
+##   .. ..$ P-value    : num [1:12] 8.34e-10 8.78e-10 3.61e-10 8.54e-10 7.85e-10 ...
+##   ..- attr(*, "class")= chr "factor_detector"
+##  $ :List of 1
+##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)
+##   .. ..$ variable1                                    : chr [1:66] "lulc" "lulc" "lulc" "lulc" ...
+##   .. ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...
+##   .. ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...
+##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...
+##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2355 0.0173 0.1953 0.1451 ...
+##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.828 0.716 0.756 0.77 ...
+##   ..- attr(*, "class")= chr "interaction_detector"
+```
+
+``` r
+fvc_opgd[[1]]
+## Spatial Stratified Heterogeneity Test 
+##  
+##           Factor detector
+```
+
+
+------------------------------------
+ variable   Q-statistic    P-value  
+---------- ------------- -----------
+  presum      0.6609      8.344e-10 
+
+   lulc       0.6597      8.782e-10 
+
+  premin      0.4655      3.606e-10 
+
+  tmpmin      0.4356      8.537e-10 
+
+  tmpmax      0.2536      7.849e-10 
+
+  slope       0.2357      8.826e-10 
+
+   elev       0.2355      7.287e-10 
+
+  tmpavg      0.2214      7.616e-10 
+
+   pop        0.1953      2.428e-10 
+
+  premax      0.1451      5.961e-10 
+
+  aspect      0.0186       0.7491   
+
+   ntl        0.01726      0.1384   
+------------------------------------
+
+
+
+``` r
+fvc_opgd[[2]]
+## Spatial Stratified Heterogeneity Test 
+##  
+##          Interaction detector
+```
+
+
+-------------------------------------------
+ Interactive variable      Interaction     
+---------------------- --------------------
+    lulc ∩ aspect       Enhance, nonlinear 
+
+     lulc ∩ elev           Enhance, bi-    
+
+      lulc ∩ ntl        Enhance, nonlinear 
+
+      lulc ∩ pop           Enhance, bi-    
+
+    lulc ∩ premax          Enhance, bi-    
+
+    lulc ∩ premin          Enhance, bi-    
+
+    lulc ∩ presum          Enhance, bi-    
+
+     lulc ∩ slope          Enhance, bi-    
+
+    lulc ∩ tmpavg          Enhance, bi-    
+
+    lulc ∩ tmpmax          Enhance, bi-    
+
+    lulc ∩ tmpmin          Enhance, bi-    
+
+    aspect ∩ elev       Enhance, nonlinear 
+
+     aspect ∩ ntl       Enhance, nonlinear 
+
+     aspect ∩ pop       Enhance, nonlinear 
+
+   aspect ∩ premax      Enhance, nonlinear 
+
+   aspect ∩ premin      Enhance, nonlinear 
+
+   aspect ∩ presum         Enhance, bi-    
+
+    aspect ∩ slope      Enhance, nonlinear 
+
+   aspect ∩ tmpavg      Enhance, nonlinear 
+
+   aspect ∩ tmpmax      Enhance, nonlinear 
+
+   aspect ∩ tmpmin      Enhance, nonlinear 
+
+      elev ∩ ntl        Enhance, nonlinear 
+
+      elev ∩ pop        Enhance, nonlinear 
+
+    elev ∩ premax       Enhance, nonlinear 
+
+    elev ∩ premin          Enhance, bi-    
+
+    elev ∩ presum          Enhance, bi-    
+
+     elev ∩ slope          Enhance, bi-    
+
+    elev ∩ tmpavg          Enhance, bi-    
+
+    elev ∩ tmpmax       Enhance, nonlinear 
+
+    elev ∩ tmpmin          Enhance, bi-    
+
+      ntl ∩ pop         Enhance, nonlinear 
+
+     ntl ∩ premax       Enhance, nonlinear 
+
+     ntl ∩ premin       Enhance, nonlinear 
+
+     ntl ∩ presum       Enhance, nonlinear 
+
+     ntl ∩ slope        Enhance, nonlinear 
+
+     ntl ∩ tmpavg       Enhance, nonlinear 
+
+     ntl ∩ tmpmax       Enhance, nonlinear 
+
+     ntl ∩ tmpmin       Enhance, nonlinear 
+
+     pop ∩ premax       Enhance, nonlinear 
+
+     pop ∩ premin          Enhance, bi-    
+
+     pop ∩ presum          Enhance, bi-    
+
+     pop ∩ slope           Enhance, bi-    
+
+     pop ∩ tmpavg       Enhance, nonlinear 
+
+     pop ∩ tmpmax       Enhance, nonlinear 
+
+     pop ∩ tmpmin          Enhance, bi-    
+
+   premax ∩ premin      Enhance, nonlinear 
+
+   premax ∩ presum         Enhance, bi-    
+
+    premax ∩ slope      Enhance, nonlinear 
+
+   premax ∩ tmpavg      Enhance, nonlinear 
+
+   premax ∩ tmpmax      Enhance, nonlinear 
+
+   premax ∩ tmpmin      Enhance, nonlinear 
+
+   premin ∩ presum         Enhance, bi-    
+
+    premin ∩ slope         Enhance, bi-    
+
+   premin ∩ tmpavg         Enhance, bi-    
+
+   premin ∩ tmpmax         Enhance, bi-    
+
+   premin ∩ tmpmin         Enhance, bi-    
+
+    presum ∩ slope         Enhance, bi-    
+
+   presum ∩ tmpavg         Enhance, bi-    
+
+   presum ∩ tmpmax         Enhance, bi-    
+
+   presum ∩ tmpmin         Enhance, bi-    
+
+    slope ∩ tmpavg         Enhance, bi-    
+
+    slope ∩ tmpmax         Enhance, bi-    
+
+    slope ∩ tmpmin         Enhance, bi-    
+
+   tmpavg ∩ tmpmax      Enhance, nonlinear 
+
+   tmpavg ∩ tmpmin         Enhance, bi-    
 
    tmpmax ∩ tmpmin      Enhance, nonlinear 
 -------------------------------------------

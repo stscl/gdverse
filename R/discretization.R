@@ -44,7 +44,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @param formula A formula of spatial stratified heterogeneity test.
 #' @param data A data.frame or tibble of observation data.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:15`.
-#' @param discmethod (optional) A vector of methods for discretization,default is used
+#' @param discmethod (optional) A vector of methods for discretization,default is using
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `spEcula`.
 #' @param cores positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster
