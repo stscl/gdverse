@@ -44,7 +44,7 @@ usfi
 The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
 
 <div class="figure" style="text-align: center">
-<img src="../man/figures/spade_studyarea.png" alt="The study area map of USFI_Xian data" width="75%" />
+<img src="../man/figures/spade_studyarea.png" alt="The study area map of USFI_Xian data" width="120%" />
 <p class="caption">The study area map of USFI_Xian data</p>
 </div>
 
