@@ -87,15 +87,17 @@ And gdverse will use <code>locations</code> columns to construct spatial weight 
 
 
 <dt>locations</dt>
-<dd><p>(optional) The geospatial locations column name in <code>data</code>. Useful when <code>wt</code> is not provided.</p></dd>
+<dd><p>(optional) The geospatial locations coordinate columns name which in <code>data</code>.
+Useful and must provided when <code>wt</code> is not provided.</p></dd>
 
 
 <dt>discnum</dt>
-<dd><p>(optional) Number of multilevel discretization.Default will use <code>2:15</code>.</p></dd>
+<dd><p>(optional) Number of multilevel discretization.Default will use <code>3:15</code>.</p></dd>
 
 
 <dt>discmethod</dt>
-<dd><p>(optional) The discretization methods. Default will use <code>quantile</code>.</p></dd>
+<dd><p>(optional) The discretization methods. Default will use <code>quantile</code>.
+When <code>discmethod</code> is <code>robust</code> use <code><a href="robust_disc.html">robust_disc()</a></code>, others use <code><a href="st_unidisc.html">st_unidisc()</a></code>.</p></dd>
 
 
 <dt>cores</dt>
