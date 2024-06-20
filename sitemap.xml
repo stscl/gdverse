@@ -76,7 +76,13 @@
     <loc>https://spatlyu.github.io/gdverse/reference/print.risk_detector.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/psd_pseudop.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/psd_spade.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/psmd_pseudop.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/psmd_spade.html</loc>
@@ -89,6 +95,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/robust_disc.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/shuffle_vector.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/spade.html</loc>
