@@ -9,7 +9,7 @@
 #' analysis: Cases with different types of spatial data, GIScience & Remote Sensing, 57(5), 593-610.
 #' doi: 10.1080/15481603.2020.1760434.
 #'
-#' @param formula A formula.
+#' @param formula A formula of comparison of size effects of spatial units.
 #' @param datalist A list of \code{data.frame} or \code{tibble}.
 #' @param su A vector of sizes of spatial units.
 #' @param discvar Name of continuous variable columns that need to be discretized.Noted that

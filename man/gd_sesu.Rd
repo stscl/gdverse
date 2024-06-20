@@ -16,7 +16,7 @@ gd_sesu(
 )
 }
 \arguments{
-\item{formula}{A formula.}
+\item{formula}{A formula of comparison of size effects of spatial units.}
 
 \item{datalist}{A list of \code{data.frame} or \code{tibble}.}
 

@@ -94,7 +94,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 #' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 #'
-#' @param formula A formula of spatial stratified heterogeneity test.
+#' @param formula A formula of calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
 #' @param data A data.frame or tibble of observation data.
 #' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
 #' And gdverse will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
@@ -152,6 +152,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 
   calcul_psmd = \(param){
     discm = param[[1]]
+    discn = param[[2]]
 
     if (discm == 'robust'){
 

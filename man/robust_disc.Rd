@@ -7,7 +7,7 @@
 robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
 }
 \arguments{
-\item{formula}{A formula of spatial stratified heterogeneity test.}
+\item{formula}{A formula of univariate discretization.}
 
 \item{data}{A data.frame or tibble of observation data.}
 

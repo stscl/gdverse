@@ -41,7 +41,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @description
 #' Function for determining the best univariate discretization based on geodetector q-statistic.
 #'
-#' @param formula A formula of spatial stratified heterogeneity test.
+#' @param formula A formula of best univariate discretization.
 #' @param data A data.frame or tibble of observation data.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:15`.
 #' @param discmethod (optional) A vector of methods for discretization,default is using

@@ -4,7 +4,7 @@
 #' Determines discretization interval breaks using an optimization algorithm for variance-based
 #' change point detection.
 #'
-#' @param formula A formula of spatial stratified heterogeneity test.
+#' @param formula A formula of univariate discretization.
 #' @param data A data.frame or tibble of observation data.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
 #' @param minsize (optional) The min size of each discretization group.Default all use `1`.

@@ -16,7 +16,7 @@ gd_bestunidisc(
 )
 }
 \arguments{
-\item{formula}{A formula of spatial stratified heterogeneity test.}
+\item{formula}{A formula of best univariate discretization.}
 
 \item{data}{A data.frame or tibble of observation data.}
 

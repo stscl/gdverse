@@ -17,7 +17,7 @@ psmd_spade(
 )
 }
 \arguments{
-\item{formula}{A formula of spatial stratified heterogeneity test.}
+\item{formula}{A formula of calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.}
 
 \item{data}{A data.frame or tibble of observation data.}
 
