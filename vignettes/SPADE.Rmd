@@ -38,22 +38,21 @@ usfi
 ##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692
 ## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601
 ## # ℹ 1,027 more rows
-## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>,
-## #   geom <POLYGON [m]>
+## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>, geom <POLYGON [m]>
 ```
 
 The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
 
 
 ```
-## Error in knitr::include_graphics("man/figures/spade_studyarea.png"): Cannot find the file(s): "../man/figures/spade_studyarea.png"
+## Error in knitr::include_graphics("../man/figures/spade_studyarea.png"): Cannot find the file(s): "../man/figures/spade_studyarea.png"
 ```
 
 ### Spatial pattern of SUHI
 
 #### global spatial autocorrelation of SUHI
 
-here I use `sfdep` o calculate the global **Moran's I**
+here I use `sfdep` to calculate the global **Moran's I**
 
 
 ``` r
@@ -84,18 +83,18 @@ new_usfi
 ## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669
 ## Projected CRS: WGS 84 / UTM zone 49N
 ## # A tibble: 1,037 × 4
-##     SUHI nb         wt                                                                     geom
-##    <dbl> <nb>       <list>                                                        <POLYGON [m]>
-##  1 1.76  <int [12]> <dbl [12]> ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 297840.…
-##  2 0.519 <int [2]>  <dbl [2]>  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 297393.…
-##  3 3.04  <int [9]>  <dbl [9]>  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.1 …
-##  4 3.22  <int [4]>  <dbl [4]>  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.6 …
-##  5 3.47  <int [6]>  <dbl [6]>  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 296788.…
-##  6 4.71  <int [6]>  <dbl [6]>  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 296467.…
-##  7 1.24  <int [2]>  <dbl [2]>  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 296347.…
-##  8 4.30  <int [8]>  <dbl [8]>  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 296144.…
-##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.…
-## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.…
+##     SUHI nb         wt                                                                      geom
+##    <dbl> <nb>       <list>                                                         <POLYGON [m]>
+##  1 1.76  <int [12]> <dbl [12]> ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 297840.8…
+##  2 0.519 <int [2]>  <dbl [2]>  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 297393.2…
+##  3 3.04  <int [9]>  <dbl [9]>  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.1 3…
+##  4 3.22  <int [4]>  <dbl [4]>  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.6 3…
+##  5 3.47  <int [6]>  <dbl [6]>  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 296788.8…
+##  6 4.71  <int [6]>  <dbl [6]>  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 296467.9…
+##  7 1.24  <int [2]>  <dbl [2]>  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 296347.5…
+##  8 4.30  <int [8]>  <dbl [8]>  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 296144.9…
+##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.8…
+## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.5…
 ## # ℹ 1,027 more rows
 ```
 
@@ -141,7 +140,7 @@ new_usfi %>%
 ```
 
 <div class="figure">
-<img src="man/figures/SPADE-SUHI_LISA-1.png" alt="plot of chunk SUHI_LISA" width="75%" />
+<img src="figure/SUHI_LISA-1.png" alt="plot of chunk SUHI_LISA" width="75%" />
 <p class="caption">plot of chunk SUHI_LISA</p>
 </div>
 
@@ -155,7 +154,54 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 ``` r
 usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
                  discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+usfi_opgd
+## Spatial Stratified Heterogeneity Test 
+##  
+##           Factor detector
 ```
+
+
+------------------------------------
+ variable   Q-statistic    P-value  
+---------- ------------- -----------
+   DAR        0.4393      4.882e-10 
+
+   NDVI       0.3971      2.024e-10 
+
+   GAR        0.3823      8.253e-10 
+
+   RFD         0.267      7.395e-10 
+
+    BD         0.265      3.249e-10 
+
+    BH        0.2478      8.793e-11 
+
+   NDWI       0.2081      6.586e-10 
+
+   FAR         0.198      1.35e-10  
+
+   SVF        0.1309      4.973e-10 
+
+    RL        0.1231      8.885e-10 
+
+   TER        0.1164      6.774e-08 
+
+   WAR        0.1062      5.574e-10 
+
+   LSI        0.07673     3.213e-06 
+
+   DTH        0.07629     7.669e-06 
+
+   DTP        0.07479     7.947e-10 
+
+   DTW        0.05576     0.0004072 
+
+   DTR        0.05286     3.937e-07 
+
+   LPI        0.02876      0.8158   
+------------------------------------
+
+
 
 **You can access the detailed q statistics by `usfi_opgd$factor`**
 
@@ -242,13 +288,15 @@ identical(wt3,wt4)
 ## [1] TRUE
 ```
 
-In the following section we will execute *SPADE* model using  spatial weight matrix `wt3`.
+**We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this.In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area! **
+
+In the following section we will execute *SPADE* model using  spatial weight matrix `wt2`.
 
 #### run SPADE
 
 
 ``` r
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
+usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt2, discnum = 3:15,
                    discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
 usfi_spade
 ## Spatial Stratified Heterogeneity Test 
@@ -260,39 +308,39 @@ usfi_spade
 ----------------------------------
  variable   Q-statistic   P-value 
 ---------- ------------- ---------
-   DAR        0.5029       0.01   
+   NDVI       0.4655       0.01   
 
-   NDVI        0.469       0.01   
+   DAR        0.4159       0.01   
 
-   NDWI       0.4371       0.01   
+   GAR        0.3953       0.01   
 
-   GAR        0.4199       0.01   
+   RFD        0.3221       0.01   
 
-   RFD        0.3943       0.01   
+   NDWI       0.2885       0.01   
 
-   TER        0.3909       0.01   
+    BD        0.2762       0.01   
 
-    BD        0.3625       0.01   
+   DTW        0.2532       0.01   
 
-    BH        0.3207       0.01   
+   DTR        0.2465       0.01   
 
-   FAR        0.2161       0.01   
+    BH        0.2414       0.01   
 
-   DTR        0.2002       0.01   
+   DTP        0.2412       0.01   
 
-   LSI        0.1685       0.01   
+   FAR        0.2237       0.01   
 
-   DTP        0.1538       0.01   
+   TER        0.2173       0.01   
 
-    RL        0.1436       0.01   
+   LPI        0.1646       0.01   
 
-   LPI        0.1424       0.01   
+   SVF        0.1547       0.01   
 
-   DTW        0.1365       0.01   
+    RL        0.1317       0.01   
 
-   SVF        0.1268       0.01   
+   LSI        0.1312       0.01   
 
-   DTH        0.08443      0.01   
+   DTH        0.09689      0.01   
 
    WAR          NA          NA    
 ----------------------------------
@@ -307,22 +355,232 @@ usfi_spade$factor
 ## # A tibble: 18 × 3
 ##    variable `Q-statistic` `P-value`
 ##    <chr>            <dbl>     <dbl>
-##  1 DAR             0.503       0.01
-##  2 NDVI            0.469       0.01
-##  3 NDWI            0.437       0.01
-##  4 GAR             0.420       0.01
-##  5 RFD             0.394       0.01
-##  6 TER             0.391       0.01
-##  7 BD              0.362       0.01
-##  8 BH              0.321       0.01
-##  9 FAR             0.216       0.01
-## 10 DTR             0.200       0.01
-## 11 LSI             0.169       0.01
-## 12 DTP             0.154       0.01
-## 13 RL              0.144       0.01
-## 14 LPI             0.142       0.01
-## 15 DTW             0.136       0.01
-## 16 SVF             0.127       0.01
-## 17 DTH             0.0844      0.01
+##  1 NDVI            0.465       0.01
+##  2 DAR             0.416       0.01
+##  3 GAR             0.395       0.01
+##  4 RFD             0.322       0.01
+##  5 NDWI            0.288       0.01
+##  6 BD              0.276       0.01
+##  7 DTW             0.253       0.01
+##  8 DTR             0.247       0.01
+##  9 BH              0.241       0.01
+## 10 DTP             0.241       0.01
+## 11 FAR             0.224       0.01
+## 12 TER             0.217       0.01
+## 13 LPI             0.165       0.01
+## 14 SVF             0.155       0.01
+## 15 RL              0.132       0.01
+## 16 LSI             0.131       0.01
+## 17 DTH             0.0969      0.01
 ## 18 WAR           NaN          NA
 ```
+
+The result of `WAR` is `NA`,and you can see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
+
+We demonstrate the rationality of NA values calculated of `WAR` in the following section:
+
+### SPADE NA results explained
+
+
+``` r
+WAR = usfi$WAR
+skimr::skim(WAR)
+```
+
+
+Table: Data summary
+
+|                         |     |
+|:------------------------|:----|
+|Name                     |WAR  |
+|Number of rows           |1037 |
+|Number of columns        |1    |
+|_______________________  |     |
+|Column type frequency:   |     |
+|numeric                  |1    |
+|________________________ |     |
+|Group variables          |None |
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate| mean|   sd| p0| p25| p50| p75| p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|--:|---:|---:|---:|----:|:-----|
+|data          |         0|             1| 0.01| 0.04|  0|   0|   0|   0| 0.73|▇▁▁▁▁ |
+
+
+
+
+``` r
+hist(WAR)
+```
+
+<div class="figure">
+<img src="figure/skewness_WAR-1.png" alt="plot of chunk skewness_WAR" width="75%" />
+<p class="caption">plot of chunk skewness_WAR</p>
+</div>
+
+``` r
+moments::skewness(WAR)
+## [1] 11.6917
+```
+
+``` r
+shapiro.test(WAR)
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  WAR
+## W = 0.14693, p-value < 2.2e-16
+```
+From the histogram of `WAR`,its skewness and the result of shapiro.test, you will find that the WAR variable is heavily skewed, with a large number of zeros, which do not provide sufficient information for modeling SUHI.
+
+In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because provide sufficient information for modeling SUHI.
+
+In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF.Here
+we examine the effect of removing the WAR variable on VIF and linear models
+
+
+``` r
+lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(usfi))
+summary(lm.modelOne)
+## 
+## Call:
+## lm(formula = SUHI ~ ., data = st_drop_geometry(usfi))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.1991 -0.6899 -0.0366  0.6837  3.7666 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  22.156854   5.003326   4.428 1.05e-05 ***
+## LPI          -0.002280   0.002701  -0.844  0.39872    
+## LSI          -0.004190   0.023320  -0.180  0.85746    
+## GAR           6.869974   0.902865   7.609 6.27e-14 ***
+## DAR           6.746594   0.829310   8.135 1.19e-15 ***
+## WAR           5.283058   1.784052   2.961  0.00313 ** 
+## TER          -1.388985   0.670337  -2.072  0.03851 *  
+## NDVI        -15.268701   1.620501  -9.422  < 2e-16 ***
+## NDWI        -15.408610   2.127737  -7.242 8.72e-13 ***
+## DTH           0.015604   0.012255   1.273  0.20318    
+## DTP           0.091178   0.098705   0.924  0.35584    
+## DTR          -0.069387   0.064638  -1.073  0.28331    
+## DTW          -0.195546   0.067418  -2.901  0.00381 ** 
+## BH            0.197986   0.034505   5.738 1.26e-08 ***
+## BD            6.151962   2.181999   2.819  0.00490 ** 
+## RL            0.008593   0.228118   0.038  0.96996    
+## RFD           0.117208   0.741697   0.158  0.87447    
+## SVF         -22.397352   4.954590  -4.521 6.89e-06 ***
+## FAR          -1.260657   0.112759 -11.180  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.06 on 1018 degrees of freedom
+## Multiple R-squared:  0.6173,	Adjusted R-squared:  0.6106 
+## F-statistic: 91.23 on 18 and 1018 DF,  p-value: < 2.2e-16
+```
+
+``` r
+
+car::vif(lm.modelOne) |>
+  tibble::as_tibble_row() |>
+  tidyr::pivot_longer(everything(),
+                      names_to = 'variable',
+                      values_to = 'VIF')
+## # A tibble: 18 × 2
+##    variable    VIF
+##    <chr>     <dbl>
+##  1 LPI        1.68
+##  2 LSI        1.50
+##  3 GAR       31.1 
+##  4 DAR       28.5 
+##  5 WAR        5.85
+##  6 TER        1.18
+##  7 NDVI      20.5 
+##  8 NDWI      13.2 
+##  9 DTH        1.15
+## 10 DTP        2.06
+## 11 DTR        1.15
+## 12 DTW        2.00
+## 13 BH        31.9 
+## 14 BD       105.  
+## 15 RL         2.96
+## 16 RFD       89.4 
+## 17 SVF        3.02
+## 18 FAR       31.3
+```
+
+
+``` r
+lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(usfi) |> select(-WAR))
+summary(lm.modelTwo)
+## 
+## Call:
+## lm(formula = SUHI ~ ., data = select(st_drop_geometry(usfi), 
+##     -WAR))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.1752 -0.7118 -0.0227  0.6896  3.6784 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  21.011090   5.007323   4.196 2.95e-05 ***
+## LPI          -0.000917   0.002671  -0.343 0.731475    
+## LSI          -0.002172   0.023399  -0.093 0.926046    
+## GAR           5.283103   0.729402   7.243 8.64e-13 ***
+## DAR           5.300795   0.672909   7.877 8.53e-15 ***
+## TER          -1.174510   0.668949  -1.756 0.079431 .  
+## NDVI        -13.026040   1.438097  -9.058  < 2e-16 ***
+## NDWI        -10.693806   1.416860  -7.548 9.82e-14 ***
+## DTH           0.011362   0.012217   0.930 0.352593    
+## DTP           0.115158   0.098747   1.166 0.243809    
+## DTR          -0.058443   0.064778  -0.902 0.367161    
+## DTW          -0.226617   0.066850  -3.390 0.000726 ***
+## BH            0.192503   0.034587   5.566 3.34e-08 ***
+## BD            5.951972   2.189252   2.719 0.006665 ** 
+## RL            0.061282   0.228288   0.268 0.788413    
+## RFD           0.100502   0.744497   0.135 0.892644    
+## SVF         -19.414910   4.869603  -3.987 7.17e-05 ***
+## FAR          -1.227348   0.112624 -10.898  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.064 on 1019 degrees of freedom
+## Multiple R-squared:  0.614,	Adjusted R-squared:  0.6076 
+## F-statistic: 95.36 on 17 and 1019 DF,  p-value: < 2.2e-16
+```
+
+``` r
+
+car::vif(lm.modelTwo) |>
+  tibble::as_tibble_row() |>
+  tidyr::pivot_longer(everything(),
+                      names_to = 'variable',
+                      values_to = 'VIF')
+## # A tibble: 17 × 2
+##    variable    VIF
+##    <chr>     <dbl>
+##  1 LPI        1.63
+##  2 LSI        1.50
+##  3 GAR       20.2 
+##  4 DAR       18.6 
+##  5 TER        1.16
+##  6 NDVI      16.0 
+##  7 NDWI       5.83
+##  8 DTH        1.13
+##  9 DTP        2.05
+## 10 DTR        1.15
+## 11 DTW        1.96
+## 12 BH        31.8 
+## 13 BD       104.  
+## 14 RL         2.94
+## 15 RFD       89.4 
+## 16 SVF        2.90
+## 17 FAR       31.0
+```
+
+You can see that the model does not change much before and after removing the WAR variable.In other words, WAR does not do much to model SUHI.
+
+This suggests another use of `SPADE` for selection modeling variables
