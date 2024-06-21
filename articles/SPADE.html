@@ -697,11 +697,11 @@ with a large number of zeros, which do not provide sufficient
 information for modeling SUHI.</p>
 <p>In fact, the WAR variable represents the proportion of the water area
 of each block, and the WAR value is NA in the SPADE result probably
-because provide sufficient information for modeling SUHI.</p>
+because it can’t provide sufficient information for modeling SUHI.</p>
 <p>In most cases, we use linear regression to explore linear
 relationships between variables and select appropriate variables for
 subsequent modeling through methods such as VIF.Here we examine the
-effect of removing the WAR variable on VIF and linear models</p>
+effect of removing the WAR variable on VIF and linear models:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm.modelOne</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span></span>
@@ -836,8 +836,8 @@ effect of removing the WAR variable on VIF and linear models</p>
 <p>You can see that the model does not change much before and after
 removing the WAR variable.In other words, WAR does not do much to model
 SUHI.</p>
-<p>This suggests another use of <code>SPADE</code> for selection
-modeling variables</p>
+<p>This suggests another use of <code>SPADE</code> for selecting
+modeling variables.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
