@@ -129,7 +129,7 @@ When response variable has a strong spatial dependence, maybe *SPADE* is a best 
 
 The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
-In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight**, which can be created by `inverse_distance_weight()`.
+In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by  default, which can be created by `inverse_distance_weight()`.
 
 ```{r}
 coords = usfi |>
@@ -139,7 +139,7 @@ coords = usfi |>
 wt1 = inverse_distance_weight(coords[,1],coords[,2])
 ```
 
-You can also use gravity weight by assigning `power` parameter in `inverse_distance_weight()` function.
+You can also use gravity weight by assigning the `power` parameter in `inverse_distance_weight()` function.
 
 ```{r}
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
@@ -176,11 +176,13 @@ identical(wt3,wt4)
 
 In the following section we will execute *SPADE* model using  spatial weight matrix `wt3` which is constructed by queen contiguity.
 
+The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value,this calculations are very time-consuming.In most cases we set the `permutations` parameter to 0 and do not calculate the pseudo-p value.The same approach is taken here.
+
 #### run SPADE
 
 ```{r}
 usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
-                   discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+                   discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6, permutations = 0)
 usfi_spade
 ```
 

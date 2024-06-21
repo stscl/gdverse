@@ -25,20 +25,21 @@ usfi
 ## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669
 ## Projected CRS: WGS 84 / UTM zone 49N
 ## # A tibble: 1,037 × 20
-##      LPI   LSI   GAR    DAR      WAR   TER  NDVI   NDWI   DTH   DTP    DTR   DTW    BH    BD
-##    <dbl> <dbl> <dbl>  <dbl>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl> <dbl>
-##  1  57.2 10.5  0.630 0.273  0.00219  0.979 0.497 -0.356  5.66 1.08  0.934   1.16 3.16  0.635
-##  2  85.7  2.35 0.905 0.0952 0        0.977 0.514 -0.288  5.66 1.41  0.0807  1.57 0.310 0.139
-##  3  41.2  7.85 0.436 0.449  0.000672 0.972 0.365 -0.296  4.38 1.88  0.516   2.37 3.99  0.671
-##  4  39.1  5.40 0.534 0.377  0        0.966 0.395 -0.299  4.25 1.97  0.442   2.81 4.63  0.634
-##  5  32.0  8.04 0.405 0.437  0        0.968 0.354 -0.302  3.65 1.34  0.615   2.55 4.07  0.642
-##  6  58.3  7.91 0.332 0.615  0.000377 0.966 0.312 -0.271  3.69 0.700 0.592   2.25 7.91  0.777
-##  7  98.4  3.34 0.984 0.0161 0        0.948 0.451 -0.248  5.39 1.36  0.124   3.64 0.216 0.111
-##  8  44.6 17.6  0.416 0.502  0.000672 0.949 0.365 -0.295  5.11 1.20  0.926   2.50 6.49  0.747
-##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692
-## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601
+##      LPI   LSI   GAR    DAR      WAR   TER  NDVI   NDWI   DTH   DTP    DTR
+##    <dbl> <dbl> <dbl>  <dbl>    <dbl> <dbl> <dbl>  <dbl> <dbl> <dbl>  <dbl>
+##  1  57.2 10.5  0.630 0.273  0.00219  0.979 0.497 -0.356  5.66 1.08  0.934 
+##  2  85.7  2.35 0.905 0.0952 0        0.977 0.514 -0.288  5.66 1.41  0.0807
+##  3  41.2  7.85 0.436 0.449  0.000672 0.972 0.365 -0.296  4.38 1.88  0.516 
+##  4  39.1  5.40 0.534 0.377  0        0.966 0.395 -0.299  4.25 1.97  0.442 
+##  5  32.0  8.04 0.405 0.437  0        0.968 0.354 -0.302  3.65 1.34  0.615 
+##  6  58.3  7.91 0.332 0.615  0.000377 0.966 0.312 -0.271  3.69 0.700 0.592 
+##  7  98.4  3.34 0.984 0.0161 0        0.948 0.451 -0.248  5.39 1.36  0.124 
+##  8  44.6 17.6  0.416 0.502  0.000672 0.949 0.365 -0.295  5.11 1.20  0.926 
+##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03  
+## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658 
 ## # ℹ 1,027 more rows
-## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>, geom <POLYGON [m]>
+## # ℹ 9 more variables: DTW <dbl>, BH <dbl>, BD <dbl>, RL <dbl>, RFD <dbl>,
+## #   SVF <dbl>, FAR <dbl>, SUHI <dbl>, geom <POLYGON [m]>
 ```
 
 <div class="figure" style="text-align: center">
@@ -52,7 +53,7 @@ The polygon spatial data are the streets divided based on roads within *the Ring
 
 #### global spatial autocorrelation of SUHI
 
-here I use `sfdep` to calculate the global **Moran's I**
+here I use `sfdep` to calculate the global **Moran's I**:
 
 
 ``` r
@@ -83,18 +84,18 @@ new_usfi
 ## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669
 ## Projected CRS: WGS 84 / UTM zone 49N
 ## # A tibble: 1,037 × 4
-##     SUHI nb         wt                                                                      geom
-##    <dbl> <nb>       <list>                                                         <POLYGON [m]>
-##  1 1.76  <int [12]> <dbl [12]> ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 297840.8…
-##  2 0.519 <int [2]>  <dbl [2]>  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 297393.2…
-##  3 3.04  <int [9]>  <dbl [9]>  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.1 3…
-##  4 3.22  <int [4]>  <dbl [4]>  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.6 3…
-##  5 3.47  <int [6]>  <dbl [6]>  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 296788.8…
-##  6 4.71  <int [6]>  <dbl [6]>  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 296467.9…
-##  7 1.24  <int [2]>  <dbl [2]>  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 296347.5…
-##  8 4.30  <int [8]>  <dbl [8]>  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 296144.9…
-##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.8…
-## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.5…
+##     SUHI nb         wt                                                   geom
+##    <dbl> <nb>       <list>                                      <POLYGON [m]>
+##  1 1.76  <int [12]> <dbl [12]> ((297871.4 3787333, 297864.8 3787343, 297852.…
+##  2 0.519 <int [2]>  <dbl [2]>  ((297398.6 3788768, 297397.5 3788779, 297395.…
+##  3 3.04  <int [9]>  <dbl [9]>  ((297391.4 3789405, 297391 3789429, 297390.5 …
+##  4 3.22  <int [4]>  <dbl [4]>  ((297244.1 3790712, 297240.4 3790729, 297235 …
+##  5 3.47  <int [6]>  <dbl [6]>  ((296806.9 3791969, 296806.7 3791970, 296797.…
+##  6 4.71  <int [6]>  <dbl [6]>  ((296484.5 3792805, 296481.4 3792815, 296474.…
+##  7 1.24  <int [2]>  <dbl [2]>  ((296356.5 3793294, 296355.5 3793298, 296351.…
+##  8 4.30  <int [8]>  <dbl [8]>  ((296154.6 3794673, 296152.3 3794688, 296148.…
+##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.…
+## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.…
 ## # ℹ 1,027 more rows
 ```
 
@@ -115,7 +116,6 @@ The global Moran's Index is 0.5359564 and the P value is 5.0780594 &times; 10<su
 
 We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
 
-
 ``` r
 library(tidyrgeoda)
 
@@ -133,13 +133,13 @@ new_usfi %>%
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    legend.title = element_text(size = 5),
-    legend.text = element_text(size = 5),
-    legend.key.size = unit(.3, 'cm')
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
+    legend.key.size = unit(.5, 'cm')
   )
 ```
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="../man/figures/spade_SUHI_LISA.png" alt="LISA Of SUHI in Xi'an Main City" width="100%" />
 <p class="caption">LISA Of SUHI in Xi'an Main City</p>
 </div>
@@ -203,7 +203,7 @@ usfi_opgd
 
 
 
-**You can access the detailed q statistics by `usfi_opgd$factor`**
+**You can access the detailed q statistics by `usfi_opgd$factor`.**
 
 
 ``` r
@@ -239,7 +239,7 @@ When response variable has a strong spatial dependence, maybe *SPADE* is a best 
 
 The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
-In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight**, which can be created by `inverse_distance_weight()`.
+In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by  default, which can be created by `inverse_distance_weight()`.
 
 
 ``` r
@@ -250,7 +250,7 @@ coords = usfi |>
 wt1 = inverse_distance_weight(coords[,1],coords[,2])
 ```
 
-You can also use gravity weight by assigning `power` parameter in `inverse_distance_weight()` function.
+You can also use gravity weight by assigning the `power` parameter in `inverse_distance_weight()` function.
 
 
 ``` r
@@ -292,12 +292,14 @@ identical(wt3,wt4)
 
 In the following section we will execute *SPADE* model using  spatial weight matrix `wt3` which is constructed by queen contiguity.
 
+The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value,this calculations are very time-consuming.In most cases we set the `permutations` parameter to 0 and do not calculate the pseudo-p value.The same approach is taken here.
+
 #### run SPADE
 
 
 ``` r
 usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
-                   discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+                   discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6, permutations = 0)
 usfi_spade
 ## Spatial Stratified Heterogeneity Test 
 ##  
@@ -305,45 +307,45 @@ usfi_spade
 ```
 
 
-----------------------------------
- variable   Q-statistic   P-value 
----------- ------------- ---------
-   NDVI       0.4655       0.01   
+--------------------------------------------
+ variable   Q-statistic        P-value      
+---------- ------------- -------------------
+   DAR        0.5029      No Pseudo-P Value 
 
-   DAR        0.4159       0.01   
+   NDVI        0.469      No Pseudo-P Value 
 
-   GAR        0.3953       0.01   
+   NDWI       0.4371      No Pseudo-P Value 
 
-   RFD        0.3221       0.01   
+   GAR        0.4199      No Pseudo-P Value 
 
-   NDWI       0.2885       0.01   
+   RFD        0.3943      No Pseudo-P Value 
 
-    BD        0.2762       0.01   
+   TER        0.3909      No Pseudo-P Value 
 
-   DTW        0.2532       0.01   
+    BD        0.3625      No Pseudo-P Value 
 
-   DTR        0.2465       0.01   
+    BH        0.3207      No Pseudo-P Value 
 
-    BH        0.2414       0.01   
+   FAR        0.2161      No Pseudo-P Value 
 
-   DTP        0.2412       0.01   
+   DTR        0.2002      No Pseudo-P Value 
 
-   FAR        0.2237       0.01   
+   LSI        0.1685      No Pseudo-P Value 
 
-   TER        0.2173       0.01   
+   DTP        0.1538      No Pseudo-P Value 
 
-   LPI        0.1646       0.01   
+    RL        0.1436      No Pseudo-P Value 
 
-   SVF        0.1547       0.01   
+   LPI        0.1424      No Pseudo-P Value 
 
-    RL        0.1317       0.01   
+   DTW        0.1365      No Pseudo-P Value 
 
-   LSI        0.1312       0.01   
+   SVF        0.1268      No Pseudo-P Value 
 
-   DTH        0.09689      0.01   
+   DTH        0.08443     No Pseudo-P Value 
 
-   WAR          NA          NA    
-----------------------------------
+   WAR          NA        No Pseudo-P Value 
+--------------------------------------------
 
 
 
@@ -353,26 +355,26 @@ usfi_spade
 ``` r
 usfi_spade$factor
 ## # A tibble: 18 × 3
-##    variable `Q-statistic` `P-value`
-##    <chr>            <dbl>     <dbl>
-##  1 NDVI            0.465       0.01
-##  2 DAR             0.416       0.01
-##  3 GAR             0.395       0.01
-##  4 RFD             0.322       0.01
-##  5 NDWI            0.288       0.01
-##  6 BD              0.276       0.01
-##  7 DTW             0.253       0.01
-##  8 DTR             0.247       0.01
-##  9 BH              0.241       0.01
-## 10 DTP             0.241       0.01
-## 11 FAR             0.224       0.01
-## 12 TER             0.217       0.01
-## 13 LPI             0.165       0.01
-## 14 SVF             0.155       0.01
-## 15 RL              0.132       0.01
-## 16 LSI             0.131       0.01
-## 17 DTH             0.0969      0.01
-## 18 WAR           NaN          NA
+##    variable `Q-statistic` `P-value`        
+##    <chr>            <dbl> <chr>            
+##  1 DAR             0.503  No Pseudo-P Value
+##  2 NDVI            0.469  No Pseudo-P Value
+##  3 NDWI            0.437  No Pseudo-P Value
+##  4 GAR             0.420  No Pseudo-P Value
+##  5 RFD             0.394  No Pseudo-P Value
+##  6 TER             0.391  No Pseudo-P Value
+##  7 BD              0.362  No Pseudo-P Value
+##  8 BH              0.321  No Pseudo-P Value
+##  9 FAR             0.216  No Pseudo-P Value
+## 10 DTR             0.200  No Pseudo-P Value
+## 11 LSI             0.169  No Pseudo-P Value
+## 12 DTP             0.154  No Pseudo-P Value
+## 13 RL              0.144  No Pseudo-P Value
+## 14 LPI             0.142  No Pseudo-P Value
+## 15 DTW             0.136  No Pseudo-P Value
+## 16 SVF             0.127  No Pseudo-P Value
+## 17 DTH             0.0844 No Pseudo-P Value
+## 18 WAR           NaN      No Pseudo-P Value
 ```
 
 The result of `WAR` is `NA`,and you can see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
@@ -410,8 +412,7 @@ Table: Data summary
 
 
 
-
-``` r
+```r
 ggplot(data = usfi) +
   geom_histogram(aes(WAR),
                color='white',
@@ -420,10 +421,11 @@ ggplot(data = usfi) +
   theme_classic()
 ```
 
-<div class="figure">
+<div class="figure" style="text-align: center">
 <img src="../man/figures/spade_WAR_Hist.png" alt="Histogram of WAR Variable" width="100%" />
 <p class="caption">Histogram of WAR Variable</p>
 </div>
+
 
 ``` r
 moments::skewness(WAR)
@@ -487,6 +489,7 @@ summary(lm.modelOne)
 ```
 
 ``` r
+
 car::vif(lm.modelOne) |>
   tibble::as_tibble_row() |>
   tidyr::pivot_longer(everything(),
@@ -557,6 +560,7 @@ summary(lm.modelTwo)
 ```
 
 ``` r
+
 car::vif(lm.modelTwo) |>
   tibble::as_tibble_row() |>
   tidyr::pivot_longer(everything(),
