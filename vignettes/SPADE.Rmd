@@ -442,10 +442,10 @@ shapiro.test(WAR)
 ```
 From the histogram of `WAR`,its skewness and the result of shapiro.test, you will find that the WAR variable is heavily skewed, with a large number of zeros, which do not provide sufficient information for modeling SUHI.
 
-In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because provide sufficient information for modeling SUHI.
+In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
 
 In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF.Here
-we examine the effect of removing the WAR variable on VIF and linear models
+we examine the effect of removing the WAR variable on VIF and linear models:
 
 
 ``` r
@@ -590,4 +590,4 @@ car::vif(lm.modelTwo) |>
 
 You can see that the model does not change much before and after removing the WAR variable.In other words, WAR does not do much to model SUHI.
 
-This suggests another use of `SPADE` for selection modeling variables
+This suggests another use of `SPADE` for selecting modeling variables.
