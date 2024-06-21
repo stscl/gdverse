@@ -64,9 +64,10 @@ usfi = usfi |>
   dplyr::bind_cols(coord) |>
   st_drop_geometry()
 tictoc::tic()
-psmd_pseudop('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
-             locations = c('X','Y'),cores = 6)
+pp = psmd_pseudop('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+                  locations = c('X','Y'),cores = 6)
 tictoc::toc()
+pp
 }
 
 }

@@ -25,8 +25,11 @@ psd_pseudop = \(y,x,wt,cores = 6,
                 seed = 123456789,
                 permutations = 99){
   set.seed(seed)
-  # permutation = stats::runif(permutations, min = 0, max = 1)
-  permutation = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+  permutation = data.frame(
+    x1 = stats::runif(permutations, min = 0, max = 1),
+    x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+  ) %>%
+    split(.,seq_len(nrow(.)))
   qs = psd_spade(y,x,wt)
 
   doclust = FALSE
@@ -41,8 +44,8 @@ psd_pseudop = \(y,x,wt,cores = 6,
   xperm = shuffle_vector(x,randomnum,seed = seed)
   yperm = shuffle_vector(y,randomnum,seed = seed)
   calcul_psd = \(p_shuffle){
-    yobs_shffule = shuffle_vector(yperm,p_shuffle,seed = seed)
-    xobs_shffule = shuffle_vector(xperm,p_shuffle,seed = seed)
+    yobs_shffule = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
+    xobs_shffule = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
     return(psd_spade(yobs_shffule,xobs_shffule,wt))
   }
 
@@ -103,16 +106,20 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #'   dplyr::bind_cols(coord) |>
 #'   st_drop_geometry()
 #' tictoc::tic()
-#' psmd_pseudop('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
-#'              locations = c('X','Y'),cores = 6)
+#' pp = psmd_pseudop('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#'                   locations = c('X','Y'),cores = 6)
 #' tictoc::toc()
+#' pp
 #' }
 #'
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
                  cores = 6,seed = 123456789,permutations = 99, ...){
   set.seed(seed)
-  # permutation = stats::runif(permutations, min = 0, max = 1)
-  permutation = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+  permutation = data.frame(
+    x1 = stats::runif(permutations, min = 0, max = 1),
+    x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+    ) %>%
+  split(.,seq_len(nrow(.)))
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
 
   doclust = FALSE
@@ -139,8 +146,8 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
   xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
   yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
   calcul_psmd = \(p_shuffle){
-    data[,xname] = shuffle_vector(xperm,p_shuffle,seed = seed)
-    data[,formula.vars[1]] = shuffle_vector(yperm,p_shuffle,seed = seed)
+    data[,xname] = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
+    data[,formula.vars[1]] = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
     return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
   }
 
