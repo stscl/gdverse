@@ -211,7 +211,7 @@ ggplot(data = usfi) +
 ```
 
 ```{r echo=FALSE, fig.align="center",fig.cap="Histogram of WAR Variable"}
-knitr::include_graphics('../man/figures/spade_SUHI_LISA.png')
+knitr::include_graphics('../man/figures/spade_WAR_Hist.png')
 ```
 
 ```{r}

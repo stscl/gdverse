@@ -421,7 +421,7 @@ ggplot(data = usfi) +
 ```
 
 <div class="figure">
-<img src="../man/figures/spade_SUHI_LISA.png" alt="Histogram of WAR Variable" width="75%" />
+<img src="../man/figures/spade_WAR_Hist.png" alt="Histogram of WAR Variable" width="100%" />
 <p class="caption">Histogram of WAR Variable</p>
 </div>
 
@@ -557,7 +557,6 @@ summary(lm.modelTwo)
 ```
 
 ``` r
-
 car::vif(lm.modelTwo) |>
   tibble::as_tibble_row() |>
   tidyr::pivot_longer(everything(),
