@@ -69,20 +69,3 @@ fvc_opgd
 g = gozh(fvc ~ ., data = fvc, cores = 6)
 g
 ```
-
-### RGD model
-
-To run `RGD`,remember to set up your python dependence, see `RGD` vignette to get more details.
-
-```{r}
-reticulate::use_condaenv('geocompy')
-tictoc::tic()
-fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 10, 
-              discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = 'factor')
-tictoc::toc()
-fvc_rgd
-```
-
-
-

@@ -57,11 +57,8 @@ gozh = \(formula,data,cores = 1,...){
     out_g = purrr::map_dfr(xname,calcul_gozh)
   }
 
-  out_t = gd_rpart(paste(yname,'~ .'),data = dti)
   out_g = out_g %>%
-    dplyr::bind_rows(out_t) %>%
-    dplyr::mutate(variable = c(xname,
-                               'Explanatory Variables Association')) %>%
+    dplyr::mutate(variable = xname) %>%
     dplyr::select(variable,dplyr::everything()) %>%
     dplyr::arrange(dplyr::desc(`Q-statistic`))
   res = list("factor" = out_g)

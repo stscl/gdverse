@@ -60,7 +60,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 2.91 sec elapsed
+## 3.33 sec elapsed
 ```
 
 ``` r
@@ -95,55 +95,17 @@ g
 ##           Factor detector
 ```
 
-|             variable              | Q-statistic |  P-value  |
-|:---------------------------------:|:-----------:|:---------:|
-| Explanatory Variables Association |   0.8052    | 7.146e-10 |
-|              presum               |   0.6372    | 9.492e-11 |
-|               lulc                |   0.6106    | 4.797e-10 |
-|              premin               |   0.4658    | 5.484e-10 |
-|              tmpmin               |   0.4112    | 2.948e-10 |
-|              tmpmax               |   0.2478    | 7.308e-10 |
-|               slope               |   0.2286    | 6.05e-10  |
-|                pop                |   0.2238    | 3.753e-10 |
-|               elev                |   0.2237    | 4.671e-10 |
-|              tmpavg               |   0.2188    | 6.543e-10 |
-|              premax               |   0.1259    | 1.436e-10 |
-|                ntl                |   0.02365   | 1.832e-10 |
-|              aspect               |   0.01413   | 8.938e-09 |
-
-### RGD model
-
-To run `RGD`,remember to set up your python dependence, see `RGD`
-vignette to get more details.
-
-``` r
-reticulate::use_condaenv('geocompy')
-tictoc::tic()
-fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 10, 
-              discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = 'factor')
-tictoc::toc()
-## 1844.56 sec elapsed
-```
-
-``` r
-fvc_rgd
-## Spatial Stratified Heterogeneity Test 
-##  
-##           Factor detector
-```
-
 | variable | Q-statistic |  P-value  |
 |:--------:|:-----------:|:---------:|
-|  presum  |   0.6678    | 4.284e-10 |
-|   lulc   |   0.6597    | 8.782e-10 |
-|  premin  |   0.4781    | 7.04e-10  |
-|  tmpmin  |    0.448    | 5.718e-10 |
-|  tmpmax  |   0.2692    | 3.296e-10 |
-|   elev   |    0.248    | 4.734e-10 |
-|  slope   |   0.2464    | 8.852e-10 |
-|   pop    |   0.2446    | 9.414e-10 |
-|  tmpavg  |   0.2405    | 5.228e-10 |
-|  premax  |   0.1572    | 5.383e-10 |
-|  aspect  |   0.02759   | 0.003456  |
-|   ntl    |   0.02334   | 4.623e-10 |
+|  presum  |   0.6372    | 9.492e-11 |
+|   lulc   |   0.6106    | 4.797e-10 |
+|  premin  |   0.4658    | 5.484e-10 |
+|  tmpmin  |   0.4112    | 2.948e-10 |
+|  tmpmax  |   0.2478    | 7.308e-10 |
+|  slope   |   0.2286    | 6.05e-10  |
+|   pop    |   0.2238    | 3.753e-10 |
+|   elev   |   0.2237    | 4.671e-10 |
+|  tmpavg  |   0.2188    | 6.543e-10 |
+|  premax  |   0.1259    | 1.436e-10 |
+|   ntl    |   0.02365   | 1.832e-10 |
+|  aspect  |   0.01413   | 8.938e-09 |
