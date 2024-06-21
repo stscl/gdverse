@@ -38,7 +38,7 @@ The polygon spatial data are the streets divided based on roads within *the Ring
 
 #### global spatial autocorrelation of SUHI
 
-here I use `sfdep` to calculate the global **Moran's I**
+here I use `sfdep` to calculate the global **Moran's I**:
 
 ```{r}
 global_moranI = \(data,col,nb,wt){
@@ -115,7 +115,7 @@ usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
 usfi_opgd
 ```
 
-**You can access the detailed q statistics by `usfi_opgd$factor`**
+**You can access the detailed q statistics by `usfi_opgd$factor`.**
 
 ```{r}
 usfi_opgd$factor

@@ -54,3 +54,22 @@ shuffle_vector = \(x,shuffle_rate,seed = 123456789){
     return(new_x)
   }
 }
+
+#' @title rescale continuous vector to specified minimum and maximum
+#'
+#' @param x A continuous numeric vector.
+#' @param to_left (optional) Specified minimum. Default is `0`.
+#' @param to_right (optional) Specified maximum. Default is `1`.
+#'
+#' @return A continuous vector which has rescaled.
+#' @export
+#'
+#' @examples
+#' rescale_vector(c(-5,1,5),0.01,0.99)
+#'
+rescale_vector = \(x,to_left = 0,to_right = 1){
+  xmin = range(x,na.rm = TRUE)[1]
+  xmax = range(x,na.rm = TRUE)[2]
+  xnew = (x - xmin) / (xmax - xmin) * (to_right - to_left) + to_left
+  return(xnew)
+}

@@ -18,14 +18,15 @@
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
 #'
 #' @return A tibble of power of spatial determinant and the corresponding pseudo-p value.
-#' @importFrom stats runif
+#' @importFrom stats rnorm runif
 #' @export
 #'
 psd_pseudop = \(y,x,wt,cores = 6,
                 seed = 123456789,
                 permutations = 99){
   set.seed(seed)
-  permutation = stats::runif(permutations, min = 0, max = 1)
+  # permutation = stats::runif(permutations, min = 0, max = 1)
+  permutation = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
   qs = psd_spade(y,x,wt)
 
   doclust = FALSE
@@ -36,7 +37,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
   }
 
   set.seed(seed)
-  randomnum = runif(1)
+  randomnum = stats::runif(1)
   xperm = shuffle_vector(x,randomnum,seed = seed)
   yperm = shuffle_vector(y,randomnum,seed = seed)
   calcul_psd = \(p_shuffle){
@@ -88,7 +89,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
-#' @importFrom stats runif
+#' @importFrom stats rnorm runif
 #' @export
 #' @examples
 #' \dontrun{
@@ -110,7 +111,8 @@ psd_pseudop = \(y,x,wt,cores = 6,
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
                  cores = 6,seed = 123456789,permutations = 99, ...){
   set.seed(seed)
-  permutation = stats::runif(permutations, min = 0, max = 1)
+  # permutation = stats::runif(permutations, min = 0, max = 1)
+  permutation = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
 
   doclust = FALSE
@@ -133,7 +135,7 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
   }
   data = as.data.frame(data)
   set.seed(seed)
-  randomnum = runif(1)
+  randomnum = stats::runif(1)
   xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
   yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
   calcul_psmd = \(p_shuffle){
