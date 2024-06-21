@@ -2,7 +2,7 @@
 % Please edit documentation in R/opgd.R
 \name{opgd}
 \alias{opgd}
-\title{optimal parameters geographical detector(OPGD) model}
+\title{optimal parameters-based geographical detector(OPGD) model}
 \usage{
 opgd(
   formula,
@@ -45,7 +45,7 @@ which is used to set the random number seed.}
 A list of the OPGD model result.
 }
 \description{
-Function for optimal parameters geographical detector(OPGD) model.
+Function for optimal parameters-based geographical detector(OPGD) model.
 }
 \examples{
 \dontrun{

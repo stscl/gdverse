@@ -1,7 +1,7 @@
-#' @title optimal parameters geographical detector(OPGD) model
+#' @title optimal parameters-based geographical detector(OPGD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for optimal parameters geographical detector(OPGD) model.
+#' Function for optimal parameters-based geographical detector(OPGD) model.
 #' @references
 #' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
