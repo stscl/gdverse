@@ -16,6 +16,7 @@
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
+#' If `permutations` is `0`, no pseudo-p values are calculated.
 #'
 #' @return A tibble of power of spatial determinant and the corresponding pseudo-p value.
 #' @importFrom stats rnorm runif
@@ -24,43 +25,47 @@
 psd_pseudop = \(y,x,wt,cores = 6,
                 seed = 123456789,
                 permutations = 99){
-  set.seed(seed)
-  permutation = data.frame(
-    x1 = stats::runif(permutations, min = 0, max = 1),
-    x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
-  ) %>%
-    split(.,seq_len(nrow(.)))
   qs = psd_spade(y,x,wt)
-
-  doclust = FALSE
-  if (cores > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add=TRUE)
-  }
-
-  set.seed(seed)
-  randomnum = stats::runif(1)
-  xperm = shuffle_vector(x,randomnum,seed = seed)
-  yperm = shuffle_vector(y,randomnum,seed = seed)
-  calcul_psd = \(p_shuffle){
-    yobs_shffule = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
-    xobs_shffule = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
-    return(psd_spade(yobs_shffule,xobs_shffule,wt))
-  }
-
-  if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar',
-                                    'psd_spade',"shuffle_vector"))
-    out_g = parallel::parLapply(cores,permutation,calcul_psd)
-    out_g = as.numeric(do.call(rbind, out_g))
+  if (permutations == 0){
+    fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
   } else {
-    out_g = purrr::map_dbl(permutation,calcul_psd)
-  }
+    set.seed(seed)
+    permutation = data.frame(
+      x1 = stats::runif(permutations, min = 0, max = 1),
+      x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+    ) %>%
+      split(.,seq_len(nrow(.)))
 
-  R = sum(out_g >= qs)
-  pp = (R + 1) / (permutations + 1)
-  fd = tibble::tibble("Q-statistic" = qs, "P-value" = pp)
+    doclust = FALSE
+    if (cores > 1) {
+      doclust = TRUE
+      cores = parallel::makeCluster(cores)
+      on.exit(parallel::stopCluster(cores), add=TRUE)
+    }
+
+    set.seed(seed)
+    randomnum = stats::runif(1)
+    xperm = shuffle_vector(x,randomnum,seed = seed)
+    yperm = shuffle_vector(y,randomnum,seed = seed)
+    calcul_psd = \(p_shuffle){
+      yobs_shffule = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
+      xobs_shffule = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
+      return(psd_spade(yobs_shffule,xobs_shffule,wt))
+    }
+
+    if (doclust) {
+      parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar',
+                                      'psd_spade',"shuffle_vector"))
+      out_g = parallel::parLapply(cores,permutation,calcul_psd)
+      out_g = as.numeric(do.call(rbind, out_g))
+    } else {
+      out_g = purrr::map_dbl(permutation,calcul_psd)
+    }
+
+    R = sum(out_g >= qs)
+    pp = (R + 1) / (permutations + 1)
+    fd = tibble::tibble("Q-statistic" = qs, "P-value" = pp)
+  }
   return(fd)
 }
 
@@ -89,6 +94,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
+#' If `permutations` is `0`, no pseudo-p values are calculated.
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
@@ -114,58 +120,59 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #'
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
                  cores = 6,seed = 123456789,permutations = 99, ...){
-  set.seed(seed)
-  permutation = data.frame(
-    x1 = stats::runif(permutations, min = 0, max = 1),
-    x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
-    ) %>%
-  split(.,seq_len(nrow(.)))
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
+  if (permutations == 0){
+    fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
+  } else {
+    set.seed(seed)
+    permutation = data.frame(
+      x1 = stats::runif(permutations, min = 0, max = 1),
+      x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+    ) %>%
+      split(.,seq_len(nrow(.)))
 
-  doclust = FALSE
-  if (cores > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add=TRUE)
-  }
-
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  if (formula.vars[2] == "."){
-    if (length(!(which(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
-      stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data` .')
-    } else {
-      xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
+    doclust = FALSE
+    if (cores > 1) {
+      doclust = TRUE
+      cores = parallel::makeCluster(cores)
+      on.exit(parallel::stopCluster(cores), add=TRUE)
     }
-  } else {
-    xname = formula.vars[2][-which(formula.vars[2] %in% c(formula.vars[1],locations))]
-  }
-  data = as.data.frame(data)
-  set.seed(seed)
-  randomnum = stats::runif(1)
-  xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
-  yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
-  calcul_psmd = \(p_shuffle){
-    data[,xname] = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
-    data[,formula.vars[1]] = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
-    return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
-  }
 
-  if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar','shuffle_vector',
-                                    'psd_spade','cpsd_spade','psmd_spade','inverse_distance_weight'))
-    out_g = parallel::parLapply(cores,permutation,calcul_psmd)
-    out_g = as.numeric(do.call(rbind, out_g))
-  } else {
-    out_g = purrr::map_dbl(permutation,calcul_psmd)
-  }
+    formula = stats::as.formula(formula)
+    formula.vars = all.vars(formula)
+    if (formula.vars[2] == "."){
+      if (length(!(which(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
+        stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data` .')
+      } else {
+        xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
+      }
+    } else {
+      xname = formula.vars[2][-which(formula.vars[2] %in% c(formula.vars[1],locations))]
+    }
+    data = as.data.frame(data)
+    set.seed(seed)
+    randomnum = stats::runif(1)
+    xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
+    yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
+    calcul_psmd = \(p_shuffle){
+      data[,xname] = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
+      data[,formula.vars[1]] = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
+      return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
+    }
 
-  R = sum(out_g >= qs)
-  pp = (R + 1) / (permutations + 1)
-  fd = tibble::tibble("Q-statistic" = qs, "P-value" = pp)
+    if (doclust) {
+      parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar','shuffle_vector',
+                                      'psd_spade','cpsd_spade','psmd_spade','inverse_distance_weight'))
+      out_g = parallel::parLapply(cores,permutation,calcul_psmd)
+      out_g = as.numeric(do.call(rbind, out_g))
+    } else {
+      out_g = purrr::map_dbl(permutation,calcul_psmd)
+    }
+
+    R = sum(out_g >= qs)
+    pp = (R + 1) / (permutations + 1)
+    fd = tibble::tibble("Q-statistic" = qs, "P-value" = pp)
+  }
   return(fd)
 }
-
-
-
 

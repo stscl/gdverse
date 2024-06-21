@@ -21,6 +21,7 @@
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
+#' If `permutations` is `0`, no pseudo-p values are calculated.
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A list of the SPADE model result.
@@ -47,7 +48,7 @@
 #'       discmethod = c('sd','equal'),cores = 6)
 #' }
 spade = \(formula,data,wt = NULL,locations = NULL,discvar = NULL,discnum = NULL,
-          discmethod = NULL,cores = 6,seed = 123456789,permutations = 99,...){
+          discmethod = NULL,cores = 6, seed = 123456789, permutations = 99, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (formula.vars[2] != "."){
