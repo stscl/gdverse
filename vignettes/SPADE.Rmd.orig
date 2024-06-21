@@ -76,7 +76,7 @@ The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`,which shows
 
 We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
 
-```{r SUHI_LISA,fig.width=7.5,fig.height=4}
+``` r
 library(tidyrgeoda)
 
 new_usfi %>%
@@ -93,10 +93,14 @@ new_usfi %>%
     axis.ticks = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-    legend.title = element_text(size = 5),
-    legend.text = element_text(size = 5),
-    legend.key.size = unit(.3, 'cm')
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
+    legend.key.size = unit(.5, 'cm')
   )
+```
+
+```{r echo=FALSE, fig.align="center",fig.cap="LISA Of SUHI in Xi'an Main City"}
+knitr::include_graphics('../man/figures/spade_SUHI_LISA.png')
 ```
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
@@ -170,12 +174,12 @@ identical(wt3,wt4)
 
 **We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this.In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area! **
 
-In the following section we will execute *SPADE* model using  spatial weight matrix `wt2`.
+In the following section we will execute *SPADE* model using  spatial weight matrix `wt3` which is constructed by queen contiguity.
 
 #### run SPADE
 
 ```{r}
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt2, discnum = 3:15,
+usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
                    discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
 usfi_spade
 ```
@@ -197,8 +201,20 @@ WAR = usfi$WAR
 skimr::skim(WAR)
 ```
 
-```{r skewness_WAR,fig.width=7.5,fig.height=7.5}
-hist(WAR)
+```r
+ggplot(data = usfi) +
+  geom_histogram(aes(WAR),
+               color='white',
+               fill='gray60') +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+```
+
+```{r echo=FALSE, fig.align="center",fig.cap="Histogram of WAR Variable"}
+knitr::include_graphics('../man/figures/spade_SUHI_LISA.png')
+```
+
+```{r}
 moments::skewness(WAR)
 shapiro.test(WAR)
 ```

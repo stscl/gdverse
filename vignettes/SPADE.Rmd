@@ -140,8 +140,8 @@ new_usfi %>%
 ```
 
 <div class="figure">
-<img src="figure/SUHI_LISA-1.png" alt="plot of chunk SUHI_LISA" width="100%" />
-<p class="caption">plot of chunk SUHI_LISA</p>
+<img src="../man/figures/spade_SUHI_LISA.png" alt="LISA Of SUHI in Xi'an Main City" width="100%" />
+<p class="caption">LISA Of SUHI in Xi'an Main City</p>
 </div>
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
@@ -290,13 +290,13 @@ identical(wt3,wt4)
 
 **We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this.In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area! **
 
-In the following section we will execute *SPADE* model using  spatial weight matrix `wt2`.
+In the following section we will execute *SPADE* model using  spatial weight matrix `wt3` which is constructed by queen contiguity.
 
 #### run SPADE
 
 
 ``` r
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt2, discnum = 3:15,
+usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
                    discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
 usfi_spade
 ## Spatial Stratified Heterogeneity Test 
@@ -412,12 +412,17 @@ Table: Data summary
 
 
 ``` r
-hist(WAR)
+ggplot(data = usfi) +
+  geom_histogram(aes(WAR),
+               color='white',
+               fill='gray60') +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
 ```
 
 <div class="figure">
-<img src="figure/skewness_WAR-1.png" alt="plot of chunk skewness_WAR" width="75%" />
-<p class="caption">plot of chunk skewness_WAR</p>
+<img src="../man/figures/spade_SUHI_LISA.png" alt="Histogram of WAR Variable" width="75%" />
+<p class="caption">Histogram of WAR Variable</p>
 </div>
 
 ``` r
@@ -482,7 +487,6 @@ summary(lm.modelOne)
 ```
 
 ``` r
-
 car::vif(lm.modelOne) |>
   tibble::as_tibble_row() |>
   tidyr::pivot_longer(everything(),

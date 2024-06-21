@@ -40,8 +40,9 @@ psd_pseudop = \(y,x,wt,cores = 6,
   xperm = shuffle_vector(x,randomnum,seed = seed)
   yperm = shuffle_vector(y,randomnum,seed = seed)
   calcul_psd = \(p_shuffle){
+    yobs_shffule = shuffle_vector(yperm,p_shuffle,seed = seed)
     xobs_shffule = shuffle_vector(xperm,p_shuffle,seed = seed)
-    return(psd_spade(yperm,xobs_shffule,wt))
+    return(psd_spade(yobs_shffule,xobs_shffule,wt))
   }
 
   if (doclust) {
@@ -135,10 +136,9 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
   randomnum = runif(1)
   xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
   yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
-  data[,formula.vars[1]] = yperm
   calcul_psmd = \(p_shuffle){
-    xobs_shffule = shuffle_vector(xperm,p_shuffle,seed = seed)
-    data[,xname] = xobs_shffule
+    data[,xname] = shuffle_vector(xperm,p_shuffle,seed = seed)
+    data[,formula.vars[1]] = shuffle_vector(yperm,p_shuffle,seed = seed)
     return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
   }
 
