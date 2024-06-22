@@ -28,11 +28,10 @@ A list of the GOZH model result.
 Function for geographically optimal zones-based heterogeneity(GOZH) model
 }
 \examples{
-\dontrun{
 data('ndvi')
 g = gozh(NDVIchange ~ ., data = ndvi)
 g
-}
+
 }
 \references{
 Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of

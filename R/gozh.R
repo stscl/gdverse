@@ -22,11 +22,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('ndvi')
 #' g = gozh(NDVIchange ~ ., data = ndvi)
 #' g
-#' }
+#'
 gozh = \(formula, data, cores = 1,
          type = 'factor',alpha = 0.95,...){
   if (length(type) == 1){
