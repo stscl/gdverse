@@ -46,6 +46,9 @@
     <loc>https://spatlyu.github.io/gdverse/reference/gd_sesu.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/generate_subsets.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/gozh.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/inverse_distance_weight.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/ndvi.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/opgd.html</loc>
@@ -107,6 +113,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/spade.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/spd_lesh.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/spvar.html</loc>
