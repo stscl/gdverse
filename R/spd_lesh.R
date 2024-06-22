@@ -4,7 +4,10 @@
 #' Function for calculate SHAP power of determinants \eqn{SPD}.
 #' @details
 #' The power of SHAP power of determinants formula is
-#' \eqn{\theta_{x_j} \left( S \right) = \sum\limits_{s \in M \setminus \{x_j\}} \frac{|S|! \left(|M| - |S| - 1\right)!}{|M|!}\left(v \left(S \cup \left\{x_j\right\} \right) - v\left(S\right)\right)}
+#'
+#' \eqn{\theta_{x_j} \left( S \right) = \sum\limits_{s \in M \setminus \{x_j\}} \frac{|S|! \left(|M| - |S| - 1\right)!}{|M|!}\left(v \left(S \cup \left\{x_j\right\} \right) - v\left(S\right)\right)}.
+#'
+#' SHAP power of determinants (SPD) is the contribution of variable \eqn{x_j} to the power of determinants.
 #'
 #' @references
 #' Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., & Hou, Z. (2023). A locally explained heterogeneity model for
