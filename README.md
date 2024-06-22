@@ -60,7 +60,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.33 sec elapsed
+## 3.25 sec elapsed
 ```
 
 ``` r
@@ -88,7 +88,7 @@ fvc_opgd
 ### GOZH model
 
 ``` r
-g = gozh(fvc ~ ., data = fvc, cores = 6)
+g = gozh(fvc ~ ., data = fvc, cores = 6, type = 'factor')
 g
 ## Spatial Stratified Heterogeneity Test 
 ##  

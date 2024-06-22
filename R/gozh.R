@@ -55,8 +55,9 @@ gozh = \(formula,data,cores = 1,
   if (doclust) {
     parallel::clusterExport(cores,c('rpart_disc'))
     out_g = parallel::parLapply(cores,xname,calcul_rpartdisc)
-    out_g = tibble::as_tibble(do.call(cbind, out_g))%>%
-      purrr::set_names(xname)
+    out_g = do.call(cbind, out_g)
+    colnames(out_g) = xname
+    out_g = tibble::as_tibble(out_g)
   } else {
     out_g = purrr::map_dfc(xname,calcul_rpartdisc)%>%
       purrr::set_names(xname)

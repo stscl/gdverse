@@ -66,6 +66,6 @@ fvc_opgd
 ### GOZH model
 
 ```{r}
-g = gozh(fvc ~ ., data = fvc, cores = 6)
+g = gozh(fvc ~ ., data = fvc, cores = 6, type = 'factor')
 g
 ```
