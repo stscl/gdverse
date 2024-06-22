@@ -10,7 +10,7 @@
 #'
 #' @return A ggplot2 layer using `ggpubr::ggdotchart()`
 #' @importFrom ggplot2 ggplot geom_bar geom_text scale_y_continuous coord_flip theme_minimal scale_alpha_manual theme labs
-#' @importFrom dplyr slice_head
+#' @importFrom dplyr slice
 #' @export
 #'
 plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
