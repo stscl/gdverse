@@ -12,9 +12,11 @@
 #' @param formula A formula of GOZH model.
 #' @param data A data.frame or tibble of observation data.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster
-#' object.
-#' @param ... (optional) Other arguments passed to `rpart::rpart()`.
+#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param type (optional) The type of geographical detector,which must be `factor`(default),
+#' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
+#' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
+#' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A list of the GOZH model result.
 #' @export
@@ -25,7 +27,8 @@
 #' g = gozh(NDVIchange ~ ., data = ndvi)
 #' g
 #' }
-gozh = \(formula,data,cores = 1,...){
+gozh = \(formula,data,cores = 1,
+         type = 'factor',alpha = 0.95,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE
@@ -45,55 +48,32 @@ gozh = \(formula,data,cores = 1,...){
   }
   xname = colnames(dti)[-which(colnames(dti) == yname)]
 
-  calcul_gozh = \(xvar){
-    gd_rpart(paste(yname,'~',xvar),data = dti)
+  calcul_rpartdisc = \(xvar){
+    rpart_disc(paste(yname,'~',xvar),data = dti,...)
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('gd_rpart','factor_detector'))
-    out_g = parallel::parLapply(cores,xname,calcul_gozh)
-    out_g = tibble::as_tibble(do.call(rbind, out_g))
+    parallel::clusterExport(cores,c('rpart_disc'))
+    out_g = parallel::parLapply(cores,xname,calcul_rpartdisc)
+    out_g = tibble::as_tibble(do.call(cbind, out_g))%>%
+      purrr::set_names(xname)
   } else {
-    out_g = purrr::map_dfr(xname,calcul_gozh)
+    out_g = purrr::map_dfc(xname,calcul_rpartdisc)%>%
+      purrr::set_names(xname)
   }
-
-  out_g = out_g %>%
-    dplyr::mutate(variable = xname) %>%
-    dplyr::select(variable,dplyr::everything()) %>%
-    dplyr::arrange(dplyr::desc(`Q-statistic`))
-  res = list("factor" = out_g)
-  class(res) = "factor_detector"
+  newdata = dti %>%
+    dplyr::select(dplyr::all_of(yname)) %>%
+    dplyr::bind_cols(out_g)
+  if (length(type) == 1){
+    res = gd(paste0(yname,' ~ .'),data = newdata,type = type,alpha = alpha)
+  } else {
+    res = vector("list", length(type))
+    for (i in seq_along(type)){
+      res[[i]] = gd(paste0(yname,' ~ .'),data = newdata,
+                    type = type[i],alpha = alpha)
+    }
+  }
   return(res)
 }
 
-#' @title q-statistics of geographical detector based on recursive partitioning
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @references
-#' Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
-#' spatio-temporal disparities in soil moisture of the Northern Hemisphere using a geographically optimal
-#' zones-based heterogeneity model. ISPRS Journal of Photogrammetry and Remote Sensing: Official
-#' Publication of the International Society for Photogrammetry and Remote Sensing (ISPRS), 185, 111–128.
-#' https://doi.org/10.1016/j.isprsjprs.2022.01.009
-#'
-#' @param formula A formula.
-#' @param data A data.frame or tibble of observation data.
-#' @param ... (optional) Other arguments passed to `rpart::rpart()`.
-#'
-#' @importFrom rpart rpart
-#' @importFrom tibble as_tibble_row
-#' @return A tibble contains the Q-statistic and the p-value.
-#' @export
-gd_rpart = \(formula,data,...){
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  if (formula.vars[2] != "."){
-    dti = dplyr::select(data,dplyr::all_of(formula.vars))
-  } else {
-    dti = data
-  }
-  dti_tree = rpart::rpart(formula, data = dti, ...)
-  g = data[, formula.vars[1], drop = TRUE] %>%
-    factor_detector(as.character(as.numeric(dti_tree$where))) %>%
-    tibble::as_tibble_row()
-  return(g)
-}
+

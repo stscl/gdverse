@@ -4,7 +4,7 @@
 \alias{gozh}
 \title{geographically optimal zones-based heterogeneity(GOZH) model}
 \usage{
-gozh(formula, data, cores = 1, ...)
+gozh(formula, data, cores = 1, type = "factor", alpha = 0.95, ...)
 }
 \arguments{
 \item{formula}{A formula of GOZH model.}
@@ -12,10 +12,14 @@ gozh(formula, data, cores = 1, ...)
 \item{data}{A data.frame or tibble of observation data.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.}
+cluster with that many cores is created and used. You can also supply a cluster object.}
 
-\item{...}{(optional) Other arguments passed to \code{rpart::rpart()}.}
+\item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
+\code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
+
+\item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
+
+\item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
 A list of the GOZH model result.

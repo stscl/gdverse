@@ -33,7 +33,7 @@ Default all \code{discvar} use \code{10}.}
 parallel computation.}
 
 \item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
-\code{interaction}, \code{risk}, \code{ecological}.You can run one or more at a time.}
+\code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
 
 \item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
 

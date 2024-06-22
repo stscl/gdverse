@@ -17,7 +17,7 @@
 #' @param ... (optional) Other arguments passed to `classInt::classify_intervals()`,
 #' see `?classInt::classify_intervals()`.
 #'
-#' @return A discrete vectors after being classified.
+#' @return A discrete vectors after being discretized.
 #' @importFrom classInt classify_intervals
 #' @export
 #'

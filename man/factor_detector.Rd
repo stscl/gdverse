@@ -12,7 +12,7 @@ factor_detector(y, x)
 \item{x}{Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.}
 }
 \value{
-A list contains the Q-statistic and the p-value.
+A list contains the Q-statistic and the P-value.
 }
 \description{
 The factor detector q-statistic measures the spatial stratified heterogeneity of a variable Y,

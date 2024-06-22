@@ -7,7 +7,7 @@
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
-#' @return A list contains the Q-statistic and the p-value.
+#' @return A list contains the Q-statistic and the P-value.
 #' @importFrom stats var pf
 #' @importFrom tibble tibble
 #' @importFrom dplyr group_by n filter ungroup mutate
@@ -137,7 +137,7 @@ risk_detector = \(y,x,alpha = 0.95){
 #' @param x2 Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #'
-#' @return A list contains \code{F} statistics, p-values, and is there a significant difference between the
+#' @return A list contains \code{F} statistics, P-values, and is there a significant difference between the
 #' two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}
 #' @importFrom stats pf
 #'

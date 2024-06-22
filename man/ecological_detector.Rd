@@ -16,7 +16,7 @@ ecological_detector(y, x1, x2, alpha = 0.95)
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
 }
 \value{
-A list contains \code{F} statistics, p-values, and is there a significant difference between the
+A list contains \code{F} statistics, P-values, and is there a significant difference between the
 two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}
 }
 \description{

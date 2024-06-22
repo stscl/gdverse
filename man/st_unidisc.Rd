@@ -27,7 +27,7 @@ by sampling \verb{10\%}(the default value for \code{samp_prop}).}
 see \code{?classInt::classify_intervals()}.}
 }
 \value{
-A discrete vectors after being classified.
+A discrete vectors after being discretized.
 }
 \description{
 Function to classify univariate vector to interval,a wrapper of \code{classInt::classify_intervals()}.
