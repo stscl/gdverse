@@ -4,12 +4,12 @@
 #' S3 method to plot output for factor detector in `gd()`.
 #'
 #' @param x Return by `gd()`.
-#' @param alpha (optional) Confidence level of the interval,default is `0.95`.
-#' @param ... (optional) Other arguments passed to `ggpubr::ggdotchart()`.
+#' @param alpha (optional) Confidence level.Default is `0.95`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer using `ggpubr::ggdotchart()`
-#' @importFrom ggpubr ggdotchart
-#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 ggplot geom_bar geom_text scale_y_continuous coord_flip theme_minimal theme labs
+#' @importFrom stats quantile
 #' @export
 #'
 plot.factor_detector = \(x, alpha = 0.05, ...) {
@@ -19,29 +19,22 @@ plot.factor_detector = \(x, alpha = 0.05, ...) {
                                                 'Significant',
                                                 'Not Significant',
                                                 NA))
-
-  if (any(is.na(g$significance))){
-    fig_factor = ggpubr::ggdotchart(data = g, x = "variable", y = 'qv',
-                                    xlab = '', ylab = 'Q statistic',
-                                    sorting = "descending", add = "segments",
-                                    rotate = TRUE, dot.size = 10, color = '#00afbb',
-                                    label = round(g[,2,drop = TRUE],3),shape = 19,
-                                    font.label = list(color = "white", size = 8,vjust = 0.5),
-                                    ggtheme = ggpubr::theme_pubr(), ...)
-  } else {
-    fig_factor = ggpubr::ggdotchart(data = g, x = "variable", y = 'qv',
-                                    xlab = '', ylab = 'Q statistic',
-                                    sorting = "descending", add = "segments",
-                                    rotate = TRUE, dot.size = 10, color = "significance",
-                                    group = "significance",palette = c('#56B4E9','#999999'),
-                                    label = round(g[,2,drop = TRUE],3), shape = 19,
-                                    font.label = list(color = "white", size = 8,vjust = 0.5),
-                                    ggtheme = ggpubr::theme_pubr(), ...) +
-      ggplot2::theme(
-        legend.position = 'inside',
-        legend.justification.inside = c('right','bottom')
-      )
-  }
+  qvl = stats::quantile(g$qv,0.75)
+  fig_factor = ggplot2::ggplot(g, aes(x = stats::reorder(variable,qv), y = qv)) +
+    ggplot2::geom_bar(stat = "identity",fill = "#bebebe") +
+    ggplot2::geom_bar(data = dplyr::slice(g,1),stat = "identity",fill = "#ff0000") +
+    ggplot2::geom_text(data = dplyr::filter(g,qv>=qvl),
+                       aes(label = round(qv,4)), hjust = 1.25, color = "black") +
+    ggplot2::geom_text(data = dplyr::filter(g,qv<qvl),
+                       aes(label = round(qv,4)), hjust = -0.1, color = "black") +
+    ggplot2::scale_y_continuous(limits = c(0,round(max(g$qv) + 0.04,1)),
+                                breaks = seq(0,round(max(g$qv) + 0.04,1),by = 0.1),
+                                expand = c(0,0)) +
+    ggplot2::coord_flip() +
+    ggplot2::theme_minimal() +
+    ggplot2::labs(x = "", y = "Q statistic") +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,hjust = 1,color = 'black'),
+                   axis.text.y = ggplot2::element_text(color = 'black'),...)
   return(fig_factor)
 }
 

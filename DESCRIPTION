@@ -14,7 +14,6 @@ Imports:
     dplyr,
     geosphere,
     ggplot2,
-    ggpubr,
     knitr,
     magrittr,
     pander,
