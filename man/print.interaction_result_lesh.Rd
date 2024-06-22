@@ -15,7 +15,7 @@
 Formatted string output
 }
 \description{
-S3 method to format output for interaction_result in \code{lesh()}.
+S3 method to format output for LESH model interaction result in \code{lesh()}.
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}

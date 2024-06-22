@@ -44,7 +44,7 @@ lesh = \(formula,data,cores = 1,...){
 #' @title print LESH model interaction result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for interaction_result in `lesh()`.
+#' S3 method to format output for LESH model interaction result in `lesh()`.
 #'
 #' @param x Return by `lesh()`.
 #' @param ... Other arguments.
