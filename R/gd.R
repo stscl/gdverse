@@ -48,7 +48,7 @@
 #'
 gd = \(formula,data,type = "factor",...){
   if (!(type %in% c("factor","interaction","risk", "ecological"))){
-    stop("`type` must be one of `factor`,`interaction`,`risk` and  `ecological` !")
+    stop("`type` must be one of `factor`,`interaction`,`risk` and `ecological`!")
   }
 
   formula = stats::as.formula(formula)

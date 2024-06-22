@@ -28,10 +28,6 @@
 #'
 gozh = \(formula, data, cores = 1,
          type = "factor",alpha = 0.95,...){
-  if (!(type %in% c("factor","interaction","risk", "ecological"))){
-    stop("`type` must be one or more of `factor`,`interaction`,`risk` and  `ecological` !")
-  }
-
   if (length(type) == 1){
     res = gozh_detector(formula, data, cores, type, alpha, ...)
   } else {
@@ -76,6 +72,10 @@ gozh = \(formula, data, cores = 1,
 #' }
 gozh_detector = \(formula, data, cores = 1,
                   type = "factor",alpha = 0.95,...){
+  if (!(type %in% c("factor","interaction","risk", "ecological"))){
+    stop("`type` must be one of `factor`,`interaction`,`risk` and `ecological`!")
+  }
+
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE

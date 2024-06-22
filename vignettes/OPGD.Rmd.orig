@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "##",
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  fig.path = "../man/figures/opgd-"
 )
 ```
 
@@ -81,4 +82,14 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
 str(fvc_opgd)
 fvc_opgd[[1]]
 fvc_opgd[[2]]
+```
+
+You can use `plot()` to visualize the result.
+
+```{r plot_fd,fig.width=5,fig.height=3.5}
+plot(fvc_opgd[[1]])
+```
+
+```{r plot_it,fig.width=6.5,fig.height=4.25}
+plot(fvc_opgd[[2]])
 ```

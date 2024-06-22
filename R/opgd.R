@@ -44,10 +44,6 @@
 #' }
 opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
          cores = 1,type = "factor",alpha = 0.95,...){
-  if (!(type %in% c("factor","interaction","risk", "ecological"))){
-    stop("`type` must be one or more of `factor`,`interaction`,`risk` and  `ecological` !")
-  }
-
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
