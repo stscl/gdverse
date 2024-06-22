@@ -11,7 +11,7 @@
 
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
 
-\item{...}{Other arguments passed to \code{ggpubr::ggdotchart()}.}
+\item{...}{(optional) Other arguments passed to \code{ggpubr::ggdotchart()}.}
 }
 \value{
 A ggplot2 layer using \code{ggpubr::ggdotchart()}

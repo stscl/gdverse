@@ -27,7 +27,11 @@
 #' g
 #'
 gozh = \(formula, data, cores = 1,
-         type = 'factor',alpha = 0.95,...){
+         type = "factor",alpha = 0.95,...){
+  if (!(type %in% c("factor","interaction","risk", "ecological"))){
+    stop("`type` must be one or more of `factor`,`interaction`,`risk` and  `ecological` !")
+  }
+
   if (length(type) == 1){
     res = gozh_detector(formula, data, cores, type, alpha, ...)
   } else {
@@ -71,7 +75,7 @@ gozh = \(formula, data, cores = 1,
 #' g
 #' }
 gozh_detector = \(formula, data, cores = 1,
-                  type = 'factor',alpha = 0.95,...){
+                  type = "factor",alpha = 0.95,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
     doclust = TRUE
@@ -83,12 +87,12 @@ gozh_detector = \(formula, data, cores = 1,
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
-  yname = formula.vars[1]
   if (formula.vars[2] != "."){
     dti = dplyr::select(data,dplyr::all_of(formula.vars))
   } else {
     dti = data
   }
+  yname = formula.vars[1]
   xname = colnames(dti)[-which(colnames(dti) == yname)]
 
   calcul_rpartdisc = \(xvar,...){

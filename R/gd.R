@@ -46,7 +46,11 @@
 #'                   x2 = c(rep('a',2),rep('b',2),rep('c',3))),
 #'    type = 'ecological',alpha = 0.95)
 #'
-gd = \(formula,data,type = 'factor',...){
+gd = \(formula,data,type = "factor",...){
+  if (!(type %in% c("factor","interaction","risk", "ecological"))){
+    stop("`type` must be one of `factor`,`interaction`,`risk` and  `ecological` !")
+  }
+
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   response = data[, formula.vars[1], drop = TRUE]
