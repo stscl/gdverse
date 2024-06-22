@@ -8,6 +8,8 @@
 
 * Rewrite the GOZH model.
 
+* Support the LESH model.
+
 # gdverse 0.1.1
 
 ## Major changes
