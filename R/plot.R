@@ -12,7 +12,7 @@
 #' @importFrom ggplot2 theme
 #' @export
 #'
-gd_plot.factor_detector = \(x, alpha = 0.05, ...) {
+plot.factor_detector = \(x, alpha = 0.05, ...) {
   g = x$factor %>%
     dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`)%>%
     dplyr::mutate(significance = dplyr::if_else(pv<=0.05,
