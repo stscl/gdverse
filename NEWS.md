@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.1
+
+## Major changes
+
+* Optimize the GOZH model design to facilitate the next integration of the LESH model.
+
 # gdverse 0.1.0
 
 ## Major changes
