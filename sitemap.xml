@@ -52,6 +52,9 @@
     <loc>https://spatlyu.github.io/gdverse/reference/gozh.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/gozh_detector.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/index.html</loc>
   </url>
   <url>
@@ -122,5 +125,8 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/st_unidisc.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/weight_assign.html</loc>
   </url>
 </urlset>
