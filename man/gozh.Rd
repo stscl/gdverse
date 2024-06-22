@@ -29,7 +29,7 @@ Function for geographically optimal zones-based heterogeneity(GOZH) model
 }
 \examples{
 \dontrun{
-ndvi = GD::ndvi_40
+data('ndvi')
 g = gozh(NDVIchange ~ ., data = ndvi)
 g
 }

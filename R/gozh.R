@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' ndvi = GD::ndvi_40
+#' data('ndvi')
 #' g = gozh(NDVIchange ~ ., data = ndvi)
 #' g
 #' }

@@ -19,6 +19,12 @@ A discrete vectors after being discretized.
 \description{
 discretization of variables based on recursive partitioning
 }
+\examples{
+\dontrun{
+data('ndvi')
+rpart_disc(NDVIchange ~ ., data = ndvi)
+}
+}
 \references{
 Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
 spatio-temporal disparities in soil moisture of the Northern Hemisphere using a geographically optimal

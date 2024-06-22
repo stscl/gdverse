@@ -73,3 +73,33 @@ rescale_vector = \(x,to_left = 0,to_right = 1){
   xnew = (x - xmin) / (xmax - xmin) * (to_right - to_left) + to_left
   return(xnew)
 }
+
+#' @title generates subsets of a set
+#'
+#' @param set A vector
+#' including the empty set and the set itself. Default is `TRUE`.
+#' @param empty (optional) When `empty` is `TRUE`,the generated subset includes the empty set,
+#' otherwise the empty set is removed. Default is `TRUE`.
+#' @param self (optional) When `self` is `TRUE`,the resulting subset includes the set itself,
+#' otherwise the set itself is removed. Default is `TRUE`.
+#'
+#' @return A list with the subsets
+#' @export
+#'
+#' @examples
+#' generate_subsets(letters[1:3])
+#' generate_subsets(letters[1:3],empty = FALSE)
+#' generate_subsets(letters[1:3],self = FALSE)
+#' generate_subsets(letters[1:3],empty = FALSE,self = FALSE)
+#'
+generate_subsets = \(set,empty = TRUE,self = TRUE) {
+  n = length(set)
+  subsets = list(c())
+  for (i in seq(set)) {
+    subsets = c(subsets, utils::combn(set, i, simplify = FALSE))
+  }
+  if (!empty) {subsets = subsets[-1]}
+  if (!self & empty) {subsets = subsets[-2^n]}
+  if (!self & !empty) {subsets = subsets[-(2^n-1)]}
+  return(subsets)
+}
