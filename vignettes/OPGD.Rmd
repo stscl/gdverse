@@ -546,11 +546,11 @@ You can use `plot()` to visualize the result.
 plot(fvc_opgd[[1]])
 ```
 
-![plot of chunk plot_fd](../man/figures/opgd-plot_fd-1.png)
+![](../man/figures/opgd-plot_fd-1.png)
 
 
 ``` r
 plot(fvc_opgd[[2]])
 ```
 
-![plot of chunk plot_it](../man/figures/opgd-plot_it-1.png)
+![](../man/figures/opgd-plot_it-1.png)
