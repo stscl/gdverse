@@ -56,7 +56,7 @@ gd = \(formula,data,type = 'factor',...){
     explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
   }
 
-  switch (type,
+  switch(type,
           "factor" = {
             res = purrr::map_dfr(names(explanatory),
                                  \(i) factor_detector(response,data[,i,drop = TRUE])) %>%

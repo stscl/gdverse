@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.2
+
+## Major changes
+
+* Rewrite the GOZH model.
+
 # gdverse 0.1.1
 
 ## Major changes

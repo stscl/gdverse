@@ -74,7 +74,7 @@ rescale_vector = \(x,to_left = 0,to_right = 1){
   return(xnew)
 }
 
-#' @title generates subsets of a set
+#' @title generate subsets of a set
 #'
 #' @param set A vector
 #' including the empty set and the set itself. Default is `TRUE`.
@@ -102,4 +102,25 @@ generate_subsets = \(set,empty = TRUE,self = TRUE) {
   if (!self & empty) {subsets = subsets[-2^n]}
   if (!self & !empty) {subsets = subsets[-(2^n-1)]}
   return(subsets)
+}
+
+#' @title assign values by weight
+#'
+#' @param x A numeric value
+#' @param w A weight vector
+#' @param list (optional) Return list or not. if `list` is `TRUE`, return a list,
+#' otherwise return a vector. Default is `FALSE`.
+#'
+#' @return A numeric Vector.
+#' @export
+#'
+#' @examples
+#' weight_assign(0.875,1:3)
+#'
+weight_assign = \(x,w,list = FALSE){
+  if (list) {
+    return(list(x * w / sum(w)))
+  } else {
+    return(x * w / sum(w))
+  }
 }

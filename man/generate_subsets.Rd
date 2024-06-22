@@ -2,7 +2,7 @@
 % Please edit documentation in R/gdverse_helper.R
 \name{generate_subsets}
 \alias{generate_subsets}
-\title{generates subsets of a set}
+\title{generate subsets of a set}
 \usage{
 generate_subsets(set, empty = TRUE, self = TRUE)
 }
@@ -20,7 +20,7 @@ otherwise the set itself is removed. Default is \code{TRUE}.}
 A list with the subsets
 }
 \description{
-generates subsets of a set
+generate subsets of a set
 }
 \examples{
 generate_subsets(letters[1:3])

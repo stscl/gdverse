@@ -36,7 +36,7 @@ spd_lesh = \(formula,data,cores = 1,...){
   } else if (cores > 1) {
     doclust = TRUE
     cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add=TRUE)
+    on.exit(parallel::stopCluster(cores), add = TRUE)
   }
 
   formula = stats::as.formula(formula)
