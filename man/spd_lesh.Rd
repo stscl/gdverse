@@ -14,13 +14,17 @@ spd_lesh(formula, data, cores = 1, ...)
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster object.}
 
-\item{...}{(optional) Other arguments passed to \code{gozh()}.}
+\item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
 A tibble with variable and its corresponding \eqn{SPD} value.
 }
 \description{
-SHAP power of determinants (SPD)
+Function for calculate SHAP power of determinants \eqn{SPD}.
+}
+\details{
+The power of SHAP power of determinants formula is
+\eqn{\theta_{x_j} \left( S \right) = \sum\limits_{s \in M \setminus \{x_j\}} \frac{|S|! \left(|M| - |S| - 1\right)!}{|M|!}\left(v \left(S \cup \left\{x_j\right\} \right) - v\left(S\right)\right)}
 }
 \examples{
 \dontrun{
@@ -28,4 +32,12 @@ data('ndvi')
 g = spd_lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 g
 }
+}
+\references{
+Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., & Hou, Z. (2023). A locally explained heterogeneity model for
+examining wetland disparity. International Journal of Digital Earth, 16(2), 4533–4552.
+https://doi.org/10.1080/17538947.2023.2271883
+}
+\author{
+Wenbo Lv \email{lyu.geosocial@gmail.com}
 }
