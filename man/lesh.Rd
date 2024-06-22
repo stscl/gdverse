@@ -23,10 +23,11 @@ A list of the LESH model result.
 Function for locally explained heterogeneity model.
 }
 \examples{
+\dontrun{
 data('ndvi')
-g = lesh(NDVIchange ~ ., data = ndvi)
+g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 g
-
+}
 }
 \references{
 Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., & Hou, Z. (2023). A locally explained heterogeneity model for
