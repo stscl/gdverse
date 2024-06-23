@@ -61,7 +61,7 @@ So you can just look at the contribution part of the variable interaction:
 plot(lesh.m, pie = TRUE, scatter = FALSE)
 ```
 
-By accessing the concrete result through 'lesh.m$interaction', which returns a `tibble`.
+By accessing the concrete result through `lesh.m$interaction`, which returns a `tibble`.
 
 ```{r}
 lesh.m$interaction

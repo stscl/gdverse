@@ -12,6 +12,24 @@
 The goal of **gdverse** is to *support the geodetector model and its
 variants*.
 
+## Overview
+
+Full document of the most recent release of **gdverse** is online:
+<https://spatlyu.github.io/gdverse/>
+
+Current models and functions provided by **gdverse** are:
+
+| geodetector model | *gdverse* function | support status |
+|-------------------|--------------------|----------------|
+| **GeoDetector**   | `gd()`             | ✔️             |
+| **OPGD**          | `opgd()`           | ✔️             |
+| **GOZH**          | `gozh()`           | ✔️             |
+| **LESH**          | `lesh()`           | ✔️             |
+| **SPADE**         | `spade()`          | ✔️             |
+| **IDSA**          | `idsa()`           | ❌             |
+| **RGD**           | `rgd()`            | ✔️             |
+| **RID**           | `rid()`            | ❌             |
+
 ## Installation
 
 You can install the development version of **gdverse** from
@@ -29,7 +47,7 @@ or install **gdverse** from
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
-### Load data and package
+## Example
 
 ``` r
 library(terra)
@@ -60,7 +78,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.25 sec elapsed
+## 3.26 sec elapsed
 ```
 
 ``` r

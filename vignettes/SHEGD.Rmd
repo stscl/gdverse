@@ -185,7 +185,7 @@ plot(lesh.m, pie = TRUE, scatter = FALSE)
 
 ![](../man/figures/shegd-lesh_only-1.png)
 
-By accessing the concrete result through 'lesh.m$interaction', which returns a `tibble`.
+By accessing the concrete result through `lesh.m$interaction`, which returns a `tibble`.
 
 
 ``` r

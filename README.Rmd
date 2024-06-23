@@ -24,6 +24,24 @@ knitr::opts_chunk$set(
 
 The goal of **gdverse** is to *support the geodetector model and its variants*.
 
+## Overview
+
+Full document of the most recent release of **gdverse** is online:
+<https://spatlyu.github.io/gdverse/>
+
+Current models and functions provided by **gdverse** are:
+
+|   geodetector model   |   *gdverse* function   |   support status   |
+|------------------------|-----------------------|--------------------|
+|  **GeoDetector**  |        `gd()`         |          ✔️        |
+|  **OPGD**  |        `opgd()`         |          ✔️        |
+|  **GOZH**  |        `gozh()`         |          ✔️        |
+|  **LESH**  |        `lesh()`         |          ✔️        |
+|  **SPADE**  |        `spade()`         |          ✔️        |
+|  **IDSA**  |        `idsa()`         |          ❌        |
+|  **RGD**  |        `rgd()`         |          ✔️        |
+|  **RID**  |        `rid()`         |          ❌        |
+
 ## Installation
 
 You can install the development version of **gdverse** from [github](https://github.com/SpatLyu/gdverse) with:
@@ -39,7 +57,7 @@ or install **gdverse** from [r-universe](https://spatlyu.r-universe.dev/gdverse)
 install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
 ```
 
-### Load data and package
+## Example
 
 ```{r example_gdverse}
 library(terra)
