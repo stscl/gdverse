@@ -7,3 +7,11 @@
 #' @docType data
 #' @keywords dataset ndvi
 "ndvi"
+
+#' @title NTDs data
+#'
+#' @name NTDs
+#' @format \code{NTDs}: A tibble with 185 rows and 5 variables.
+#' @docType data
+#' @keywords dataset NTDs
+"NTDs"
