@@ -88,20 +88,19 @@ interaction_detector = \(y,x1,x2){
 #' degrees of freedom, p-values, and whether has risk (Yes or No).
 #'
 #' @importFrom stats t.test
-#' @importFrom tidyr crossing
 #' @importFrom tibble tibble
-#' @importFrom purrr map2_dfr
+#' @importFrom purrr map2_dfr map_chr
 #' @importFrom dplyr filter pull bind_cols
 #'
 #' @export
 risk_detector = \(y,x,alpha = 0.95){
   x = factor(x)
   gdf = tibble::tibble(x = x, y = y)
-  paradf = tidyr::crossing(zone1 = levels(x),
-                           zone2 = levels(x)) %>%
-    dplyr::filter(zone1 != zone2)
-  x1 = paradf$zone1
-  x2 = paradf$zone2
+  paradf = utils::combn(levels(x),2,simplify = FALSE)
+  x1 =  purrr::map_chr(seq_along(paradf), \(i) paradf[[i]][1])
+  x2 =  purrr::map_chr(seq_along(paradf), \(i) paradf[[i]][2])
+  paradf = tibble::tibble(zone1st = paste0('zone',x1),
+                          zone2nd = paste0('zone',x2))
 
   twounit_risk_detector = \(n1,n2,cutoff = 0.95){
     y1 = dplyr::filter(gdf, x == n1) %>% dplyr::pull(y)

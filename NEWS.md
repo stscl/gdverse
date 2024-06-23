@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.4
+
+## Major changes
+
+* Rewrite risk detector and ecological detector to beautify output and support visualization.
+
 # gdverse 0.1.3
 
 ## Major changes

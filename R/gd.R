@@ -89,7 +89,7 @@ gd = \(formula,data,type = "factor",...){
                                                     data[,i,drop = TRUE],
                                                     ...) %>%
                                    dplyr::mutate(variable = i) %>%
-                                   dplyr::select(variable,zone1,zone2,Risk,
+                                   dplyr::select(variable,zone1st,zone2nd,Risk,
                                                  dplyr::everything()))
             res = list("risk" = res)
             class(res) = "risk_detector"
@@ -163,12 +163,12 @@ print.interaction_detector = \(x, ...) {
 #' @return Formatted string output
 #' @importFrom knitr kable
 #' @importFrom tidyr pivot_wider
-#' @importFrom dplyr mutate select count pull filter all_of
+#' @importFrom dplyr mutate select count pull filter
 #' @export
 print.risk_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
       "\n             Risk detector             \n")
-  x = dplyr::select(x$risk,variable,zone1,zone2,Risk)
+  x = dplyr::select(x$risk,variable,zone1st,zone2nd,Risk)
   xvar = x %>%
     dplyr::count(variable) %>%
     dplyr::pull(variable)
@@ -176,13 +176,11 @@ print.risk_detector = \(x, ...) {
     matt = x %>%
       dplyr::filter(variable == zonevar) %>%
       dplyr::select(-variable) %>%
-      tidyr::pivot_wider(names_from = zone2,
+      tidyr::pivot_wider(names_from = zone1st,
                          values_from = Risk)
-    matname = matt$zone1
-    matt = dplyr::select(matt,zone1,dplyr::all_of(matname)) %>%
-      dplyr::select(-zone1) %>%
-      as.matrix()
-    rownames(matt) = matname
+    mattname = names(matt)
+    mattname[1] = 'zone'
+    names(matt) = mattname
     return(matt)
   }
   cat('\n')
