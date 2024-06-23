@@ -1,0 +1,366 @@
+---
+title: "Original Geographical Detector(GD)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{GD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+This vignette explains how to run `geodatector` in `gdverse` package.
+
+<div class="figure" style="text-align: center">
+<img src="../man/figures/gd_flowchart.png" alt="Schematic diagram of Spatial Stratified Heterogeneity Test" width="75%" />
+<p class="caption">Schematic diagram of Spatial Stratified Heterogeneity Test</p>
+</div>
+
+### Load package and pre-processing data.
+
+
+``` r
+library(sf)
+library(gdverse)
+library(tidyverse)
+```
+
+See layers in `NTDs.gpkg`:
+
+
+``` r
+ntdspath = system.file("extdata", "NTDs.gpkg",package = 'gdverse')
+st_layers(ntdspath)
+## Driver: GPKG 
+## Available layers:
+##   layer_name geometry_type features fields crs_name
+## 1    disease       Polygon      189      2  unknown
+## 2  watershed       Polygon        9      2  unknown
+## 3  elevation Multi Polygon        7      2  unknown
+## 4   soiltype Multi Polygon        6      2  unknown
+```
+
+In `NTDs.gpkg`, disease is the dependent variable, which is a continuous numerical variable, while others are independent and discrete variables.
+
+Now we need to combine these layers together:
+
+
+``` r
+watershed = read_sf(ntdspath,layer = 'watershed')
+elevation = read_sf(ntdspath,layer = 'elevation')
+soiltype = read_sf(ntdspath,layer = 'soiltype')
+disease = read_sf(ntdspath,layer = 'disease')
+```
+
+Plot them together:
+
+
+``` r
+library(cowplot)
+
+f1 = ggplot(data = disease) +
+  geom_sf(aes(fill = incidence),lwd = .1,color = 'grey') +
+  viridis::scale_fill_viridis(option="mako", direction = -1) +
+  theme_bw() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = 'inside',
+    legend.position.inside = c(.1,.25),
+    legend.background = element_rect(fill = 'transparent',color = NA)
+  )
+f2 = ggplot(data = watershed) +
+  geom_sf(aes(fill = watershed),lwd = .1,color = 'grey') +
+  tidyterra::scale_fill_whitebox_c() +
+  coord_sf(crs = NULL) +
+  theme_bw() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = 'inside',
+    legend.position.inside = c(.1,.25),
+    legend.background = element_rect(fill = 'transparent',color = NA)
+  )
+f3 = ggplot(data = elevation) +
+  geom_sf(aes(fill = elevation),lwd = .1,color = 'grey') +
+  tidyterra::scale_fill_hypso_c() +
+  theme_bw() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = 'inside',
+    legend.position.inside = c(.1,.25),
+    legend.background = element_rect(fill = 'transparent',color = NA)
+  )
+f4 = ggplot(data = soiltype) +
+  geom_sf(aes(fill = soiltype),lwd = .1,color = 'grey') +
+  tidyterra::scale_fill_wiki_c() +
+  theme_bw() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    legend.position = 'inside',
+    legend.position.inside = c(.1,.25),
+    legend.background = element_rect(fill = 'transparent',color = NA)
+  )
+
+plot_grid(f1,f2,f3,f4, nrow = 2,label_fontfamily = 'serif',
+          labels = paste0('(',letters[1:4],')'),
+          label_fontface = 'plain',label_size = 10,
+          hjust = -1.5,align = 'hv')  -> p
+p
+```
+
+![](../man/figures/gd-NTDs_map-1.png)
+
+Attribute spatial join
+
+
+``` r
+NTDs = disease %>%
+  st_centroid() %>%
+  st_join(watershed[,"watershed"]) %>%
+  st_join(elevation[,"elevation"]) %>%
+  st_join(soiltype[,"soiltype"])
+```
+
+Check whether has `NA` in `NTDs`:
+
+
+``` r
+NTDs %>%
+  dplyr::filter(if_any(everything(),~is.na(.x)))
+## Simple feature collection with 4 features and 5 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 301567.5 ymin: 3989433 xmax: 318763.3 ymax: 3991906
+## Projected CRS: +proj=aea +lat_0=0 +lon_0=105 +lat_1=25 +lat_2=47 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs
+## # A tibble: 4 × 6
+##   SP_ID incidence               geom watershed elevation soiltype
+## * <chr>     <dbl>        <POINT [m]>     <int>     <int>    <int>
+## 1 141        6.48 (318763.3 3991847)         9        NA        3
+## 2 165        6.53 (316574.1 3989433)         4        NA        2
+## 3 166        6.43 (311439.1 3990674)         4        NA        2
+## 4 188        6.26 (301567.5 3991906)        NA         2        3
+```
+
+
+``` r
+NTDs %>%
+  dplyr::filter(if_all(everything(),~!is.na(.x))) -> NTDs
+```
+
+### Factor detector
+
+
+``` r
+NTDs = st_drop_geometry(NTDs)
+fd = gd(incidence ~ watershed + elevation + soiltype,
+        data = NTDs,type = 'factor')
+fd
+## Spatial Stratified Heterogeneity Test 
+##  
+##           Factor detector
+```
+
+
+-------------------------------------
+ variable    Q-statistic    P-value  
+----------- ------------- -----------
+ watershed     0.6378      0.0001288 
+
+ elevation     0.6067       0.04338  
+
+ soiltype      0.3857       0.3721   
+-------------------------------------
+
+
+
+``` r
+plot(fd)
+```
+
+![](../man/figures/gd-fd-1.png)
+
+### Interaction detector
+
+
+``` r
+id = gd(incidence ~ watershed + elevation + soiltype,
+        data = NTDs,type = 'interaction')
+id
+## Spatial Stratified Heterogeneity Test 
+##  
+##          Interaction detector
+```
+
+
+--------------------------------------
+ Interactive variable    Interaction  
+----------------------- --------------
+ watershed ∩ elevation   Enhance, bi- 
+
+ watershed ∩ soiltype    Enhance, bi- 
+
+ elevation ∩ soiltype    Enhance, bi- 
+--------------------------------------
+
+
+
+``` r
+plot(id)
+```
+
+![](../man/figures/gd-id-1.png)
+
+### Risk detector
+
+
+``` r
+rd = gd(incidence ~ watershed + elevation + soiltype,
+        data = NTDs,type = 'risk')
+rd
+## Spatial Stratified Heterogeneity Test 
+##  
+##              Risk detector             
+## 
+## --------------------------------------
+## Variable elevation:
+## 
+## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |
+## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|
+## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |
+## |zone3 |Yes   |No    |NA    |NA    |NA    |NA    |
+## |zone4 |Yes   |Yes   |Yes   |NA    |NA    |NA    |
+## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |
+## |zone6 |Yes   |Yes   |Yes   |Yes   |Yes   |NA    |
+## |zone7 |Yes   |Yes   |Yes   |Yes   |Yes   |Yes   |
+## --------------------------------------
+## Variable soiltype:
+## 
+## |zone  |zone1 |zone2 |zone3 |zone4 |
+## |:-----|:-----|:-----|:-----|:-----|
+## |zone2 |Yes   |NA    |NA    |NA    |
+## |zone3 |Yes   |No    |NA    |NA    |
+## |zone4 |Yes   |Yes   |Yes   |NA    |
+## |zone5 |No    |Yes   |Yes   |Yes   |
+## --------------------------------------
+## Variable watershed:
+## 
+## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |zone7 |zone8 |
+## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
+## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |NA    |
+## |zone3 |Yes   |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |
+## |zone4 |Yes   |No    |Yes   |NA    |NA    |NA    |NA    |NA    |
+## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |NA    |NA    |
+## |zone6 |Yes   |Yes   |Yes   |Yes   |No    |NA    |NA    |NA    |
+## |zone7 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |NA    |NA    |
+## |zone8 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |NA    |
+## |zone9 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |Yes   |
+```
+
+``` r
+plot(rd)
+```
+
+![](../man/figures/gd-rd-1.png)
+
+You can change the significant interval by assign `alpha` argument,the default value of `alpha` argument is `0.95`.
+
+
+``` r
+rd99 = gd(incidence ~ watershed + elevation + soiltype,
+          data = NTDs,type = 'risk',alpha = 0.99)
+rd99
+## Spatial Stratified Heterogeneity Test 
+##  
+##              Risk detector             
+## 
+## --------------------------------------
+## Variable elevation:
+## 
+## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |
+## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|
+## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |
+## |zone3 |Yes   |No    |NA    |NA    |NA    |NA    |
+## |zone4 |Yes   |Yes   |Yes   |NA    |NA    |NA    |
+## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |
+## |zone6 |Yes   |Yes   |Yes   |Yes   |Yes   |NA    |
+## |zone7 |Yes   |Yes   |Yes   |Yes   |Yes   |Yes   |
+## --------------------------------------
+## Variable soiltype:
+## 
+## |zone  |zone1 |zone2 |zone3 |zone4 |
+## |:-----|:-----|:-----|:-----|:-----|
+## |zone2 |Yes   |NA    |NA    |NA    |
+## |zone3 |Yes   |No    |NA    |NA    |
+## |zone4 |Yes   |Yes   |Yes   |NA    |
+## |zone5 |No    |Yes   |Yes   |Yes   |
+## --------------------------------------
+## Variable watershed:
+## 
+## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |zone7 |zone8 |
+## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
+## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |NA    |
+## |zone3 |Yes   |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |
+## |zone4 |Yes   |No    |Yes   |NA    |NA    |NA    |NA    |NA    |
+## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |NA    |NA    |
+## |zone6 |Yes   |Yes   |Yes   |Yes   |No    |NA    |NA    |NA    |
+## |zone7 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |NA    |NA    |
+## |zone8 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |NA    |
+## |zone9 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |Yes   |
+```
+
+### Ecological detector
+
+
+``` r
+ed = gd(incidence ~ watershed + elevation + soiltype,
+        data = NTDs,type = 'ecological')
+ed
+## Spatial Stratified Heterogeneity Test 
+##  
+##           ecological detector          
+## 
+## --------------------------------------
+## 
+## 
+## |          |elevation |soiltype |
+## |:---------|:---------|:--------|
+## |watershed |No        |No       |
+## |elevation |NA        |No       |
+```
+
+``` r
+plot(ed)
+```
+
+![](../man/figures/gd-ed-1.png)
+
+You can also change the significant interval by assign `alpha` argument,the default value of `alpha` argument is `0.95`.
+
+
+``` r
+ed99 = gd(incidence ~ watershed + elevation + soiltype,
+          data = NTDs,type = 'ecological',alpha = 0.99)
+ed99
+## Spatial Stratified Heterogeneity Test 
+##  
+##           ecological detector          
+## 
+## --------------------------------------
+## 
+## 
+## |          |elevation |soiltype |
+## |:---------|:---------|:--------|
+## |watershed |No        |No       |
+## |elevation |NA        |No       |
+```

@@ -4,6 +4,9 @@
 
 devtools::load_all()
 
+knitr::knit("vignettes/GD.Rmd.orig",
+            "vignettes/GD.Rmd")
+
 knitr::knit("vignettes/OPGD.Rmd.orig",
             "vignettes/OPGD.Rmd")
 
