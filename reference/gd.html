@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,14 +111,10 @@ DOI: 10.1080/13658810802443457</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Factor detector         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  variable   Q-statistic   P-value </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- ------------- ---------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x2        0.8929      0.03168 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x1        0.7714      0.07936 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | variable | Q-statistic |  P-value   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:-----------:|:----------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    x2    |  0.8928571  | 0.03167582 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    x1    |  0.7714286  | 0.07936477 |</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
 <span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
@@ -127,14 +123,11 @@ DOI: 10.1080/13658810802443457</p>
 <span class="r-in"><span>   type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Spatial Stratified Heterogeneity Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Interaction detector          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Interaction detector         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Interactive variable      Interaction    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------------------- -------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        x1 ∩ x2          Weaken, nonlinear </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ------------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | Interactive variable |    Interaction    |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------------------:|:-----------------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |       x1 ∩ x2        | Weaken, nonlinear |</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
 <span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
@@ -145,20 +138,19 @@ DOI: 10.1080/13658810802443457</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              Risk detector             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variable x1:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable x1:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |zone  |zonex |zoney |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:-----|:-----|:-----|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |zoney |No    |NA    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |zonez |No    |Yes   |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Variable x2:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zone  | zonex | zoney |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:-----:|:-----:|:-----:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zoney |  No   |  NA   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonez |  No   |  Yes  |</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |zone  |zonea |zoneb |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:-----|:-----|:-----|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |zoneb |No    |NA    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |zonec |Yes   |Yes   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable x2:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zone  | zonea | zoneb |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:-----:|:-----:|:-----:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zoneb |  No   |  NA   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonec |  Yes  |  Yes  |</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
 <span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
@@ -167,14 +159,11 @@ DOI: 10.1080/13658810802443457</p>
 <span class="r-in"><span>   type <span class="op">=</span> <span class="st">'ecological'</span>,alpha <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Spatial Stratified Heterogeneity Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           ecological detector          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           ecological detector         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> --------------------------------------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   |x2 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:--|:--|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |x1 |No |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   | x2 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:--|:--:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |x1 | No |</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,51 +126,16 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="va">gozh.uvi</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector</span></span></code></pre></div>
-<table style="width:61%;" class="table">
-<colgroup>
-<col width="22%">
-<col width="19%">
-<col width="19%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">variable</th>
-<th align="center">Q-statistic</th>
-<th align="center">P-value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">Precipitation</td>
-<td align="center">0.8726</td>
-<td align="center">4.516e-10</td>
-</tr>
-<tr class="even">
-<td align="center">Climatezone</td>
-<td align="center">0.8213</td>
-<td align="center">2.501e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">Tempchange</td>
-<td align="center">0.3332</td>
-<td align="center">1.122e-10</td>
-</tr>
-<tr class="even">
-<td align="center">Popdensity</td>
-<td align="center">0.2232</td>
-<td align="center">2.998e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">Mining</td>
-<td align="center">0.1398</td>
-<td align="center">5.985e-11</td>
-</tr>
-<tr class="even">
-<td align="center">GDP</td>
-<td align="center">0.0917</td>
-<td align="center">3.959e-10</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |   variable    | Q-statistic |   P-value    |</span></span>
+<span><span class="co">## |:-------------:|:-----------:|:------------:|</span></span>
+<span><span class="co">## | Precipitation | 0.87255056  | 4.515558e-10 |</span></span>
+<span><span class="co">## |  Climatezone  | 0.82129550  | 2.500763e-10 |</span></span>
+<span><span class="co">## |  Tempchange   | 0.33324945  | 1.121618e-10 |</span></span>
+<span><span class="co">## |  Popdensity   | 0.22321863  | 2.998225e-10 |</span></span>
+<span><span class="co">## |    Mining     | 0.13982859  | 5.985420e-11 |</span></span>
+<span><span class="co">## |      GDP      | 0.09170153  | 3.958823e-10 |</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.uvi</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd-gozh_uni-1.png"></p>
@@ -183,79 +148,25 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="va">gozh.bi</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##          Interaction detector</span></span></code></pre></div>
-<table style="width:71%;" class="table">
-<colgroup>
-<col width="41%">
-<col width="29%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Interactive variable</th>
-<th align="center">Interaction</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">Climatezone ∩ Mining</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="even">
-<td align="center">Climatezone ∩ Tempchange</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="odd">
-<td align="center">Climatezone ∩ Precipitation</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Climatezone ∩ GDP</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Climatezone ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Mining ∩ Tempchange</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Mining ∩ Precipitation</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="even">
-<td align="center">Mining ∩ GDP</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Mining ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Tempchange ∩ Precipitation</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Tempchange ∩ GDP</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">Tempchange ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Precipitation ∩ GDP</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Precipitation ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">GDP ∩ Popdensity</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##          Interaction detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
+<span><span class="co">## |:---------------------------:|:------------------:|</span></span>
+<span><span class="co">## |    Climatezone ∩ Mining     |    Weaken, uni-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Tempchange   |    Weaken, uni-    |</span></span>
+<span><span class="co">## | Climatezone ∩ Precipitation |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      Climatezone ∩ GDP      |    Enhance, bi-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Mining ∩ Tempchange     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |   Mining ∩ Precipitation    |    Weaken, uni-    |</span></span>
+<span><span class="co">## |        Mining ∩ GDP         |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Mining ∩ Popdensity     |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Tempchange ∩ Precipitation  |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      Tempchange ∩ GDP       | Enhance, nonlinear |</span></span>
+<span><span class="co">## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Precipitation ∩ GDP     |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Precipitation ∩ Popdensity  |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.bi</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd-gozh_bi-1.png"></p>
@@ -269,79 +180,25 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## </span></span>
 <span><span class="co">##     Spatial Interaction Association Detect    </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##                    LESH Model</span></span></code></pre></div>
-<table style="width:71%;" class="table">
-<colgroup>
-<col width="41%">
-<col width="29%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Interactive variable</th>
-<th align="center">Interaction</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">Climatezone ∩ Mining</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="even">
-<td align="center">Climatezone ∩ Tempchange</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="odd">
-<td align="center">Climatezone ∩ Precipitation</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Climatezone ∩ GDP</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Climatezone ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Mining ∩ Tempchange</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Mining ∩ Precipitation</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-<tr class="even">
-<td align="center">Mining ∩ GDP</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Mining ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Tempchange ∩ Precipitation</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Tempchange ∩ GDP</td>
-<td align="center">Enhance, nonlinear</td>
-</tr>
-<tr class="even">
-<td align="center">Tempchange ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">Precipitation ∩ GDP</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">Precipitation ∩ Popdensity</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">GDP ∩ Popdensity</td>
-<td align="center">Weaken, uni-</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##                    LESH Model                   </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
+<span><span class="co">## |:---------------------------:|:------------------:|</span></span>
+<span><span class="co">## |    Climatezone ∩ Mining     |    Weaken, uni-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Tempchange   |    Weaken, uni-    |</span></span>
+<span><span class="co">## | Climatezone ∩ Precipitation |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      Climatezone ∩ GDP      |    Enhance, bi-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Mining ∩ Tempchange     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |   Mining ∩ Precipitation    |    Weaken, uni-    |</span></span>
+<span><span class="co">## |        Mining ∩ GDP         |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Mining ∩ Popdensity     |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Tempchange ∩ Precipitation  |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      Tempchange ∩ GDP       | Enhance, nonlinear |</span></span>
+<span><span class="co">## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Precipitation ∩ GDP     |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Precipitation ∩ Popdensity  |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd-lesh-1.png"></p>

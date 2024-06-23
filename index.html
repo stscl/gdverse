@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,81 +184,27 @@
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.64 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 3.37 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="center">variable</th>
-<th align="center">Q-statistic</th>
-<th align="center">P-value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">presum</td>
-<td align="center">0.6609</td>
-<td align="center">8.344e-10</td>
-</tr>
-<tr class="even">
-<td align="center">lulc</td>
-<td align="center">0.6597</td>
-<td align="center">8.782e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">premin</td>
-<td align="center">0.4655</td>
-<td align="center">3.606e-10</td>
-</tr>
-<tr class="even">
-<td align="center">tmpmin</td>
-<td align="center">0.4356</td>
-<td align="center">8.537e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">tmpmax</td>
-<td align="center">0.2536</td>
-<td align="center">7.849e-10</td>
-</tr>
-<tr class="even">
-<td align="center">slope</td>
-<td align="center">0.2357</td>
-<td align="center">8.826e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">elev</td>
-<td align="center">0.2355</td>
-<td align="center">7.287e-10</td>
-</tr>
-<tr class="even">
-<td align="center">tmpavg</td>
-<td align="center">0.2214</td>
-<td align="center">7.616e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">pop</td>
-<td align="center">0.1953</td>
-<td align="center">2.428e-10</td>
-</tr>
-<tr class="even">
-<td align="center">premax</td>
-<td align="center">0.1451</td>
-<td align="center">5.961e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">aspect</td>
-<td align="center">0.0186</td>
-<td align="center">0.7491</td>
-</tr>
-<tr class="even">
-<td align="center">ntl</td>
-<td align="center">0.01726</td>
-<td align="center">0.1384</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
+<span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
+<span><span class="co">## |  presum  | 0.66090313  | 8.344327e-10 |</span></span>
+<span><span class="co">## |   lulc   | 0.65972601  | 8.781502e-10 |</span></span>
+<span><span class="co">## |  premin  | 0.46550058  | 3.606232e-10 |</span></span>
+<span><span class="co">## |  tmpmin  | 0.43559812  | 8.536544e-10 |</span></span>
+<span><span class="co">## |  tmpmax  | 0.25364304  | 7.848540e-10 |</span></span>
+<span><span class="co">## |  slope   | 0.23570512  | 8.826343e-10 |</span></span>
+<span><span class="co">## |   elev   | 0.23554763  | 7.286761e-10 |</span></span>
+<span><span class="co">## |  tmpavg  | 0.22139249  | 7.615818e-10 |</span></span>
+<span><span class="co">## |   pop    | 0.19529044  | 2.428073e-10 |</span></span>
+<span><span class="co">## |  premax  | 0.14507334  | 5.960950e-10 |</span></span>
+<span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
+<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="gozh-model">GOZH model<a class="anchor" aria-label="anchor" href="#gozh-model"></a>
@@ -268,76 +214,22 @@
 <span><span class="va">g</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="center">variable</th>
-<th align="center">Q-statistic</th>
-<th align="center">P-value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">presum</td>
-<td align="center">0.6372</td>
-<td align="center">9.492e-11</td>
-</tr>
-<tr class="even">
-<td align="center">lulc</td>
-<td align="center">0.6106</td>
-<td align="center">4.797e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">premin</td>
-<td align="center">0.4658</td>
-<td align="center">5.484e-10</td>
-</tr>
-<tr class="even">
-<td align="center">tmpmin</td>
-<td align="center">0.4112</td>
-<td align="center">2.948e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">tmpmax</td>
-<td align="center">0.2478</td>
-<td align="center">7.308e-10</td>
-</tr>
-<tr class="even">
-<td align="center">slope</td>
-<td align="center">0.2286</td>
-<td align="center">6.05e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">pop</td>
-<td align="center">0.2238</td>
-<td align="center">3.753e-10</td>
-</tr>
-<tr class="even">
-<td align="center">elev</td>
-<td align="center">0.2237</td>
-<td align="center">4.671e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">tmpavg</td>
-<td align="center">0.2188</td>
-<td align="center">6.543e-10</td>
-</tr>
-<tr class="even">
-<td align="center">premax</td>
-<td align="center">0.1259</td>
-<td align="center">1.436e-10</td>
-</tr>
-<tr class="odd">
-<td align="center">ntl</td>
-<td align="center">0.02365</td>
-<td align="center">1.832e-10</td>
-</tr>
-<tr class="even">
-<td align="center">aspect</td>
-<td align="center">0.01413</td>
-<td align="center">8.938e-09</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
+<span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
+<span><span class="co">## |  presum  | 0.63722230  | 9.491610e-11 |</span></span>
+<span><span class="co">## |   lulc   | 0.61064956  | 4.797254e-10 |</span></span>
+<span><span class="co">## |  premin  | 0.46576994  | 5.484498e-10 |</span></span>
+<span><span class="co">## |  tmpmin  | 0.41116492  | 2.948282e-10 |</span></span>
+<span><span class="co">## |  tmpmax  | 0.24778090  | 7.308311e-10 |</span></span>
+<span><span class="co">## |  slope   | 0.22861668  | 6.049710e-10 |</span></span>
+<span><span class="co">## |   pop    | 0.22376308  | 3.753077e-10 |</span></span>
+<span><span class="co">## |   elev   | 0.22370908  | 4.670732e-10 |</span></span>
+<span><span class="co">## |  tmpavg  | 0.21883019  | 6.542658e-10 |</span></span>
+<span><span class="co">## |  premax  | 0.12586705  | 1.436104e-10 |</span></span>
+<span><span class="co">## |   ntl    | 0.02364914  | 1.831876e-10 |</span></span>
+<span><span class="co">## |  aspect  | 0.01412962  | 8.937567e-09 |</span></span></code></pre></div>
 </div>
 </div>
 </div>

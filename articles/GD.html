@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -226,36 +226,13 @@ discrete variables.</p>
 <span><span class="va">fd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector</span></span></code></pre></div>
-<table style="width:56%;" class="table">
-<colgroup>
-<col width="16%">
-<col width="19%">
-<col width="19%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">variable</th>
-<th align="center">Q-statistic</th>
-<th align="center">P-value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">watershed</td>
-<td align="center">0.6378</td>
-<td align="center">0.0001288</td>
-</tr>
-<tr class="even">
-<td align="center">elevation</td>
-<td align="center">0.6067</td>
-<td align="center">0.04338</td>
-</tr>
-<tr class="odd">
-<td align="center">soiltype</td>
-<td align="center">0.3857</td>
-<td align="center">0.3721</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | variable  | Q-statistic |   P-value   |</span></span>
+<span><span class="co">## |:---------:|:-----------:|:-----------:|</span></span>
+<span><span class="co">## | watershed |  0.6377737  | 0.000128803 |</span></span>
+<span><span class="co">## | elevation |  0.6067087  | 0.043382244 |</span></span>
+<span><span class="co">## | soiltype  |  0.3857168  | 0.372145486 |</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd-fd-1.png"></p>
@@ -269,31 +246,13 @@ discrete variables.</p>
 <span><span class="va">id</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##          Interaction detector</span></span></code></pre></div>
-<table style="width:54%;" class="table">
-<colgroup>
-<col width="33%">
-<col width="20%">
-</colgroup>
-<thead><tr class="header">
-<th align="center">Interactive variable</th>
-<th align="center">Interaction</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="center">watershed ∩ elevation</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="even">
-<td align="center">watershed ∩ soiltype</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-<tr class="odd">
-<td align="center">elevation ∩ soiltype</td>
-<td align="center">Enhance, bi-</td>
-</tr>
-</tbody>
-</table>
+<span><span class="co">##          Interaction detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | Interactive variable  | Interaction  |</span></span>
+<span><span class="co">## |:---------------------:|:------------:|</span></span>
+<span><span class="co">## | watershed ∩ elevation | Enhance, bi- |</span></span>
+<span><span class="co">## | watershed ∩ soiltype  | Enhance, bi- |</span></span>
+<span><span class="co">## | elevation ∩ soiltype  | Enhance, bi- |</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd-id-1.png"></p>
@@ -309,39 +268,38 @@ discrete variables.</p>
 <span><span class="co">##  </span></span>
 <span><span class="co">##              Risk detector             </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## Variable elevation:</span></span>
+<span><span class="co">##  Variable elevation:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |</span></span>
-<span><span class="co">## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|</span></span>
-<span><span class="co">## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone3 |Yes   |No    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone4 |Yes   |Yes   |Yes   |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |</span></span>
-<span><span class="co">## |zone6 |Yes   |Yes   |Yes   |Yes   |Yes   |NA    |</span></span>
-<span><span class="co">## |zone7 |Yes   |Yes   |Yes   |Yes   |Yes   |Yes   |</span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## Variable soiltype:</span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  No   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |</span></span>
+<span><span class="co">## | zone7 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |zone  |zone1 |zone2 |zone3 |zone4 |</span></span>
-<span><span class="co">## |:-----|:-----|:-----|:-----|:-----|</span></span>
-<span><span class="co">## |zone2 |Yes   |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone3 |Yes   |No    |NA    |NA    |</span></span>
-<span><span class="co">## |zone4 |Yes   |Yes   |Yes   |NA    |</span></span>
-<span><span class="co">## |zone5 |No    |Yes   |Yes   |Yes   |</span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## Variable watershed:</span></span>
+<span><span class="co">##  Variable soiltype:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |zone7 |zone8 |</span></span>
-<span><span class="co">## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|</span></span>
-<span><span class="co">## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone3 |Yes   |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone4 |Yes   |No    |Yes   |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone6 |Yes   |Yes   |Yes   |Yes   |No    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone7 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |NA    |NA    |</span></span>
-<span><span class="co">## |zone8 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |NA    |</span></span>
-<span><span class="co">## |zone9 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |Yes   |</span></span></code></pre></div>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  No   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |</span></span>
+<span><span class="co">## | zone5 |  No   |  Yes  |  Yes  |  Yes  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Variable watershed:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 | zone7 | zone8 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  No   |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  No   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |</span></span>
+<span><span class="co">## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd-rd-1.png"></p>
@@ -356,39 +314,38 @@ argument,the default value of <code>alpha</code> argument is
 <span><span class="co">##  </span></span>
 <span><span class="co">##              Risk detector             </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## Variable elevation:</span></span>
+<span><span class="co">##  Variable elevation:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |</span></span>
-<span><span class="co">## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|</span></span>
-<span><span class="co">## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone3 |Yes   |No    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone4 |Yes   |Yes   |Yes   |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |</span></span>
-<span><span class="co">## |zone6 |Yes   |Yes   |Yes   |Yes   |Yes   |NA    |</span></span>
-<span><span class="co">## |zone7 |Yes   |Yes   |Yes   |Yes   |Yes   |Yes   |</span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## Variable soiltype:</span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  No   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |</span></span>
+<span><span class="co">## | zone7 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |zone  |zone1 |zone2 |zone3 |zone4 |</span></span>
-<span><span class="co">## |:-----|:-----|:-----|:-----|:-----|</span></span>
-<span><span class="co">## |zone2 |Yes   |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone3 |Yes   |No    |NA    |NA    |</span></span>
-<span><span class="co">## |zone4 |Yes   |Yes   |Yes   |NA    |</span></span>
-<span><span class="co">## |zone5 |No    |Yes   |Yes   |Yes   |</span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## Variable watershed:</span></span>
+<span><span class="co">##  Variable soiltype:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |zone7 |zone8 |</span></span>
-<span><span class="co">## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|</span></span>
-<span><span class="co">## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone3 |Yes   |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone4 |Yes   |No    |Yes   |NA    |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone6 |Yes   |Yes   |Yes   |Yes   |No    |NA    |NA    |NA    |</span></span>
-<span><span class="co">## |zone7 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |NA    |NA    |</span></span>
-<span><span class="co">## |zone8 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |NA    |</span></span>
-<span><span class="co">## |zone9 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |Yes   |</span></span></code></pre></div>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  No   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |</span></span>
+<span><span class="co">## | zone5 |  No   |  Yes  |  Yes  |  Yes  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Variable watershed:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 | zone7 | zone8 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  No   |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  No   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |</span></span>
+<span><span class="co">## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="ecological-detector">Ecological detector<a class="anchor" aria-label="anchor" href="#ecological-detector"></a>
@@ -399,15 +356,12 @@ argument,the default value of <code>alpha</code> argument is
 <span><span class="va">ed</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           ecological detector          </span></span>
+<span><span class="co">##           ecological detector         </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |          |elevation |soiltype |</span></span>
-<span><span class="co">## |:---------|:---------|:--------|</span></span>
-<span><span class="co">## |watershed |No        |No       |</span></span>
-<span><span class="co">## |elevation |NA        |No       |</span></span></code></pre></div>
+<span><span class="co">## |          | elevation | soiltype |</span></span>
+<span><span class="co">## |:---------|:---------:|:--------:|</span></span>
+<span><span class="co">## |watershed |    No     |    No    |</span></span>
+<span><span class="co">## |elevation |    NA     |    No    |</span></span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ed</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd-ed-1.png"></p>
@@ -420,15 +374,12 @@ argument is <code>0.95</code>.</p>
 <span><span class="va">ed99</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           ecological detector          </span></span>
+<span><span class="co">##           ecological detector         </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## --------------------------------------</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |          |elevation |soiltype |</span></span>
-<span><span class="co">## |:---------|:---------|:--------|</span></span>
-<span><span class="co">## |watershed |No        |No       |</span></span>
-<span><span class="co">## |elevation |NA        |No       |</span></span></code></pre></div>
+<span><span class="co">## |          | elevation | soiltype |</span></span>
+<span><span class="co">## |:---------|:---------:|:--------:|</span></span>
+<span><span class="co">## |watershed |    No     |    No    |</span></span>
+<span><span class="co">## |elevation |    NA     |    No    |</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
