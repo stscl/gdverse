@@ -16,7 +16,7 @@
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
 \value{
-A ggplot2 layer using \code{ggpubr::ggdotchart()}
+A ggplot2 layer.
 }
 \description{
 S3 method to plot output for factor detector in \code{gd()}.

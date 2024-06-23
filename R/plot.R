@@ -8,9 +8,10 @@
 #' @param alpha (optional) Confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
-#' @return A ggplot2 layer using `ggpubr::ggdotchart()`
-#' @importFrom ggplot2 ggplot geom_bar geom_text scale_y_continuous coord_flip theme_minimal scale_alpha_manual theme labs
-#' @importFrom dplyr slice
+#' @return A ggplot2 layer.
+#' @importFrom ggplot2 ggplot aes geom_bar geom_text scale_y_continuous coord_flip theme_minimal scale_alpha_manual element_text theme labs
+#' @importFrom dplyr if_else slice
+#' @importFrom stats reorder
 #' @export
 #'
 plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
@@ -90,8 +91,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
 #'
 plot.interaction_detector = \(x,alpha = 1,...){
   g = x$interaction %>%
-    select(interactv = `Variable1 and Variable2 interact Q-statistics`,
-           dplyr::everything())
+    dplyr::select(interactv = `Variable1 and Variable2 interact Q-statistics`,
+                  dplyr::everything())
   gv1 = dplyr::count(g,variable1)
   gv2 = dplyr::count(g,variable2)
   gv = gv1 %>%
@@ -100,8 +101,9 @@ plot.interaction_detector = \(x,alpha = 1,...){
   g = g %>%
     dplyr::mutate(variable1 = factor(variable1,levels = gv$variable1),
                   variable2 = factor(variable2,levels = rev(gv$variable2)))
-  fig_interaction = ggplot2::ggplot(g, ggplot2::aes(x = variable1, y = variable2,
-                             size = interactv, color = Interaction)) +
+  fig_interaction = ggplot2::ggplot(g,
+                                    ggplot2::aes(x = variable1, y = variable2,
+                                    size = interactv, color = Interaction)) +
     ggplot2::geom_point(alpha = alpha) +
     ggplot2::scale_size(range = c(1,10)) +
     ggplot2::scale_color_manual(values = c("Enhance, nonlinear" = "#EA4848",
@@ -109,9 +111,9 @@ plot.interaction_detector = \(x,alpha = 1,...){
                                            "Enhance, bi-" = "#F2C55E",
                                            "Weaken, uni-" = "#6EE9EF",
                                            "Weaken, nonlinear" = "#558DE8")) +
+    ggplot2::labs(x = "", y = "", size = "", color = "") +
     ggplot2::coord_equal() +
     ggplot2::theme_bw() +
-    ggplot2::theme(...) +
-    ggplot2::labs(x = "", y = "", size = "", color = "")
+    ggplot2::theme(...)
   return(fig_interaction)
 }

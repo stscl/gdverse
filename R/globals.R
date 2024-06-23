@@ -6,5 +6,5 @@ utils::globalVariables(c(".", "Ecological", "Interaction", "Interactive variable
                          "variable2", "x", "zone1", "zone2", "id_sample_new", "qv",
                          "spd_theta", "Variable1 and Variable2 interact Q-statistics",
                          "spd1", "spd2", "varibale", "P-value", "pv", "interactv",
-                         "significance"
+                         "significance", "Variable1 SPD", "Variable2 SPD"
                          ))
