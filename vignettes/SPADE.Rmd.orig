@@ -11,9 +11,9 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "##",
-  out.width = "100%",
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  fig.path = "man/figures/spade/"
 )
 ```
 
@@ -29,7 +29,7 @@ usfi
 ```
 
 ```{r echo=FALSE, fig.align="center",fig.cap="The study area map of USFI_Xian data"}
-knitr::include_graphics('../man/figures/spade_studyarea.png')
+knitr::include_graphics('../man/figures/spade/studyarea.png')
 ```
 
 The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
@@ -62,7 +62,6 @@ usfi |>
   dplyr::select(SUHI,nb,wt) -> new_usfi
 
 new_usfi
-
 set.seed(123456789)
 
 gmi = new_usfi |>
@@ -76,7 +75,7 @@ The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`,which shows
 
 We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
 
-``` r
+```{r SUHI_LISA,fig.width=7.5,fig.height=4}
 library(tidyrgeoda)
 
 new_usfi %>%
@@ -97,10 +96,6 @@ new_usfi %>%
     legend.text = element_text(size = 7.5),
     legend.key.size = unit(.5, 'cm')
   )
-```
-
-```{r echo=FALSE, fig.align="center",fig.cap="LISA Of SUHI in Xi'an Main City"}
-knitr::include_graphics('../man/figures/spade_SUHI_LISA.png')
 ```
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
@@ -180,10 +175,11 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 #### run SPADE
 
-```{r}
+```{r USFI_SPADE_factor,fig.width=8.5,fig.height=6.5}
 usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
                    discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6, permutations = 0)
 usfi_spade
+plot(usfi_spade,slicenum = 8)
 ```
 
 **You can also access the detailed q statistics by `usfi_spade$factor`**
@@ -203,17 +199,13 @@ WAR = usfi$WAR
 skimr::skim(WAR)
 ```
 
-```r
+```{r WAR_Hist,fig.width=4.5,fig.height=3}
 ggplot(data = usfi) +
   geom_histogram(aes(WAR),
                color='white',
                fill='gray60') +
   scale_y_continuous(expand = c(0,0)) +
   theme_classic()
-```
-
-```{r echo=FALSE, fig.align="center",fig.cap="Histogram of WAR Variable"}
-knitr::include_graphics('../man/figures/spade_WAR_Hist.png')
 ```
 
 ```{r}

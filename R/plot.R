@@ -10,18 +10,20 @@
 #'
 #' @return A ggplot2 layer.
 #' @importFrom ggplot2 ggplot aes geom_bar geom_text scale_y_continuous coord_flip theme_minimal scale_alpha_manual element_text element_blank theme labs
-#' @importFrom dplyr if_else slice
+#' @importFrom dplyr if_else slice filter
 #' @importFrom stats reorder
 #' @export
 #'
 plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
   g = x$factor %>%
-    dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`)%>%
-    dplyr::mutate(significance = dplyr::if_else(pv<=0.05,
+    dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
+    dplyr::filter(!is.na(qv)) %>%
+    dplyr::mutate(significance = dplyr::if_else(pv <= 0.05,
                                                 'Significant',
                                                 'Not Significant',
                                                 NA))
-  if (any(is.na(g$significance))) {
+  ylimits = round(max(g$qv) + 0.05,1)
+  if ("No Pseudo-P Value" %in% g$pv) {
     fig_factor = ggplot2::ggplot(g,
                                  ggplot2::aes(x = stats::reorder(variable,qv), y = qv)) +
       ggplot2::geom_bar(stat = "identity", fill = "#bebebe") +
@@ -33,8 +35,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
       ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
                          ggplot2::aes(label = round(qv,4)),
                          hjust = -0.1, color = "black") +
-      ggplot2::scale_y_continuous(limits = c(0,round(max(g$qv) + 0.04,1)),
-                                  breaks = seq(0,round(max(g$qv) + 0.04,1),by = 0.1),
+      ggplot2::scale_y_continuous(limits = c(0,ylimits),
+                                  breaks = seq(0,ylimits,by = 0.1),
                                   expand = c(0,0)) +
       ggplot2::coord_flip() +
       ggplot2::theme_minimal() +
@@ -59,8 +61,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
       ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
                          ggplot2::aes(label = round(qv,4)),
                          hjust = -0.1, color = "black") +
-      ggplot2::scale_y_continuous(limits = c(0,round(max(g$qv) + 0.04,1)),
-                                  breaks = seq(0,round(max(g$qv) + 0.04,1),by = 0.1),
+      ggplot2::scale_y_continuous(limits = c(0,ylimits),
+                                  breaks = seq(0,ylimits,by = 0.1),
                                   expand = c(0,0)) +
       ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25),
                                   na.value = 0.85,name = '') +

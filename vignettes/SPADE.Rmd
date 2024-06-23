@@ -43,7 +43,7 @@ usfi
 ```
 
 <div class="figure" style="text-align: center">
-<img src="../man/figures/spade_studyarea.png" alt="The study area map of USFI_Xian data" width="100%" />
+<img src="../man/figures/spade/studyarea.png" alt="The study area map of USFI_Xian data"  />
 <p class="caption">The study area map of USFI_Xian data</p>
 </div>
 
@@ -100,7 +100,6 @@ new_usfi
 ```
 
 ``` r
-
 set.seed(123456789)
 
 gmi = new_usfi |>
@@ -115,6 +114,7 @@ The global Moran's Index is 0.5359564 and the P value is 5.0780594 &times; 10<su
 #### local spatial autocorrelation of SUHI
 
 We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
+
 
 ``` r
 library(tidyrgeoda)
@@ -139,10 +139,7 @@ new_usfi %>%
   )
 ```
 
-<div class="figure" style="text-align: center">
-<img src="../man/figures/spade_SUHI_LISA.png" alt="LISA Of SUHI in Xi'an Main City" width="100%" />
-<p class="caption">LISA Of SUHI in Xi'an Main City</p>
-</div>
+![](../man/figures/spade/SUHI_LISA-1.png)
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
 
@@ -305,6 +302,12 @@ usfi_spade
 ## |   WAR    |     NaN     | No Pseudo-P Value |
 ```
 
+``` r
+plot(usfi_spade,slicenum = 8)
+```
+
+![](../man/figures/spade/USFI_SPADE_factor-1.png)
+
 **You can also access the detailed q statistics by `usfi_spade$factor`**
 
 
@@ -368,7 +371,8 @@ Table: Data summary
 
 
 
-```r
+
+``` r
 ggplot(data = usfi) +
   geom_histogram(aes(WAR),
                color='white',
@@ -377,10 +381,7 @@ ggplot(data = usfi) +
   theme_classic()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="../man/figures/spade_WAR_Hist.png" alt="Histogram of WAR Variable" width="100%" />
-<p class="caption">Histogram of WAR Variable</p>
-</div>
+![](../man/figures/spade/WAR_Hist-1.png)
 
 
 ``` r

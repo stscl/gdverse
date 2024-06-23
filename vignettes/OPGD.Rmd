@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 4.11 sec elapsed
+## 4.43 sec elapsed
 ```
 
 
@@ -374,11 +374,11 @@ You can use `plot()` to visualize the result.
 plot(fvc_opgd[[1]])
 ```
 
-![](../man/figures/opgd-fd-1.png)
+![](../man/figures/opgd/fd-1.png)
 
 
 ``` r
 plot(fvc_opgd[[2]])
 ```
 
-![](../man/figures/opgd-id-1.png)
+![](../man/figures/opgd/id-1.png)
