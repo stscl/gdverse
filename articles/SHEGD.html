@@ -138,7 +138,7 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## |      GDP      | 0.09170153  | 3.958823e-10 |</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.uvi</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/shegd-gozh_uni-1.png"></p>
+<p><img src="../reference/figures/shegd/gozh_uni-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="variable-interaction-detection">Variable interaction detection<a class="anchor" aria-label="anchor" href="#variable-interaction-detection"></a>
@@ -169,7 +169,7 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.bi</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/shegd-gozh_bi-1.png"></p>
+<p><img src="../reference/figures/shegd/gozh_bi-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="variable-interaction-contribution">Variable interaction contribution<a class="anchor" aria-label="anchor" href="#variable-interaction-contribution"></a>
@@ -201,7 +201,7 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/shegd-lesh-1.png"></p>
+<p><img src="../reference/figures/shegd/lesh-1.png"></p>
 <p>Compared to <strong>GOZH Interaction Detector</strong> ,
 <strong>LESH</strong> only has a decomposition of the interactive
 contribution of variables,and the rest remains consistent.</p>
@@ -209,7 +209,7 @@ contribution of variables,and the rest remains consistent.</p>
 interaction:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/shegd-lesh_only-1.png"></p>
+<p><img src="../reference/figures/shegd/lesh_only-1.png"></p>
 <p>By accessing the concrete result through
 <code>lesh.m$interaction</code>, which returns a
 <code>tibble</code>.</p>
