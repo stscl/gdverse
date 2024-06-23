@@ -31,8 +31,8 @@ Full document of the most recent release of **gdverse** is online:
 
 Current models and functions provided by **gdverse** are:
 
-|   geodetector model   |   *gdverse* function   |   support status   |
-|------------------------|-----------------------|--------------------|
+|   *geodetector model*   |   *gdverse function*   |   *support status*   |
+|--------------------------|-------------------------|----------------------|
 |  **GeoDetector**  |        `gd()`         |          ✔️        |
 |  **OPGD**  |        `opgd()`         |          ✔️        |
 |  **GOZH**  |        `gozh()`         |          ✔️        |

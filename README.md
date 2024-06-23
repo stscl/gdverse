@@ -19,16 +19,16 @@ Full document of the most recent release of **gdverse** is online:
 
 Current models and functions provided by **gdverse** are:
 
-| geodetector model | *gdverse* function | support status |
-|-------------------|--------------------|----------------|
-| **GeoDetector**   | `gd()`             | ✔️             |
-| **OPGD**          | `opgd()`           | ✔️             |
-| **GOZH**          | `gozh()`           | ✔️             |
-| **LESH**          | `lesh()`           | ✔️             |
-| **SPADE**         | `spade()`          | ✔️             |
-| **IDSA**          | `idsa()`           | ❌             |
-| **RGD**           | `rgd()`            | ✔️             |
-| **RID**           | `rid()`            | ❌             |
+| *geodetector model* | *gdverse function* | *support status* |
+|---------------------|--------------------|------------------|
+| **GeoDetector**     | `gd()`             | ✔️               |
+| **OPGD**            | `opgd()`           | ✔️               |
+| **GOZH**            | `gozh()`           | ✔️               |
+| **LESH**            | `lesh()`           | ✔️               |
+| **SPADE**           | `spade()`          | ✔️               |
+| **IDSA**            | `idsa()`           | ❌               |
+| **RGD**             | `rgd()`            | ✔️               |
+| **RID**             | `rid()`            | ❌               |
 
 ## Installation
 
@@ -78,7 +78,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.26 sec elapsed
+## 3.64 sec elapsed
 ```
 
 ``` r
