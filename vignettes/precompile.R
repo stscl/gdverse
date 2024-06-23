@@ -13,5 +13,8 @@ knitr::knit("vignettes/RGD.Rmd.orig",
 knitr::knit("vignettes/SPADE.Rmd.orig",
             "vignettes/SPADE.Rmd")
 
+knitr::knit("vignettes/SHEGD.Rmd.orig",
+            "vignettes/SHEGD.Rmd")
+
 # knitr::knit("./README.Rmd",
 #             "./README.md")

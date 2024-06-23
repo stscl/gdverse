@@ -73,8 +73,8 @@ print.interaction_lesh = \(x, ...) {
 #' for normal display.
 #'
 #' @param x x Return by `lesh()`.
-#' @param scatter (optional) Whether to draw the interaction direction diagram. Default is `TRUE`.
 #' @param pie (optional) Whether to draw the interaction contributions. Default is `TRUE`.
+#' @param scatter (optional) Whether to draw the interaction direction diagram. Default is `FALSE`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #' @param scatter_alpha (optional) Picture transparency. Default is `1`.
 #'
@@ -91,7 +91,7 @@ print.interaction_lesh = \(x, ...) {
 #' plot(g)
 #' }
 #'
-plot.interaction_lesh = \(x,scatter = TRUE,pie = TRUE,
+plot.interaction_lesh = \(x,pie = TRUE,scatter = FALSE,
                           ..., scatter_alpha = 1) {
   fig_scatter = NULL
   fig_pie = NULL
@@ -141,8 +141,7 @@ plot.interaction_lesh = \(x,scatter = TRUE,pie = TRUE,
     fig_p = cowplot::plot_grid(fig_scatter, fig_pie, nrow = 1,
                                label_fontfamily = 'serif',
                                labels = paste0('(',letters[1:2],')'),
-                               label_fontface = 'plain',label_size = 10,
-                               hjust = -1.5,align = 'hv')
+                               label_fontface = 'plain')
     return(fig_p)
   }
 }

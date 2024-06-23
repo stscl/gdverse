@@ -4,14 +4,14 @@
 \alias{plot.interaction_lesh}
 \title{plot LESH model interaction result}
 \usage{
-\method{plot}{interaction_lesh}(x, scatter = TRUE, pie = TRUE, ..., scatter_alpha = 1)
+\method{plot}{interaction_lesh}(x, pie = TRUE, scatter = FALSE, ..., scatter_alpha = 1)
 }
 \arguments{
 \item{x}{x Return by \code{lesh()}.}
 
-\item{scatter}{(optional) Whether to draw the interaction direction diagram. Default is \code{TRUE}.}
-
 \item{pie}{(optional) Whether to draw the interaction contributions. Default is \code{TRUE}.}
+
+\item{scatter}{(optional) Whether to draw the interaction direction diagram. Default is \code{FALSE}.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 
