@@ -82,6 +82,9 @@
     <loc>https://spatlyu.github.io/gdverse/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/plot.ecological_detector.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/plot.factor_detector.html</loc>
   </url>
   <url>
@@ -89,6 +92,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/plot.interaction_lesh.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/plot.risk_detector.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/print.ecological_detector.html</loc>
