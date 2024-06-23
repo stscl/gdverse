@@ -87,6 +87,62 @@
 
 <p>The goal of <strong>gdverse</strong> is to <em>support the geodetector model and its variants</em>.</p>
 <div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>Full document of the most recent release of <strong>gdverse</strong> is online: <a href="https://spatlyu.github.io/gdverse/" class="uri">https://spatlyu.github.io/gdverse/</a></p>
+<p>Current models and functions provided by <strong>gdverse</strong> are:</p>
+<table class="table">
+<thead><tr class="header">
+<th>geodetector model</th>
+<th>
+<em>gdverse</em> function</th>
+<th>support status</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>GeoDetector</strong></td>
+<td><code><a href="reference/gd.html">gd()</a></code></td>
+<td>✔️</td>
+</tr>
+<tr class="even">
+<td><strong>OPGD</strong></td>
+<td><code><a href="reference/opgd.html">opgd()</a></code></td>
+<td>✔️</td>
+</tr>
+<tr class="odd">
+<td><strong>GOZH</strong></td>
+<td><code><a href="reference/gozh.html">gozh()</a></code></td>
+<td>✔️</td>
+</tr>
+<tr class="even">
+<td><strong>LESH</strong></td>
+<td><code><a href="reference/lesh.html">lesh()</a></code></td>
+<td>✔️</td>
+</tr>
+<tr class="odd">
+<td><strong>SPADE</strong></td>
+<td><code><a href="reference/spade.html">spade()</a></code></td>
+<td>✔️</td>
+</tr>
+<tr class="even">
+<td><strong>IDSA</strong></td>
+<td><code>idsa()</code></td>
+<td>❌</td>
+</tr>
+<tr class="odd">
+<td><strong>RGD</strong></td>
+<td><code><a href="reference/rgd.html">rgd()</a></code></td>
+<td>✔️</td>
+</tr>
+<tr class="even">
+<td><strong>RID</strong></td>
+<td><code>rid()</code></td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of <strong>gdverse</strong> from <a href="https://github.com/SpatLyu/gdverse" class="external-link">github</a> with:</p>
@@ -96,9 +152,10 @@
 <p>or install <strong>gdverse</strong> from <a href="https://spatlyu.r-universe.dev/gdverse" class="external-link">r-universe</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'gdverse'</span>, repos<span class="op">=</span><span class="st">'https://spatlyu.r-universe.dev'</span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
-</h3>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
@@ -118,7 +175,6 @@
 <span><span class="co">## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.  2.79</span></span>
 <span><span class="co">## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93</span></span>
 <span><span class="co">## # ℹ 1 more variable: aspect &lt;dbl&gt;</span></span></code></pre></div>
-</div>
 <div class="section level3">
 <h3 id="opgd-model">OPGD model<a class="anchor" aria-label="anchor" href="#opgd-model"></a>
 </h3>
@@ -128,7 +184,7 @@
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.25 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 3.26 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
