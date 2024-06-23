@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.5
+
+## Major changes
+
+* Using `kableExtra::kable()` to unify console and rmarkdown output.
+
 # gdverse 0.1.4
 
 ## Major changes

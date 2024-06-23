@@ -50,18 +50,18 @@ lesh = \(formula,data,cores = 1,...){
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom pander pander
+#' @importFrom kableExtra kable
 #' @importFrom dplyr mutate select
 #' @export
 print.interaction_lesh = \(x, ...) {
   cat("\n    Spatial Interaction Association Detect    \n",
-      "\n                   LESH Model                 \n")
+      "\n                   LESH Model                   ")
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
                                                   rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20))),
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
-  pander::pander(x)
+  print(kableExtra::kable(x,format = "markdown",digits = 16,align = 'c'))
 }
 
 #' @title plot LESH model interaction result

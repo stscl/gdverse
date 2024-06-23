@@ -86,10 +86,10 @@ fvc_opgd[[2]]
 
 You can use `plot()` to visualize the result.
 
-```{r plot_fd,fig.width=5,fig.height=3.5}
+```{r fd,fig.width=5,fig.height=3.5}
 plot(fvc_opgd[[1]])
 ```
 
-```{r plot_it,fig.width=6.5,fig.height=4.25}
+```{r id,fig.width=6.5,fig.height=4.25}
 plot(fvc_opgd[[2]])
 ```

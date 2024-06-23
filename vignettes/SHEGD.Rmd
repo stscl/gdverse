@@ -37,27 +37,17 @@ gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
 gozh.uvi
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector
+##           Factor detector         
+## 
+## |   variable    | Q-statistic |   P-value    |
+## |:-------------:|:-----------:|:------------:|
+## | Precipitation | 0.87255056  | 4.515558e-10 |
+## |  Climatezone  | 0.82129550  | 2.500763e-10 |
+## |  Tempchange   | 0.33324945  | 1.121618e-10 |
+## |  Popdensity   | 0.22321863  | 2.998225e-10 |
+## |    Mining     | 0.13982859  | 5.985420e-11 |
+## |      GDP      | 0.09170153  | 3.958823e-10 |
 ```
-
-
------------------------------------------
-   variable      Q-statistic    P-value  
---------------- ------------- -----------
- Precipitation     0.8726      4.516e-10 
-
-  Climatezone      0.8213      2.501e-10 
-
-  Tempchange       0.3332      1.122e-10 
-
-  Popdensity       0.2232      2.998e-10 
-
-    Mining         0.1398      5.985e-11 
-
-      GDP          0.0917      3.959e-10 
------------------------------------------
-
-
 
 ``` r
 plot(gozh.uvi)
@@ -73,45 +63,26 @@ gozh.bi = gozh(NDVIchange ~ ., data = ndvi,type = 'interaction')
 gozh.bi
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector
+##          Interaction detector         
+## 
+## |    Interactive variable     |    Interaction     |
+## |:---------------------------:|:------------------:|
+## |    Climatezone ∩ Mining     |    Weaken, uni-    |
+## |  Climatezone ∩ Tempchange   |    Weaken, uni-    |
+## | Climatezone ∩ Precipitation |    Enhance, bi-    |
+## |      Climatezone ∩ GDP      |    Enhance, bi-    |
+## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |
+## |     Mining ∩ Tempchange     |    Enhance, bi-    |
+## |   Mining ∩ Precipitation    |    Weaken, uni-    |
+## |        Mining ∩ GDP         |    Enhance, bi-    |
+## |     Mining ∩ Popdensity     |    Enhance, bi-    |
+## | Tempchange ∩ Precipitation  |    Enhance, bi-    |
+## |      Tempchange ∩ GDP       | Enhance, nonlinear |
+## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |
+## |     Precipitation ∩ GDP     |    Enhance, bi-    |
+## | Precipitation ∩ Popdensity  |    Enhance, bi-    |
+## |      GDP ∩ Popdensity       |    Weaken, uni-    |
 ```
-
-
---------------------------------------------------
-    Interactive variable          Interaction     
------------------------------ --------------------
-    Climatezone ∩ Mining          Weaken, uni-    
-
-  Climatezone ∩ Tempchange        Weaken, uni-    
-
- Climatezone ∩ Precipitation      Enhance, bi-    
-
-      Climatezone ∩ GDP           Enhance, bi-    
-
-  Climatezone ∩ Popdensity        Enhance, bi-    
-
-     Mining ∩ Tempchange          Enhance, bi-    
-
-   Mining ∩ Precipitation         Weaken, uni-    
-
-        Mining ∩ GDP              Enhance, bi-    
-
-     Mining ∩ Popdensity          Enhance, bi-    
-
- Tempchange ∩ Precipitation       Enhance, bi-    
-
-      Tempchange ∩ GDP         Enhance, nonlinear 
-
-   Tempchange ∩ Popdensity        Enhance, bi-    
-
-     Precipitation ∩ GDP          Enhance, bi-    
-
- Precipitation ∩ Popdensity       Enhance, bi-    
-
-      GDP ∩ Popdensity            Weaken, uni-    
---------------------------------------------------
-
-
 
 ``` r
 plot(gozh.bi)
@@ -128,45 +99,26 @@ lesh.m
 ## 
 ##     Spatial Interaction Association Detect    
 ##  
-##                    LESH Model
+##                    LESH Model                   
+## 
+## |    Interactive variable     |    Interaction     |
+## |:---------------------------:|:------------------:|
+## |    Climatezone ∩ Mining     |    Weaken, uni-    |
+## |  Climatezone ∩ Tempchange   |    Weaken, uni-    |
+## | Climatezone ∩ Precipitation |    Enhance, bi-    |
+## |      Climatezone ∩ GDP      |    Enhance, bi-    |
+## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |
+## |     Mining ∩ Tempchange     |    Enhance, bi-    |
+## |   Mining ∩ Precipitation    |    Weaken, uni-    |
+## |        Mining ∩ GDP         |    Enhance, bi-    |
+## |     Mining ∩ Popdensity     |    Enhance, bi-    |
+## | Tempchange ∩ Precipitation  |    Enhance, bi-    |
+## |      Tempchange ∩ GDP       | Enhance, nonlinear |
+## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |
+## |     Precipitation ∩ GDP     |    Enhance, bi-    |
+## | Precipitation ∩ Popdensity  |    Enhance, bi-    |
+## |      GDP ∩ Popdensity       |    Weaken, uni-    |
 ```
-
-
---------------------------------------------------
-    Interactive variable          Interaction     
------------------------------ --------------------
-    Climatezone ∩ Mining          Weaken, uni-    
-
-  Climatezone ∩ Tempchange        Weaken, uni-    
-
- Climatezone ∩ Precipitation      Enhance, bi-    
-
-      Climatezone ∩ GDP           Enhance, bi-    
-
-  Climatezone ∩ Popdensity        Enhance, bi-    
-
-     Mining ∩ Tempchange          Enhance, bi-    
-
-   Mining ∩ Precipitation         Weaken, uni-    
-
-        Mining ∩ GDP              Enhance, bi-    
-
-     Mining ∩ Popdensity          Enhance, bi-    
-
- Tempchange ∩ Precipitation       Enhance, bi-    
-
-      Tempchange ∩ GDP         Enhance, nonlinear 
-
-   Tempchange ∩ Popdensity        Enhance, bi-    
-
-     Precipitation ∩ GDP          Enhance, bi-    
-
- Precipitation ∩ Popdensity       Enhance, bi-    
-
-      GDP ∩ Popdensity            Weaken, uni-    
---------------------------------------------------
-
-
 
 ``` r
 plot(lesh.m, pie = TRUE, scatter = TRUE)

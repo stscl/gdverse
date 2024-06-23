@@ -121,12 +121,13 @@ gd = \(formula,data,type = "factor",...){
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom pander pander
+#' @importFrom kableExtra kable
 #' @export
 print.factor_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
-      "\n          Factor detector         \n")
-  pander::pander(x$factor)
+      "\n          Factor detector         ")
+  # pander::pander(x$factor)
+  print(kableExtra::kable(x$factor,format = "markdown",digits = 16,align = 'c'))
 }
 
 #' @title print interaction detector
@@ -138,18 +139,19 @@ print.factor_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom pander pander
+#' @importFrom kableExtra kable
 #' @importFrom dplyr mutate select
 #' @export
 print.interaction_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
-      "\n         Interaction detector          \n")
+      "\n         Interaction detector         ")
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
                                                   rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20))),
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
-  pander::pander(x)
+  # pander::pander(x)
+  print(kableExtra::kable(x,format = "markdown",align = 'c'))
 }
 
 #' @title print risk detector
@@ -161,7 +163,7 @@ print.interaction_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom knitr kable
+#' @importFrom kableExtra kable
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr mutate select count pull filter
 #' @export
@@ -183,12 +185,10 @@ print.risk_detector = \(x, ...) {
     names(matt) = mattname
     return(matt)
   }
-  cat('\n')
   for (i in xvar){
-    cat('--------------------------------------\n')
-    cat(sprintf("Variable %s:",i))
-    print(knitr::kable(rd2mat(x,i), format = "markdown"))
-    #cat('--------------------------------------\n')
+    cat(sprintf("\n Variable %s:",i))
+    # print(knitr::kable(rd2mat(x,i),format = "markdown"))
+    print(kableExtra::kable(rd2mat(x,i),format = "markdown",align = 'c'))
   }
 }
 
@@ -201,13 +201,13 @@ print.risk_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom knitr kable
+#' @importFrom kableExtra kable
 #' @importFrom tidyr pivot_wider
 #' @importFrom dplyr select all_of
 #' @export
 print.ecological_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
-      "\n          ecological detector          \n")
+      "\n          ecological detector         ")
   x = dplyr::select(x$ecological,
                     dplyr::all_of(c('variable1','variable2','Ecological')))
   ed2mat = \(x){
@@ -221,7 +221,6 @@ print.ecological_detector = \(x, ...) {
     rownames(matt) = matname
     return(matt)
   }
-  cat('\n')
-  cat('--------------------------------------\n')
-  print(knitr::kable(ed2mat(x), format = "markdown"))
+  # print(knitr::kable(ed2mat(x),format = "markdown"))
+  print(kableExtra::kable(ed2mat(x),format = "markdown",align = 'c'))
 }

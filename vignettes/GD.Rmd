@@ -168,21 +168,14 @@ fd = gd(incidence ~ watershed + elevation + soiltype,
 fd
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector
+##           Factor detector         
+## 
+## | variable  | Q-statistic |   P-value   |
+## |:---------:|:-----------:|:-----------:|
+## | watershed |  0.6377737  | 0.000128803 |
+## | elevation |  0.6067087  | 0.043382244 |
+## | soiltype  |  0.3857168  | 0.372145486 |
 ```
-
-
--------------------------------------
- variable    Q-statistic    P-value  
------------ ------------- -----------
- watershed     0.6378      0.0001288 
-
- elevation     0.6067       0.04338  
-
- soiltype      0.3857       0.3721   
--------------------------------------
-
-
 
 ``` r
 plot(fd)
@@ -199,21 +192,14 @@ id = gd(incidence ~ watershed + elevation + soiltype,
 id
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector
+##          Interaction detector         
+## 
+## | Interactive variable  | Interaction  |
+## |:---------------------:|:------------:|
+## | watershed ∩ elevation | Enhance, bi- |
+## | watershed ∩ soiltype  | Enhance, bi- |
+## | elevation ∩ soiltype  | Enhance, bi- |
 ```
-
-
---------------------------------------
- Interactive variable    Interaction  
------------------------ --------------
- watershed ∩ elevation   Enhance, bi- 
-
- watershed ∩ soiltype    Enhance, bi- 
-
- elevation ∩ soiltype    Enhance, bi- 
---------------------------------------
-
-
 
 ``` r
 plot(id)
@@ -232,39 +218,38 @@ rd
 ##  
 ##              Risk detector             
 ## 
-## --------------------------------------
-## Variable elevation:
+##  Variable elevation:
 ## 
-## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |
-## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|
-## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |
-## |zone3 |Yes   |No    |NA    |NA    |NA    |NA    |
-## |zone4 |Yes   |Yes   |Yes   |NA    |NA    |NA    |
-## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |
-## |zone6 |Yes   |Yes   |Yes   |Yes   |Yes   |NA    |
-## |zone7 |Yes   |Yes   |Yes   |Yes   |Yes   |Yes   |
-## --------------------------------------
-## Variable soiltype:
+## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  No   |  NA   |  NA   |  NA   |  NA   |
+## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |
+## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
+## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |
+## | zone7 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |
 ## 
-## |zone  |zone1 |zone2 |zone3 |zone4 |
-## |:-----|:-----|:-----|:-----|:-----|
-## |zone2 |Yes   |NA    |NA    |NA    |
-## |zone3 |Yes   |No    |NA    |NA    |
-## |zone4 |Yes   |Yes   |Yes   |NA    |
-## |zone5 |No    |Yes   |Yes   |Yes   |
-## --------------------------------------
-## Variable watershed:
+##  Variable soiltype:
 ## 
-## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |zone7 |zone8 |
-## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
-## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |NA    |
-## |zone3 |Yes   |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |
-## |zone4 |Yes   |No    |Yes   |NA    |NA    |NA    |NA    |NA    |
-## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |NA    |NA    |
-## |zone6 |Yes   |Yes   |Yes   |Yes   |No    |NA    |NA    |NA    |
-## |zone7 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |NA    |NA    |
-## |zone8 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |NA    |
-## |zone9 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |Yes   |
+## | zone  | zone1 | zone2 | zone3 | zone4 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  No   |  NA   |  NA   |
+## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |
+## | zone5 |  No   |  Yes  |  Yes  |  Yes  |
+## 
+##  Variable watershed:
+## 
+## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 | zone7 | zone8 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone4 |  Yes  |  No   |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |
+## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  No   |  NA   |  NA   |  NA   |
+## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
+## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |
+## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |
 ```
 
 ``` r
@@ -284,39 +269,38 @@ rd99
 ##  
 ##              Risk detector             
 ## 
-## --------------------------------------
-## Variable elevation:
+##  Variable elevation:
 ## 
-## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |
-## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|
-## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |
-## |zone3 |Yes   |No    |NA    |NA    |NA    |NA    |
-## |zone4 |Yes   |Yes   |Yes   |NA    |NA    |NA    |
-## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |
-## |zone6 |Yes   |Yes   |Yes   |Yes   |Yes   |NA    |
-## |zone7 |Yes   |Yes   |Yes   |Yes   |Yes   |Yes   |
-## --------------------------------------
-## Variable soiltype:
+## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  No   |  NA   |  NA   |  NA   |  NA   |
+## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |
+## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
+## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |
+## | zone7 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |
 ## 
-## |zone  |zone1 |zone2 |zone3 |zone4 |
-## |:-----|:-----|:-----|:-----|:-----|
-## |zone2 |Yes   |NA    |NA    |NA    |
-## |zone3 |Yes   |No    |NA    |NA    |
-## |zone4 |Yes   |Yes   |Yes   |NA    |
-## |zone5 |No    |Yes   |Yes   |Yes   |
-## --------------------------------------
-## Variable watershed:
+##  Variable soiltype:
 ## 
-## |zone  |zone1 |zone2 |zone3 |zone4 |zone5 |zone6 |zone7 |zone8 |
-## |:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|:-----|
-## |zone2 |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |NA    |
-## |zone3 |Yes   |Yes   |NA    |NA    |NA    |NA    |NA    |NA    |
-## |zone4 |Yes   |No    |Yes   |NA    |NA    |NA    |NA    |NA    |
-## |zone5 |Yes   |Yes   |Yes   |Yes   |NA    |NA    |NA    |NA    |
-## |zone6 |Yes   |Yes   |Yes   |Yes   |No    |NA    |NA    |NA    |
-## |zone7 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |NA    |NA    |
-## |zone8 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |NA    |
-## |zone9 |Yes   |Yes   |No    |Yes   |Yes   |Yes   |No    |Yes   |
+## | zone  | zone1 | zone2 | zone3 | zone4 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  No   |  NA   |  NA   |
+## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |
+## | zone5 |  No   |  Yes  |  Yes  |  Yes  |
+## 
+##  Variable watershed:
+## 
+## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 | zone7 | zone8 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone4 |  Yes  |  No   |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |
+## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  No   |  NA   |  NA   |  NA   |
+## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
+## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |
+## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |
 ```
 
 ### Ecological detector
@@ -328,15 +312,12 @@ ed = gd(incidence ~ watershed + elevation + soiltype,
 ed
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           ecological detector          
+##           ecological detector         
 ## 
-## --------------------------------------
-## 
-## 
-## |          |elevation |soiltype |
-## |:---------|:---------|:--------|
-## |watershed |No        |No       |
-## |elevation |NA        |No       |
+## |          | elevation | soiltype |
+## |:---------|:---------:|:--------:|
+## |watershed |    No     |    No    |
+## |elevation |    NA     |    No    |
 ```
 
 ``` r
@@ -354,13 +335,10 @@ ed99 = gd(incidence ~ watershed + elevation + soiltype,
 ed99
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           ecological detector          
+##           ecological detector         
 ## 
-## --------------------------------------
-## 
-## 
-## |          |elevation |soiltype |
-## |:---------|:---------|:--------|
-## |watershed |No        |No       |
-## |elevation |NA        |No       |
+## |          | elevation | soiltype |
+## |:---------|:---------:|:--------:|
+## |watershed |    No     |    No    |
+## |elevation |    NA     |    No    |
 ```

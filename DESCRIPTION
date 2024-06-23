@@ -1,6 +1,6 @@
 Package: gdverse
 Title: Geographical detector models
-Version: 0.1.4.9000
+Version: 0.1.5
 Authors@R: 
     person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-6003-3800"))
@@ -16,9 +16,8 @@ Imports:
     forcats,
     geosphere,
     ggplot2,
-    knitr,
+    kableExtra,
     magrittr,
-    pander,
     parallel,
     PieGlyph,
     purrr,
@@ -30,14 +29,12 @@ Imports:
     utils
 URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
 Suggests: 
-    ggspatial,
+    knitr,
     rmarkdown,
     sf,
-    sfdep,
     terra,
     tidyterra,
-    tidyverse,
-    tmap
+    tidyverse
 VignetteBuilder: knitr
 Depends: 
     R (>= 4.1.0)

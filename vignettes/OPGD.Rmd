@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 4.19 sec elapsed
+## 4.11 sec elapsed
 ```
 
 
@@ -149,185 +149,99 @@ Then, we can run geodetector model by `gd()` function.
 gd(fvc ~ .,data = new.fvc,type = 'factor')
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector
+##           Factor detector         
+## 
+## | variable | Q-statistic |   P-value    |
+## |:--------:|:-----------:|:------------:|
+## |  presum  | 0.66090313  | 8.344327e-10 |
+## |   lulc   | 0.65972601  | 8.781502e-10 |
+## |  premin  | 0.46550058  | 3.606232e-10 |
+## |  tmpmin  | 0.43559812  | 8.536544e-10 |
+## |  tmpmax  | 0.25364304  | 7.848540e-10 |
+## |  slope   | 0.23570512  | 8.826343e-10 |
+## |   elev   | 0.23554763  | 7.286761e-10 |
+## |  tmpavg  | 0.22139249  | 7.615818e-10 |
+## |   pop    | 0.19529044  | 2.428073e-10 |
+## |  premax  | 0.14507334  | 5.960950e-10 |
+## |  aspect  | 0.01859967  | 7.490531e-01 |
+## |   ntl    | 0.01725685  | 1.384075e-01 |
 ```
-
-
-------------------------------------
- variable   Q-statistic    P-value  
----------- ------------- -----------
-  presum      0.6609      8.344e-10 
-
-   lulc       0.6597      8.782e-10 
-
-  premin      0.4655      3.606e-10 
-
-  tmpmin      0.4356      8.537e-10 
-
-  tmpmax      0.2536      7.849e-10 
-
-  slope       0.2357      8.826e-10 
-
-   elev       0.2355      7.287e-10 
-
-  tmpavg      0.2214      7.616e-10 
-
-   pop        0.1953      2.428e-10 
-
-  premax      0.1451      5.961e-10 
-
-  aspect      0.0186       0.7491   
-
-   ntl        0.01726      0.1384   
-------------------------------------
-
-
 
 ``` r
 gd(fvc ~ .,data = new.fvc,type = 'interaction')
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector
+##          Interaction detector         
+## 
+## | Interactive variable |    Interaction     |
+## |:--------------------:|:------------------:|
+## |    lulc ∩ aspect     | Enhance, nonlinear |
+## |     lulc ∩ elev      |    Enhance, bi-    |
+## |      lulc ∩ ntl      | Enhance, nonlinear |
+## |      lulc ∩ pop      |    Enhance, bi-    |
+## |    lulc ∩ premax     |    Enhance, bi-    |
+## |    lulc ∩ premin     |    Enhance, bi-    |
+## |    lulc ∩ presum     |    Enhance, bi-    |
+## |     lulc ∩ slope     |    Enhance, bi-    |
+## |    lulc ∩ tmpavg     |    Enhance, bi-    |
+## |    lulc ∩ tmpmax     |    Enhance, bi-    |
+## |    lulc ∩ tmpmin     |    Enhance, bi-    |
+## |    aspect ∩ elev     | Enhance, nonlinear |
+## |     aspect ∩ ntl     | Enhance, nonlinear |
+## |     aspect ∩ pop     | Enhance, nonlinear |
+## |   aspect ∩ premax    | Enhance, nonlinear |
+## |   aspect ∩ premin    | Enhance, nonlinear |
+## |   aspect ∩ presum    |    Enhance, bi-    |
+## |    aspect ∩ slope    | Enhance, nonlinear |
+## |   aspect ∩ tmpavg    | Enhance, nonlinear |
+## |   aspect ∩ tmpmax    | Enhance, nonlinear |
+## |   aspect ∩ tmpmin    | Enhance, nonlinear |
+## |      elev ∩ ntl      | Enhance, nonlinear |
+## |      elev ∩ pop      | Enhance, nonlinear |
+## |    elev ∩ premax     | Enhance, nonlinear |
+## |    elev ∩ premin     |    Enhance, bi-    |
+## |    elev ∩ presum     |    Enhance, bi-    |
+## |     elev ∩ slope     |    Enhance, bi-    |
+## |    elev ∩ tmpavg     |    Enhance, bi-    |
+## |    elev ∩ tmpmax     | Enhance, nonlinear |
+## |    elev ∩ tmpmin     |    Enhance, bi-    |
+## |      ntl ∩ pop       | Enhance, nonlinear |
+## |     ntl ∩ premax     | Enhance, nonlinear |
+## |     ntl ∩ premin     | Enhance, nonlinear |
+## |     ntl ∩ presum     | Enhance, nonlinear |
+## |     ntl ∩ slope      | Enhance, nonlinear |
+## |     ntl ∩ tmpavg     | Enhance, nonlinear |
+## |     ntl ∩ tmpmax     | Enhance, nonlinear |
+## |     ntl ∩ tmpmin     | Enhance, nonlinear |
+## |     pop ∩ premax     | Enhance, nonlinear |
+## |     pop ∩ premin     |    Enhance, bi-    |
+## |     pop ∩ presum     |    Enhance, bi-    |
+## |     pop ∩ slope      |    Enhance, bi-    |
+## |     pop ∩ tmpavg     | Enhance, nonlinear |
+## |     pop ∩ tmpmax     | Enhance, nonlinear |
+## |     pop ∩ tmpmin     |    Enhance, bi-    |
+## |   premax ∩ premin    | Enhance, nonlinear |
+## |   premax ∩ presum    |    Enhance, bi-    |
+## |    premax ∩ slope    | Enhance, nonlinear |
+## |   premax ∩ tmpavg    | Enhance, nonlinear |
+## |   premax ∩ tmpmax    | Enhance, nonlinear |
+## |   premax ∩ tmpmin    | Enhance, nonlinear |
+## |   premin ∩ presum    |    Enhance, bi-    |
+## |    premin ∩ slope    |    Enhance, bi-    |
+## |   premin ∩ tmpavg    |    Enhance, bi-    |
+## |   premin ∩ tmpmax    |    Enhance, bi-    |
+## |   premin ∩ tmpmin    |    Enhance, bi-    |
+## |    presum ∩ slope    |    Enhance, bi-    |
+## |   presum ∩ tmpavg    |    Enhance, bi-    |
+## |   presum ∩ tmpmax    |    Enhance, bi-    |
+## |   presum ∩ tmpmin    |    Enhance, bi-    |
+## |    slope ∩ tmpavg    |    Enhance, bi-    |
+## |    slope ∩ tmpmax    |    Enhance, bi-    |
+## |    slope ∩ tmpmin    |    Enhance, bi-    |
+## |   tmpavg ∩ tmpmax    | Enhance, nonlinear |
+## |   tmpavg ∩ tmpmin    |    Enhance, bi-    |
+## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |
 ```
-
-
--------------------------------------------
- Interactive variable      Interaction     
----------------------- --------------------
-    lulc ∩ aspect       Enhance, nonlinear 
-
-     lulc ∩ elev           Enhance, bi-    
-
-      lulc ∩ ntl        Enhance, nonlinear 
-
-      lulc ∩ pop           Enhance, bi-    
-
-    lulc ∩ premax          Enhance, bi-    
-
-    lulc ∩ premin          Enhance, bi-    
-
-    lulc ∩ presum          Enhance, bi-    
-
-     lulc ∩ slope          Enhance, bi-    
-
-    lulc ∩ tmpavg          Enhance, bi-    
-
-    lulc ∩ tmpmax          Enhance, bi-    
-
-    lulc ∩ tmpmin          Enhance, bi-    
-
-    aspect ∩ elev       Enhance, nonlinear 
-
-     aspect ∩ ntl       Enhance, nonlinear 
-
-     aspect ∩ pop       Enhance, nonlinear 
-
-   aspect ∩ premax      Enhance, nonlinear 
-
-   aspect ∩ premin      Enhance, nonlinear 
-
-   aspect ∩ presum         Enhance, bi-    
-
-    aspect ∩ slope      Enhance, nonlinear 
-
-   aspect ∩ tmpavg      Enhance, nonlinear 
-
-   aspect ∩ tmpmax      Enhance, nonlinear 
-
-   aspect ∩ tmpmin      Enhance, nonlinear 
-
-      elev ∩ ntl        Enhance, nonlinear 
-
-      elev ∩ pop        Enhance, nonlinear 
-
-    elev ∩ premax       Enhance, nonlinear 
-
-    elev ∩ premin          Enhance, bi-    
-
-    elev ∩ presum          Enhance, bi-    
-
-     elev ∩ slope          Enhance, bi-    
-
-    elev ∩ tmpavg          Enhance, bi-    
-
-    elev ∩ tmpmax       Enhance, nonlinear 
-
-    elev ∩ tmpmin          Enhance, bi-    
-
-      ntl ∩ pop         Enhance, nonlinear 
-
-     ntl ∩ premax       Enhance, nonlinear 
-
-     ntl ∩ premin       Enhance, nonlinear 
-
-     ntl ∩ presum       Enhance, nonlinear 
-
-     ntl ∩ slope        Enhance, nonlinear 
-
-     ntl ∩ tmpavg       Enhance, nonlinear 
-
-     ntl ∩ tmpmax       Enhance, nonlinear 
-
-     ntl ∩ tmpmin       Enhance, nonlinear 
-
-     pop ∩ premax       Enhance, nonlinear 
-
-     pop ∩ premin          Enhance, bi-    
-
-     pop ∩ presum          Enhance, bi-    
-
-     pop ∩ slope           Enhance, bi-    
-
-     pop ∩ tmpavg       Enhance, nonlinear 
-
-     pop ∩ tmpmax       Enhance, nonlinear 
-
-     pop ∩ tmpmin          Enhance, bi-    
-
-   premax ∩ premin      Enhance, nonlinear 
-
-   premax ∩ presum         Enhance, bi-    
-
-    premax ∩ slope      Enhance, nonlinear 
-
-   premax ∩ tmpavg      Enhance, nonlinear 
-
-   premax ∩ tmpmax      Enhance, nonlinear 
-
-   premax ∩ tmpmin      Enhance, nonlinear 
-
-   premin ∩ presum         Enhance, bi-    
-
-    premin ∩ slope         Enhance, bi-    
-
-   premin ∩ tmpavg         Enhance, bi-    
-
-   premin ∩ tmpmax         Enhance, bi-    
-
-   premin ∩ tmpmin         Enhance, bi-    
-
-    presum ∩ slope         Enhance, bi-    
-
-   presum ∩ tmpavg         Enhance, bi-    
-
-   presum ∩ tmpmax         Enhance, bi-    
-
-   presum ∩ tmpmin         Enhance, bi-    
-
-    slope ∩ tmpavg         Enhance, bi-    
-
-    slope ∩ tmpmax         Enhance, bi-    
-
-    slope ∩ tmpmin         Enhance, bi-    
-
-   tmpavg ∩ tmpmax      Enhance, nonlinear 
-
-   tmpavg ∩ tmpmin         Enhance, bi-    
-
-   tmpmax ∩ tmpmin      Enhance, nonlinear 
--------------------------------------------
-
-
 
 ### You can also use `opgd()` in one time to get result above.
 
@@ -359,185 +273,99 @@ str(fvc_opgd)
 fvc_opgd[[1]]
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector
+##           Factor detector         
+## 
+## | variable | Q-statistic |   P-value    |
+## |:--------:|:-----------:|:------------:|
+## |  presum  | 0.66090313  | 8.344327e-10 |
+## |   lulc   | 0.65972601  | 8.781502e-10 |
+## |  premin  | 0.46550058  | 3.606232e-10 |
+## |  tmpmin  | 0.43559812  | 8.536544e-10 |
+## |  tmpmax  | 0.25364304  | 7.848540e-10 |
+## |  slope   | 0.23570512  | 8.826343e-10 |
+## |   elev   | 0.23554763  | 7.286761e-10 |
+## |  tmpavg  | 0.22139249  | 7.615818e-10 |
+## |   pop    | 0.19529044  | 2.428073e-10 |
+## |  premax  | 0.14507334  | 5.960950e-10 |
+## |  aspect  | 0.01859967  | 7.490531e-01 |
+## |   ntl    | 0.01725685  | 1.384075e-01 |
 ```
-
-
-------------------------------------
- variable   Q-statistic    P-value  
----------- ------------- -----------
-  presum      0.6609      8.344e-10 
-
-   lulc       0.6597      8.782e-10 
-
-  premin      0.4655      3.606e-10 
-
-  tmpmin      0.4356      8.537e-10 
-
-  tmpmax      0.2536      7.849e-10 
-
-  slope       0.2357      8.826e-10 
-
-   elev       0.2355      7.287e-10 
-
-  tmpavg      0.2214      7.616e-10 
-
-   pop        0.1953      2.428e-10 
-
-  premax      0.1451      5.961e-10 
-
-  aspect      0.0186       0.7491   
-
-   ntl        0.01726      0.1384   
-------------------------------------
-
-
 
 ``` r
 fvc_opgd[[2]]
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector
+##          Interaction detector         
+## 
+## | Interactive variable |    Interaction     |
+## |:--------------------:|:------------------:|
+## |    lulc ∩ aspect     | Enhance, nonlinear |
+## |     lulc ∩ elev      |    Enhance, bi-    |
+## |      lulc ∩ ntl      | Enhance, nonlinear |
+## |      lulc ∩ pop      |    Enhance, bi-    |
+## |    lulc ∩ premax     |    Enhance, bi-    |
+## |    lulc ∩ premin     |    Enhance, bi-    |
+## |    lulc ∩ presum     |    Enhance, bi-    |
+## |     lulc ∩ slope     |    Enhance, bi-    |
+## |    lulc ∩ tmpavg     |    Enhance, bi-    |
+## |    lulc ∩ tmpmax     |    Enhance, bi-    |
+## |    lulc ∩ tmpmin     |    Enhance, bi-    |
+## |    aspect ∩ elev     | Enhance, nonlinear |
+## |     aspect ∩ ntl     | Enhance, nonlinear |
+## |     aspect ∩ pop     | Enhance, nonlinear |
+## |   aspect ∩ premax    | Enhance, nonlinear |
+## |   aspect ∩ premin    | Enhance, nonlinear |
+## |   aspect ∩ presum    |    Enhance, bi-    |
+## |    aspect ∩ slope    | Enhance, nonlinear |
+## |   aspect ∩ tmpavg    | Enhance, nonlinear |
+## |   aspect ∩ tmpmax    | Enhance, nonlinear |
+## |   aspect ∩ tmpmin    | Enhance, nonlinear |
+## |      elev ∩ ntl      | Enhance, nonlinear |
+## |      elev ∩ pop      | Enhance, nonlinear |
+## |    elev ∩ premax     | Enhance, nonlinear |
+## |    elev ∩ premin     |    Enhance, bi-    |
+## |    elev ∩ presum     |    Enhance, bi-    |
+## |     elev ∩ slope     |    Enhance, bi-    |
+## |    elev ∩ tmpavg     |    Enhance, bi-    |
+## |    elev ∩ tmpmax     | Enhance, nonlinear |
+## |    elev ∩ tmpmin     |    Enhance, bi-    |
+## |      ntl ∩ pop       | Enhance, nonlinear |
+## |     ntl ∩ premax     | Enhance, nonlinear |
+## |     ntl ∩ premin     | Enhance, nonlinear |
+## |     ntl ∩ presum     | Enhance, nonlinear |
+## |     ntl ∩ slope      | Enhance, nonlinear |
+## |     ntl ∩ tmpavg     | Enhance, nonlinear |
+## |     ntl ∩ tmpmax     | Enhance, nonlinear |
+## |     ntl ∩ tmpmin     | Enhance, nonlinear |
+## |     pop ∩ premax     | Enhance, nonlinear |
+## |     pop ∩ premin     |    Enhance, bi-    |
+## |     pop ∩ presum     |    Enhance, bi-    |
+## |     pop ∩ slope      |    Enhance, bi-    |
+## |     pop ∩ tmpavg     | Enhance, nonlinear |
+## |     pop ∩ tmpmax     | Enhance, nonlinear |
+## |     pop ∩ tmpmin     |    Enhance, bi-    |
+## |   premax ∩ premin    | Enhance, nonlinear |
+## |   premax ∩ presum    |    Enhance, bi-    |
+## |    premax ∩ slope    | Enhance, nonlinear |
+## |   premax ∩ tmpavg    | Enhance, nonlinear |
+## |   premax ∩ tmpmax    | Enhance, nonlinear |
+## |   premax ∩ tmpmin    | Enhance, nonlinear |
+## |   premin ∩ presum    |    Enhance, bi-    |
+## |    premin ∩ slope    |    Enhance, bi-    |
+## |   premin ∩ tmpavg    |    Enhance, bi-    |
+## |   premin ∩ tmpmax    |    Enhance, bi-    |
+## |   premin ∩ tmpmin    |    Enhance, bi-    |
+## |    presum ∩ slope    |    Enhance, bi-    |
+## |   presum ∩ tmpavg    |    Enhance, bi-    |
+## |   presum ∩ tmpmax    |    Enhance, bi-    |
+## |   presum ∩ tmpmin    |    Enhance, bi-    |
+## |    slope ∩ tmpavg    |    Enhance, bi-    |
+## |    slope ∩ tmpmax    |    Enhance, bi-    |
+## |    slope ∩ tmpmin    |    Enhance, bi-    |
+## |   tmpavg ∩ tmpmax    | Enhance, nonlinear |
+## |   tmpavg ∩ tmpmin    |    Enhance, bi-    |
+## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |
 ```
-
-
--------------------------------------------
- Interactive variable      Interaction     
----------------------- --------------------
-    lulc ∩ aspect       Enhance, nonlinear 
-
-     lulc ∩ elev           Enhance, bi-    
-
-      lulc ∩ ntl        Enhance, nonlinear 
-
-      lulc ∩ pop           Enhance, bi-    
-
-    lulc ∩ premax          Enhance, bi-    
-
-    lulc ∩ premin          Enhance, bi-    
-
-    lulc ∩ presum          Enhance, bi-    
-
-     lulc ∩ slope          Enhance, bi-    
-
-    lulc ∩ tmpavg          Enhance, bi-    
-
-    lulc ∩ tmpmax          Enhance, bi-    
-
-    lulc ∩ tmpmin          Enhance, bi-    
-
-    aspect ∩ elev       Enhance, nonlinear 
-
-     aspect ∩ ntl       Enhance, nonlinear 
-
-     aspect ∩ pop       Enhance, nonlinear 
-
-   aspect ∩ premax      Enhance, nonlinear 
-
-   aspect ∩ premin      Enhance, nonlinear 
-
-   aspect ∩ presum         Enhance, bi-    
-
-    aspect ∩ slope      Enhance, nonlinear 
-
-   aspect ∩ tmpavg      Enhance, nonlinear 
-
-   aspect ∩ tmpmax      Enhance, nonlinear 
-
-   aspect ∩ tmpmin      Enhance, nonlinear 
-
-      elev ∩ ntl        Enhance, nonlinear 
-
-      elev ∩ pop        Enhance, nonlinear 
-
-    elev ∩ premax       Enhance, nonlinear 
-
-    elev ∩ premin          Enhance, bi-    
-
-    elev ∩ presum          Enhance, bi-    
-
-     elev ∩ slope          Enhance, bi-    
-
-    elev ∩ tmpavg          Enhance, bi-    
-
-    elev ∩ tmpmax       Enhance, nonlinear 
-
-    elev ∩ tmpmin          Enhance, bi-    
-
-      ntl ∩ pop         Enhance, nonlinear 
-
-     ntl ∩ premax       Enhance, nonlinear 
-
-     ntl ∩ premin       Enhance, nonlinear 
-
-     ntl ∩ presum       Enhance, nonlinear 
-
-     ntl ∩ slope        Enhance, nonlinear 
-
-     ntl ∩ tmpavg       Enhance, nonlinear 
-
-     ntl ∩ tmpmax       Enhance, nonlinear 
-
-     ntl ∩ tmpmin       Enhance, nonlinear 
-
-     pop ∩ premax       Enhance, nonlinear 
-
-     pop ∩ premin          Enhance, bi-    
-
-     pop ∩ presum          Enhance, bi-    
-
-     pop ∩ slope           Enhance, bi-    
-
-     pop ∩ tmpavg       Enhance, nonlinear 
-
-     pop ∩ tmpmax       Enhance, nonlinear 
-
-     pop ∩ tmpmin          Enhance, bi-    
-
-   premax ∩ premin      Enhance, nonlinear 
-
-   premax ∩ presum         Enhance, bi-    
-
-    premax ∩ slope      Enhance, nonlinear 
-
-   premax ∩ tmpavg      Enhance, nonlinear 
-
-   premax ∩ tmpmax      Enhance, nonlinear 
-
-   premax ∩ tmpmin      Enhance, nonlinear 
-
-   premin ∩ presum         Enhance, bi-    
-
-    premin ∩ slope         Enhance, bi-    
-
-   premin ∩ tmpavg         Enhance, bi-    
-
-   premin ∩ tmpmax         Enhance, bi-    
-
-   premin ∩ tmpmin         Enhance, bi-    
-
-    presum ∩ slope         Enhance, bi-    
-
-   presum ∩ tmpavg         Enhance, bi-    
-
-   presum ∩ tmpmax         Enhance, bi-    
-
-   presum ∩ tmpmin         Enhance, bi-    
-
-    slope ∩ tmpavg         Enhance, bi-    
-
-    slope ∩ tmpmax         Enhance, bi-    
-
-    slope ∩ tmpmin         Enhance, bi-    
-
-   tmpavg ∩ tmpmax      Enhance, nonlinear 
-
-   tmpavg ∩ tmpmin         Enhance, bi-    
-
-   tmpmax ∩ tmpmin      Enhance, nonlinear 
--------------------------------------------
-
-
 
 You can use `plot()` to visualize the result.
 
@@ -546,11 +374,11 @@ You can use `plot()` to visualize the result.
 plot(fvc_opgd[[1]])
 ```
 
-![](../man/figures/opgd-plot_fd-1.png)
+![](../man/figures/opgd-fd-1.png)
 
 
 ``` r
 plot(fvc_opgd[[2]])
 ```
 
-![](../man/figures/opgd-plot_it-1.png)
+![](../man/figures/opgd-id-1.png)

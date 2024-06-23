@@ -78,30 +78,30 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.64 sec elapsed
+## 3.37 sec elapsed
 ```
 
 ``` r
 fvc_opgd
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector
+##           Factor detector         
+## 
+## | variable | Q-statistic |   P-value    |
+## |:--------:|:-----------:|:------------:|
+## |  presum  | 0.66090313  | 8.344327e-10 |
+## |   lulc   | 0.65972601  | 8.781502e-10 |
+## |  premin  | 0.46550058  | 3.606232e-10 |
+## |  tmpmin  | 0.43559812  | 8.536544e-10 |
+## |  tmpmax  | 0.25364304  | 7.848540e-10 |
+## |  slope   | 0.23570512  | 8.826343e-10 |
+## |   elev   | 0.23554763  | 7.286761e-10 |
+## |  tmpavg  | 0.22139249  | 7.615818e-10 |
+## |   pop    | 0.19529044  | 2.428073e-10 |
+## |  premax  | 0.14507334  | 5.960950e-10 |
+## |  aspect  | 0.01859967  | 7.490531e-01 |
+## |   ntl    | 0.01725685  | 1.384075e-01 |
 ```
-
-| variable | Q-statistic |  P-value  |
-|:--------:|:-----------:|:---------:|
-|  presum  |   0.6609    | 8.344e-10 |
-|   lulc   |   0.6597    | 8.782e-10 |
-|  premin  |   0.4655    | 3.606e-10 |
-|  tmpmin  |   0.4356    | 8.537e-10 |
-|  tmpmax  |   0.2536    | 7.849e-10 |
-|  slope   |   0.2357    | 8.826e-10 |
-|   elev   |   0.2355    | 7.287e-10 |
-|  tmpavg  |   0.2214    | 7.616e-10 |
-|   pop    |   0.1953    | 2.428e-10 |
-|  premax  |   0.1451    | 5.961e-10 |
-|  aspect  |   0.0186    |  0.7491   |
-|   ntl    |   0.01726   |  0.1384   |
 
 ### GOZH model
 
@@ -110,20 +110,20 @@ g = gozh(fvc ~ ., data = fvc, cores = 6, type = 'factor')
 g
 ## Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector
+##           Factor detector         
+## 
+## | variable | Q-statistic |   P-value    |
+## |:--------:|:-----------:|:------------:|
+## |  presum  | 0.63722230  | 9.491610e-11 |
+## |   lulc   | 0.61064956  | 4.797254e-10 |
+## |  premin  | 0.46576994  | 5.484498e-10 |
+## |  tmpmin  | 0.41116492  | 2.948282e-10 |
+## |  tmpmax  | 0.24778090  | 7.308311e-10 |
+## |  slope   | 0.22861668  | 6.049710e-10 |
+## |   pop    | 0.22376308  | 3.753077e-10 |
+## |   elev   | 0.22370908  | 4.670732e-10 |
+## |  tmpavg  | 0.21883019  | 6.542658e-10 |
+## |  premax  | 0.12586705  | 1.436104e-10 |
+## |   ntl    | 0.02364914  | 1.831876e-10 |
+## |  aspect  | 0.01412962  | 8.937567e-09 |
 ```
-
-| variable | Q-statistic |  P-value  |
-|:--------:|:-----------:|:---------:|
-|  presum  |   0.6372    | 9.492e-11 |
-|   lulc   |   0.6106    | 4.797e-10 |
-|  premin  |   0.4658    | 5.484e-10 |
-|  tmpmin  |   0.4112    | 2.948e-10 |
-|  tmpmax  |   0.2478    | 7.308e-10 |
-|  slope   |   0.2286    | 6.05e-10  |
-|   pop    |   0.2238    | 3.753e-10 |
-|   elev   |   0.2237    | 4.671e-10 |
-|  tmpavg  |   0.2188    | 6.543e-10 |
-|  premax  |   0.1259    | 1.436e-10 |
-|   ntl    |   0.02365   | 1.832e-10 |
-|  aspect  |   0.01413   | 8.938e-09 |
