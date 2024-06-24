@@ -127,9 +127,9 @@ Then ,we can run geodetector model by `gd()` function.
 
 ``` r
 gd(fvc ~ .,data = new.fvc,type = 'factor')
-## Spatial Stratified Heterogeneity Test 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector         
+##              Factor detector         
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
@@ -149,9 +149,9 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 
 ``` r
 gd(fvc ~ .,data = new.fvc,type = 'interaction')
-## Spatial Stratified Heterogeneity Test 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector         
+##            Interaction detector         
 ## 
 ## | Interactive variable |    Interaction     |
 ## |:--------------------:|:------------------:|
@@ -251,9 +251,9 @@ str(fvc_rgd)
 
 ``` r
 fvc_rgd[[1]]
-## Spatial Stratified Heterogeneity Test 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector         
+##              Factor detector         
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
@@ -273,9 +273,9 @@ fvc_rgd[[1]]
 
 ``` r
 fvc_rgd[[2]]
-## Spatial Stratified Heterogeneity Test 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector         
+##            Interaction detector         
 ## 
 ## | Interactive variable |    Interaction     |
 ## |:--------------------:|:------------------:|
