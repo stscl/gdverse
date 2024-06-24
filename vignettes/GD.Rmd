@@ -166,9 +166,10 @@ NTDs = st_drop_geometry(NTDs)
 fd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'factor')
 fd
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector         
+##              Factor detector            
 ## 
 ## | variable  | Q-statistic |   P-value   |
 ## |:---------:|:-----------:|:-----------:|
@@ -190,9 +191,10 @@ plot(fd)
 id = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'interaction')
 id
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector         
+##            Interaction detector         
 ## 
 ## | Interactive variable  | Interaction  |
 ## |:---------------------:|:------------:|
@@ -214,9 +216,10 @@ plot(id)
 rd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'risk')
 rd
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##              Risk detector             
+##                Risk detector           
 ## 
 ##  Variable elevation:
 ## 
@@ -265,9 +268,10 @@ You can change the significant interval by assign `alpha` argument,the default v
 rd99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'risk',alpha = 0.99)
 rd99
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##              Risk detector             
+##                Risk detector           
 ## 
 ##  Variable elevation:
 ## 
@@ -310,9 +314,10 @@ rd99
 ed = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'ecological')
 ed
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           ecological detector         
+##              Ecological detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|
@@ -333,9 +338,10 @@ You can also change the significant interval by assign `alpha` argument,the defa
 ed99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'ecological',alpha = 0.99)
 ed99
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           ecological detector         
+##              Ecological detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|

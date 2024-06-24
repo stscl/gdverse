@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 4.43 sec elapsed
+## 4.29 sec elapsed
 ```
 
 
@@ -147,9 +147,10 @@ Then, we can run geodetector model by `gd()` function.
 
 ``` r
 gd(fvc ~ .,data = new.fvc,type = 'factor')
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector         
+##              Factor detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
@@ -169,9 +170,10 @@ gd(fvc ~ .,data = new.fvc,type = 'factor')
 
 ``` r
 gd(fvc ~ .,data = new.fvc,type = 'interaction')
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector         
+##            Interaction detector         
 ## 
 ## | Interactive variable |    Interaction     |
 ## |:--------------------:|:------------------:|
@@ -271,9 +273,10 @@ str(fvc_opgd)
 
 ``` r
 fvc_opgd[[1]]
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##           Factor detector         
+##              Factor detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
@@ -293,9 +296,10 @@ fvc_opgd[[1]]
 
 ``` r
 fvc_opgd[[2]]
-## Spatial Stratified Heterogeneity Test 
+## 
+##  Spatial Stratified Heterogeneity Test 
 ##  
-##          Interaction detector         
+##            Interaction detector         
 ## 
 ## | Interactive variable |    Interaction     |
 ## |:--------------------:|:------------------:|
