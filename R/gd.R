@@ -118,8 +118,8 @@ gd = \(formula,data,type = "factor",...){
 #' @return Formatted string output
 #' @export
 print.factor_detector = \(x, ...) {
-  cat("Spatial Stratified Heterogeneity Test \n",
-      "\n          Factor detector         ")
+  cat("\n    Spatial Stratified Heterogeneity Test \n",
+      "\n                 Factor detector            ")
   # pander::pander(x$factor)
   print(kableExtra::kable(x$factor,format = "markdown",digits = 16,align = 'c'))
 }
@@ -135,8 +135,8 @@ print.factor_detector = \(x, ...) {
 #' @return Formatted string output
 #' @export
 print.interaction_detector = \(x, ...) {
-  cat("Spatial Stratified Heterogeneity Test \n",
-      "\n         Interaction detector         ")
+  cat("\n    Spatial Stratified Heterogeneity Test \n",
+      "\n               Interaction detector         ")
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
                                                   rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20))),
@@ -157,8 +157,8 @@ print.interaction_detector = \(x, ...) {
 #' @return Formatted string output
 #' @export
 print.risk_detector = \(x, ...) {
-  cat("Spatial Stratified Heterogeneity Test \n",
-      "\n             Risk detector             \n")
+  cat("\n    Spatial Stratified Heterogeneity Test \n",
+      "\n                  Risk detector           \n")
   x = dplyr::select(x$risk,variable,zone1st,zone2nd,Risk)
   xvar = x %>%
     dplyr::count(variable) %>%
@@ -192,8 +192,8 @@ print.risk_detector = \(x, ...) {
 #' @return Formatted string output
 #' @export
 print.ecological_detector = \(x, ...) {
-  cat("Spatial Stratified Heterogeneity Test \n",
-      "\n          ecological detector         ")
+  cat("\n    Spatial Stratified Heterogeneity Test \n",
+      "\n                Ecological detector         ")
   x = dplyr::select(x$ecological,
                     dplyr::all_of(c('variable1','variable2','Ecological')))
   ed2mat = \(x){
