@@ -27,7 +27,7 @@
 #'          7508, 5203)
 #' st_unidisc(xvar,k = 6,method = 'sd')
 st_unidisc = \(x,k,method = "quantile",factor = FALSE,
-               seed = 123456789,...){
+               seed = 123456789, ...){
   if (k<=2) {stop(" `k` must greater than 3 !")}
   set.seed(seed)
   return(suppressWarnings(classInt::classify_intervals(var = x,n = k - 1,
