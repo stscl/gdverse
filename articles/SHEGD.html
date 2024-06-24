@@ -124,9 +124,10 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.uvi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span><span class="op">)</span></span>
 <span><span class="va">gozh.uvi</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">##              Factor detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:-------------:|:-----------:|:------------:|</span></span>
@@ -146,9 +147,10 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.bi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">gozh.bi</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##          Interaction detector         </span></span>
+<span><span class="co">##            Interaction detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
 <span><span class="co">## |:---------------------------:|:------------------:|</span></span>
@@ -216,23 +218,23 @@ interaction:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lesh.m</span><span class="op">$</span><span class="va">interaction</span></span>
 <span><span class="co">## # A tibble: 15 × 8</span></span>
-<span><span class="co">##    variable1     variable2     Interaction        Variable1 Q-statisti…¹ Variable2 Q-statisti…²</span></span>
-<span><span class="co">##    &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;                               &lt;dbl&gt;                  &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 Climatezone   Mining        Weaken, uni-                       0.821                  0.140 </span></span>
-<span><span class="co">##  2 Climatezone   Tempchange    Weaken, uni-                       0.821                  0.333 </span></span>
-<span><span class="co">##  3 Climatezone   Precipitation Enhance, bi-                       0.821                  0.873 </span></span>
-<span><span class="co">##  4 Climatezone   GDP           Enhance, bi-                       0.821                  0.0917</span></span>
-<span><span class="co">##  5 Climatezone   Popdensity    Enhance, bi-                       0.821                  0.223 </span></span>
-<span><span class="co">##  6 Mining        Tempchange    Enhance, bi-                       0.140                  0.333 </span></span>
-<span><span class="co">##  7 Mining        Precipitation Weaken, uni-                       0.140                  0.873 </span></span>
-<span><span class="co">##  8 Mining        GDP           Enhance, bi-                       0.140                  0.0917</span></span>
-<span><span class="co">##  9 Mining        Popdensity    Enhance, bi-                       0.140                  0.223 </span></span>
-<span><span class="co">## 10 Tempchange    Precipitation Enhance, bi-                       0.333                  0.873 </span></span>
-<span><span class="co">## 11 Tempchange    GDP           Enhance, nonlinear                 0.333                  0.0917</span></span>
-<span><span class="co">## 12 Tempchange    Popdensity    Enhance, bi-                       0.333                  0.223 </span></span>
-<span><span class="co">## 13 Precipitation GDP           Enhance, bi-                       0.873                  0.0917</span></span>
-<span><span class="co">## 14 Precipitation Popdensity    Enhance, bi-                       0.873                  0.223 </span></span>
-<span><span class="co">## 15 GDP           Popdensity    Weaken, uni-                       0.0917                 0.223 </span></span>
+<span><span class="co">##    variable1     variable2     Interaction        Variable1 Q-statistic…¹ Variable2 Q-statisti…²</span></span>
+<span><span class="co">##    &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;                                &lt;dbl&gt;                  &lt;dbl&gt;</span></span>
+<span><span class="co">##  1 Climatezone   Mining        Weaken, uni-                        0.821                  0.140 </span></span>
+<span><span class="co">##  2 Climatezone   Tempchange    Weaken, uni-                        0.821                  0.333 </span></span>
+<span><span class="co">##  3 Climatezone   Precipitation Enhance, bi-                        0.821                  0.873 </span></span>
+<span><span class="co">##  4 Climatezone   GDP           Enhance, bi-                        0.821                  0.0917</span></span>
+<span><span class="co">##  5 Climatezone   Popdensity    Enhance, bi-                        0.821                  0.223 </span></span>
+<span><span class="co">##  6 Mining        Tempchange    Enhance, bi-                        0.140                  0.333 </span></span>
+<span><span class="co">##  7 Mining        Precipitation Weaken, uni-                        0.140                  0.873 </span></span>
+<span><span class="co">##  8 Mining        GDP           Enhance, bi-                        0.140                  0.0917</span></span>
+<span><span class="co">##  9 Mining        Popdensity    Enhance, bi-                        0.140                  0.223 </span></span>
+<span><span class="co">## 10 Tempchange    Precipitation Enhance, bi-                        0.333                  0.873 </span></span>
+<span><span class="co">## 11 Tempchange    GDP           Enhance, nonlinear                  0.333                  0.0917</span></span>
+<span><span class="co">## 12 Tempchange    Popdensity    Enhance, bi-                        0.333                  0.223 </span></span>
+<span><span class="co">## 13 Precipitation GDP           Enhance, bi-                        0.873                  0.0917</span></span>
+<span><span class="co">## 14 Precipitation Popdensity    Enhance, bi-                        0.873                  0.223 </span></span>
+<span><span class="co">## 15 GDP           Popdensity    Weaken, uni-                        0.0917                 0.223 </span></span>
 <span><span class="co">## # ℹ abbreviated names: ¹​`Variable1 Q-statistics`, ²​`Variable2 Q-statistics`</span></span>
 <span><span class="co">## # ℹ 3 more variables: `Variable1 and Variable2 interact Q-statistics` &lt;dbl&gt;,</span></span>
 <span><span class="co">## #   `Variable1 SPD` &lt;dbl&gt;, `Variable2 SPD` &lt;dbl&gt;</span></span></code></pre></div>

@@ -144,7 +144,7 @@ q-statistic.</p>
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 4.43 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 4.29 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
@@ -218,9 +218,10 @@ col in <code>fvc</code> tibble now.</p>
 <p>Then, we can run geodetector model by <code><a href="../reference/gd.html">gd()</a></code> function.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">##              Factor detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
@@ -238,9 +239,10 @@ col in <code>fvc</code> tibble now.</p>
 <span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##          Interaction detector         </span></span>
+<span><span class="co">##            Interaction detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable |    Interaction     |</span></span>
 <span><span class="co">## |:--------------------:|:------------------:|</span></span>
@@ -338,9 +340,10 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##           Factor detector         </span></span>
+<span><span class="co">##              Factor detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
@@ -358,9 +361,10 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">## Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##          Interaction detector         </span></span>
+<span><span class="co">##            Interaction detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable |    Interaction     |</span></span>
 <span><span class="co">## |:--------------------:|:------------------:|</span></span>
