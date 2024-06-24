@@ -25,9 +25,6 @@
 #'  which is used to set the random number seed.
 #'
 #' @return A list of the OPGD model result.
-#' @importFrom stats as.formula
-#' @importFrom purrr map
-#' @importFrom dplyr select all_of bind_cols
 #' @export
 #'
 #' @examples
@@ -43,7 +40,7 @@
 #'      cores = 6, type =c('factor','interaction'))
 #' }
 opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
-         cores = 1,type = "factor",alpha = 0.95,...){
+         cores = 1, type = "factor", alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]

@@ -15,11 +15,6 @@
 #' @param ... (optional) Specifies the size of the alpha (confidence level).Default is `0.95`.
 #'
 #' @return A tibble of the corresponding result is stored under the corresponding detector type.
-#' @importFrom stats as.formula
-#' @importFrom utils combn
-#' @importFrom purrr map_dfr
-#' @importFrom tibble as_tibble
-#' @importFrom dplyr mutate select arrange desc everything
 #' @export
 #'
 #' @examples
@@ -121,7 +116,6 @@ gd = \(formula,data,type = "factor",...){
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom kableExtra kable
 #' @export
 print.factor_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
@@ -139,8 +133,6 @@ print.factor_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom kableExtra kable
-#' @importFrom dplyr mutate select
 #' @export
 print.interaction_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
@@ -163,9 +155,6 @@ print.interaction_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom kableExtra kable
-#' @importFrom tidyr pivot_wider
-#' @importFrom dplyr mutate select count pull filter
 #' @export
 print.risk_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",
@@ -201,9 +190,6 @@ print.risk_detector = \(x, ...) {
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom kableExtra kable
-#' @importFrom tidyr pivot_wider
-#' @importFrom dplyr select all_of
 #' @export
 print.ecological_detector = \(x, ...) {
   cat("Spatial Stratified Heterogeneity Test \n",

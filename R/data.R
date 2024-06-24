@@ -11,7 +11,7 @@
 #' @title NTDs data
 #'
 #' @name NTDs
-#' @format \code{NTDs}: A tibble with 185 rows and 5 variables.
+#' @format \code{NTDs}: A tibble with 185 rows and 4 variable columns and 1 ID column, modified from `geodetector` package.
 #' @docType data
 #' @keywords dataset NTDs
 "NTDs"

@@ -14,7 +14,6 @@
 #' @param wtn The spatial weight matrix.
 #'
 #' @return The spatial variance
-#' @importFrom stats dist
 #' @export
 #'
 #' @examples

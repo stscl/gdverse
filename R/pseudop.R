@@ -19,7 +19,6 @@
 #' If `permutations` is `0`, no pseudo-p values are calculated.
 #'
 #' @return A tibble of power of spatial determinant and the corresponding pseudo-p value.
-#' @importFrom stats rnorm runif
 #' @export
 #'
 psd_pseudop = \(y,x,wt,cores = 6,
@@ -98,7 +97,6 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
-#' @importFrom stats rnorm runif
 #' @export
 #' @examples
 #' \dontrun{

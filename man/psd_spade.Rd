@@ -25,22 +25,7 @@ The power of spatial determinant formula is
 }
 \examples{
 \dontrun{
-library(sf)
-library(tidyverse)
-ntdspath = system.file("extdata", "NTDs.gpkg",package = 'gdverse')
-watershed = read_sf(ntdspath,layer = 'watershed')
-elevation = read_sf(ntdspath,layer = 'elevation')
-soiltype = read_sf(ntdspath,layer = 'soiltype')
-disease = read_sf(ntdspath,layer = 'disease')
-NTDs = disease \%>\%
-  st_centroid() \%>\%
-  st_join(watershed[,"watershed"]) \%>\%
-  st_join(elevation[,"elevation"]) \%>\%
-  st_join(soiltype[,"soiltype"])\%>\%
-  dplyr::filter(if_all(everything(),~!is.na(.x)))
-NTDs = NTDs \%>\%
-  st_coordinates() \%>\%
-  dplyr::bind_cols(NTDs,.)
+data('NTDs')
 wt = inverse_distance_weight(NTDs$X,NTDs$Y)
 psd_spade(NTDs$disease,NTDs$soiltype,wt)
 }

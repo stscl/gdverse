@@ -60,8 +60,6 @@ gozh = \(formula, data, cores = 1,
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A tibble of the corresponding result is stored under the corresponding detector type.
-#' @importFrom purrr map_chr map_dfc map_dbl pmap_chr
-#' @importFrom dplyr case_when
 #' @export
 #'
 #' @examples

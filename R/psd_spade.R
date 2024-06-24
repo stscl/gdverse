@@ -19,22 +19,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(sf)
-#' library(tidyverse)
-#' ntdspath = system.file("extdata", "NTDs.gpkg",package = 'gdverse')
-#' watershed = read_sf(ntdspath,layer = 'watershed')
-#' elevation = read_sf(ntdspath,layer = 'elevation')
-#' soiltype = read_sf(ntdspath,layer = 'soiltype')
-#' disease = read_sf(ntdspath,layer = 'disease')
-#' NTDs = disease %>%
-#'   st_centroid() %>%
-#'   st_join(watershed[,"watershed"]) %>%
-#'   st_join(elevation[,"elevation"]) %>%
-#'   st_join(soiltype[,"soiltype"])%>%
-#'   dplyr::filter(if_all(everything(),~!is.na(.x)))
-#' NTDs = NTDs %>%
-#'   st_coordinates() %>%
-#'   dplyr::bind_cols(NTDs,.)
+#' data('NTDs')
 #' wt = inverse_distance_weight(NTDs$X,NTDs$Y)
 #' psd_spade(NTDs$disease,NTDs$soiltype,wt)
 #' }
@@ -80,6 +65,7 @@ psd_spade = \(y,x,wt){
 #'
 #' @return A value of compensated power of spatial determinant \eqn{Q_s}.
 #' @export
+#'
 #' @examples
 #' \dontrun{
 #' library(sf)
@@ -126,8 +112,8 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A value of power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
-#' @importFrom purrr map_dbl map_dfc set_names
 #' @export
+#'
 #' @examples
 #' \dontrun{
 #' library(sf)
@@ -244,9 +230,8 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 #' @param xdisc The discretized vector.
 #'
 #' @return A value of information loss as measured by information entropy.
-#' @importFrom dplyr count mutate pull
-#' @importFrom tibble tibble
 #' @export
+#'
 F_informationloss = \(xvar,xdisc){
   gdf = tibble::tibble(xvar = xvar,
                        xdisc = xdisc)

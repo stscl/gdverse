@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.6
+
+## Major changes
+
+* Specification of external function dependencies with no user-visible changes.
+
 # gdverse 0.1.5
 
 ## Major changes

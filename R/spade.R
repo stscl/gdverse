@@ -25,8 +25,6 @@
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A list of the SPADE model result.
-#' @importFrom purrr map list_rbind
-#' @importFrom dplyr bind_rows
 #' @export
 #'
 #' @examples

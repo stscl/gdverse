@@ -8,10 +8,8 @@
 #' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
 #' @return A list contains the Q-statistic and the P-value.
-#' @importFrom stats var pf
-#' @importFrom tibble tibble
-#' @importFrom dplyr group_by n filter ungroup mutate
 #' @export
+#'
 factor_detector = \(y,x){
   gdf = tibble::tibble(x = x, y = y) %>%
     dplyr::group_by(x) %>%
@@ -29,7 +27,7 @@ factor_detector = \(y,x){
   Nh = tapply(y, x, length)
   v1 = sum(hmean ^ 2)
   v2 = (sum(sqrt(Nh) * hmean)) ^ 2 / N
-  lambda = (v1 - v2) / (var(y) * (N - 1) / N)
+  lambda = (v1 - v2) / (stats::var(y) * (N - 1) / N)
   pv = suppressWarnings(stats::pf(Fv, df1 = (L - 1), df2 = (N - L),
                                   ncp = lambda, lower.tail = FALSE))
   fd = list("Q-statistic" = qv, "P-value" = pv)
@@ -49,8 +47,8 @@ factor_detector = \(y,x){
 #'
 #' @return A list contains the Q statistic when the factors \eqn{X_1} and \eqn{X_1} act on \eqn{Y} alone
 #' and the Q statistic when the two interact on \eqn{Y} together with the result type of the interaction detector.
-#'
 #' @export
+#'
 interaction_detector = \(y,x1,x2){
   x12 = paste0(x1,x2,'_')
   qv1 = factor_detector(y,x1)[[1]]
@@ -86,13 +84,8 @@ interaction_detector = \(y,x1,x2){
 #'
 #' @return A tibble contains different combinations of covariate \code{X} level and student t-test statistics,
 #' degrees of freedom, p-values, and whether has risk (Yes or No).
-#'
-#' @importFrom stats t.test
-#' @importFrom tibble tibble
-#' @importFrom purrr map2_dfr map_chr
-#' @importFrom dplyr filter pull bind_cols
-#'
 #' @export
+#'
 risk_detector = \(y,x,alpha = 0.95){
   x = factor(x)
   gdf = tibble::tibble(x = x, y = y)
@@ -137,10 +130,9 @@ risk_detector = \(y,x,alpha = 0.95){
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #'
 #' @return A list contains \code{F} statistics, P-values, and is there a significant difference between the
-#' two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}
-#' @importFrom stats pf
-#'
+#' two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 #' @export
+#'
 ecological_detector = \(y,x1,x2,alpha = 0.95){
   q1 = factor_detector(y,x1)[[1]]
   q2 = factor_detector(y,x2)[[1]]

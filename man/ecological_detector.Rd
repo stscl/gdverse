@@ -17,7 +17,7 @@ ecological_detector(y, x1, x2, alpha = 0.95)
 }
 \value{
 A list contains \code{F} statistics, P-values, and is there a significant difference between the
-two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}
+two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 }
 \description{
 Compare the effects of two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.

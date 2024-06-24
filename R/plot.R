@@ -9,9 +9,6 @@
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
-#' @importFrom ggplot2 ggplot aes geom_bar geom_text scale_y_continuous coord_flip theme_minimal scale_alpha_manual element_text element_blank theme labs
-#' @importFrom dplyr if_else slice filter
-#' @importFrom stats reorder
 #' @export
 #'
 plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
@@ -25,7 +22,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
   ylimits = round(max(g$qv) + 0.05,1)
   if ("No Pseudo-P Value" %in% g$pv) {
     fig_factor = ggplot2::ggplot(g,
-                                 ggplot2::aes(x = stats::reorder(variable,qv), y = qv)) +
+                                 ggplot2::aes(x = stats::reorder(variable,qv),
+                                              y = qv)) +
       ggplot2::geom_bar(stat = "identity", fill = "#bebebe") +
       ggplot2::geom_bar(data = dplyr::slice(g,1),
                         stat = "identity", fill = "#ff0000") +
@@ -49,7 +47,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
                      ...)
   } else {
     fig_factor = ggplot2::ggplot(g,
-                                 ggplot2::aes(x = stats::reorder(variable,qv), y = qv)) +
+                                 ggplot2::aes(x = stats::reorder(variable,qv),
+                                              y = qv)) +
       ggplot2::geom_bar(stat = "identity", fill = "#bebebe",
                         ggplot2::aes(alpha = significance)) +
       ggplot2::geom_bar(data = dplyr::slice(g,1),
@@ -89,7 +88,6 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
-#' @importFrom ggplot2 ggplot aes geom_point scale_size scale_color_manual coord_equal theme_bw theme labs
 #' @export
 #'
 plot.interaction_detector = \(x,alpha = 1,...){
@@ -130,10 +128,6 @@ plot.interaction_detector = \(x,alpha = 1,...){
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
-#' @importFrom cowplot plot_grid
-#' @importFrom ggplot2 annotate element_blank element_text theme theme_minimal coord_fixed geom_tile
-#' @importFrom forcats fct_recode
-#' @importFrom purrr map
 #' @export
 #'
 plot.risk_detector = \(x, ...) {
@@ -195,7 +189,7 @@ plot.ecological_detector = \(x, ...) {
   fig_ed = ggplot2::ggplot(data = g,
                            ggplot2::aes(x = variable1, y = variable2, fill = eco)) +
     ggplot2::geom_tile(color = "white", size = 0.75) +
-    ggplot2::geom_text(aes(label = eco), color = "black") +
+    ggplot2::geom_text(ggplot2::aes(label = eco), color = "black") +
     ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
     ggplot2::coord_fixed() +
     ggplot2::theme_minimal() +

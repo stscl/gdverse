@@ -12,9 +12,6 @@
 #' @param is_arc (optional) FALSE (default) or TRUE, whether to compute arc distance.
 #'
 #' @return A inverse distance weight matrices with class of `matrix`.
-#' @importFrom stats as.dist
-#' @importFrom stats dist
-#' @importFrom geosphere distm
 #' @export
 #'
 #' @examples

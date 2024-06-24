@@ -18,7 +18,6 @@
 #' see `?classInt::classify_intervals()`.
 #'
 #' @return A discrete vectors after being discretized.
-#' @importFrom classInt classify_intervals
 #' @export
 #'
 #' @examples
@@ -58,12 +57,6 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
 #' `method` and `disc`(when `return_disc` is `TRUE`).
-#' @importFrom stats as.formula
-#' @importFrom parallel makeCluster stopCluster clusterExport parLapply
-#' @importFrom tidyr crossing
-#' @importFrom tibble as_tibble
-#' @importFrom purrr map_dfr pmap_dfc set_names
-#' @importFrom dplyr bind_cols slice_max group_by ungroup select
 #' @export
 #'
 #' @examples

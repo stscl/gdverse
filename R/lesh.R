@@ -15,7 +15,6 @@
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A list of the LESH model result.
-#' @importFrom dplyr starts_with left_join
 #' @export
 #'
 #' @examples
@@ -50,8 +49,6 @@ lesh = \(formula,data,cores = 1,...){
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
-#' @importFrom kableExtra kable
-#' @importFrom dplyr mutate select
 #' @export
 print.interaction_lesh = \(x, ...) {
   cat("\n    Spatial Interaction Association Detect    \n",
@@ -79,9 +76,6 @@ print.interaction_lesh = \(x, ...) {
 #' @param scatter_alpha (optional) Picture transparency. Default is `1`.
 #'
 #' @return A ggplot2 layer.
-#' @importFrom ggplot2 scale_fill_manual element_text coord_equal
-#' @importFrom PieGlyph geom_pie_glyph scale_radius_continuous
-#' @importFrom cowplot plot_grid
 #' @export
 #'
 #' @examples

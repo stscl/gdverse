@@ -5,7 +5,7 @@
 \alias{NTDs}
 \title{NTDs data}
 \format{
-\code{NTDs}: A tibble with 185 rows and 5 variables.
+\code{NTDs}: A tibble with 185 rows and 4 variable columns and 1 ID column, modified from \code{geodetector} package.
 }
 \usage{
 NTDs
