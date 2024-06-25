@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,7 @@ And <code>gdverse</code> will use <code>locations</code> columns to construct sp
 
 <dt>locations</dt>
 <dd><p>(optional) The geospatial locations coordinate columns name which in <code>data</code>.
-Useful and must provided when <code>wt</code> is not provided.</p></dd>
+Useful and must provided when <code>wt</code> is not provided. When <code>wt</code> is provided, <code>locations</code> is not need.</p></dd>
 
 
 <dt>discvar</dt>
@@ -102,7 +102,7 @@ when <code>formula</code> has <code>discvar</code>, <code>data</code> must have 
 
 
 <dt>discnum</dt>
-<dd><p>(optional) Number of multilevel discretization.Default will use <code>3:15</code>.</p></dd>
+<dd><p>(optional) Number of multilevel discretization.Default will use <code>3:22</code>.</p></dd>
 
 
 <dt>discmethod</dt>
@@ -132,6 +132,15 @@ If <code>permutations</code> is <code>0</code>, no pseudo-p values are calculate
     
 
 <p>A list of the SPADE model result.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>When both <code>wt</code> and <code>locations</code> are provided, the <code>locations</code> columns in <code>data</code> is not considered as
+an explanatory variables and not be used in SPADE model. When <code>wt</code> is provided, please consider
+whether you want to directly use the spatial locations as part of the explanatory variables in SPADE
+modeling. If not, please specify the spatial location column in data through the <code>locations</code> parameter;
+otherwise, there is no need to process the <code>locations</code> parameter.The most recommended method is to explicitly
+specify all variables in <code>formula</code> instead of using <code>.</code>!</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

@@ -106,6 +106,9 @@
     <loc>https://spatlyu.github.io/gdverse/reference/plot.risk_detector.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/plot.spade_result.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/print.ecological_detector.html</loc>
   </url>
   <url>
@@ -119,6 +122,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/print.risk_detector.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/print.spade_result.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/psd_pseudop.html</loc>

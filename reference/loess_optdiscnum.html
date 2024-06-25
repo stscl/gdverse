@@ -12,7 +12,7 @@ locally estimated scatterplot smoothing (LOESS) model."><meta property="og:image
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,8 +90,9 @@ Default is <code>5%</code>.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>When no increase_rate is satisfied by the calculation, the discrete number
-corresponding to the highest Q-statistic is selected as a return.</p>
+    <p>When <code>increase_rate</code> is not satisfied by the calculation, <code>increase_rate*0.1</code> is used first.
+At this time, if <code>increase_rate*0.1</code> is not satisfied again, the discrete number corresponding
+to the highest Q-statistic is selected as a return.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

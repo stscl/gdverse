@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -360,9 +360,9 @@ pseudo-p value.The same approach is taken here.</p>
 <span>                   discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span>, permutations <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">usfi_spade</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
+<span><span class="co">##        Spatial Association Detector       </span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
+<span><span class="co">##                   SPADE Model               </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |      P-value      |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:-----------------:|</span></span>
@@ -383,7 +383,7 @@ pseudo-p value.The same approach is taken here.</p>
 <span><span class="co">## |   DTW    | 0.13648179  | No Pseudo-P Value |</span></span>
 <span><span class="co">## |   SVF    | 0.12679746  | No Pseudo-P Value |</span></span>
 <span><span class="co">## |   DTH    | 0.08442943  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   WAR    |     NaN     | No Pseudo-P Value |</span></span></code></pre></div>
+<span><span class="co">## |   WAR    | -0.23746639 | No Pseudo-P Value |</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">usfi_spade</span>,slicenum <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/spade/USFI_SPADE_factor-1.png"></p>
@@ -411,16 +411,17 @@ pseudo-p value.The same approach is taken here.</p>
 <span><span class="co">## 15 DTW             0.136  No Pseudo-P Value</span></span>
 <span><span class="co">## 16 SVF             0.127  No Pseudo-P Value</span></span>
 <span><span class="co">## 17 DTH             0.0844 No Pseudo-P Value</span></span>
-<span><span class="co">## 18 WAR           NaN      No Pseudo-P Value</span></span></code></pre></div>
-<p>The result of <code>WAR</code> is <code>NA</code>,and you can see a
-big difference between the OPGD and SPADE model. The results of SPADE
-are more reliable in most cases.</p>
-<p>We demonstrate the rationality of NA values calculated of
+<span><span class="co">## 18 WAR            -0.237  No Pseudo-P Value</span></span></code></pre></div>
+<p>The result of <code>WAR</code> is very small and You can’t even see
+it in the result histogram above.You can also see a big difference
+between the OPGD and SPADE model. The results of SPADE are more reliable
+in most cases.</p>
+<p>We demonstrate the rationality of very small values calculated of
 <code>WAR</code> in the following section:</p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="spade-na-results-explained">SPADE NA results explained<a class="anchor" aria-label="anchor" href="#spade-na-results-explained"></a>
+<h3 id="spade-very-small-result-explained">SPADE very small result explained<a class="anchor" aria-label="anchor" href="#spade-very-small-result-explained"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">WAR</span> <span class="op">=</span> <span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span></span>
@@ -527,8 +528,9 @@ shapiro.test, you will find that the WAR variable is heavily skewed,
 with a large number of zeros, which do not provide sufficient
 information for modeling SUHI.</p>
 <p>In fact, the WAR variable represents the proportion of the water area
-of each block, and the WAR value is NA in the SPADE result probably
-because it can’t provide sufficient information for modeling SUHI.</p>
+of each block, and the WAR value is very small in the SPADE result
+probably because it can’t provide sufficient information for modeling
+SUHI.</p>
 <p>In most cases, we use linear regression to explore linear
 relationships between variables and select appropriate variables for
 subsequent modeling through methods such as VIF.Here we examine the
@@ -667,7 +669,7 @@ effect of removing the WAR variable on VIF and linear models:</p>
 <p>You can see that the model does not change much before and after
 removing the WAR variable.In other words, WAR does not do much to model
 SUHI.</p>
-<p>This suggests another use of <code>SPADE</code> for selecting
+<p>This suggests another use of <code>SPADE</code> model for selecting
 modeling variables.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
