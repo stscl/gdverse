@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -383,7 +383,7 @@ pseudo-p value.The same approach is taken here.</p>
 <span><span class="co">## |   DTW    | 0.13648179  | No Pseudo-P Value |</span></span>
 <span><span class="co">## |   SVF    | 0.12679746  | No Pseudo-P Value |</span></span>
 <span><span class="co">## |   DTH    | 0.08442943  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   WAR    | -0.23746639 | No Pseudo-P Value |</span></span></code></pre></div>
+<span><span class="co">## |   WAR    |     NaN     | No Pseudo-P Value |</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">usfi_spade</span>,slicenum <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/spade/USFI_SPADE_factor-1.png"></p>
@@ -411,12 +411,11 @@ pseudo-p value.The same approach is taken here.</p>
 <span><span class="co">## 15 DTW             0.136  No Pseudo-P Value</span></span>
 <span><span class="co">## 16 SVF             0.127  No Pseudo-P Value</span></span>
 <span><span class="co">## 17 DTH             0.0844 No Pseudo-P Value</span></span>
-<span><span class="co">## 18 WAR            -0.237  No Pseudo-P Value</span></span></code></pre></div>
-<p>The result of <code>WAR</code> is very small and You can’t even see
-it in the result histogram above.You can also see a big difference
-between the OPGD and SPADE model. The results of SPADE are more reliable
-in most cases.</p>
-<p>We demonstrate the rationality of very small values calculated of
+<span><span class="co">## 18 WAR           NaN      No Pseudo-P Value</span></span></code></pre></div>
+<p>The result of <code>WAR</code> is <code>NA</code> and you can also
+see a big difference between the OPGD and SPADE model. The results of
+SPADE are more reliable in most cases.</p>
+<p>We demonstrate the rationality of NA values calculated of
 <code>WAR</code> in the following section:</p>
 </div>
 </div>
@@ -528,14 +527,40 @@ shapiro.test, you will find that the WAR variable is heavily skewed,
 with a large number of zeros, which do not provide sufficient
 information for modeling SUHI.</p>
 <p>In fact, the WAR variable represents the proportion of the water area
-of each block, and the WAR value is very small in the SPADE result
-probably because it can’t provide sufficient information for modeling
-SUHI.</p>
+of each block, and the WAR value is NA in the SPADE result probably
+because it can’t provide sufficient information for modeling SUHI.</p>
+<p>Let’s look at the specific calculation process of the PSMD(power of
+spatial and multilevel discretization determinant) value corresponding
+to WAR:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>                  <span class="fu"><a href="../reference/factor_detector.html">factor_detector</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>                  <span class="op">{</span><span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="co">##  [1] 0.00000000 0.05795105 0.08069138 0.10177158 0.12117267 0.13904284 0.15732689 0.17377009</span></span>
+<span><span class="co">##  [9] 0.19092712 0.20432876 0.22190151 0.23780494 0.25057152 0.26498423 0.28119643 0.29570781</span></span>
+<span><span class="co">## [17] 0.30353784 0.32068449 0.33494156 0.34531717</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>                   <span class="fu"><a href="../reference/psd_spade.html">psd_spade</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##  [1]  0.000000000 -0.181786937 -0.169155345 -0.125396131 -0.133455175 -0.131115501 -0.119970690</span></span>
+<span><span class="co">##  [8] -0.088315304 -0.054531193 -0.058428439 -0.064742210 -0.016081019 -0.021323890 -0.005247945</span></span>
+<span><span class="co">## [15]  0.010609672  0.010440325  0.016261102  0.002394303  0.017674399  0.048750505</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>                   <span class="fu"><a href="../reference/cpsd_spade.html">cpsd_spade</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">$</span><span class="va">SUHI</span>, <span class="va">usfi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">##  [1]         NaN  -0.3910865  -0.3535054  -0.6770723  -0.6521600  -0.5998628  -0.7624360</span></span>
+<span><span class="co">##  [8]  -1.1612373  -1.9424624  -1.8009497  -1.6812595  -7.1186310  -5.7310788 -23.2948856</span></span>
+<span><span class="co">## [15]  11.3510521  12.2344850   7.6904733  51.9905042   7.2849128   2.6199094</span></span></code></pre></div>
 <p>In most cases, we use linear regression to explore linear
 relationships between variables and select appropriate variables for
 subsequent modeling through methods such as VIF.Here we examine the
 effect of removing the WAR variable on VIF and linear models:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm.modelOne</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span></span>
 <span><span class="co">## </span></span>
@@ -573,7 +598,7 @@ effect of removing the WAR variable on VIF and linear models:</p>
 <span><span class="co">## Residual standard error: 1.06 on 1018 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-squared:  0.6173, Adjusted R-squared:  0.6106 </span></span>
 <span><span class="co">## F-statistic: 91.23 on 18 and 1018 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble_row</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -601,7 +626,7 @@ effect of removing the WAR variable on VIF and linear models:</p>
 <span><span class="co">## 16 RFD       89.4 </span></span>
 <span><span class="co">## 17 SVF        3.02</span></span>
 <span><span class="co">## 18 FAR       31.3</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm.modelTwo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">WAR</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span></span>
 <span><span class="co">## </span></span>
@@ -639,7 +664,7 @@ effect of removing the WAR variable on VIF and linear models:</p>
 <span><span class="co">## Residual standard error: 1.064 on 1019 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-squared:  0.614,  Adjusted R-squared:  0.6076 </span></span>
 <span><span class="co">## F-statistic: 95.36 on 17 and 1019 DF,  p-value: &lt; 2.2e-16</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html" class="external-link">vif</a></span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble_row</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
