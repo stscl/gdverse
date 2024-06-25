@@ -135,11 +135,10 @@ If <code>permutations</code> is <code>0</code>, no pseudo-p values are calculate
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>When both <code>wt</code> and <code>locations</code> are provided, the <code>locations</code> columns in <code>data</code> is not considered as
-an explanatory variables and not be used in SPADE model. When <code>wt</code> is provided, please consider
-whether you want to directly use the spatial locations as part of the explanatory variables in SPADE
-modeling. If not, please specify the spatial location column in data through the <code>locations</code> parameter;
-otherwise, there is no need to process the <code>locations</code> parameter.The most recommended method is to explicitly
+    <p>The columns in the <code>locations</code> part of data are only used to construct spatial weight matrix
+when <code>wt</code> is <code>NULL</code>, and are not considered as explanatory variables. If you need to include
+spatial locations as explanatory variables, build a spatial weight matrix ahead of time,
+leaving the <code>locations</code> parameter to <code>NULL</code>.The most recommended method is to explicitly
 specify all variables in <code>formula</code> instead of using <code>.</code>!</p>
     </div>
     <div class="section level2">
