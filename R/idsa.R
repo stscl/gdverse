@@ -72,7 +72,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
   }
 
   g = cpsd_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
-                wt = wt_idsa, data = discdf, discnum = discnum,
+                data = discdf, wt = wt_idsa, discnum = discnum,
                 discmethod = discmethod, strategy = strategy,
                 increase_rate = increase_rate,
                 cores = cores, seed = seed, ...)
@@ -92,7 +92,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
         newdti[,.x,drop = TRUE],
         wt_idsa)
     } else {
-      qv = pid_idsa(paste(yname,paste0(.x,collapse = '+')),
+      qv = pid_idsa(paste(yname,'~',paste0(.x,collapse = '+')),
                     dti, newdti, wt_idsa, spfom)
     }
     names(qv) = 'pid_idsa'
