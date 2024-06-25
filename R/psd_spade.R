@@ -215,7 +215,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
     out_g = purrr::map_dbl(paste0('xobs_',discn),calcul_cpsd)
   }
 
-    return(mean(out_g,na.rm = TRUE))
+    return(mean(out_g))
 }
 
 #' @title measure information loss by information entropy

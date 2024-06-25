@@ -300,7 +300,7 @@ usfi_spade
 ## |   DTW    | 0.13648179  | No Pseudo-P Value |
 ## |   SVF    | 0.12679746  | No Pseudo-P Value |
 ## |   DTH    | 0.08442943  | No Pseudo-P Value |
-## |   WAR    | -0.23746639 | No Pseudo-P Value |
+## |   WAR    |     NaN     | No Pseudo-P Value |
 ```
 
 ``` r
@@ -334,12 +334,12 @@ usfi_spade$factor
 ## 15 DTW             0.136  No Pseudo-P Value
 ## 16 SVF             0.127  No Pseudo-P Value
 ## 17 DTH             0.0844 No Pseudo-P Value
-## 18 WAR            -0.237  No Pseudo-P Value
+## 18 WAR           NaN      No Pseudo-P Value
 ```
 
-The result of `WAR` is very small and You can't even see it in the result histogram above.You can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
+The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
 
-We demonstrate the rationality of very small values calculated of `WAR` in the following section:
+We demonstrate the rationality of NA values calculated of `WAR` in the following section:
 
 ### SPADE very small result explained
 
@@ -398,9 +398,43 @@ shapiro.test(WAR)
 ## data:  WAR
 ## W = 0.14693, p-value < 2.2e-16
 ```
+
 From the histogram of `WAR`,its skewness and the result of shapiro.test, you will find that the WAR variable is heavily skewed, with a large number of zeros, which do not provide sufficient information for modeling SUHI.
 
-In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is very small in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
+In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
+
+Let's look at the specific calculation process of the PSMD(power of spatial and multilevel discretization determinant) value corresponding to WAR:
+
+
+``` r
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
+                  factor_detector(usfi$WAR, .) %>%
+                  {.[[1]]})
+##  [1] 0.00000000 0.05795105 0.08069138 0.10177158 0.12117267 0.13904284 0.15732689 0.17377009
+##  [9] 0.19092712 0.20432876 0.22190151 0.23780494 0.25057152 0.26498423 0.28119643 0.29570781
+## [17] 0.30353784 0.32068449 0.33494156 0.34531717
+```
+
+``` r
+
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
+                   psd_spade(usfi$WAR, ., wt))
+##  [1]  0.000000000 -0.181786937 -0.169155345 -0.125396131 -0.133455175 -0.131115501 -0.119970690
+##  [8] -0.088315304 -0.054531193 -0.058428439 -0.064742210 -0.016081019 -0.021323890 -0.005247945
+## [15]  0.010609672  0.010440325  0.016261102  0.002394303  0.017674399  0.048750505
+```
+
+``` r
+
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
+                   cpsd_spade(usfi$SUHI, usfi$WAR, ., wt))
+##  [1]         NaN  -0.3910865  -0.3535054  -0.6770723  -0.6521600  -0.5998628  -0.7624360
+##  [8]  -1.1612373  -1.9424624  -1.8009497  -1.6812595  -7.1186310  -5.7310788 -23.2948856
+## [15]  11.3510521  12.2344850   7.6904733  51.9905042   7.2849128   2.6199094
+```
 
 In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF.Here
 we examine the effect of removing the WAR variable on VIF and linear models:

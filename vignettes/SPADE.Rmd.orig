@@ -188,9 +188,9 @@ plot(usfi_spade,slicenum = 8)
 usfi_spade$factor
 ```
 
-The result of `WAR` is very small and You can't even see it in the result histogram above.You can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
+The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
 
-We demonstrate the rationality of very small values calculated of `WAR` in the following section:
+We demonstrate the rationality of NA values calculated of `WAR` in the following section:
 
 ### SPADE very small result explained
 
@@ -212,9 +212,27 @@ ggplot(data = usfi) +
 moments::skewness(WAR)
 shapiro.test(WAR)
 ```
+
 From the histogram of `WAR`,its skewness and the result of shapiro.test, you will find that the WAR variable is heavily skewed, with a large number of zeros, which do not provide sufficient information for modeling SUHI.
 
-In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is very small in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
+In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
+
+Let's look at the specific calculation process of the PSMD(power of spatial and multilevel discretization determinant) value corresponding to WAR:
+
+```{r}
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
+                  factor_detector(usfi$WAR, .) %>%
+                  {.[[1]]})
+
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
+                   psd_spade(usfi$WAR, ., wt))
+
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
+                   cpsd_spade(usfi$SUHI, usfi$WAR, ., wt))
+```
 
 In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF.Here
 we examine the effect of removing the WAR variable on VIF and linear models:
