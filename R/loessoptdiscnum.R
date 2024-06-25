@@ -2,6 +2,9 @@
 #' locally estimated scatterplot smoothing (LOESS) model.
 #'
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @note
+#' When no increase_rate is satisfied by the calculation, the discrete number
+#' corresponding to the highest Q-statistic is selected as a return.
 #' @references
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
@@ -15,6 +18,16 @@
 #' @return A optimal number of spatial data discretization.
 #' @export
 #'
+#' @examples
+#' library(sf)
+#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+#' 3:10 %>%
+#' purrr::map_dbl(\(.k) st_unidisc(usfi$NDVI,.k) %>%
+#'                factor_detector(usfi$SUHI,.) %>%
+#'                {.[[1]]}) %>%
+#'  loess_optdiscnum(3:10)
+#'
 loess_optdiscnum = \(qvec, discnumvec,
                      increase_rate = 0.05){
   n = length(qvec)
@@ -25,6 +38,12 @@ loess_optdiscnum = \(qvec, discnumvec,
                          lr = loessrate,
                          lr_before = dplyr::lag(lr)) %>%
     dplyr::filter(lr <= increase_rate & lr_before > increase_rate)
-  res = c('discnum' = lrtbf[1,1])
+
+  # debug: when no increase_rate is satisfied, the highest Q-statistic is selected
+  if (is.na(lrtbf[1,1,drop = TRUE])){
+    res = c('discnum' = discnumvec[which.max(qvec)])
+  } else {
+    res = c('discnum' = lrtbf[1,1,drop = TRUE])
+  }
   return(res)
 }

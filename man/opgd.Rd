@@ -24,10 +24,10 @@ opgd(
 \item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:15}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization,default is using
-\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}
+\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster

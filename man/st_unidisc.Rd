@@ -14,7 +14,7 @@ see also the "dpih" and "headtails" styles for automatic choice of the number of
 greater than \code{3} !}
 
 \item{method}{Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
-"hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box".Default is \code{quantile}.}
+"hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is \code{quantile}.}
 
 \item{factor}{(optional) Default is \code{FALSE}, if \code{TRUE} returns cols as a factor with intervals as
 labels rather than integers.}

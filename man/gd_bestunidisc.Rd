@@ -20,10 +20,10 @@ gd_bestunidisc(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:15}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization,default is using
-\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}
+\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster
@@ -34,7 +34,7 @@ Default is \code{TRUE}.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.Setting random seed is useful when
 the sample size is greater than \code{3000}(the default value for \code{largeN}) and the data is discretized
-by sampling \verb{10\%}(the default value for \code{samp_prop}).}
+by sampling \verb{10\%}(the default value for \code{samp_prop} in \code{st_unidisc()}).}
 
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()}.}
 }

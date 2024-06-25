@@ -22,6 +22,21 @@ A optimal number of spatial data discretization.
 optimal spatial data discretization for individual variables based on
 locally estimated scatterplot smoothing (LOESS) model.
 }
+\note{
+When no increase_rate is satisfied by the calculation, the discrete number
+corresponding to the highest Q-statistic is selected as a return.
+}
+\examples{
+library(sf)
+usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+3:10 \%>\%
+purrr::map_dbl(\(.k) st_unidisc(usfi$NDVI,.k) \%>\%
+               factor_detector(usfi$SUHI,.) \%>\%
+               {.[[1]]}) \%>\%
+ loess_optdiscnum(3:10)
+
+}
 \references{
 Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 International Journal of Geographical Information Science, 35:8, 1676-1701,

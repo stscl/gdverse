@@ -8,7 +8,7 @@
 #' see also the "dpih" and "headtails" styles for automatic choice of the number of classes. `k` must
 #' greater than `3` !
 #' @param method Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
-#' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box".Default is `quantile`.
+#' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
 #' labels rather than integers.
 #' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
@@ -42,9 +42,9 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #'
 #' @param formula A formula of best univariate discretization.
 #' @param data A data.frame or tibble of observation data.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:15`.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
 #' @param discmethod (optional) A vector of methods for discretization,default is using
-#' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `spEcula`.
+#' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `gdverse`.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
@@ -52,7 +52,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' Default is `TRUE`.
 #' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
 #' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
-#' by sampling `10%`(the default value for `samp_prop`).
+#' by sampling `10%`(the default value for `samp_prop` in `st_unidisc()`).
 #' @param ... (optional) Other arguments passed to `st_unidisc()`.
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
@@ -83,7 +83,7 @@ gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
   if (is.null(discmethod)) {
     discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")
   }
-  if (is.null(discnum)){discnum = 3:15}
+  if (is.null(discnum)){discnum = 3:22}
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
