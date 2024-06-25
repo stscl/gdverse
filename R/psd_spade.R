@@ -143,8 +143,8 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   formula.vars = all.vars(formula)
   yobs = data[, formula.vars[1], drop = TRUE]
   if (formula.vars[2] == "."){
-    if (length(!(which(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
-      stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data` .')
+    if (length(which(!(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
+      stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data`.')
     } else {
       xobs = data[, -which(colnames(data) %in% c(formula.vars[1],locations)), drop = TRUE]
     }
@@ -154,7 +154,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 
   if (is.null(wt)) {
     if (is.null(locations)) {
-      stop("When `wt` is not provided, please provided `locations` coordinate columns name which in `data` !")
+      stop("When `wt` is not provided, please provided `locations` coordinate columns name which in `data`!")
     } else {
       locations = data[, locations]
       wt_spade = inverse_distance_weight(locations[,1,drop = TRUE],

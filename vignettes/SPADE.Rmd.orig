@@ -192,7 +192,7 @@ The result of `WAR` is `NA` and you can also see a big difference between the OP
 
 We demonstrate the rationality of NA values calculated of `WAR` in the following section:
 
-### SPADE very small result explained
+### SPADE NA result explained
 
 ```{r}
 WAR = usfi$WAR

@@ -3,11 +3,10 @@
 #' @description
 #' Function for spatial association detector (SPADE) model.
 #' @note
-#' When both `wt` and `locations` are provided, the `locations` columns in `data` is not considered as
-#' an explanatory variables and not be used in SPADE model. When `wt` is provided, please consider
-#' whether you want to directly use the spatial locations as part of the explanatory variables in SPADE
-#' modeling. If not, please specify the spatial location column in data through the `locations` parameter;
-#' otherwise, there is no need to process the `locations` parameter.The most recommended method is to explicitly
+#' The columns in the `locations` part of data are only used to construct spatial weight matrix
+#' when `wt` is `NULL`, and are not considered as explanatory variables. If you need to include
+#' spatial locations as explanatory variables, build a spatial weight matrix ahead of time,
+#' leaving the `locations` parameter to `NULL`.The most recommended method is to explicitly
 #' specify all variables in `formula` instead of using `.`!
 #'
 #' @references
