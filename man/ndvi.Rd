@@ -11,7 +11,7 @@
 ndvi
 }
 \description{
-dataset of NDVI changes and its influencing factors,modified from \code{GD} package.
+dataset of NDVI changes and its influencing factors, modified from \code{GD} package.
 }
 \keyword{dataset}
 \keyword{ndvi}

@@ -20,6 +20,16 @@ A spatial fuzzy overlay vector.
 \description{
 Function for spatial fuzzy overlay.
 }
+\examples{
+data('sim')
+sim = sim \%>\%
+  dplyr::mutate(dplyr::across(4:6,\(.x) st_unidisc(.x,4,"quantile")))
+fo1 = st_fuzzyoverlay(y~xa+xb+xc,data = sim, method = 'and')
+fo2 = st_fuzzyoverlay(y~xa+xb+xc,data = sim, method = 'or')
+fo1
+fo2
+
+}
 \references{
 Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 International Journal of Geographical Information Science, 35:8, 1676-1701,

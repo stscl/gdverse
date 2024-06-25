@@ -14,6 +14,14 @@
 #'
 #' @return A spatial fuzzy overlay vector.
 #' @export
+#' @examples
+#' data('sim')
+#' sim = sim %>%
+#'   dplyr::mutate(dplyr::across(4:6,\(.x) st_unidisc(.x,4,"quantile")))
+#' fo1 = st_fuzzyoverlay(y~xa+xb+xc,data = sim, method = 'and')
+#' fo2 = st_fuzzyoverlay(y~xa+xb+xc,data = sim, method = 'or')
+#' fo1
+#' fo2
 #'
 st_fuzzyoverlay = \(formula, data, method = "and"){
   if (!(method %in% c("and","or"))){
