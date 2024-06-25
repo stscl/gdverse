@@ -8,7 +8,7 @@
 #' examining wetland disparity. International Journal of Digital Earth, 16(2), 4533–4552.
 #' https://doi.org/10.1080/17538947.2023.2271883
 #'
-#' @param formula  A formula of LESH model.
+#' @param formula A formula of LESH model.
 #' @param data A data.frame or tibble of observation data.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster object.
@@ -53,9 +53,10 @@ lesh = \(formula,data,cores = 1,...){
 print.interaction_lesh = \(x, ...) {
   cat("\n    Spatial Interaction Association Detector    \n",
       "\n                   LESH Model                     ")
+  IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
-                                                  rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20))),
+                                                  IntersectionSymbol,
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
   print(kableExtra::kable(x,format = "markdown",digits = 16,align = 'c'))

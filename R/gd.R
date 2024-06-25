@@ -137,9 +137,10 @@ print.factor_detector = \(x, ...) {
 print.interaction_detector = \(x, ...) {
   cat("\n Spatial Stratified Heterogeneity Test \n",
       "\n           Interaction detector         ")
+  IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
-                                                  rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20))),
+                                                  IntersectionSymbol,
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
   # pander::pander(x)

@@ -2,12 +2,12 @@
 % Please edit documentation in R/idsa.R
 \name{pid_idsa}
 \alias{pid_idsa}
-\title{IDSA Q-saistics}
+\title{IDSA Q-saistics \code{PID}}
 \usage{
 pid_idsa(formula, rawdata, discdata, wt, overlaymethod = "and")
 }
 \arguments{
-\item{formula}{A formula for IDSA Q-saistics \code{PID}}
+\item{formula}{A formula for IDSA Q-saistics}
 
 \item{rawdata}{Raw observation data}
 
@@ -22,7 +22,7 @@ Default is \code{and}.}
 The value of IDSA Q-saistics \code{PID}.
 }
 \description{
-IDSA Q-saistics
+IDSA Q-saistics \code{PID}
 }
 \details{
 \eqn{Q_{IDSA} = \frac{\theta_r}{\phi}}

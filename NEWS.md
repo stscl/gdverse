@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.6
+
+### major changes
+
+* Support the IDSA model.
+
 # gdverse 0.1.7
 
 ### bug fixes
