@@ -27,12 +27,12 @@ spade(
 And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
 
 \item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
-Useful and must provided when \code{wt} is not provided.}
+Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
 
 \item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:15}.}
+\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}}
@@ -51,6 +51,14 @@ A list of the SPADE model result.
 }
 \description{
 Function for spatial association detector (SPADE) model.
+}
+\note{
+When both \code{wt} and \code{locations} are provided, the \code{locations} columns in \code{data} is not considered as
+an explanatory variables and not be used in SPADE model. When \code{wt} is provided, please consider
+whether you want to directly use the spatial locations as part of the explanatory variables in SPADE
+modeling. If not, please specify the spatial location column in data through the \code{locations} parameter;
+otherwise, there is no need to process the \code{locations} parameter.The most recommended method is to explicitly
+specify all variables in \code{formula} instead of using \code{.}!
 }
 \examples{
 \dontrun{

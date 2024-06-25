@@ -4,10 +4,10 @@
 \alias{plot.factor_detector}
 \title{plot factor detector result}
 \usage{
-\method{plot}{factor_detector}(x, slicenum = 2, alpha = 0.05, ...)
+\method{plot}{factor_detector}(x, slicenum = 2, alpha = 0.95, ...)
 }
 \arguments{
-\item{x}{Return by \code{gd()}.The number of labels facing inward.}
+\item{x}{Return by \code{gd()}.}
 
 \item{slicenum}{(optional) The number of labels facing inward. Default is \code{2}.}
 

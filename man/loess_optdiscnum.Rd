@@ -23,8 +23,9 @@ optimal spatial data discretization for individual variables based on
 locally estimated scatterplot smoothing (LOESS) model.
 }
 \note{
-When no increase_rate is satisfied by the calculation, the discrete number
-corresponding to the highest Q-statistic is selected as a return.
+When \code{increase_rate} is not satisfied by the calculation, \code{increase_rate*0.1} is used first.
+At this time, if \code{increase_rate*0.1} is not satisfied again, the discrete number corresponding
+to the highest Q-statistic is selected as a return.
 }
 \examples{
 library(sf)

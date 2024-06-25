@@ -3,8 +3,9 @@
 #'
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @note
-#' When no increase_rate is satisfied by the calculation, the discrete number
-#' corresponding to the highest Q-statistic is selected as a return.
+#' When `increase_rate` is not satisfied by the calculation, `increase_rate*0.1` is used first.
+#' At this time, if `increase_rate*0.1` is not satisfied again, the discrete number corresponding
+#' to the highest Q-statistic is selected as a return.
 #' @references
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
@@ -33,6 +34,8 @@ loess_optdiscnum = \(qvec, discnumvec,
   n = length(qvec)
   loessf = stats::loess(qvec ~ discnumvec)
   loessrate = (loessf$fitted - dplyr::lag(loessf$fitted)) / dplyr::lag(loessf$fitted)
+  increase_rate = ifelse(max(loessrate,na.rm = TRUE) < increase_rate,
+                         increase_rate*0.1, increase_rate)
   lrtbf = tibble::tibble(discnum = discnumvec,
                          qstatistic = qvec,
                          lr = loessrate,

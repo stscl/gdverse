@@ -86,7 +86,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided.
-#' @param discnum (optional) Number of multilevel discretization.Default will use `3:15`.
+#' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
 #' one `discmethod` at one time.

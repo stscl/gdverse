@@ -103,7 +103,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided.
-#' @param discnum (optional) Number of multilevel discretization.Default will use `3:15`.
+#' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
 #' one `discmethod` at one time.
@@ -130,7 +130,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' }
 #'
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
-               discmethod = NULL,cores = 1,seed = 123456789,...){
+               discmethod = NULL, cores = 1, seed = 123456789, ...){
   doclust = FALSE
   if (cores > 1) {
     doclust = TRUE
@@ -164,7 +164,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
     wt_spade = wt
   }
   if (is.null(discnum)) {
-    discn = 3:15
+    discn = 3:22
   } else {
     discn = discnum
   }
@@ -215,7 +215,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
     out_g = purrr::map_dbl(paste0('xobs_',discn),calcul_cpsd)
   }
 
-    return(mean(out_g))
+    return(mean(out_g,na.rm = TRUE))
 }
 
 #' @title measure information loss by information entropy

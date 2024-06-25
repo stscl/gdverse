@@ -28,7 +28,7 @@ And \code{gdverse} will use \code{locations} columns to construct spatial weight
 \item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
 Useful and must provided when \code{wt} is not provided.}
 
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:15}.}
+\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
 When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}.Now only support

@@ -3,7 +3,7 @@
 #' @description
 #' S3 method to plot output for factor detector in `gd()`.
 #'
-#' @param x Return by `gd()`.The number of labels facing inward.
+#' @param x Return by `gd()`.
 #' @param slicenum (optional) The number of labels facing inward. Default is `2`.
 #' @param alpha (optional) Confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
@@ -11,70 +11,43 @@
 #' @return A ggplot2 layer.
 #' @export
 #'
-plot.factor_detector = \(x, slicenum = 2, alpha = 0.05, ...) {
+plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
   g = x$factor %>%
     dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
     dplyr::filter(!is.na(qv)) %>%
-    dplyr::mutate(significance = dplyr::if_else(pv <= 0.05,
+    dplyr::mutate(significance = dplyr::if_else(pv <= 1-alpha,
                                                 'Significant',
                                                 'Not Significant',
                                                 NA))
   ylimits = round(max(g$qv) + 0.05,1)
-  if ("No Pseudo-P Value" %in% g$pv) {
-    fig_factor = ggplot2::ggplot(g,
-                                 ggplot2::aes(x = stats::reorder(variable,qv),
-                                              y = qv)) +
-      ggplot2::geom_bar(stat = "identity", fill = "#bebebe") +
-      ggplot2::geom_bar(data = dplyr::slice(g,1),
-                        stat = "identity", fill = "#ff0000") +
-      ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
-                         ggplot2::aes(label = round(qv,4)),
-                         hjust = 1.25, color = "black") +
-      ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
-                         ggplot2::aes(label = round(qv,4)),
-                         hjust = -0.1, color = "black") +
-      ggplot2::scale_y_continuous(limits = c(0,ylimits),
-                                  breaks = seq(0,ylimits,by = 0.1),
-                                  expand = c(0,0)) +
-      ggplot2::coord_flip() +
-      ggplot2::theme_minimal() +
-      ggplot2::labs(x = "", y = "Q statistic") +
-      ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,hjust = 1,color = 'black'),
-                     axis.text.y = ggplot2::element_text(color = 'black'),
-                     legend.position = "inside",
-                     legend.justification.inside = c('right','bottom'),
-                     panel.grid = ggplot2::element_blank(),
-                     ...)
-  } else {
-    fig_factor = ggplot2::ggplot(g,
-                                 ggplot2::aes(x = stats::reorder(variable,qv),
-                                              y = qv)) +
-      ggplot2::geom_bar(stat = "identity", fill = "#bebebe",
-                        ggplot2::aes(alpha = significance)) +
-      ggplot2::geom_bar(data = dplyr::slice(g,1),
-                        ggplot2::aes(alpha = significance),
-                        stat = "identity",fill = "#ff0000") +
-      ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
-                         ggplot2::aes(label = round(qv,4)),
-                         hjust = 1.25, color = "black") +
-      ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
-                         ggplot2::aes(label = round(qv,4)),
-                         hjust = -0.1, color = "black") +
-      ggplot2::scale_y_continuous(limits = c(0,ylimits),
-                                  breaks = seq(0,ylimits,by = 0.1),
-                                  expand = c(0,0)) +
-      ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25),
-                                  na.value = 0.85,name = '') +
-      ggplot2::coord_flip() +
-      ggplot2::theme_minimal() +
-      ggplot2::labs(x = "", y = "Q statistic") +
-      ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,hjust = 1,color = 'black'),
-                     axis.text.y = ggplot2::element_text(color = 'black'),
-                     legend.position = "inside",
-                     legend.justification.inside = c('right','bottom'),
-                     panel.grid = ggplot2::element_blank(),
-                     ...)
-  }
+  fig_factor = ggplot2::ggplot(g,
+                               ggplot2::aes(x = stats::reorder(variable,qv),
+                                            y = qv)) +
+    ggplot2::geom_bar(stat = "identity", fill = "#bebebe",
+                      ggplot2::aes(alpha = significance)) +
+    ggplot2::geom_bar(data = dplyr::slice(g,1),
+                      ggplot2::aes(alpha = significance),
+                      stat = "identity",fill = "#ff0000") +
+    ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
+                       ggplot2::aes(label = round(qv,4)),
+                       hjust = 1.25, color = "black") +
+    ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
+                       ggplot2::aes(label = round(qv,4)),
+                       hjust = -0.1, color = "black") +
+    ggplot2::scale_y_continuous(limits = c(0,ylimits),
+                                breaks = seq(0,ylimits,by = 0.1),
+                                expand = c(0,0)) +
+    ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25),
+                                na.value = 0.85,name = '') +
+    ggplot2::coord_flip() +
+    ggplot2::theme_minimal() +
+    ggplot2::labs(x = "", y = "Q statistic") +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,hjust = 1,color = 'black'),
+                   axis.text.y = ggplot2::element_text(color = 'black'),
+                   legend.position = "inside",
+                   legend.justification.inside = c('right','bottom'),
+                   panel.grid = ggplot2::element_blank(),
+                   ...)
   return(fig_factor)
 }
 

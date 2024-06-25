@@ -51,8 +51,8 @@ lesh = \(formula,data,cores = 1,...){
 #' @return Formatted string output
 #' @export
 print.interaction_lesh = \(x, ...) {
-  cat("\n    Spatial Interaction Association Detect    \n",
-      "\n                   LESH Model                   ")
+  cat("\n    Spatial Interaction Association Detector    \n",
+      "\n                   LESH Model                     ")
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
                                                   rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20))),
