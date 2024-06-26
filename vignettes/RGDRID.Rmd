@@ -22,327 +22,289 @@ pandas ruptures -y`
 
 
 ``` r
-library(terra)
 library(gdverse)
 library(tidyverse)
 reticulate::use_condaenv('geocompy')
+## Error in reticulate::use_condaenv("geocompy"): Unable to locate conda environment 'geocompy'.
+```
 
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = aggregate(fvc,fact = 5)
-fvc
-## class       : SpatRaster 
-## dimensions  : 84, 114, 13  (nrow, ncol, nlyr)
-## resolution  : 5000, 5000  (x, y)
-## extent      : -92742.16, 477257.8, 3589385, 4009385  (xmin, xmax, ymin, ymax)
-## coord. ref. : Asia_North_Albers_Equal_Area_Conic 
-## source(s)   : memory
-## names       :       fvc,   premax,    premin,   presum,   tmpmax,    tmpmin, ... 
-## min values  : 0.1527159, 111.2089,  2.340401, 3834.887, 10.92638, -9.976424, ... 
-## max values  : 0.8905939, 247.1408, 75.933422, 8276.911, 26.72104,  1.101411, ...
+``` r
+
+data("ndvi")
 ```
 
 
 ``` r
-names(fvc)
-##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"    "lulc"  
-## [11] "elev"   "slope"  "aspect"
-```
-
-### Convert data from `SpatRaster` to `tibble`
-
-
-``` r
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-head(fvc)
-## # A tibble: 6 × 13
-##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev slope aspect
-##   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
-## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.  2.96   122.
-## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.  1.86   174.
-## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.  3.19   192.
-## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.  3.32   213.
-## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.  2.79   132.
-## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93   137.
+names(ndvi)
+## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"
+## [6] "GDP"           "Popdensity"
 ```
 
 ### Determine discretization use offline change point detection
 
-Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
-We can use `robust_disc()` to discretize them based on offline change point detection.
+`Climatezone` and `Mining` is the discrete category variables in the `ndvi` data, we need to discretize others.You can use `robust_disc()` to discretize them based on offline change point detection.When executing `robust_disc()`, note that each `discvar` can use a `discnum` parameter of its own. You can pass in a vector of equal length to `discvar` to use different `discnum` for different `discvar`.
 
 
 ``` r
 tictoc::tic()
-new.fvc = robust_disc(fvc ~ .,data = select(fvc,-lulc),discnum = 15,cores = 6)
+new.ndvi = robust_disc(NDVIchange ~ .,
+                       data = select(ndvi,-c(Climatezone,Mining)),
+                       discnum = 10,cores = 6)
 tictoc::toc()
-## 2786 sec elapsed
+## 12.88 sec elapsed
 ```
 
 
 ``` r
-new.fvc
-## # A tibble: 5,240 × 11
-##    premax  premin presum tmpmax tmpmin tmpavg pop     ntl     elev    slope   aspect 
-##    <chr>   <chr>  <chr>  <chr>  <chr>  <chr>  <chr>   <chr>   <chr>   <chr>   <chr>  
-##  1 group10 group1 group1 group8 group4 group5 group7  group14 group13 group10 group4 
-##  2 group10 group1 group1 group9 group4 group7 group10 group14 group11 group10 group14
-##  3 group11 group1 group1 group8 group4 group5 group8  group14 group13 group10 group14
-##  4 group13 group1 group1 group8 group2 group4 group7  group14 group13 group11 group14
-##  5 group10 group1 group1 group8 group4 group5 group1  group14 group13 group10 group7 
-##  6 group10 group1 group1 group9 group4 group5 group2  group14 group11 group10 group7 
-##  7 group10 group1 group1 group9 group4 group7 group8  group14 group9  group6  group4 
-##  8 group10 group1 group1 group9 group4 group7 group8  group14 group9  group10 group14
-##  9 group10 group1 group1 group8 group4 group5 group10 group14 group13 group10 group14
-## 10 group11 group1 group1 group8 group4 group5 group9  group14 group9  group10 group14
-## # ℹ 5,230 more rows
+new.ndvi
+## # A tibble: 713 × 4
+##    Tempchange Precipitation GDP     Popdensity
+##    <chr>      <chr>         <chr>   <chr>     
+##  1 group1     group5        group7  group6    
+##  2 group1     group5        group7  group4    
+##  3 group1     group9        group8  group10   
+##  4 group1     group5        group1  group3    
+##  5 group1     group3        group1  group3    
+##  6 group1     group3        group1  group4    
+##  7 group1     group5        group7  group6    
+##  8 group1     group5        group8  group10   
+##  9 group1     group7        group10 group10   
+## 10 group1     group7        group9  group10   
+## # ℹ 703 more rows
 ```
 
-The `new.fvc` is the discrete result,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.ndvi` is the discrete result,we can combine it with `NDVIchange`,`Climatezone` and `Mining` cols in `ndvi` tibble now.
 
 
 ``` r
-new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-new.fvc
-## # A tibble: 5,240 × 13
-##      fvc  lulc premax  premin presum tmpmax tmpmin tmpavg pop     ntl     elev    slope  aspect
-##    <dbl> <dbl> <chr>   <chr>  <chr>  <chr>  <chr>  <chr>  <chr>   <chr>   <chr>   <chr>  <chr> 
-##  1 0.188    10 group10 group1 group1 group8 group4 group5 group7  group14 group13 group… group4
-##  2 0.162    10 group10 group1 group1 group9 group4 group7 group10 group14 group11 group… group…
-##  3 0.168    10 group11 group1 group1 group8 group4 group5 group8  group14 group13 group… group…
-##  4 0.186    10 group13 group1 group1 group8 group2 group4 group7  group14 group13 group… group…
-##  5 0.189    10 group10 group1 group1 group8 group4 group5 group1  group14 group13 group… group7
-##  6 0.171    10 group10 group1 group1 group9 group4 group5 group2  group14 group11 group… group7
-##  7 0.153    10 group10 group1 group1 group9 group4 group7 group8  group14 group9  group6 group4
-##  8 0.163    10 group10 group1 group1 group9 group4 group7 group8  group14 group9  group… group…
-##  9 0.176    10 group10 group1 group1 group8 group4 group5 group10 group14 group13 group… group…
-## 10 0.177    10 group11 group1 group1 group8 group4 group5 group9  group14 group9  group… group…
-## # ℹ 5,230 more rows
+new.ndvi = bind_cols(select(ndvi,c(NDVIchange,Climatezone,Mining)),new.ndvi)
+new.ndvi
+## # A tibble: 713 × 7
+##    NDVIchange Climatezone Mining Tempchange Precipitation GDP     Popdensity
+##         <dbl> <chr>       <fct>  <chr>      <chr>         <chr>   <chr>     
+##  1    0.116   Bwk         low    group1     group5        group7  group6    
+##  2    0.0178  Bwk         low    group1     group5        group7  group4    
+##  3    0.138   Bsk         low    group1     group9        group8  group10   
+##  4    0.00439 Bwk         low    group1     group5        group1  group3    
+##  5    0.00316 Bwk         low    group1     group3        group1  group3    
+##  6    0.00838 Bwk         low    group1     group3        group1  group4    
+##  7    0.0335  Bwk         low    group1     group5        group7  group6    
+##  8    0.0387  Bwk         low    group1     group5        group8  group10   
+##  9    0.0882  Bsk         low    group1     group7        group10 group10   
+## 10    0.0690  Bsk         low    group1     group7        group9  group10   
+## # ℹ 703 more rows
 ```
 
 ### Run geodetector
 
-Then ,we can run geodetector model by `gd()` function.
+Then, we can run geodetector model by `gd()` function.
 
 
 ``` r
-gd(fvc ~ .,data = new.fvc,type = 'factor')
+g1 = gd(NDVIchange ~ .,data = new.ndvi, type = 'factor')
+g1
+## 
 ##  Spatial Stratified Heterogeneity Test 
 ##  
-##              Factor detector         
+##              Factor detector            
 ## 
-## | variable | Q-statistic |   P-value    |
-## |:--------:|:-----------:|:------------:|
-## |  presum  | 0.67445200  | 6.166071e-10 |
-## |   lulc   | 0.65972601  | 8.781502e-10 |
-## |  premin  | 0.48551635  | 5.461166e-10 |
-## |  tmpmin  | 0.45750355  | 6.232301e-10 |
-## |  tmpmax  | 0.28155698  | 5.853387e-10 |
-## |   elev   | 0.25758875  | 5.407331e-10 |
-## |   pop    | 0.25657619  | 4.386063e-10 |
-## |  slope   | 0.25254898  | 9.438880e-10 |
-## |  tmpavg  | 0.25020311  | 4.200449e-10 |
-## |  premax  | 0.16682640  | 9.434108e-10 |
-## |  aspect  | 0.03426667  | 6.238625e-02 |
-## |   ntl    | 0.02333733  | 4.623048e-10 |
+## |   variable    | Q-statistic |   P-value    |
+## |:-------------:|:-----------:|:------------:|
+## | Precipitation |  0.8933049  | 3.249709e-10 |
+## |  Climatezone  |  0.8218335  | 7.340526e-10 |
+## |  Tempchange   |  0.3874615  | 7.590713e-10 |
+## |  Popdensity   |  0.2622265  | 3.647313e-10 |
+## |      GDP      |  0.1491878  | 3.634139e-10 |
+## |    Mining     |  0.1411154  | 6.734163e-10 |
 ```
 
 ``` r
-gd(fvc ~ .,data = new.fvc,type = 'interaction')
+plot(g1)
+```
+
+![](../man/figures/rgdrid/rgd_fd-1.png)
+
+
+``` r
+g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
+g2
+## 
 ##  Spatial Stratified Heterogeneity Test 
 ##  
 ##            Interaction detector         
 ## 
-## | Interactive variable |    Interaction     |
-## |:--------------------:|:------------------:|
-## |    lulc ∩ premax     |    Enhance, bi-    |
-## |    lulc ∩ premin     |    Enhance, bi-    |
-## |    lulc ∩ presum     |    Enhance, bi-    |
-## |    lulc ∩ tmpmax     |    Enhance, bi-    |
-## |    lulc ∩ tmpmin     |    Enhance, bi-    |
-## |    lulc ∩ tmpavg     |    Enhance, bi-    |
-## |      lulc ∩ pop      |    Enhance, bi-    |
-## |      lulc ∩ ntl      |    Enhance, bi-    |
-## |     lulc ∩ elev      |    Enhance, bi-    |
-## |     lulc ∩ slope     |    Enhance, bi-    |
-## |    lulc ∩ aspect     |    Enhance, bi-    |
-## |   premax ∩ premin    | Enhance, nonlinear |
-## |   premax ∩ presum    |    Enhance, bi-    |
-## |   premax ∩ tmpmax    | Enhance, nonlinear |
-## |   premax ∩ tmpmin    | Enhance, nonlinear |
-## |   premax ∩ tmpavg    | Enhance, nonlinear |
-## |     premax ∩ pop     | Enhance, nonlinear |
-## |     premax ∩ ntl     | Enhance, nonlinear |
-## |    premax ∩ elev     | Enhance, nonlinear |
-## |    premax ∩ slope    |    Enhance, bi-    |
-## |   premax ∩ aspect    | Enhance, nonlinear |
-## |   premin ∩ presum    |    Enhance, bi-    |
-## |   premin ∩ tmpmax    |    Enhance, bi-    |
-## |   premin ∩ tmpmin    |    Enhance, bi-    |
-## |   premin ∩ tmpavg    |    Enhance, bi-    |
-## |     premin ∩ pop     |    Enhance, bi-    |
-## |     premin ∩ ntl     | Enhance, nonlinear |
-## |    premin ∩ elev     |    Enhance, bi-    |
-## |    premin ∩ slope    |    Enhance, bi-    |
-## |   premin ∩ aspect    |    Enhance, bi-    |
-## |   presum ∩ tmpmax    |    Enhance, bi-    |
-## |   presum ∩ tmpmin    |    Enhance, bi-    |
-## |   presum ∩ tmpavg    |    Enhance, bi-    |
-## |     presum ∩ pop     |    Enhance, bi-    |
-## |     presum ∩ ntl     | Enhance, nonlinear |
-## |    presum ∩ elev     |    Enhance, bi-    |
-## |    presum ∩ slope    |    Enhance, bi-    |
-## |   presum ∩ aspect    |    Enhance, bi-    |
-## |   tmpmax ∩ tmpmin    |    Enhance, bi-    |
-## |   tmpmax ∩ tmpavg    | Enhance, nonlinear |
-## |     tmpmax ∩ pop     |    Enhance, bi-    |
-## |     tmpmax ∩ ntl     | Enhance, nonlinear |
-## |    tmpmax ∩ elev     | Enhance, nonlinear |
-## |    tmpmax ∩ slope    |    Enhance, bi-    |
-## |   tmpmax ∩ aspect    | Enhance, nonlinear |
-## |   tmpmin ∩ tmpavg    |    Enhance, bi-    |
-## |     tmpmin ∩ pop     |    Enhance, bi-    |
-## |     tmpmin ∩ ntl     | Enhance, nonlinear |
-## |    tmpmin ∩ elev     |    Enhance, bi-    |
-## |    tmpmin ∩ slope    |    Enhance, bi-    |
-## |   tmpmin ∩ aspect    |    Enhance, bi-    |
-## |     tmpavg ∩ pop     |    Enhance, bi-    |
-## |     tmpavg ∩ ntl     | Enhance, nonlinear |
-## |    tmpavg ∩ elev     |    Enhance, bi-    |
-## |    tmpavg ∩ slope    |    Enhance, bi-    |
-## |   tmpavg ∩ aspect    | Enhance, nonlinear |
-## |      pop ∩ ntl       | Enhance, nonlinear |
-## |      pop ∩ elev      |    Enhance, bi-    |
-## |     pop ∩ slope      |    Enhance, bi-    |
-## |     pop ∩ aspect     |    Enhance, bi-    |
-## |      ntl ∩ elev      | Enhance, nonlinear |
-## |     ntl ∩ slope      | Enhance, nonlinear |
-## |     ntl ∩ aspect     | Enhance, nonlinear |
-## |     elev ∩ slope     |    Enhance, bi-    |
-## |    elev ∩ aspect     | Enhance, nonlinear |
-## |    slope ∩ aspect    |    Enhance, bi-    |
+## |    Interactive variable     | Interaction  |
+## |:---------------------------:|:------------:|
+## |    Climatezone ∩ Mining     | Enhance, bi- |
+## |  Climatezone ∩ Tempchange   | Enhance, bi- |
+## | Climatezone ∩ Precipitation | Enhance, bi- |
+## |      Climatezone ∩ GDP      | Enhance, bi- |
+## |  Climatezone ∩ Popdensity   | Enhance, bi- |
+## |     Mining ∩ Tempchange     | Enhance, bi- |
+## |   Mining ∩ Precipitation    | Enhance, bi- |
+## |        Mining ∩ GDP         | Enhance, bi- |
+## |     Mining ∩ Popdensity     | Enhance, bi- |
+## | Tempchange ∩ Precipitation  | Enhance, bi- |
+## |      Tempchange ∩ GDP       | Enhance, bi- |
+## |   Tempchange ∩ Popdensity   | Enhance, bi- |
+## |     Precipitation ∩ GDP     | Enhance, bi- |
+## | Precipitation ∩ Popdensity  | Enhance, bi- |
+## |      GDP ∩ Popdensity       | Enhance, bi- |
 ```
+
+``` r
+plot(g2)
+```
+
+![](../man/figures/rgdrid/rgd_id-1.png)
 
 ### You can also use `rgd()` in one time to get result above.
 
 
 ``` r
-fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15,
-              discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = c('factor','interaction'))
-str(fvc_rgd)
+ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
+               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 10, cores = 6, type = c('factor','interaction'))
+str(ndvi_rgd)
 ## List of 2
 ##  $ :List of 1
-##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)
-##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...
-##   .. ..$ Q-statistic: num [1:12] 0.674 0.66 0.486 0.458 0.282 ...
-##   .. ..$ P-value    : num [1:12] 6.17e-10 8.78e-10 5.46e-10 6.23e-10 5.85e-10 ...
+##   ..$ factor: tibble [6 × 3] (S3: tbl_df/tbl/data.frame)
+##   .. ..$ variable   : chr [1:6] "Precipitation" "Climatezone" "Tempchange" "Popdensity" ...
+##   .. ..$ Q-statistic: num [1:6] 0.893 0.822 0.387 0.262 0.149 ...
+##   .. ..$ P-value    : num [1:6] 3.25e-10 7.34e-10 7.59e-10 3.65e-10 3.63e-10 ...
 ##   ..- attr(*, "class")= chr "factor_detector"
 ##  $ :List of 1
-##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)
-##   .. ..$ variable1                                    : chr [1:66] "lulc" "lulc" "lulc" "lulc" ...
-##   .. ..$ variable2                                    : chr [1:66] "premax" "premin" "presum" "tmpmax" ...
-##   .. ..$ Interaction                                  : chr [1:66] "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" ...
-##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...
-##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.167 0.486 0.674 0.282 0.458 ...
-##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.771 0.791 0.817 0.82 0.848 ...
+##   ..$ interaction: tibble [15 × 6] (S3: tbl_df/tbl/data.frame)
+##   .. ..$ variable1                                    : chr [1:15] "Climatezone" "Climatezone" "Climatezone" "Climatezone" ...
+##   .. ..$ variable2                                    : chr [1:15] "Mining" "Tempchange" "Precipitation" "GDP" ...
+##   .. ..$ Interaction                                  : chr [1:15] "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" ...
+##   .. ..$ Variable1 Q-statistics                       : num [1:15] 0.822 0.822 0.822 0.822 0.822 ...
+##   .. ..$ Variable2 Q-statistics                       : num [1:15] 0.141 0.387 0.893 0.149 0.262 ...
+##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:15] 0.834 0.859 0.914 0.842 0.836 ...
 ##   ..- attr(*, "class")= chr "interaction_detector"
 ```
 
 ``` r
-fvc_rgd[[1]]
+ndvi_rgd[[1]]
+## 
 ##  Spatial Stratified Heterogeneity Test 
 ##  
-##              Factor detector         
+##              Factor detector            
 ## 
-## | variable | Q-statistic |   P-value    |
-## |:--------:|:-----------:|:------------:|
-## |  presum  | 0.67445200  | 6.166071e-10 |
-## |   lulc   | 0.65972601  | 8.781502e-10 |
-## |  premin  | 0.48551635  | 5.461166e-10 |
-## |  tmpmin  | 0.45750355  | 6.232301e-10 |
-## |  tmpmax  | 0.28155698  | 5.853387e-10 |
-## |   elev   | 0.25758875  | 5.407331e-10 |
-## |   pop    | 0.25657619  | 4.386063e-10 |
-## |  slope   | 0.25254898  | 9.438880e-10 |
-## |  tmpavg  | 0.25020311  | 4.200449e-10 |
-## |  premax  | 0.16682640  | 9.434108e-10 |
-## |  aspect  | 0.03426667  | 6.238625e-02 |
-## |   ntl    | 0.02333733  | 4.623048e-10 |
+## |   variable    | Q-statistic |   P-value    |
+## |:-------------:|:-----------:|:------------:|
+## | Precipitation |  0.8933049  | 3.249709e-10 |
+## |  Climatezone  |  0.8218335  | 7.340526e-10 |
+## |  Tempchange   |  0.3874615  | 7.590713e-10 |
+## |  Popdensity   |  0.2622265  | 3.647313e-10 |
+## |      GDP      |  0.1491878  | 3.634139e-10 |
+## |    Mining     |  0.1411154  | 6.734163e-10 |
 ```
 
 ``` r
-fvc_rgd[[2]]
+ndvi_rgd[[2]]
+## 
 ##  Spatial Stratified Heterogeneity Test 
 ##  
 ##            Interaction detector         
 ## 
-## | Interactive variable |    Interaction     |
-## |:--------------------:|:------------------:|
-## |    lulc ∩ premax     |    Enhance, bi-    |
-## |    lulc ∩ premin     |    Enhance, bi-    |
-## |    lulc ∩ presum     |    Enhance, bi-    |
-## |    lulc ∩ tmpmax     |    Enhance, bi-    |
-## |    lulc ∩ tmpmin     |    Enhance, bi-    |
-## |    lulc ∩ tmpavg     |    Enhance, bi-    |
-## |      lulc ∩ pop      |    Enhance, bi-    |
-## |      lulc ∩ ntl      |    Enhance, bi-    |
-## |     lulc ∩ elev      |    Enhance, bi-    |
-## |     lulc ∩ slope     |    Enhance, bi-    |
-## |    lulc ∩ aspect     |    Enhance, bi-    |
-## |   premax ∩ premin    | Enhance, nonlinear |
-## |   premax ∩ presum    |    Enhance, bi-    |
-## |   premax ∩ tmpmax    | Enhance, nonlinear |
-## |   premax ∩ tmpmin    | Enhance, nonlinear |
-## |   premax ∩ tmpavg    | Enhance, nonlinear |
-## |     premax ∩ pop     | Enhance, nonlinear |
-## |     premax ∩ ntl     | Enhance, nonlinear |
-## |    premax ∩ elev     | Enhance, nonlinear |
-## |    premax ∩ slope    |    Enhance, bi-    |
-## |   premax ∩ aspect    | Enhance, nonlinear |
-## |   premin ∩ presum    |    Enhance, bi-    |
-## |   premin ∩ tmpmax    |    Enhance, bi-    |
-## |   premin ∩ tmpmin    |    Enhance, bi-    |
-## |   premin ∩ tmpavg    |    Enhance, bi-    |
-## |     premin ∩ pop     |    Enhance, bi-    |
-## |     premin ∩ ntl     | Enhance, nonlinear |
-## |    premin ∩ elev     |    Enhance, bi-    |
-## |    premin ∩ slope    |    Enhance, bi-    |
-## |   premin ∩ aspect    |    Enhance, bi-    |
-## |   presum ∩ tmpmax    |    Enhance, bi-    |
-## |   presum ∩ tmpmin    |    Enhance, bi-    |
-## |   presum ∩ tmpavg    |    Enhance, bi-    |
-## |     presum ∩ pop     |    Enhance, bi-    |
-## |     presum ∩ ntl     | Enhance, nonlinear |
-## |    presum ∩ elev     |    Enhance, bi-    |
-## |    presum ∩ slope    |    Enhance, bi-    |
-## |   presum ∩ aspect    |    Enhance, bi-    |
-## |   tmpmax ∩ tmpmin    |    Enhance, bi-    |
-## |   tmpmax ∩ tmpavg    | Enhance, nonlinear |
-## |     tmpmax ∩ pop     |    Enhance, bi-    |
-## |     tmpmax ∩ ntl     | Enhance, nonlinear |
-## |    tmpmax ∩ elev     | Enhance, nonlinear |
-## |    tmpmax ∩ slope    |    Enhance, bi-    |
-## |   tmpmax ∩ aspect    | Enhance, nonlinear |
-## |   tmpmin ∩ tmpavg    |    Enhance, bi-    |
-## |     tmpmin ∩ pop     |    Enhance, bi-    |
-## |     tmpmin ∩ ntl     | Enhance, nonlinear |
-## |    tmpmin ∩ elev     |    Enhance, bi-    |
-## |    tmpmin ∩ slope    |    Enhance, bi-    |
-## |   tmpmin ∩ aspect    |    Enhance, bi-    |
-## |     tmpavg ∩ pop     |    Enhance, bi-    |
-## |     tmpavg ∩ ntl     | Enhance, nonlinear |
-## |    tmpavg ∩ elev     |    Enhance, bi-    |
-## |    tmpavg ∩ slope    |    Enhance, bi-    |
-## |   tmpavg ∩ aspect    | Enhance, nonlinear |
-## |      pop ∩ ntl       | Enhance, nonlinear |
-## |      pop ∩ elev      |    Enhance, bi-    |
-## |     pop ∩ slope      |    Enhance, bi-    |
-## |     pop ∩ aspect     |    Enhance, bi-    |
-## |      ntl ∩ elev      | Enhance, nonlinear |
-## |     ntl ∩ slope      | Enhance, nonlinear |
-## |     ntl ∩ aspect     | Enhance, nonlinear |
-## |     elev ∩ slope     |    Enhance, bi-    |
-## |    elev ∩ aspect     | Enhance, nonlinear |
-## |    slope ∩ aspect    |    Enhance, bi-    |
+## |    Interactive variable     | Interaction  |
+## |:---------------------------:|:------------:|
+## |    Climatezone ∩ Mining     | Enhance, bi- |
+## |  Climatezone ∩ Tempchange   | Enhance, bi- |
+## | Climatezone ∩ Precipitation | Enhance, bi- |
+## |      Climatezone ∩ GDP      | Enhance, bi- |
+## |  Climatezone ∩ Popdensity   | Enhance, bi- |
+## |     Mining ∩ Tempchange     | Enhance, bi- |
+## |   Mining ∩ Precipitation    | Enhance, bi- |
+## |        Mining ∩ GDP         | Enhance, bi- |
+## |     Mining ∩ Popdensity     | Enhance, bi- |
+## | Tempchange ∩ Precipitation  | Enhance, bi- |
+## |      Tempchange ∩ GDP       | Enhance, bi- |
+## |   Tempchange ∩ Popdensity   | Enhance, bi- |
+## |     Precipitation ∩ GDP     | Enhance, bi- |
+## | Precipitation ∩ Popdensity  | Enhance, bi- |
+## |      GDP ∩ Popdensity       | Enhance, bi- |
+```
+
+### Run RID
+
+`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Fuzzy **And** Join` are used to generate a new spatial partition of the interaction variables.
+
+
+``` r
+ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
+               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 10, cores = 6)
+ndvi_rid
+## 
+##  Robust Interaction Detector 
+##  
+##  ----------PD values: ---------
+## 
+## |                               varibale                               |    PD     |
+## |:--------------------------------------------------------------------:|:---------:|
+## |                     Climatezone ∩ Precipitation                      | 0.8983194 |
+## |                            Precipitation                             | 0.8933049 |
+## |                  Climatezone ∩ Precipitation ∩ GDP                   | 0.8470890 |
+## |                 Climatezone ∩ Mining ∩ Precipitation                 | 0.8448562 |
+## |               Climatezone ∩ Precipitation ∩ Popdensity               | 0.8426167 |
+## |            Climatezone ∩ Precipitation ∩ GDP ∩ Popdensity            | 0.8351028 |
+## |               Climatezone ∩ Tempchange ∩ Precipitation               | 0.8343010 |
+## |              Climatezone ∩ Mining ∩ Precipitation ∩ GDP              | 0.8302478 |
+## |                         Precipitation ∩ GDP                          | 0.8291002 |
+## |          Climatezone ∩ Mining ∩ Precipitation ∩ Popdensity           | 0.8266936 |
+## |                      Tempchange ∩ Precipitation                      | 0.8262867 |
+## |                             Climatezone                              | 0.8218335 |
+## |       Climatezone ∩ Mining ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.8206854 |
+## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.8033886 |
+## |                   Precipitation ∩ GDP ∩ Popdensity                   | 0.7984676 |
+## |        Climatezone ∩ Tempchange ∩ Precipitation ∩ Popdensity         | 0.7941671 |
+## |                         Climatezone ∩ Mining                         | 0.7930330 |
+## |                      Precipitation ∩ Popdensity                      | 0.7928397 |
+## |          Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation           | 0.7926405 |
+## |     Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity      | 0.7914425 |
+## |                   Tempchange ∩ Precipitation ∩ GDP                   | 0.7898127 |
+## |       Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP        | 0.7826698 |
+## |                     Mining ∩ Precipitation ∩ GDP                     | 0.7780201 |
+## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.7767463 |
+## | Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity | 0.7748192 |
+## |                        Mining ∩ Precipitation                        | 0.7742147 |
+## |                       Climatezone ∩ Tempchange                       | 0.7593504 |
+## |            Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity             | 0.7592357 |
+## |               Tempchange ∩ Precipitation ∩ Popdensity                | 0.7564501 |
+## |                  Climatezone ∩ Mining ∩ Popdensity                   | 0.7554556 |
+## |                      Climatezone ∩ Mining ∩ GDP                      | 0.7546429 |
+## |              Mining ∩ Precipitation ∩ GDP ∩ Popdensity               | 0.7529482 |
+## |                  Climatezone ∩ Mining ∩ Tempchange                   | 0.7485414 |
+## |                       Climatezone ∩ Popdensity                       | 0.7478818 |
+## |                          Climatezone ∩ GDP                           | 0.7442993 |
+## |                 Mining ∩ Precipitation ∩ Popdensity                  | 0.7428155 |
+## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.7390511 |
+## |                    Climatezone ∩ Tempchange ∩ GDP                    | 0.7373548 |
+## |                 Mining ∩ Tempchange ∩ Precipitation                  | 0.7348493 |
+## |               Climatezone ∩ Mining ∩ GDP ∩ Popdensity                | 0.7337329 |
+## |               Climatezone ∩ Mining ∩ Tempchange ∩ GDP                | 0.7316833 |
+## |                    Climatezone ∩ GDP ∩ Popdensity                    | 0.7217405 |
+## |                Climatezone ∩ Tempchange ∩ Popdensity                 | 0.7203489 |
+## |            Climatezone ∩ Mining ∩ Tempchange ∩ Popdensity            | 0.7190660 |
+## |        Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.7124629 |
+## |         Climatezone ∩ Mining ∩ Tempchange ∩ GDP ∩ Popdensity         | 0.7106643 |
+## |             Climatezone ∩ Tempchange ∩ GDP ∩ Popdensity              | 0.7100158 |
+## |           Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity           | 0.7016658 |
+## |                Mining ∩ Tempchange ∩ GDP ∩ Popdensity                | 0.4132554 |
+## |                      Mining ∩ Tempchange ∩ GDP                       | 0.4057062 |
+## |                         Mining ∩ Tempchange                          | 0.4032055 |
+## |                   Mining ∩ Tempchange ∩ Popdensity                   | 0.4026808 |
+## |                    Tempchange ∩ GDP ∩ Popdensity                     | 0.3996984 |
+## |                       Tempchange ∩ Popdensity                        | 0.3990126 |
+## |                           Tempchange ∩ GDP                           | 0.3914879 |
+## |                              Tempchange                              | 0.3874615 |
+## |                      Mining ∩ GDP ∩ Popdensity                       | 0.3293260 |
+## |                         Mining ∩ Popdensity                          | 0.3188582 |
+## |                           GDP ∩ Popdensity                           | 0.2773077 |
+## |                              Popdensity                              | 0.2622265 |
+## |                             Mining ∩ GDP                             | 0.2157334 |
+## |                                 GDP                                  | 0.1491878 |
+## |                                Mining                                | 0.1411154 |
 ```

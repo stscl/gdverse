@@ -10,10 +10,25 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "##"
+  comment = "##",
+  warning = FALSE,
+  message = FALSE,
+  fig.path = "man/figures/idsa/"
 )
 ```
 
-```{r setup}
+The IDSA model is based on the SPADE model, which extends the power of spatial determinant of the SPADE model to multivariable interaction and takes spatial fuzzy overlay into account.
+
+In this vignette, we used the same data as SPADE vignette to demonstrate the use of the IDSA model.
+
+### Load data and package
+
+``` {r}
+library(sf)
 library(gdverse)
+library(magrittr)
+library(tidyverse)
+usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse'))
+usfi
 ```
+

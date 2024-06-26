@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "##",
   warning = FALSE,
-  message = FALSE
+  message = FALSE,
+  fig.path = "man/figures/rgdrid/"
 )
 ```
 
@@ -28,66 +29,74 @@ pandas ruptures -y`
 ### Load data and package
 
 ``` {r}
-library(terra)
 library(gdverse)
 library(tidyverse)
 reticulate::use_condaenv('geocompy')
 
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = aggregate(fvc,fact = 5)
-fvc
+data("ndvi")
 ```
 
 ``` {r}
-names(fvc)
-```
-
-### Convert data from `SpatRaster` to `tibble`
-
-``` {r}
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-head(fvc)
+names(ndvi)
 ```
 
 ### Determine discretization use offline change point detection
 
-Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
-We can use `robust_disc()` to discretize them based on offline change point detection.
+`Climatezone` and `Mining` is the discrete category variables in the `ndvi` data, we need to discretize others.You can use `robust_disc()` to discretize them based on offline change point detection.When executing `robust_disc()`, note that each `discvar` can use a `discnum` parameter of its own. You can pass in a vector of equal length to `discvar` to use different `discnum` for different `discvar`.
 
 ```{r}
 tictoc::tic()
-new.fvc = robust_disc(fvc ~ .,data = select(fvc,-lulc),discnum = 15,cores = 6)
+new.ndvi = robust_disc(NDVIchange ~ .,
+                       data = select(ndvi,-c(Climatezone,Mining)),
+                       discnum = 10,cores = 6)
 tictoc::toc()
 ```
 
 ```{r}
-new.fvc
+new.ndvi
 ```
 
-The `new.fvc` is the discrete result,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.ndvi` is the discrete result,we can combine it with `NDVIchange`,`Climatezone` and `Mining` cols in `ndvi` tibble now.
 
 ```{r}
-new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-new.fvc
+new.ndvi = bind_cols(select(ndvi,c(NDVIchange,Climatezone,Mining)),new.ndvi)
+new.ndvi
 ```
 
 ### Run geodetector
 
-Then ,we can run geodetector model by `gd()` function.
+Then, we can run geodetector model by `gd()` function.
 
-```{r}
-gd(fvc ~ .,data = new.fvc,type = 'factor')
-gd(fvc ~ .,data = new.fvc,type = 'interaction')
+```{r rgd_fd,fig.width=5,fig.height=3.5}
+g1 = gd(NDVIchange ~ .,data = new.ndvi, type = 'factor')
+g1
+plot(g1)
+```
+
+```{r rgd_id,fig.width=6.25,fig.height=4.25}
+g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
+g2
+plot(g2)
 ```
 
 ### You can also use `rgd()` in one time to get result above.
 
 ```{r}
-fvc_rgd = rgd(fvc ~ ., data = fvc, discnum = 15,
-              discvar = names(select(fvc,-c(fvc,lulc))),
-              cores = 6, type = c('factor','interaction'))
-str(fvc_rgd)
-fvc_rgd[[1]]
-fvc_rgd[[2]]
+ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
+               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 10, cores = 6, type = c('factor','interaction'))
+str(ndvi_rgd)
+ndvi_rgd[[1]]
+ndvi_rgd[[2]]
+```
+
+### Run RID
+
+`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Fuzzy **And** Join` are used to generate a new spatial partition of the interaction variables.
+
+```{r}
+ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
+               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 10, cores = 6)
+ndvi_rid
 ```
