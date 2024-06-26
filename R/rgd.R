@@ -18,25 +18,19 @@
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
-#' @param ... (optional) Other arguments passed to `robust_disc()`.
 #'
 #' @return A list of the RGD model result.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' library(terra)
-#' library(tidyverse)
-#' fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-#' fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-#' fvc = terra::aggregate(fvc,fact = 5)
-#' fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-#' rgd(fvc ~ ., data = fvc, discnum = 10,
-#'     discvar = names(select(fvc,-c(fvc,lulc))),
-#'     cores = 6, type =c('factor','interaction'))
+#' data('ndvi')
+#' reticulate::use_condaenv('geocompy')
+#' g = rgd(NDVIchange ~ ., data = ndvi, dicsvar = names(ndvi)[-1],
+#'         cores = 6, type =c('factor','interaction'))
 #' }
 rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
-        cores = 1, type = "factor", alpha = 0.95, ...){
+        cores = 1, type = "factor", alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]

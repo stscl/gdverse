@@ -40,7 +40,7 @@ Current models and functions provided by **gdverse** are:
 |  **SPADE**  |        `spade()`         |          ✔️        |
 |  **IDSA**  |        `idsa()`         |          ✔️       |
 |  **RGD**  |        `rgd()`         |          ✔️        |
-|  **RID**  |        `rid()`         |          ❌        |
+|  **RID**  |        `rid()`         |          ✔️       |
 
 ## Installation
 

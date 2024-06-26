@@ -12,8 +12,7 @@ rgd(
   minsize = NULL,
   cores = 1,
   type = "factor",
-  alpha = 0.95,
-  ...
+  alpha = 0.95
 )
 }
 \arguments{
@@ -36,8 +35,6 @@ parallel computation.}
 \code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
 
 \item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
-
-\item{...}{(optional) Other arguments passed to \code{robust_disc()}.}
 }
 \value{
 A list of the RGD model result.
@@ -47,15 +44,10 @@ Function for robust geographical detector(RGD) model.
 }
 \examples{
 \dontrun{
-library(terra)
-library(tidyverse)
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = terra::aggregate(fvc,fact = 5)
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-rgd(fvc ~ ., data = fvc, discnum = 10,
-    discvar = names(select(fvc,-c(fvc,lulc))),
-    cores = 6, type =c('factor','interaction'))
+data('ndvi')
+reticulate::use_condaenv('geocompy')
+g = rgd(NDVIchange ~ ., data = ndvi, dicsvar = names(ndvi)[-1],
+        cores = 6, type =c('factor','interaction'))
 }
 }
 \references{

@@ -34,9 +34,9 @@ st_fuzzyoverlay = \(formula, data, method = "and"){
   formula.vars = all.vars(formula)
   y = data[, formula.vars[1], drop = TRUE]
   if (formula.vars[2] == "."){
-    xs = data[,-which(colnames(data) == formula.vars[1])]
+    xs = dplyr::select(data,-dplyr::any_of(formula.vars[1]))
   } else {
-    xs = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
+    xs = dplyr::select(data,dplyr::all_of(formula.vars[-1]))
   }
   xs = xs %>%
     dplyr::mutate(dplyr::across(dplyr::where(is.factor),

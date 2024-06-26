@@ -28,7 +28,7 @@ Current models and functions provided by **gdverse** are:
 | **SPADE**           | `spade()`          | ✔️               |
 | **IDSA**            | `idsa()`           | ✔️               |
 | **RGD**             | `rgd()`            | ✔️               |
-| **RID**             | `rid()`            | ❌               |
+| **RID**             | `rid()`            | ✔️               |
 
 ## Installation
 
@@ -78,7 +78,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.06 sec elapsed
+## 3.81 sec elapsed
 ```
 
 ``` r

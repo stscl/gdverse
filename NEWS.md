@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.2.0
+
+### major changes
+
+* Support the RID model.
+
 # gdverse 0.1.9
 
 ### major changes
