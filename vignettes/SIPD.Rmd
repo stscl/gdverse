@@ -1,0 +1,19 @@
+---
+title: "Spatial Interaction Associations detection(IDSA&RGD)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SIPD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gdverse)
+```

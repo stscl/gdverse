@@ -1,5 +1,5 @@
 ---
-title: "Spatial heterogeneity explanation(GOZH & LESH)"
+title: "Spatial Heterogeneity Explanation(GOZH & LESH)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SHEGD}
