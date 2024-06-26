@@ -62,18 +62,18 @@ A tibble with PID values under different spatial overlays.
 \description{
 Function for interactive detector for spatial associations model.
 }
+\note{
+The IDSA model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
+When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
+When there are a large number of explanatory variables, the data dimensionality reduction method can be used
+to ensure the trade-off between analysis results and calculation speed.
+}
 \examples{
 \dontrun{
-library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
-  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = usfi |>
-  st_centroid() |>
-  st_coordinates()
-wt = inverse_distance_weight(coord[,1],coord[,2])
-usfi = st_drop_geometry(usfi)
-idsa(SUHI ~ NDVI + BH, data = usfi,wt = wt,
-     discvar = c('NDVI','BH'),cores = 6)
+data('sim')
+g = idsa(y ~ ., data = sim, locations = c('lo','la'),
+         discvar = c("xa","xb","xc"), cores = 6)
+g
 }
 }
 \references{

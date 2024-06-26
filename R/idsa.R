@@ -6,6 +6,11 @@
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
 #' DOI:10.1080/13658816.2021.1882680
+#' @note
+#' The IDSA model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
+#' When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
+#' When there are a large number of explanatory variables, the data dimensionality reduction method can be used
+#' to ensure the trade-off between analysis results and calculation speed.
 #'
 #' @param formula A formula of IDSA model.
 #' @param data A data.frame or tibble of observation data.
@@ -35,16 +40,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(sf)
-#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = usfi |>
-#'   st_centroid() |>
-#'   st_coordinates()
-#' wt = inverse_distance_weight(coord[,1],coord[,2])
-#' usfi = st_drop_geometry(usfi)
-#' idsa(SUHI ~ NDVI + BH, data = usfi,wt = wt,
-#'      discvar = c('NDVI','BH'),cores = 6)
+#' data('sim')
+#' g = idsa(y ~ ., data = sim, locations = c('lo','la'),
+#'          discvar = c("xa","xb","xc"), cores = 6)
+#' g
 #' }
 idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
          discvar = NULL, discnum = NULL, discmethod = NULL, strategy = 2L,

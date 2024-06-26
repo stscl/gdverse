@@ -7,9 +7,7 @@
 ### major changes
 
 * Rewrite the LESH model,reduces computational complexity of the algorithm from 
-$n*2^n-1$ to $2^n-1$.
-
-* IDSA model now is implemented recursively.
+$n \times 2^n-1$ to $2^n-1$.
 
 # gdverse 0.1.8
 
