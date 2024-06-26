@@ -38,7 +38,7 @@ Current models and functions provided by **gdverse** are:
 |  **GOZH**  |        `gozh()`         |          ✔️        |
 |  **LESH**  |        `lesh()`         |          ✔️        |
 |  **SPADE**  |        `spade()`         |          ✔️        |
-|  **IDSA**  |        `idsa()`         |          ❌        |
+|  **IDSA**  |        `idsa()`         |          ✔️       |
 |  **RGD**  |        `rgd()`         |          ✔️        |
 |  **RID**  |        `rid()`         |          ❌        |
 
@@ -74,7 +74,7 @@ head(fvc)
 
 ```{r}
 tictoc::tic()
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
+fvc_opgd = opgd(fvc ~ ., data = fvc, 
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()

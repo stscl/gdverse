@@ -26,7 +26,7 @@ Current models and functions provided by **gdverse** are:
 | **GOZH**            | `gozh()`           | ✔️               |
 | **LESH**            | `lesh()`           | ✔️               |
 | **SPADE**           | `spade()`          | ✔️               |
-| **IDSA**            | `idsa()`           | ❌               |
+| **IDSA**            | `idsa()`           | ✔️               |
 | **RGD**             | `rgd()`            | ✔️               |
 | **RID**             | `rid()`            | ❌               |
 
@@ -74,11 +74,11 @@ head(fvc)
 
 ``` r
 tictoc::tic()
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
+fvc_opgd = opgd(fvc ~ ., data = fvc, 
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.56 sec elapsed
+## 4.06 sec elapsed
 ```
 
 ``` r
@@ -90,18 +90,18 @@ fvc_opgd
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
-## |  presum  | 0.66090313  | 8.344327e-10 |
+## |  presum  | 0.66923550  | 8.554930e-10 |
 ## |   lulc   | 0.65972601  | 8.781502e-10 |
-## |  premin  | 0.46550058  | 3.606232e-10 |
-## |  tmpmin  | 0.43559812  | 8.536544e-10 |
-## |  tmpmax  | 0.25364304  | 7.848540e-10 |
-## |  slope   | 0.23570512  | 8.826343e-10 |
-## |   elev   | 0.23554763  | 7.286761e-10 |
-## |  tmpavg  | 0.22139249  | 7.615818e-10 |
-## |   pop    | 0.19529044  | 2.428073e-10 |
-## |  premax  | 0.14507334  | 5.960950e-10 |
-## |  aspect  | 0.01859967  | 7.490531e-01 |
-## |   ntl    | 0.01725685  | 1.384075e-01 |
+## |  premin  | 0.47166574  | 7.962555e-10 |
+## |  tmpmin  | 0.44222562  | 6.514229e-10 |
+## |  tmpmax  | 0.26854375  | 2.030104e-10 |
+## |   elev   | 0.23905807  | 8.916474e-10 |
+## |  slope   | 0.23806298  | 7.558786e-10 |
+## |  tmpavg  | 0.23215568  | 4.995040e-10 |
+## |   pop    | 0.21559875  | 3.563219e-10 |
+## |  premax  | 0.15141204  | 6.934805e-10 |
+## |   ntl    | 0.02289085  | 3.851238e-01 |
+## |  aspect  | 0.01901487  | 9.695436e-01 |
 ```
 
 ### GOZH model
