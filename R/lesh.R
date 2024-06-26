@@ -42,7 +42,7 @@ lesh = \(formula,data,cores = 1,...){
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
     dplyr::select(-dplyr::starts_with('spd'))
   res = list("interaction" = res)
-  class(res) = "interaction_lesh"
+  class(res) = "lesh_result"
   return(res)
 }
 
@@ -52,11 +52,11 @@ lesh = \(formula,data,cores = 1,...){
 #' S3 method to format output for LESH model interaction result in `lesh()`.
 #'
 #' @param x Return by `lesh()`.
-#' @param ... Other arguments.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
-print.interaction_lesh = \(x, ...) {
+print.lesh_result = \(x, ...) {
   cat("\n    Spatial Interaction Association Detector    \n",
       "\n                   LESH Model                     ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
@@ -65,7 +65,7 @@ print.interaction_lesh = \(x, ...) {
                                                   IntersectionSymbol,
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
-  print(kableExtra::kable(x,format = "markdown",digits = 16,align = 'c'))
+  print(kableExtra::kable(x,format = "markdown",digits = 16,align = 'c',...))
 }
 
 #' @title plot LESH model interaction result
@@ -92,7 +92,7 @@ print.interaction_lesh = \(x, ...) {
 #' plot(g)
 #' }
 #'
-plot.interaction_lesh = \(x,pie = TRUE,scatter = FALSE,
+plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
                           ..., scatter_alpha = 1) {
   fig_scatter = NULL
   fig_pie = NULL

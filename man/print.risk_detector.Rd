@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{Return by \code{gd()}.}
 
-\item{...}{Other arguments.}
+\item{...}{(optional) Other arguments passed to \code{knitr::kable()}.}
 }
 \value{
 Formatted string output

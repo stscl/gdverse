@@ -113,7 +113,7 @@ gd = \(formula,data,type = "factor",...){
 #' S3 method to format output for factor detector in `gd()`.
 #'
 #' @param x Return by `gd()`.
-#' @param ... Other arguments.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
@@ -121,7 +121,7 @@ print.factor_detector = \(x, ...) {
   cat("\n Spatial Stratified Heterogeneity Test \n",
       "\n             Factor detector            ")
   # pander::pander(x$factor)
-  print(kableExtra::kable(x$factor,format = "markdown",digits = 16,align = 'c'))
+  print(kableExtra::kable(x$factor,format = "markdown",digits = 16,align = 'c',...))
 }
 
 #' @title print interaction detector
@@ -130,7 +130,7 @@ print.factor_detector = \(x, ...) {
 #' S3 method to format output for interaction detector in `gd()`.
 #'
 #' @param x Return by `gd()`.
-#' @param ... Other arguments.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
@@ -144,7 +144,7 @@ print.interaction_detector = \(x, ...) {
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
   # pander::pander(x)
-  print(kableExtra::kable(x,format = "markdown",align = 'c'))
+  print(kableExtra::kable(x,format = "markdown",align = 'c',...))
 }
 
 #' @title print risk detector
@@ -153,7 +153,7 @@ print.interaction_detector = \(x, ...) {
 #' S3 method to format output for risk detector in `gd()`.
 #'
 #' @param x Return by `gd()`.
-#' @param ... Other arguments.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
@@ -178,7 +178,7 @@ print.risk_detector = \(x, ...) {
   for (i in xvar){
     cat(sprintf("\n Variable %s:",i))
     # print(knitr::kable(rd2mat(x,i),format = "markdown"))
-    print(kableExtra::kable(rd2mat(x,i),format = "markdown",align = 'c'))
+    print(kableExtra::kable(rd2mat(x,i),format = "markdown",align = 'c',...))
   }
 }
 
@@ -188,7 +188,7 @@ print.risk_detector = \(x, ...) {
 #' S3 method to format output for ecological detector in `gd()`.
 #'
 #' @param x Return by `gd()`.
-#' @param ... Other arguments.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
@@ -209,5 +209,5 @@ print.ecological_detector = \(x, ...) {
     return(matt)
   }
   # print(knitr::kable(ed2mat(x),format = "markdown"))
-  print(kableExtra::kable(ed2mat(x),format = "markdown",align = 'c'))
+  print(kableExtra::kable(ed2mat(x),format = "markdown",align = 'c',...))
 }
