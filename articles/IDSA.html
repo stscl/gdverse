@@ -92,8 +92,43 @@
 
     
     
+<p>The IDSA model is based on the SPADE model, which extends the power
+of spatial determinant of the SPADE model to multivariable interaction
+and takes spatial fuzzy overlay into account.</p>
+<p>In this vignette, we used the same data as SPADE vignette to
+demonstrate the use of the IDSA model.</p>
+<div class="section level3">
+<h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
+</h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">usfi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/USFI_Xian.gpkg'</span>,package <span class="op">=</span> <span class="st">'gdverse'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">usfi</span></span>
+<span><span class="co">## Simple feature collection with 1037 features and 19 fields</span></span>
+<span><span class="co">## Geometry type: POLYGON</span></span>
+<span><span class="co">## Dimension:     XY</span></span>
+<span><span class="co">## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669</span></span>
+<span><span class="co">## Projected CRS: WGS 84 / UTM zone 49N</span></span>
+<span><span class="co">## <span style="color: #949494;"># A tibble: 1,037 × 20</span></span></span>
+<span><span class="co">##      LPI   LSI   GAR    DAR      WAR   TER  NDVI   NDWI   DTH   DTP    DTR   DTW</span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span>  57.2 10.5  0.630 0.273  0.002<span style="text-decoration: underline;">19</span>  0.979 0.497 -<span style="color: #BB0000;">0.356</span>  5.66 1.08  0.934   1.16</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span>  85.7  2.35 0.905 0.095<span style="text-decoration: underline;">2</span> 0        0.977 0.514 -<span style="color: #BB0000;">0.288</span>  5.66 1.41  0.080<span style="text-decoration: underline;">7</span>  1.57</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>  41.2  7.85 0.436 0.449  0.000<span style="text-decoration: underline;">672</span> 0.972 0.365 -<span style="color: #BB0000;">0.296</span>  4.38 1.88  0.516   2.37</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span>  39.1  5.40 0.534 0.377  0        0.966 0.395 -<span style="color: #BB0000;">0.299</span>  4.25 1.97  0.442   2.81</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span>  32.0  8.04 0.405 0.437  0        0.968 0.354 -<span style="color: #BB0000;">0.302</span>  3.65 1.34  0.615   2.55</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span>  58.3  7.91 0.332 0.615  0.000<span style="text-decoration: underline;">377</span> 0.966 0.312 -<span style="color: #BB0000;">0.271</span>  3.69 0.700 0.592   2.25</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span>  98.4  3.34 0.984 0.016<span style="text-decoration: underline;">1</span> 0        0.948 0.451 -<span style="color: #BB0000;">0.248</span>  5.39 1.36  0.124   3.64</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span>  44.6 17.6  0.416 0.502  0.000<span style="text-decoration: underline;">672</span> 0.949 0.365 -<span style="color: #BB0000;">0.295</span>  5.11 1.20  0.926   2.50</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span>  35.9  9.81 0.464 0.467  0.001<span style="text-decoration: underline;">34</span>  0.936 0.379 -<span style="color: #BB0000;">0.309</span>  7.10 2.01  1.03    2.75</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span>  44.3  9.49 0.403 0.504  0.000<span style="text-decoration: underline;">547</span> 0.926 0.310 -<span style="color: #BB0000;">0.278</span>  8.51 2.68  0.658   3.20</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1,027 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 8 more variables: BH &lt;dbl&gt;, BD &lt;dbl&gt;, RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;, geom &lt;POLYGON [m]&gt;</span></span></span></code></pre></div>
+</div>
   </main>
 </div>
 
