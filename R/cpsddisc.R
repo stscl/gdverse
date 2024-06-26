@@ -58,9 +58,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
     cores = parallel::makeCluster(cores)
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
-  if (is.null(discmethod)) {
-    discmethod = "quantile"
-  }
+  if (is.null(discmethod)) {discmethod = "quantile"}
   if (is.null(discnum)){discnum = 3:22}
 
   formula = stats::as.formula(formula)

@@ -31,7 +31,8 @@
 #'
 loess_optdiscnum = \(qvec, discnumvec,
                      increase_rate = 0.05){
-  n = length(qvec)
+  qvec = qvec[which(!is.na(qvec))] # debug : remove NA value in qvec and discnumver
+  discnumvec = discnumvec[which(!is.na(qvec))]
   loessf = stats::loess(qvec ~ discnumvec)
   loessrate = (loessf$fitted - dplyr::lag(loessf$fitted)) / dplyr::lag(loessf$fitted)
   increase_rate = ifelse(max(loessrate,na.rm = TRUE) < increase_rate,
