@@ -68,7 +68,6 @@
 <span>  wt <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  overlaymethod <span class="op">=</span> <span class="st">"and"</span>,</span>
 <span>  locations <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  discvar <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  discnum <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  discmethod <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
@@ -103,11 +102,6 @@ Default is <code>and</code>.</p></dd>
 <dt>locations</dt>
 <dd><p>(optional) The geospatial locations coordinate columns name which in <code>data</code>.
 Useful and must provided when <code>wt</code> is not provided. When <code>wt</code> is provided, <code>locations</code> is not need.</p></dd>
-
-
-<dt>discvar</dt>
-<dd><p>Name of continuous variable columns that need to be discretized.Noted that
-when <code>formula</code> has <code>discvar</code>, <code>data</code> must have these columns.</p></dd>
 
 
 <dt>discnum</dt>

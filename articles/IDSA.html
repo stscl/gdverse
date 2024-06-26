@@ -112,24 +112,133 @@ demonstrate the use of the IDSA model.</p>
 <span><span class="co">## Dimension:     XY</span></span>
 <span><span class="co">## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669</span></span>
 <span><span class="co">## Projected CRS: WGS 84 / UTM zone 49N</span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble: 1,037 × 20</span></span></span>
-<span><span class="co">##      LPI   LSI   GAR    DAR      WAR   TER  NDVI   NDWI   DTH   DTP    DTR   DTW</span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span>  57.2 10.5  0.630 0.273  0.002<span style="text-decoration: underline;">19</span>  0.979 0.497 -<span style="color: #BB0000;">0.356</span>  5.66 1.08  0.934   1.16</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span>  85.7  2.35 0.905 0.095<span style="text-decoration: underline;">2</span> 0        0.977 0.514 -<span style="color: #BB0000;">0.288</span>  5.66 1.41  0.080<span style="text-decoration: underline;">7</span>  1.57</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span>  41.2  7.85 0.436 0.449  0.000<span style="text-decoration: underline;">672</span> 0.972 0.365 -<span style="color: #BB0000;">0.296</span>  4.38 1.88  0.516   2.37</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span>  39.1  5.40 0.534 0.377  0        0.966 0.395 -<span style="color: #BB0000;">0.299</span>  4.25 1.97  0.442   2.81</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span>  32.0  8.04 0.405 0.437  0        0.968 0.354 -<span style="color: #BB0000;">0.302</span>  3.65 1.34  0.615   2.55</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span>  58.3  7.91 0.332 0.615  0.000<span style="text-decoration: underline;">377</span> 0.966 0.312 -<span style="color: #BB0000;">0.271</span>  3.69 0.700 0.592   2.25</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span>  98.4  3.34 0.984 0.016<span style="text-decoration: underline;">1</span> 0        0.948 0.451 -<span style="color: #BB0000;">0.248</span>  5.39 1.36  0.124   3.64</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span>  44.6 17.6  0.416 0.502  0.000<span style="text-decoration: underline;">672</span> 0.949 0.365 -<span style="color: #BB0000;">0.295</span>  5.11 1.20  0.926   2.50</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span>  35.9  9.81 0.464 0.467  0.001<span style="text-decoration: underline;">34</span>  0.936 0.379 -<span style="color: #BB0000;">0.309</span>  7.10 2.01  1.03    2.75</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span>  44.3  9.49 0.403 0.504  0.000<span style="text-decoration: underline;">547</span> 0.926 0.310 -<span style="color: #BB0000;">0.278</span>  8.51 2.68  0.658   3.20</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 1,027 more rows</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 8 more variables: BH &lt;dbl&gt;, BD &lt;dbl&gt;, RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;, geom &lt;POLYGON [m]&gt;</span></span></span></code></pre></div>
+<span><span class="co">## # A tibble: 1,037 × 20</span></span>
+<span><span class="co">##      LPI   LSI   GAR    DAR     WAR   TER  NDVI   NDWI   DTH   DTP    DTR   DTW    BH    BD    RL</span></span>
+<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">##  1  57.2 10.5  0.630 0.273  2.19e-3 0.979 0.497 -0.356  5.66 1.08  0.934   1.16 3.16  0.635 0.192</span></span>
+<span><span class="co">##  2  85.7  2.35 0.905 0.0952 0       0.977 0.514 -0.288  5.66 1.41  0.0807  1.57 0.310 0.139 0    </span></span>
+<span><span class="co">##  3  41.2  7.85 0.436 0.449  6.72e-4 0.972 0.365 -0.296  4.38 1.88  0.516   2.37 3.99  0.671 0.151</span></span>
+<span><span class="co">##  4  39.1  5.40 0.534 0.377  0       0.966 0.395 -0.299  4.25 1.97  0.442   2.81 4.63  0.634 0.143</span></span>
+<span><span class="co">##  5  32.0  8.04 0.405 0.437  0       0.968 0.354 -0.302  3.65 1.34  0.615   2.55 4.07  0.642 0.129</span></span>
+<span><span class="co">##  6  58.3  7.91 0.332 0.615  3.77e-4 0.966 0.312 -0.271  3.69 0.700 0.592   2.25 7.91  0.777 0.232</span></span>
+<span><span class="co">##  7  98.4  3.34 0.984 0.0161 0       0.948 0.451 -0.248  5.39 1.36  0.124   3.64 0.216 0.111 0    </span></span>
+<span><span class="co">##  8  44.6 17.6  0.416 0.502  6.72e-4 0.949 0.365 -0.295  5.11 1.20  0.926   2.50 6.49  0.747 0.185</span></span>
+<span><span class="co">##  9  35.9  9.81 0.464 0.467  1.34e-3 0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692 0.195</span></span>
+<span><span class="co">## 10  44.3  9.49 0.403 0.504  5.47e-4 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601 0.127</span></span>
+<span><span class="co">## # ℹ 1,027 more rows</span></span>
+<span><span class="co">## # ℹ 5 more variables: RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;, geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 </div>
-  </main>
+<div class="section level3">
+<h3 id="data-precessing">Data precessing<a class="anchor" aria-label="anchor" href="#data-precessing"></a>
+</h3>
+<p>There are originally 18 explanatory variables in the
+<code>usfi</code> tibble. If these 18 variables are used together, IDSA
+needs to be calculated about 2.62143 × 10<sup>5</sup> times, which is
+very time-consuming, and we need to reduce the dimension of the data or
+select appropriate variables.</p>
+<p>Here we combine the understanding of the data and the diffusion maps
+method to generate the data after dimensionality reduction.Specifically,
+we combine data of the same class into one class using diffusion maps
+based on the classification of explanatory variables.</p>
+<p>In SPADE vignette we proved the invalidity of <code>WAR</code> to
+explain <code>SUHI</code>, which is removed here.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">landscape</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"LPI"</span>,<span class="st">"LSI"</span>,<span class="st">"GAR"</span>,<span class="st">"DAR"</span><span class="op">)</span></span>
+<span><span class="va">dist_cold_heat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DTH"</span>,<span class="st">"DTP"</span>,<span class="st">"DTR"</span>,<span class="st">"DTW"</span><span class="op">)</span></span>
+<span><span class="va">urbanbuilt_form</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"TER"</span>,<span class="st">"NDVI"</span>,<span class="st">"NDWI"</span>,<span class="st">"BH"</span>,<span class="st">"BD"</span>,<span class="st">"RL"</span>,<span class="st">"RFD"</span>,<span class="st">"SVF"</span>,<span class="st">"FAR"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dm_n21</span> <span class="op">=</span> \<span class="op">(</span><span class="va">xvecname</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span></span>
+<span>    <span class="va">usfi</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">all_of</a></span><span class="op">(</span><span class="va">xvecname</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="op">{</span><span class="fu">Rdimtools</span><span class="fu">::</span><span class="fu">do.dm</span><span class="op">(</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span><span class="op">}</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="op">{</span><span class="va">.</span><span class="op">$</span><span class="va">Y</span><span class="op">}</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="op">{</span><span class="va">.</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">}</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>      <span class="fu">gdverse</span><span class="fu">::</span><span class="fu"><a href="../reference/rescale_vector.html">rescale_vector</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">newdata</span> <span class="op">=</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  SUHI <span class="op">=</span> <span class="va">usfi</span><span class="op">$</span><span class="va">SUHI</span>,</span>
+<span>  landscape <span class="op">=</span> <span class="fu">dm_n21</span><span class="op">(</span><span class="va">landscape</span><span class="op">)</span>,</span>
+<span>  dist_cold_heat <span class="op">=</span> <span class="fu">dm_n21</span><span class="op">(</span><span class="va">dist_cold_heat</span><span class="op">)</span>,</span>
+<span>  urbanbuilt_form <span class="op">=</span> <span class="fu">dm_n21</span><span class="op">(</span><span class="va">urbanbuilt_form</span><span class="op">)</span>,</span>
+<span><span class="op">)</span></span>
+<span><span class="va">newdata</span></span>
+<span><span class="co">## # A tibble: 1,037 × 4</span></span>
+<span><span class="co">##     SUHI landscape dist_cold_heat urbanbuilt_form</span></span>
+<span><span class="co">##    &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;</span></span>
+<span><span class="co">##  1 1.76       1.00          0.726         0.200  </span></span>
+<span><span class="co">##  2 0.519      1.00          0.722         0.00319</span></span>
+<span><span class="co">##  3 3.04       1.00          0.392         0.272  </span></span>
+<span><span class="co">##  4 3.22       1.00          0.344         0.345  </span></span>
+<span><span class="co">##  5 3.47       1.00          0.216         0.273  </span></span>
+<span><span class="co">##  6 4.71       1.00          0.225         0.644  </span></span>
+<span><span class="co">##  7 1.24       1.00          0.508         0.00117</span></span>
+<span><span class="co">##  8 4.30       1             0.554         0.544  </span></span>
+<span><span class="co">##  9 3.76       1.00          0.860         0.443  </span></span>
+<span><span class="co">## 10 4.23       1.00          0.928         0.197  </span></span>
+<span><span class="co">## # ℹ 1,027 more rows</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="construct-spatial-weight">Construct spatial Weight<a class="anchor" aria-label="anchor" href="#construct-spatial-weight"></a>
+</h3>
+<p>We use the same spatial weight matrix as SPADE vignette.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wt</span> <span class="op">=</span> <span class="va">usfi</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">is.na</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/st_contiguity.html" class="external-link">st_contiguity</a></span><span class="op">(</span><span class="va">geom</span><span class="op">)</span>,</span>
+<span>         wt <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/st_weights.html" class="external-link">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/exposition.html" class="external-link">%$%</a></span></span>
+<span>  <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/wt_as_matrix.html" class="external-link">wt_as_matrix</a></span><span class="op">(</span><span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span></span>
+<span><span class="va">usfi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="idsa-modeling">IDSA modeling<a class="anchor" aria-label="anchor" href="#idsa-modeling"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">idsa.model</span> <span class="op">=</span> <span class="fu"><a href="../reference/idsa.html">idsa</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span> ,data <span class="op">=</span> <span class="va">newdata</span>, wt <span class="op">=</span> <span class="va">wt</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">idsa.model</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Interactive Detector For Spatial Associations </span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ------------------ PID values: -------------------</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |                   varibale                   |     PID     |</span></span>
+<span><span class="co">## |:--------------------------------------------:|:-----------:|</span></span>
+<span><span class="co">## | landscape ∩ dist_cold_heat ∩ urbanbuilt_form | 0.456037749 |</span></span>
+<span><span class="co">## |       dist_cold_heat ∩ urbanbuilt_form       | 0.409391856 |</span></span>
+<span><span class="co">## |               urbanbuilt_form                | 0.345502490 |</span></span>
+<span><span class="co">## |         landscape ∩ urbanbuilt_form          | 0.330585501 |</span></span>
+<span><span class="co">## |                dist_cold_heat                | 0.123563063 |</span></span>
+<span><span class="co">## |          landscape ∩ dist_cold_heat          | 0.071627057 |</span></span>
+<span><span class="co">## |                  landscape                   | 0.004188307 |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  ------- IDSA model performance evaluation: -------</span></span>
+<span><span class="co">##  * Number of overlay zones :  11 </span></span>
+<span><span class="co">##  * Percentage of finely divided zones :  0.0009643202 </span></span>
+<span><span class="co">##  * Number of individual explanatory variables :  3 </span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ## Different of response variable between a pair of overlay zones:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |       zone1st        |       zone2nd        | Risk |</span></span>
+<span><span class="co">## |:--------------------:|:--------------------:|:----:|</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_3 |  No  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_4 |  No  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_8 | Yes  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_9 |  No  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 |   zonelandscape_1    |  No  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  #### Only the first five pairs of overlay zones are displayed! ####</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">idsa.model</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/idsa/idsa_modeling-1.png"></p>
+<p>This vignette is a special case because the explanatory variables are
+dimensionally reduced in advance and is used as a coping strategy when
+IDSA is executed in the face of many explanatory variables.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
