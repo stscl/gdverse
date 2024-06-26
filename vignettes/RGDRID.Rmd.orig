@@ -1,8 +1,8 @@
 ---
-title: "Robust Geographical Detector(RGD)"
+title: "Robust Geographical Detector & Robust Interaction Detector(RGD & RID)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{RGD}
+  %\VignetteIndexEntry{RGDRID}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

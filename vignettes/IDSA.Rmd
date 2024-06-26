@@ -1,8 +1,8 @@
 ---
-title: "Spatial Interaction Associations detection(IDSA&RGD)"
+title: "Interactive Detector For Spatial Associations(IDSA)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SIPD}
+  %\VignetteIndexEntry{IDSA}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,7 +10,7 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "##"
 )
 ```
 
