@@ -74,6 +74,7 @@
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">123456789</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -137,6 +138,10 @@ object.</p></dd>
 <dd><p>(optional) Random number seed, default is <code>123456789</code>.</p></dd>
 
 
+<dt>alpha</dt>
+<dd><p>(optional) Specifies the size of confidence level.Default is <code>0.95</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>(optional) Other arguments passed to <code><a href="cpsd_disc.html">cpsd_disc()</a></code>.</p></dd>
 
@@ -145,7 +150,7 @@ object.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A tibble with PID values under different spatial overlays.</p>
+<p>A list with PID values tibble under different spatial overlays and performance evaluation indicators.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
