@@ -2,6 +2,15 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.1.9
+
+### major changes
+
+* Rewrite the LESH model,reduces computational complexity of the algorithm from 
+$n*2^n-1$ to $2^n-1$.
+
+* IDSA model now is implemented recursively.
+
 # gdverse 0.1.8
 
 ### major changes

@@ -3,6 +3,10 @@
 #' @description
 #' Function for locally explained heterogeneity model.
 #'
+#' @note
+#' The LESH model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
+#' When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
+#'
 #' @references
 #' Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., & Hou, Z. (2023). A locally explained heterogeneity model for
 #' examining wetland disparity. International Journal of Digital Earth, 16(2), 4533–4552.

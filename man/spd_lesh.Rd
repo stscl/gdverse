@@ -29,6 +29,10 @@ The power of SHAP power of determinants formula is
 
 SHAP power of determinants (SPD) is the contribution of variable \eqn{x_j} to the power of determinants.
 }
+\note{
+The SHAP power of determinants (SPD) requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
+When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
+}
 \examples{
 \dontrun{
 data('ndvi')
