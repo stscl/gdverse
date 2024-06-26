@@ -106,7 +106,7 @@
     <loc>https://spatlyu.github.io/gdverse/reference/plot.interaction_detector.html</loc>
   </url>
   <url>
-    <loc>https://spatlyu.github.io/gdverse/reference/plot.interaction_lesh.html</loc>
+    <loc>https://spatlyu.github.io/gdverse/reference/plot.lesh_result.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/plot.risk_detector.html</loc>
@@ -121,10 +121,13 @@
     <loc>https://spatlyu.github.io/gdverse/reference/print.factor_detector.html</loc>
   </url>
   <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/print.idsa_result.html</loc>
+  </url>
+  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/print.interaction_detector.html</loc>
   </url>
   <url>
-    <loc>https://spatlyu.github.io/gdverse/reference/print.interaction_lesh.html</loc>
+    <loc>https://spatlyu.github.io/gdverse/reference/print.lesh_result.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/print.risk_detector.html</loc>
