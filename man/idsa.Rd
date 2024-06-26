@@ -10,7 +10,6 @@ idsa(
   wt = NULL,
   overlaymethod = "and",
   locations = NULL,
-  discvar = NULL,
   discnum = NULL,
   discmethod = NULL,
   strategy = 2L,
@@ -34,9 +33,6 @@ Default is \code{and}.}
 
 \item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
 Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
-
-\item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
-when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
 \item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 

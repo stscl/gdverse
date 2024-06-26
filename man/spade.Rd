@@ -9,7 +9,6 @@ spade(
   data,
   wt = NULL,
   locations = NULL,
-  discvar = NULL,
   discnum = NULL,
   discmethod = NULL,
   cores = 6,
@@ -28,9 +27,6 @@ And \code{gdverse} will use \code{locations} columns to construct spatial weight
 
 \item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
 Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
-
-\item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
-when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
 \item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
@@ -71,10 +67,8 @@ wt = inverse_distance_weight(coord[,1],coord[,2])
 usfi = usfi |>
   dplyr::bind_cols(coord) |>
   st_drop_geometry()
-spade('SUHI~.', data = usfi,locations = c('X','Y'),
-      discvar = c('BH','NDVI'), cores = 6)
-spade('SUHI~.', data = usfi, wt = wt,
-      discvar = c('BH','NDVI'),locations = c('X','Y'),
+spade('SUHI~.', data = usfi,locations = c('X','Y'),cores = 6)
+spade('SUHI~.', data = usfi, wt = wt,locations = c('X','Y'),
       discmethod = c('sd','equal'),cores = 6)
 }
 }

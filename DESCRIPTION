@@ -1,5 +1,5 @@
 Package: gdverse
-Title: Geographical detector models
+Title: GeoDetector Models In R
 Version: 0.2.0
 Authors@R: 
     person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),

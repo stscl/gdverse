@@ -1,0 +1,90 @@
+---
+title: "Interactive Detector For Spatial Associations(IDSA)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{IDSA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  warning = FALSE,
+  message = FALSE,
+  fig.path = "man/figures/idsa/"
+)
+```
+
+The IDSA model is based on the SPADE model, which extends the power of spatial determinant of the SPADE model to multivariable interaction and takes spatial fuzzy overlay into account.
+
+In this vignette, we used the same data as SPADE vignette to demonstrate the use of the IDSA model.
+
+### Load data and package
+
+``` {r}
+library(sf)
+library(gdverse)
+library(magrittr)
+library(tidyverse)
+usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse'))
+usfi
+```
+
+### Data precessing
+
+There are originally 18 explanatory variables in the `usfi` tibble. If these 18 variables are used together, IDSA needs to be calculated about `r 2^18-1` times, which is very time-consuming, and we need to reduce the dimension of the data or select appropriate variables.
+
+Here we combine the understanding of the data and the diffusion maps method to generate the data after dimensionality reduction.Specifically, we combine data of the same class into one class using diffusion maps based on the classification of explanatory variables.
+
+In SPADE vignette we proved the invalidity of `WAR` to explain `SUHI`, which is removed here.
+
+```{r}
+landscape = c("LPI","LSI","GAR","DAR")
+dist_cold_heat = c("DTH","DTP","DTR","DTW")
+urbanbuilt_form = c("TER","NDVI","NDWI","BH","BD","RL","RFD","SVF","FAR")
+
+dm_n21 = \(xvecname){
+  return(
+    usfi %>%
+      sf::st_drop_geometry() %>%
+      dplyr::select(dplyr::all_of(xvecname)) %>%
+      {Rdimtools::do.dm(as.data.frame(.),1)} %>%
+      {.$Y} %>%
+      {.[,1]} %>%
+      gdverse::rescale_vector(0,1)
+  )
+}
+
+newdata = tibble::tibble(
+  SUHI = usfi$SUHI,
+  landscape = dm_n21(landscape),
+  dist_cold_heat = dm_n21(dist_cold_heat),
+  urbanbuilt_form = dm_n21(urbanbuilt_form),
+)
+newdata
+```
+
+### Construct spatial Weight
+
+We use the same spatial weight matrix as SPADE vignette.
+
+```{r}
+wt = usfi |>
+  dplyr::filter(!if_any(everything(),is.na)) |>
+  mutate(nb = sfdep::st_contiguity(geom),
+         wt = sfdep::st_weights(nb)) %$%
+  sfdep::wt_as_matrix(nb,wt)
+usfi = st_drop_geometry(usfi)
+```
+
+### IDSA modeling
+
+```{r idsa_modeling,fig.width=4.25,fig.height=3.5}
+idsa.model = idsa(SUHI ~ . ,data = newdata, wt = wt, cores = 6)
+idsa.model
+plot(idsa.model)
+```
+
+This vignette is a special case because the explanatory variables are dimensionally reduced in advance and is used as a coping strategy when IDSA is executed in the face of many explanatory variables.

@@ -19,8 +19,6 @@
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
-#' @param discvar Name of continuous variable columns that need to be discretized.Noted that
-#' when `formula` has `discvar`, `data` must have these columns.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`
@@ -45,14 +43,12 @@
 #' usfi = usfi |>
 #'   dplyr::bind_cols(coord) |>
 #'   st_drop_geometry()
-#' spade('SUHI~.', data = usfi,locations = c('X','Y'),
-#'       discvar = c('BH','NDVI'), cores = 6)
-#' spade('SUHI~.', data = usfi, wt = wt,
-#'       discvar = c('BH','NDVI'),locations = c('X','Y'),
+#' spade('SUHI~.', data = usfi,locations = c('X','Y'),cores = 6)
+#' spade('SUHI~.', data = usfi, wt = wt,locations = c('X','Y'),
 #'       discmethod = c('sd','equal'),cores = 6)
 #' }
-spade = \(formula,data,wt = NULL,locations = NULL,discvar = NULL,discnum = NULL,
-          discmethod = NULL, cores = 6, seed = 123456789, permutations = 99, ...){
+spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
+          cores = 6, seed = 123456789, permutations = 99, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (formula.vars[2] != "."){
@@ -60,32 +56,20 @@ spade = \(formula,data,wt = NULL,locations = NULL,discvar = NULL,discnum = NULL,
   }
   yname = formula.vars[1]
   xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
-  xname_spade = xname[which(xname %in% discvar)]
-  if (is.null(discmethod)) {discmethod = rep('quantile',length(xname_spade))}
-  qv_spade = vector("list",length = length(xname_spade))
-  for (i in seq_along(xname_spade)){
-    qv_spade[[i]] = psmd_pseudop(
-      formula = paste(yname,'~',xname_spade[i]),
+  if (is.null(discmethod)) {discmethod = rep('quantile',length(xname))}
+  qv = vector("list",length = length(xname))
+  for (i in seq_along(xname)){
+    qv[[i]] = psmd_pseudop(
+      formula = paste(yname,'~',xname[i]),
       data = dplyr::select(data,
-                           dplyr::all_of(c(yname,xname_spade[i],locations))),
+                           dplyr::all_of(c(yname,xname[i],locations))),
       wt = wt, locations = locations, discnum = discnum, discmethod = discmethod[i],
       cores = cores, seed = seed, permutations = permutations, ...)
   }
-  qv_spade = purrr::list_rbind(qv_spade) %>%
-    dplyr::mutate(variable = xname_spade) %>%
-    dplyr::select(variable,dplyr::everything())
-  if (length(xname[which(!(xname %in% discvar))]) >= 1){
-    qv_psd = xname[which(!(xname %in% discvar))] %>%
-      purrr::map(\(xvar) psd_pseudop(data[,yname,drop = TRUE],
-                                     data[,xvar,drop = TRUE],wt)) %>%
-      purrr::list_rbind() %>%
-      dplyr::mutate(variable = xname[which(!(xname %in% discvar))]) %>%
-      dplyr::select(variable,dplyr::everything())
-    res = dplyr::bind_rows(qv_spade,qv_psd)%>%
-      dplyr::arrange(dplyr::desc(`Q-statistic`))} else {
-        res = qv_spade %>%
-          dplyr::arrange(dplyr::desc(`Q-statistic`))
-      }
+  res = purrr::list_rbind(qv) %>%
+    dplyr::mutate(variable = xname) %>%
+    dplyr::select(variable,dplyr::everything()) %>%
+    dplyr::arrange(dplyr::desc(`Q-statistic`))
   res = list("factor" = res)
   class(res) = "spade_result"
   return(res)

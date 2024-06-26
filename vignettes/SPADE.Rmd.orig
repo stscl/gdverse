@@ -34,6 +34,33 @@ knitr::include_graphics('../man/figures/spade/studyarea.png')
 
 The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
 
+The meanings of each explanatory variable are as follows,and can be divided into three categories:
+
+1. Landscape pattern and Land cover characteristic indicators
+- `LPI` Largest patch index (Area and Edge metric)(landscape level)
+- `LSI` Landscape shape index (Aggregation metric)(landscape level)
+- `GAR` The proportion of green space area
+- `DAR` The proportion of industrial space area
+- `WAR` The proportion of water space area
+2. Distances from cold and heat sources indicators
+- `DTH`  Distance to the nearest power plant(Heat source)
+- `DTP`  Distance to the nearest urban park(Cold source)
+- `DTR`  Distance to the nearest urban main road(Heat source)
+- `DTW`  Distance to the nearest water body(Cold source)
+3. Urban built space form indicators
+- `BH` Building height
+- `BD` Building density
+- `RL` Roughness length
+- `NDVI` Normalized Difference Vegetation Index
+- `NDWI` Normalized Difference Water Index
+- `RFD` Strewn degree (describing the roughness of buildings in three dimensional space)
+- `SVF` Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity)
+- `FAR` Floor Area Ratio (The ratio of the total floor area of buildings on a site to the net land area of that site)
+- `TER` Topographic Relief (The ratio of the average elevation of the unit to
+the average elevation of the entire study area)
+
+And the `SUHI` stands for surface urban heat island effect intensity.
+
 ### Spatial pattern of SUHI
 
 #### global spatial autocorrelation of SUHI
@@ -176,8 +203,8 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 #### run SPADE
 
 ```{r USFI_SPADE_factor,fig.width=8.5,fig.height=6.5}
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3, discnum = 3:15,
-                   discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6, permutations = 0)
+usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3,
+                   discnum = 3:22, cores = 6, permutations = 0)
 usfi_spade
 plot(usfi_spade,slicenum = 8)
 ```

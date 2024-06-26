@@ -20,8 +20,6 @@
 #' Default is `and`.
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
-#' @param discvar Name of continuous variable columns that need to be discretized.Noted that
-#' when `formula` has `discvar`, `data` must have these columns.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`. More details to see `st_unidisc()`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
@@ -47,8 +45,8 @@
 #' g
 #' }
 idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
-         discvar = NULL, discnum = NULL, discmethod = NULL, strategy = 2L,
-         increase_rate = 0.05,cores = 6,seed = 123456789,alpha = 0.95,...){
+         discnum = NULL,discmethod = NULL,strategy = 2L,increase_rate = 0.05,
+         cores = 6, seed = 123456789, alpha = 0.95, ...){
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
@@ -57,7 +55,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
   }
   yname = formula.vars[1]
   xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
-  discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
+  discdf =  dplyr::select(data,dplyr::all_of(c(yname,xname)))
 
   if (is.null(wt)) {
     if (is.null(locations)) {
@@ -71,14 +69,13 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
     wt_idsa = wt
   }
 
-  g = cpsd_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
+  g = cpsd_disc(paste0(yname,'~',paste0(xname,collapse = '+')),
                 data = discdf, wt = wt_idsa, discnum = discnum,
                 discmethod = discmethod, strategy = strategy,
                 increase_rate = increase_rate,
                 cores = cores, seed = seed, ...)
-  discedvar = colnames(data[,-which(colnames(data) %in% c(discvar,locations))])
   newdti = data %>%
-    dplyr::select(dplyr::all_of(discedvar)) %>%
+    dplyr::select(dplyr::all_of(yname)) %>%
     dplyr::bind_cols(g$disv)
   dti = dplyr::select(data,dplyr::all_of(names(newdti)))
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
