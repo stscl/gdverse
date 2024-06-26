@@ -21,7 +21,7 @@ Current models and functions provided by **gdverse** are:
 
 | *geodetector model* | *gdverse function* | *support status* |
 |---------------------|--------------------|------------------|
-| **GeoDetector**     | `gd()`             | ✔️               |
+| **GD**              | `gd()`             | ✔️               |
 | **OPGD**            | `opgd()`           | ✔️               |
 | **GOZH**            | `gozh()`           | ✔️               |
 | **LESH**            | `lesh()`           | ✔️               |
@@ -78,7 +78,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.81 sec elapsed
+## 3.74 sec elapsed
 ```
 
 ``` r

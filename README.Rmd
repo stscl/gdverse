@@ -33,7 +33,7 @@ Current models and functions provided by **gdverse** are:
 
 |   *geodetector model*   |   *gdverse function*   |   *support status*   |
 |--------------------------|-------------------------|----------------------|
-|  **GeoDetector**  |        `gd()`         |          ✔️        |
+|  **GD**  |        `gd()`         |          ✔️        |
 |  **OPGD**  |        `opgd()`         |          ✔️        |
 |  **GOZH**  |        `gozh()`         |          ✔️        |
 |  **LESH**  |        `lesh()`         |          ✔️        |
