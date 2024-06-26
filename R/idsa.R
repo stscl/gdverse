@@ -33,9 +33,10 @@
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
 #' @param seed (optional) Random number seed, default is `123456789`.
+#' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `cpsd_disc()`.
 #'
-#' @return A tibble with PID values under different spatial overlays.
+#' @return A list with PID values tibble under different spatial overlays and performance evaluation indicators.
 #' @export
 #'
 #' @examples
@@ -47,7 +48,7 @@
 #' }
 idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
          discvar = NULL, discnum = NULL, discmethod = NULL, strategy = 2L,
-         increase_rate = 0.05, cores = 6, seed = 123456789, ...){
+         increase_rate = 0.05,cores = 6,seed = 123456789,alpha = 0.95,...){
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
@@ -117,10 +118,26 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
   }
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
+  interactvar = xs[[which.max(out_g$pid_idsa)]]
+  if (overlaymethod == 'intersection'){
+    reszone = newdti %>%
+      dplyr::select(dplyr::all_of(interactvar)) %>%
+      purrr::reduce(paste,sep = '_')
+  } else {
+    reszone = st_fuzzyoverlay(paste(yname,'~',paste0(interactvar,collapse = '+')),
+                              newdti, spfom)
+  }
+  zonenum = as.numeric(table(reszone))
+  percentzone = length(which(zonenum==1)) / length(reszone)
+  risk = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
   out_g = tibble::tibble(varibale = xsname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(pid_idsa))
-  res = list(interaction = out_g)
+
+  res = list("interaction" = out_g, "risk" = risk,
+             "number_individual_explanatory_variables" = length(interactvar),
+             "number_overlay_zones" = length(zonenum),
+             "percentage_finely_divided_zones" =  percentzone)
   class(res) = "idsa_result"
   return(res)
 }
@@ -136,8 +153,47 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
 #' @return Formatted string output
 #' @export
 print.idsa_result = \(x, ...) {
-  cat("\n Interactive Detector For Spatial Associations ")
-  x = x$interaction %>%
-    dplyr::rename(PID = pid_idsa)
-  print(kableExtra::kable(x,format = "markdown",align = 'c',...))
+  cat("\n Interactive Detector For Spatial Associations \n",
+      "\n ------------------ PID values: -------------------")
+  print(kableExtra::kable(dplyr::rename(x$interaction, PID = pid_idsa),
+                          format = "markdown",digits = 16,align = 'c',...))
+  cat("\n ------- IDSA model performance evaluation: -------\n",
+      "* Number of overlay zones : ", x$number_overlay_zones, "\n",
+      "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
+      "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
+      "\n ## Different of response variable between a pair of overlay zones:")
+  x = dplyr::select(x$risk,zone1st,zone2nd,Risk)
+  print(kableExtra::kable(utils::head(x,5),format = "markdown",align = 'c',...))
+  cat("\n #### Only the first five pairs of overlay zones are displayed! ####")
+}
+
+#' @title plot IDSA risk result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for IDSA risk result in `idsa()`.
+#'
+#' @param x Return by `idsa()`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer
+#' @export
+#'
+plot.idsa_result = \(x, ...) {
+  grd = dplyr::select(x$risk,zone1st,zone2nd,Risk) %>%
+    dplyr::mutate(risk = forcats::fct_recode(Risk,"Y" = "Yes", "N" = "No"))
+  fig_rd = ggplot2::ggplot(data = grd,
+                           ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
+    ggplot2::geom_tile(color = "white", size = 0.75) +
+    ggplot2::geom_text(ggplot2::aes(label = risk), color = "black") +
+    ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
+    ggplot2::coord_fixed() +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(axis.title.x = ggplot2::element_blank(),
+                   axis.title.y = ggplot2::element_blank(),
+                   axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black'),
+                   axis.text.y = ggplot2::element_text(color = 'black'),
+                   legend.position = "none",
+                   panel.grid = ggplot2::element_blank(),
+                   ...)
+  return(fig_rd)
 }

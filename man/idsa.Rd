@@ -17,6 +17,7 @@ idsa(
   increase_rate = 0.05,
   cores = 6,
   seed = 123456789,
+  alpha = 0.95,
   ...
 )
 }
@@ -54,10 +55,12 @@ object.}
 
 \item{seed}{(optional) Random number seed, default is \code{123456789}.}
 
+\item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
+
 \item{...}{(optional) Other arguments passed to \code{cpsd_disc()}.}
 }
 \value{
-A tibble with PID values under different spatial overlays.
+A list with PID values tibble under different spatial overlays and performance evaluation indicators.
 }
 \description{
 Function for interactive detector for spatial associations model.
