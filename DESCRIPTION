@@ -30,6 +30,7 @@ Imports:
 URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
 Suggests: 
     knitr,
+    Rdimtools,
     rmarkdown,
     sf,
     terra,
