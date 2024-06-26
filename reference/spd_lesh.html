@@ -96,6 +96,11 @@ cluster with that many cores is created and used. You can also supply a cluster 
 <p>SHAP power of determinants (SPD) is the contribution of variable \(x_j\) to the power of determinants.</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>The SHAP power of determinants (SPD) requires at least \(2^n-1\) calculations when has \(n\) explanatory variables.
+When there are more than 10 explanatory variables, carefully consider the computational burden of this model.</p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., &amp; Hou, Z. (2023). A locally explained heterogeneity model for
 examining wetland disparity. International Journal of Digital Earth, 16(2), 4533–4552.
