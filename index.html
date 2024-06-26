@@ -127,7 +127,7 @@
 <tr class="even">
 <td><strong>IDSA</strong></td>
 <td><code><a href="reference/idsa.html">idsa()</a></code></td>
-<td>❌</td>
+<td>✔️</td>
 </tr>
 <tr class="odd">
 <td><strong>RGD</strong></td>
@@ -180,11 +180,11 @@
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
+<span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, </span>
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.56 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 4.06 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## </span></span>
@@ -194,18 +194,18 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |  presum  | 0.66090313  | 8.344327e-10 |</span></span>
+<span><span class="co">## |  presum  | 0.66923550  | 8.554930e-10 |</span></span>
 <span><span class="co">## |   lulc   | 0.65972601  | 8.781502e-10 |</span></span>
-<span><span class="co">## |  premin  | 0.46550058  | 3.606232e-10 |</span></span>
-<span><span class="co">## |  tmpmin  | 0.43559812  | 8.536544e-10 |</span></span>
-<span><span class="co">## |  tmpmax  | 0.25364304  | 7.848540e-10 |</span></span>
-<span><span class="co">## |  slope   | 0.23570512  | 8.826343e-10 |</span></span>
-<span><span class="co">## |   elev   | 0.23554763  | 7.286761e-10 |</span></span>
-<span><span class="co">## |  tmpavg  | 0.22139249  | 7.615818e-10 |</span></span>
-<span><span class="co">## |   pop    | 0.19529044  | 2.428073e-10 |</span></span>
-<span><span class="co">## |  premax  | 0.14507334  | 5.960950e-10 |</span></span>
-<span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
-<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span></code></pre></div>
+<span><span class="co">## |  premin  | 0.47166574  | 7.962555e-10 |</span></span>
+<span><span class="co">## |  tmpmin  | 0.44222562  | 6.514229e-10 |</span></span>
+<span><span class="co">## |  tmpmax  | 0.26854375  | 2.030104e-10 |</span></span>
+<span><span class="co">## |   elev   | 0.23905807  | 8.916474e-10 |</span></span>
+<span><span class="co">## |  slope   | 0.23806298  | 7.558786e-10 |</span></span>
+<span><span class="co">## |  tmpavg  | 0.23215568  | 4.995040e-10 |</span></span>
+<span><span class="co">## |   pop    | 0.21559875  | 3.563219e-10 |</span></span>
+<span><span class="co">## |  premax  | 0.15141204  | 6.934805e-10 |</span></span>
+<span><span class="co">## |   ntl    | 0.02289085  | 3.851238e-01 |</span></span>
+<span><span class="co">## |  aspect  | 0.01901487  | 9.695436e-01 |</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="gozh-model">GOZH model<a class="anchor" aria-label="anchor" href="#gozh-model"></a>
