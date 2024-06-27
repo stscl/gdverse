@@ -58,9 +58,6 @@
     <loc>https://spatlyu.github.io/gdverse/reference/gd_bestunidisc.html</loc>
   </url>
   <url>
-    <loc>https://spatlyu.github.io/gdverse/reference/gd_sesu.html</loc>
-  </url>
-  <url>
     <loc>https://spatlyu.github.io/gdverse/reference/generate_subsets.html</loc>
   </url>
   <url>
@@ -179,6 +176,9 @@
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/rpart_disc.html</loc>
+  </url>
+  <url>
+    <loc>https://spatlyu.github.io/gdverse/reference/sesu_opgd.html</loc>
   </url>
   <url>
     <loc>https://spatlyu.github.io/gdverse/reference/shuffle_vector.html</loc>
