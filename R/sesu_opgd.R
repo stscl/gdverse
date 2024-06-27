@@ -85,8 +85,8 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
 print.sesu_opgd = \(x,...){
   g = purrr::list_rbind(x$sesu$sesu_result)
   spunits = x$sesu$spatial_units
-  cat("\n    Size Effects Of Spatial Unit    \n",
-      "\n              OPGD Model            \n",
+  cat("\n     Size Effects Of Spatial Unit     \n",
+      "\n             OPGD Model               \n",
       "\n  ***  Optimal Spatial Unit : ", x$optsu, "  ***\n")
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
@@ -114,6 +114,8 @@ plot.sesu_opgd = \(x,...){
   shapev = seq_along(namev)
   names(shapev) = namev
   qvrange = range(g$qv)
+  surange = range(g$su)
+  suvalue = surange[2] - surange[1]
   qv95 = g %>%
     dplyr::group_by(variable) %>%
     dplyr::summarise(qv95 = stats::quantile(qv,probs = 0.9)) %>%
@@ -134,11 +136,13 @@ plot.sesu_opgd = \(x,...){
                          linetype = 3,show.legend = FALSE) +
       ggplot2::scale_x_continuous(name = 'Size of spatial uint',
                          breaks = x$sesu$spatial_units,
-                         limits = x$sesu$spatial_units + c(-100,100),
+                         limits = c(ifelse(surange[1]-0.01*suvalue<=0,0,
+                                           surange[1]-0.01*suvalue),
+                                    surange[2] + 0.01 * suvalue),
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                         limits = c(ifelse(qvrange[1]>=0.05,0,qvrange[1]-0.05),
-                                    ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
+                                  limits = c(ifelse(qvrange[1]>=0.05,qvrange[1]-0.05,0),
+                                             ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
                          breaks = round(seq(qvrange[1],qvrange[2],length.out = length(qv95)),3),
                          sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
                                                       labels = qv95, breaks = qv95,
@@ -155,10 +159,12 @@ plot.sesu_opgd = \(x,...){
                          linetype = 3,show.legend = FALSE) +
       ggplot2::scale_x_continuous(name = 'Size of spatial uint',
                          breaks = x$sesu$spatial_units,
-                         limits = x$sesu$spatial_units + c(-100,100),
+                         limits = c(ifelse(surange[1]-0.01*suvalue<=0,0,
+                                           surange[1]-0.01*suvalue),
+                                    surange[2] + 0.01 * suvalue),
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                                  limits = c(ifelse(qvrange[1]>=0.05,0,qvrange[1]-0.05),
+                                  limits = c(ifelse(qvrange[1]>=0.05,qvrange[1]-0.05,0),
                                              ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
                                   breaks = round(seq(qvrange[1],qvrange[2],length.out = length(qv95)),3),
                                   sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",

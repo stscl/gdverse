@@ -9,6 +9,7 @@ sesu_gozh(
   datalist,
   su,
   cores = 1,
+  strategy = 2L,
   increase_rate = 0.05,
   alpha = 0.95,
   ...
@@ -24,25 +25,29 @@ sesu_gozh(
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster object.}
 
+\item{strategy}{(optional) Calculation strategies of Q statistics at different scales. Default
+is \code{2L}, see \code{details} for more contents.}
+
 \item{increase_rate}{(optional) The critical increase rate of the number of discretization.
 Default is \verb{5\%}.}
 
 \item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 
-\item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.}
+\item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A list with \code{sesu}(size effects of spatial units) and \code{optsu}(optimal spatial unit).
+A list with \code{sesu}(size effects of spatial units),\code{optsu}(optimal spatial unit) and
+\code{strategy}(A number that represents the optimal analytical scale selection strategy).
 }
 \description{
 Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
 geographically optimal zones-based heterogeneity(GOZH) model.
 }
 \details{
-Firstly, the \code{GOZH} model is executed for each data in the datalist (all \code{significant}
-Q statistic of each data are averaged to represent the spatial connection strength under
-this spatial unit), and then the \code{loess_optscale} function is used to select the optimal
-spatial analysis scale.
+When \code{strategy} is \code{1}, use the same process as \code{sesu_opgd()}.If not, all explanatory
+variables are used to generate a unique Q statistic corresponding to the data in the
+datalist based on \code{rpart_disc()} and \code{gd()}, and then \code{loess_optscale()}is used to
+determine the optimal analysis scale.
 }
 \examples{
 \dontrun{
