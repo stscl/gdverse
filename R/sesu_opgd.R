@@ -1,4 +1,4 @@
-#' @title comparison of size effects of spatial units based on optimal parameters geographical detector(OPGD) model.
+#' @title comparison of size effects of spatial units based on OPGD.
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
@@ -37,15 +37,15 @@
 #'   terra::aggregate(fact = 5) %>%
 #'   terra::as.data.frame(na.rm = T) %>%
 #'   as_tibble()
-#' gd_sesu(fvc ~ .,
-#'         datalist = list(fvc1000,fvc5000),
-#'         su = c(1000,5000),
-#'         discnum = 2:15,
-#'         discvar = names(select(fvc5000,-c(fvc,lulc))),
-#'         cores = 6)
+#' sesu_opgd(fvc ~ .,
+#'           datalist = list(fvc1000,fvc5000),
+#'           su = c(1000,5000),
+#'           discnum = 2:15,
+#'           discvar = names(select(fvc5000,-c(fvc,lulc))),
+#'           cores = 6)
 #' }
-gd_sesu = \(formula,datalist,su,discvar,
-            discnum = NULL,discmethod = NULL,cores = 1,...){
+sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,
+              discmethod = NULL,cores = 1,...){
   res_sesu = purrr::map(datalist,
                         \(.tbf) opgd(formula,.tbf,discvar,
                                      discnum,discmethod,cores,...) %>%
