@@ -2,7 +2,7 @@
 % Please edit documentation in R/sesu_opgd.R
 \name{print.sesu_opgd}
 \alias{print.sesu_opgd}
-\title{print opgd sedu}
+\title{print opgd sesu}
 \usage{
 \method{print}{sesu_opgd}(x, ...)
 }
@@ -15,7 +15,7 @@
 Formatted string output
 }
 \description{
-S3 method to format output for iopgd sedu in \code{sesu_opgd()}.
+S3 method to format output for opgd sesu from \code{sesu_opgd()}.
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}

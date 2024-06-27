@@ -71,10 +71,10 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
   return(res)
 }
 
-#' @title print opgd sedu
+#' @title print opgd sesu
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for iopgd sedu in `sesu_opgd()`.
+#' S3 method to format output for opgd sesu from `sesu_opgd()`.
 #'
 #' @param x Return by `sesu_opgd()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
@@ -95,10 +95,10 @@ print.sesu_opgd = \(x,...){
   }
 }
 
-#' @title plot opgd sedu
+#' @title plot opgd sesu
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for iopgd sedu in `sesu_opgd()`.
+#' S3 method to plot output for opgd sesu in `sesu_opgd()`.
 #'
 #' @param x Return by `sesu_opgd()`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.

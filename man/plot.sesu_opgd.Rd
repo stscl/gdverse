@@ -2,7 +2,7 @@
 % Please edit documentation in R/sesu_opgd.R
 \name{plot.sesu_opgd}
 \alias{plot.sesu_opgd}
-\title{plot opgd sedu}
+\title{plot opgd sesu}
 \usage{
 \method{plot}{sesu_opgd}(x, ...)
 }
@@ -15,7 +15,7 @@
 A ggplot2 layer.
 }
 \description{
-S3 method to plot output for iopgd sedu in \code{sesu_opgd()}.
+S3 method to plot output for opgd sesu in \code{sesu_opgd()}.
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
