@@ -29,7 +29,7 @@
 #' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
 #'
-#' @return A nested tibble with `spatial_units`, `sesu_result` and `data`.
+#' @return A list with `sesu`(size effects of spatial units) and `optsu`(optimal spatial unit).
 #' @export
 #'
 #' @examples
