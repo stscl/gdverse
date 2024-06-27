@@ -66,7 +66,7 @@ sesu_gozh = \(formula,datalist,su, cores = 1, strategy = 2L,
                           sesu_result = res_sesu)
     optsu = res_sesu %>%
       purrr::list_rbind() %>%
-      dplyr::filter(`P-value` <= (1 - alpha)) %>%
+      dplyr::filter(`P-value` <= (1 - alpha) | is.na(`P-value`)) %>%
       dplyr::group_by(su) %>%
       dplyr::summarise(qv = mean(`Q-statistic`,na.rm = T))
     optsu = loess_optscale(optsu$qv,optsu$su,increase_rate)
@@ -152,9 +152,8 @@ plot.sesu_gozh = \(x,...){
                           color = "#ff0000", linetype = 2) +
       ggplot2::scale_x_continuous(name = 'Size of spatial uint',
                                   breaks = x$sesu$spatial_units,
-                                  limits = c(ifelse(surange[1]-0.01*suvalue<=0,0,
-                                                    surange[1]-0.01*suvalue),
-                                             surange[2] + 0.01 * suvalue),
+                                  limits = c(surange[1] - 0.05 * suvalue,
+                                             surange[2] + 0.05 * suvalue),
                                   expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
                                   limits = c(ifelse(qvrange[1]>=0.05,qvrange[1]-0.05,0),

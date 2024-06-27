@@ -62,7 +62,7 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
                         sesu_result = res_sesu)
   optsu = res_sesu %>%
     purrr::list_rbind() %>%
-    dplyr::filter(`P-value` <= (1 - alpha)) %>%
+    dplyr::filter(`P-value` <= (1 - alpha) | is.na(`P-value`)) %>%
     dplyr::group_by(su) %>%
     dplyr::summarise(qv = mean(`Q-statistic`,na.rm = T))
   optsu = loess_optscale(optsu$qv,optsu$su,increase_rate)
@@ -121,7 +121,7 @@ plot.sesu_opgd = \(x,...){
     dplyr::summarise(qv95 = stats::quantile(qv,probs = 0.9)) %>%
     dplyr::pull(qv95) %>%
     round(3)
-  qv95 = seq(range(qv95)[1],range(qv95)[2],length.out = length(qv95))
+  qv95 = round(seq(range(qv95)[1],range(qv95)[2],length.out = length(qv95)),3)
   colv = c("#0000ff","#ff0000","#0ecf0e","#000000","#3effff","#A6CEE3","#FFFF33",
            "#B2DF8A","#33A02C","#FB9A99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A",
            "#FFFF99","#B15928","#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E",
@@ -136,17 +136,17 @@ plot.sesu_opgd = \(x,...){
                          linetype = 3,show.legend = FALSE) +
       ggplot2::scale_x_continuous(name = 'Size of spatial uint',
                          breaks = x$sesu$spatial_units,
-                         limits = c(ifelse(surange[1]-0.01*suvalue<=0,0,
-                                           surange[1]-0.01*suvalue),
-                                    surange[2] + 0.01 * suvalue),
+                         limits = c(surange[1] - 0.05 * suvalue,
+                                    surange[2] + 0.05 * suvalue),
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                                  limits = c(ifelse(qvrange[1]>=0.05,qvrange[1]-0.05,0),
-                                             ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
-                         breaks = round(seq(qvrange[1],qvrange[2],length.out = length(qv95)),3),
-                         sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
-                                                      labels = qv95, breaks = qv95,
-                                                      transform = ~ .)) +
+                                  limits = c(qvrange[1]-0.05,qvrange[2]+0.05),
+                                  breaks = round(seq(qvrange[1],qvrange[2],
+                                                 length.out = length(qv95)),3),
+                                  sec.axis = ggplot2::sec_axis(
+                                    name = "The 90% quantile of Q statistic",
+                                    labels = qv95, breaks = qv95,
+                                    transform = ~ .)) +
       ggplot2::scale_shape_manual(name = "", values = shapev) +
       ggplot2::scale_color_manual(name = "", values = colv) +
       ggplot2::theme_bw() +
@@ -159,17 +159,17 @@ plot.sesu_opgd = \(x,...){
                          linetype = 3,show.legend = FALSE) +
       ggplot2::scale_x_continuous(name = 'Size of spatial uint',
                          breaks = x$sesu$spatial_units,
-                         limits = c(ifelse(surange[1]-0.01*suvalue<=0,0,
-                                           surange[1]-0.01*suvalue),
-                                    surange[2] + 0.01 * suvalue),
+                         limits = c(surange[1] - 0.05 * suvalue,
+                                    surange[2] + 0.05 * suvalue),
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                                  limits = c(ifelse(qvrange[1]>=0.05,qvrange[1]-0.05,0),
-                                             ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
-                                  breaks = round(seq(qvrange[1],qvrange[2],length.out = length(qv95)),3),
-                                  sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
-                                                               labels = qv95, breaks = qv95,
-                                                               transform = ~ .)) +
+                                  limits = c(qvrange[1]-0.05,qvrange[2]+0.05),
+                                  breaks = round(seq(qvrange[1],qvrange[2],
+                                                 length.out = length(qv95)),3),
+                                  sec.axis = ggplot2::sec_axis(
+                                    name = "The 90% quantile of Q statistic",
+                                    labels = qv95, breaks = qv95,
+                                    transform = ~ .)) +
       ggplot2::theme_bw() +
       ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
   }
