@@ -73,6 +73,8 @@ optimal parameters geographical detector(OPGD) model.</p>
 <span>  discnum <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  discmethod <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -107,8 +109,16 @@ when <code>formula</code> has <code>discvar</code>, <code>data</code> must have 
 
 <dt>cores</dt>
 <dd><p>(optional) A positive integer(default is 1). If cores &gt; 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.</p></dd>
+cluster with that many cores is created and used. You can also supply a cluster object.</p></dd>
+
+
+<dt>increase_rate</dt>
+<dd><p>(optional) The critical increase rate of the number of discretization.
+Default is <code>5%</code>.</p></dd>
+
+
+<dt>alpha</dt>
+<dd><p>(optional) Specifies the size of confidence level. Default is <code>0.95</code>.</p></dd>
 
 
 <dt>...</dt>
@@ -120,6 +130,13 @@ object.</p></dd>
     
 
 <p>A nested tibble with <code>spatial_units</code>, <code>sesu_result</code> and <code>data</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Firstly, the <code>OPGD</code> model is executed for each data in the datalist (all <code>significant</code>
+Q statistic of each data are averaged to represent the spatial connection strength under
+this spatial unit), and then the <code>loess_optscale</code> function is used to select the optimal
+spatial analysis scale.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
