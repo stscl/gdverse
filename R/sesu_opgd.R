@@ -90,6 +90,7 @@ print.sesu_opgd = \(x,...){
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
+#' @export
 #'
 plot.sesu_opgd = \(x,...){
   g = purrr::list_rbind(x$sesu$sesu_result) %>%
@@ -98,6 +99,7 @@ plot.sesu_opgd = \(x,...){
   namev = g[which(g$su== spunits[1]),"variable",drop = TRUE]
   shapev = seq_along(namev)
   names(shapev) = namev
+  qvrange = range(g$qv)
   qv95 = g %>%
     dplyr::group_by(variable) %>%
     dplyr::summarise(qv95 = stats::quantile(qv,probs = 0.9)) %>%
@@ -121,8 +123,9 @@ plot.sesu_opgd = \(x,...){
                          limits = x$sesu$spatial_units + c(-100,100),
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                         limits = c(ifelse(range(g$qv)[1]>=0.05,0,range(g$qv)[1]-0.05),
-                                    ifelse(range(g$qv)[2]<=0.95,range(g$qv)[2]+0.05,range(g$qv)[2])),
+                         limits = c(ifelse(qvrange[1]>=0.05,0,qvrange[1]-0.05),
+                                    ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
+                         breaks = round(seq(qvrange[1],qvrange[2],length.out = length(qv95)),3),
                          sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
                                                       labels = qv95, breaks = qv95,
                                                       transform = ~ .)) +
@@ -141,11 +144,12 @@ plot.sesu_opgd = \(x,...){
                          limits = x$sesu$spatial_units + c(-100,100),
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                         limits = c(ifelse(range(g$qv)[1]>=0.05,0,range(g$qv)[1]-0.05),
-                                    ifelse(range(g$qv)[2]<=0.95,range(g$qv)[2]+0.05,range(g$qv)[2])),
-                         sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
-                                                      labels = qv95, breaks = qv95,
-                                                      transform = ~ .)) +
+                                  limits = c(ifelse(qvrange[1]>=0.05,0,qvrange[1]-0.05),
+                                             ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
+                                  breaks = round(seq(qvrange[1],qvrange[2],length.out = length(qv95)),3),
+                                  sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
+                                                               labels = qv95, breaks = qv95,
+                                                               transform = ~ .)) +
       ggplot2::theme_bw() +
       ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
   }
