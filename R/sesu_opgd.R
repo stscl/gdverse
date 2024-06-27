@@ -8,6 +8,11 @@
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
 #' analysis: Cases with different types of spatial data, GIScience & Remote Sensing, 57(5), 593-610.
 #' doi: 10.1080/15481603.2020.1760434.
+#' @details
+#' Firstly, the `OPGD` model is executed for each data in the datalist (all `significant`
+#' Q statistic of each data are averaged to represent the spatial connection strength under
+#' this spatial unit), and then the `loess_optscale` function is used to select the optimal
+#' spatial analysis scale.
 #'
 #' @param formula A formula of comparison of size effects of spatial units.
 #' @param datalist A list of \code{data.frame} or \code{tibble}.
@@ -18,8 +23,10 @@
 #' @param discmethod (optional) A vector of methods for discretization,default is used
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `gdverse`.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster
-#' object.
+#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param increase_rate (optional) The critical increase rate of the number of discretization.
+#' Default is `5%`.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
 #'
 #' @return A nested tibble with `spatial_units`, `sesu_result` and `data`.
@@ -43,17 +50,23 @@
 #'           discvar = names(select(fvc5000,-c(fvc,lulc))),
 #'           cores = 6)
 #' }
-sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,
-              discmethod = NULL, cores = 1, ...){
+sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
+              cores = 1, increase_rate = 0.05, alpha = 0.95, ...){
   res_sesu = purrr::map2(datalist, su,
-                         \(.tbf, .spsu) opgd(formula,.tbf,
-                                           discvar,discnum,
-                                           discmethod,cores,...) %>%
+                         \(.tbf, .spsu) opgd(formula,.tbf,discvar,discnum,
+                                             discmethod,cores,type = "factor",
+                                             alpha = alpha, ...) %>%
                                 purrr::pluck('factor') %>%
                                 dplyr::mutate(su = .spsu))
   sesu = tibble::tibble(spatial_units = su,
                         sesu_result = res_sesu)
-  res = list('sesu' = sesu)
+  optsu = res_sesu %>%
+    purrr::list_rbind() %>%
+    dplyr::filter(`P-value` <= (1 - alpha)) %>%
+    dplyr::group_by(su) %>%
+    dplyr::summarise(qv = mean(`Q-statistic`,na.rm = T))
+  optsu = loess_optscale(optsu$qv,optsu$su,increase_rate)
+  res = list('sesu' = sesu,'optsu' = optsu)
   class(res) = 'sesu_opgd'
   return(res)
 }
@@ -73,7 +86,8 @@ print.sesu_opgd = \(x,...){
   g = purrr::list_rbind(x$sesu$sesu_result)
   spunits = x$sesu$spatial_units
   cat("\n    Size Effects Of Spatial Unit    \n",
-      "\n              OPGD Model            \n")
+      "\n              OPGD Model            \n",
+      "\n  ***  Optimal Spatial Unit : ", x$optsu, "  ***\n")
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
     print(kableExtra::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),

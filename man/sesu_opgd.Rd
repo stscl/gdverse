@@ -12,6 +12,8 @@ sesu_opgd(
   discnum = NULL,
   discmethod = NULL,
   cores = 1,
+  increase_rate = 0.05,
+  alpha = 0.95,
   ...
 )
 }
@@ -31,8 +33,12 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.}
+cluster with that many cores is created and used. You can also supply a cluster object.}
+
+\item{increase_rate}{(optional) The critical increase rate of the number of discretization.
+Default is \verb{5\%}.}
+
+\item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 
 \item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.}
 }
@@ -42,6 +48,12 @@ A nested tibble with \code{spatial_units}, \code{sesu_result} and \code{data}.
 \description{
 Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
 optimal parameters geographical detector(OPGD) model.
+}
+\details{
+Firstly, the \code{OPGD} model is executed for each data in the datalist (all \code{significant}
+Q statistic of each data are averaged to represent the spatial connection strength under
+this spatial unit), and then the \code{loess_optscale} function is used to select the optimal
+spatial analysis scale.
 }
 \examples{
 \dontrun{

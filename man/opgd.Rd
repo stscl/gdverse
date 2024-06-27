@@ -30,8 +30,7 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.}
+cluster with that many cores is created and used. You can also supply a cluster object.}
 
 \item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
