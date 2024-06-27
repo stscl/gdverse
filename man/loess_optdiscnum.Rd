@@ -2,15 +2,14 @@
 % Please edit documentation in R/loess.R
 \name{loess_optdiscnum}
 \alias{loess_optdiscnum}
-\title{optimal spatial data discretization for individual variables based on
-locally estimated scatterplot smoothing (LOESS) model.}
+\title{determine optimal spatial data discretization for individual variables}
 \usage{
 loess_optdiscnum(qvec, discnumvec, increase_rate = 0.05)
 }
 \arguments{
 \item{qvec}{A numeric vector of q statistics.}
 
-\item{discnumvec}{A numeric vector of break numbers.}
+\item{discnumvec}{A numeric vector of break numbers corresponding to \code{qvec}.}
 
 \item{increase_rate}{(optional) The critical increase rate of the number of discretization.
 Default is \verb{5\%}.}
@@ -19,13 +18,16 @@ Default is \verb{5\%}.}
 A optimal number of spatial data discretization.
 }
 \description{
-optimal spatial data discretization for individual variables based on
-locally estimated scatterplot smoothing (LOESS) model.
+Function for determining optimal spatial data discretization for individual variables
+based on locally estimated scatterplot smoothing (LOESS) model.
 }
 \note{
 When \code{increase_rate} is not satisfied by the calculation, \code{increase_rate*0.1} is used first.
 At this time, if \code{increase_rate*0.1} is not satisfied again, the discrete number corresponding
 to the highest Q-statistic is selected as a return.
+
+Note that \code{gdverse} sorts \code{discnumvec} from smallest to largest and keeps \code{qvec} in
+one-to-one correspondence with \code{discnumvec}.
 }
 \examples{
 library(sf)
