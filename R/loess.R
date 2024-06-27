@@ -11,8 +11,8 @@
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
 #' DOI:10.1080/13658816.2021.1882680
 #'
-#' @param qvec A numeric vector of break numbers.
-#' @param discnumvec A numeric vector of q statistics.
+#' @param qvec A numeric vector of q statistics.
+#' @param discnumvec A numeric vector of break numbers.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
 #' Default is `5%`.
 #'
