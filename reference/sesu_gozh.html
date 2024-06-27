@@ -70,6 +70,7 @@ geographically optimal zones-based heterogeneity(GOZH) model.</p>
 <span>  <span class="va">datalist</span>,</span>
 <span>  <span class="va">su</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -95,6 +96,11 @@ geographically optimal zones-based heterogeneity(GOZH) model.</p>
 cluster with that many cores is created and used. You can also supply a cluster object.</p></dd>
 
 
+<dt>strategy</dt>
+<dd><p>(optional) Calculation strategies of Q statistics at different scales. Default
+is <code>2L</code>, see <code>details</code> for more contents.</p></dd>
+
+
 <dt>increase_rate</dt>
 <dd><p>(optional) The critical increase rate of the number of discretization.
 Default is <code>5%</code>.</p></dd>
@@ -105,21 +111,22 @@ Default is <code>5%</code>.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>(optional) Other arguments passed to <code><a href="gd_bestunidisc.html">gd_bestunidisc()</a></code>.</p></dd>
+<dd><p>(optional) Other arguments passed to <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A list with <code>sesu</code>(size effects of spatial units) and <code>optsu</code>(optimal spatial unit).</p>
+<p>A list with <code>sesu</code>(size effects of spatial units),<code>optsu</code>(optimal spatial unit) and
+<code>strategy</code>(A number that represents the optimal analytical scale selection strategy).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Firstly, the <code>GOZH</code> model is executed for each data in the datalist (all <code>significant</code>
-Q statistic of each data are averaged to represent the spatial connection strength under
-this spatial unit), and then the <code>loess_optscale</code> function is used to select the optimal
-spatial analysis scale.</p>
+    <p>When <code>strategy</code> is <code>1</code>, use the same process as <code><a href="sesu_opgd.html">sesu_opgd()</a></code>.If not, all explanatory
+variables are used to generate a unique Q statistic corresponding to the data in the
+datalist based on <code><a href="rpart_disc.html">rpart_disc()</a></code> and <code><a href="gd.html">gd()</a></code>, and then <code><a href="loess_optscale.html">loess_optscale()</a></code>is used to
+determine the optimal analysis scale.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
