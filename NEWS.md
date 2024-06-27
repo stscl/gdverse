@@ -8,6 +8,8 @@
 
 * Support the RID model.
 
+* Support comparison of spatial unit scale effects based on OPGD and GOZH model.  
+
 # gdverse 0.1.9
 
 ### major changes
