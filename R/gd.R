@@ -117,6 +117,7 @@ gd = \(formula,data,type = "factor",...){
 #'
 #' @return Formatted string output
 #' @export
+#'
 print.factor_detector = \(x, ...) {
   cat("\n Spatial Stratified Heterogeneity Test \n",
       "\n             Factor detector            ")
@@ -134,6 +135,7 @@ print.factor_detector = \(x, ...) {
 #'
 #' @return Formatted string output
 #' @export
+#'
 print.interaction_detector = \(x, ...) {
   cat("\n Spatial Stratified Heterogeneity Test \n",
       "\n           Interaction detector         ")
@@ -157,6 +159,7 @@ print.interaction_detector = \(x, ...) {
 #'
 #' @return Formatted string output
 #' @export
+#'
 print.risk_detector = \(x, ...) {
   cat("\n Spatial Stratified Heterogeneity Test \n",
       "\n               Risk detector           \n")
@@ -192,6 +195,7 @@ print.risk_detector = \(x, ...) {
 #'
 #' @return Formatted string output
 #' @export
+#'
 print.ecological_detector = \(x, ...) {
   cat("\n Spatial Stratified Heterogeneity Test \n",
       "\n             Ecological detector         ")

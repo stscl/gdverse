@@ -33,7 +33,6 @@ data('ndvi')
 g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 plot(g)
 }
-
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}

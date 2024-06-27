@@ -149,8 +149,9 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
 #'
 #' @return Formatted string output
 #' @export
+#'
 print.idsa_result = \(x, ...) {
-  cat("\n Interactive Detector For Spatial Associations \n",
+  cat("\n   Interactive Detector For Spatial Associations \n",
       "\n ------------------ PID values: -------------------")
   print(kableExtra::kable(dplyr::rename(x$interaction, PID = pid_idsa),
                           format = "markdown",digits = 16,align = 'c',...))

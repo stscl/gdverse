@@ -45,13 +45,109 @@
 #' }
 sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,
               discmethod = NULL, cores = 1, ...){
-  res_sesu = purrr::map(datalist,
-                        \(.tbf) opgd(formula,.tbf,discvar,
-                                     discnum,discmethod,cores,...) %>%
-                                purrr::pluck('factor'))
+  res_sesu = purrr::map2(datalist, su,
+                         \(.tbf, .spsu) opgd(formula,.tbf,
+                                           discvar,discnum,
+                                           discmethod,cores,...) %>%
+                                purrr::pluck('factor') %>%
+                                dplyr::mutate(su = .spsu))
   sesu = tibble::tibble(spatial_units = su,
-                        sesu_result = res_sesu,
-                        data = datalist)
+                        sesu_result = res_sesu)
+  res = list('sesu' = sesu)
+  class(res) = 'sesu_opgd'
+  return(res)
+}
 
-  return(sesu)
+#' @title print opgd sedu
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for iopgd sedu in `sesu_opgd()`.
+#'
+#' @param x Return by `sesu_opgd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+#'
+print.sesu_opgd = \(x,...){
+  g = purrr::list_rbind(x$sesu$sesu_result)
+  spunits = x$sesu$spatial_units
+  cat("\n    Size Effects Of Spatial Unit    \n",
+      "\n              OPGD Model            \n")
+  for (i in spunits){
+    cat(sprintf("\n Spatial Unit: %s ",i))
+    print(kableExtra::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),
+                            format = "markdown",digits = 16, align = 'c', ...))
+  }
+}
+
+#' @title plot opgd sedu
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for iopgd sedu in `sesu_opgd()`.
+#'
+#' @param x Return by `sesu_opgd()`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer.
+#'
+plot.sesu_opgd = \(x,...){
+  g = purrr::list_rbind(x$sesu$sesu_result) %>%
+    dplyr::rename(qv = `Q-statistic`, pv = `P-value`)
+  spunits = x$sesu$spatial_units
+  namev = g[which(g$su== spunits[1]),"variable",drop = TRUE]
+  shapev = seq_along(namev)
+  names(shapev) = namev
+  qv95 = g %>%
+    dplyr::group_by(variable) %>%
+    dplyr::summarise(qv95 = stats::quantile(qv,probs = 0.9)) %>%
+    dplyr::pull(qv95) %>%
+    round(3)
+  qv95 = seq(range(qv95)[1],range(qv95)[2],length.out = length(qv95))
+  colv = c("#0000ff","#ff0000","#0ecf0e","#000000","#3effff","#A6CEE3","#FFFF33",
+           "#B2DF8A","#33A02C","#FB9A99","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A",
+           "#FFFF99","#B15928","#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E",
+           "#E6AB02","#A6761D","#1F78B4","#666666")[seq_along(qv95)]
+  names(colv) = namev
+  if (length(shapev) <= 25) {
+    fig_g = ggplot2::ggplot(g, ggplot2::aes(x = su, y = qv)) +
+      ggplot2::geom_point(ggplot2::aes(shape = variable,
+                                       color = variable),
+                          size = 2.75) +
+      ggplot2::geom_line(ggplot2::aes(color = variable),
+                         linetype = 3,show.legend = FALSE) +
+      ggplot2::scale_x_continuous(name = 'Size of spatial uint',
+                         breaks = x$sesu$spatial_units,
+                         limits = x$sesu$spatial_units + c(-100,100),
+                         expand = c(0,0)) +
+      ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
+                         limits = c(ifelse(range(g$qv)[1]>=0.05,0,range(g$qv)[1]-0.05),
+                                    ifelse(range(g$qv)[2]<=0.95,range(g$qv)[2]+0.05,range(g$qv)[2])),
+                         sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
+                                                      labels = qv95, breaks = qv95,
+                                                      transform = ~ .)) +
+      ggplot2::scale_shape_manual(name = "", values = shapev) +
+      ggplot2::scale_color_manual(name = "", values = colv) +
+      ggplot2::theme_bw() +
+      ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
+  } else {
+    fig_g = ggplot2::ggplot(g, ggplot2::aes(x = su, y = qv)) +
+      ggplot2::geom_point(ggplot2::aes(color = variable),
+                          size = 2.75) +
+      ggplot2::geom_line(ggplot2::aes(color = variable),
+                         linetype = 3,show.legend = FALSE) +
+      ggplot2::scale_x_continuous(name = 'Size of spatial uint',
+                         breaks = x$sesu$spatial_units,
+                         limits = x$sesu$spatial_units + c(-100,100),
+                         expand = c(0,0)) +
+      ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
+                         limits = c(ifelse(range(g$qv)[1]>=0.05,0,range(g$qv)[1]-0.05),
+                                    ifelse(range(g$qv)[2]<=0.95,range(g$qv)[2]+0.05,range(g$qv)[2])),
+                         sec.axis = ggplot2::sec_axis(name = "The 90% quantile of Q statistic",
+                                                      labels = qv95, breaks = qv95,
+                                                      transform = ~ .)) +
+      ggplot2::theme_bw() +
+      ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
+  }
+ return(fig_g)
 }

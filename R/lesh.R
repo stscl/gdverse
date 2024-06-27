@@ -56,6 +56,7 @@ lesh = \(formula,data,cores = 1,...){
 #'
 #' @return Formatted string output
 #' @export
+#'
 print.lesh_result = \(x, ...) {
   cat("\n    Spatial Interaction Association Detector    \n",
       "\n                   LESH Model                     ")
@@ -91,7 +92,6 @@ print.lesh_result = \(x, ...) {
 #' g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 #' plot(g)
 #' }
-#'
 plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
                           ..., scatter_alpha = 1) {
   fig_scatter = NULL
