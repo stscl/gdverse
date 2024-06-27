@@ -2,7 +2,7 @@
 % Please edit documentation in R/sesu_opgd.R
 \name{sesu_opgd}
 \alias{sesu_opgd}
-\title{comparison of size effects of spatial units based on OPGD.}
+\title{comparison of size effects of spatial units based on OPGD}
 \usage{
 sesu_opgd(
   formula,
@@ -25,10 +25,10 @@ sesu_opgd(
 \item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{2:15}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization,default is used
-\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{spEcula}.}
+\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster
@@ -58,7 +58,6 @@ fvc5000 = fvc \%>\%
 sesu_opgd(fvc ~ .,
           datalist = list(fvc1000,fvc5000),
           su = c(1000,5000),
-          discnum = 2:15,
           discvar = names(select(fvc5000,-c(fvc,lulc))),
           cores = 6)
 }
