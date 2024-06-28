@@ -1,5 +1,5 @@
 ---
-title: "Comparison Of Size Effects Of Spatial Units"
+title: "Comparison of Size Effects of Spatial Units(SESU)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SESU}
