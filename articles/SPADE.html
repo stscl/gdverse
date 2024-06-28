@@ -631,7 +631,7 @@ to WAR:</p>
 <span><span class="co">## [19] -0.60269473 -1.11353340</span></span></code></pre></div>
 <p>In most cases, we use linear regression to explore linear
 relationships between variables and select appropriate variables for
-subsequent modeling through methods such as VIF.Here we examine the
+subsequent modeling through methods such as VIF. Here we examine the
 effect of removing the WAR variable on VIF and linear models:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm.modelOne</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span><span class="op">)</span></span>
