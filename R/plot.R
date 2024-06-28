@@ -24,10 +24,12 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
                                ggplot2::aes(x = stats::reorder(variable,qv),
                                             y = qv)) +
     ggplot2::geom_bar(stat = "identity", fill = "#bebebe",
-                      ggplot2::aes(alpha = significance)) +
+                      ggplot2::aes(alpha = significance),
+                      show.legend = FALSE) +
     ggplot2::geom_bar(data = dplyr::slice(g,1),
                       ggplot2::aes(alpha = significance),
-                      stat = "identity",fill = "#ff0000") +
+                      stat = "identity",fill = "#ff0000",
+                      show.legend = FALSE) +
     ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
                        ggplot2::aes(label = round(qv,4)),
                        hjust = 1.25, color = "black") +
@@ -37,17 +39,19 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
     ggplot2::scale_y_continuous(limits = c(0,ylimits),
                                 breaks = seq(0,ylimits,by = 0.1),
                                 expand = c(0,0)) +
-    ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25),
+    ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25,
+                                           "Significant" = 1),
                                 na.value = 0.85,name = '') +
     ggplot2::coord_flip() +
     ggplot2::theme_minimal() +
     ggplot2::labs(x = "", y = "Q statistic") +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,hjust = 1,color = 'black'),
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,
+                                                       hjust = 1,
+                                                       color = 'black'),
                    axis.text.y = ggplot2::element_text(color = 'black'),
                    legend.position = "inside",
                    legend.justification.inside = c('right','bottom'),
-                   panel.grid = ggplot2::element_blank(),
-                   ...)
+                   panel.grid = ggplot2::element_blank(), ...)
   return(fig_factor)
 }
 
@@ -117,8 +121,7 @@ plot.risk_detector = \(x, ...) {
                      axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black'),
                      axis.text.y = ggplot2::element_text(color = 'black'),
                      legend.position = "none",
-                     panel.grid = ggplot2::element_blank(),
-                     ...) +
+                     panel.grid = ggplot2::element_blank(), ...) +
       ggplot2::annotate("text", x = Inf, y = -Inf, label = gname,
                         vjust = -1.75, hjust = 1.25, color = "#ff0000")
     return(fig_rd)
@@ -170,7 +173,6 @@ plot.ecological_detector = \(x, ...) {
                    axis.title.y = ggplot2::element_blank(),
                    axis.text = ggplot2::element_text(color = 'black'),
                    legend.position = "none",
-                   panel.grid = ggplot2::element_blank(),
-                   ...)
+                   panel.grid = ggplot2::element_blank(), ...)
   return(fig_ed)
 }
