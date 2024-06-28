@@ -132,7 +132,7 @@ plot(lesh.m, pie = TRUE, scatter = TRUE)
 
 Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of the interactive contribution of variables,and the rest remains consistent.
 
-So you can just look at the contribution part of the variable interaction:
+And you can only look at the contribution part of the variable interaction:
 
 
 ``` r

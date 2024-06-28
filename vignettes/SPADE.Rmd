@@ -467,7 +467,7 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 ## [19] -0.60269473 -1.11353340
 ```
 
-In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF.Here
+In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF. Here
 we examine the effect of removing the WAR variable on VIF and linear models:
 
 

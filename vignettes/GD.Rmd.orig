@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 This vignette explains how to run `geodetector` in `gdverse` package.
 
-```{r echo=FALSE, out.width='75%', fig.align="center",fig.cap="Schematic diagram of Spatial Stratified Heterogeneity Test"}
+```{r echo=FALSE, out.width='75%', fig.align="center",fig.cap="Schematic diagram of Geodetector"}
 knitr::include_graphics('../man/figures/gd_flowchart.png')
 ```
 
