@@ -18,7 +18,7 @@
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list of the GOZH model result.
+#' @return A list of GOZH model result.
 #' @export
 #'
 #' @examples
@@ -49,6 +49,8 @@ gozh = \(formula, data, cores = 1,
 #' zones-based heterogeneity model. ISPRS Journal of Photogrammetry and Remote Sensing: Official
 #' Publication of the International Society for Photogrammetry and Remote Sensing (ISPRS), 185, 111–128.
 #' https://doi.org/10.1016/j.isprsjprs.2022.01.009
+#' @note
+#' Only one type of detector is supported in a `gozh_detector()` run at a time.
 #'
 #' @param formula A formula of GOZH detector.
 #' @param data A data.frame or tibble of observation data.
@@ -59,7 +61,7 @@ gozh = \(formula, data, cores = 1,
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A tibble of the corresponding result is stored under the corresponding detector type.
+#' @return A list of the corresponding result is stored under the corresponding detector type.
 #' @export
 #'
 #' @examples

@@ -22,7 +22,7 @@ cluster with that many cores is created and used. You can also supply a cluster 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A list of the GOZH model result.
+A list of GOZH model result.
 }
 \description{
 Function for geographically optimal zones-based heterogeneity(GOZH) model

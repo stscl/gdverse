@@ -22,10 +22,13 @@ cluster with that many cores is created and used. You can also supply a cluster 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A tibble of the corresponding result is stored under the corresponding detector type.
+A list of the corresponding result is stored under the corresponding detector type.
 }
 \description{
 Function for geographically optimal zones-based heterogeneity detector.
+}
+\note{
+Only one type of detector is supported in a \code{gozh_detector()} run at a time.
 }
 \examples{
 \dontrun{
