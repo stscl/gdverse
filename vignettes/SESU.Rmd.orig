@@ -47,7 +47,7 @@ fvc = c(list(fvc1000),fvc_other)
 str(fvc)
 ```
 
-## Comparison Of Size Effects Of Spatial Units based on OPGD model
+## Comparison of Size Effects of Spatial Units based on OPGD model
 
 ```{r opgd,fig.width=7.5,fig.height=7.5}
 discvar = names(select(fvc1000,-c(fvc,lulc)))
@@ -56,7 +56,7 @@ g1
 plot(g1)
 ```
 
-## Comparison Of Size Effects Of Spatial Units based on GOZH model
+## Comparison of Size Effects of Spatial Units based on GOZH model
 
 ```{r gozh1,fig.width=7.5,fig.height=7.5}
 g2 = sesu_gozh(fvc ~ ., data = fvc,su = su,cores = 6)
