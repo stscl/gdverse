@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,10 +150,15 @@
 <p>You can install the development version of <strong>gdverse</strong> from <a href="https://github.com/SpatLyu/gdverse" class="external-link">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SpatLyu/gdverse"</span>,build_vignettes <span class="op">=</span> <span class="cn">T</span>,dep <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SpatLyu/gdverse"</span>,</span>
+<span>                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                         dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>or install <strong>gdverse</strong> from <a href="https://spatlyu.r-universe.dev/gdverse" class="external-link">r-universe</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'gdverse'</span>, repos<span class="op">=</span><span class="st">'https://spatlyu.r-universe.dev'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gdverse"</span>, </span>
+<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://spatlyu.r-universe.dev"</span>,</span>
+<span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
+<span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
