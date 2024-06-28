@@ -277,7 +277,7 @@ construct the data under <code>2000-10000</code> m spatial units with
 <span><span class="co">##   ..$ aspect: num [1:1253] 130 182 211 194 163 ...</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="comparison-of-size-effects-of-spatial-units-based-on-opgd-model">Comparison Of Size Effects Of Spatial Units based on OPGD model<a class="anchor" aria-label="anchor" href="#comparison-of-size-effects-of-spatial-units-based-on-opgd-model"></a>
+<h2 id="comparison-of-size-effects-of-spatial-units-based-on-opgd-model">Comparison of Size Effects of Spatial Units based on OPGD model<a class="anchor" aria-label="anchor" href="#comparison-of-size-effects-of-spatial-units-based-on-opgd-model"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">discvar</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc1000</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -464,7 +464,7 @@ construct the data under <code>2000-10000</code> m spatial units with
 <p><img src="../reference/figures/sesu/opgd-1.png"></p>
 </div>
 <div class="section level2">
-<h2 id="comparison-of-size-effects-of-spatial-units-based-on-gozh-model">Comparison Of Size Effects Of Spatial Units based on GOZH model<a class="anchor" aria-label="anchor" href="#comparison-of-size-effects-of-spatial-units-based-on-gozh-model"></a>
+<h2 id="comparison-of-size-effects-of-spatial-units-based-on-gozh-model">Comparison of Size Effects of Spatial Units based on GOZH model<a class="anchor" aria-label="anchor" href="#comparison-of-size-effects-of-spatial-units-based-on-gozh-model"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="../reference/sesu_gozh.html">sesu_gozh</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>,su <span class="op">=</span> <span class="va">su</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
