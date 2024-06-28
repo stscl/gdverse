@@ -11,7 +11,7 @@
 #' @param data A data.frame or tibble of observation data.
 #' @param ... (optional) Other arguments passed to `rpart::rpart()`.
 #'
-#' @return A discrete vectors after being discretized.
+#' @return A vectors that being discretized.
 #' @export
 #'
 #' @examples

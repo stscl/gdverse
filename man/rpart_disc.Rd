@@ -14,7 +14,7 @@ rpart_disc(formula, data, ...)
 \item{...}{(optional) Other arguments passed to \code{rpart::rpart()}.}
 }
 \value{
-A discrete vectors after being discretized.
+A vectors that being discretized.
 }
 \description{
 discretization of variables based on recursive partitioning
