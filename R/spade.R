@@ -108,7 +108,7 @@ print.spade_result = \(x, ...) {
 #' @export
 #'
 plot.spade_result = \(x, slicenum = 2, alpha = 0.95, ...) {
-  if ("No Pseudo-P Value" %in% g$pv) {
+  if ("No Pseudo-P Value" %in% x$factor$`P-value`) {
     g = x$factor %>%
       dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
       dplyr::filter(!is.na(qv)) %>%
@@ -120,9 +120,9 @@ plot.spade_result = \(x, slicenum = 2, alpha = 0.95, ...) {
     fig_factor = ggplot2::ggplot(g,
                                  ggplot2::aes(x = stats::reorder(variable,qv),
                                               y = qv)) +
-      ggplot2::geom_bar(stat = "identity", fill = "#bebebe") +
+      ggplot2::geom_bar(stat = "identity", fill = "#bebebe", alpha = 1) +
       ggplot2::geom_bar(data = dplyr::slice(g,1),
-                        stat = "identity", fill = "#ff0000") +
+                        stat = "identity", fill = "#ff0000", alpha = 1) +
       ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
                          ggplot2::aes(label = round(qv,4)),
                          hjust = 1.25, color = "black") +

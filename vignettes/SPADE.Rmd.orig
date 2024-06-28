@@ -254,11 +254,11 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 
 3:22 %>%
   purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                   psd_spade(usfi$WAR, ., wt))
+                   psd_spade(usfi$WAR, ., wt3))
 
 3:22 %>%
   purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                   cpsd_spade(usfi$SUHI, usfi$WAR, ., wt))
+                   cpsd_spade(usfi$SUHI, usfi$WAR, ., wt3))
 ```
 
 In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF.Here

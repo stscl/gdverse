@@ -9,7 +9,7 @@ vignette: >
 
 
 
-This vignette explains how to run `geodatector` in `gdverse` package.
+This vignette explains how to run `geodetector` in `gdverse` package.
 
 <div class="figure" style="text-align: center">
 <img src="../man/figures/gd_flowchart.png" alt="Schematic diagram of Spatial Stratified Heterogeneity Test" width="75%" />
