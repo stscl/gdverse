@@ -2,7 +2,7 @@
 % Please edit documentation in R/lesh.R
 \name{plot.lesh_result}
 \alias{plot.lesh_result}
-\title{plot LESH model interaction result}
+\title{plot LESH model result}
 \usage{
 \method{plot}{lesh_result}(x, pie = TRUE, scatter = FALSE, ..., scatter_alpha = 1)
 }

@@ -24,6 +24,3 @@ knitr::knit("vignettes/SHEGD.Rmd.orig",
 
 knitr::knit("vignettes/SESU.Rmd.orig",
             "vignettes/SESU.Rmd")
-
-# knitr::knit("./README.Rmd",
-#             "./README.md")

@@ -20,7 +20,7 @@
 #' cluster with that many cores is created and used. You can also supply a cluster object.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list of the LESH model result.
+#' @return A list of LESH model result.
 #' @export
 #'
 #' @examples
@@ -69,7 +69,7 @@ print.lesh_result = \(x, ...) {
   print(kableExtra::kable(x,format = "markdown",digits = 16,align = 'c',...))
 }
 
-#' @title plot LESH model interaction result
+#' @title plot LESH model result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for LESH model interaction result in `lesh()`.
@@ -93,7 +93,7 @@ print.lesh_result = \(x, ...) {
 #' plot(g)
 #' }
 plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
-                          ..., scatter_alpha = 1) {
+                     ..., scatter_alpha = 1) {
   fig_scatter = NULL
   fig_pie = NULL
   if (scatter) {

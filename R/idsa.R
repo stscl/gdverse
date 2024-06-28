@@ -191,7 +191,6 @@ plot.idsa_result = \(x, ...) {
                    axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black'),
                    axis.text.y = ggplot2::element_text(color = 'black'),
                    legend.position = "none",
-                   panel.grid = ggplot2::element_blank(),
-                   ...)
+                   panel.grid = ggplot2::element_blank(), ...)
   return(fig_rd)
 }

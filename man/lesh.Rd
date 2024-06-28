@@ -17,7 +17,7 @@ cluster with that many cores is created and used. You can also supply a cluster 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A list of the LESH model result.
+A list of LESH model result.
 }
 \description{
 Function for locally explained heterogeneity model.
