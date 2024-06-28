@@ -2,6 +2,12 @@
 
 * Support more geodetector model variants and fix bugs of gdverse.
 
+# gdverse 0.2.1
+
+### major changes
+
+* Optimize plotting function.
+
 # gdverse 0.2.0
 
 ### major changes

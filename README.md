@@ -37,14 +37,19 @@ You can install the development version of **gdverse** from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("SpatLyu/gdverse",build_vignettes = T,dep = T)
+devtools::install_github("SpatLyu/gdverse",
+                         build_vignettes = TRUE,
+                         dep = TRUE)
 ```
 
 or install **gdverse** from
 [r-universe](https://spatlyu.r-universe.dev/gdverse):
 
 ``` r
-install.packages('gdverse', repos='https://spatlyu.r-universe.dev')
+install.packages("gdverse", 
+                 repos = c("https://spatlyu.r-universe.dev",
+                           "https://cran.rstudio.com/"),
+                 dep = TRUE)
 ```
 
 ## Example
