@@ -141,8 +141,8 @@ plot.sesu_opgd = \(x,...){
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
                                   limits = c(qvrange[1]-0.05,qvrange[2]+0.05),
-                                  breaks = round(seq(qvrange[1],qvrange[2],
-                                                 length.out = length(qv95)),3),
+                                  # breaks = round(seq(qvrange[1],qvrange[2],
+                                  #                length.out = length(qv95)),3),
                                   sec.axis = ggplot2::sec_axis(
                                     name = "The 90% quantile of Q statistic",
                                     labels = qv95, breaks = qv95,
@@ -164,8 +164,8 @@ plot.sesu_opgd = \(x,...){
                          expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
                                   limits = c(qvrange[1]-0.05,qvrange[2]+0.05),
-                                  breaks = round(seq(qvrange[1],qvrange[2],
-                                                 length.out = length(qv95)),3),
+                                  # breaks = round(seq(qvrange[1],qvrange[2],
+                                  #                length.out = length(qv95)),3),
                                   sec.axis = ggplot2::sec_axis(
                                     name = "The 90% quantile of Q statistic",
                                     labels = qv95, breaks = qv95,

@@ -25,7 +25,7 @@ library(tidyverse)
 library(gdverse)
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = aggregate(fvc,fact = 5)
+fvc = terra::aggregate(fvc,fact = 5)
 fvc
 ```
 

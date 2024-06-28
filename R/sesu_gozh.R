@@ -156,10 +156,10 @@ plot.sesu_gozh = \(x,...){
                                              surange[2] + 0.05 * suvalue),
                                   expand = c(0,0)) +
       ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                                  limits = c(ifelse(qvrange[1]>=0.05,qvrange[1]-0.05,0),
-                                             ifelse(qvrange[2]<=0.95,qvrange[2]+0.05,qvrange[2])),
-                                  breaks = round(seq(qvrange[1],qvrange[2],
-                                                     length.out = length(g$su)),3)) +
+                                  limits = c(qvrange[1]-0.05,qvrange[2]+0.05),
+                                  # breaks = round(seq(qvrange[1],qvrange[2],
+                                  #                    length.out = length(g$su)),3)
+                                  ) +
       ggplot2::theme_bw() +
       ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
     return(fig_g)
