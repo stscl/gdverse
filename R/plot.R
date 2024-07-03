@@ -94,7 +94,7 @@ plot.interaction_detector = \(x,alpha = 1,...){
                                            "Weaken, uni-" = "#6EE9EF",
                                            "Weaken, nonlinear" = "#558DE8")) +
     ggplot2::labs(x = "", y = "", size = "", color = "") +
-    ggplot2::coord_equal() +
+    ggplot2::coord_fixed() +
     ggplot2::theme_bw() +
     ggplot2::theme(...)
   return(fig_interaction)

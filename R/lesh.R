@@ -140,20 +140,25 @@ plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
                      axis.text.y = ggplot2::element_text(color = '#fb9872'),
                      ...)
     #--- use PieGlyph package ---
-    # fig_pie = ggplot2::ggplot(data = g_pie,
-    #                           ggplot2::aes(x = variable1, y = variable2)) +
-    #   PieGlyph::geom_pie_glyph(ggplot2::aes(radius = interactv),
-    #                            slices = c('spd1', 'spd2'),
-    #                            show.legend = TRUE) +
-    #   ggplot2::scale_fill_manual(name = "", values = c('#75c7af','#fb9872'),
-    #                              labels = c('Variable-Xaxis','Variable-Yaxis')) +
-    #   PieGlyph::scale_radius_continuous(name = '', range = c(0.25, 0.75)) +
-    #   ggplot2::labs(x = "", y = "") +
-    #   ggplot2::coord_equal() +
-    #   ggplot2::theme_bw() +
-    #   ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
-    #                  axis.text.y = ggplot2::element_text(color = '#fb9872'),
-    #                  ...)
+  #   fig_pie = ggplot2::ggplot(data = g_pie,
+  #                             ggplot2::aes(x = variable1, y = variable2)) +
+  #     PieGlyph::geom_pie_glyph(ggplot2::aes(radius = interactv),
+  #                              slices = c('spd1', 'spd2'),
+  #                              show.legend = TRUE) +
+  #     ggplot2::scale_fill_manual(name = "", values = c('#75c7af','#fb9872'),
+  #                                labels = c('Variable-Xaxis','Variable-Yaxis')) +
+  #     PieGlyph::scale_radius_continuous(name = '', range = c(0.25, 0.75)) +
+  #     ggplot2::guides(size = ggplot2::guide_legend(
+  #       override.aes = list(shape = 21,
+  #                           fill = "transparent",
+  #                           color = "black"))) +
+  #     ggplot2::labs(x = "", y = "") +
+  #     ggplot2::coord_equal() +
+  #     ggplot2::theme_bw() +
+  #     ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
+  #                    axis.text.y = ggplot2::element_text(color = '#fb9872'),
+  #                    ...)
+
   }
 
   if (is.null(fig_scatter) | is.null(fig_pie)){
@@ -165,10 +170,11 @@ plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
       return(fig_pie)
     }
   } else {
-    fig_p = cowplot::plot_grid(fig_scatter, fig_pie, nrow = 1,
-                               label_fontfamily = 'serif',
-                               labels = paste0('(',letters[1:2],')'),
-                               label_fontface = 'plain')
+    # fig_p = cowplot::plot_grid(fig_scatter, fig_pie, nrow = 1,
+    #                            label_fontfamily = 'serif',
+    #                            labels = paste0('(',letters[1:2],')'),
+    #                            label_fontface = 'plain')
+    fig_p = patchwork::wrap_plots(fig_scatter, fig_pie, nrow = 1)
     return(fig_p)
   }
 }

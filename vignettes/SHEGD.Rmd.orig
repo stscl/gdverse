@@ -39,7 +39,7 @@ plot(gozh.uvi)
 
 ### Variable interaction detection
 
-```{r gozh_bi,fig.width=6.25,fig.height=4.25}
+```{r gozh_bi,fig.width=7.25,fig.height=4.25}
 gozh.bi = gozh(NDVIchange ~ ., data = ndvi,type = 'interaction')
 gozh.bi
 plot(gozh.bi)
@@ -47,7 +47,7 @@ plot(gozh.bi)
 
 ### Variable interaction contribution
 
-```{r lesh,fig.width=13.5,fig.height=5.75}
+```{r lesh,fig.width=12.5,fig.height=5.75}
 lesh.m = lesh(NDVIchange ~ ., data = ndvi,cores = 6)
 lesh.m
 plot(lesh.m, pie = TRUE, scatter = TRUE)
@@ -57,7 +57,7 @@ Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of
 
 And you can only look at the contribution part of the variable interaction:
 
-```{r lesh_only,fig.width=6.75,fig.height=5.25}
+```{r lesh_only,fig.width=5.75,fig.height=5.25}
 plot(lesh.m, pie = TRUE, scatter = FALSE)
 ```
 

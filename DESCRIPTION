@@ -11,7 +11,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
     classInt,
-    cowplot,
     dplyr,
     forcats,
     geosphere,
@@ -19,6 +18,7 @@ Imports:
     kableExtra,
     magrittr,
     parallel,
+    patchwork,
     purrr,
     reticulate,
     rpart,
@@ -29,6 +29,7 @@ Imports:
     utils
 URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
 Suggests: 
+    cowplot,
     knitr,
     PieGlyph,
     Rdimtools,
