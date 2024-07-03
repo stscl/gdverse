@@ -113,21 +113,47 @@ plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
       dplyr::arrange(dplyr::desc(n))
     g_pie = g_pie %>%
       dplyr::mutate(variable1 = factor(variable1,levels = gv$variable1),
-                    variable2 = factor(variable2,levels = rev(gv$variable2)))
+                    variable2 = factor(variable2,levels = rev(gv$variable2))) %>%
+      dplyr::mutate(v1 = rescale_vector(as.numeric(variable1),-80,80),
+                    v2 = rescale_vector(as.numeric(variable2),-80,80))
+    #--- use scatterpie package ---
     fig_pie = ggplot2::ggplot(data = g_pie,
-                              ggplot2::aes(x = variable1, y = variable2))+
-      PieGlyph::geom_pie_glyph(ggplot2::aes(radius = interactv),
-                               slices = c('spd1', 'spd2'),
-                               show.legend = TRUE) +
-      ggplot2::scale_fill_manual(name = "", values = c('#75c7af','#fb9872'),
-                                 labels = c('Variable-Xaxis','Variable-Yaxis')) +
-      PieGlyph::scale_radius_continuous(name = '', range = c(0.25, 0.75)) +
-      ggplot2::labs(x = "", y = "") +
+                              ggplot2::aes(x = v1, y = v2)) +
+      scatterpie::geom_scatterpie(ggplot2::aes(x = v1, y = v2, r = 15 * interactv),
+                                  data = g_pie, cols = c('spd1', 'spd2'),
+                                  color = NA, show.legend = FALSE) +
+      ggplot2::scale_fill_manual(values = c('#75c7af','#fb9872')) +
+      suppressWarnings(scatterpie::geom_scatterpie_legend(g_pie$interactv * 15, n = 3,
+                                         x = stats::quantile(g_pie$v1,0.99),
+                                         y = stats::quantile(g_pie$v1,0.1),
+                                         label_position = 'left',
+                                         labeller = \(.x) round(.x/15,1))) +
+      ggplot2::scale_x_continuous(name = "",
+                                  breaks = g_pie$v1,
+                                  labels = g_pie$variable1) +
+      ggplot2::scale_y_continuous(name = "",
+                                  breaks = g_pie$v2,
+                                  labels = g_pie$variable2) +
       ggplot2::coord_equal() +
       ggplot2::theme_bw() +
       ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
                      axis.text.y = ggplot2::element_text(color = '#fb9872'),
                      ...)
+    #--- use PieGlyph package ---
+    # fig_pie = ggplot2::ggplot(data = g_pie,
+    #                           ggplot2::aes(x = variable1, y = variable2)) +
+    #   PieGlyph::geom_pie_glyph(ggplot2::aes(radius = interactv),
+    #                            slices = c('spd1', 'spd2'),
+    #                            show.legend = TRUE) +
+    #   ggplot2::scale_fill_manual(name = "", values = c('#75c7af','#fb9872'),
+    #                              labels = c('Variable-Xaxis','Variable-Yaxis')) +
+    #   PieGlyph::scale_radius_continuous(name = '', range = c(0.25, 0.75)) +
+    #   ggplot2::labs(x = "", y = "") +
+    #   ggplot2::coord_equal() +
+    #   ggplot2::theme_bw() +
+    #   ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
+    #                  axis.text.y = ggplot2::element_text(color = '#fb9872'),
+    #                  ...)
   }
 
   if (is.null(fig_scatter) | is.null(fig_pie)){

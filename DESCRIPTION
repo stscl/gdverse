@@ -19,10 +19,10 @@ Imports:
     kableExtra,
     magrittr,
     parallel,
-    PieGlyph,
     purrr,
     reticulate,
     rpart,
+    scatterpie,
     stats,
     tibble,
     tidyr,
@@ -30,6 +30,7 @@ Imports:
 URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
 Suggests: 
     knitr,
+    PieGlyph,
     Rdimtools,
     rmarkdown,
     sf,
