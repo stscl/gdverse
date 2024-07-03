@@ -84,6 +84,10 @@ plot.interaction_detector = \(x,alpha = 1,...){
                                     size = interactv, color = Interaction)) +
     ggplot2::geom_point(alpha = alpha) +
     ggplot2::scale_size(range = c(1,10)) +
+    ggplot2::guides(size = ggplot2::guide_legend(
+                    override.aes = list(shape = 21,
+                                        fill = "transparent",
+                                        color = "black"))) +
     ggplot2::scale_color_manual(values = c("Enhance, nonlinear" = "#EA4848",
                                            "Independent" = "#E08338",
                                            "Enhance, bi-" = "#F2C55E",
