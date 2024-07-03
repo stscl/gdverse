@@ -18,6 +18,11 @@ gdverse_pyinit = function() {
   gdverse_python = Sys.getenv("GDVERSE_PYTHON", unset = NA)
   if (!is.na(gdverse_python)) {
     reticulate::use_python(gdverse_python)
+    if (!all(purrr::map_lgl(
+      c('numpy','pandas','ruptures','joblib'),
+      reticulate::py_module_available))) {
+      stop('python dependencies for gdverse cannot be loaded properly.')
+    }
   } else if (!all(purrr::map_lgl(
     c('numpy','pandas','ruptures','joblib'),
     reticulate::py_module_available))) {
@@ -25,6 +30,5 @@ gdverse_pyinit = function() {
   } else {
     message("\n", "Please set `GDVERSE_PYTHON` environment variable to appropriate python path!")
     message("\n", "Run `vignette('RGDRID',package = 'gdverse')` to see more details")
-    stop('python dependencies for gdverse cannot be loaded properly.')
   }
 }
