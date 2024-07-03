@@ -48,7 +48,6 @@ knitr::opts_chunk$set(
 ``` {r}
 library(gdverse)
 library(tidyverse)
-gdverse_pyinit()
 
 data("ndvi")
 ```
