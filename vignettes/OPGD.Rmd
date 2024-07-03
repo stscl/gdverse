@@ -34,8 +34,8 @@ fvc
 
 ``` r
 names(fvc)
-##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"   
-##  [9] "ntl"    "lulc"   "elev"   "slope"  "aspect"
+##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"    "lulc"  
+## [11] "elev"   "slope"  "aspect"
 ```
 
 ### Convert data from `SpatRaster` to `tibble`
@@ -45,15 +45,14 @@ names(fvc)
 fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
 head(fvc)
 ## # A tibble: 6 × 13
-##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev
-##   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.
-## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.
-## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.
-## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.
-## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.
-## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.
-## # ℹ 2 more variables: slope <dbl>, aspect <dbl>
+##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev slope aspect
+##   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>  <dbl>
+## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.  2.96   122.
+## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.  1.86   174.
+## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.  3.19   192.
+## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.  3.32   213.
+## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.  2.79   132.
+## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93   137.
 ```
 
 ### Determine optimal discretization parameters
@@ -66,22 +65,22 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 4.53 sec elapsed
+## 4.17 sec elapsed
 ```
 
 
 ``` r
 g
 ## $x
-##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope" 
-##  [9] "tmpavg" "tmpmax" "tmpmin"
+##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg" "tmpmax"
+## [11] "tmpmin"
 ## 
 ## $k
 ##  [1] 13 15 15 15 15 15 15 15 10 15 15
 ## 
 ## $method
-##  [1] "pretty"   "fisher"   "fisher"   "quantile" "fisher"   "fisher"  
-##  [7] "fisher"   "fisher"   "sd"       "quantile" "fisher"  
+##  [1] "pretty"   "fisher"   "fisher"   "quantile" "fisher"   "fisher"   "fisher"   "fisher"  
+##  [9] "sd"       "quantile" "fisher"  
 ## 
 ## $disv
 ## # A tibble: 5,240 × 11
@@ -126,20 +125,19 @@ The `new.fvc` is the discrete result of the optimal discretization parameter bas
 new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
 new.fvc
 ## # A tibble: 5,240 × 13
-##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg
-##    <dbl> <dbl>  <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>
-##  1 0.188    10      7     9     3     2      7      1      1     5      8
-##  2 0.162    10      9     8     3     5      7      1      1     3      8
-##  3 0.168    10     10     9     3     2      7      1      1     5      8
-##  4 0.186    10     11     9     2     2      8      1      1     5      7
-##  5 0.189    10      7     9     4     1      7      2      1     4      8
-##  6 0.171    10      7     8     3     1      7      1      1     3      8
-##  7 0.153    10      7     8     3     3      6      1      1     2      8
-##  8 0.163    10     11     8     3     2      7      1      1     3      8
-##  9 0.176    10      9     9     4     7      7      1      1     5      8
-## 10 0.177    10     11     8     3     3      7      1      1     4      8
+##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin
+##    <dbl> <dbl>  <int> <int> <int> <int>  <int>  <int>  <int> <int>  <int>  <int>  <int>
+##  1 0.188    10      7     9     3     2      7      1      1     5      8      9      2
+##  2 0.162    10      9     8     3     5      7      1      1     3      8     11      2
+##  3 0.168    10     10     9     3     2      7      1      1     5      8      9      2
+##  4 0.186    10     11     9     2     2      8      1      1     5      7      7      2
+##  5 0.189    10      7     9     4     1      7      2      1     4      8      9      2
+##  6 0.171    10      7     8     3     1      7      1      1     3      8     11      3
+##  7 0.153    10      7     8     3     3      6      1      1     2      8     11      3
+##  8 0.163    10     11     8     3     2      7      1      1     3      8     11      3
+##  9 0.176    10      9     9     4     7      7      1      1     5      8      9      2
+## 10 0.177    10     11     8     3     3      7      1      1     4      8     10      2
 ## # ℹ 5,230 more rows
-## # ℹ 2 more variables: tmpmax <int>, tmpmin <int>
 ```
 
 ### Run geodetector

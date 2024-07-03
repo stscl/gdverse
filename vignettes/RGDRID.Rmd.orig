@@ -67,16 +67,14 @@ new.ndvi
 
 Then, we can run geodetector model by `gd()` function.
 
-```{r rgd_fd,fig.width=5,fig.height=3.5}
+```{r}
 g1 = gd(NDVIchange ~ .,data = new.ndvi, type = 'factor')
 g1
-plot(g1)
 ```
 
-```{r rgd_id,fig.width=6.25,fig.height=4.25}
+```{r}
 g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
 g2
-plot(g2)
 ```
 
 ### You can also use `rgd()` in one time to get result above.
@@ -88,6 +86,14 @@ ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
 str(ndvi_rgd)
 ndvi_rgd[[1]]
 ndvi_rgd[[2]]
+```
+
+```{r rgd_fd,fig.width=5,fig.height=3.5}
+plot(ndvi_rgd[[1]])
+```
+
+```{r rgd_id,fig.width=6.25,fig.height=4.25}
+plot(ndvi_rgd[[2]])
 ```
 
 ### Run RID

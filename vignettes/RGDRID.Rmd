@@ -25,10 +25,6 @@ pandas ruptures -y`
 library(gdverse)
 library(tidyverse)
 reticulate::use_condaenv('geocompy')
-## Error in reticulate::use_condaenv("geocompy"): Unable to locate conda environment 'geocompy'.
-```
-
-``` r
 
 data("ndvi")
 ```
@@ -51,7 +47,7 @@ new.ndvi = robust_disc(NDVIchange ~ .,
                        data = select(ndvi,-c(Climatezone,Mining)),
                        discnum = 10,cores = 6)
 tictoc::toc()
-## 12.88 sec elapsed
+## 19.33 sec elapsed
 ```
 
 
@@ -118,12 +114,6 @@ g1
 ## |    Mining     |  0.1411154  | 6.734163e-10 |
 ```
 
-``` r
-plot(g1)
-```
-
-![](../man/figures/rgdrid/rgd_fd-1.png)
-
 
 ``` r
 g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
@@ -151,12 +141,6 @@ g2
 ## | Precipitation ∩ Popdensity  | Enhance, bi- |
 ## |      GDP ∩ Popdensity       | Enhance, bi- |
 ```
-
-``` r
-plot(g2)
-```
-
-![](../man/figures/rgdrid/rgd_id-1.png)
 
 ### You can also use `rgd()` in one time to get result above.
 
@@ -226,6 +210,20 @@ ndvi_rgd[[2]]
 ## | Precipitation ∩ Popdensity  | Enhance, bi- |
 ## |      GDP ∩ Popdensity       | Enhance, bi- |
 ```
+
+
+``` r
+plot(ndvi_rgd[[1]])
+```
+
+![](../man/figures/rgdrid/rgd_fd-1.png)
+
+
+``` r
+plot(ndvi_rgd[[2]])
+```
+
+![](../man/figures/rgdrid/rgd_id-1.png)
 
 ### Run RID
 
