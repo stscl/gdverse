@@ -115,8 +115,8 @@
 <span><span class="co">## max values  : 0.8905939, 247.1408, 75.933422, 8276.911, 26.72104,  1.101411, ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"   </span></span>
-<span><span class="co">##  [9] "ntl"    "lulc"   "elev"   "slope"  "aspect"</span></span></code></pre></div>
+<span><span class="co">##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"    "lulc"  </span></span>
+<span><span class="co">## [11] "elev"   "slope"  "aspect"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="convert-data-from-spatraster-to-tibble">Convert data from <code>SpatRaster</code> to
@@ -126,15 +126,14 @@
 <code class="sourceCode R"><span><span class="va">fvc</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">fvc</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
 <span><span class="co">## # A tibble: 6 × 13</span></span>
-<span><span class="co">##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev</span></span>
-<span><span class="co">##   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.</span></span>
-<span><span class="co">## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.</span></span>
-<span><span class="co">## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.</span></span>
-<span><span class="co">## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.</span></span>
-<span><span class="co">## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.</span></span>
-<span><span class="co">## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.</span></span>
-<span><span class="co">## # ℹ 2 more variables: slope &lt;dbl&gt;, aspect &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="co">##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev slope aspect</span></span>
+<span><span class="co">##   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.  2.96   122.</span></span>
+<span><span class="co">## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.  1.86   174.</span></span>
+<span><span class="co">## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.  3.19   192.</span></span>
+<span><span class="co">## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.  3.32   213.</span></span>
+<span><span class="co">## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.  2.79   132.</span></span>
+<span><span class="co">## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93   137.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="determine-optimal-discretization-parameters">Determine optimal discretization parameters<a class="anchor" aria-label="anchor" href="#determine-optimal-discretization-parameters"></a>
@@ -147,19 +146,19 @@ q-statistic.</p>
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 4.53 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 4.17 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
-<span><span class="co">##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope" </span></span>
-<span><span class="co">##  [9] "tmpavg" "tmpmax" "tmpmin"</span></span>
+<span><span class="co">##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg" "tmpmax"</span></span>
+<span><span class="co">## [11] "tmpmin"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $k</span></span>
 <span><span class="co">##  [1] 13 15 15 15 15 15 15 15 10 15 15</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $method</span></span>
-<span><span class="co">##  [1] "pretty"   "fisher"   "fisher"   "quantile" "fisher"   "fisher"  </span></span>
-<span><span class="co">##  [7] "fisher"   "fisher"   "sd"       "quantile" "fisher"  </span></span>
+<span><span class="co">##  [1] "pretty"   "fisher"   "fisher"   "quantile" "fisher"   "fisher"   "fisher"   "fisher"  </span></span>
+<span><span class="co">##  [9] "sd"       "quantile" "fisher"  </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $disv</span></span>
 <span><span class="co">## # A tibble: 5,240 × 11</span></span>
@@ -201,20 +200,19 @@ col in <code>fvc</code> tibble now.</p>
 <code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span>,<span class="va">new.fvc</span><span class="op">)</span></span>
 <span><span class="va">new.fvc</span></span>
 <span><span class="co">## # A tibble: 5,240 × 13</span></span>
-<span><span class="co">##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1 0.188    10      7     9     3     2      7      1      1     5      8</span></span>
-<span><span class="co">##  2 0.162    10      9     8     3     5      7      1      1     3      8</span></span>
-<span><span class="co">##  3 0.168    10     10     9     3     2      7      1      1     5      8</span></span>
-<span><span class="co">##  4 0.186    10     11     9     2     2      8      1      1     5      7</span></span>
-<span><span class="co">##  5 0.189    10      7     9     4     1      7      2      1     4      8</span></span>
-<span><span class="co">##  6 0.171    10      7     8     3     1      7      1      1     3      8</span></span>
-<span><span class="co">##  7 0.153    10      7     8     3     3      6      1      1     2      8</span></span>
-<span><span class="co">##  8 0.163    10     11     8     3     2      7      1      1     3      8</span></span>
-<span><span class="co">##  9 0.176    10      9     9     4     7      7      1      1     5      8</span></span>
-<span><span class="co">## 10 0.177    10     11     8     3     3      7      1      1     4      8</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span>
-<span><span class="co">## # ℹ 2 more variables: tmpmax &lt;int&gt;, tmpmin &lt;int&gt;</span></span></code></pre></div>
+<span><span class="co">##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
+<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
+<span><span class="co">##  1 0.188    10      7     9     3     2      7      1      1     5      8      9      2</span></span>
+<span><span class="co">##  2 0.162    10      9     8     3     5      7      1      1     3      8     11      2</span></span>
+<span><span class="co">##  3 0.168    10     10     9     3     2      7      1      1     5      8      9      2</span></span>
+<span><span class="co">##  4 0.186    10     11     9     2     2      8      1      1     5      7      7      2</span></span>
+<span><span class="co">##  5 0.189    10      7     9     4     1      7      2      1     4      8      9      2</span></span>
+<span><span class="co">##  6 0.171    10      7     8     3     1      7      1      1     3      8     11      3</span></span>
+<span><span class="co">##  7 0.153    10      7     8     3     3      6      1      1     2      8     11      3</span></span>
+<span><span class="co">##  8 0.163    10     11     8     3     2      7      1      1     3      8     11      3</span></span>
+<span><span class="co">##  9 0.176    10      9     9     4     7      7      1      1     5      8      9      2</span></span>
+<span><span class="co">## 10 0.177    10     11     8     3     3      7      1      1     4      8     10      2</span></span>
+<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-geodetector">Run geodetector<a class="anchor" aria-label="anchor" href="#run-geodetector"></a>
