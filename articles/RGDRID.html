@@ -94,20 +94,32 @@
     
     
 <div class="section level3">
-<h3 id="set-up-your-python-dependence">Set up your python dependence<a class="anchor" aria-label="anchor" href="#set-up-your-python-dependence"></a>
+<h3 id="set-up-python-dependence">Set up python dependence<a class="anchor" aria-label="anchor" href="#set-up-python-dependence"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>install <code>miniconda</code>
+<li>Install <strong>miniconda</strong>
 </li>
-<li>create a new conda env <code>geocompy</code> use
-<code>conda create -n geocompy python=3.9 -y</code>
+<li>Open the conda terminal and perform steps 3 to 6</li>
+<li>Create a new conda env <code>gdverse</code> &gt;
+<code>conda create -n gdverse python=3.9 -y</code>
 </li>
-<li>activate this env <code>conda activate geocompy</code>
+<li>Activate this env &gt; <code>conda activate gdverse</code>
 </li>
-<li>install <code>mamba</code> by
+<li>Install <code>mamba</code> &gt;
 <code>conda install -c conda-forge mamba -y</code>.</li>
-<li>set up python packages use
+<li>Set up python packages &gt;
 <code>mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y</code>
+</li>
+<li>Configure <code>GDVERSE_PYTHON</code> environment variable
+<ul>
+<li>Temporarily setting up <code>gdverse</code> python dependence
+environment using <code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> in the R console or R code
+like
+<code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>.</li>
+<li>Or using <code>usethis::edit_r_environ()</code> to set
+long-available <code>gdverse</code> python dependencies environment
+path.</li>
+</ul>
 </li>
 </ol>
 </div>
@@ -117,7 +129,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_condaenv</a></span><span class="op">(</span><span class="st">'geocompy'</span><span class="op">)</span></span>
+<span><span class="fu">gdverse_pyinit</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"ndvi"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -142,7 +154,7 @@ equal length to <code>discvar</code> to use different
 <span>                       data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                       discnum <span class="op">=</span> <span class="fl">10</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 19.33 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 16.68 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new.ndvi</span></span>
 <span><span class="co">## # A tibble: 713 × 4</span></span>
