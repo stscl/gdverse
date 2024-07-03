@@ -19,7 +19,7 @@
 # gdverse 0.1.9
 
 * Rewrite the LESH model,reduces computational complexity of the algorithm from 
-$ n \times 2^n-1 $ to $ 2^n-1 $.
+$n \times 2^n-1$ to $2^n-1$.
 
 # gdverse 0.1.8
 
