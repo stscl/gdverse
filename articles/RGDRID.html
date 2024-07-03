@@ -97,28 +97,42 @@
 <h3 id="set-up-python-dependence">Set up python dependence<a class="anchor" aria-label="anchor" href="#set-up-python-dependence"></a>
 </h3>
 <ol style="list-style-type: decimal">
-<li>Install <strong>miniconda</strong>
+<li><p>Install <strong>miniconda</strong></p></li>
+<li><p>Open the conda terminal and perform steps 3 to 6</p></li>
+<li>
+<p>Create a new conda env <code>gdverse</code></p>
+<blockquote>
+<p><code>conda create -n gdverse python=3.9 -y</code></p>
+</blockquote>
 </li>
-<li>Open the conda terminal and perform steps 3 to 6</li>
-<li>Create a new conda env <code>gdverse</code> &gt;
-<code>conda create -n gdverse python=3.9 -y</code>
+<li>
+<p>Activate this env</p>
+<blockquote>
+<p><code>conda activate gdverse</code></p>
+</blockquote>
 </li>
-<li>Activate this env &gt; <code>conda activate gdverse</code>
+<li>
+<p>Install <code>mamba</code></p>
+<blockquote>
+<p><code>conda install -c conda-forge mamba -y</code>.</p>
+</blockquote>
 </li>
-<li>Install <code>mamba</code> &gt;
-<code>conda install -c conda-forge mamba -y</code>.</li>
-<li>Set up python packages &gt;
-<code>mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y</code>
+<li>
+<p>Set up python packages</p>
+<blockquote>
+<p><code>mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y</code></p>
+</blockquote>
 </li>
-<li>Configure <code>GDVERSE_PYTHON</code> environment variable
+<li>
+<p>Configure <code>GDVERSE_PYTHON</code> environment variable</p>
 <ul>
-<li>Temporarily setting up <code>gdverse</code> python dependence
+<li><p>Temporarily setting up <code>gdverse</code> python dependence
 environment using <code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> in the R console or R code
 like
-<code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>.</li>
-<li>Or using <code>usethis::edit_r_environ()</code> to set
+<code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>.</p></li>
+<li><p>Or using <code>usethis::edit_r_environ()</code> to set
 long-available <code>gdverse</code> python dependencies environment
-path.</li>
+path.</p></li>
 </ul>
 </li>
 </ol>
