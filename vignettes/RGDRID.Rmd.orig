@@ -22,15 +22,25 @@ knitr::opts_chunk$set(
 1. Install **miniconda**
 2. Open the conda terminal and perform steps 3 to 6
 3. Create a new conda env `gdverse`
+
    > `conda create -n gdverse python=3.9 -y`
+
 4. Activate this env
+
    > `conda activate gdverse`
+
 5. Install `mamba`
+
    > `conda install -c conda-forge mamba -y`.
+
 6. Set up python packages
+
    > `mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y`
+
 7. Configure `GDVERSE_PYTHON` environment variable
+
    - Temporarily setting up `gdverse` python dependence environment using `Sys.setenv()` in the R console or R code like `Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")`.
+
    - Or using `usethis::edit_r_environ()` to set long-available `gdverse` python dependencies environment path.
 
 ### Load data and package
