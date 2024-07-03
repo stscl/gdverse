@@ -56,7 +56,7 @@ gozh.uvi
 plot(gozh.uvi)
 ```
 
-![plot of chunk gozh_uni](man/figures/shegd/gozh_uni-1.png)
+![](../man/figures/shegd/gozh_uni-1.png)
 
 ### Variable interaction detection
 
