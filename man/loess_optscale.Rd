@@ -19,7 +19,26 @@ A optimal number of spatial scale
 }
 \description{
 Function for determining optimal spatial data analysis scale based on locally
-estimated scatterplot smoothing (LOESS) model.
+estimated scatter plot smoothing (LOESS) model.
+}
+\examples{
+\dontrun{
+library(tidyverse)
+fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
+fvc = terra::rast(paste0("/vsicurl/",fvcpath))
+fvc1000 = fvc \%>\%
+  terra::as.data.frame(na.rm = T) \%>\%
+  as_tibble()
+fvc5000 = fvc \%>\%
+  terra::aggregate(fact = 5) \%>\%
+  terra::as.data.frame(na.rm = T) \%>\%
+  as_tibble()
+qv1000 = factor_detector(fvc1000$fvc,
+                         st_unidisc(fvc1000$premax,10,'quantile'))[[1]]
+qv5000 = factor_detector(fvc5000$fvc,
+                         st_unidisc(fvc5000$premax,10,'quantile'))[[1]]
+loess_optscale(c(qv1000,qv5000),c(1000,5000))
+}
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
