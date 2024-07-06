@@ -5,13 +5,13 @@
 \alias{NTDs}
 \title{NTDs data}
 \format{
-\code{NTDs}: A tibble with 185 rows and 4 variable columns and 1 ID column, modified from \code{geodetector} package.
+\code{NTDs}: A tibble with 185 rows and 4 variable columns and 2 location columns, modified from \code{geodetector} package.
 }
 \usage{
 NTDs
 }
 \description{
-NTDs data
+The data were obtained by preprocessing use \code{sf} and \code{tidyverse}.
 }
 \keyword{NTDs}
 \keyword{dataset}

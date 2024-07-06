@@ -19,8 +19,7 @@
 #'
 #' @examples
 #' data('NTDs')
-#' # use a virtual spatial distance
-#' wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+#' wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
 #' psd_spade(NTDs$incidence,NTDs$soiltype,wt)
 #'
 psd_spade = \(y,x,wt){
