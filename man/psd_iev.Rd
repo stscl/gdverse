@@ -29,7 +29,6 @@ sz = st_fuzzyoverlay(incidence ~ watershed + elevation + soiltype,
                      data = NTDs)
 psd_iev(dplyr::select(NTDs,-c(SP_ID,incidence)),sz,wt)
 
-
 }
 \references{
 Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
