@@ -135,12 +135,19 @@ NTDs %>%
 ```{r}
 NTDs %>%
   dplyr::filter(if_all(everything(),~!is.na(.x))) -> NTDs
+NTDs
+```
+
+```{r}
+NTDs = NTDs %>%
+  st_drop_geometry() %>%
+  dplyr::select(-SP_ID)
+NTDs
 ```
 
 ### Factor detector
 
 ```{r fd,fig.width=5,fig.height=3.5}
-NTDs = st_drop_geometry(NTDs)
 fd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'factor')
 fd

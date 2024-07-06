@@ -156,13 +156,54 @@ NTDs %>%
 ``` r
 NTDs %>%
   dplyr::filter(if_all(everything(),~!is.na(.x))) -> NTDs
+NTDs
+## Simple feature collection with 185 features and 5 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 272784.9 ymin: 3982369 xmax: 333088.5 ymax: 4025117
+## Projected CRS: +proj=aea +lat_0=0 +lon_0=105 +lat_1=25 +lat_2=47 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs
+## # A tibble: 185 × 6
+##    SP_ID incidence               geom watershed elevation soiltype
+##  * <chr>     <dbl>        <POINT [m]>     <int>     <int>    <int>
+##  1 0          5.94 (287216.1 4004408)         5         5        5
+##  2 1          5.87 (284861.2 4001734)         5         5        4
+##  3 2          5.88 (287731.3 4000289)         5         5        5
+##  4 3          5.98 (290808.8 4000994)         5         5        5
+##  5 4          5.96 (290924.8 4004432)         5         5        1
+##  6 5          5.66 (272784.9 4007758)         5         5        4
+##  7 6          5.74 (274308.9 4010571)         5         5        4
+##  8 7          5.88 (279539.7 4003222)         5         5        4
+##  9 8          6.1  (279032.9 4005677)         5         5        4
+## 10 9          5.89 (282534.9 4004849)         5         5        4
+## # ℹ 175 more rows
+```
+
+
+``` r
+NTDs = NTDs %>%
+  st_drop_geometry() %>%
+  dplyr::select(-SP_ID)
+NTDs
+## # A tibble: 185 × 4
+##    incidence watershed elevation soiltype
+##        <dbl>     <int>     <int>    <int>
+##  1      5.94         5         5        5
+##  2      5.87         5         5        4
+##  3      5.88         5         5        5
+##  4      5.98         5         5        5
+##  5      5.96         5         5        1
+##  6      5.66         5         5        4
+##  7      5.74         5         5        4
+##  8      5.88         5         5        4
+##  9      6.1          5         5        4
+## 10      5.89         5         5        4
+## # ℹ 175 more rows
 ```
 
 ### Factor detector
 
 
 ``` r
-NTDs = st_drop_geometry(NTDs)
 fd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'factor')
 fd
