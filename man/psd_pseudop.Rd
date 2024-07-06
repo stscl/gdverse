@@ -30,6 +30,17 @@ Function for calculate power of spatial determinant \eqn{q_s}.
 The power of spatial determinant formula is
 \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
 }
+\examples{
+\dontrun{
+data('NTDs')
+# use a virtual spatial distance
+wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+tictoc::tic()
+pp = psd_pseudop(NTDs$incidence,NTDs$soiltype,wt)
+tictoc::toc()
+pp
+}
+}
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693

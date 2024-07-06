@@ -70,7 +70,6 @@ pp = psmd_pseudop('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
 tictoc::toc()
 pp
 }
-
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

@@ -21,6 +21,16 @@
 #' @return A tibble of power of spatial determinant and the corresponding pseudo-p value.
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' data('NTDs')
+#' # use a virtual spatial distance
+#' wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+#' tictoc::tic()
+#' pp = psd_pseudop(NTDs$incidence,NTDs$soiltype,wt)
+#' tictoc::toc()
+#' pp
+#' }
 psd_pseudop = \(y,x,wt,cores = 6,
                 seed = 123456789,
                 permutations = 99){
@@ -98,6 +108,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
 #' @export
+#'
 #' @examples
 #' \dontrun{
 #' library(sf)
@@ -115,7 +126,6 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' tictoc::toc()
 #' pp
 #' }
-#'
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
                  cores = 6,seed = 123456789,permutations = 99, ...){
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)

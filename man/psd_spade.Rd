@@ -24,11 +24,11 @@ The power of spatial determinant formula is
 \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
 }
 \examples{
-\dontrun{
 data('NTDs')
-wt = inverse_distance_weight(NTDs$X,NTDs$Y)
-psd_spade(NTDs$disease,NTDs$soiltype,wt)
-}
+# use a virtual spatial distance
+wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+psd_spade(NTDs$incidence,NTDs$soiltype,wt)
+
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

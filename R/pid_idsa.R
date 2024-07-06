@@ -145,6 +145,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
 #'
 #' @examples
 #' data('NTDs')
+#' # use a virtual spatial distance
 #' wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
 #' sz = st_fuzzyoverlay(incidence ~ watershed + elevation + soiltype,
 #'                      data = NTDs)

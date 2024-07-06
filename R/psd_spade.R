@@ -18,12 +18,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('NTDs')
-#' wt = inverse_distance_weight(NTDs$X,NTDs$Y)
-#' psd_spade(NTDs$disease,NTDs$soiltype,wt)
-#' }
-
+#' # use a virtual spatial distance
+#' wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+#' psd_spade(NTDs$incidence,NTDs$soiltype,wt)
+#'
 psd_spade = \(y,x,wt){
   gdf = tibble::tibble(x = x, y = y,
                        id_sample = seq_along(y)) %>%
