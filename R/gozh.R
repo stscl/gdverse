@@ -65,11 +65,10 @@ gozh = \(formula, data, cores = 1,
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('ndvi')
 #' g = gozh_detector(NDVIchange ~ ., data = ndvi)
 #' g
-#' }
+#'
 gozh_detector = \(formula, data, cores = 1,
                   type = "factor",alpha = 0.95,...){
   if (!(type %in% c("factor","interaction","risk", "ecological"))){

@@ -31,11 +31,10 @@ Function for geographically optimal zones-based heterogeneity detector.
 Only one type of detector is supported in a \code{gozh_detector()} run at a time.
 }
 \examples{
-\dontrun{
 data('ndvi')
 g = gozh_detector(NDVIchange ~ ., data = ndvi)
 g
-}
+
 }
 \references{
 Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
