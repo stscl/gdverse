@@ -223,7 +223,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 #' @description
 #' Function for measure information loss by information entropy.
 #' @details
-#' The power of spatial determinant formula is
+#' The information loss measured by information entropy formula is
 #' \eqn{F = -\sum\limits_{i=1}^N p_{(i)}\log_2 p_{(i)} - \left(-\sum\limits_{h=1}^L p_{(h)}\log_2 p_{(h)}\right)}
 #'
 #' @param xvar The original un-discretized vector.
