@@ -216,14 +216,52 @@ discrete variables.</p>
 <span><span class="co">## 4 188        6.26 (301567.5 3991906)        NA         2        3</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">NTDs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_all</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="op">~</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">NTDs</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_all</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="op">~</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">NTDs</span></span>
+<span><span class="va">NTDs</span></span>
+<span><span class="co">## Simple feature collection with 185 features and 5 fields</span></span>
+<span><span class="co">## Geometry type: POINT</span></span>
+<span><span class="co">## Dimension:     XY</span></span>
+<span><span class="co">## Bounding box:  xmin: 272784.9 ymin: 3982369 xmax: 333088.5 ymax: 4025117</span></span>
+<span><span class="co">## Projected CRS: +proj=aea +lat_0=0 +lon_0=105 +lat_1=25 +lat_2=47 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs</span></span>
+<span><span class="co">## # A tibble: 185 × 6</span></span>
+<span><span class="co">##    SP_ID incidence               geom watershed elevation soiltype</span></span>
+<span><span class="co">##  * &lt;chr&gt;     &lt;dbl&gt;        &lt;POINT [m]&gt;     &lt;int&gt;     &lt;int&gt;    &lt;int&gt;</span></span>
+<span><span class="co">##  1 0          5.94 (287216.1 4004408)         5         5        5</span></span>
+<span><span class="co">##  2 1          5.87 (284861.2 4001734)         5         5        4</span></span>
+<span><span class="co">##  3 2          5.88 (287731.3 4000289)         5         5        5</span></span>
+<span><span class="co">##  4 3          5.98 (290808.8 4000994)         5         5        5</span></span>
+<span><span class="co">##  5 4          5.96 (290924.8 4004432)         5         5        1</span></span>
+<span><span class="co">##  6 5          5.66 (272784.9 4007758)         5         5        4</span></span>
+<span><span class="co">##  7 6          5.74 (274308.9 4010571)         5         5        4</span></span>
+<span><span class="co">##  8 7          5.88 (279539.7 4003222)         5         5        4</span></span>
+<span><span class="co">##  9 8          6.1  (279032.9 4005677)         5         5        4</span></span>
+<span><span class="co">## 10 9          5.89 (282534.9 4004849)         5         5        4</span></span>
+<span><span class="co">## # ℹ 175 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">NTDs</span> <span class="op">=</span> <span class="va">NTDs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">SP_ID</span><span class="op">)</span></span>
+<span><span class="va">NTDs</span></span>
+<span><span class="co">## # A tibble: 185 × 4</span></span>
+<span><span class="co">##    incidence watershed elevation soiltype</span></span>
+<span><span class="co">##        &lt;dbl&gt;     &lt;int&gt;     &lt;int&gt;    &lt;int&gt;</span></span>
+<span><span class="co">##  1      5.94         5         5        5</span></span>
+<span><span class="co">##  2      5.87         5         5        4</span></span>
+<span><span class="co">##  3      5.88         5         5        5</span></span>
+<span><span class="co">##  4      5.98         5         5        5</span></span>
+<span><span class="co">##  5      5.96         5         5        1</span></span>
+<span><span class="co">##  6      5.66         5         5        4</span></span>
+<span><span class="co">##  7      5.74         5         5        4</span></span>
+<span><span class="co">##  8      5.88         5         5        4</span></span>
+<span><span class="co">##  9      6.1          5         5        4</span></span>
+<span><span class="co">## 10      5.89         5         5        4</span></span>
+<span><span class="co">## # ℹ 175 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="factor-detector">Factor detector<a class="anchor" aria-label="anchor" href="#factor-detector"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">NTDs</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">NTDs</span><span class="op">)</span></span>
-<span><span class="va">fd</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fd</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="va">fd</span></span>
 <span><span class="co">## </span></span>
@@ -236,14 +274,14 @@ discrete variables.</p>
 <span><span class="co">## | watershed |  0.6377737  | 0.000128803 |</span></span>
 <span><span class="co">## | elevation |  0.6067087  | 0.043382244 |</span></span>
 <span><span class="co">## | soiltype  |  0.3857168  | 0.372145486 |</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd/fd-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="interaction-detector">Interaction detector<a class="anchor" aria-label="anchor" href="#interaction-detector"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">id</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">id</span></span>
@@ -257,14 +295,14 @@ discrete variables.</p>
 <span><span class="co">## | watershed ∩ elevation | Enhance, bi- |</span></span>
 <span><span class="co">## | watershed ∩ soiltype  | Enhance, bi- |</span></span>
 <span><span class="co">## | elevation ∩ soiltype  | Enhance, bi- |</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd/id-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="risk-detector">Risk detector<a class="anchor" aria-label="anchor" href="#risk-detector"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rd</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'risk'</span><span class="op">)</span></span>
 <span><span class="va">rd</span></span>
@@ -305,13 +343,13 @@ discrete variables.</p>
 <span><span class="co">## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
 <span><span class="co">## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |</span></span>
 <span><span class="co">## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">rd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd/rd-1.png"></p>
 <p>You can change the significant interval by assign <code>alpha</code>
 argument,the default value of <code>alpha</code> argument is
 <code>0.95</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rd99</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>          data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'risk'</span>,alpha <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span>
 <span><span class="va">rd99</span></span>
@@ -356,7 +394,7 @@ argument,the default value of <code>alpha</code> argument is
 <div class="section level3">
 <h3 id="ecological-detector">Ecological detector<a class="anchor" aria-label="anchor" href="#ecological-detector"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ed</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'ecological'</span><span class="op">)</span></span>
 <span><span class="va">ed</span></span>
@@ -369,13 +407,13 @@ argument,the default value of <code>alpha</code> argument is
 <span><span class="co">## |:---------|:---------:|:--------:|</span></span>
 <span><span class="co">## |watershed |    No     |    No    |</span></span>
 <span><span class="co">## |elevation |    NA     |    No    |</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ed</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/gd/ed-1.png"></p>
 <p>You can also change the significant interval by assign
 <code>alpha</code> argument,the default value of <code>alpha</code>
 argument is <code>0.95</code>.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ed99</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>          data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'ecological'</span>,alpha <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span>
 <span><span class="va">ed99</span></span>
