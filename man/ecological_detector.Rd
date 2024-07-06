@@ -22,6 +22,12 @@ two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute
 \description{
 Compare the effects of two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 }
+\examples{
+ecological_detector(y = 1:7,
+                    x1 = c('x',rep('y',3),rep('z',3)),
+                    x2 = c(rep('a',2),rep('b',2),rep('c',3)))
+
+}
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
 }

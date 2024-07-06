@@ -10,6 +10,9 @@
 #' @return A list contains the Q-statistic and the P-value.
 #' @export
 #'
+#' @examples
+#' factor_detector(y = 1:7,x = c('x',rep('y',3),rep('z',3)))
+#'
 factor_detector = \(y,x){
   gdf = tibble::tibble(x = x, y = y) %>%
     dplyr::group_by(x) %>%
@@ -49,6 +52,11 @@ factor_detector = \(y,x){
 #' and the Q statistic when the two interact on \eqn{Y} together with the result type of the interaction detector.
 #' @export
 #'
+#' @examples
+#' interaction_detector(y = 1:7,
+#'                      x1 = c('x',rep('y',3),rep('z',3)),
+#'                      x2 = c(rep('a',2),rep('b',2),rep('c',3)))
+#'
 interaction_detector = \(y,x1,x2){
   x12 = paste0(x1,x2,'_')
   qv1 = factor_detector(y,x1)[[1]]
@@ -85,6 +93,10 @@ interaction_detector = \(y,x1,x2){
 #' @return A tibble contains different combinations of covariate \code{X} level and student t-test statistics,
 #' degrees of freedom, p-values, and whether has risk (Yes or No).
 #' @export
+#'
+#' @examples
+#' risk_detector(y = 1:7,
+#'               x = c('x',rep('y',3),rep('z',3)))
 #'
 risk_detector = \(y,x,alpha = 0.95){
   x = factor(x)
@@ -132,6 +144,11 @@ risk_detector = \(y,x,alpha = 0.95){
 #' @return A list contains \code{F} statistics, P-values, and is there a significant difference between the
 #' two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 #' @export
+#'
+#' @examples
+#' ecological_detector(y = 1:7,
+#'                     x1 = c('x',rep('y',3),rep('z',3)),
+#'                     x2 = c(rep('a',2),rep('b',2),rep('c',3)))
 #'
 ecological_detector = \(y,x1,x2,alpha = 0.95){
   q1 = factor_detector(y,x1)[[1]]

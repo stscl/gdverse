@@ -22,6 +22,12 @@ Identify the interaction between different risk factors, that is, assess whether
 increase or decrease the explanatory power of the dependent variable Y, or whether the effects of these factors
 on Y are independent of each other.
 }
+\examples{
+interaction_detector(y = 1:7,
+                     x1 = c('x',rep('y',3),rep('z',3)),
+                     x2 = c(rep('a',2),rep('b',2),rep('c',3)))
+
+}
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
 }

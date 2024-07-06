@@ -18,6 +18,10 @@ A list contains the Q-statistic and the P-value.
 The factor detector q-statistic measures the spatial stratified heterogeneity of a variable Y,
 or the determinant power of a covariate X of Y.
 }
+\examples{
+factor_detector(y = 1:7,x = c('x',rep('y',3),rep('z',3)))
+
+}
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
 }
