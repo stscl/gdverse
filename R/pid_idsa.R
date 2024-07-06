@@ -136,18 +136,25 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
 #' @details
 #' \eqn{\phi = 1 - \frac{\sum_{i=1}^m \sum_{k=1}^{n_i}N_{i,k}\tau_{i,k}}{\sum_{i=1}^m N_i \tau_i}}
 #'
-#' @param rawdata Discrete explanatory variables data
-#' @param spzone Fuzzy overlay spatial zones
+#' @param discdata Discreted explanatory variables data. A tibble or dataframe .
+#' @param spzone Fuzzy overlay spatial zones. Returned from `st_fuzzyoverlay()`.
 #' @param wt Spatial weight matrix
 #'
 #' @return The Value of \code{PSD-IEV}
 #' @export
 #'
-psd_iev = \(rawdata,spzone,wt){
-  xname = names(rawdata)
-  totalsv = purrr::map_dbl(rawdata,
+#' @examples
+#' data('NTDs')
+#' wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+#' sz = st_fuzzyoverlay(incidence ~ watershed + elevation + soiltype,
+#'                      data = NTDs)
+#' psd_iev(dplyr::select(NTDs,-c(SP_ID,incidence)),sz,wt)
+#'
+psd_iev = \(discdata,spzone,wt){
+  xname = names(discdata)
+  totalsv = purrr::map_dbl(discdata,
                            \(.x) spvar(.x, wt))
-  qv = purrr::map_dbl(rawdata,
+  qv = purrr::map_dbl(discdata,
                       \(.y) psd_spade(.y,spzone,wt)) %>%
     {(-1*. + 1)*totalsv}
   return(1 - sum(qv) / sum(totalsv))

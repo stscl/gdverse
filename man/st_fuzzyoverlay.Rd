@@ -20,6 +20,10 @@ A spatial fuzzy overlay vector.
 \description{
 Function for spatial fuzzy overlay.
 }
+\note{
+Independent variables in the \code{data} provided to \code{st_fuzzyoverlay()} must be discretized variables,
+and dependent variables are continuous variables.
+}
 \examples{
 data('sim')
 sim = sim \%>\%

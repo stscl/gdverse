@@ -4,12 +4,12 @@
 \alias{psd_iev}
 \title{PSD of an interaction of explanatory variables (PSD-IEV)}
 \usage{
-psd_iev(rawdata, spzone, wt)
+psd_iev(discdata, spzone, wt)
 }
 \arguments{
-\item{rawdata}{Discrete explanatory variables data}
+\item{discdata}{Discreted explanatory variables data. A tibble or dataframe .}
 
-\item{spzone}{Fuzzy overlay spatial zones}
+\item{spzone}{Fuzzy overlay spatial zones. Returned from \code{st_fuzzyoverlay()}.}
 
 \item{wt}{Spatial weight matrix}
 }
@@ -21,6 +21,15 @@ PSD of an interaction of explanatory variables (PSD-IEV)
 }
 \details{
 \eqn{\phi = 1 - \frac{\sum_{i=1}^m \sum_{k=1}^{n_i}N_{i,k}\tau_{i,k}}{\sum_{i=1}^m N_i \tau_i}}
+}
+\examples{
+data('NTDs')
+wt = inverse_distance_weight(NTDs$SP_ID,NTDs$SP_ID,power = 2)
+sz = st_fuzzyoverlay(incidence ~ watershed + elevation + soiltype,
+                     data = NTDs)
+psd_iev(dplyr::select(NTDs,-c(SP_ID,incidence)),sz,wt)
+
+
 }
 \references{
 Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
