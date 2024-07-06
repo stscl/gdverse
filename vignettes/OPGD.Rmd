@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 4.17 sec elapsed
+## 3.69 sec elapsed
 ```
 
 
