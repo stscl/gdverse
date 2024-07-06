@@ -1,4 +1,4 @@
-#' @title univariate discretization based on offline change point detection.
+#' @title univariate discretization based on offline change point detection
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Determines discretization interval breaks using an optimization algorithm for variance-based
@@ -11,7 +11,7 @@
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use `python`'s `joblib` package to
 #' parallel computation.
 #'
-#' @return A tibble of discretized classes of columns that need to be discretized.
+#' @return A tibble of discretized classes of columns which need to be discretized.
 #' @export
 #'
 #' @examples

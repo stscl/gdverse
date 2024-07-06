@@ -2,7 +2,7 @@
 % Please edit documentation in R/robustdisc.R
 \name{robust_disc}
 \alias{robust_disc}
-\title{univariate discretization based on offline change point detection.}
+\title{univariate discretization based on offline change point detection}
 \usage{
 robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
 }
@@ -19,7 +19,7 @@ robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
 parallel computation.}
 }
 \value{
-A tibble of discretized classes of columns that need to be discretized.
+A tibble of discretized classes of columns which need to be discretized.
 }
 \description{
 Determines discretization interval breaks using an optimization algorithm for variance-based
