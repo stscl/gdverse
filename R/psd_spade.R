@@ -229,8 +229,11 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 #' @param xvar The original un-discretized vector.
 #' @param xdisc The discretized vector.
 #'
-#' @return A value of information loss as measured by information entropy.
+#' @return A numeric value of information loss measured by information entropy.
 #' @export
+#'
+#' @examples
+#' F_informationloss(1:7,c('x',rep('y',3),rep('z',3)))
 #'
 F_informationloss = \(xvar,xdisc){
   gdf = tibble::tibble(xvar = xvar,
