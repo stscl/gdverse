@@ -19,6 +19,7 @@
 #' y = 1:10
 #' inverse_distance_weight(x,y)
 #' inverse_distance_weight(x,y,is_arc = TRUE)
+#'
 inverse_distance_weight = \(locx,locy,power = 1,is_arc = FALSE){
   if (is_arc) {
     distij = stats::as.dist(geosphere::distm(matrix(c(locx,locy),
@@ -38,6 +39,9 @@ inverse_distance_weight = \(locx,locy,power = 1,is_arc = FALSE){
 #'
 #' @return A shuffled vector.
 #' @export
+#'
+#' @examples
+#' shuffle_vector(1:100,0.15)
 #'
 shuffle_vector = \(x,shuffle_rate,seed = 123456789){
   set.seed(seed)

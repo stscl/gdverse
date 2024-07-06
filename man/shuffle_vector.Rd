@@ -19,3 +19,7 @@ A shuffled vector.
 \description{
 randomly shuffling vector
 }
+\examples{
+shuffle_vector(1:100,0.15)
+
+}

@@ -30,6 +30,7 @@ x = 1:10
 y = 1:10
 inverse_distance_weight(x,y)
 inverse_distance_weight(x,y,is_arc = TRUE)
+
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
