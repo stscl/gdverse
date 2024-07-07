@@ -417,16 +417,18 @@ spatial weight matrix <code>wt3</code> which is constructed by queen
 contiguity.</p>
 <p>The test of <em>SPADE</em> model significance in <code>gdverse</code>
 is achieved by randomization null hypothesis use a pseudo-p value,this
-calculations are very time-consuming.In most cases we set the
-<code>permutations</code> parameter to 0 and do not calculate the
-pseudo-p value.The same approach is taken here.</p>
+calculations are very time-consuming. Default <code>gdverse</code> sets
+the <code>permutations</code> parameter to 0 and does not calculate the
+pseudo-p value. If you want to calculate the pseudo-p value, specify the
+<code>permutations</code> parameter to a number such as 99,999,9999,
+etc.</p>
 </div>
 <div class="section level4">
 <h4 id="run-spade">run SPADE<a class="anchor" aria-label="anchor" href="#run-spade"></a>
 </h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>, wt <span class="op">=</span> <span class="va">wt3</span>,</span>
-<span>                   discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>, cores <span class="op">=</span> <span class="fl">6</span>, permutations <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,</span>
+<span>                   wt <span class="op">=</span> <span class="va">wt3</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">usfi_spade</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##        Spatial Association Detector       </span></span>
