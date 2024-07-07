@@ -2,7 +2,7 @@ Package: gdverse
 Title: Geographical Detector Models
 Version: 0.3.0
 Authors@R: 
-    person("Wenbo", "Lv", , "lyu.geosocial@gmail.com", role = c("aut", "cre"),
+    person("Wenbo Lv", email = "lyu.geosocial@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0002-6003-3800"))
 Description: Family of geographical detector models in R.
 License: GPL-3
