@@ -2,7 +2,7 @@ url: https://spatlyu.github.io/gdverse/
 template:
   bootstrap: 5
   bootswatch: spacelab
-'TRUE':
+on:
   push:
     branches: main
 jobs:
