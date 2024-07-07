@@ -4,7 +4,7 @@
 \alias{psd_pseudop}
 \title{calculate power of spatial determinant(PSD) and the corresponding pseudo-p value}
 \usage{
-psd_pseudop(y, x, wt, cores = 6, seed = 123456789, permutations = 99)
+psd_pseudop(y, x, wt, cores = 6, seed = 123456789, permutations = 0)
 }
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
@@ -17,8 +17,8 @@ psd_pseudop(y, x, wt, cores = 6, seed = 123456789, permutations = 99)
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
-\item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{99}.
-If \code{permutations} is \code{0}, no pseudo-p values are calculated.}
+\item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{0},
+which means no pseudo-p values are calculated.}
 }
 \value{
 A tibble of power of spatial determinant and the corresponding pseudo-p value.

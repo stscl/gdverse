@@ -13,7 +13,7 @@ spade(
   discmethod = NULL,
   cores = 6,
   seed = 123456789,
-  permutations = 99,
+  permutations = 0,
   ...
 )
 }
@@ -37,8 +37,8 @@ When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \co
 
 \item{seed}{(optional) Random number seed, default is \code{123456789}.}
 
-\item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{99}.
-If \code{permutations} is \code{0}, no pseudo-p values are calculated.}
+\item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{0},
+which means no pseudo-p values are calculated.}
 
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()} or \code{robust_disc()}.}
 }

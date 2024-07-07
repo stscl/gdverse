@@ -15,8 +15,8 @@
 #' @param wt The spatial weight matrix.
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
-#' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
-#' If `permutations` is `0`, no pseudo-p values are calculated.
+#' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
+#' which means no pseudo-p values are calculated.
 #'
 #' @return A tibble of power of spatial determinant and the corresponding pseudo-p value.
 #' @export
@@ -32,7 +32,7 @@
 #' }
 psd_pseudop = \(y,x,wt,cores = 6,
                 seed = 123456789,
-                permutations = 99){
+                permutations = 0){
   qs = psd_spade(y,x,wt)
   if (permutations == 0){
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
@@ -101,8 +101,8 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' one `discmethod` at one time.
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
-#' @param permutations (optional) The number of permutations for the PSD computation. Default is `99`.
-#' If `permutations` is `0`, no pseudo-p values are calculated.
+#' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
+#' which means no pseudo-p values are calculated.
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
@@ -126,7 +126,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' pp
 #' }
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
-                 cores = 6,seed = 123456789,permutations = 99, ...){
+                 cores = 6,seed = 123456789,permutations = 0, ...){
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
   if (permutations == 0){
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
