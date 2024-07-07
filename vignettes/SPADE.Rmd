@@ -301,7 +301,7 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 ``` r
 usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
-                   wt = wt3,discnum = 3:22, cores = 6)
+                   wt = wt3, discnum = 3:22, cores = 6)
 usfi_spade
 ## 
 ##        Spatial Association Detector       
