@@ -241,7 +241,7 @@ When response variable has a strong spatial dependence, maybe *SPADE* is a best 
 
 The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
-In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by  default, which can be created by `inverse_distance_weight()`.
+In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
 
 
 ``` r
@@ -294,14 +294,14 @@ identical(wt3,wt4)
 
 In the following section we will execute *SPADE* model using  spatial weight matrix `wt3` which is constructed by queen contiguity.
 
-The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value,this calculations are very time-consuming.In most cases we set the `permutations` parameter to 0 and do not calculate the pseudo-p value.The same approach is taken here.
+The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value,this calculations are very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
 
 #### run SPADE
 
 
 ``` r
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi), wt = wt3,
-                   discnum = 3:22, cores = 6, permutations = 0)
+usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
+                   wt = wt3,discnum = 3:22, cores = 6)
 usfi_spade
 ## 
 ##        Spatial Association Detector       
