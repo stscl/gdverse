@@ -123,9 +123,6 @@ new_usfi
 ##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.8…
 ## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.5…
 ## # ℹ 1,027 more rows
-```
-
-``` r
 set.seed(123456789)
 
 gmi = new_usfi |>
@@ -328,9 +325,6 @@ usfi_spade
 ## |   LPI    | 0.13054984  | No Pseudo-P Value |
 ## |   DTH    | 0.08346346  | No Pseudo-P Value |
 ## |   WAR    |     NaN     | No Pseudo-P Value |
-```
-
-``` r
 plot(usfi_spade,slicenum = 8)
 ```
 
@@ -415,9 +409,6 @@ ggplot(data = usfi) +
 ``` r
 moments::skewness(WAR)
 ## [1] 11.6917
-```
-
-``` r
 shapiro.test(WAR)
 ## 
 ## 	Shapiro-Wilk normality test
@@ -441,9 +432,6 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 ##  [1] 0.00000000 0.05795105 0.08069138 0.10177158 0.12117267 0.13904284 0.15732689 0.17377009
 ##  [9] 0.19092712 0.20432876 0.22190151 0.23780494 0.25057152 0.26498423 0.28119643 0.29570781
 ## [17] 0.30353784 0.32068449 0.33494156 0.34531717
-```
-
-``` r
 
 3:22 %>%
   purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
@@ -451,9 +439,6 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 ##  [1]  0.0000000 -0.4065480 -0.3942882 -0.4219084 -0.6231376 -0.7273617 -0.7462245 -0.5883158
 ##  [9] -0.4720283 -0.4902740 -0.3850580 -0.3185052 -0.3402303 -0.3119740 -0.3468160 -0.3244028
 ## [17] -0.3453713 -0.3221619 -0.2500152 -0.2302331
-```
-
-``` r
 
 3:22 %>%
   purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
@@ -505,9 +490,6 @@ summary(lm.modelOne)
 ## Residual standard error: 1.06 on 1018 degrees of freedom
 ## Multiple R-squared:  0.6173,	Adjusted R-squared:  0.6106 
 ## F-statistic: 91.23 on 18 and 1018 DF,  p-value: < 2.2e-16
-```
-
-``` r
 
 car::vif(lm.modelOne) |>
   tibble::as_tibble_row() |>
@@ -576,9 +558,6 @@ summary(lm.modelTwo)
 ## Residual standard error: 1.064 on 1019 degrees of freedom
 ## Multiple R-squared:  0.614,	Adjusted R-squared:  0.6076 
 ## F-statistic: 95.36 on 17 and 1019 DF,  p-value: < 2.2e-16
-```
-
-``` r
 
 car::vif(lm.modelTwo) |>
   tibble::as_tibble_row() |>
