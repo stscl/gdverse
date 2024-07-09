@@ -2,9 +2,13 @@
 
 * Support more **geodetector model variants** and fix bugs of **gdverse**.
 
+# gdverse 1.0.0
+
+* **C++** is now used to calculate the spatial variance, and the R version of the spatial variance implementation is still preserved through the **spvar** function.
+
 # gdverse 0.3.0
 
-* Enhance python dependency configuration support for **gdverse**
+* Enhance python dependency configuration support for **gdverse**.
 
 # gdverse 0.2.1
 
