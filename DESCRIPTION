@@ -1,5 +1,5 @@
 Package: gdverse
-Title: Geographical detector models
+Title: Geographical Detector Models
 Version: 1.0.0
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
