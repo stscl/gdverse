@@ -38,7 +38,6 @@ Imports:
     tibble,
     tidyr,
     utils
-URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
 Suggests: 
     cowplot,
     knitr,
@@ -49,9 +48,10 @@ Suggests:
     terra,
     tidyterra,
     tidyverse
+LinkingTo: 
+    Rcpp
 VignetteBuilder: knitr
 Depends: 
     R (>= 4.1.0)
 LazyData: true
-LinkingTo: 
-    Rcpp
+URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
