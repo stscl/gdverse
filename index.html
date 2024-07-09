@@ -133,6 +133,7 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<p>Please ensure that <strong>Rcpp</strong> is properly installed and the appropriate <strong>C++</strong> compilation environment is configured in advance.</p>
 <p>You can install the development version of <strong>gdverse</strong> from <a href="https://github.com/SpatLyu/gdverse" class="external-link">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
@@ -177,9 +178,8 @@
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.74 sec elapsed</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc_opgd</span></span>
+<span><span class="co">## 4.14 sec elapsed</span></span>
+<span><span class="va">fvc_opgd</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
 <span><span class="co">##  </span></span>
@@ -203,7 +203,7 @@
 <div class="section level3">
 <h3 id="gozh-model">GOZH model<a class="anchor" aria-label="anchor" href="#gozh-model"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="va">g</span></span>
 <span><span class="co">## </span></span>
