@@ -145,9 +145,6 @@ idsa.model
 ## | zonedist_cold_heat_2 |   zonelandscape_1    |  No  |
 ## 
 ##  #### Only the first five pairs of overlay zones are displayed! ####
-```
-
-``` r
 plot(idsa.model)
 ```
 
