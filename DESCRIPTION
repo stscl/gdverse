@@ -11,7 +11,11 @@ Authors@R: c(
              role = c("aut", "rev", "ths"),
              comment = c(ORCID = "0000-0003-3420-9622"))      
       )
-Description: Family of geographical detector models in R.
+Description: Support for a family of geographical detector models in R. There are 8 kinds of geographical detector models 
+             in gdverse, including native geographic detector(GD), optimal parameters-based geographical detector(OPGD),
+             geographically optimal zones-based heterogeneity model(GOZH), locally explained heterogeneity model(LESH),
+             spatial association detector(SPADE), interactive detector for spatial associations(IDSA), robust geographical 
+             detector(RGD) and robust interactive detector(RID).
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
