@@ -88,7 +88,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','psd_spade','cpsd_spade','spvar'))
+    parallel::clusterExport(cores,c('st_unidisc','psd_spade','cpsd_spade','spatial_variance'))
     out_g = parallel::parLapply(cores,parak,calcul_disc,...)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
@@ -153,7 +153,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
 psd_iev = \(discdata,spzone,wt){
   xname = names(discdata)
   totalsv = purrr::map_dbl(discdata,
-                           \(.x) spvar(.x, wt))
+                           \(.x) spatial_variance(.x, wt))
   qv = purrr::map_dbl(discdata,
                       \(.y) psd_spade(.y,spzone,wt)) %>%
     {(-1*. + 1)*totalsv}

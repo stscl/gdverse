@@ -62,7 +62,8 @@ psd_pseudop = \(y,x,wt,cores = 6,
     }
 
     if (doclust) {
-      parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar',
+      parallel::clusterExport(cores,c('st_unidisc','robust_disc',
+                                      'spatial_variance',
                                       'psd_spade',"shuffle_vector"))
       out_g = parallel::parLapply(cores,permutation,calcul_psd)
       out_g = as.numeric(do.call(rbind, out_g))
@@ -168,7 +169,7 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
     }
 
     if (doclust) {
-      parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar','shuffle_vector',
+      parallel::clusterExport(cores,c('st_unidisc','robust_disc','spatial_variance','shuffle_vector',
                                       'psd_spade','cpsd_spade','psmd_spade','inverse_distance_weight'))
       out_g = parallel::parLapply(cores,permutation,calcul_psmd)
       out_g = as.numeric(do.call(rbind, out_g))
