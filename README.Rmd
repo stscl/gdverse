@@ -44,6 +44,8 @@ Current models and functions provided by **gdverse** are:
 
 ## Installation
 
+Please ensure that **Rcpp** is properly installed and the appropriate **C++** compilation environment is configured in advance.
+
 You can install the development version of **gdverse** from [github](https://github.com/SpatLyu/gdverse) with:
 
 ``` r
