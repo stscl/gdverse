@@ -32,9 +32,6 @@ Current models and functions provided by **gdverse** are:
 
 ## Installation
 
-Please ensure that **Rcpp** is properly installed and the appropriate
-**C++** compilation environment is configured in advance.
-
 You can install the development version of **gdverse** from
 [github](https://github.com/SpatLyu/gdverse) with:
 
@@ -45,7 +42,11 @@ devtools::install_github("SpatLyu/gdverse",
                          dep = TRUE)
 ```
 
-or install **gdverse** from
+Please ensure that **Rcpp** is properly installed and the appropriate
+**C++** compilation environment is configured in advance if you want to
+install **gdverse** from [github](https://github.com/SpatLyu/gdverse).
+
+You can also install the binary version of **gdverse** from
 [r-universe](https://spatlyu.r-universe.dev/gdverse):
 
 ``` r
@@ -86,7 +87,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.14 sec elapsed
+## 4.09 sec elapsed
 fvc_opgd
 ## 
 ##  Spatial Stratified Heterogeneity Test 

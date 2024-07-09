@@ -44,8 +44,6 @@ Current models and functions provided by **gdverse** are:
 
 ## Installation
 
-Please ensure that **Rcpp** is properly installed and the appropriate **C++** compilation environment is configured in advance.
-
 You can install the development version of **gdverse** from [github](https://github.com/SpatLyu/gdverse) with:
 
 ``` r
@@ -55,7 +53,9 @@ devtools::install_github("SpatLyu/gdverse",
                          dep = TRUE)
 ```
 
-or install **gdverse** from [r-universe](https://spatlyu.r-universe.dev/gdverse):
+Please ensure that **Rcpp** is properly installed and the appropriate **C++** compilation environment is configured in advance if you want to install **gdverse** from [github](https://github.com/SpatLyu/gdverse).
+
+You can also install the binary version of **gdverse** from [r-universe](https://spatlyu.r-universe.dev/gdverse):
 
 ```r
 install.packages("gdverse", 
