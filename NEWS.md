@@ -4,7 +4,7 @@
 
 # gdverse 1.0.0
 
-* The first stable release.
+* First stable release.
 
 # gdverse 0.3.0
 
