@@ -13,7 +13,7 @@
 #' @param yn The numerical vector of a response variable.
 #' @param wtn The spatial weight matrix.
 #'
-#' @return The spatial variance
+#' @return A value of spatial variance.
 #' @export
 #'
 #' @examples
@@ -24,6 +24,7 @@
 #' spvar(y,wt1)
 #' spvar(y,wt2)
 #' var(y)
+#'
 spvar = \(yn,wtn){
   dn = data.frame(yn,yn) %>%
     stats::dist() %>%

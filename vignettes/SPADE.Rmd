@@ -300,7 +300,7 @@ usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
 usfi_spade
 ## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
 plot(usfi_spade,slicenum = 8)
-## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'usfi_spade' not found
+## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
 ```
 
 **You can also access the detailed q statistics by `usfi_spade$factor`**

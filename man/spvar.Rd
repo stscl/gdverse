@@ -12,7 +12,7 @@ spvar(yn, wtn)
 \item{wtn}{The spatial weight matrix.}
 }
 \value{
-The spatial variance
+A value of spatial variance.
 }
 \description{
 Function for calculate inverse distance weight.
@@ -29,6 +29,7 @@ diag(wt2) = 0
 spvar(y,wt1)
 spvar(y,wt2)
 var(y)
+
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
