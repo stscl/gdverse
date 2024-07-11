@@ -16,10 +16,10 @@ cpsd_spade(yobs, xobs, xdisc, wt)
 \item{wt}{The spatial weight matrix.}
 }
 \value{
-A value of compensated power of spatial determinant \eqn{Q_s}.
+A value of compensated power of spatial determinant \code{Q_s}.
 }
 \description{
-Function for calculate compensated power of spatial determinant \eqn{Q_s}.
+Function for calculate compensated power of spatial determinant \code{Q_s}.
 }
 \details{
 The power of compensated spatial determinant formula is

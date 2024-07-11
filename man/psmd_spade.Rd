@@ -17,7 +17,7 @@ psmd_spade(
 )
 }
 \arguments{
-\item{formula}{A formula of calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.}
+\item{formula}{A formula of calculate power of spatial and multilevel discretization determinant \code{PSMDQ_s}.}
 
 \item{data}{A data.frame or tibble of observation data.}
 
@@ -40,14 +40,14 @@ one \code{discmethod} at one time.}
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()} or \code{robust_disc()}.}
 }
 \value{
-A value of power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+A value of power of spatial and multilevel discretization determinant \code{PSMDQ_s}.
 }
 \description{
-Function for calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+Function for calculate power of spatial and multilevel discretization determinant \code{PSMDQ_s}.
 }
 \details{
 The power of spatial and multilevel discretization determinant formula is
-\eqn{PSMDQ_s = MEAN(Q_s)}
+\eqn{`PSMDQ_s` = `MEAN(Q_s)`}
 }
 \examples{
 \dontrun{

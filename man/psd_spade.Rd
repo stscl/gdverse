@@ -14,10 +14,10 @@ psd_spade(y, x, wt)
 \item{wt}{The spatial weight matrix.}
 }
 \value{
-A value of power of spatial determinant \eqn{q_s}.
+A value of power of spatial determinant \code{q_s}.
 }
 \description{
-Function for calculate power of spatial determinant \eqn{q_s}.
+Function for calculate power of spatial determinant \code{q_s}
 }
 \details{
 The power of spatial determinant formula is
