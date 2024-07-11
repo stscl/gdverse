@@ -270,7 +270,9 @@ more details see <a href="https://spatlyu.github.io/tidyrgeoda/articles/Local-In
 <span>    legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">7.5</span><span class="op">)</span>,</span>
 <span>    legend.key.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="st">'cm'</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/spade/SUHI_LISA-1.png"></p>
+<div class="float">
+<img src="reference/figures/spade/SUHI_LISA-1.png" alt="plot of chunk SUHI_LISA"><div class="figcaption">plot of chunk SUHI_LISA</div>
+</div>
 <p>The global and local spatial autocorrelation shows that SUHI’s strong
 spatial dependence.</p>
 <p>Spatial dependence was neglected in native geodetector, which led to
@@ -284,30 +286,27 @@ the <strong>SPADE</strong> spatial association detector.</p>
 <code class="sourceCode R"><span><span class="va">usfi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
 <span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">usfi_opgd</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |   DAR    | 0.43933223  | 4.882348e-10 |</span></span>
-<span><span class="co">## |   NDVI   | 0.39709785  | 2.024269e-10 |</span></span>
-<span><span class="co">## |   GAR    | 0.38226004  | 8.253424e-10 |</span></span>
-<span><span class="co">## |   RFD    | 0.26695978  | 7.395150e-10 |</span></span>
-<span><span class="co">## |    BD    | 0.26496790  | 3.248683e-10 |</span></span>
-<span><span class="co">## |    BH    | 0.24779725  | 8.792670e-11 |</span></span>
-<span><span class="co">## |   NDWI   | 0.20808065  | 6.585551e-10 |</span></span>
-<span><span class="co">## |   FAR    | 0.19795883  | 1.349734e-10 |</span></span>
-<span><span class="co">## |   SVF    | 0.13094230  | 4.972996e-10 |</span></span>
-<span><span class="co">## |    RL    | 0.12311769  | 8.885315e-10 |</span></span>
-<span><span class="co">## |   TER    | 0.11640460  | 6.773640e-08 |</span></span>
-<span><span class="co">## |   WAR    | 0.10615536  | 5.573880e-10 |</span></span>
+<span><span class="co">## |   DAR    | 0.43933223  | 4.880000e-10 |</span></span>
+<span><span class="co">## |   NDVI   | 0.39709785  | 2.020000e-10 |</span></span>
+<span><span class="co">## |   GAR    | 0.38226004  | 8.250000e-10 |</span></span>
+<span><span class="co">## |   RFD    | 0.26695978  | 7.400000e-10 |</span></span>
+<span><span class="co">## |    BD    | 0.26496790  | 3.250000e-10 |</span></span>
+<span><span class="co">## |    BH    | 0.24779725  | 8.800000e-11 |</span></span>
+<span><span class="co">## |   NDWI   | 0.20808065  | 6.590000e-10 |</span></span>
+<span><span class="co">## |   FAR    | 0.19795883  | 1.350000e-10 |</span></span>
+<span><span class="co">## |   SVF    | 0.13094230  | 4.970000e-10 |</span></span>
+<span><span class="co">## |    RL    | 0.12311769  | 8.890000e-10 |</span></span>
+<span><span class="co">## |   TER    | 0.11640460  | 6.773600e-08 |</span></span>
+<span><span class="co">## |   WAR    | 0.10615536  | 5.570000e-10 |</span></span>
 <span><span class="co">## |   LSI    | 0.07673167  | 3.213431e-06 |</span></span>
 <span><span class="co">## |   DTH    | 0.07628845  | 7.669056e-06 |</span></span>
-<span><span class="co">## |   DTP    | 0.07478988  | 7.947200e-10 |</span></span>
+<span><span class="co">## |   DTP    | 0.07478988  | 7.950000e-10 |</span></span>
 <span><span class="co">## |   DTW    | 0.05575932  | 4.071996e-04 |</span></span>
-<span><span class="co">## |   DTR    | 0.05285988  | 3.936829e-07 |</span></span>
+<span><span class="co">## |   DTR    | 0.05285988  | 3.936830e-07 |</span></span>
 <span><span class="co">## |   LPI    | 0.02875711  | 8.158332e-01 |</span></span></code></pre></div>
 <p><strong>You can access the detailed q statistics by
 <code>usfi_opgd$factor</code>.</strong></p>
@@ -411,59 +410,16 @@ etc.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,</span>
 <span>                   wt <span class="op">=</span> <span class="va">wt3</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">## Error in checkForRemoteErrors(val): 6 nodes produced errors; first error: function 'enterRNGScope' not provided by package 'Rcpp'</span></span>
 <span><span class="va">usfi_spade</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##        Spatial Association Detector       </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##                   SPADE Model               </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## | variable | Q-statistic |      P-value      |</span></span>
-<span><span class="co">## |:--------:|:-----------:|:-----------------:|</span></span>
-<span><span class="co">## |   DAR    | 0.51354520  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   NDVI   | 0.47435470  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   NDWI   | 0.43652650  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   GAR    | 0.42037121  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   RFD    | 0.35902741  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    BD    | 0.35397385  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    BH    | 0.32947163  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   TER    | 0.31556969  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   FAR    | 0.22828609  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTR    | 0.22245435  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTW    | 0.19009188  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTP    | 0.14935992  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   LSI    | 0.14875273  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    RL    | 0.13422740  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   SVF    | 0.13294874  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   LPI    | 0.13054984  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTH    | 0.08346346  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   WAR    |     NaN     | No Pseudo-P Value |</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">usfi_spade</span>,slicenum <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/spade/USFI_SPADE_factor-1.png"></p>
+<span><span class="co">## Error in eval(expr, envir, enclos): object 'usfi_spade' not found</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">usfi_spade</span>,slicenum <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">## Error in eval(expr, envir, enclos): object 'usfi_spade' not found</span></span></code></pre></div>
 <p><strong>You can also access the detailed q statistics by
 <code>usfi_spade$factor</code></strong></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">usfi_spade</span><span class="op">$</span><span class="va">factor</span></span>
-<span><span class="co">## # A tibble: 18 × 3</span></span>
-<span><span class="co">##    variable `Q-statistic` `P-value`        </span></span>
-<span><span class="co">##    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;            </span></span>
-<span><span class="co">##  1 DAR             0.514  No Pseudo-P Value</span></span>
-<span><span class="co">##  2 NDVI            0.474  No Pseudo-P Value</span></span>
-<span><span class="co">##  3 NDWI            0.437  No Pseudo-P Value</span></span>
-<span><span class="co">##  4 GAR             0.420  No Pseudo-P Value</span></span>
-<span><span class="co">##  5 RFD             0.359  No Pseudo-P Value</span></span>
-<span><span class="co">##  6 BD              0.354  No Pseudo-P Value</span></span>
-<span><span class="co">##  7 BH              0.329  No Pseudo-P Value</span></span>
-<span><span class="co">##  8 TER             0.316  No Pseudo-P Value</span></span>
-<span><span class="co">##  9 FAR             0.228  No Pseudo-P Value</span></span>
-<span><span class="co">## 10 DTR             0.222  No Pseudo-P Value</span></span>
-<span><span class="co">## 11 DTW             0.190  No Pseudo-P Value</span></span>
-<span><span class="co">## 12 DTP             0.149  No Pseudo-P Value</span></span>
-<span><span class="co">## 13 LSI             0.149  No Pseudo-P Value</span></span>
-<span><span class="co">## 14 RL              0.134  No Pseudo-P Value</span></span>
-<span><span class="co">## 15 SVF             0.133  No Pseudo-P Value</span></span>
-<span><span class="co">## 16 LPI             0.131  No Pseudo-P Value</span></span>
-<span><span class="co">## 17 DTH             0.0835 No Pseudo-P Value</span></span>
-<span><span class="co">## 18 WAR           NaN      No Pseudo-P Value</span></span></code></pre></div>
+<span><span class="co">## Error in eval(expr, envir, enclos): object 'usfi_spade' not found</span></span></code></pre></div>
 <p>The result of <code>WAR</code> is <code>NA</code> and you can also
 see a big difference between the OPGD and SPADE model. The results of
 SPADE are more reliable in most cases.</p>
@@ -563,7 +519,9 @@ SPADE are more reliable in most cases.</p>
 <span>               fill<span class="op">=</span><span class="st">'gray60'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/spade/WAR_Hist-1.png"></p>
+<div class="float">
+<img src="reference/figures/spade/WAR_Hist-1.png" alt="plot of chunk WAR_Hist"><div class="figcaption">plot of chunk WAR_Hist</div>
+</div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">moments</span><span class="fu">::</span><span class="fu">skewness</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
 <span><span class="co">## [1] 11.6917</span></span>

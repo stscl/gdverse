@@ -129,7 +129,7 @@ q-statistic.</p>
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.69 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 3.94 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
@@ -157,9 +157,8 @@ q-statistic.</p>
 <span><span class="co">##  8     11     8     3     2      7      1      1     3      8     11      3</span></span>
 <span><span class="co">##  9      9     9     4     7      7      1      1     5      8      9      2</span></span>
 <span><span class="co">## 10     11     8     3     3      7      1      1     4      8     10      2</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="va">g</span><span class="op">$</span><span class="va">disv</span></span>
+<span><span class="co">## # ℹ 5,230 more rows</span></span>
+<span><span class="va">new.fvc</span> <span class="op">=</span> <span class="va">g</span><span class="op">$</span><span class="va">disv</span></span>
 <span><span class="va">new.fvc</span></span>
 <span><span class="co">## # A tibble: 5,240 × 11</span></span>
 <span><span class="co">##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
@@ -179,7 +178,7 @@ q-statistic.</p>
 discretization parameter based on the Q statistic of the geographic
 detector,we can combine it with <code>fvc</code> and <code>lulc</code>
 col in <code>fvc</code> tibble now.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span>,<span class="va">new.fvc</span><span class="op">)</span></span>
 <span><span class="va">new.fvc</span></span>
 <span><span class="co">## # A tibble: 5,240 × 13</span></span>
@@ -201,33 +200,26 @@ col in <code>fvc</code> tibble now.</p>
 <h3 id="run-geodetector">Run geodetector<a class="anchor" aria-label="anchor" href="#run-geodetector"></a>
 </h3>
 <p>Then, we can run geodetector model by <code><a href="../reference/gd.html">gd()</a></code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |  presum  | 0.66090313  | 8.344327e-10 |</span></span>
-<span><span class="co">## |   lulc   | 0.65972601  | 8.781502e-10 |</span></span>
-<span><span class="co">## |  premin  | 0.46550058  | 3.606232e-10 |</span></span>
-<span><span class="co">## |  tmpmin  | 0.43559812  | 8.536544e-10 |</span></span>
-<span><span class="co">## |  tmpmax  | 0.25364304  | 7.848540e-10 |</span></span>
-<span><span class="co">## |  slope   | 0.23570512  | 8.826343e-10 |</span></span>
-<span><span class="co">## |   elev   | 0.23554763  | 7.286761e-10 |</span></span>
-<span><span class="co">## |  tmpavg  | 0.22139249  | 7.615818e-10 |</span></span>
-<span><span class="co">## |   pop    | 0.19529044  | 2.428073e-10 |</span></span>
-<span><span class="co">## |  premax  | 0.14507334  | 5.960950e-10 |</span></span>
+<span><span class="co">## |  presum  | 0.66090313  | 8.340000e-10 |</span></span>
+<span><span class="co">## |   lulc   | 0.65972601  | 8.780000e-10 |</span></span>
+<span><span class="co">## |  premin  | 0.46550058  | 3.610000e-10 |</span></span>
+<span><span class="co">## |  tmpmin  | 0.43559812  | 8.540000e-10 |</span></span>
+<span><span class="co">## |  tmpmax  | 0.25364304  | 7.850000e-10 |</span></span>
+<span><span class="co">## |  slope   | 0.23570512  | 8.830000e-10 |</span></span>
+<span><span class="co">## |   elev   | 0.23554763  | 7.290000e-10 |</span></span>
+<span><span class="co">## |  tmpavg  | 0.22139249  | 7.620000e-10 |</span></span>
+<span><span class="co">## |   pop    | 0.19529044  | 2.430000e-10 |</span></span>
+<span><span class="co">## |  premax  | 0.14507334  | 5.960000e-10 |</span></span>
 <span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
-<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##            Interaction detector         </span></span>
+<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span>
+<span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
+<span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable |    Interaction     |</span></span>
 <span><span class="co">## |:--------------------:|:------------------:|</span></span>
@@ -302,7 +294,7 @@ col in <code>fvc</code> tibble now.</p>
 <h3 id="you-can-also-use-opgd-in-one-time-to-get-result-above-">You can also use <code>opgd()</code> in one time to get result
 above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-time-to-get-result-above-"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
@@ -322,34 +314,26 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <span><span class="co">##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...</span></span>
 <span><span class="co">##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2355 0.0173 0.1953 0.1451 ...</span></span>
 <span><span class="co">##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.828 0.716 0.756 0.77 ...</span></span>
-<span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
+<span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span>
+<span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |  presum  | 0.66090313  | 8.344327e-10 |</span></span>
-<span><span class="co">## |   lulc   | 0.65972601  | 8.781502e-10 |</span></span>
-<span><span class="co">## |  premin  | 0.46550058  | 3.606232e-10 |</span></span>
-<span><span class="co">## |  tmpmin  | 0.43559812  | 8.536544e-10 |</span></span>
-<span><span class="co">## |  tmpmax  | 0.25364304  | 7.848540e-10 |</span></span>
-<span><span class="co">## |  slope   | 0.23570512  | 8.826343e-10 |</span></span>
-<span><span class="co">## |   elev   | 0.23554763  | 7.286761e-10 |</span></span>
-<span><span class="co">## |  tmpavg  | 0.22139249  | 7.615818e-10 |</span></span>
-<span><span class="co">## |   pop    | 0.19529044  | 2.428073e-10 |</span></span>
-<span><span class="co">## |  premax  | 0.14507334  | 5.960950e-10 |</span></span>
+<span><span class="co">## |  presum  | 0.66090313  | 8.340000e-10 |</span></span>
+<span><span class="co">## |   lulc   | 0.65972601  | 8.780000e-10 |</span></span>
+<span><span class="co">## |  premin  | 0.46550058  | 3.610000e-10 |</span></span>
+<span><span class="co">## |  tmpmin  | 0.43559812  | 8.540000e-10 |</span></span>
+<span><span class="co">## |  tmpmax  | 0.25364304  | 7.850000e-10 |</span></span>
+<span><span class="co">## |  slope   | 0.23570512  | 8.830000e-10 |</span></span>
+<span><span class="co">## |   elev   | 0.23554763  | 7.290000e-10 |</span></span>
+<span><span class="co">## |  tmpavg  | 0.22139249  | 7.620000e-10 |</span></span>
+<span><span class="co">## |   pop    | 0.19529044  | 2.430000e-10 |</span></span>
+<span><span class="co">## |  premax  | 0.14507334  | 5.960000e-10 |</span></span>
 <span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
-<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##            Interaction detector         </span></span>
+<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span>
+<span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable |    Interaction     |</span></span>
 <span><span class="co">## |:--------------------:|:------------------:|</span></span>
@@ -420,10 +404,10 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <span><span class="co">## |   tmpavg ∩ tmpmin    |    Enhance, bi-    |</span></span>
 <span><span class="co">## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |</span></span></code></pre></div>
 <p>You can use <code><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot()</a></code> to visualize the result.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/opgd/fd-1.png"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/opgd/id-1.png"></p>
 </div>

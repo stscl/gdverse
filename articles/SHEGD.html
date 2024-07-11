@@ -111,33 +111,26 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.uvi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span><span class="op">)</span></span>
 <span><span class="va">gozh.uvi</span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |   variable    | Q-statistic |   P-value    |</span></span>
-<span><span class="co">## |:-------------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## | Precipitation | 0.87255056  | 4.515558e-10 |</span></span>
-<span><span class="co">## |  Climatezone  | 0.82129550  | 2.500763e-10 |</span></span>
-<span><span class="co">## |  Tempchange   | 0.33324945  | 1.121618e-10 |</span></span>
-<span><span class="co">## |  Popdensity   | 0.22321863  | 2.998225e-10 |</span></span>
-<span><span class="co">## |    Mining     | 0.13982859  | 5.985420e-11 |</span></span>
-<span><span class="co">## |      GDP      | 0.09170153  | 3.958823e-10 |</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.uvi</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
+<span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
+<span><span class="co">## | Precipitation | 0.87255056  | 4.52e-10 |</span></span>
+<span><span class="co">## |  Climatezone  | 0.82129550  | 2.50e-10 |</span></span>
+<span><span class="co">## |  Tempchange   | 0.33324945  | 1.12e-10 |</span></span>
+<span><span class="co">## |  Popdensity   | 0.22321863  | 3.00e-10 |</span></span>
+<span><span class="co">## |    Mining     | 0.13982859  | 6.00e-11 |</span></span>
+<span><span class="co">## |      GDP      | 0.09170153  | 3.96e-10 |</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.uvi</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd/gozh_uni-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="variable-interaction-detection">Variable interaction detection<a class="anchor" aria-label="anchor" href="#variable-interaction-detection"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.bi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">gozh.bi</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##            Interaction detector         </span></span>
+<span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
 <span><span class="co">## |:---------------------------:|:------------------:|</span></span>
@@ -155,21 +148,18 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |</span></span>
 <span><span class="co">## |     Precipitation ∩ GDP     |    Enhance, bi-    |</span></span>
 <span><span class="co">## | Precipitation ∩ Popdensity  |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.bi</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">gozh.bi</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd/gozh_bi-1.png"></p>
 </div>
 <div class="section level3">
 <h3 id="variable-interaction-contribution">Variable interaction contribution<a class="anchor" aria-label="anchor" href="#variable-interaction-contribution"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lesh.m</span> <span class="op">=</span> <span class="fu"><a href="../reference/lesh.html">lesh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">lesh.m</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##     Spatial Interaction Association Detector    </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##                    LESH Model                     </span></span>
+<span><span class="co">## ***    Spatial Interaction Association Detector      </span></span>
+<span><span class="co">##                         LESH Model                     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
 <span><span class="co">## |:---------------------------:|:------------------:|</span></span>
@@ -187,22 +177,21 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |</span></span>
 <span><span class="co">## |     Precipitation ∩ GDP     |    Enhance, bi-    |</span></span>
 <span><span class="co">## | Precipitation ∩ Popdensity  |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd/lesh-1.png"></p>
 <p>Compared to <strong>GOZH Interaction Detector</strong> ,
 <strong>LESH</strong> only has a decomposition of the interactive
 contribution of variables,and the rest remains consistent.</p>
 <p>And you can only look at the contribution part of the variable
 interaction:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd/lesh_only-1.png"></p>
 <p>By accessing the concrete result through
 <code>lesh.m$interaction</code>, which returns a
 <code>tibble</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lesh.m</span><span class="op">$</span><span class="va">interaction</span></span>
 <span><span class="co">## # A tibble: 15 × 8</span></span>
 <span><span class="co">##    variable1     variable2     Interaction        Variable1 Q-statistic…¹ Variable2 Q-statisti…²</span></span>
