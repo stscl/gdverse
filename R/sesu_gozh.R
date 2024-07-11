@@ -115,7 +115,7 @@ print.sesu_gozh = \(x,...){
   spunits = x$sesu$spatial_units
   cat("      Size Effect Of Spatial Units      \n",
       "              GOZH Model                \n",
-      "***    Optimal Spatial Unit:", x$optsu)
+      "***    Optimal Spatial Unit:",x$optsu)
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
     print(knitr::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),

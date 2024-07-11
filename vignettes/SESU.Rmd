@@ -200,7 +200,7 @@ g1 = sesu_opgd(fvc ~ ., data = fvc,su = su,discvar = discvar,cores = 6)
 g1
 ##       Size Effect Of Spatial Units      
 ##                OPGD Model                
-##  ***     Optimal Spatial Unit :  5000
+##  ***    Optimal Spatial Unit: 5000
 ##  Spatial Unit: 1000 
 ## 
 ## | variable | Q-statistic | P-value  |
@@ -383,7 +383,7 @@ g2 = sesu_gozh(fvc ~ ., data = fvc,su = su,cores = 6)
 g2
 ##       Size Effect Of Spatial Units      
 ##                GOZH Model                
-##  ***     Optimal Spatial Unit :  4000
+##  ***    Optimal Spatial Unit: 4000
 ##  Spatial Unit: 1000 
 ## 
 ## |   variable    | Q-statistic | P-value  |
@@ -456,7 +456,7 @@ g3 = sesu_gozh(fvc ~ ., data = fvc,su = su,cores = 6,strategy = 1)
 g3
 ##       Size Effect Of Spatial Units      
 ##                GOZH Model                
-##  ***     Optimal Spatial Unit :  10000
+##  ***    Optimal Spatial Unit: 10000
 ##  Spatial Unit: 1000 
 ## 
 ## | variable | Q-statistic | P-value  |
