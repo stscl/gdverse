@@ -150,7 +150,7 @@ equal length to <code>discvar</code> to use different
 <span>                       data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                       discnum <span class="op">=</span> <span class="fl">10</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 18.66 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 22.05 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new.ndvi</span></span>
 <span><span class="co">## # A tibble: 713 × 4</span></span>
@@ -195,26 +195,20 @@ with <code>NDVIchange</code>,<code>Climatezone</code> and
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.ndvi</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="va">g1</span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |   variable    | Q-statistic |   P-value    |</span></span>
-<span><span class="co">## |:-------------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## | Precipitation |  0.8933049  | 3.249709e-10 |</span></span>
-<span><span class="co">## |  Climatezone  |  0.8218335  | 7.340526e-10 |</span></span>
-<span><span class="co">## |  Tempchange   |  0.3874615  | 7.590713e-10 |</span></span>
-<span><span class="co">## |  Popdensity   |  0.2622265  | 3.647313e-10 |</span></span>
-<span><span class="co">## |      GDP      |  0.1491878  | 3.634139e-10 |</span></span>
-<span><span class="co">## |    Mining     |  0.1411154  | 6.734163e-10 |</span></span></code></pre></div>
+<span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
+<span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
+<span><span class="co">## | Precipitation |  0.8933049  | 3.25e-10 |</span></span>
+<span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
+<span><span class="co">## |  Tempchange   |  0.3874615  | 7.59e-10 |</span></span>
+<span><span class="co">## |  Popdensity   |  0.2622265  | 3.65e-10 |</span></span>
+<span><span class="co">## |      GDP      |  0.1491878  | 3.63e-10 |</span></span>
+<span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.ndvi</span>, type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">g2</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##            Interaction detector         </span></span>
+<span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     | Interaction  |</span></span>
 <span><span class="co">## |:---------------------------:|:------------:|</span></span>
@@ -258,28 +252,20 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-t
 <span><span class="co">##   .. ..$ Variable1 Q-statistics                       : num [1:15] 0.822 0.822 0.822 0.822 0.822 ...</span></span>
 <span><span class="co">##   .. ..$ Variable2 Q-statistics                       : num [1:15] 0.141 0.387 0.893 0.149 0.262 ...</span></span>
 <span><span class="co">##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:15] 0.834 0.859 0.914 0.842 0.836 ...</span></span>
-<span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ndvi_rgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span>
+<span><span class="va">ndvi_rgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##              Factor detector            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |   variable    | Q-statistic |   P-value    |</span></span>
-<span><span class="co">## |:-------------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## | Precipitation |  0.8933049  | 3.249709e-10 |</span></span>
-<span><span class="co">## |  Climatezone  |  0.8218335  | 7.340526e-10 |</span></span>
-<span><span class="co">## |  Tempchange   |  0.3874615  | 7.590713e-10 |</span></span>
-<span><span class="co">## |  Popdensity   |  0.2622265  | 3.647313e-10 |</span></span>
-<span><span class="co">## |      GDP      |  0.1491878  | 3.634139e-10 |</span></span>
-<span><span class="co">## |    Mining     |  0.1411154  | 6.734163e-10 |</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ndvi_rgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Spatial Stratified Heterogeneity Test </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##            Interaction detector         </span></span>
+<span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
+<span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
+<span><span class="co">## | Precipitation |  0.8933049  | 3.25e-10 |</span></span>
+<span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
+<span><span class="co">## |  Tempchange   |  0.3874615  | 7.59e-10 |</span></span>
+<span><span class="co">## |  Popdensity   |  0.2622265  | 3.65e-10 |</span></span>
+<span><span class="co">## |      GDP      |  0.1491878  | 3.63e-10 |</span></span>
+<span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
+<span><span class="va">ndvi_rgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     | Interaction  |</span></span>
 <span><span class="co">## |:---------------------------:|:------------:|</span></span>
@@ -298,10 +284,10 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-t
 <span><span class="co">## |     Precipitation ∩ GDP     | Enhance, bi- |</span></span>
 <span><span class="co">## | Precipitation ∩ Popdensity  | Enhance, bi- |</span></span>
 <span><span class="co">## |      GDP ∩ Popdensity       | Enhance, bi- |</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/rgdrid/rgd_fd-1.png"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/rgdrid/rgd_id-1.png"></p>
 </div>
@@ -312,15 +298,13 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-t
 possible combinations of variables. By default,
 <code>Spatial Fuzzy **And** Join</code> are used to generate a new
 spatial partition of the interaction variables.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_rid</span> <span class="op">=</span> <span class="fu"><a href="../reference/rid.html">rid</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
 <span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">ndvi_rid</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Robust Interaction Detector </span></span>
-<span><span class="co">##  </span></span>
-<span><span class="co">##  ----------PD values: ---------</span></span>
+<span><span class="co">## ***      Robust Interaction Detector       </span></span>
+<span><span class="co">##  ------------------ PD values: ---------------</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |                               varibale                               |    PD     |</span></span>
 <span><span class="co">## |:--------------------------------------------------------------------:|:---------:|</span></span>

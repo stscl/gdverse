@@ -182,11 +182,39 @@ explain <code>SUHI</code>, which is removed here.</p>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">idsa.model</span> <span class="op">=</span> <span class="fu"><a href="../reference/idsa.html">idsa</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span> ,data <span class="op">=</span> <span class="va">newdata</span>, wt <span class="op">=</span> <span class="va">wt</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
-<span><span class="co">## Error in checkForRemoteErrors(val): 6 nodes produced errors; first error: function 'enterRNGScope' not provided by package 'Rcpp'</span></span>
 <span><span class="va">idsa.model</span></span>
-<span><span class="co">## Error in eval(expr, envir, enclos): object 'idsa.model' not found</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">idsa.model</span><span class="op">)</span></span>
-<span><span class="co">## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'idsa.model' not found</span></span></code></pre></div>
+<span><span class="co">## ***   Interactive Detector For Spatial Associations </span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ------------------ PID values: -------------------</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |                   varibale                   |     PID     |</span></span>
+<span><span class="co">## |:--------------------------------------------:|:-----------:|</span></span>
+<span><span class="co">## | landscape ∩ dist_cold_heat ∩ urbanbuilt_form | 0.456037749 |</span></span>
+<span><span class="co">## |       dist_cold_heat ∩ urbanbuilt_form       | 0.409391856 |</span></span>
+<span><span class="co">## |               urbanbuilt_form                | 0.345502490 |</span></span>
+<span><span class="co">## |         landscape ∩ urbanbuilt_form          | 0.330585501 |</span></span>
+<span><span class="co">## |                dist_cold_heat                | 0.123563063 |</span></span>
+<span><span class="co">## |          landscape ∩ dist_cold_heat          | 0.071627057 |</span></span>
+<span><span class="co">## |                  landscape                   | 0.004188307 |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  ------- IDSA model performance evaluation: -------</span></span>
+<span><span class="co">##  * Number of overlay zones :  11 </span></span>
+<span><span class="co">##  * Percentage of finely divided zones :  0.0009643202 </span></span>
+<span><span class="co">##  * Number of individual explanatory variables :  3 </span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ## Different of response variable between a pair of overlay zones:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |       zone1st        |       zone2nd        | Risk |</span></span>
+<span><span class="co">## |:--------------------:|:--------------------:|:----:|</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_3 |  No  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_4 |  No  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_8 | Yes  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 | zonedist_cold_heat_9 |  No  |</span></span>
+<span><span class="co">## | zonedist_cold_heat_2 |   zonelandscape_1    |  No  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  #### Only the first five pairs of overlay zones are displayed! ####</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">idsa.model</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/idsa/idsa_modeling-1.png"></p>
 <p>This vignette is a special case because the explanatory variables are
 dimensionally reduced in advance and is used as a coping strategy when
 IDSA is executed in the face of many explanatory variables.</p>
