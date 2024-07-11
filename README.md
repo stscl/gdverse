@@ -42,10 +42,6 @@ devtools::install_github("SpatLyu/gdverse",
                          dep = TRUE)
 ```
 
-Please ensure that **Rcpp** is properly installed and the appropriate
-**C++** compilation environment is configured in advance if you want to
-install **gdverse** from github.
-
 You can also install the binary version of **gdverse** from
 [r-universe](https://spatlyu.r-universe.dev/gdverse):
 
@@ -87,7 +83,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.03 sec elapsed
+## 4.11 sec elapsed
 fvc_opgd
 ## ***          Factor Detector            
 ## 
