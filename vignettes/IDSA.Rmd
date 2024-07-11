@@ -114,9 +114,7 @@ usfi = st_drop_geometry(usfi)
 ``` r
 idsa.model = idsa(SUHI ~ . ,data = newdata, wt = wt, cores = 6)
 idsa.model
-## ***   Interactive Detector For Spatial Associations 
-##  
-##  ------------------ PID values: -------------------
+## ***     Interactive Detector For Spatial Associations 
 ## 
 ## |                   varibale                   |     PID     |
 ## |:--------------------------------------------:|:-----------:|
@@ -128,7 +126,7 @@ idsa.model
 ## |          landscape ∩ dist_cold_heat          | 0.071627057 |
 ## |                  landscape                   | 0.004188307 |
 ## 
-##  ------- IDSA model performance evaluation: -------
+##  --------- IDSA model performance evaluation: --------
 ##  * Number of overlay zones :  11 
 ##  * Percentage of finely divided zones :  0.0009643202 
 ##  * Number of individual explanatory variables :  3 
