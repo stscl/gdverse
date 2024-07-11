@@ -121,7 +121,7 @@ gd = \(formula,data,type = "factor",...){
 print.factor_detector = \(x, ...) {
   cat("***             Factor Detector            ")
   # pander::pander(x$factor)
-  print(knitr::kable(x$factor,format = "markdown",digits = 16,align = 'c',...))
+  print(knitr::kable(x$factor,format = "markdown",digits = 12,align = 'c',...))
 }
 
 #' @title print interaction detector

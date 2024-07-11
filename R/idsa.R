@@ -155,7 +155,7 @@ print.idsa_result = \(x, ...) {
   cat("***   Interactive Detector For Spatial Associations \n",
       "\n ------------------ PID values: -------------------")
   print(kableExtra::kable(dplyr::rename(x$interaction, PID = pid_idsa),
-                          format = "markdown",digits = 16,align = 'c',...))
+                          format = "markdown",digits = 12,align = 'c',...))
   cat("\n ------- IDSA model performance evaluation: -------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",

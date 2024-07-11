@@ -66,7 +66,7 @@ print.lesh_result = \(x, ...) {
                                                   IntersectionSymbol,
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
-  print(knitr::kable(x,format = "markdown",digits = 16,align = 'c',...))
+  print(knitr::kable(x,format = "markdown",digits = 12,align = 'c',...))
 }
 
 #' @title plot LESH model result

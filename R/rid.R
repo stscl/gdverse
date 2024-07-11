@@ -112,5 +112,5 @@ print.rid_result = \(x, ...) {
   cat("***      Robust Interaction Detector       \n",
       "------------------ PD values: ---------------")
   print(knitr::kable(dplyr::rename(x$interaction, PD = qv_rid),
-                     format = "markdown",digits = 16,align = 'c',...))
+                     format = "markdown",digits = 12,align = 'c',...))
 }

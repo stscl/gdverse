@@ -85,13 +85,13 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
 print.sesu_opgd = \(x,...){
   g = purrr::list_rbind(x$sesu$sesu_result)
   spunits = x$sesu$spatial_units
-  cat("\n     Size Effects Of Spatial Unit     \n",
-      "\n             OPGD Model               \n",
-      "\n  ***  Optimal Spatial Unit : ", x$optsu, "  ***\n")
+  cat("        Size Effect Of Spatial Units      \n",
+      "                OPGD Model                \n",
+      "    ***   Optimal Spatial Unit : ", x$optsu, "   ***\n")
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
-    print(kableExtra::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),
-                            format = "markdown",digits = 16, align = 'c', ...))
+    print(knitr::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),
+                       format = "markdown",digits = 12, align = 'c', ...))
   }
 }
 

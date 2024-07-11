@@ -89,7 +89,7 @@ spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NU
 print.spade_result = \(x, ...) {
   cat("***         Spatial Association Detector         ")
   # pander::pander(x$factor)
-  print(knitr::kable(x$factor,format = "markdown",digits = 16,align = 'c'))
+  print(knitr::kable(x$factor,format = "markdown",digits = 12,align = 'c'))
 }
 
 #' @title plot SPADE power of spatial and multilevel discretization determinant
