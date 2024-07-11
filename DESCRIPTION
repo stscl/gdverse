@@ -47,8 +47,6 @@ Suggests:
     terra,
     tidyterra,
     tidyverse
-LinkingTo: 
-    Rcpp
 VignetteBuilder: knitr
 Depends: 
     R (>= 4.1.0)
