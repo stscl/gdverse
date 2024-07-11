@@ -150,7 +150,7 @@ equal length to <code>discvar</code> to use different
 <span>                       data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                       discnum <span class="op">=</span> <span class="fl">10</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 22.05 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 15.37 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new.ndvi</span></span>
 <span><span class="co">## # A tibble: 713 × 4</span></span>
@@ -296,15 +296,14 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-t
 </h3>
 <p><code>RID</code> allows you to obtain the interactions of all
 possible combinations of variables. By default,
-<code>Spatial Fuzzy **And** Join</code> are used to generate a new
-spatial partition of the interaction variables.</p>
+<code>Spatial Fuzzy And Join</code> are used to generate a new spatial
+partition of the interaction variables.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_rid</span> <span class="op">=</span> <span class="fu"><a href="../reference/rid.html">rid</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
 <span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">ndvi_rid</span></span>
-<span><span class="co">## ***      Robust Interaction Detector       </span></span>
-<span><span class="co">##  ------------------ PD values: ---------------</span></span>
+<span><span class="co">## ***          Robust Interaction Detector       </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |                               varibale                               |    PD     |</span></span>
 <span><span class="co">## |:--------------------------------------------------------------------:|:---------:|</span></span>
