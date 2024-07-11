@@ -4,7 +4,7 @@
 
 # gdverse 1.0.0
 
-* **C++** is now used to calculate the spatial variance, and the R version of the spatial variance implementation is still preserved through the **spvar** function.
+* The first stable release.
 
 # gdverse 0.3.0
 

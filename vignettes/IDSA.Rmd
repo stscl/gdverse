@@ -113,41 +113,11 @@ usfi = st_drop_geometry(usfi)
 
 ``` r
 idsa.model = idsa(SUHI ~ . ,data = newdata, wt = wt, cores = 6)
+## Error in checkForRemoteErrors(val): 6 nodes produced errors; first error: function 'enterRNGScope' not provided by package 'Rcpp'
 idsa.model
-## 
-##    Interactive Detector For Spatial Associations 
-##  
-##  ------------------ PID values: -------------------
-## 
-## |                   varibale                   |     PID     |
-## |:--------------------------------------------:|:-----------:|
-## | landscape ∩ dist_cold_heat ∩ urbanbuilt_form | 0.456037749 |
-## |       dist_cold_heat ∩ urbanbuilt_form       | 0.409391856 |
-## |               urbanbuilt_form                | 0.345502490 |
-## |         landscape ∩ urbanbuilt_form          | 0.330585501 |
-## |                dist_cold_heat                | 0.123563063 |
-## |          landscape ∩ dist_cold_heat          | 0.071627057 |
-## |                  landscape                   | 0.004188307 |
-## 
-##  ------- IDSA model performance evaluation: -------
-##  * Number of overlay zones :  11 
-##  * Percentage of finely divided zones :  0.0009643202 
-##  * Number of individual explanatory variables :  3 
-##  
-##  ## Different of response variable between a pair of overlay zones:
-## 
-## |       zone1st        |       zone2nd        | Risk |
-## |:--------------------:|:--------------------:|:----:|
-## | zonedist_cold_heat_2 | zonedist_cold_heat_3 |  No  |
-## | zonedist_cold_heat_2 | zonedist_cold_heat_4 |  No  |
-## | zonedist_cold_heat_2 | zonedist_cold_heat_8 | Yes  |
-## | zonedist_cold_heat_2 | zonedist_cold_heat_9 |  No  |
-## | zonedist_cold_heat_2 |   zonelandscape_1    |  No  |
-## 
-##  #### Only the first five pairs of overlay zones are displayed! ####
+## Error in eval(expr, envir, enclos): object 'idsa.model' not found
 plot(idsa.model)
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'idsa.model' not found
 ```
-
-![](../man/figures/idsa/idsa_modeling-1.png)
 
 This vignette is a special case because the explanatory variables are dimensionally reduced in advance and is used as a coping strategy when IDSA is executed in the face of many explanatory variables.

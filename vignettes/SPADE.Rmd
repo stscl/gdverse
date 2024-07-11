@@ -162,7 +162,7 @@ new_usfi %>%
   )
 ```
 
-![](../man/figures/spade/SUHI_LISA-1.png)
+![plot of chunk SUHI_LISA](man/figures/spade/SUHI_LISA-1.png)
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
 
@@ -175,30 +175,27 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
                  discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
 usfi_opgd
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
+## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
-## |   DAR    | 0.43933223  | 4.882348e-10 |
-## |   NDVI   | 0.39709785  | 2.024269e-10 |
-## |   GAR    | 0.38226004  | 8.253424e-10 |
-## |   RFD    | 0.26695978  | 7.395150e-10 |
-## |    BD    | 0.26496790  | 3.248683e-10 |
-## |    BH    | 0.24779725  | 8.792670e-11 |
-## |   NDWI   | 0.20808065  | 6.585551e-10 |
-## |   FAR    | 0.19795883  | 1.349734e-10 |
-## |   SVF    | 0.13094230  | 4.972996e-10 |
-## |    RL    | 0.12311769  | 8.885315e-10 |
-## |   TER    | 0.11640460  | 6.773640e-08 |
-## |   WAR    | 0.10615536  | 5.573880e-10 |
+## |   DAR    | 0.43933223  | 4.880000e-10 |
+## |   NDVI   | 0.39709785  | 2.020000e-10 |
+## |   GAR    | 0.38226004  | 8.250000e-10 |
+## |   RFD    | 0.26695978  | 7.400000e-10 |
+## |    BD    | 0.26496790  | 3.250000e-10 |
+## |    BH    | 0.24779725  | 8.800000e-11 |
+## |   NDWI   | 0.20808065  | 6.590000e-10 |
+## |   FAR    | 0.19795883  | 1.350000e-10 |
+## |   SVF    | 0.13094230  | 4.970000e-10 |
+## |    RL    | 0.12311769  | 8.890000e-10 |
+## |   TER    | 0.11640460  | 6.773600e-08 |
+## |   WAR    | 0.10615536  | 5.570000e-10 |
 ## |   LSI    | 0.07673167  | 3.213431e-06 |
 ## |   DTH    | 0.07628845  | 7.669056e-06 |
-## |   DTP    | 0.07478988  | 7.947200e-10 |
+## |   DTP    | 0.07478988  | 7.950000e-10 |
 ## |   DTW    | 0.05575932  | 4.071996e-04 |
-## |   DTR    | 0.05285988  | 3.936829e-07 |
+## |   DTR    | 0.05285988  | 3.936830e-07 |
 ## |   LPI    | 0.02875711  | 8.158332e-01 |
 ```
 
@@ -299,63 +296,19 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 ``` r
 usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
                    wt = wt3, discnum = 3:22, cores = 6)
+## Error in checkForRemoteErrors(val): 6 nodes produced errors; first error: function 'enterRNGScope' not provided by package 'Rcpp'
 usfi_spade
-## 
-##        Spatial Association Detector       
-##  
-##                   SPADE Model               
-## 
-## | variable | Q-statistic |      P-value      |
-## |:--------:|:-----------:|:-----------------:|
-## |   DAR    | 0.51354520  | No Pseudo-P Value |
-## |   NDVI   | 0.47435470  | No Pseudo-P Value |
-## |   NDWI   | 0.43652650  | No Pseudo-P Value |
-## |   GAR    | 0.42037121  | No Pseudo-P Value |
-## |   RFD    | 0.35902741  | No Pseudo-P Value |
-## |    BD    | 0.35397385  | No Pseudo-P Value |
-## |    BH    | 0.32947163  | No Pseudo-P Value |
-## |   TER    | 0.31556969  | No Pseudo-P Value |
-## |   FAR    | 0.22828609  | No Pseudo-P Value |
-## |   DTR    | 0.22245435  | No Pseudo-P Value |
-## |   DTW    | 0.19009188  | No Pseudo-P Value |
-## |   DTP    | 0.14935992  | No Pseudo-P Value |
-## |   LSI    | 0.14875273  | No Pseudo-P Value |
-## |    RL    | 0.13422740  | No Pseudo-P Value |
-## |   SVF    | 0.13294874  | No Pseudo-P Value |
-## |   LPI    | 0.13054984  | No Pseudo-P Value |
-## |   DTH    | 0.08346346  | No Pseudo-P Value |
-## |   WAR    |     NaN     | No Pseudo-P Value |
+## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
 plot(usfi_spade,slicenum = 8)
+## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'usfi_spade' not found
 ```
-
-![](../man/figures/spade/USFI_SPADE_factor-1.png)
 
 **You can also access the detailed q statistics by `usfi_spade$factor`**
 
 
 ``` r
 usfi_spade$factor
-## # A tibble: 18 × 3
-##    variable `Q-statistic` `P-value`        
-##    <chr>            <dbl> <chr>            
-##  1 DAR             0.514  No Pseudo-P Value
-##  2 NDVI            0.474  No Pseudo-P Value
-##  3 NDWI            0.437  No Pseudo-P Value
-##  4 GAR             0.420  No Pseudo-P Value
-##  5 RFD             0.359  No Pseudo-P Value
-##  6 BD              0.354  No Pseudo-P Value
-##  7 BH              0.329  No Pseudo-P Value
-##  8 TER             0.316  No Pseudo-P Value
-##  9 FAR             0.228  No Pseudo-P Value
-## 10 DTR             0.222  No Pseudo-P Value
-## 11 DTW             0.190  No Pseudo-P Value
-## 12 DTP             0.149  No Pseudo-P Value
-## 13 LSI             0.149  No Pseudo-P Value
-## 14 RL              0.134  No Pseudo-P Value
-## 15 SVF             0.133  No Pseudo-P Value
-## 16 LPI             0.131  No Pseudo-P Value
-## 17 DTH             0.0835 No Pseudo-P Value
-## 18 WAR           NaN      No Pseudo-P Value
+## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
 ```
 
 The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
@@ -403,7 +356,7 @@ ggplot(data = usfi) +
   theme_classic()
 ```
 
-![](../man/figures/spade/WAR_Hist-1.png)
+![plot of chunk WAR_Hist](man/figures/spade/WAR_Hist-1.png)
 
 
 ``` r
