@@ -63,7 +63,7 @@ new.ndvi = robust_disc(NDVIchange ~ .,
                        data = select(ndvi,-c(Climatezone,Mining)),
                        discnum = 10,cores = 6)
 tictoc::toc()
-## 18.66 sec elapsed
+## 22.05 sec elapsed
 ```
 
 
@@ -115,29 +115,23 @@ Then, we can run geodetector model by `gd()` function.
 ``` r
 g1 = gd(NDVIchange ~ .,data = new.ndvi, type = 'factor')
 g1
+## ***          Factor Detector            
 ## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
-## 
-## |   variable    | Q-statistic |   P-value    |
-## |:-------------:|:-----------:|:------------:|
-## | Precipitation |  0.8933049  | 3.249709e-10 |
-## |  Climatezone  |  0.8218335  | 7.340526e-10 |
-## |  Tempchange   |  0.3874615  | 7.590713e-10 |
-## |  Popdensity   |  0.2622265  | 3.647313e-10 |
-## |      GDP      |  0.1491878  | 3.634139e-10 |
-## |    Mining     |  0.1411154  | 6.734163e-10 |
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation |  0.8933049  | 3.25e-10 |
+## |  Climatezone  |  0.8218335  | 7.34e-10 |
+## |  Tempchange   |  0.3874615  | 7.59e-10 |
+## |  Popdensity   |  0.2622265  | 3.65e-10 |
+## |      GDP      |  0.1491878  | 3.63e-10 |
+## |    Mining     |  0.1411154  | 6.73e-10 |
 ```
 
 
 ``` r
 g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
 g2
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##            Interaction detector         
+## ***        Interaction Detector         
 ## 
 ## |    Interactive variable     | Interaction  |
 ## |:---------------------------:|:------------:|
@@ -182,31 +176,19 @@ str(ndvi_rgd)
 ##   .. ..$ Variable2 Q-statistics                       : num [1:15] 0.141 0.387 0.893 0.149 0.262 ...
 ##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:15] 0.834 0.859 0.914 0.842 0.836 ...
 ##   ..- attr(*, "class")= chr "interaction_detector"
-```
-
-``` r
 ndvi_rgd[[1]]
+## ***          Factor Detector            
 ## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
-## 
-## |   variable    | Q-statistic |   P-value    |
-## |:-------------:|:-----------:|:------------:|
-## | Precipitation |  0.8933049  | 3.249709e-10 |
-## |  Climatezone  |  0.8218335  | 7.340526e-10 |
-## |  Tempchange   |  0.3874615  | 7.590713e-10 |
-## |  Popdensity   |  0.2622265  | 3.647313e-10 |
-## |      GDP      |  0.1491878  | 3.634139e-10 |
-## |    Mining     |  0.1411154  | 6.734163e-10 |
-```
-
-``` r
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation |  0.8933049  | 3.25e-10 |
+## |  Climatezone  |  0.8218335  | 7.34e-10 |
+## |  Tempchange   |  0.3874615  | 7.59e-10 |
+## |  Popdensity   |  0.2622265  | 3.65e-10 |
+## |      GDP      |  0.1491878  | 3.63e-10 |
+## |    Mining     |  0.1411154  | 6.73e-10 |
 ndvi_rgd[[2]]
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##            Interaction detector         
+## ***        Interaction Detector         
 ## 
 ## |    Interactive variable     | Interaction  |
 ## |:---------------------------:|:------------:|
@@ -251,10 +233,8 @@ ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 10, cores = 6)
 ndvi_rid
-## 
-##  Robust Interaction Detector 
-##  
-##  ----------PD values: ---------
+## ***      Robust Interaction Detector       
+##  ------------------ PD values: ---------------
 ## 
 ## |                               varibale                               |    PD     |
 ## |:--------------------------------------------------------------------:|:---------:|
