@@ -37,22 +37,16 @@ head(ndvi)
 ``` r
 gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
 gozh.uvi
+## ***          Factor Detector            
 ## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
-## 
-## |   variable    | Q-statistic |   P-value    |
-## |:-------------:|:-----------:|:------------:|
-## | Precipitation | 0.87255056  | 4.515558e-10 |
-## |  Climatezone  | 0.82129550  | 2.500763e-10 |
-## |  Tempchange   | 0.33324945  | 1.121618e-10 |
-## |  Popdensity   | 0.22321863  | 2.998225e-10 |
-## |    Mining     | 0.13982859  | 5.985420e-11 |
-## |      GDP      | 0.09170153  | 3.958823e-10 |
-```
-
-``` r
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation | 0.87255056  | 4.52e-10 |
+## |  Climatezone  | 0.82129550  | 2.50e-10 |
+## |  Tempchange   | 0.33324945  | 1.12e-10 |
+## |  Popdensity   | 0.22321863  | 3.00e-10 |
+## |    Mining     | 0.13982859  | 6.00e-11 |
+## |      GDP      | 0.09170153  | 3.96e-10 |
 plot(gozh.uvi)
 ```
 
@@ -64,10 +58,7 @@ plot(gozh.uvi)
 ``` r
 gozh.bi = gozh(NDVIchange ~ ., data = ndvi,type = 'interaction')
 gozh.bi
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##            Interaction detector         
+## ***        Interaction Detector         
 ## 
 ## |    Interactive variable     |    Interaction     |
 ## |:---------------------------:|:------------------:|
@@ -86,9 +77,6 @@ gozh.bi
 ## |     Precipitation ∩ GDP     |    Enhance, bi-    |
 ## | Precipitation ∩ Popdensity  |    Enhance, bi-    |
 ## |      GDP ∩ Popdensity       |    Weaken, uni-    |
-```
-
-``` r
 plot(gozh.bi)
 ```
 
@@ -100,10 +88,8 @@ plot(gozh.bi)
 ``` r
 lesh.m = lesh(NDVIchange ~ ., data = ndvi,cores = 6)
 lesh.m
-## 
-##     Spatial Interaction Association Detector    
-##  
-##                    LESH Model                     
+## ***    Spatial Interaction Association Detector      
+##                         LESH Model                     
 ## 
 ## |    Interactive variable     |    Interaction     |
 ## |:---------------------------:|:------------------:|
@@ -122,9 +108,6 @@ lesh.m
 ## |     Precipitation ∩ GDP     |    Enhance, bi-    |
 ## | Precipitation ∩ Popdensity  |    Enhance, bi-    |
 ## |      GDP ∩ Popdensity       |    Weaken, uni-    |
-```
-
-``` r
 plot(lesh.m, pie = TRUE, scatter = TRUE)
 ```
 
