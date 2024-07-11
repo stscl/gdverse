@@ -89,7 +89,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' Function for calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @details
 #' The power of spatial and multilevel discretization determinant formula is
-#' \eqn{`PSMDQ_s` = `MEAN(Q_s)`}
+#' \eqn{PSMDQ_s = MEAN(Q_s)}
 #'
 #' @references
 #' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
@@ -97,7 +97,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #'
 #' @param formula A formula of calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @param data A data.frame or tibble of observation data.
-#' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
+#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`.
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided.

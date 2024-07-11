@@ -21,7 +21,7 @@ psmd_spade(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{wt}{(optional) The spatial weight matrix.When \code{wt} is not provided, must provide \code{locations}.
+\item{wt}{(optional) The spatial weight matrix. When \code{wt} is not provided, must provide \code{locations}.
 And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
 
 \item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
@@ -47,7 +47,7 @@ Function for calculate power of spatial and multilevel discretization determinan
 }
 \details{
 The power of spatial and multilevel discretization determinant formula is
-\eqn{`PSMDQ_s` = `MEAN(Q_s)`}
+\eqn{PSMDQ_s = MEAN(Q_s)}
 }
 \examples{
 \dontrun{
