@@ -207,19 +207,13 @@ NTDs
 fd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'factor')
 fd
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
+## ***          Factor Detector            
 ## 
 ## | variable  | Q-statistic |   P-value   |
 ## |:---------:|:-----------:|:-----------:|
 ## | watershed |  0.6377737  | 0.000128803 |
 ## | elevation |  0.6067087  | 0.043382244 |
 ## | soiltype  |  0.3857168  | 0.372145486 |
-```
-
-``` r
 plot(fd)
 ```
 
@@ -232,19 +226,13 @@ plot(fd)
 id = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'interaction')
 id
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##            Interaction detector         
+## ***        Interaction Detector         
 ## 
 ## | Interactive variable  | Interaction  |
 ## |:---------------------:|:------------:|
 ## | watershed ∩ elevation | Enhance, bi- |
 ## | watershed ∩ soiltype  | Enhance, bi- |
 ## | elevation ∩ soiltype  | Enhance, bi- |
-```
-
-``` r
 plot(id)
 ```
 
@@ -257,10 +245,7 @@ plot(id)
 rd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'risk')
 rd
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##                Risk detector           
+## ***            Risk Detector            
 ## 
 ##  Variable elevation:
 ## 
@@ -294,9 +279,6 @@ rd
 ## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
 ## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |
 ## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |
-```
-
-``` r
 plot(rd)
 ```
 
@@ -309,10 +291,7 @@ You can change the significant interval by assign `alpha` argument,the default v
 rd99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'risk',alpha = 0.99)
 rd99
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##                Risk detector           
+## ***            Risk Detector            
 ## 
 ##  Variable elevation:
 ## 
@@ -355,18 +334,12 @@ rd99
 ed = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'ecological')
 ed
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Ecological detector         
+## ***          Ecological Detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|
 ## |watershed |    No     |    No    |
 ## |elevation |    NA     |    No    |
-```
-
-``` r
 plot(ed)
 ```
 
@@ -379,10 +352,7 @@ You can also change the significant interval by assign `alpha` argument,the defa
 ed99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'ecological',alpha = 0.99)
 ed99
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Ecological detector         
+## ***          Ecological Detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|

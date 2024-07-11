@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 3.69 sec elapsed
+## 3.94 sec elapsed
 ```
 
 
@@ -97,9 +97,6 @@ g
 ##  9      9     9     4     7      7      1      1     5      8      9      2
 ## 10     11     8     3     3      7      1      1     4      8     10      2
 ## # ℹ 5,230 more rows
-```
-
-``` r
 new.fvc = g$disv
 new.fvc
 ## # A tibble: 5,240 × 11
@@ -147,33 +144,24 @@ Then, we can run geodetector model by `gd()` function.
 
 ``` r
 gd(fvc ~ .,data = new.fvc,type = 'factor')
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
+## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
-## |  presum  | 0.66090313  | 8.344327e-10 |
-## |   lulc   | 0.65972601  | 8.781502e-10 |
-## |  premin  | 0.46550058  | 3.606232e-10 |
-## |  tmpmin  | 0.43559812  | 8.536544e-10 |
-## |  tmpmax  | 0.25364304  | 7.848540e-10 |
-## |  slope   | 0.23570512  | 8.826343e-10 |
-## |   elev   | 0.23554763  | 7.286761e-10 |
-## |  tmpavg  | 0.22139249  | 7.615818e-10 |
-## |   pop    | 0.19529044  | 2.428073e-10 |
-## |  premax  | 0.14507334  | 5.960950e-10 |
+## |  presum  | 0.66090313  | 8.340000e-10 |
+## |   lulc   | 0.65972601  | 8.780000e-10 |
+## |  premin  | 0.46550058  | 3.610000e-10 |
+## |  tmpmin  | 0.43559812  | 8.540000e-10 |
+## |  tmpmax  | 0.25364304  | 7.850000e-10 |
+## |  slope   | 0.23570512  | 8.830000e-10 |
+## |   elev   | 0.23554763  | 7.290000e-10 |
+## |  tmpavg  | 0.22139249  | 7.620000e-10 |
+## |   pop    | 0.19529044  | 2.430000e-10 |
+## |  premax  | 0.14507334  | 5.960000e-10 |
 ## |  aspect  | 0.01859967  | 7.490531e-01 |
 ## |   ntl    | 0.01725685  | 1.384075e-01 |
-```
-
-``` r
 gd(fvc ~ .,data = new.fvc,type = 'interaction')
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##            Interaction detector         
+## ***        Interaction Detector         
 ## 
 ## | Interactive variable |    Interaction     |
 ## |:--------------------:|:------------------:|
@@ -269,37 +257,25 @@ str(fvc_opgd)
 ##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2355 0.0173 0.1953 0.1451 ...
 ##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.828 0.716 0.756 0.77 ...
 ##   ..- attr(*, "class")= chr "interaction_detector"
-```
-
-``` r
 fvc_opgd[[1]]
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##              Factor detector            
+## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
-## |  presum  | 0.66090313  | 8.344327e-10 |
-## |   lulc   | 0.65972601  | 8.781502e-10 |
-## |  premin  | 0.46550058  | 3.606232e-10 |
-## |  tmpmin  | 0.43559812  | 8.536544e-10 |
-## |  tmpmax  | 0.25364304  | 7.848540e-10 |
-## |  slope   | 0.23570512  | 8.826343e-10 |
-## |   elev   | 0.23554763  | 7.286761e-10 |
-## |  tmpavg  | 0.22139249  | 7.615818e-10 |
-## |   pop    | 0.19529044  | 2.428073e-10 |
-## |  premax  | 0.14507334  | 5.960950e-10 |
+## |  presum  | 0.66090313  | 8.340000e-10 |
+## |   lulc   | 0.65972601  | 8.780000e-10 |
+## |  premin  | 0.46550058  | 3.610000e-10 |
+## |  tmpmin  | 0.43559812  | 8.540000e-10 |
+## |  tmpmax  | 0.25364304  | 7.850000e-10 |
+## |  slope   | 0.23570512  | 8.830000e-10 |
+## |   elev   | 0.23554763  | 7.290000e-10 |
+## |  tmpavg  | 0.22139249  | 7.620000e-10 |
+## |   pop    | 0.19529044  | 2.430000e-10 |
+## |  premax  | 0.14507334  | 5.960000e-10 |
 ## |  aspect  | 0.01859967  | 7.490531e-01 |
 ## |   ntl    | 0.01725685  | 1.384075e-01 |
-```
-
-``` r
 fvc_opgd[[2]]
-## 
-##  Spatial Stratified Heterogeneity Test 
-##  
-##            Interaction detector         
+## ***        Interaction Detector         
 ## 
 ## | Interactive variable |    Interaction     |
 ## |:--------------------:|:------------------:|
