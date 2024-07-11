@@ -152,7 +152,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
 #' @export
 #'
 print.idsa_result = \(x, ...) {
-  cat("\n   Interactive Detector For Spatial Associations \n",
+  cat("***   Interactive Detector For Spatial Associations \n",
       "\n ------------------ PID values: -------------------")
   print(kableExtra::kable(dplyr::rename(x$interaction, PID = pid_idsa),
                           format = "markdown",digits = 16,align = 'c',...))
@@ -162,7 +162,7 @@ print.idsa_result = \(x, ...) {
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
       "\n ## Different of response variable between a pair of overlay zones:")
   x = dplyr::select(x$risk,zone1st,zone2nd,Risk)
-  print(kableExtra::kable(utils::head(x,5),format = "markdown",align = 'c',...))
+  print(knitr::kable(utils::head(x,5),format = "markdown",align = 'c',...))
   cat("\n #### Only the first five pairs of overlay zones are displayed! ####")
 }
 

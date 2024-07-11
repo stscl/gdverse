@@ -26,7 +26,6 @@ Imports:
     forcats,
     geosphere,
     ggplot2,
-    kableExtra,
     magrittr,
     parallel,
     patchwork,

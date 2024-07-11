@@ -109,8 +109,8 @@ rid = \(formula,data,overlaymethod = 'and', discvar,
 #' @return Formatted string output
 #' @export
 print.rid_result = \(x, ...) {
-  cat("\n Robust Interaction Detector \n",
-      "\n ----------PD values: ---------")
-  print(kableExtra::kable(dplyr::rename(x$interaction, PD = qv_rid),
-                          format = "markdown",digits = 16,align = 'c',...))
+  cat("***      Robust Interaction Detector       \n",
+      "------------------ PD values: ---------------")
+  print(knitr::kable(dplyr::rename(x$interaction, PD = qv_rid),
+                     format = "markdown",digits = 16,align = 'c',...))
 }

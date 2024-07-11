@@ -87,10 +87,9 @@ spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NU
 #' @return Formatted string output
 #' @export
 print.spade_result = \(x, ...) {
-  cat("\n       Spatial Association Detector       \n",
-      "\n                  SPADE Model               ")
+  cat("***         Spatial Association Detector         ")
   # pander::pander(x$factor)
-  print(kableExtra::kable(x$factor,format = "markdown",digits = 16,align = 'c'))
+  print(knitr::kable(x$factor,format = "markdown",digits = 16,align = 'c'))
 }
 
 #' @title plot SPADE power of spatial and multilevel discretization determinant

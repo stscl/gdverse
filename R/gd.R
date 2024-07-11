@@ -119,10 +119,9 @@ gd = \(formula,data,type = "factor",...){
 #' @export
 #'
 print.factor_detector = \(x, ...) {
-  cat("\n Spatial Stratified Heterogeneity Test \n",
-      "\n             Factor detector            ")
+  cat("***             Factor Detector            ")
   # pander::pander(x$factor)
-  print(kableExtra::kable(x$factor,format = "markdown",digits = 16,align = 'c',...))
+  print(knitr::kable(x$factor,format = "markdown",digits = 16,align = 'c',...))
 }
 
 #' @title print interaction detector
@@ -137,8 +136,7 @@ print.factor_detector = \(x, ...) {
 #' @export
 #'
 print.interaction_detector = \(x, ...) {
-  cat("\n Spatial Stratified Heterogeneity Test \n",
-      "\n           Interaction detector         ")
+  cat("***           Interaction Detector         ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
@@ -146,7 +144,7 @@ print.interaction_detector = \(x, ...) {
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
   # pander::pander(x)
-  print(kableExtra::kable(x,format = "markdown",align = 'c',...))
+  print(knitr::kable(x,format = "markdown",align = 'c',...))
 }
 
 #' @title print risk detector
@@ -161,8 +159,7 @@ print.interaction_detector = \(x, ...) {
 #' @export
 #'
 print.risk_detector = \(x, ...) {
-  cat("\n Spatial Stratified Heterogeneity Test \n",
-      "\n               Risk detector           \n")
+  cat("***                Risk Detector            \n")
   x = dplyr::select(x$risk,variable,zone1st,zone2nd,Risk)
   xvar = x %>%
     dplyr::count(variable) %>%
@@ -180,8 +177,7 @@ print.risk_detector = \(x, ...) {
   }
   for (i in xvar){
     cat(sprintf("\n Variable %s:",i))
-    # print(knitr::kable(rd2mat(x,i),format = "markdown"))
-    print(kableExtra::kable(rd2mat(x,i),format = "markdown",align = 'c',...))
+    print(knitr::kable(rd2mat(x,i),format = "markdown",align = 'c',...))
   }
 }
 
@@ -197,8 +193,7 @@ print.risk_detector = \(x, ...) {
 #' @export
 #'
 print.ecological_detector = \(x, ...) {
-  cat("\n Spatial Stratified Heterogeneity Test \n",
-      "\n             Ecological detector         ")
+  cat("***             Ecological Detector         ")
   x = dplyr::select(x$ecological,
                     dplyr::all_of(c('variable1','variable2','Ecological')))
   ed2mat = \(x){
@@ -212,6 +207,5 @@ print.ecological_detector = \(x, ...) {
     rownames(matt) = matname
     return(matt)
   }
-  # print(knitr::kable(ed2mat(x),format = "markdown"))
-  print(kableExtra::kable(ed2mat(x),format = "markdown",align = 'c',...))
+  print(knitr::kable(ed2mat(x),format = "markdown",align = 'c',...))
 }

@@ -58,15 +58,15 @@ lesh = \(formula,data,cores = 1,...){
 #' @export
 #'
 print.lesh_result = \(x, ...) {
-  cat("\n    Spatial Interaction Association Detector    \n",
-      "\n                   LESH Model                     ")
+  cat("***    Spatial Interaction Association Detector      \n",
+      "                       LESH Model                     ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
                                                   IntersectionSymbol,
                                                   variable2)) %>%
     dplyr::select(`Interactive variable`,Interaction)
-  print(kableExtra::kable(x,format = "markdown",digits = 16,align = 'c',...))
+  print(knitr::kable(x,format = "markdown",digits = 16,align = 'c',...))
 }
 
 #' @title plot LESH model result
