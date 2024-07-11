@@ -97,8 +97,8 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #'
 #' @param formula A formula of calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @param data A data.frame or tibble of observation data.
-#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`.
-#' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
+#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`,
+#' then `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
