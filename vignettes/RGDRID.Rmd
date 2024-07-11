@@ -63,7 +63,7 @@ new.ndvi = robust_disc(NDVIchange ~ .,
                        data = select(ndvi,-c(Climatezone,Mining)),
                        discnum = 10,cores = 6)
 tictoc::toc()
-## 22.05 sec elapsed
+## 15.37 sec elapsed
 ```
 
 
@@ -225,7 +225,7 @@ plot(ndvi_rgd[[2]])
 
 ### Run RID
 
-`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Fuzzy **And** Join` are used to generate a new spatial partition of the interaction variables.
+`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Fuzzy And Join` are used to generate a new spatial partition of the interaction variables.
 
 
 ``` r
@@ -233,8 +233,7 @@ ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 10, cores = 6)
 ndvi_rid
-## ***      Robust Interaction Detector       
-##  ------------------ PD values: ---------------
+## ***          Robust Interaction Detector       
 ## 
 ## |                               varibale                               |    PD     |
 ## |:--------------------------------------------------------------------:|:---------:|
