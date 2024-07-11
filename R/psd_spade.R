@@ -1,7 +1,7 @@
 #' @title power of spatial determinant(PSD)
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for calculate power of spatial determinant \eqn{q_s}.
+#' Function for calculate power of spatial determinant `q_s`
 #' @details
 #' The power of spatial determinant formula is
 #' \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
@@ -14,7 +14,7 @@
 #' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param wt The spatial weight matrix.
 #'
-#' @return A value of power of spatial determinant \eqn{q_s}.
+#' @return A value of power of spatial determinant `q_s`.
 #' @export
 #'
 #' @examples
@@ -46,7 +46,7 @@ psd_spade = \(y,x,wt){
 #' @title compensated power of spatial determinant(CPSD)
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for calculate compensated power of spatial determinant \eqn{Q_s}.
+#' Function for calculate compensated power of spatial determinant `Q_s`.
 #' @details
 #' The power of compensated spatial determinant formula is
 #' \eqn{Q_s = \frac{q_s}{q_{s_{inforkep}}}
@@ -61,7 +61,7 @@ psd_spade = \(y,x,wt){
 #' @param xdisc The discretized covariable X.
 #' @param wt The spatial weight matrix.
 #'
-#' @return A value of compensated power of spatial determinant \eqn{Q_s}.
+#' @return A value of compensated power of spatial determinant `Q_s`.
 #' @export
 #'
 #' @examples
@@ -86,16 +86,16 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @title power of spatial and multilevel discretization determinant(PSMD)
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+#' Function for calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @details
 #' The power of spatial and multilevel discretization determinant formula is
-#' \eqn{PSMDQ_s = MEAN(Q_s)}
+#' \eqn{`PSMDQ_s` = `MEAN(Q_s)`}
 #'
 #' @references
 #' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 #' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 #'
-#' @param formula A formula of calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+#' @param formula A formula of calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @param data A data.frame or tibble of observation data.
 #' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
@@ -109,7 +109,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
 #'
-#' @return A value of power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.
+#' @return A value of power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @export
 #'
 #' @examples
