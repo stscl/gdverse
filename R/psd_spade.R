@@ -37,9 +37,9 @@ psd_spade = \(y,x,wt){
   sprss = \(indice){
     yn = y[indice]
     wtn = wt[indice,indice]
-    return(length(yn) * spatial_variance(yn,wtn))
+    return(length(yn) * spvar(yn,wtn))
   }
-  qv = 1 - sum(tapply(indices, x, sprss)) / (length(y) * spatial_variance(y,wt))
+  qv = 1 - sum(tapply(indices, x, sprss)) / (length(y) * spvar(y,wt))
   return(qv)
 }
 
@@ -206,14 +206,12 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 
   if (doclust) {
     parallel::clusterExport(cores,c('st_unidisc','robust_disc',
-                                    'psd_spade','cpsd_spade',
-                                    'spatial_variance'))
+                                    'psd_spade','cpsd_spade','spvar'))
     out_g = parallel::parLapply(cores,paste0('xobs_',discn),calcul_cpsd)
     out_g = as.numeric(do.call(rbind, out_g))
   } else {
     out_g = purrr::map_dbl(paste0('xobs_',discn),calcul_cpsd)
   }
-
     return(mean(out_g))
 }
 
