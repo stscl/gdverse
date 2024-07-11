@@ -106,7 +106,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('spatial_variance','psd_spade',
+    parallel::clusterExport(cores,c('spvar','psd_spade',
                                     'cpsd_spade','psd_iev',
                                     'st_fuzzyoverlay','pid_idsa'))
     out_g = parallel::parLapply(cores,xs, calcul_pid)

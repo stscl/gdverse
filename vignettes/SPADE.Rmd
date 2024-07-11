@@ -162,7 +162,7 @@ new_usfi %>%
   )
 ```
 
-![plot of chunk SUHI_LISA](man/figures/spade/SUHI_LISA-1.png)
+![](../man/figures/spade/SUHI_LISA-1.png)
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
 
@@ -296,19 +296,60 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 ``` r
 usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
                    wt = wt3, discnum = 3:22, cores = 6)
-## Error in checkForRemoteErrors(val): 6 nodes produced errors; first error: function 'enterRNGScope' not provided by package 'Rcpp'
 usfi_spade
-## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
+## ***         Spatial Association Detector         
+## 
+## | variable | Q-statistic |      P-value      |
+## |:--------:|:-----------:|:-----------------:|
+## |   DAR    | 0.51354520  | No Pseudo-P Value |
+## |   NDVI   | 0.47435470  | No Pseudo-P Value |
+## |   NDWI   | 0.43652650  | No Pseudo-P Value |
+## |   GAR    | 0.42037121  | No Pseudo-P Value |
+## |   RFD    | 0.35902741  | No Pseudo-P Value |
+## |    BD    | 0.35397385  | No Pseudo-P Value |
+## |    BH    | 0.32947163  | No Pseudo-P Value |
+## |   TER    | 0.31556969  | No Pseudo-P Value |
+## |   FAR    | 0.22828609  | No Pseudo-P Value |
+## |   DTR    | 0.22245435  | No Pseudo-P Value |
+## |   DTW    | 0.19009188  | No Pseudo-P Value |
+## |   DTP    | 0.14935992  | No Pseudo-P Value |
+## |   LSI    | 0.14875273  | No Pseudo-P Value |
+## |    RL    | 0.13422740  | No Pseudo-P Value |
+## |   SVF    | 0.13294874  | No Pseudo-P Value |
+## |   LPI    | 0.13054984  | No Pseudo-P Value |
+## |   DTH    | 0.08346346  | No Pseudo-P Value |
+## |   WAR    |     NaN     | No Pseudo-P Value |
 plot(usfi_spade,slicenum = 8)
-## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
 ```
+
+![](../man/figures/spade/USFI_SPADE_factor-1.png)
 
 **You can also access the detailed q statistics by `usfi_spade$factor`**
 
 
 ``` r
 usfi_spade$factor
-## Error in eval(expr, envir, enclos): object 'usfi_spade' not found
+## # A tibble: 18 × 3
+##    variable `Q-statistic` `P-value`        
+##    <chr>            <dbl> <chr>            
+##  1 DAR             0.514  No Pseudo-P Value
+##  2 NDVI            0.474  No Pseudo-P Value
+##  3 NDWI            0.437  No Pseudo-P Value
+##  4 GAR             0.420  No Pseudo-P Value
+##  5 RFD             0.359  No Pseudo-P Value
+##  6 BD              0.354  No Pseudo-P Value
+##  7 BH              0.329  No Pseudo-P Value
+##  8 TER             0.316  No Pseudo-P Value
+##  9 FAR             0.228  No Pseudo-P Value
+## 10 DTR             0.222  No Pseudo-P Value
+## 11 DTW             0.190  No Pseudo-P Value
+## 12 DTP             0.149  No Pseudo-P Value
+## 13 LSI             0.149  No Pseudo-P Value
+## 14 RL              0.134  No Pseudo-P Value
+## 15 SVF             0.133  No Pseudo-P Value
+## 16 LPI             0.131  No Pseudo-P Value
+## 17 DTH             0.0835 No Pseudo-P Value
+## 18 WAR           NaN      No Pseudo-P Value
 ```
 
 The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
@@ -356,7 +397,7 @@ ggplot(data = usfi) +
   theme_classic()
 ```
 
-![plot of chunk WAR_Hist](man/figures/spade/WAR_Hist-1.png)
+![](../man/figures/spade/WAR_Hist-1.png)
 
 
 ``` r

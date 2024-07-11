@@ -113,11 +113,11 @@ usfi = st_drop_geometry(usfi)
 
 ``` r
 idsa.model = idsa(SUHI ~ . ,data = newdata, wt = wt, cores = 6)
-## Error in checkForRemoteErrors(val): 6 nodes produced errors; first error: function 'enterRNGScope' not provided by package 'Rcpp'
+## Error in get(name, envir = envir): object 'spatial_variance' not found
 idsa.model
 ## Error in eval(expr, envir, enclos): object 'idsa.model' not found
 plot(idsa.model)
-## Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'idsa.model' not found
+## Error in eval(expr, envir, enclos): object 'idsa.model' not found
 ```
 
 This vignette is a special case because the explanatory variables are dimensionally reduced in advance and is used as a coping strategy when IDSA is executed in the face of many explanatory variables.
