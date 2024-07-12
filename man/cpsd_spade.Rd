@@ -23,6 +23,7 @@ Function for calculate compensated power of spatial determinant \code{Q_s}.
 }
 \details{
 The power of compensated spatial determinant formula is
+
 \eqn{Q_s = \frac{q_s}{q_{s_{inforkep}}}
 = \frac{1 - \frac{\sum_{h=1}^L N_h \Gamma_{kdep}}{N \Gamma_{totaldep}}}{1 - \frac{\sum_{h=1}^L N_h \Gamma_{hind}}{N \Gamma_{totalind}}}}
 }

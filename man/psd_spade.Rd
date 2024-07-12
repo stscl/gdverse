@@ -21,6 +21,7 @@ Function for calculate power of spatial determinant \code{q_s}
 }
 \details{
 The power of spatial determinant formula is
+
 \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
 }
 \examples{

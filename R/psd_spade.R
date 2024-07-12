@@ -4,6 +4,7 @@
 #' Function for calculate power of spatial determinant `q_s`
 #' @details
 #' The power of spatial determinant formula is
+#'
 #' \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
 #'
 #' @references
@@ -49,6 +50,7 @@ psd_spade = \(y,x,wt){
 #' Function for calculate compensated power of spatial determinant `Q_s`.
 #' @details
 #' The power of compensated spatial determinant formula is
+#'
 #' \eqn{Q_s = \frac{q_s}{q_{s_{inforkep}}}
 #' = \frac{1 - \frac{\sum_{h=1}^L N_h \Gamma_{kdep}}{N \Gamma_{totaldep}}}{1 - \frac{\sum_{h=1}^L N_h \Gamma_{hind}}{N \Gamma_{totalind}}}}
 #'
@@ -103,7 +105,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' Useful and must provided when `wt` is not provided.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
-#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
+#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`. Now only support
 #' one `discmethod` at one time.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
