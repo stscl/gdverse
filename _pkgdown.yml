@@ -3,6 +3,7 @@ template:
   bootstrap: 5
   bootswatch: spacelab
   math-rendering: mathjax
+  path: pkgdown/templates
 
 navbar:
   components:
