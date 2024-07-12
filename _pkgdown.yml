@@ -19,10 +19,10 @@ navbar:
         href: articles/SPADE.html
       - text: Interactive Detector For Spatial Associations(IDSA)
         href: articles/IDSA.html
-      - text: Robust Geographical Detector&Robust Interaction Detector(RGD&RID)
-        href: articles/RGDRID.html
       - text: Compare Size Effect of Spatial Units(SESU)
         href: articles/SESU.html
+      - text: Robust Geographical Detector&Robust Interaction Detector(RGD&RID)
+        href: articles/RGDRID.html
 
 on:
   push:
