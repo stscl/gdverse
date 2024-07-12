@@ -2,7 +2,7 @@ url: https://spatlyu.github.io/gdverse/
 template:
   bootstrap: 5
   bootswatch: spacelab
-  math-rendering: katex
+  math-rendering: mathjax
 on:
   push:
     branches: main
