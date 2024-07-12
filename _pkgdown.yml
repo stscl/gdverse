@@ -3,6 +3,27 @@ template:
   bootstrap: 5
   bootswatch: spacelab
   math-rendering: mathjax
+
+navbar:
+  components:
+    articles:
+      text: Vignettes
+      menu:
+      - text: Original Geographical Detector(GD)
+        href: articles/GD.html
+      - text: Optimal Parameters-based Geographical Detector(OPGD)
+        href: articles/OPGD.html
+      - text: Spatial Heterogeneity Explanation(GOZH&LESH)
+        href: articles/SHEGD.html
+      - text: Spatial Association Detector(SPADE)
+        href: articles/SPADE.html
+      - text: Interactive Detector For Spatial Associations(IDSA)
+        href: articles/IDSA.html
+      - text: Robust Geographical Detector&Robust Interaction Detector(RGD&RID)
+        href: articles/RGDRID.html
+      - text: Compare Size Effect of Spatial Units(SESU)
+        href: articles/SESU.html
+
 on:
   push:
     branches: main
