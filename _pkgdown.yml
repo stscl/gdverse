@@ -3,10 +3,13 @@ template:
   bootstrap: 5
   bootswatch: spacelab
   math-rendering: mathjax
-  path: pkgdown/templates
 
 navbar:
   components:
+    reference:
+      menu:
+      - text: Function reference
+        href: reference/index.html
     articles:
       text: Vignettes
       menu:
