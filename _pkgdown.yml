@@ -74,11 +74,7 @@ reference:
   - rescale_vector
   - generate_subsets
   - weight_assign
-
-- title: S3 Methods
-  contents:
-  - starts_with("plot")
-  - starts_with("print")
+  - F_informationloss
 
 - title: S3 Methods
   contents:
