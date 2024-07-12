@@ -24,6 +24,73 @@ navbar:
       - text: Robust Geographical Detector&Robust Interaction Detector(RGD&RID)
         href: articles/RGDRID.html
 
+reference:
+
+- title: Geographical Detector Models
+  contents:
+  - gd
+  - opgd
+  - gozh
+  - lesh
+  - spade
+  - idsa
+  - rgd
+  - rid
+
+- title: Compare Size Effect of Spatial Units
+  contents:
+  - sesu_opgd
+  - sesu_gozh
+
+- title: Variable Discretization Method
+  contents:
+  - st_unidisc
+  - gd_bestunidisc
+  - rpart_disc
+  - robust_disc
+  - cpsd_disc
+
+- title: Important Algorithm Function
+  contents:
+  - spvar
+  - spd_lesh
+  - st_fuzzyoverlay
+  - loess_optdiscnum
+  - loess_optscale
+  - factor_detector
+  - interaction_detector
+  - risk_detector
+  - ecological_detector
+  - gozh_detector
+  - ends_with("_spade")
+  - psd_iev
+  - pid_idsa
+  - ends_with("_pseudop")
+
+- title: Utility Functions
+  contents:
+  - inverse_distance_weight
+  - shuffle_vector
+  - rescale_vector
+  - generate_subsets
+  - weight_assign
+
+- title: S3 Methods
+  contents:
+  - starts_with("plot")
+  - starts_with("print")
+
+- title: S3 Methods
+  contents:
+  - starts_with("plot")
+  - starts_with("print")
+
+- title: Data
+  contents:
+  - NTDs
+  - ndvi
+  - sim
+
 on:
   push:
     branches: main
@@ -49,6 +116,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
+
 home:
   title: |
     gdverse | Geographical Detector Models
