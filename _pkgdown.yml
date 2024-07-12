@@ -50,6 +50,12 @@ reference:
   - robust_disc
   - cpsd_disc
 
+- title: Data
+  contents:
+  - NTDs
+  - ndvi
+  - sim
+
 - title: Important Algorithm Function
   contents:
   - spvar
@@ -80,12 +86,6 @@ reference:
   contents:
   - starts_with("plot")
   - starts_with("print")
-
-- title: Data
-  contents:
-  - NTDs
-  - ndvi
-  - sim
 
 on:
   push:
