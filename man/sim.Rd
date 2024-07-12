@@ -13,5 +13,8 @@ sim
 \description{
 Simulation data.
 }
+\author{
+Yongze Song \email{yongze.song@outlook.com}
+}
 \keyword{dataset}
 \keyword{sim}

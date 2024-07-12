@@ -1,6 +1,6 @@
 #' @title dataset of NDVI changes and its influencing factors
-#'
 #' @description dataset of NDVI changes and its influencing factors, modified from `GD` package.
+#' @author Yongze Song \email{yongze.song@outlook.com}
 #'
 #' @name ndvi
 #' @format \code{ndvi}: A tibble with 713 rows and 7 variables
@@ -20,6 +20,7 @@
 "NTDs"
 
 #' @title Simulation data.
+#' @author Yongze Song \email{yongze.song@outlook.com}
 #'
 #' @name sim
 #' @format \code{sim}: A tibble with 80 rows and 6 variables, modified from `IDSA` package.

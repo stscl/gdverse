@@ -13,5 +13,8 @@ ndvi
 \description{
 dataset of NDVI changes and its influencing factors, modified from \code{GD} package.
 }
+\author{
+Yongze Song \email{yongze.song@outlook.com}
+}
 \keyword{dataset}
 \keyword{ndvi}
