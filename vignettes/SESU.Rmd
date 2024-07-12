@@ -1,5 +1,5 @@
 ---
-title: "Compare Size Effects of Spatial Units(SESU)"
+title: "Compare Size Effect of Spatial Units(SESU)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SESU}
@@ -191,7 +191,7 @@ str(fvc)
 ##   ..$ aspect: num [1:1253] 130 182 211 194 163 ...
 ```
 
-## Comparison of Size Effects of Spatial Units based on OPGD model
+## Comparison of Size Effect of Spatial Units based on OPGD model
 
 
 ``` r
@@ -375,7 +375,7 @@ plot(g1)
 
 ![](../man/figures/sesu/opgd-1.png)
 
-## Comparison of Size Effects of Spatial Units based on GOZH model
+## Comparison of Size Effect of Spatial Units based on GOZH model
 
 
 ``` r
