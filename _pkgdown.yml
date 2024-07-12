@@ -42,7 +42,7 @@ reference:
   - sesu_opgd
   - sesu_gozh
 
-- title: Variable Discretization Method
+- title: Variable Discretization Methods
   contents:
   - st_unidisc
   - gd_bestunidisc
@@ -56,7 +56,7 @@ reference:
   - ndvi
   - sim
 
-- title: Important Algorithm Function
+- title: Important Algorithm Functions
   contents:
   - spvar
   - spd_lesh
