@@ -1,5 +1,5 @@
 ---
-title: "Original Geographical Detector(GD)"
+title: "Geographical Detector(GD)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{GD}
@@ -17,11 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette explains how to run `geodetector` in `gdverse` package.
-
-```{r echo=FALSE, out.width='75%', fig.align="center",fig.cap="Schematic diagram of Geodetector"}
-knitr::include_graphics('../man/figures/gd_flowchart.png')
-```
+This vignette explains how to run **native geographic detector(GD)** in **gdverse** package.
 
 ### Load package and pre-processing data.
 

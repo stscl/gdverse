@@ -1,5 +1,5 @@
 ---
-title: "Original Geographical Detector(GD)"
+title: "Geographical Detector(GD)"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{GD}
@@ -9,12 +9,7 @@ vignette: >
 
 
 
-This vignette explains how to run `geodetector` in `gdverse` package.
-
-<div class="figure" style="text-align: center">
-<img src="../man/figures/gd_flowchart.png" alt="Schematic diagram of Geodetector" width="75%" />
-<p class="caption">Schematic diagram of Geodetector</p>
-</div>
+This vignette explains how to run **native geographic detector(GD)** in **gdverse** package.
 
 ### Load package and pre-processing data.
 
