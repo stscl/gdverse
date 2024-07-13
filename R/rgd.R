@@ -25,7 +25,6 @@
 #' @examples
 #' \dontrun{
 #' data('ndvi')
-#' reticulate::use_condaenv('geocompy')
 #' g = rgd(NDVIchange ~ ., data = ndvi, dicsvar = names(ndvi)[-1],
 #'         cores = 6, type =c('factor','interaction'))
 #' }

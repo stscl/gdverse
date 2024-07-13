@@ -49,7 +49,6 @@ to ensure the trade-off between analysis results and calculation speed.
 \examples{
 \dontrun{
 data('sim')
-reticulate::use_condaenv('geocompy')
 g = rid(y ~ ., data = sim \%>\% dplyr::select(-dplyr::any_of(c('lo','la'))),
         discvar = c("xa","xb","xc"), discnum = 4, cores = 6)
 g
