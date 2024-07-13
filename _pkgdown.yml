@@ -10,7 +10,7 @@ navbar:
     articles:
       text: Vignettes
       menu:
-      - text: Original Geographical Detector(GD)
+      - text: Geographical Detector(GD)
         href: articles/GD.html
       - text: Optimal Parameters-based Geographical Detector(OPGD)
         href: articles/OPGD.html
