@@ -9,7 +9,15 @@ Authors@R: c(
       person(given = "Yongze", family = "Song",
              email = "yongze.song@outlook.com", 
              role = c("aut", "rev", "ths"),
-             comment = c(ORCID = "0000-0003-3420-9622"))      
+             comment = c(ORCID = "0000-0003-3420-9622")),
+      person(given = "Yangyang", family = "Lei",
+             email = "2237768656@qq.com", 
+             role = c("aut"),
+             comment = c(ORCID = "0009-0002-6518-3613")),
+      person(given = "Jianwu", family = "Yan",
+             email = "yanjw2001@163.com", 
+             role = c("aut"),
+             comment = c(ORCID = "0000-0001-9411-8453"))
       )
 Description: Support for a family of geographical detector models in R. There are 8 kinds of geographical detector models 
              in gdverse, including native geographic detector(GD), optimal parameters-based geographical detector(OPGD),
