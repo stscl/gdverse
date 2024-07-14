@@ -20,7 +20,7 @@
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
-#' @param discmethod (optional) The discretization methods. Default will use `quantile`.
+#' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
 #' Others use `st_unidisc()`.
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.

@@ -30,7 +30,7 @@ Useful and must provided when \code{wt} is not provided. When \code{wt} is provi
 
 \item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
-\item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
+\item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
 Others use \code{st_unidisc()}.}
 
