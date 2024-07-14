@@ -206,7 +206,6 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
                                 xobs = xv) %>%
           dplyr::bind_cols(discdf)
       }
-
       return(discdf)
     }
     discdf = spade_disc(yobs,xobs,discn,discm,cores_rdisc,...)

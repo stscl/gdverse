@@ -55,6 +55,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
     doclust = TRUE
   } else if (cores > 1) {
     doclust = TRUE
+    cores_rdisc = cores # distinguish between python and r parallel.
     cores = parallel::makeCluster(cores)
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
@@ -79,16 +80,32 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
 
   calcul_disc = \(paramgd, ...){
     xobs = explanatory[,paramgd[[1]],drop = TRUE]
-    xdisc = st_unidisc(xobs, k = paramgd[[2]],
-                       method = paramgd[[3]],
-                       seed = seed, ...)
+    if (paramgd[[3]] == 'rpart'){
+      discdf = tibble::tibble(yobs = response,
+                              xobs = xobs)
+      xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
+    } else if (paramgd[[3]] == 'robust') {
+      discdf = tibble::tibble(yobs = response,
+                              xobs = xobs)
+      xdisc = robust_disc("yobs ~ .",
+                           data = discdf,
+                           discnum = paramgd[[2]],
+                           cores = 1,
+                           ...)
+      xdisc = xdisc[,1,drop = TRUE]
+    } else {
+      xdisc = st_unidisc(xobs, k = paramgd[[2]],
+                         method = paramgd[[3]],
+                         seed = seed, ...)
+    }
     q = cpsd_spade(response,xobs,xdisc,wtn)
     names(q) = "spade_cpsd"
     return(q)
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','psd_spade','cpsd_spade','spvar'))
+    parallel::clusterExport(cores,c('st_unidisc','robust_disc','rpart_disc',
+                                    'psd_spade','cpsd_spade','spvar'))
     out_g = parallel::parLapply(cores,parak,calcul_disc,...)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
