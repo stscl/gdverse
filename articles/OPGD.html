@@ -106,8 +106,8 @@
 <span><span class="co">## max values  : 0.8905939, 247.1408, 75.933422, 8276.911, 26.72104,  1.101411, ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"    "lulc"  </span></span>
-<span><span class="co">## [11] "elev"   "slope"  "aspect"</span></span></code></pre></div>
+<span><span class="co">##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"   </span></span>
+<span><span class="co">## [10] "lulc"   "elev"   "slope"  "aspect"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="convert-data-from-spatraster-to-tibble">Convert data from <code>SpatRaster</code> to
@@ -137,12 +137,12 @@ q-statistic.</p>
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.94 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 4.1 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
-<span><span class="co">##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg" "tmpmax"</span></span>
-<span><span class="co">## [11] "tmpmin"</span></span>
+<span><span class="co">##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg"</span></span>
+<span><span class="co">## [10] "tmpmax" "tmpmin"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $k</span></span>
 <span><span class="co">##  [1] 13 15 15 15 15 15 15 15 10 15 15</span></span>
@@ -183,9 +183,9 @@ q-statistic.</p>
 <span><span class="co">## 10     11     8     3     3      7      1      1     4      8     10      2</span></span>
 <span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
 <p>The <code>new.fvc</code> is the discrete result of the optimal
-discretization parameter based on the Q statistic of the geographic
-detector,we can combine it with <code>fvc</code> and <code>lulc</code>
-col in <code>fvc</code> tibble now.</p>
+discretization parameter based on the Q statistic of the geographical
+detector (factor detector), we can combine it with <code>fvc</code> and
+<code>lulc</code> col in <code>fvc</code> tibble now.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span>,<span class="va">new.fvc</span><span class="op">)</span></span>
 <span><span class="va">new.fvc</span></span>
