@@ -29,6 +29,10 @@ The goal of **gdverse** is to *support the geodetector model and its variants*.
 Full document of the most recent release of **gdverse** is online:
 <https://spatlyu.github.io/gdverse/>
 
+```{r echo=FALSE, out.width='75%', fig.align="center",fig.cap="Functions in gdverse"}
+knitr::include_graphics('./man/figures/gdverse_framework_bgtrans.png')
+```
+
 Current models and functions provided by **gdverse** are:
 
 |   *geodetector model*   |   *gdverse function*   |   *support status*   |

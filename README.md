@@ -17,6 +17,15 @@ variants*.
 Full document of the most recent release of **gdverse** is online:
 <https://spatlyu.github.io/gdverse/>
 
+<div class="figure" style="text-align: center">
+
+<img src="./man/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="75%" />
+<p class="caption">
+Functions in gdverse
+</p>
+
+</div>
+
 Current models and functions provided by **gdverse** are:
 
 | *geodetector model* | *gdverse function* | *support status* |
@@ -83,7 +92,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.11 sec elapsed
+## 4.31 sec elapsed
 fvc_opgd
 ## ***          Factor Detector            
 ## 
