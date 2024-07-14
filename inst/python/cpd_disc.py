@@ -2,13 +2,14 @@
 # author: Wenbo Lv
 # references: 
 # https://github.com/Zehua-Zhang-01/Robust_Geographical_Detector/blob/main/CPD_1.ipynb
+# https://rstudio.github.io/reticulate/#type-conversions
 
 import numpy as np
 import pandas as pd
 import ruptures as rpt
 from joblib import Parallel, delayed
 
-def cpd_disc(df,y,xvars,groups,minsizes,cores = 6):
+def cpd_disc(df,y,xvars,groups,minsizes,cores = 1):
     def cpd_disc1(dt,y,x,gs,min_size):
         df = dt.loc[:,[y,x]]
         IndusFile = df.values
@@ -27,6 +28,16 @@ def cpd_disc(df,y,xvars,groups,minsizes,cores = 6):
             labels[i] = str("group" + str(i + 1))
         df_2['_category'] = pd.cut(df_2[xvar].rank(), bins=result, labels=labels)  
         return df_2.loc[:,'_category'].values
+      
+    def scalar4list(x):
+        if isinstance(x, list):
+            return(x)
+        else:
+            return([x])  
+          
+    xvars = scalar4list(xvars)
+    groups = scalar4list(groups)
+    minsizes = scalar4list(minsizes)
       
     if cores < 1:
         raise ValueError("Cores must be greater than or equal to 1")

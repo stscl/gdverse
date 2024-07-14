@@ -63,6 +63,10 @@ usfi = usfi |>
   st_drop_geometry()
 psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
            locations = c('X','Y'),cores = 6)
+psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+           locations = c('X','Y'),discmethod = 'rpart',cores = 6)
+psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+           locations = c('X','Y'),discmethod = 'robust',cores = 6)
 }
 
 }

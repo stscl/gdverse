@@ -17,10 +17,10 @@
 #' @examples
 #' \dontrun{
 #' data('ndvi')
-#' robust_disc(NDVIchange ~ .,
-#'             data = select(ndvi,-c(Climatezone,Mining)),
-#'             discnum = 10,cores = 6)
 #' robust_disc(NDVIchange ~ GDP,data = ndvi,discnum = 5)
+#' robust_disc(NDVIchange ~ .,
+#'             data = dplyr::select(ndvi,-c(Climatezone,Mining)),
+#'             discnum = 10,cores = 6)
 #' }
 robust_disc = \(formula,data,discnum,minsize = NULL,cores = 1) {
   formula = stats::as.formula(formula)
