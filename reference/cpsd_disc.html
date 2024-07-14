@@ -90,8 +90,9 @@
 
 
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
-<dd><p>(optional) A vector of methods for discretization,default is all using <code>quantile</code>in <code>gdverse</code>.
-see <code>method</code> parameter in <code><a href="st_unidisc.html">st_unidisc()</a></code> for more details.</p></dd>
+<dd><p>(optional) The discretization methods. Default all use <code>quantile</code>.
+Noted that <code>robust</code> will use <code><a href="robust_disc.html">robust_disc()</a></code>; <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>;
+Others use <code><a href="st_unidisc.html">st_unidisc()</a></code>. You can try <code><a href="unidisc_methods.html">unidisc_methods()</a></code>.</p></dd>
 
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
@@ -123,13 +124,18 @@ by sampling <code>10%</code>(the default value for <code>samp_prop</code> in <co
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>(optional) Other arguments passed to <code><a href="st_unidisc.html">st_unidisc()</a></code>.</p></dd>
+<dd><p>(optional) Other arguments passed to <code><a href="st_unidisc.html">st_unidisc()</a></code>,<code><a href="robust_disc.html">robust_disc()</a></code> or <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with the optimal parameter in the provided parameter combination with <code>k</code>,
 <code>method</code> and <code>disc</code>(when <code>return_disc</code> is <code>TRUE</code>).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>When the <code>discmethod</code> is configured to <code>robust</code>, it will operate at a significantly reduced speed.
+Consequently, the use of robust discretization is not advised.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

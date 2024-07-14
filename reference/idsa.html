@@ -103,7 +103,9 @@ Useful and must provided when <code>wt</code> is not provided. When <code>wt</co
 
 
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
-<dd><p>(optional) The discretization methods. Default all use <code>quantile</code>. More details to see <code><a href="st_unidisc.html">st_unidisc()</a></code>.</p></dd>
+<dd><p>(optional) The discretization methods. Default all use <code>quantile</code>.
+Noted that <code>robust</code> will use <code><a href="robust_disc.html">robust_disc()</a></code>; <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>;
+Others use <code><a href="st_unidisc.html">st_unidisc()</a></code>. You can try <code><a href="unidisc_methods.html">unidisc_methods()</a></code>.</p></dd>
 
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
