@@ -6,13 +6,17 @@
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
 #' DOI:10.1080/13658816.2021.1882680
+#' @note
+#' When the `discmethod` is configured to `robust`, it will operate at a significantly reduced speed.
+#' Consequently, the use of robust discretization is not advised.
 #'
 #' @param formula A formula of optimal spatial data discretization.
 #' @param data A data.frame or tibble of observation data.
 #' @param wt The spatial weight matrix.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
-#' @param discmethod (optional) A vector of methods for discretization,default is all using `quantile`in `gdverse`.
-#' see `method` parameter in `st_unidisc()` for more details.
+#' @param discmethod (optional) The discretization methods. Default all use `quantile`.
+#' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
+#' Others use `st_unidisc()`. You can try `unidisc_methods()`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.
@@ -26,7 +30,7 @@
 #' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
 #' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
 #' by sampling `10%`(the default value for `samp_prop` in `st_unidisc()`).
-#' @param ... (optional) Other arguments passed to `st_unidisc()`.
+#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
 #' `method` and `disc`(when `return_disc` is `TRUE`).
@@ -94,7 +98,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
       #                      cores = cores_rdisc,
       #                      ...)
       # xdisc = xdisc[,1,drop = TRUE]
-      q = 0.01 * paramgd[[2]]
+      q = 0.01 * paramgd[[2]] ### Subsequent confirmation is required
     } else {
       xdisc = st_unidisc(xobs, k = paramgd[[2]],
                          method = paramgd[[3]],

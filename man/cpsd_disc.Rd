@@ -27,8 +27,9 @@ cpsd_disc(
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
-\item{discmethod}{(optional) A vector of methods for discretization,default is all using \code{quantile}in \code{gdverse}.
-see \code{method} parameter in \code{st_unidisc()} for more details.}
+\item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
+Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
+Others use \code{st_unidisc()}. You can try \code{unidisc_methods()}.}
 
 \item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest SPADE model q-statistics to
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
@@ -48,7 +49,7 @@ Default is \code{TRUE}.}
 the sample size is greater than \code{3000}(the default value for \code{largeN}) and the data is discretized
 by sampling \verb{10\%}(the default value for \code{samp_prop} in \code{st_unidisc()}).}
 
-\item{...}{(optional) Other arguments passed to \code{st_unidisc()}.}
+\item{...}{(optional) Other arguments passed to \code{st_unidisc()},\code{robust_disc()} or \code{rpart_disc()}.}
 }
 \value{
 A list with the optimal parameter in the provided parameter combination with \code{k},
@@ -56,6 +57,10 @@ A list with the optimal parameter in the provided parameter combination with \co
 }
 \description{
 Function for determining the optimal spatial data discretization based on SPADE q-statistics.
+}
+\note{
+When the \code{discmethod} is configured to \code{robust}, it will operate at a significantly reduced speed.
+Consequently, the use of robust discretization is not advised.
 }
 \examples{
 \dontrun{

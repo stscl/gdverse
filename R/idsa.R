@@ -21,7 +21,9 @@
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
-#' @param discmethod (optional) The discretization methods. Default all use `quantile`. More details to see `st_unidisc()`.
+#' @param discmethod (optional) The discretization methods. Default all use `quantile`.
+#' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
+#' Others use `st_unidisc()`. You can try `unidisc_methods()`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.

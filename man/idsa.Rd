@@ -36,7 +36,9 @@ Useful and must provided when \code{wt} is not provided. When \code{wt} is provi
 
 \item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
-\item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}. More details to see \code{st_unidisc()}.}
+\item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
+Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
+Others use \code{st_unidisc()}. You can try \code{unidisc_methods()}.}
 
 \item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest SPADE model q-statistics to
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
