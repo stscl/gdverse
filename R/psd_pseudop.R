@@ -97,13 +97,14 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' Useful and must provided when `wt` is not provided.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
-#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`.Now only support
-#' one `discmethod` at one time.
+#' If `discmethod` is set to `robust`, the function `robust_disc()` will be used. Conversely,
+#' if `discmethod` is set to `rpart`, the `rpart_disc()` function will be used. Others use
+#' `st_unidisc()`. Currently, only one `discmethod` can be used at a time.
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
-#' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
+#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
 #' @export
@@ -168,7 +169,7 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
     }
 
     if (doclust) {
-      parallel::clusterExport(cores,c('st_unidisc','robust_disc','spvar','shuffle_vector',
+      parallel::clusterExport(cores,c('st_unidisc','robust_disc','rpart_disc','spvar','shuffle_vector',
                                       'psd_spade','cpsd_spade','psmd_spade','inverse_distance_weight'))
       out_g = parallel::parLapply(cores,permutation,calcul_psmd)
       out_g = as.numeric(do.call(rbind, out_g))

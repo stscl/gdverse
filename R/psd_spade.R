@@ -105,11 +105,12 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' Useful and must provided when `wt` is not provided.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
-#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`. Now only support
-#' one `discmethod` at one time.
+#' If `discmethod` is set to `robust`, the function `robust_disc()` will be used. Conversely,
+#' if `discmethod` is set to `rpart`, the `rpart_disc()` function will be used. Others use
+#' `st_unidisc()`. Currently, only one `discmethod` can be used at a time.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
-#' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
+#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A value of power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @export
@@ -127,6 +128,10 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #'   st_drop_geometry()
 #' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
 #'            locations = c('X','Y'),cores = 6)
+#' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#'            locations = c('X','Y'),discmethod = 'rpart',cores = 6)
+#' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#'            locations = c('X','Y'),discmethod = 'robust',cores = 6)
 #' }
 #'
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
@@ -163,6 +168,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   } else {
     wt_spade = wt
   }
+
   if (is.null(discnum)) {
     discn = 3:22
   } else {
@@ -174,53 +180,55 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
     discm = discmethod
   }
 
-  spade_disc = \(yv,xv,discn,discm,cores,...){
-    if (discm %in% c('robust','rpart')) {
-      discdf = rep(list("xobs" = xv),length(discn))
-      names(discdf) = paste0('xobs_',discn)
-      discdf = tibble::tibble(yobs = yv,
-                              xobs = xv) %>%
-        dplyr::bind_cols(tibble::as_tibble(discdf))
-      if (discm == 'robust'){
+  if (discm == 'rpart'){
+    discdf = tibble::tibble(yobs = yobs,
+                            xobs = xobs)
+    xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
+    out_g = cpsd_spade(yobs,xobs,xdisc,wt_spade)
+  } else {
+    spade_disc = \(yv,xv,discn,discm,cores,...){
+      if (discm == 'robust') {
+        discdf = rep(list("xobs" = xv),length(discn))
+        names(discdf) = paste0('xobs_',discn)
+        discdf = tibble::tibble(yobs = yv,
+                                xobs = xv) %>%
+          dplyr::bind_cols(tibble::as_tibble(discdf))
         discdf = robust_disc("yobs ~ .",
                              data = discdf,
                              discnum = discn,
                              cores = cores,
                              ...)
       } else {
-        discdf = rpart_disc("yobs ~ .",
-                            data = discdf,
-                            ...)
+        discdf = discn %>%
+          purrr::map_dfc(\(kn) st_unidisc(xv,kn,method = discm,...)) %>%
+          purrr::set_names(paste0('xobs_',discn))
+        discdf = tibble::tibble(yobs = yv,
+                                xobs = xv) %>%
+          dplyr::bind_cols(discdf)
       }
-    } else {
-      discdf = discn %>%
-        purrr::map_dfc(\(kn) st_unidisc(xv,kn,method = discm,...)) %>%
-        purrr::set_names(paste0('xobs_',discn))
-      discdf = tibble::tibble(yobs = yv,
-                              xobs = xv) %>%
-        dplyr::bind_cols(discdf)
+
+      return(discdf)
+    }
+    discdf = spade_disc(yobs,xobs,discn,discm,cores_rdisc,...)
+
+    calcul_cpsd = \(paramn){
+      yvar = discdf[,'yobs',drop = TRUE]
+      xvar = discdf[,'xobs',drop = TRUE]
+      xdisc = discdf[,paramn,drop = TRUE]
+      return(cpsd_spade(yvar,xvar,xdisc,wt_spade))
     }
 
-    return(discdf)
+    if (doclust) {
+      parallel::clusterExport(cores,c('st_unidisc','robust_disc',
+                                      'psd_spade','cpsd_spade','spvar'))
+      out_g = parallel::parLapply(cores,paste0('xobs_',discn),calcul_cpsd)
+      out_g = as.numeric(do.call(rbind, out_g))
+    } else {
+      out_g = purrr::map_dbl(paste0('xobs_',discn),calcul_cpsd)
+    }
+    out_g = mean(out_g)
   }
-  discdf = spade_disc(yobs,xobs,discn,discm,cores_rdisc,...)
-
-  calcul_cpsd = \(paramn){
-    yvar = discdf[,'yobs',drop = TRUE]
-    xvar = discdf[,'xobs',drop = TRUE]
-    xdisc = discdf[,paramn,drop = TRUE]
-    return(cpsd_spade(yvar,xvar,xdisc,wt_spade))
-  }
-
-  if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','robust_disc','rpart_disc',
-                                    'psd_spade','cpsd_spade','spvar'))
-    out_g = parallel::parLapply(cores,paste0('xobs_',discn),calcul_cpsd)
-    out_g = as.numeric(do.call(rbind, out_g))
-  } else {
-    out_g = purrr::map_dbl(paste0('xobs_',discn),calcul_cpsd)
-  }
-    return(mean(out_g))
+  return(out_g)
 }
 
 #' @title measure information loss by information entropy

@@ -30,14 +30,15 @@ Useful and must provided when \code{wt} is not provided.}
 \item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
-When \code{discmethod} is \code{robust} use \code{robust_disc()}, others use \code{st_unidisc()}. Now only support
-one \code{discmethod} at one time.}
+If \code{discmethod} is set to \code{robust}, the function \code{robust_disc()} will be used. Conversely,
+if \code{discmethod} is set to \code{rpart}, the \code{rpart_disc()} function will be used. Others use
+\code{st_unidisc()}. Currently, only one \code{discmethod} can be used at a time.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
-\item{...}{(optional) Other arguments passed to \code{st_unidisc()} or \code{robust_disc()}.}
+\item{...}{(optional) Other arguments passed to \code{st_unidisc()},\code{robust_disc()} or \code{rpart_disc()}.}
 }
 \value{
 A value of power of spatial and multilevel discretization determinant \code{PSMDQ_s}.

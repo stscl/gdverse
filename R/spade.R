@@ -20,13 +20,14 @@
 #' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
-#' @param discmethod (optional) The discretization methods. Default all use `quantile`.
-#' When `discmethod` is `robust` use `robust_disc()`, others use `st_unidisc()`
+#' @param discmethod (optional) The discretization methods. Default will use `quantile`.
+#' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
+#' Others use `st_unidisc()`.
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random number seed, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
-#' @param ... (optional) Other arguments passed to `st_unidisc()` or `robust_disc()`.
+#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A list of the SPADE model result.
 #' @export
