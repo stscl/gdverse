@@ -44,7 +44,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>power of spatial and multilevel discretization determinant(PSMD) and the corresponding pseudo-p value</h1>
-      <small class="dont-index">Source: <a href="https://github.com/SpatLyu/gdverse/blob/main/R/pseudop.R" class="external-link"><code>R/pseudop.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/SpatLyu/gdverse/blob/main/R/psd_pseudop.R" class="external-link"><code>R/psd_pseudop.R</code></a></small>
       <div class="d-none name"><code>psmd_pseudop.Rd</code></div>
     </div>
 
@@ -96,8 +96,8 @@ Useful and must provided when <code>wt</code> is not provided.</p></dd>
 
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
 <dd><p>(optional) The discretization methods. Default will use <code>quantile</code>.
-When <code>discmethod</code> is <code>robust</code> use <code><a href="robust_disc.html">robust_disc()</a></code>, others use <code><a href="st_unidisc.html">st_unidisc()</a></code>.Now only support
-one <code>discmethod</code> at one time.</p></dd>
+Noted that <code>robust</code> will use <code><a href="robust_disc.html">robust_disc()</a></code>; <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>;
+Others use <code><a href="st_unidisc.html">st_unidisc()</a></code>.</p></dd>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
@@ -114,7 +114,7 @@ which means no pseudo-p values are calculated.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>(optional) Other arguments passed to <code><a href="st_unidisc.html">st_unidisc()</a></code> or <code><a href="robust_disc.html">robust_disc()</a></code>.</p></dd>
+<dd><p>(optional) Other arguments passed to <code><a href="st_unidisc.html">st_unidisc()</a></code>,<code><a href="robust_disc.html">robust_disc()</a></code> or <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
