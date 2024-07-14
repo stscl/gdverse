@@ -57,7 +57,7 @@ new.fvc = g$disv
 new.fvc
 ```
 
-The `new.fvc` is the discrete result of the optimal discretization parameter based on the Q statistic of the geographic detector,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.fvc` is the discrete result of the optimal discretization parameter based on the Q statistic of the geographical detector (factor detector), we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
 
 ```{r}
 new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)

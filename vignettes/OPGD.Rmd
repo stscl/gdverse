@@ -34,8 +34,8 @@ fvc
 
 ``` r
 names(fvc)
-##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"    "lulc"  
-## [11] "elev"   "slope"  "aspect"
+##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"   
+## [10] "lulc"   "elev"   "slope"  "aspect"
 ```
 
 ### Convert data from `SpatRaster` to `tibble`
@@ -65,15 +65,15 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 3.94 sec elapsed
+## 4.1 sec elapsed
 ```
 
 
 ``` r
 g
 ## $x
-##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg" "tmpmax"
-## [11] "tmpmin"
+##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg"
+## [10] "tmpmax" "tmpmin"
 ## 
 ## $k
 ##  [1] 13 15 15 15 15 15 15 15 10 15 15
@@ -115,7 +115,7 @@ new.fvc
 ## # ℹ 5,230 more rows
 ```
 
-The `new.fvc` is the discrete result of the optimal discretization parameter based on the Q statistic of the geographic detector,we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.fvc` is the discrete result of the optimal discretization parameter based on the Q statistic of the geographical detector (factor detector), we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
 
 
 ``` r
