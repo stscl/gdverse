@@ -175,17 +175,23 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   }
 
   spade_disc = \(yv,xv,discn,discm,cores,...){
-    if (discm == 'robust') {
+    if (discm %in% c('robust','rpart')) {
       discdf = rep(list("xobs" = xv),length(discn))
       names(discdf) = paste0('xobs_',discn)
       discdf = tibble::tibble(yobs = yv,
                               xobs = xv) %>%
         dplyr::bind_cols(tibble::as_tibble(discdf))
-      discdf = robust_disc("yobs ~ .",
-                           data = discdf,
-                           discnum = discn,
-                           cores = cores,
-                           ...)
+      if (discm == 'robust'){
+        discdf = robust_disc("yobs ~ .",
+                             data = discdf,
+                             discnum = discn,
+                             cores = cores,
+                             ...)
+      } else {
+        discdf = rpart_disc("yobs ~ .",
+                            data = discdf,
+                            ...)
+      }
     } else {
       discdf = discn %>%
         purrr::map_dfc(\(kn) st_unidisc(xv,kn,method = discm,...)) %>%
