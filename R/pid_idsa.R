@@ -90,7 +90,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
       xdisc = robust_disc("yobs ~ .",
                            data = discdf,
                            discnum = paramgd[[2]],
-                           cores = 1,
+                           cores = cores_rdisc,
                            ...)
       xdisc = xdisc[,1,drop = TRUE]
     } else {
@@ -134,9 +134,30 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
   }
 
   if(return_disc){
+    calcul_unidisc = \(xobs, k, method, ...){
+      if (method == 'rpart'){
+        discdf = tibble::tibble(yobs = response,
+                                xobs = xobs)
+        xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
+      } else if (method == 'robust') {
+        discdf = tibble::tibble(yobs = response,
+                                xobs = xobs)
+        xdisc = robust_disc("yobs ~ .",
+                            data = discdf,
+                            discnum = k,
+                            cores = cores_rdisc,
+                            ...)
+        xdisc = xdisc[,1,drop = TRUE]
+      } else {
+        xdisc = st_unidisc(xobs, k = k,
+                           method = method,
+                           seed = seed, ...)
+      }
+      return(xdisc)
+    }
     resdisc = purrr::pmap_dfc(out_g,
-                              \(x,k,method) st_unidisc(x = explanatory[,x,drop = TRUE],
-                                                       k = k, method = method, ...)) %>%
+                              \(x,k,method) calcul_unidisc(x = explanatory[,x,drop = TRUE],
+                                                           k = k, method = method, ...)) %>%
       purrr::set_names(out_g[[1]])
     out_g = append(out_g,list("disv" = resdisc))
   }
