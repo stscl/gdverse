@@ -31,9 +31,8 @@ Useful and must provided when \code{wt} is not provided.}
 \item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
-If \code{discmethod} is set to \code{robust}, the function \code{robust_disc()} will be used. Conversely,
-if \code{discmethod} is set to \code{rpart}, the \code{rpart_disc()} function will be used. Others use
-\code{st_unidisc()}. Currently, only one \code{discmethod} can be used at a time.}
+Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
+Others use \code{st_unidisc()}.}
 
 \item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
 

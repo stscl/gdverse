@@ -97,9 +97,8 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' Useful and must provided when `wt` is not provided.
 #' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
-#' If `discmethod` is set to `robust`, the function `robust_disc()` will be used. Conversely,
-#' if `discmethod` is set to `rpart`, the `rpart_disc()` function will be used. Others use
-#' `st_unidisc()`. Currently, only one `discmethod` can be used at a time.
+#' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
+#' Others use `st_unidisc()`.
 #' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
