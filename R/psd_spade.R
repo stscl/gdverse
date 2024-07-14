@@ -213,7 +213,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('st_unidisc','robust_disc',
+    parallel::clusterExport(cores,c('st_unidisc','robust_disc','rpart_disc',
                                     'psd_spade','cpsd_spade','spvar'))
     out_g = parallel::parLapply(cores,paste0('xobs_',discn),calcul_cpsd)
     out_g = as.numeric(do.call(rbind, out_g))
