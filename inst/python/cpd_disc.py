@@ -27,8 +27,18 @@ def cpd_disc(df,y,xvars,groups,minsizes,cores = 6):
             labels[i] = str("group" + str(i + 1))
         df_2['_category'] = pd.cut(df_2[xvar].rank(), bins=result, labels=labels)  
         return df_2.loc[:,'_category'].values
-    
-    args_list = [(df,y,xvars[i],groups[i],minsizes[i]) for i in range(len(xvars))]
-    res = Parallel(n_jobs=cores)(delayed(cpd_disc1)(d,y,x,g,m) for d,y,x,g,m in args_list)
-    res = pd.DataFrame(np.array(res).transpose(),columns=xvars)
+      
+    if cores < 1:
+        raise ValueError("Cores must be greater than or equal to 1")
+    elif cores == 1:
+        res = []
+        for i in range(len(xvars)):
+            result = cpd_disc1(df, y, xvars[i], groups[i], minsizes[i])
+            res.append(result)
+        res = pd.DataFrame(np.array(res).transpose(), columns=xvars)
+    else:
+      args_list = [(df,y,xvars[i],groups[i],minsizes[i]) for i in range(len(xvars))]
+      res = Parallel(n_jobs=cores)(delayed(cpd_disc1)(d,y,x,g,m) for d,y,x,g,m in args_list)
+      res = pd.DataFrame(np.array(res).transpose(), columns=xvars)
+      
     return res

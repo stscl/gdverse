@@ -16,14 +16,11 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(terra)
-#' library(tidyverse)
-#' fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-#' fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-#' fvc = terra::aggregate(fvc,fact = 5)
-#' fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-#' new.fvc = robust_disc(fvc ~ .,data = select(fvc,-lulc),discnum = 10,cores = 6)
-#' new.fvc
+#' data('ndvi')
+#' robust_disc(NDVIchange ~ .,
+#'             data = select(ndvi,-c(Climatezone,Mining)),
+#'             discnum = 10,cores = 6)
+#' robust_disc(NDVIchange ~ GDP,data = ndvi,discnum = 5)
 #' }
 robust_disc = \(formula,data,discnum,minsize = NULL,cores = 1) {
   formula = stats::as.formula(formula)
