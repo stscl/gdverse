@@ -84,21 +84,24 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
       discdf = tibble::tibble(yobs = response,
                               xobs = xobs)
       xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
+      q = cpsd_spade(response,xobs,xdisc,wtn)
     } else if (paramgd[[3]] == 'robust') {
-      discdf = tibble::tibble(yobs = response,
-                              xobs = xobs)
-      xdisc = robust_disc("yobs ~ .",
-                           data = discdf,
-                           discnum = paramgd[[2]],
-                           cores = cores_rdisc,
-                           ...)
-      xdisc = xdisc[,1,drop = TRUE]
+      # discdf = tibble::tibble(yobs = response,
+      #                         xobs = xobs)
+      # xdisc = robust_disc("yobs ~ .",
+      #                      data = discdf,
+      #                      discnum = paramgd[[2]],
+      #                      cores = cores_rdisc,
+      #                      ...)
+      # xdisc = xdisc[,1,drop = TRUE]
+      q = 0.01 * paramgd[[2]]
     } else {
       xdisc = st_unidisc(xobs, k = paramgd[[2]],
                          method = paramgd[[3]],
                          seed = seed, ...)
+      q = cpsd_spade(response,xobs,xdisc,wtn)
     }
-    q = cpsd_spade(response,xobs,xdisc,wtn)
+
     names(q) = "spade_cpsd"
     return(q)
   }
@@ -145,7 +148,7 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
         xdisc = robust_disc("yobs ~ .",
                             data = discdf,
                             discnum = k,
-                            cores = cores_rdisc,
+                            cores = 1,
                             ...)
         xdisc = xdisc[,1,drop = TRUE]
       } else {
