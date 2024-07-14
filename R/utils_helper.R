@@ -138,3 +138,19 @@ weight_assign = \(x,w,list = FALSE){
   }
 }
 
+#' @title all discretization methods that can be used in `st_unidisc`
+#' @description
+#' A comprehensive vector of all discretization methods that can be
+#' employed within `st_unidisc()`.
+#'
+#' @return A character vector
+#' @export
+#'
+#' @examples
+#' unidisc_methods()
+#'
+unidisc_methods = \(){
+  return(c("fixed", "sd", "equal", "pretty", "quantile", "kmeans",
+           "hclust", "bclust", "fisher", "jenks", "dpih", "headtails",
+           "maximum","box"))
+}
