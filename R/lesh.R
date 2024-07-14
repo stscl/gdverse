@@ -59,7 +59,7 @@ lesh = \(formula,data,cores = 1,...){
 #'
 print.lesh_result = \(x, ...) {
   cat("***    Spatial Interaction Association Detector      \n",
-      "                       LESH Model                     ")
+      "                   LESH Model                     ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
