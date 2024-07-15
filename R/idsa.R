@@ -129,12 +129,19 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
   }
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
-  risk = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
+  risk1 = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
+  risk2 = risk1 %>%
+    dplyr::select(dplyr::all_of(c('zone1st','zone2nd','Risk'))) %>%
+    tidyr::pivot_longer(cols = dplyr::all_of(c('zone1st','zone2nd')),
+                        names_to = 'zone', values_to = 'zone_risk')
+  risk2 = tibble::tibble(reszone = reszone) %>%
+    dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
+    dplyr::pull('Risk')
   out_g = tibble::tibble(varibale = xsname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(pid_idsa))
 
-  res = list("interaction" = out_g, "risk" = risk,
+  res = list("interaction" = out_g, "risk1" = risk1, "risk2" = risk2,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
@@ -179,7 +186,7 @@ print.idsa_result = \(x, ...) {
 #' @export
 #'
 plot.idsa_result = \(x, ...) {
-  grd = dplyr::select(x$risk,zone1st,zone2nd,Risk) %>%
+  grd = dplyr::select(x$risk1,zone1st,zone2nd,Risk) %>%
     dplyr::mutate(risk = forcats::fct_recode(Risk,"Y" = "Yes", "N" = "No"))
   fig_rd = ggplot2::ggplot(data = grd,
                            ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
