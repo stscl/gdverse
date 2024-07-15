@@ -8,6 +8,8 @@
 
 * Adding spatial plotting support for the risk outcomes in IDSA Model.
 
+* Update model console output.
+
 # gdverse 0.3.0
 
 * Enhance python dependency configuration support for **gdverse**.
