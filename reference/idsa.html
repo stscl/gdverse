@@ -139,8 +139,26 @@ object.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with PID values tibble under different spatial overlays and performance evaluation indicators.</p>
-    </div>
+    <p>A list with PID values tibble under different spatial overlays and performance evaluation indicators.</p><dl><dt><code>interaction</code></dt>
+<dd><p>the interaction result of IDSA model</p></dd>
+
+<dt><code>risk1</code></dt>
+<dd><p>whether values of the response variable between a pair of overlay zones are significantly different</p></dd>
+
+<dt><code>risk2</code></dt>
+<dd><p>risk detection result of the input data</p></dd>
+
+<dt><code>number_individual_explanatory_variables</code></dt>
+<dd><p>the number of individual explanatory variables used for examining the interaction effects</p></dd>
+
+<dt><code>number_overlay_zones</code></dt>
+<dd><p>the number of overlay zones</p></dd>
+
+<dt><code>percentage_finely_divided_zones</code></dt>
+<dd><p>the percentage of finely divided zones that are determined by the interaction of variables</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The IDSA model requires at least \(2^n-1\) calculations when has \(n\) explanatory variables.
