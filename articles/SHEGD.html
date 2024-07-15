@@ -167,7 +167,7 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <code class="sourceCode R"><span><span class="va">lesh.m</span> <span class="op">=</span> <span class="fu"><a href="../reference/lesh.html">lesh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">lesh.m</span></span>
 <span><span class="co">## ***    Spatial Interaction Association Detector      </span></span>
-<span><span class="co">##                     LESH Model                     </span></span>
+<span><span class="co">##                      LESH Model                     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
 <span><span class="co">## |:---------------------------:|:------------------:|</span></span>
@@ -222,6 +222,19 @@ interaction:</p>
 <span><span class="co">## # ℹ abbreviated names: ¹​`Variable1 Q-statistics`, ²​`Variable2 Q-statistics`</span></span>
 <span><span class="co">## # ℹ 3 more variables: `Variable1 and Variable2 interact Q-statistics` &lt;dbl&gt;,</span></span>
 <span><span class="co">## #   `Variable1 SPD` &lt;dbl&gt;, `Variable2 SPD` &lt;dbl&gt;</span></span></code></pre></div>
+<p>Use <code>lesh.m$spd_lesh</code> to access the SHAP power of
+determinants:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lesh.m</span><span class="op">$</span><span class="va">spd_lesh</span></span>
+<span><span class="co">## # A tibble: 6 × 2</span></span>
+<span><span class="co">##   varibale      spd_theta</span></span>
+<span><span class="co">##   &lt;chr&gt;             &lt;dbl&gt;</span></span>
+<span><span class="co">## 1 Precipitation    0.218 </span></span>
+<span><span class="co">## 2 Climatezone      0.176 </span></span>
+<span><span class="co">## 3 Tempchange       0.0482</span></span>
+<span><span class="co">## 4 Popdensity       0.0262</span></span>
+<span><span class="co">## 5 Mining           0.0158</span></span>
+<span><span class="co">## 6 GDP              0.0115</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
