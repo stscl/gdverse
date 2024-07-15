@@ -63,7 +63,7 @@ new.ndvi = robust_disc(NDVIchange ~ .,
                        data = select(ndvi,-c(Climatezone,Mining)),
                        discnum = 10,cores = 6)
 tictoc::toc()
-## 15.37 sec elapsed
+## 21.42 sec elapsed
 ```
 
 
@@ -159,24 +159,8 @@ g2
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 10, cores = 6, type = c('factor','interaction'))
-str(ndvi_rgd)
-## List of 2
-##  $ :List of 1
-##   ..$ factor: tibble [6 × 3] (S3: tbl_df/tbl/data.frame)
-##   .. ..$ variable   : chr [1:6] "Precipitation" "Climatezone" "Tempchange" "Popdensity" ...
-##   .. ..$ Q-statistic: num [1:6] 0.893 0.822 0.387 0.262 0.149 ...
-##   .. ..$ P-value    : num [1:6] 3.25e-10 7.34e-10 7.59e-10 3.65e-10 3.63e-10 ...
-##   ..- attr(*, "class")= chr "factor_detector"
-##  $ :List of 1
-##   ..$ interaction: tibble [15 × 6] (S3: tbl_df/tbl/data.frame)
-##   .. ..$ variable1                                    : chr [1:15] "Climatezone" "Climatezone" "Climatezone" "Climatezone" ...
-##   .. ..$ variable2                                    : chr [1:15] "Mining" "Tempchange" "Precipitation" "GDP" ...
-##   .. ..$ Interaction                                  : chr [1:15] "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" "Enhance, bi-" ...
-##   .. ..$ Variable1 Q-statistics                       : num [1:15] 0.822 0.822 0.822 0.822 0.822 ...
-##   .. ..$ Variable2 Q-statistics                       : num [1:15] 0.141 0.387 0.893 0.149 0.262 ...
-##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:15] 0.834 0.859 0.914 0.842 0.836 ...
-##   ..- attr(*, "class")= chr "interaction_detector"
-ndvi_rgd[[1]]
+ndvi_rgd
+##                  RGD Model                  
 ## ***          Factor Detector            
 ## 
 ## |   variable    | Q-statistic | P-value  |
@@ -187,7 +171,7 @@ ndvi_rgd[[1]]
 ## |  Popdensity   |  0.2622265  | 3.65e-10 |
 ## |      GDP      |  0.1491878  | 3.63e-10 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
-ndvi_rgd[[2]]
+## 
 ## ***        Interaction Detector         
 ## 
 ## |    Interactive variable     | Interaction  |
@@ -211,14 +195,7 @@ ndvi_rgd[[2]]
 
 
 ``` r
-plot(ndvi_rgd[[1]])
-```
-
-![](../man/figures/rgdrid/rgd_fd-1.png)
-
-
-``` r
-plot(ndvi_rgd[[2]])
+plot(ndvi_rgd)
 ```
 
 ![](../man/figures/rgdrid/rgd_id-1.png)

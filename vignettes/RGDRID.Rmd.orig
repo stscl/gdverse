@@ -99,17 +99,11 @@ g2
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 10, cores = 6, type = c('factor','interaction'))
-str(ndvi_rgd)
-ndvi_rgd[[1]]
-ndvi_rgd[[2]]
+ndvi_rgd
 ```
 
-```{r rgd_fd,fig.width=5,fig.height=3.5}
-plot(ndvi_rgd[[1]])
-```
-
-```{r rgd_id,fig.width=6.25,fig.height=4.25}
-plot(ndvi_rgd[[2]])
+```{r rgd_id,fig.width=10.25,fig.height=4.25}
+plot(ndvi_rgd)
 ```
 
 ### Run RID
