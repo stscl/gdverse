@@ -15,7 +15,7 @@
 Formatted string output
 }
 \description{
-S3 method to format output for RID model from \code{opgd()}.
+S3 method to format output for OPGD model from \code{opgd()}.
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
