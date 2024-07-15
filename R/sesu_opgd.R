@@ -29,7 +29,11 @@
 #' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
 #'
-#' @return A list with `sesu`(size effects of spatial units) and `optsu`(optimal spatial unit).
+#' @return A list with SESU OPGD results
+#' \describe{
+#' \item{\code{sesu}}{a tibble representing size effects of spatial units}
+#' \item{\code{optsu}}{optimal spatial unit}
+#' }
 #' @export
 #'
 #' @examples

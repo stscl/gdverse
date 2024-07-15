@@ -43,7 +43,11 @@ Default is \verb{5\%}.}
 \item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.}
 }
 \value{
-A list with \code{sesu}(size effects of spatial units) and \code{optsu}(optimal spatial unit).
+A list with SESU OPGD results
+\describe{
+\item{\code{sesu}}{a tibble representing size effects of spatial units}
+\item{\code{optsu}}{optimal spatial unit}
+}
 }
 \description{
 Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
