@@ -59,7 +59,8 @@ rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
       res[[i]] = gd(paste0(yname,' ~ .'),data = newdata,
                     type = type[i],alpha = alpha)[[1]]
     }
+    names(res) = type
   }
-
+  class(res) = "rgd_result"
   return(res)
 }

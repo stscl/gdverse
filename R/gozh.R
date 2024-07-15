@@ -40,8 +40,10 @@ gozh = \(formula, data, cores = 1,
     res = vector("list", length(type))
     for (i in seq_along(type)){
       res[[i]] = gozh_detector(formula, data, cores, type[i], alpha, ...)[[1]]
-      }
+    }
+    names(res) = type
   }
+  class(res) = "gozh_result"
   return(res)
 }
 
