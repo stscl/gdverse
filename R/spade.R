@@ -30,6 +30,9 @@
 #' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A list of the SPADE model result.
+#' \describe{
+#' \item{\code{factor}}{the result of SPADE model}
+#' }
 #' @export
 #'
 #' @examples

@@ -45,6 +45,9 @@ which means no pseudo-p values are calculated.}
 }
 \value{
 A list of the SPADE model result.
+\describe{
+\item{\code{factor}}{the result of SPADE model}
+}
 }
 \description{
 Function for spatial association detector (SPADE) model.
