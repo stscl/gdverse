@@ -110,9 +110,17 @@ Default is <code>5%</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with <code>sesu</code>(size effects of spatial units),<code>optsu</code>(optimal spatial unit) and
-<code>strategy</code>(A number that represents the optimal analytical scale selection strategy).</p>
-    </div>
+    <p>A list with SESU GOZH results.</p><dl><dt><code>sesu</code></dt>
+<dd><p>a tibble representing size effects of spatial units</p></dd>
+
+<dt><code>optsu</code></dt>
+<dd><p>optimal spatial unit</p></dd>
+
+<dt><code>strategy</code></dt>
+<dd><p>the optimal analytical scale selection strategy</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>When <code>strategy</code> is <code>1</code>, use the same process as <code><a href="sesu_opgd.html">sesu_opgd()</a></code>.If not, all explanatory
