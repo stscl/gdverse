@@ -18,6 +18,10 @@ cluster with that many cores is created and used. You can also supply a cluster 
 }
 \value{
 A list of LESH model result.
+\describe{
+\item{\code{interaction}}{the interaction result of LESH model}
+\item{\code{spd_lesh}}{a tibble of the SHAP power of determinants}
+}
 }
 \description{
 Function for locally explained heterogeneity model.

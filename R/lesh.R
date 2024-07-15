@@ -21,6 +21,10 @@
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A list of LESH model result.
+#' \describe{
+#' \item{\code{interaction}}{the interaction result of LESH model}
+#' \item{\code{spd_lesh}}{a tibble of the SHAP power of determinants}
+#' }
 #' @export
 #'
 #' @examples
@@ -41,7 +45,7 @@ lesh = \(formula,data,cores = 1,...){
                   `Variable1 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd1,
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
     dplyr::select(-dplyr::starts_with('spd'))
-  res = list("interaction" = res)
+  res = list("interaction" = res, "spd_lesh" = spd)
   class(res) = "lesh_result"
   return(res)
 }
@@ -59,7 +63,7 @@ lesh = \(formula,data,cores = 1,...){
 #'
 print.lesh_result = \(x, ...) {
   cat("***    Spatial Interaction Association Detector      \n",
-      "                   LESH Model                     ")
+      "                    LESH Model                     ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
