@@ -80,16 +80,10 @@ fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = c('factor','interaction'))
 fvc_opgd
-fvc_opgd[[1]]
-fvc_opgd[[2]]
 ```
 
 You can use `plot()` to visualize the result.
 
-```{r fd,fig.width=5,fig.height=3.5}
-plot(fvc_opgd[[1]])
-```
-
-```{r id,fig.width=6.5,fig.height=4.25}
-plot(fvc_opgd[[2]])
+```{r opgd_plot,fig.width=10.5,fig.height=4.25}
+plot(fvc_opgd)
 ```

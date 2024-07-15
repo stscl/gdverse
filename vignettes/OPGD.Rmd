@@ -65,7 +65,7 @@ We can use `gd_bestunidisc()` to discretize them based on geodetector q-statisti
 tictoc::tic()
 g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
 tictoc::toc()
-## 3.72 sec elapsed
+## 3.7 sec elapsed
 ```
 
 
@@ -240,65 +240,102 @@ gd(fvc ~ .,data = new.fvc,type = 'interaction')
 fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = c('factor','interaction'))
-str(fvc_opgd)
-## List of 2
-##  $ : tibble [12 × 3] (S3: tbl_df/tbl/data.frame)
-##   ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...
-##   ..$ Q-statistic: num [1:12] 0.661 0.66 0.466 0.436 0.254 ...
-##   ..$ P-value    : num [1:12] 8.34e-10 8.78e-10 3.61e-10 8.54e-10 7.85e-10 ...
-##  $ : tibble [66 × 6] (S3: tbl_df/tbl/data.frame)
-##   ..$ variable1                                    : chr [1:66] "lulc" "lulc" "lulc" "lulc" ...
-##   ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...
-##   ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...
-##   ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...
-##   ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2355 0.0173 0.1953 0.1451 ...
-##   ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.828 0.716 0.756 0.77 ...
-fvc_opgd[[1]]
-## # A tibble: 12 × 3
-##    variable `Q-statistic` `P-value`
-##    <chr>            <dbl>     <dbl>
-##  1 presum          0.661   8.34e-10
-##  2 lulc            0.660   8.78e-10
-##  3 premin          0.466   3.61e-10
-##  4 tmpmin          0.436   8.54e-10
-##  5 tmpmax          0.254   7.85e-10
-##  6 slope           0.236   8.83e-10
-##  7 elev            0.236   7.29e-10
-##  8 tmpavg          0.221   7.62e-10
-##  9 pop             0.195   2.43e-10
-## 10 premax          0.145   5.96e-10
-## 11 aspect          0.0186  7.49e- 1
-## 12 ntl             0.0173  1.38e- 1
-fvc_opgd[[2]]
-## # A tibble: 66 × 6
-##    variable1 variable2 Interaction        `Variable1 Q-statistics` `Variable2 Q-statistics`
-##    <chr>     <chr>     <chr>                                 <dbl>                    <dbl>
-##  1 lulc      aspect    Enhance, nonlinear                    0.660                   0.0186
-##  2 lulc      elev      Enhance, bi-                          0.660                   0.236 
-##  3 lulc      ntl       Enhance, nonlinear                    0.660                   0.0173
-##  4 lulc      pop       Enhance, bi-                          0.660                   0.195 
-##  5 lulc      premax    Enhance, bi-                          0.660                   0.145 
-##  6 lulc      premin    Enhance, bi-                          0.660                   0.466 
-##  7 lulc      presum    Enhance, bi-                          0.660                   0.661 
-##  8 lulc      slope     Enhance, bi-                          0.660                   0.236 
-##  9 lulc      tmpavg    Enhance, bi-                          0.660                   0.221 
-## 10 lulc      tmpmax    Enhance, bi-                          0.660                   0.254 
-## # ℹ 56 more rows
-## # ℹ 1 more variable: `Variable1 and Variable2 interact Q-statistics` <dbl>
+fvc_opgd
+##                 OPGD Model                  
+## ***          Factor Detector            
+## 
+## | variable | Q-statistic |   P-value    |
+## |:--------:|:-----------:|:------------:|
+## |  presum  | 0.66090313  | 8.340000e-10 |
+## |   lulc   | 0.65972601  | 8.780000e-10 |
+## |  premin  | 0.46550058  | 3.610000e-10 |
+## |  tmpmin  | 0.43559812  | 8.540000e-10 |
+## |  tmpmax  | 0.25364304  | 7.850000e-10 |
+## |  slope   | 0.23570512  | 8.830000e-10 |
+## |   elev   | 0.23554763  | 7.290000e-10 |
+## |  tmpavg  | 0.22139249  | 7.620000e-10 |
+## |   pop    | 0.19529044  | 2.430000e-10 |
+## |  premax  | 0.14507334  | 5.960000e-10 |
+## |  aspect  | 0.01859967  | 7.490531e-01 |
+## |   ntl    | 0.01725685  | 1.384075e-01 |
+## 
+## ***        Interaction Detector         
+## 
+## | Interactive variable |    Interaction     |
+## |:--------------------:|:------------------:|
+## |    lulc ∩ aspect     | Enhance, nonlinear |
+## |     lulc ∩ elev      |    Enhance, bi-    |
+## |      lulc ∩ ntl      | Enhance, nonlinear |
+## |      lulc ∩ pop      |    Enhance, bi-    |
+## |    lulc ∩ premax     |    Enhance, bi-    |
+## |    lulc ∩ premin     |    Enhance, bi-    |
+## |    lulc ∩ presum     |    Enhance, bi-    |
+## |     lulc ∩ slope     |    Enhance, bi-    |
+## |    lulc ∩ tmpavg     |    Enhance, bi-    |
+## |    lulc ∩ tmpmax     |    Enhance, bi-    |
+## |    lulc ∩ tmpmin     |    Enhance, bi-    |
+## |    aspect ∩ elev     | Enhance, nonlinear |
+## |     aspect ∩ ntl     | Enhance, nonlinear |
+## |     aspect ∩ pop     | Enhance, nonlinear |
+## |   aspect ∩ premax    | Enhance, nonlinear |
+## |   aspect ∩ premin    | Enhance, nonlinear |
+## |   aspect ∩ presum    |    Enhance, bi-    |
+## |    aspect ∩ slope    | Enhance, nonlinear |
+## |   aspect ∩ tmpavg    | Enhance, nonlinear |
+## |   aspect ∩ tmpmax    | Enhance, nonlinear |
+## |   aspect ∩ tmpmin    | Enhance, nonlinear |
+## |      elev ∩ ntl      | Enhance, nonlinear |
+## |      elev ∩ pop      | Enhance, nonlinear |
+## |    elev ∩ premax     | Enhance, nonlinear |
+## |    elev ∩ premin     |    Enhance, bi-    |
+## |    elev ∩ presum     |    Enhance, bi-    |
+## |     elev ∩ slope     |    Enhance, bi-    |
+## |    elev ∩ tmpavg     |    Enhance, bi-    |
+## |    elev ∩ tmpmax     | Enhance, nonlinear |
+## |    elev ∩ tmpmin     |    Enhance, bi-    |
+## |      ntl ∩ pop       | Enhance, nonlinear |
+## |     ntl ∩ premax     | Enhance, nonlinear |
+## |     ntl ∩ premin     | Enhance, nonlinear |
+## |     ntl ∩ presum     | Enhance, nonlinear |
+## |     ntl ∩ slope      | Enhance, nonlinear |
+## |     ntl ∩ tmpavg     | Enhance, nonlinear |
+## |     ntl ∩ tmpmax     | Enhance, nonlinear |
+## |     ntl ∩ tmpmin     | Enhance, nonlinear |
+## |     pop ∩ premax     | Enhance, nonlinear |
+## |     pop ∩ premin     |    Enhance, bi-    |
+## |     pop ∩ presum     |    Enhance, bi-    |
+## |     pop ∩ slope      |    Enhance, bi-    |
+## |     pop ∩ tmpavg     | Enhance, nonlinear |
+## |     pop ∩ tmpmax     | Enhance, nonlinear |
+## |     pop ∩ tmpmin     |    Enhance, bi-    |
+## |   premax ∩ premin    | Enhance, nonlinear |
+## |   premax ∩ presum    |    Enhance, bi-    |
+## |    premax ∩ slope    | Enhance, nonlinear |
+## |   premax ∩ tmpavg    | Enhance, nonlinear |
+## |   premax ∩ tmpmax    | Enhance, nonlinear |
+## |   premax ∩ tmpmin    | Enhance, nonlinear |
+## |   premin ∩ presum    |    Enhance, bi-    |
+## |    premin ∩ slope    |    Enhance, bi-    |
+## |   premin ∩ tmpavg    |    Enhance, bi-    |
+## |   premin ∩ tmpmax    |    Enhance, bi-    |
+## |   premin ∩ tmpmin    |    Enhance, bi-    |
+## |    presum ∩ slope    |    Enhance, bi-    |
+## |   presum ∩ tmpavg    |    Enhance, bi-    |
+## |   presum ∩ tmpmax    |    Enhance, bi-    |
+## |   presum ∩ tmpmin    |    Enhance, bi-    |
+## |    slope ∩ tmpavg    |    Enhance, bi-    |
+## |    slope ∩ tmpmax    |    Enhance, bi-    |
+## |    slope ∩ tmpmin    |    Enhance, bi-    |
+## |   tmpavg ∩ tmpmax    | Enhance, nonlinear |
+## |   tmpavg ∩ tmpmin    |    Enhance, bi-    |
+## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |
 ```
 
 You can use `plot()` to visualize the result.
 
 
 ``` r
-plot(fvc_opgd[[1]])
+plot(fvc_opgd)
 ```
 
-![plot of chunk fd](man/figures/opgd/fd-1.png)
-
-
-``` r
-plot(fvc_opgd[[2]])
-```
-
-![plot of chunk id](man/figures/opgd/id-1.png)
+![](../man/figures/opgd/opgd_plot-1.png)
