@@ -31,7 +31,7 @@ head(ndvi)
 
 ### Univariate power of determinants detection
 
-```{r gozh_uni,fig.width=4.5,fig.height=3.5}
+```{r gozh_uni,fig.width=5.5,fig.height=3.5}
 gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
 gozh.uvi
 plot(gozh.uvi)
