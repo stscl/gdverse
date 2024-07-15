@@ -66,8 +66,9 @@ opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
     res = vector("list", length(type))
     for (i in seq_along(type)){
       res[[i]] = gd(paste0(yname,' ~ .'),data = newdata,
-                    type = type[i],alpha = alpha)[[i]]
+                    type = type[i],alpha = alpha)[[1]]
     }
+    names(res) = type
   }
 
   return(res)

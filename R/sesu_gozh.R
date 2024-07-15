@@ -62,7 +62,8 @@ sesu_gozh = \(formula,datalist,su, cores = 1, strategy = 2L,
               increase_rate = 0.05, alpha = 0.95, ...){
   if (strategy == 1) {
     res_sesu = purrr::map2(datalist, su,
-                           \(.tbf, .spsu) gozh(formula,.tbf,cores,type = "factor",
+                           \(.tbf, .spsu) gozh(formula,.tbf,cores,
+                                               type = "factor",
                                                alpha = alpha, ...) %>%
                              purrr::pluck('factor') %>%
                              dplyr::mutate(su = .spsu))
