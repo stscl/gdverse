@@ -70,6 +70,27 @@ opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
     }
     names(res) = type
   }
-
+  class(res) = "opgd_result"
   return(res)
+}
+
+#' @title print OPGD result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for RID model from `opgd()`.
+#'
+#' @param x Return by `opgd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+print.opgd_result = \(x, ...) {
+  cat("                OPGD Model                  \n")
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0(nx[i],"_detector")
+    print(res)
+    cat("\n")
+  }
 }
