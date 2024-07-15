@@ -37,6 +37,7 @@ head(ndvi)
 ``` r
 gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
 gozh.uvi
+##                 GOZH Model                  
 ## ***          Factor Detector            
 ## 
 ## |   variable    | Q-statistic | P-value  |
@@ -50,7 +51,7 @@ gozh.uvi
 plot(gozh.uvi)
 ```
 
-![](../man/figures/shegd/gozh_uni-1.png)
+![plot of chunk gozh_uni](man/figures/shegd/gozh_uni-1.png)
 
 ### Variable interaction detection
 
@@ -58,6 +59,7 @@ plot(gozh.uvi)
 ``` r
 gozh.bi = gozh(NDVIchange ~ ., data = ndvi,type = 'interaction')
 gozh.bi
+##                 GOZH Model                  
 ## ***        Interaction Detector         
 ## 
 ## |    Interactive variable     |    Interaction     |
@@ -80,7 +82,7 @@ gozh.bi
 plot(gozh.bi)
 ```
 
-![](../man/figures/shegd/gozh_bi-1.png)
+![plot of chunk gozh_bi](man/figures/shegd/gozh_bi-1.png)
 
 ### Variable interaction contribution
 
@@ -111,7 +113,7 @@ lesh.m
 plot(lesh.m, pie = TRUE, scatter = TRUE)
 ```
 
-![](../man/figures/shegd/lesh-1.png)
+![plot of chunk lesh](man/figures/shegd/lesh-1.png)
 
 Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of the interactive contribution of variables,and the rest remains consistent.
 
@@ -122,7 +124,7 @@ And you can only look at the contribution part of the variable interaction:
 plot(lesh.m, pie = TRUE, scatter = FALSE)
 ```
 
-![](../man/figures/shegd/lesh_only-1.png)
+![plot of chunk lesh_only](man/figures/shegd/lesh_only-1.png)
 
 By accessing the concrete result through `lesh.m$interaction`, which returns a `tibble`.
 
