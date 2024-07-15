@@ -119,6 +119,7 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.uvi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span><span class="op">)</span></span>
 <span><span class="va">gozh.uvi</span></span>
+<span><span class="co">##                 GOZH Model                  </span></span>
 <span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
@@ -138,6 +139,7 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.bi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">gozh.bi</span></span>
+<span><span class="co">##                 GOZH Model                  </span></span>
 <span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>

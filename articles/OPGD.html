@@ -137,7 +137,7 @@ q-statistic.</p>
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 4.1 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 3.7 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
@@ -306,24 +306,8 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <code class="sourceCode R"><span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">)</span></span>
-<span><span class="co">## List of 2</span></span>
-<span><span class="co">##  $ :List of 1</span></span>
-<span><span class="co">##   ..$ factor: tibble [12 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">##   .. ..$ variable   : chr [1:12] "presum" "lulc" "premin" "tmpmin" ...</span></span>
-<span><span class="co">##   .. ..$ Q-statistic: num [1:12] 0.661 0.66 0.466 0.436 0.254 ...</span></span>
-<span><span class="co">##   .. ..$ P-value    : num [1:12] 8.34e-10 8.78e-10 3.61e-10 8.54e-10 7.85e-10 ...</span></span>
-<span><span class="co">##   ..- attr(*, "class")= chr "factor_detector"</span></span>
-<span><span class="co">##  $ :List of 1</span></span>
-<span><span class="co">##   ..$ interaction: tibble [66 × 6] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">##   .. ..$ variable1                                    : chr [1:66] "lulc" "lulc" "lulc" "lulc" ...</span></span>
-<span><span class="co">##   .. ..$ variable2                                    : chr [1:66] "aspect" "elev" "ntl" "pop" ...</span></span>
-<span><span class="co">##   .. ..$ Interaction                                  : chr [1:66] "Enhance, nonlinear" "Enhance, bi-" "Enhance, nonlinear" "Enhance, bi-" ...</span></span>
-<span><span class="co">##   .. ..$ Variable1 Q-statistics                       : num [1:66] 0.66 0.66 0.66 0.66 0.66 ...</span></span>
-<span><span class="co">##   .. ..$ Variable2 Q-statistics                       : num [1:66] 0.0186 0.2355 0.0173 0.1953 0.1451 ...</span></span>
-<span><span class="co">##   .. ..$ Variable1 and Variable2 interact Q-statistics: num [1:66] 0.691 0.828 0.716 0.756 0.77 ...</span></span>
-<span><span class="co">##   ..- attr(*, "class")= chr "interaction_detector"</span></span>
-<span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">fvc_opgd</span></span>
+<span><span class="co">##                 OPGD Model                  </span></span>
 <span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
@@ -340,7 +324,7 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <span><span class="co">## |  premax  | 0.14507334  | 5.960000e-10 |</span></span>
 <span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
 <span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span>
-<span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">## </span></span>
 <span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable |    Interaction     |</span></span>
@@ -413,11 +397,8 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <span><span class="co">## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |</span></span></code></pre></div>
 <p>You can use <code><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot()</a></code> to visualize the result.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/opgd/fd-1.png"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/opgd/id-1.png"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/opgd/opgd_plot-1.png"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
