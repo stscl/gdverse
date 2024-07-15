@@ -13,7 +13,7 @@
 #' @param formula A formula of spatial fuzzy overlay.
 #' @param data A data.frame or tibble of discretized data.
 #' @param method (optional) Overlay methods. When `method` is `and`, use `min` to do
-#' fuzzy overlay;and when `method` is `or`,use `max` to do fuzzy overlay. Default is `and`.
+#' fuzzy overlay; and when `method` is `or`,use `max` to do fuzzy overlay. Default is `and`.
 #'
 #' @return A spatial fuzzy overlay vector.
 #' @export
