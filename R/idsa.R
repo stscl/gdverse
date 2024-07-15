@@ -136,7 +136,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
                         names_to = 'zone', values_to = 'zone_risk')
   risk2 = tibble::tibble(reszone = reszone) %>%
     dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
-    dplyr::pull('Risk')
+    dplyr::pull(Risk)
   out_g = tibble::tibble(varibale = xsname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(pid_idsa))
