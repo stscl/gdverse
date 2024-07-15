@@ -2,9 +2,12 @@
 
 S3method(plot,ecological_detector)
 S3method(plot,factor_detector)
+S3method(plot,gozh_result)
 S3method(plot,idsa_result)
 S3method(plot,interaction_detector)
 S3method(plot,lesh_result)
+S3method(plot,opgd_result)
+S3method(plot,rgd_result)
 S3method(plot,risk_detector)
 S3method(plot,sesu_gozh)
 S3method(plot,sesu_opgd)
