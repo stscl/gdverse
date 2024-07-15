@@ -134,7 +134,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
     dplyr::select(dplyr::all_of(c('zone1st','zone2nd','Risk'))) %>%
     tidyr::pivot_longer(cols = dplyr::all_of(c('zone1st','zone2nd')),
                         names_to = 'zone', values_to = 'zone_risk')
-  risk2 = tibble::tibble(reszone = reszone) %>%
+  risk2 = tibble::tibble(reszone = paste0('zone',reszone)) %>%
     dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
     dplyr::pull(Risk)
   out_g = tibble::tibble(varibale = xsname) %>%
@@ -169,7 +169,7 @@ print.idsa_result = \(x, ...) {
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
       "\n ## Different of response variable between a pair of overlay zones:")
-  x = dplyr::select(x$risk,zone1st,zone2nd,Risk)
+  x = dplyr::select(x$risk1,zone1st,zone2nd,Risk)
   print(knitr::kable(utils::head(x,5),format = "markdown",align = 'c',...))
   cat("\n #### Only the first five pairs of overlay zones are displayed! ####")
 }
