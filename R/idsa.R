@@ -141,7 +141,8 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
   risk2 = risk1 %>%
     dplyr::select(dplyr::all_of(c('zone1st','zone2nd','Risk'))) %>%
     tidyr::pivot_longer(cols = dplyr::all_of(c('zone1st','zone2nd')),
-                        names_to = 'zone', values_to = 'zone_risk')
+                        names_to = 'zone', values_to = 'zone_risk') %>%
+    dplyr::distinct(zone_risk,.keep_all = TRUE)
   risk2 = tibble::tibble(reszone = paste0('zone',reszone)) %>%
     dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
     dplyr::pull(Risk)

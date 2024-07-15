@@ -86,4 +86,14 @@ idsa.model
 plot(idsa.model)
 ```
 
+The risk detection outcomes, as determined by IDSA, can be graphically represented on a map.
+
+```{r idsa_map,fig.width=6.5,fig.height=4}
+idsa_risk = idsa.model$risk2
+usfi$risk = idsa_risk
+
+ggplot() +
+
+```
+
 This vignette is a special case because the explanatory variables are dimensionally reduced in advance and is used as a coping strategy when IDSA is executed in the face of many explanatory variables.

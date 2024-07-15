@@ -8,5 +8,5 @@ utils::globalVariables(c(".", "Ecological", "Interaction", "Interactive variable
                          "spd1", "spd2", "varibale", "P-value", "pv", "interactv",
                          "significance", "Variable1 SPD", "Variable2 SPD", "eco",
                          "risk", "n", "lr", "lr_before", "k", "method", "spade_cpsd",
-                         "qv_theta", "qv_rid", "su", "v1", "v2"))
+                         "qv_theta", "qv_rid", "su", "v1", "v2", "zone_risk"))
 
