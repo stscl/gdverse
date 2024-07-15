@@ -47,6 +47,27 @@ gozh = \(formula, data, cores = 1,
   return(res)
 }
 
+#' @title print GOZH result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for GOZH model from `gozh()`.
+#'
+#' @param x Return by `gozh()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+print.gozh_result = \(x, ...) {
+  cat("                GOZH Model                  \n")
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0(nx[i],"_detector")
+    print(res)
+    cat("\n")
+  }
+}
+
 
 #' @title geographically optimal zones-based heterogeneity detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
