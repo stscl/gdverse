@@ -6,7 +6,7 @@
 
 * Fix the bug where `robust_disc` fails to run when a single explanatory variable is input.
 
-* Adding spatial plotting support for risk outcomes in the IDSA Model.
+* Adding spatial plotting support for the risk outcomes in IDSA Model.
 
 # gdverse 0.3.0
 
