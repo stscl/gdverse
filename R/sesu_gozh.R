@@ -33,8 +33,12 @@
 #' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list with `sesu`(size effects of spatial units),`optsu`(optimal spatial unit) and
-#' `strategy`(A number that represents the optimal analytical scale selection strategy).
+#' @return A list with SESU GOZH results.
+#' \describe{
+#' \item{\code{sesu}}{a tibble representing size effects of spatial units}
+#' \item{\code{optsu}}{optimal spatial unit}
+#' \item{\code{strategy}}{the optimal analytical scale selection strategy}
+#' }
 #' @export
 #'
 #' @examples
@@ -94,7 +98,7 @@ sesu_gozh = \(formula,datalist,su, cores = 1, strategy = 2L,
       dplyr::pull(`Q-statistic`)
     optsu = loess_optscale(qv,su,increase_rate)
   }
-  res = list('sesu' = sesu,'optsu' = optsu, 'strategy' = strategy)
+  res = list('sesu' = sesu, 'optsu' = optsu, 'strategy' = strategy)
   class(res) = 'sesu_gozh'
   return(res)
 }
