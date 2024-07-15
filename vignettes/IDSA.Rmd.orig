@@ -76,7 +76,6 @@ wt = usfi |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) %$%
   sfdep::wt_as_matrix(nb,wt)
-usfi = st_drop_geometry(usfi)
 ```
 
 ### IDSA modeling

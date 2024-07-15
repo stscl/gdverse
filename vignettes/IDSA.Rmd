@@ -42,7 +42,8 @@ usfi
 ##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692
 ## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601
 ## # ℹ 1,027 more rows
-## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>, geom <POLYGON [m]>
+## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>,
+## #   geom <POLYGON [m]>
 ```
 
 ### Data precessing
@@ -105,7 +106,6 @@ wt = usfi |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) %$%
   sfdep::wt_as_matrix(nb,wt)
-usfi = st_drop_geometry(usfi)
 ```
 
 ### IDSA modeling
