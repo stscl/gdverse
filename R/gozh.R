@@ -19,6 +19,12 @@
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A list of GOZH model result.
+#' \describe{
+#' \item{\code{factor}}{the result of factor detector}
+#' \item{\code{interaction}}{the result of interaction detector}
+#' \item{\code{risk}}{the result of risk detector}
+#' \item{\code{ecological}}{the result of ecological detector}
+#' }
 #' @export
 #'
 #' @examples
@@ -33,7 +39,8 @@ gozh = \(formula, data, cores = 1,
   } else {
     res = vector("list", length(type))
     for (i in seq_along(type)){
-      res[[i]] = gozh_detector(formula, data, cores, type[i], alpha, ...)}
+      res[[i]] = gozh_detector(formula, data, cores, type[i], alpha, ...)[[1]]
+      }
   }
   return(res)
 }
@@ -61,7 +68,13 @@ gozh = \(formula, data, cores = 1,
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list of the corresponding result is stored under the corresponding detector type.
+#' @return A list of tibble with the corresponding result under different detector types.
+#' \describe{
+#' \item{\code{factor}}{the result of factor detector}
+#' \item{\code{interaction}}{the result of interaction detector}
+#' \item{\code{risk}}{the result of risk detector}
+#' \item{\code{ecological}}{the result of ecological detector}
+#' }
 #' @export
 #'
 #' @examples
