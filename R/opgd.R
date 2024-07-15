@@ -77,7 +77,7 @@ opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
 #' @title print OPGD result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for RID model from `opgd()`.
+#' S3 method to format output for OPGD model from `opgd()`.
 #'
 #' @param x Return by `opgd()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.

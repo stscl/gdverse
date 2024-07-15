@@ -64,3 +64,24 @@ rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
   class(res) = "rgd_result"
   return(res)
 }
+
+#' @title print RGD result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for RGD model from `rgd()`.
+#'
+#' @param x Return by `rgd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+print.rgd_result = \(x, ...) {
+  cat("                 RGD Model                  \n")
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0(nx[i],"_detector")
+    print(res)
+    cat("\n")
+  }
+}
