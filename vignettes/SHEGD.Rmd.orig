@@ -66,3 +66,9 @@ By accessing the concrete result through `lesh.m$interaction`, which returns a `
 ```{r}
 lesh.m$interaction
 ```
+
+Use `lesh.m$spd_lesh` to access the SHAP power of determinants:
+
+```{r}
+lesh.m$spd_lesh
+```
