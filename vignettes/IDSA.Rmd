@@ -147,4 +147,21 @@ plot(idsa.model)
 
 ![](../man/figures/idsa/idsa_modeling-1.png)
 
+The risk detection outcomes, as determined by IDSA, can be graphically represented on a map.
+
+
+``` r
+idsa_risk = idsa.model$risk2
+usfi$risk = idsa_risk
+
+ggplot(data = usfi) +
+  geom_sf(aes(fill = risk),
+          alpha = .65) +
+  ggplot2::scale_fill_manual(values = c("No" = "#7fdbff",
+                                        "Yes" = "#ffa500")) +
+  theme_bw()
+```
+
+![](../man/figures/idsa/idsa_map-1.png)
+
 This vignette is a special case because the explanatory variables are dimensionally reduced in advance and is used as a coping strategy when IDSA is executed in the face of many explanatory variables.
