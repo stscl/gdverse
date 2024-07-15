@@ -14,7 +14,13 @@
 #' `interaction`, `risk`, `ecological`.
 #' @param ... (optional) Specifies the size of the alpha (confidence level).Default is `0.95`.
 #'
-#' @return A tibble of the corresponding result is stored under the corresponding detector type.
+#' @return A list of tibble with the corresponding result under different detector types.
+#' \describe{
+#' \item{\code{factor}}{the result of factor detector}
+#' \item{\code{interaction}}{the result of interaction detector}
+#' \item{\code{risk}}{the result of risk detector}
+#' \item{\code{ecological}}{the result of ecological detector}
+#' }
 #' @export
 #'
 #' @examples

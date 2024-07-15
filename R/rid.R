@@ -26,6 +26,9 @@
 #' @param cores (optional) Positive integer(default is 1). If cores > 1, use parallel computation.
 #'
 #' @return A list of the RID model result.
+#' \describe{
+#' \item{\code{interaction}}{the result of RID model}
+#' }
 #' @export
 #'
 #' @examples

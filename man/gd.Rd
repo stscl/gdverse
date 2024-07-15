@@ -17,7 +17,13 @@ gd(formula, data, type = "factor", ...)
 \item{...}{(optional) Specifies the size of the alpha (confidence level).Default is \code{0.95}.}
 }
 \value{
-A tibble of the corresponding result is stored under the corresponding detector type.
+A list of tibble with the corresponding result under different detector types.
+\describe{
+\item{\code{factor}}{the result of factor detector}
+\item{\code{interaction}}{the result of interaction detector}
+\item{\code{risk}}{the result of risk detector}
+\item{\code{ecological}}{the result of ecological detector}
+}
 }
 \description{
 Function for original geographical detector model.

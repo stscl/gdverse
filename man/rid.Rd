@@ -34,6 +34,9 @@ Default all \code{discvar} use \code{10}.}
 }
 \value{
 A list of the RID model result.
+\describe{
+\item{\code{interaction}}{the result of RID model}
+}
 }
 \description{
 Function for robust interaction detector(RID) model.
