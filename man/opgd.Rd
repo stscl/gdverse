@@ -42,6 +42,12 @@ which is used to set the random number seed.}
 }
 \value{
 A list of the OPGD model result.
+\describe{
+\item{\code{factor}}{the result of factor detector}
+\item{\code{interaction}}{the result of interaction detector}
+\item{\code{risk}}{the result of risk detector}
+\item{\code{ecological}}{the result of ecological detector}
+}
 }
 \description{
 Function for optimal parameters-based geographical detector(OPGD) model.

@@ -24,6 +24,12 @@
 #'  which is used to set the random number seed.
 #'
 #' @return A list of the OPGD model result.
+#' \describe{
+#' \item{\code{factor}}{the result of factor detector}
+#' \item{\code{interaction}}{the result of interaction detector}
+#' \item{\code{risk}}{the result of risk detector}
+#' \item{\code{ecological}}{the result of ecological detector}
+#' }
 #' @export
 #'
 #' @examples
@@ -60,7 +66,7 @@ opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
     res = vector("list", length(type))
     for (i in seq_along(type)){
       res[[i]] = gd(paste0(yname,' ~ .'),data = newdata,
-                    type = type[i],alpha = alpha)
+                    type = type[i],alpha = alpha)[[i]]
     }
   }
 
