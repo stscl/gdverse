@@ -68,6 +68,29 @@ print.gozh_result = \(x, ...) {
   }
 }
 
+#' @title plot GOZH result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for GOZH model result in `gozh()`.
+#'
+#' @param x Return by `gozh()`.
+#' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
+#'
+#' @return A ggplot2 layer
+#' @export
+#'
+plot.gozh_result = \(x, ...) {
+  fig_p = vector("list",length(x))
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0(nx[i],"_detector")
+    fig_p[[i]] = plot(res)
+  }
+  fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
+  return(fig_p)
+}
+
 
 #' @title geographically optimal zones-based heterogeneity detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
