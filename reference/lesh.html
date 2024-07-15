@@ -80,8 +80,14 @@ cluster with that many cores is created and used. You can also supply a cluster 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of LESH model result.</p>
-    </div>
+    <p>A list of LESH model result.</p><dl><dt><code>interaction</code></dt>
+<dd><p>the interaction result of LESH model</p></dd>
+
+<dt><code>spd_lesh</code></dt>
+<dd><p>a tibble of the SHAP power of determinants</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The LESH model requires at least \(2^n-1\) calculations when has \(n\) explanatory variables.
