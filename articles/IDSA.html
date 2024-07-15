@@ -118,7 +118,8 @@ demonstrate the use of the IDSA model.</p>
 <span><span class="co">##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692</span></span>
 <span><span class="co">## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601</span></span>
 <span><span class="co">## # ℹ 1,027 more rows</span></span>
-<span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;, geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
+<span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-precessing">Data precessing<a class="anchor" aria-label="anchor" href="#data-precessing"></a>
@@ -182,8 +183,7 @@ explain <code>SUHI</code>, which is removed here.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">is.na</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/st_contiguity.html" class="external-link">st_contiguity</a></span><span class="op">(</span><span class="va">geom</span><span class="op">)</span>,</span>
 <span>         wt <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/st_weights.html" class="external-link">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/exposition.html" class="external-link">%$%</a></span></span>
-<span>  <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/wt_as_matrix.html" class="external-link">wt_as_matrix</a></span><span class="op">(</span><span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span></span>
-<span><span class="va">usfi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">sfdep</span><span class="fu">::</span><span class="fu"><a href="https://sfdep.josiahparry.com/reference/wt_as_matrix.html" class="external-link">wt_as_matrix</a></span><span class="op">(</span><span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="idsa-modeling">IDSA modeling<a class="anchor" aria-label="anchor" href="#idsa-modeling"></a>
