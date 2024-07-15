@@ -12,7 +12,7 @@ st_fuzzyoverlay(formula, data, method = "and")
 \item{data}{A data.frame or tibble of discretized data.}
 
 \item{method}{(optional) Overlay methods. When \code{method} is \code{and}, use \code{min} to do
-fuzzy overlay;and when \code{method} is \code{or},use \code{max} to do fuzzy overlay. Default is \code{and}.}
+fuzzy overlay; and when \code{method} is \code{or},use \code{max} to do fuzzy overlay. Default is \code{and}.}
 }
 \value{
 A spatial fuzzy overlay vector.
