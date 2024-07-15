@@ -92,8 +92,9 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.86 sec elapsed
+## 4.22 sec elapsed
 fvc_opgd
+##                 OPGD Model                  
 ## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
@@ -117,6 +118,7 @@ fvc_opgd
 ``` r
 g = gozh(fvc ~ ., data = fvc, cores = 6, type = 'factor')
 g
+##                 GOZH Model                  
 ## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |  P-value  |
