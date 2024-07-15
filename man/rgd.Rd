@@ -38,6 +38,12 @@ parallel computation.}
 }
 \value{
 A list of the RGD model result.
+\describe{
+\item{\code{factor}}{the result of factor detector}
+\item{\code{interaction}}{the result of interaction detector}
+\item{\code{risk}}{the result of risk detector}
+\item{\code{ecological}}{the result of ecological detector}
+}
 }
 \description{
 Function for robust geographical detector(RGD) model.

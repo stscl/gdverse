@@ -20,6 +20,12 @@
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
 #'
 #' @return A list of the RGD model result.
+#' \describe{
+#' \item{\code{factor}}{the result of factor detector}
+#' \item{\code{interaction}}{the result of interaction detector}
+#' \item{\code{risk}}{the result of risk detector}
+#' \item{\code{ecological}}{the result of ecological detector}
+#' }
 #' @export
 #'
 #' @examples
@@ -51,7 +57,7 @@ rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
     res = vector("list", length(type))
     for (i in seq_along(type)){
       res[[i]] = gd(paste0(yname,' ~ .'),data = newdata,
-                    type = type[i],alpha = alpha)
+                    type = type[i],alpha = alpha)[[1]]
     }
   }
 
