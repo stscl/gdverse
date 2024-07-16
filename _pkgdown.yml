@@ -71,6 +71,7 @@ reference:
   - risk_detector
   - ecological_detector
   - srs_factor_detector
+  - srs_interaction_detector
   - gozh_detector
   - ends_with("_spade")
   - psd_iev
