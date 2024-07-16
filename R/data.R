@@ -35,3 +35,11 @@
 #' @docType data
 #' @keywords dataset srs_table
 "srs_table"
+
+#' @title example of spatial information system spatial adjacency matrix
+#'
+#' @name ssr_wt
+#' @format \code{ssr_wt}: A matrix with 11rows and 11cols.
+#' @docType data
+#' @keywords dataset ssr_wt
+"ssr_wt"
