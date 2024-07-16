@@ -56,6 +56,16 @@ bool AnyRowCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
   return false;
 }
 
+bool AnyRowColCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+  for (int i = 0; i < mat1.nrow(); ++i) {
+    IntegerVector vec2 = mat1(i,_);
+    if (AnyCommonElementVec2(vec1,vec2)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 IntegerMatrix slice_matrix_rows(IntegerMatrix mat, IntegerVector rows) {
   IntegerMatrix new_mat(rows.size(), mat.ncol());
   for (int i = 0; i < rows.size(); ++i) {
@@ -96,7 +106,8 @@ bool rcpp_alleuqal(IntegerVector xvec, int x){
 
 // [[Rcpp::export]]
 
-List SRS_PD(IntegerMatrix xobs,
+List SRS_PD(IntegerVector yobs,
+            IntegerMatrix xobs,
             IntegerMatrix wt){
   NumericVector res(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i){
@@ -107,7 +118,7 @@ List SRS_PD(IntegerMatrix xobs,
     for (int n = 0; n < wti.size(); ++n){
       IntegerVector vec1 = xobs(wti[n],_);
       IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
-      if (AnyRowCommonElementVecMat(vec1,mat1)){
+      if (AnyRowCommonElementVecMat(vec1,mat1) and (yobs[i] == yobs[n])){
         apprx[n] = 1;
       }
     }
@@ -126,4 +137,69 @@ List SRS_PD(IntegerMatrix xobs,
   List out = List::create(Named("PD",pd),
                           Named("SE_PD",sepd));
   return out;
+}
+
+// [[Rcpp::export]]
+
+List SRS_MULTIPD(IntegerVector yobs,
+                 IntegerMatrix xobs,
+                 IntegerMatrix wt){
+  NumericVector res(xobs.nrow());
+  for (int i = 0; i < xobs.nrow(); ++i){
+    IntegerVector wti = wt(i,_);
+    wti = rcpp_which(wti != 0);
+    double wti_size = wti.size();
+    IntegerVector apprx(wti.size());
+    for (int n = 0; n < wti.size(); ++n){
+      IntegerVector vec1 = xobs(wti[n],_);
+      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      if (AnyRowColCommonElementVecMat(vec1,mat1)and (yobs[i] == yobs[n])){
+        apprx[n] = 1;
+      }
+    }
+    if (rcpp_alleuqal(apprx,0)) {
+      // When doing division operations in cpp, be careful to set at least one element to double
+      res[i] = 1.0 / wti_size;
+    } else {
+      apprx = apprx[apprx != 0];
+      res[i] = apprx.size() / wti_size;
+    }
+  }
+  // Rcout << "res: " << res << "\n";
+  double pd = Rcpp::sum(res) / xobs.nrow();
+  NumericVector pdN = res / Rcpp::sum(res);
+  double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
+  List out = List::create(Named("PD",pd),
+                          Named("SE_PD",sepd));
+  return out;
+}
+
+// [[Rcpp::export]]
+
+NumericVector SRS_PDTEST(IntegerVector yobs,
+                         IntegerMatrix xobs,
+                         IntegerMatrix wt){
+  NumericVector res(xobs.nrow());
+  for (int i = 0; i < xobs.nrow(); ++i){
+    IntegerVector wti = wt(i,_);
+    wti = rcpp_which(wti != 0);
+    double wti_size = wti.size();
+    IntegerVector apprx(wti.size());
+    for (int n = 0; n < wti.size(); ++n){
+      IntegerVector vec1 = xobs(wti[n],_);
+      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      if (AnyRowCommonElementVecMat(vec1,mat1) and (yobs[i] == yobs[n])){
+        apprx[n] = 1;
+      }
+    }
+    if (rcpp_alleuqal(apprx,0)) {
+      // When doing division operations in cpp, be careful to set at least one element to double
+      res[i] = 1.0 / wti_size;
+    } else {
+      apprx = apprx[apprx != 0];
+      res[i] = apprx.size() / wti_size;
+    }
+  }
+  // Rcout << "res: " << res << "\n";
+  return res;
 }

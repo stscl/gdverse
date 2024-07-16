@@ -107,7 +107,7 @@ interaction_detector = \(y,x1,x2){
 #' risk_detector(y = 1:7,
 #'               x = c('x',rep('y',3),rep('z',3)))
 #'
-risk_detector = \(y,x,alpha = 0.95){
+risk_detector = \(y,x,alpha = 0.95,alternative = "greater"){
   x = factor(x)
   gdf = tibble::tibble(x = x, y = y)
   paradf = utils::combn(levels(x),2,simplify = FALSE)
@@ -121,7 +121,7 @@ risk_detector = \(y,x,alpha = 0.95){
     y2 = dplyr::filter(gdf, x == n2) %>% dplyr::pull(y)
     df0 = min(c(length(y1),length(y2))) - 1
     tt = tryCatch({
-      stats::t.test(y1,y2,conf.level = cutoff)
+      stats::t.test(y1,y2,conf.level = cutoff, alternative = alternative)
     }, error = function(e){
       list("statistic" = 0,
            "parameter" = df0,

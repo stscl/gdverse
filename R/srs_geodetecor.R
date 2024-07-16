@@ -24,9 +24,9 @@
 srs_factor_detector = \(y,x,wt){
   y = all2int(y)
   x = all2int(x)
-  obs = cbind(x,y)
+  obs = matrix(x, ncol = 1)
   diag(wt) = 0
-  res = SRS_PD(obs,wt)
+  res = SRS_PD(y,obs,wt)
   return(res)
 }
 
@@ -68,9 +68,9 @@ srs_interaction_detector = \(y,x1,x2,wt){
   y = all2int(y)
   x1 = all2int(x1)
   x2 = all2int(x2)
-  obs = cbind(x1,x2,y)
+  obs = cbind(x1,x2)
   diag(wt) = 0
-  pd12a = SRS_PD(obs,wt)
+  pd12a = SRS_MULTIPD(y,obs,wt)
   pd12 = pd12a[[1]]
 
   if (pd12 < min(pd1, pd2)) {
@@ -120,10 +120,14 @@ srs_interaction_detector = \(y,x1,x2,wt){
 #' srs_ecological_detector(srs_table$d,srs_table$a1,srs_table$a2,srs_wt)
 #'
 srs_ecological_detector = \(y,x1,x2,wt,alpha = 0.95){
-  pd1a = srs_factor_detector(y,x1,wt)
-  pd1 = pd1a[[1]]
-  pd2a = srs_factor_detector(y,x2,wt)
-  pd2 = pd2a[[1]]
+  y = all2int(y)
+  x1 = all2int(x1)
+  x2 = all2int(x2)
+  xobs1 = matrix(x1, ncol = 1)
+  xobs2 = matrix(x2, ncol = 1)
+  diag(wt) = 0
+  pd1 = SRS_PDTEST(y,xobs1,wt)
+  pd2 = SRS_PDTEST(y,xobs2,wt)
   tt = tryCatch({
     stats::t.test(pd1,pd2,conf.level = alpha)
   }, error = function(e){
