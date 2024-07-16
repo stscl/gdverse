@@ -71,6 +71,6 @@ List SRS_PD(IntegerMatrix xobs,
   NumericVector pdN = res / Rcpp::sum(res);
   double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
   List out = List::create(Named("PD",pd),
-                                   Named("SE_PD",sepd));
+                          Named("SE_PD",sepd));
   return out;
 }
