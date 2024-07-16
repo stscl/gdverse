@@ -27,3 +27,11 @@
 #' @docType data
 #' @keywords dataset sim
 "sim"
+
+#' @title example of spatial information system table
+#'
+#' @name srs_table
+#' @format \code{srs_table}: A tibble with 11 rows and 5 variables(one `ID` column).
+#' @docType data
+#' @keywords dataset srs_table
+"srs_table"
