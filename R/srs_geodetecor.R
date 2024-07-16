@@ -51,6 +51,6 @@ srs_factor_detector = \(y,x,wt,alpha = 0.95,
   })
   pv = tt$p.value
   names(pv) = 'P-value'
-  append(res,pv)
+  res = append(res,pv)
   return(res)
 }
