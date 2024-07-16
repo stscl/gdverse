@@ -55,8 +55,11 @@ Suggests:
     terra,
     tidyterra,
     tidyverse
+LinkingTo: 
+    Rcpp
 VignetteBuilder: knitr
 Depends: 
     R (>= 4.1.0)
 LazyData: true
 URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
+
