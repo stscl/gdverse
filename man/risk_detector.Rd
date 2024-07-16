@@ -4,7 +4,7 @@
 \alias{risk_detector}
 \title{risk detector}
 \usage{
-risk_detector(y, x, alpha = 0.95)
+risk_detector(y, x, alpha = 0.95, alternative = "greater")
 }
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
@@ -12,6 +12,9 @@ risk_detector(y, x, alpha = 0.95)
 \item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
+
+\item{alternative}{(optional) a character string specifying the alternative hypothesis,
+must be one of "two.sided" , "greater"(default) or "less". You can specify just the initial letter.}
 }
 \value{
 A tibble. contains different combinations of covariate \code{X} level and student t-test statistics,
