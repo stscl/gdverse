@@ -40,7 +40,7 @@ srs_factor_detector = \(y,x,wt,alpha = 0.95,
     stats::t.test(pdp,0,conf.level = alpha)
   }, error = function(e){
     list("statistic" = 0,
-         "parameter" = df0,
+         "parameter" = 0,
          "p.value" = 1)
   })
   pv = tt$p.value

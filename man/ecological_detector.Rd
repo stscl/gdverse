@@ -9,15 +9,19 @@ ecological_detector(y, x1, x2, alpha = 0.95)
 \arguments{
 \item{y}{Dependent variable, continuous numeric vector.}
 
-\item{x1}{Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x1}{Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.}
 
-\item{x2}{Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x2}{Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
 }
 \value{
-A list contains \code{F} statistics, P-values, and is there a significant difference between the
-two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
+A list.
+\describe{
+\item{\code{F-statistic}}{the result of F statistic for ecological detector}
+\item{\code{P-value}}{the result of O value for ecological detector}
+\item{\code{Ecological}}{is there a significant difference between the two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}}
+}
 }
 \description{
 Compare the effects of two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.

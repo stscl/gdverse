@@ -9,10 +9,14 @@ factor_detector(y, x)
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
 
-\item{x}{Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
 }
 \value{
-A list contains the Q-statistic and the P-value.
+A list.
+\describe{
+\item{\code{Q-statistic}}{the q statistic for factor detector}
+\item{\code{P-value}}{the p value for factor detector}
+}
 }
 \description{
 The factor detector q-statistic measures the spatial stratified heterogeneity of a variable Y,

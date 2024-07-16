@@ -9,13 +9,18 @@ interaction_detector(y, x1, x2)
 \arguments{
 \item{y}{Dependent variable, continuous numeric vector.}
 
-\item{x1}{Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x1}{Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.}
 
-\item{x2}{Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
+\item{x2}{Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
 }
 \value{
-A list contains the Q statistic when the factors \eqn{X_1} and \eqn{X_1} act on \eqn{Y} alone
-and the Q statistic when the two interact on \eqn{Y} together with the result type of the interaction detector.
+A list.
+\describe{
+\item{\code{Variable1 Q-statistics}}{Q-statistics for variable1}
+\item{\code{Variable2 Q-statistics}}{Q-statistics for variable2}
+\item{\code{Variable1 and Variable2 interact Q-statistics}}{Q-statistics for variable1 and variable2 interact}
+\item{\code{Interaction}}{the interact result type}
+}
 }
 \description{
 Identify the interaction between different risk factors, that is, assess whether factors X1 and X2 together
