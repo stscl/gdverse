@@ -2,6 +2,12 @@
 
 * Support more **geodetector model variants** and fix bugs of **gdverse**.
 
+# gdverse 0.5.0
+
+* Support SRSGD model.
+
+* Update function document.
+
 # gdverse 0.4.0
 
 * Fix bug where `robust_disc` fails to run when a single explanatory variable is input.
