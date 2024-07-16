@@ -4,7 +4,7 @@
 \alias{srs_ecological_detector}
 \title{spatial rough set-based ecological detector}
 \usage{
-srs_ecological_detector(y, x1, x2, wt, alpha = 0.95)
+srs_ecological_detector(y, x1, x2, wt, alpha = 0.95, alternative = "greater")
 }
 \arguments{
 \item{y}{Dependent variable, \code{factor}, \code{character} or \code{discrete numeric}.}
@@ -16,6 +16,9 @@ srs_ecological_detector(y, x1, x2, wt, alpha = 0.95)
 \item{wt}{Spatial adjacency matrix.}
 
 \item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
+
+\item{alternative}{(optional) a character string specifying the alternative hypothesis,
+must be one of "two.sided" , "greater"(default) or "less". You can specify just the initial letter.}
 }
 \value{
 A list.

@@ -98,8 +98,6 @@ interaction_detector = \(y,x1,x2){
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
-#' @param alternative (optional) a character string specifying the alternative hypothesis,
-#' must be one of "two.sided" , "greater"(default) or "less". You can specify just the initial letter.
 #'
 #' @return A tibble. contains different combinations of covariate \code{X} level and student t-test statistics,
 #' degrees of freedom, p-values, and whether has risk (Yes or No).
@@ -109,7 +107,7 @@ interaction_detector = \(y,x1,x2){
 #' risk_detector(y = 1:7,
 #'               x = c('x',rep('y',3),rep('z',3)))
 #'
-risk_detector = \(y,x,alpha = 0.95,alternative = "greater"){
+risk_detector = \(y,x,alpha = 0.95){
   x = factor(x)
   gdf = tibble::tibble(x = x, y = y)
   paradf = utils::combn(levels(x),2,simplify = FALSE)
@@ -123,7 +121,7 @@ risk_detector = \(y,x,alpha = 0.95,alternative = "greater"){
     y2 = dplyr::filter(gdf, x == n2) %>% dplyr::pull(y)
     df0 = min(c(length(y1),length(y2))) - 1
     tt = tryCatch({
-      stats::t.test(y1,y2,conf.level = cutoff, alternative = alternative)
+      stats::t.test(y1,y2,conf.level = cutoff)
     }, error = function(e){
       list("statistic" = 0,
            "parameter" = df0,
