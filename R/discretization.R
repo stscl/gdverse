@@ -11,7 +11,7 @@
 #' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
 #' labels rather than integers.
-#' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
+#' @param seed (optional) Random seed number, default is `123456789`. Setting random seed is useful when
 #' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
 #' by sampling `10%`(the default value for `samp_prop`).
 #' @param ... (optional) Other arguments passed to `classInt::classify_intervals()`,
@@ -51,7 +51,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' object.
 #' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
 #' Default is `TRUE`.
-#' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
+#' @param seed (optional) Random seed number, default is `123456789`. Setting random seed is useful when
 #' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
 #' by sampling `10%`(the default value for `samp_prop` in `st_unidisc()`).
 #' @param ... (optional) Other arguments passed to `st_unidisc()`.

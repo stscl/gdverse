@@ -1,3 +1,22 @@
+#' @title spatial rough set-based factor detector
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#'
+#' @param y Variable Y, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param wt Spatial adjacency matrix
+#' @param alpha (optional) Confidence level of the interval,default is `0.95`.
+#' @param size_frac (opional) The fraction to calculate p value, default is `0.05`.
+#' @param seed (optional) Random seed number, default is `123456789`.
+#'
+#' @return A list.
+#' \describe{
+#' \item{\code{PD}}{the average local explanatory power}
+#' \item{\code{SE_PD}}{the degree of spatial heterogeneity of the local explanatory power}
+#' \item{\code{P-value}}{P value for spatial rough set-based factor detector}
+#' }
+#' @export
+#'
+#' @examples
 srs_factor_detector = \(y,x,wt,alpha = 0.95,
                         size_frac = 0.05,
                         seed = 123456789){

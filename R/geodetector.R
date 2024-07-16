@@ -5,7 +5,7 @@
 #' or the determinant power of a covariate X of Y.
 #'
 #' @param y Variable Y, continuous numeric vector.
-#' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
 #' @return A list contains the Q-statistic and the P-value.
 #' @export
@@ -45,8 +45,8 @@ factor_detector = \(y,x){
 #' on Y are independent of each other.
 #'
 #' @param y Dependent variable, continuous numeric vector.
-#' @param x1 Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
-#' @param x2 Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x1 Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x2 Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
 #' @return A list contains the Q statistic when the factors \eqn{X_1} and \eqn{X_1} act on \eqn{Y} alone
 #' and the Q statistic when the two interact on \eqn{Y} together with the result type of the interaction detector.
@@ -137,12 +137,16 @@ risk_detector = \(y,x,alpha = 0.95){
 #' Compare the effects of two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 #'
 #' @param y Dependent variable, continuous numeric vector.
-#' @param x1 Covariable \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
-#' @param x2 Covariable \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x1 Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
+#' @param x2 Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #'
-#' @return A list contains \code{F} statistics, P-values, and is there a significant difference between the
-#' two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
+#' @return A list.
+#' \describe{
+#' \item{\code{F-statistic}}{the result of F statistic for ecological detector}
+#' \item{\code{P-value}}{the result of O value for ecological detector}
+#' \item{\code{Ecological}}{is there a significant difference between the two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}}
+#' }
 #' @export
 #'
 #' @examples
