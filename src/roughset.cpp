@@ -50,7 +50,7 @@ NumericVector rcpp_log2(NumericVector vec) {
 
 // [[Rcpp::export]]
 
-NumericVector SRS_PD(IntegerMatrix xobs,
+List SRS_PD(IntegerMatrix xobs,
                      IntegerMatrix wt){
   NumericVector res(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i){
@@ -70,7 +70,7 @@ NumericVector SRS_PD(IntegerMatrix xobs,
   double pd = Rcpp::sum(res) / xobs.nrow();
   NumericVector pdN = res / Rcpp::sum(res);
   double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
-  NumericVector out = NumericVector::create(Named("PD",pd),
-                                            Named("SE_PD",sepd));
+  List out = List::create(Named("PD",pd),
+                                   Named("SE_PD",sepd));
   return out;
 }
