@@ -35,6 +35,12 @@ srs_factor_detector = \(y,x,wt,alpha = 0.95,
   sindice = sample(seq_along(y), size)
   obsp = obs[sindice,]
   wtp = wt[sindice,sindice]
+  if (!inherits(obsp,"matrix")){
+    obsp = matrix(obsp,nrow = 1, byrow = TRUE)
+  }
+  if (!inherits(wtp,"matrix")){
+    wtp = matrix(wtp, nrow = 1, byrow = TRUE)
+  }
   pdp = SRSFactor_P(obsp,wtp)
   tt = tryCatch({
     stats::t.test(pdp,0,conf.level = alpha)
