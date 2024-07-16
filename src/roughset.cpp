@@ -73,14 +73,14 @@ List SRS_PD(IntegerMatrix xobs,
     IntegerVector apprx(wti.size());
     IntegerMatrix mat1 = slice_matrix_rows(xobs,wti);
     Rcout << "mat1: " << mat1 << "\n";
-    for (int n = 0; n <= wti.size(); ++n){
+    for (int n = 0; n < wti.size(); ++n){
       IntegerVector vec1 = xobs(wti[n],_);
       Rcout << "vec1: " << vec1 << "\n";
       if (AnyCommonElementVecMat(vec1,mat1)){
         apprx[n] = 1;
       }
     }
-    apprx = rcpp_which(apprx == 1);
+    apprx = apprx[apprx != 0];
     Rcout << "apprx: " << apprx << "\n";
     res[i] = apprx.size() / wti.size();
     Rcout << "res[i]: " << res[i] << "\n";
