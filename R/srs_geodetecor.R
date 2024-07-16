@@ -17,6 +17,10 @@
 #' @export
 #'
 #' @examples
+#' data('srs_table')
+#' data('srs_wt')
+#' srs_factor_detector(srs_table$d,srs_table$a1,srs_wt)
+#'
 srs_factor_detector = \(y,x,wt,alpha = 0.95,
                         size_frac = 0.05,
                         seed = 123456789){
