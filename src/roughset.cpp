@@ -107,10 +107,5 @@ double SRSFactor_P(IntegerMatrix xobs,
     apprx = rcpp_which(apprx == 1);
     res[i] = apprx.size() / wti.size();
   }
-  double pd = Rcpp::sum(res) / xobs.nrow();
-  NumericVector pdN = res / Rcpp::sum(res);
-  double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
-  List out = List::create(Named("PD",pd),
-                          Named("SE_PD",sepd));
-  return out;
+  return Rcpp::mean(res);
 }
