@@ -23,7 +23,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // SRSFactor_P
-double SRSFactor_P(IntegerMatrix xobs, IntegerMatrix wt);
+NumericVector SRSFactor_P(IntegerMatrix xobs, IntegerMatrix wt);
 RcppExport SEXP _gdverse_SRSFactor_P(SEXP xobsSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

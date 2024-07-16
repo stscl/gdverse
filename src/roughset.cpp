@@ -27,27 +27,50 @@ bool AnyCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
   return false;
 }
 
+bool AllCommonElementVec2(IntegerVector vec1, IntegerVector vec2) {
+  for (int i = 0; i < vec1.size(); ++i) {
+    if (vec1[i] != vec2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool AllCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+  for (int i = 0; i < mat1.nrow(); ++i) {
+    IntegerVector vec2 = mat1(i,_);
+    if (!AllCommonElementVec2(vec1,vec2)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool AnyRowCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+  for (int i = 0; i < mat1.nrow(); ++i) {
+    IntegerVector vec2 = mat1(i,_);
+    if (AllCommonElementVec2(vec1,vec2)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 IntegerMatrix slice_matrix_rows(IntegerMatrix mat, IntegerVector rows) {
-  int new_nrow = rows.size();
-  int ncol = mat.ncol();
-  IntegerMatrix new_mat(new_nrow, ncol);
-  for (int i = 0; i < new_nrow; ++i) {
-    int row_index = rows[i];
-    for (int j = 0; j < ncol; ++j) {
-      new_mat(i, j) = mat(row_index, j);
+  IntegerMatrix new_mat(rows.size(), mat.ncol());
+  for (int i = 0; i < rows.size(); ++i) {
+    for (int j = 0; j < mat.ncol(); ++j) {
+      new_mat(i, j) = mat(rows[i], j);
     }
   }
   return new_mat;
 }
 
 IntegerMatrix slice_matrix_cols(IntegerMatrix mat, IntegerVector cols) {
-  int new_ncol = cols.size();
-  int nrow = mat.nrow();
-  IntegerMatrix new_mat(nrow, new_ncol);
-  for (int i = 0; i < new_ncol; ++i) {
-    int col_index = cols[i];
-    for (int j = 0; j < nrow; ++j) {
-      new_mat(j, i) = mat(j, col_index);
+  IntegerMatrix new_mat(mat.nrow(), cols.size());
+  for (int i = 0; i < cols.size(); ++i) {
+    for (int j = 0; j < mat.nrow(); ++j) {
+      new_mat(j, i) = mat(j, cols[i]);
     }
   }
   return new_mat;
@@ -61,6 +84,16 @@ NumericVector rcpp_log2(NumericVector vec) {
   return res;
 }
 
+bool rcpp_alleuqal(IntegerVector xvec, int x){
+  for (int i = 0; i < xvec.size(); ++i) {
+    bool xi = xvec[i] == x;
+    if (!xi) {
+      return false;
+    }
+  }
+  return true;
+}
+
 // [[Rcpp::export]]
 
 List SRS_PD(IntegerMatrix xobs,
@@ -69,17 +102,23 @@ List SRS_PD(IntegerMatrix xobs,
   for (int i = 0; i < xobs.nrow(); ++i){
     IntegerVector wti = wt(i,_);
     wti = rcpp_which(wti != 0);
+    double wti_size = wti.size();
     IntegerVector apprx(wti.size());
-    IntegerMatrix mat1 = slice_matrix_rows(xobs,wti);
     for (int n = 0; n < wti.size(); ++n){
       IntegerVector vec1 = xobs(wti[n],_);
-      if (AnyCommonElementVecMat(vec1,mat1)){
+      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      if (AnyRowCommonElementVecMat(vec1,mat1)){
         apprx[n] = 1;
       }
     }
-    apprx = apprx[apprx != 0];
-    res[i] = apprx.size() / wti.size();
+    if (rcpp_alleuqal(apprx,0)) {
+      res[i] = 1.0 / wti_size; // devide in cpp, set one to double
+    } else {
+      apprx = apprx[apprx != 0];
+      res[i] = apprx.size() / wti_size;
+    }
   }
+  // Rcout << "res: " << res << "\n";
   double pd = Rcpp::sum(res) / xobs.nrow();
   NumericVector pdN = res / Rcpp::sum(res);
   double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
@@ -90,22 +129,27 @@ List SRS_PD(IntegerMatrix xobs,
 
 // [[Rcpp::export]]
 
-double SRSFactor_P(IntegerMatrix xobs,
-                   IntegerMatrix wt){
+NumericVector SRSFactor_P(IntegerMatrix xobs,
+                          IntegerMatrix wt){
   NumericVector res(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i){
     IntegerVector wti = wt(i,_);
     wti = rcpp_which(wti != 0);
+    double wti_size = wti.size();
     IntegerVector apprx(wti.size());
-    IntegerMatrix mat1 = slice_matrix_rows(xobs,wti);
     for (int n = 0; n < wti.size(); ++n){
       IntegerVector vec1 = xobs(wti[n],_);
-      if (AnyCommonElementVecMat(vec1,mat1)){
+      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      if (AnyRowCommonElementVecMat(vec1,mat1)){
         apprx[n] = 1;
       }
     }
-    apprx = apprx[apprx != 0];
-    res[i] = apprx.size() / wti.size();
+    if (rcpp_alleuqal(apprx,0)) {
+      res[i] = 1.0 / wti_size; // devide in cpp, set one to double
+    } else {
+      apprx = apprx[apprx != 0];
+      res[i] = apprx.size() / wti_size;
+    }
   }
-  return Rcpp::mean(res);
+  return res;
 }

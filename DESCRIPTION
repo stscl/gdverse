@@ -52,6 +52,7 @@ Suggests:
     Rdimtools,
     rmarkdown,
     sf,
+    spdep,
     terra,
     tidyterra,
     tidyverse

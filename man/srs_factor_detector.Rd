@@ -4,7 +4,7 @@
 \alias{srs_factor_detector}
 \title{spatial rough set-based factor detector}
 \usage{
-srs_factor_detector(y, x, wt, alpha = 0.95, size_frac = 0.05, seed = 123456789)
+srs_factor_detector(y, x, wt)
 }
 \arguments{
 \item{y}{Variable Y, \code{factor}, \code{character} or \code{discrete numeric}.}
@@ -12,19 +12,12 @@ srs_factor_detector(y, x, wt, alpha = 0.95, size_frac = 0.05, seed = 123456789)
 \item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{wt}{Spatial adjacency matrix}
-
-\item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
-
-\item{size_frac}{(opional) The fraction to calculate p value, default is \code{0.05}.}
-
-\item{seed}{(optional) Random seed number, default is \code{123456789}.}
 }
 \value{
 A list.
 \describe{
 \item{\code{PD}}{the average local explanatory power}
 \item{\code{SE_PD}}{the degree of spatial heterogeneity of the local explanatory power}
-\item{\code{P-value}}{P value for spatial rough set-based factor detector}
 }
 }
 \description{
