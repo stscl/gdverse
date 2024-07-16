@@ -154,3 +154,25 @@ unidisc_methods = \(){
            "hclust", "bclust", "fisher", "jenks", "dpih", "headtails",
            "maximum","box"))
 }
+
+#' @ convert all discreted vectors to integer
+#'
+#' @param x A discreted vector.
+#'
+#' @return An integer vector
+#' @export
+#'
+#' @examples
+#' all2int(factor(letters[1:3],levels = c('b','a','c')))
+#' all2int(letters[1:3])
+#'
+all2int = \(x){
+  if (inherits(x,"factor")){
+    x = as.integer(x)
+  } else if (inherits(x,'character')) {
+    x = x %>%
+      as.factor() %>%
+      as.integer()
+  }
+  return(x)
+}
