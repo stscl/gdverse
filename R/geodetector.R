@@ -153,7 +153,7 @@ risk_detector = \(y,x,alpha = 0.95){
 #' @return A list.
 #' \describe{
 #' \item{\code{F-statistic}}{the result of F statistic for ecological detector}
-#' \item{\code{P-value}}{the result of O value for ecological detector}
+#' \item{\code{P-value}}{the result of P value for ecological detector}
 #' \item{\code{Ecological}}{is there a significant difference between the two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}}
 #' }
 #' @export

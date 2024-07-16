@@ -2,7 +2,7 @@
 % Please edit documentation in R/srs_geodetecor.R
 \name{srs_interaction_detector}
 \alias{srs_interaction_detector}
-\title{spatial rough set-based factor interaction detector}
+\title{spatial rough set-based interaction detector}
 \usage{
 srs_interaction_detector(y, x1, x2, wt)
 }
@@ -13,7 +13,7 @@ srs_interaction_detector(y, x1, x2, wt)
 
 \item{x2}{Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.}
 
-\item{wt}{Spatial adjacency matrix}
+\item{wt}{Spatial adjacency matrix.}
 }
 \value{
 A list.
@@ -28,7 +28,7 @@ A list.
 }
 }
 \description{
-spatial rough set-based factor interaction detector
+spatial rough set-based interaction detector
 }
 \examples{
 data('srs_table')

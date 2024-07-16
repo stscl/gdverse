@@ -11,7 +11,7 @@ srs_factor_detector(y, x, wt)
 
 \item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
-\item{wt}{Spatial adjacency matrix}
+\item{wt}{Spatial adjacency matrix.}
 }
 \value{
 A list.
