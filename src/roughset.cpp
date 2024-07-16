@@ -153,7 +153,7 @@ List SRS_MULTIPD(IntegerVector yobs,
     for (int n = 0; n < wti.size(); ++n){
       IntegerVector vec1 = xobs(wti[n],_);
       IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
-      if (AnyRowColCommonElementVecMat(vec1,mat1)and (yobs[i] == yobs[n])){
+      if (AnyRowColCommonElementVecMat(vec1,mat1) and (yobs[i] == yobs[n])){
         apprx[n] = 1;
       }
     }
