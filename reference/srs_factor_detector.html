@@ -54,7 +54,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">srs_factor_detector</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span>, <span class="va">wt</span>, alpha <span class="op">=</span> <span class="fl">0.95</span>, size_frac <span class="op">=</span> <span class="fl">0.05</span>, seed <span class="op">=</span> <span class="fl">123456789</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">srs_factor_detector</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span>, <span class="va">wt</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,18 +72,6 @@
 <dt id="arg-wt">wt<a class="anchor" aria-label="anchor" href="#arg-wt"></a></dt>
 <dd><p>Spatial adjacency matrix</p></dd>
 
-
-<dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
-<dd><p>(optional) Confidence level of the interval,default is <code>0.95</code>.</p></dd>
-
-
-<dt id="arg-size-frac">size_frac<a class="anchor" aria-label="anchor" href="#arg-size-frac"></a></dt>
-<dd><p>(opional) The fraction to calculate p value, default is <code>0.05</code>.</p></dd>
-
-
-<dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
-<dd><p>(optional) Random seed number, default is <code>123456789</code>.</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -92,9 +80,6 @@
 
 <dt><code>SE_PD</code></dt>
 <dd><p>the degree of spatial heterogeneity of the local explanatory power</p></dd>
-
-<dt><code>P-value</code></dt>
-<dd><p>P value for spatial rough set-based factor detector</p></dd>
 
 
 </dl></div>
@@ -109,13 +94,10 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'srs_wt'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">srs_factor_detector</span><span class="op">(</span><span class="va">srs_table</span><span class="op">$</span><span class="va">d</span>,<span class="va">srs_table</span><span class="op">$</span><span class="va">a1</span>,<span class="va">srs_wt</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $PD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4504329</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $SE_PD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.459432</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`P-value`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.306533</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
