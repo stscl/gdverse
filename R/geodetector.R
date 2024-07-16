@@ -7,7 +7,11 @@
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
-#' @return A list contains the Q-statistic and the P-value.
+#' @return A list.
+#' \describe{
+#' \item{\code{Q-statistic}}{the q statistic for factor detector}
+#' \item{\code{P-value}}{the p value for factor detector}
+#' }
 #' @export
 #'
 #' @examples
@@ -48,8 +52,13 @@ factor_detector = \(y,x){
 #' @param x1 Covariate \eqn{X_1}, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param x2 Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #'
-#' @return A list contains the Q statistic when the factors \eqn{X_1} and \eqn{X_1} act on \eqn{Y} alone
-#' and the Q statistic when the two interact on \eqn{Y} together with the result type of the interaction detector.
+#' @return A list.
+#' \describe{
+#' \item{\code{Variable1 Q-statistics}}{Q-statistics for variable1}
+#' \item{\code{Variable2 Q-statistics}}{Q-statistics for variable2}
+#' \item{\code{Variable1 and Variable2 interact Q-statistics}}{Q-statistics for variable1 and variable2 interact}
+#' \item{\code{Interaction}}{the interact result type}
+#' }
 #' @export
 #'
 #' @examples
@@ -90,7 +99,7 @@ interaction_detector = \(y,x1,x2){
 #' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
 #'
-#' @return A tibble contains different combinations of covariate \code{X} level and student t-test statistics,
+#' @return A tibble. contains different combinations of covariate \code{X} level and student t-test statistics,
 #' degrees of freedom, p-values, and whether has risk (Yes or No).
 #' @export
 #'
