@@ -23,6 +23,7 @@ srs_factor_detector = \(y,x,wt,alpha = 0.95,
   y = all2int(y)
   x = all2int(x)
   obs = cbind(x,y)
+  diag(wt) = 1
   res = SRS_PD(obs,wt)
 
   set.seed(seed)
