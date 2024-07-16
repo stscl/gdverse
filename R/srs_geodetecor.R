@@ -105,8 +105,6 @@ srs_interaction_detector = \(y,x1,x2,wt){
 #' @param x2 Covariate \eqn{X_2}, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param wt Spatial adjacency matrix.
 #' @param alpha (optional) Confidence level of the interval,default is `0.95`.
-#' @param alternative (optional) a character string specifying the alternative hypothesis,
-#' must be one of "two.sided"(default), "greater" or "less". You can specify just the initial letter.
 #'
 #' @return A list.
 #' \describe{
@@ -131,7 +129,7 @@ srs_ecological_detector = \(y,x1,x2,wt,alpha = 0.95){
   pd1 = SRS_PDTEST(y,xobs1,wt)
   pd2 = SRS_PDTEST(y,xobs2,wt)
   tt = tryCatch({
-    stats::t.test(pd1,pd2,conf.level = alpha,alternative = alternative)
+    stats::t.test(pd1,pd2,conf.level = alpha)
   }, error = function(e){
     list("statistic" = 0,
          "parameter" = 0,
