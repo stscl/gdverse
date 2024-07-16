@@ -5,7 +5,3 @@ SRS_PD <- function(xobs, wt) {
     .Call(`_gdverse_SRS_PD`, xobs, wt)
 }
 
-SRSFactor_P <- function(xobs, wt) {
-    .Call(`_gdverse_SRSFactor_P`, xobs, wt)
-}
-

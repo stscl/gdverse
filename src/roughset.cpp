@@ -112,7 +112,8 @@ List SRS_PD(IntegerMatrix xobs,
       }
     }
     if (rcpp_alleuqal(apprx,0)) {
-      res[i] = 1.0 / wti_size; // devide in cpp, set one to double
+      // When doing division operations in cpp, be careful to set at least one element to double
+      res[i] = 1.0 / wti_size;
     } else {
       apprx = apprx[apprx != 0];
       res[i] = apprx.size() / wti_size;
@@ -125,31 +126,4 @@ List SRS_PD(IntegerMatrix xobs,
   List out = List::create(Named("PD",pd),
                           Named("SE_PD",sepd));
   return out;
-}
-
-// [[Rcpp::export]]
-
-NumericVector SRSFactor_P(IntegerMatrix xobs,
-                          IntegerMatrix wt){
-  NumericVector res(xobs.nrow());
-  for (int i = 0; i < xobs.nrow(); ++i){
-    IntegerVector wti = wt(i,_);
-    wti = rcpp_which(wti != 0);
-    double wti_size = wti.size();
-    IntegerVector apprx(wti.size());
-    for (int n = 0; n < wti.size(); ++n){
-      IntegerVector vec1 = xobs(wti[n],_);
-      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
-      if (AnyRowCommonElementVecMat(vec1,mat1)){
-        apprx[n] = 1;
-      }
-    }
-    if (rcpp_alleuqal(apprx,0)) {
-      res[i] = 1.0 / wti_size; // devide in cpp, set one to double
-    } else {
-      apprx = apprx[apprx != 0];
-      res[i] = apprx.size() / wti_size;
-    }
-  }
-  return res;
 }

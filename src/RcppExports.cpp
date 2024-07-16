@@ -22,22 +22,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SRSFactor_P
-NumericVector SRSFactor_P(IntegerMatrix xobs, IntegerMatrix wt);
-RcppExport SEXP _gdverse_SRSFactor_P(SEXP xobsSEXP, SEXP wtSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type xobs(xobsSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type wt(wtSEXP);
-    rcpp_result_gen = Rcpp::wrap(SRSFactor_P(xobs, wt));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_gdverse_SRS_PD", (DL_FUNC) &_gdverse_SRS_PD, 2},
-    {"_gdverse_SRSFactor_P", (DL_FUNC) &_gdverse_SRSFactor_P, 2},
     {NULL, NULL, 0}
 };
 
