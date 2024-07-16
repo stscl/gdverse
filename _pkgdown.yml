@@ -82,6 +82,7 @@ reference:
   - rescale_vector
   - generate_subsets
   - weight_assign
+  - all2int
   - F_informationloss
 
 - title: S3 Methods
