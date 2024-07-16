@@ -158,7 +158,6 @@ List SRS_MULTIPD(IntegerVector yobs,
       }
     }
     if (rcpp_alleuqal(apprx,0)) {
-      // When doing division operations in cpp, be careful to set at least one element to double
       res[i] = 1.0 / wti_size;
     } else {
       apprx = apprx[apprx != 0];
@@ -193,13 +192,11 @@ NumericVector SRS_PDTEST(IntegerVector yobs,
       }
     }
     if (rcpp_alleuqal(apprx,0)) {
-      // When doing division operations in cpp, be careful to set at least one element to double
       res[i] = 1.0 / wti_size;
     } else {
       apprx = apprx[apprx != 0];
       res[i] = apprx.size() / wti_size;
     }
   }
-  // Rcout << "res: " << res << "\n";
   return res;
 }
