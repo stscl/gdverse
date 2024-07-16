@@ -98,13 +98,13 @@ double SRSFactor_P(IntegerMatrix xobs,
     wti = rcpp_which(wti != 0);
     IntegerVector apprx(wti.size());
     IntegerMatrix mat1 = slice_matrix_rows(xobs,wti);
-    for (int n = 0; n <= wti.size(); ++n){
+    for (int n = 0; n < wti.size(); ++n){
       IntegerVector vec1 = xobs(wti[n],_);
       if (AnyCommonElementVecMat(vec1,mat1)){
         apprx[n] = 1;
       }
     }
-    apprx = rcpp_which(apprx == 1);
+    apprx = apprx[apprx != 0];
     res[i] = apprx.size() / wti.size();
   }
   return Rcpp::mean(res);

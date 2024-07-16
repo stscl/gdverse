@@ -29,11 +29,10 @@ srs_factor_detector = \(y,x,wt,alpha = 0.95,
   obs = cbind(x,y)
   diag(wt) = 1
   res = SRS_PD(obs,wt)
-  print(res)
 
   set.seed(seed)
   size = ceiling(length(y) * size_frac)
-  sindice = sample.int(seq_along(y), size)
+  sindice = sample(seq_along(y), size)
   obsp = obs[sindice,]
   wtp = wt[sindice,sindice]
   pdp = SRSFactor_P(obsp,wtp)
