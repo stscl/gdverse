@@ -56,6 +56,8 @@ reference:
   - NTDs
   - ndvi
   - sim
+  - srs_table
+  - srs_wt
 
 - title: Important Algorithm Functions
   contents:
