@@ -29,6 +29,7 @@ srs_factor_detector = \(y,x,wt,alpha = 0.95,
   obs = cbind(x,y)
   diag(wt) = 1
   res = SRS_PD(obs,wt)
+  print(res)
 
   set.seed(seed)
   size = ceiling(length(y) * size_frac)
