@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,11 +66,11 @@
 
 
 <dt id="arg-x-">x1<a class="anchor" aria-label="anchor" href="#arg-x-"></a></dt>
-<dd><p>Covariable \(X_1\), <code>factor</code>, <code>character</code> or <code>discrete numeric</code>.</p></dd>
+<dd><p>Covariate \(X_1\), <code>factor</code>, <code>character</code> or <code>discrete numeric</code>.</p></dd>
 
 
 <dt id="arg-x-">x2<a class="anchor" aria-label="anchor" href="#arg-x-"></a></dt>
-<dd><p>Covariable \(X_2\), <code>factor</code>, <code>character</code> or <code>discrete numeric</code>.</p></dd>
+<dd><p>Covariate \(X_2\), <code>factor</code>, <code>character</code> or <code>discrete numeric</code>.</p></dd>
 
 
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
@@ -79,9 +79,17 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list contains <code>F</code> statistics, P-values, and is there a significant difference between the
-two factors \(X_1\) and \(X_2\) on the spatial distribution of the attribute \(Y\).</p>
-    </div>
+    <p>A list.</p><dl><dt><code>F-statistic</code></dt>
+<dd><p>the result of F statistic for ecological detector</p></dd>
+
+<dt><code>P-value</code></dt>
+<dd><p>the result of O value for ecological detector</p></dd>
+
+<dt><code>Ecological</code></dt>
+<dd><p>is there a significant difference between the two factors \(X_1\) and \(X_2\) on the spatial distribution of the attribute \(Y\)</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
     <p>Wenbo Lv <a href="mailto:lyu.geosocial@gmail.com">lyu.geosocial@gmail.com</a></p>
