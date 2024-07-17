@@ -173,32 +173,33 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 
 
 ``` r
-usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
-                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi),
+                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),
+                 cores = 6)
 usfi_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
 ## |:--------:|:-----------:|:------------:|
-## |   DAR    | 0.43933223  | 4.880000e-10 |
-## |   NDVI   | 0.39709785  | 2.020000e-10 |
-## |   GAR    | 0.38226004  | 8.250000e-10 |
-## |   RFD    | 0.26695978  | 7.400000e-10 |
-## |    BD    | 0.26496790  | 3.250000e-10 |
-## |    BH    | 0.24779725  | 8.800000e-11 |
-## |   NDWI   | 0.20808065  | 6.590000e-10 |
-## |   FAR    | 0.19795883  | 1.350000e-10 |
-## |   SVF    | 0.13094230  | 4.970000e-10 |
-## |    RL    | 0.12311769  | 8.890000e-10 |
-## |   TER    | 0.11640460  | 6.773600e-08 |
-## |   WAR    | 0.10615536  | 5.570000e-10 |
-## |   LSI    | 0.07673167  | 3.213431e-06 |
-## |   DTH    | 0.07628845  | 7.669056e-06 |
-## |   DTP    | 0.07478988  | 7.950000e-10 |
-## |   DTW    | 0.05575932  | 4.071996e-04 |
-## |   DTR    | 0.05285988  | 3.936830e-07 |
-## |   LPI    | 0.02875711  | 8.158332e-01 |
+## |   DAR    | 0.43965943  | 9.280000e-10 |
+## |   NDVI   | 0.40392817  | 4.020000e-10 |
+## |   GAR    | 0.38280266  | 3.850000e-10 |
+## |   RFD    | 0.27730957  | 1.540000e-10 |
+## |    BD    | 0.26966147  | 5.330000e-10 |
+## |    BH    | 0.25846868  | 2.610000e-10 |
+## |   NDWI   | 0.21994544  | 8.280000e-10 |
+## |   FAR    | 0.20832309  | 2.230000e-10 |
+## |   SVF    | 0.15333436  | 6.410000e-10 |
+## |    RL    | 0.13261626  | 4.350000e-10 |
+## |   TER    | 0.12144556  | 3.750000e-10 |
+## |   WAR    | 0.10718665  | 7.480000e-10 |
+## |   DTP    | 0.09015746  | 6.150000e-10 |
+## |   DTW    | 0.08565851  | 1.184870e-07 |
+## |   DTH    | 0.08466484  | 1.470018e-03 |
+## |   LSI    | 0.08447881  | 2.057000e-09 |
+## |   DTR    | 0.07530100  | 2.973400e-08 |
+## |   LPI    | 0.03320575  | 2.950997e-02 |
 ```
 
 **You can access the detailed q statistics by `usfi_opgd$factor`.**
@@ -209,24 +210,24 @@ usfi_opgd$factor
 ## # A tibble: 18 × 3
 ##    variable `Q-statistic` `P-value`
 ##    <chr>            <dbl>     <dbl>
-##  1 DAR             0.439   4.88e-10
-##  2 NDVI            0.397   2.02e-10
-##  3 GAR             0.382   8.25e-10
-##  4 RFD             0.267   7.40e-10
-##  5 BD              0.265   3.25e-10
-##  6 BH              0.248   8.79e-11
-##  7 NDWI            0.208   6.59e-10
-##  8 FAR             0.198   1.35e-10
-##  9 SVF             0.131   4.97e-10
-## 10 RL              0.123   8.89e-10
-## 11 TER             0.116   6.77e- 8
-## 12 WAR             0.106   5.57e-10
-## 13 LSI             0.0767  3.21e- 6
-## 14 DTH             0.0763  7.67e- 6
-## 15 DTP             0.0748  7.95e-10
-## 16 DTW             0.0558  4.07e- 4
-## 17 DTR             0.0529  3.94e- 7
-## 18 LPI             0.0288  8.16e- 1
+##  1 DAR             0.440   9.28e-10
+##  2 NDVI            0.404   4.02e-10
+##  3 GAR             0.383   3.85e-10
+##  4 RFD             0.277   1.54e-10
+##  5 BD              0.270   5.33e-10
+##  6 BH              0.258   2.61e-10
+##  7 NDWI            0.220   8.28e-10
+##  8 FAR             0.208   2.23e-10
+##  9 SVF             0.153   6.41e-10
+## 10 RL              0.133   4.35e-10
+## 11 TER             0.121   3.75e-10
+## 12 WAR             0.107   7.48e-10
+## 13 DTP             0.0902  6.15e-10
+## 14 DTW             0.0857  1.18e- 7
+## 15 DTH             0.0847  1.47e- 3
+## 16 LSI             0.0845  2.06e- 9
+## 17 DTR             0.0753  2.97e- 8
+## 18 LPI             0.0332  2.95e- 2
 ```
 
 ### SPADE modeling
@@ -296,8 +297,9 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 
 ``` r
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
-                   wt = wt3, discnum = 3:22, cores = 6)
+usfi_spade = spade(SUHI ~ .,
+                   data = st_drop_geometry(usfi),
+                   wt = wt3, cores = 6)
 usfi_spade
 ## ***         Spatial Association Detector         
 ## 

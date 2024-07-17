@@ -132,8 +132,9 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 ### OPGD modeling
 
 ```{r}
-usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
-                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
+usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi),
+                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),
+                 cores = 6)
 usfi_opgd
 ```
 
@@ -203,8 +204,9 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 #### run SPADE
 
 ```{r USFI_SPADE_factor,fig.width=8.5,fig.height=6.5}
-usfi_spade = spade(SUHI ~ ., data = st_drop_geometry(usfi),
-                   wt = wt3, discnum = 3:22, cores = 6)
+usfi_spade = spade(SUHI ~ .,
+                   data = st_drop_geometry(usfi),
+                   wt = wt3, cores = 6)
 usfi_spade
 plot(usfi_spade,slicenum = 8)
 ```
