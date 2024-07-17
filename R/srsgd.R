@@ -154,3 +154,57 @@ print.srs_ecological_detector = \(x, ...) {
   class(x) = 'ecological_detector'
   print(x)
 }
+
+#' @title plot spatial rough set-based factor detector result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for spatial rough set-based factor detector in `srsgd()`.
+#'
+#' @param x Return by `srsgd()`.
+#' @param slicenum (optional) The number of labels facing inward. Default is `2`.
+#' @param alpha (optional) Confidence level.Default is `0.95`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer.
+#' @export
+#'
+plot.srs_factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
+  class(x) = 'factor_detector'
+  fig_factor = plot(x, slicenum, alpha, ...)
+  return(fig_factor)
+}
+
+#' @title plot spatial rough set-based interaction detector result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for spatial rough set-based interaction detector in `srsgd()`.
+#'
+#' @param x Return by `srsgd()`.
+#' @param alpha (optional) Picture transparency. Default is `1`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer
+#' @export
+#'
+plot.srs_interaction_detector = \(x,alpha = 1,...){
+  class(x) = 'interaction_detector'
+  fig_interaction = plot(x, alpha, ...)
+  return(fig_interaction)
+}
+
+#' @title plot spatial rough set-based ecological detector
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for spatial rough set-based ecological detector in `srsgd()`.
+#'
+#' @param x Return by `srsgd()`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer
+#' @export
+#'
+plot.ecological_detector = \(x, ...) {
+  class(x) = 'ecological_detector'
+  fig_ed = plot(x, ...)
+  return(fig_ed)
+}
