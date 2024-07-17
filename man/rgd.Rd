@@ -20,21 +20,21 @@ rgd(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
+\item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
 \item{discnum}{A numeric vector of discretized classes of columns that need to be discretized.
 Default all \code{discvar} use \code{10}.}
 
-\item{minsize}{(optional) The min size of each discretization group.Default all use \code{1}.}
+\item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
-\item{cores}{(optional) Positive integer(default is 1). If cores > 1, use \code{python}'s \code{joblib} package to
+\item{cores}{(optional) Positive integer(default is 1). If cores > 1, use \code{python} \code{joblib} package to
 parallel computation.}
 
 \item{type}{(optional) The type of geographical detector, which must be \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
 
-\item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
+\item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 }
 \value{
 A list of the RGD model result.

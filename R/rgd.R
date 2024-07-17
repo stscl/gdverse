@@ -8,16 +8,16 @@
 #'
 #' @param formula A formula of RGD model.
 #' @param data A data.frame or tibble of observation data.
-#' @param discvar Name of continuous variable columns that need to be discretized.Noted that
+#' @param discvar Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
 #' Default all `discvar` use `10`.
-#' @param minsize (optional) The min size of each discretization group.Default all use `1`.
-#' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python`'s `joblib` package to
+#' @param minsize (optional) The min size of each discretization group. Default all use `1`.
+#' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python` `joblib` package to
 #' parallel computation.
 #' @param type (optional) The type of geographical detector, which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
-#' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #'
 #' @return A list of the RGD model result.
 #' \describe{
