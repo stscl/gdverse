@@ -10,7 +10,7 @@
 #'
 #' @param formula A formula of geographical detector model.
 #' @param data A data.frame or tibble of observation data.
-#' @param type (optional) The type of geographical detector,which must be one of `factor`(default),
+#' @param type (optional) The type of geographical detector, which must be one of `factor`(default),
 #' `interaction`, `risk`, `ecological`.
 #' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
 #'

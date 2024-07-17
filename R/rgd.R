@@ -15,7 +15,7 @@
 #' @param minsize (optional) The min size of each discretization group.Default all use `1`.
 #' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python`'s `joblib` package to
 #' parallel computation.
-#' @param type (optional) The type of geographical detector,which must be `factor`(default),
+#' @param type (optional) The type of geographical detector, which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
 #'

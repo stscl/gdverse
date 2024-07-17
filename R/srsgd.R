@@ -1,3 +1,22 @@
+#' @title spatial rough set-based geographical detector model
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' Function for spatial rough set-based geographical detector model.
+#' @references
+#' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
+#' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
+#' https://doi.org/10.1016/j.ins.2021.12.019
+#'
+#' @param formula A formula of spatial rough set-based geographical detector model.
+#' @param data A data.frame or tibble of observation data.
+#' @param wt Spatial adjacency matrix.
+#' @param type
+#' @param alpha
+#'
+#' @return
+#' @export
+#'
+#' @examples
 srsgd = \(formula,data,wt,type = "factor",alpha = 0.95){
   if (!(type %in% c("factor","interaction","ecological"))){
     stop("`type` must be one of `factor`,`interaction` and `ecological`!")
