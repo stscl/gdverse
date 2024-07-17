@@ -145,7 +145,7 @@ plot.spade_result = \(x, slicenum = 2, alpha = 0.95, ...) {
                      panel.grid = ggplot2::element_blank(), ...)
   } else {
     class(x) = "factor_detector"
-    fig_factor = plot.factor_detector(x,...)
+    fig_factor = plot.factor_detector(x, slicenum, alpha, ...)
   }
   return(fig_factor)
 }
