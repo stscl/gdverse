@@ -12,7 +12,7 @@
 #' @param data A data.frame or tibble of observation data.
 #' @param type (optional) The type of geographical detector,which must be one of `factor`(default),
 #' `interaction`, `risk`, `ecological`.
-#' @param alpha (optional) Specifies the size of the alpha (confidence level).Default is `0.95`.
+#' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
 #'
 #' @return A list of tibble with the corresponding result under different detector types.
 #' \describe{
@@ -64,7 +64,8 @@ gd = \(formula,data,type = "factor",alpha = 0.95){
   switch(type,
           "factor" = {
             res = purrr::map_dfr(names(explanatory),
-                                 \(i) factor_detector(response,data[,i,drop = TRUE])) %>%
+                                 \(i) factor_detector(response,
+                                                      data[,i,drop = TRUE])) %>%
               dplyr::mutate(variable = names(explanatory)) %>%
               dplyr::select(variable,dplyr::everything()) %>%
               dplyr::arrange(dplyr::desc(`Q-statistic`))

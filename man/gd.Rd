@@ -2,9 +2,9 @@
 % Please edit documentation in R/gd.R
 \name{gd}
 \alias{gd}
-\title{original geographical detector model}
+\title{native geographical detector model}
 \usage{
-gd(formula, data, type = "factor", ...)
+gd(formula, data, type = "factor", alpha = 0.95)
 }
 \arguments{
 \item{formula}{A formula of geographical detector model.}
@@ -14,7 +14,7 @@ gd(formula, data, type = "factor", ...)
 \item{type}{(optional) The type of geographical detector,which must be one of \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}.}
 
-\item{...}{(optional) Specifies the size of the alpha (confidence level).Default is \code{0.95}.}
+\item{alpha}{(optional) Specifies the size of the alpha (confidence level). Default is \code{0.95}.}
 }
 \value{
 A list of tibble with the corresponding result under different detector types.
@@ -26,7 +26,7 @@ A list of tibble with the corresponding result under different detector types.
 }
 }
 \description{
-Function for original geographical detector model.
+Function for native geographical detector model.
 }
 \examples{
 gd(y ~ x1 + x2,
