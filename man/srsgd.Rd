@@ -31,6 +31,14 @@ A list of tibble with the corresponding result under different detector types.
 \description{
 Function for spatial rough set-based geographical detector model.
 }
+\note{
+The Spatial Rough Set-based Geographical Detector Model (SRSGD) conducts spatial
+hierarchical heterogeneity analysis utilizing a geographical detector for data
+where \emph{the dependent variable} is \emph{discrete}. Given the complementary relationship
+between SRSGD and the native version of geographical detector, I strive to maintain
+consistency with \code{gd()} function when establishing \code{srsgd()} function. This implies
+that all input variable data in srsgd must \emph{be discretized prior to use}.
+}
 \examples{
 data('srs_table')
 data('srs_wt')
