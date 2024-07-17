@@ -1,6 +1,10 @@
 # gdverse (development version)
 
-* Support more **geodetector model variants** and fix bugs of **gdverse**.
+* Support more **geographical detector model variants** and fix bugs of **gdverse**.
+
+# gdverse 1.0.0
+
+* First stable release.
 
 # gdverse 0.5.0
 
