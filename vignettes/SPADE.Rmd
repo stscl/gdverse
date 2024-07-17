@@ -38,7 +38,8 @@ usfi
 ##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692
 ## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601
 ## # ℹ 1,027 more rows
-## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>, geom <POLYGON [m]>
+## # ℹ 6 more variables: RL <dbl>, RFD <dbl>, SVF <dbl>, FAR <dbl>, SUHI <dbl>,
+## #   geom <POLYGON [m]>
 ```
 
 <div class="figure" style="text-align: center">
@@ -110,18 +111,18 @@ new_usfi
 ## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669
 ## Projected CRS: WGS 84 / UTM zone 49N
 ## # A tibble: 1,037 × 4
-##     SUHI nb         wt                                                                      geom
-##    <dbl> <nb>       <list>                                                         <POLYGON [m]>
-##  1 1.76  <int [12]> <dbl [12]> ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 297840.8…
-##  2 0.519 <int [2]>  <dbl [2]>  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 297393.2…
-##  3 3.04  <int [9]>  <dbl [9]>  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.1 3…
-##  4 3.22  <int [4]>  <dbl [4]>  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.6 3…
-##  5 3.47  <int [6]>  <dbl [6]>  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 296788.8…
-##  6 4.71  <int [6]>  <dbl [6]>  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 296467.9…
-##  7 1.24  <int [2]>  <dbl [2]>  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 296347.5…
-##  8 4.30  <int [8]>  <dbl [8]>  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 296144.9…
-##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 296287.8…
-## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 297025.5…
+##     SUHI nb         wt                                                                  geom
+##    <dbl> <nb>       <list>                                                     <POLYGON [m]>
+##  1 1.76  <int [12]> <dbl [12]> ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 2978…
+##  2 0.519 <int [2]>  <dbl [2]>  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 2973…
+##  3 3.04  <int [9]>  <dbl [9]>  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390…
+##  4 3.22  <int [4]>  <dbl [4]>  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229…
+##  5 3.47  <int [6]>  <dbl [6]>  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 2967…
+##  6 4.71  <int [6]>  <dbl [6]>  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 2964…
+##  7 1.24  <int [2]>  <dbl [2]>  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 2963…
+##  8 4.30  <int [8]>  <dbl [8]>  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 2961…
+##  9 3.76  <int [5]>  <dbl [5]>  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 2962…
+## 10 4.23  <int [5]>  <dbl [5]>  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 2970…
 ## # ℹ 1,027 more rows
 set.seed(123456789)
 
@@ -162,7 +163,7 @@ new_usfi %>%
   )
 ```
 
-![](../man/figures/spade/SUHI_LISA-1.png)
+![plot of chunk SUHI_LISA](man/figures/spade/SUHI_LISA-1.png)
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
 
@@ -175,6 +176,7 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi), discnum = 3:15,
                  discvar = names(select(st_drop_geometry(usfi),-SUHI)),cores = 6)
 usfi_opgd
+##                 OPGD Model                  
 ## ***          Factor Detector            
 ## 
 ## | variable | Q-statistic |   P-value    |
@@ -322,7 +324,7 @@ usfi_spade
 plot(usfi_spade,slicenum = 8)
 ```
 
-![](../man/figures/spade/USFI_SPADE_factor-1.png)
+![plot of chunk USFI_SPADE_factor](man/figures/spade/USFI_SPADE_factor-1.png)
 
 **You can also access the detailed q statistics by `usfi_spade$factor`**
 
@@ -397,7 +399,7 @@ ggplot(data = usfi) +
   theme_classic()
 ```
 
-![](../man/figures/spade/WAR_Hist-1.png)
+![plot of chunk WAR_Hist](man/figures/spade/WAR_Hist-1.png)
 
 
 ``` r

@@ -63,7 +63,7 @@ new.ndvi = robust_disc(NDVIchange ~ .,
                        data = select(ndvi,-c(Climatezone,Mining)),
                        discnum = 10,cores = 6)
 tictoc::toc()
-## 21.42 sec elapsed
+## 21.58 sec elapsed
 ```
 
 
@@ -198,7 +198,7 @@ ndvi_rgd
 plot(ndvi_rgd)
 ```
 
-![](../man/figures/rgdrid/rgd_id-1.png)
+![plot of chunk rgd_id](man/figures/rgdrid/rgd_id-1.png)
 
 ### Run RID
 
