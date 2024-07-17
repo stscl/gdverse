@@ -64,8 +64,8 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
          "factor" = {
            res = purrr::map_dfr(names(explanatory),
                                 \(i) srs_factor_detector(response,
-                                                         data[,i,drop = TRUE]),
-                                                         wt) %>%
+                                                         data[,i,drop = TRUE],
+                                                         wt)) %>%
              dplyr::mutate(variable = names(explanatory)) %>%
              dplyr::select(variable,dplyr::everything()) %>%
              dplyr::arrange(dplyr::desc(`PD`))
