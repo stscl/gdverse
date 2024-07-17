@@ -14,6 +14,8 @@
 #' When there are a large number of explanatory variables, the data dimensionality reduction method can be used
 #' to ensure the trade-off between analysis results and calculation speed.
 #'
+#' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rid()`.
+#'
 #' @param formula A formula of RID model.
 #' @param data A data.frame or tibble of observation data.
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.

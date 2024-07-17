@@ -48,6 +48,9 @@ A list of the RGD model result.
 \description{
 Function for robust geographical detector(RGD) model.
 }
+\note{
+Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
+}
 \examples{
 \dontrun{
 data('ndvi')

@@ -25,6 +25,9 @@ A tibble of discretized columns which need to be discretized.
 Determines discretization interval breaks using an optimization algorithm for variance-based
 change point detection.
 }
+\note{
+Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{robust_disc()}.
+}
 \examples{
 \dontrun{
 data('ndvi')

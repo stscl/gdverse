@@ -5,6 +5,8 @@
 #' @references
 #' Zhang, Z., Song, Y.*, & Wu, P., 2022. Robust geographical detector. International Journal of Applied Earth Observation and Geoinformation. 109, 102782.
 #' DOI: 10.1016/j.jag.2022.102782.
+#' @note
+#' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #'
 #' @param formula A formula of RGD model.
 #' @param data A data.frame or tibble of observation data.
