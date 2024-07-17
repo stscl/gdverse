@@ -38,6 +38,7 @@ Current models and functions provided by **gdverse** are:
 | **IDSA**            | `idsa()`           | ✔️               |
 | **RGD**             | `rgd()`            | ✔️               |
 | **RID**             | `rid()`            | ✔️               |
+| **SRSGD**           | `srsgd()`          | ✔️               |
 
 ## Installation
 
@@ -92,7 +93,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.22 sec elapsed
+## 4.11 sec elapsed
 fvc_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            

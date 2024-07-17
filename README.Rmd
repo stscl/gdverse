@@ -45,6 +45,7 @@ Current models and functions provided by **gdverse** are:
 |  **IDSA**  |        `idsa()`         |          ✔️       |
 |  **RGD**  |        `rgd()`         |          ✔️        |
 |  **RID**  |        `rid()`         |          ✔️       |
+|  **SRSGD**  |        `srsgd()`         |          ✔️       |
 
 ## Installation
 
