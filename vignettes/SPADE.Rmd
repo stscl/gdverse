@@ -163,7 +163,7 @@ new_usfi %>%
   )
 ```
 
-![plot of chunk SUHI_LISA](man/figures/spade/SUHI_LISA-1.png)
+![](../man/figures/spade/SUHI_LISA-1.png)
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
 
@@ -324,7 +324,7 @@ usfi_spade
 plot(usfi_spade,slicenum = 8)
 ```
 
-![plot of chunk USFI_SPADE_factor](man/figures/spade/USFI_SPADE_factor-1.png)
+![](../man/figures/spade/USFI_SPADE_factor-1.png)
 
 **You can also access the detailed q statistics by `usfi_spade$factor`**
 
@@ -399,7 +399,7 @@ ggplot(data = usfi) +
   theme_classic()
 ```
 
-![plot of chunk WAR_Hist](man/figures/spade/WAR_Hist-1.png)
+![](../man/figures/spade/WAR_Hist-1.png)
 
 
 ``` r

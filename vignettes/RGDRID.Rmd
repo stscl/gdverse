@@ -198,7 +198,7 @@ ndvi_rgd
 plot(ndvi_rgd)
 ```
 
-![plot of chunk rgd_id](man/figures/rgdrid/rgd_id-1.png)
+![](../man/figures/rgdrid/rgd_id-1.png)
 
 ### Run RID
 

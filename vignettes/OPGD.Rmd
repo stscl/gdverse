@@ -338,4 +338,4 @@ You can use `plot()` to visualize the result.
 plot(fvc_opgd)
 ```
 
-![plot of chunk opgd_plot](man/figures/opgd/opgd_plot-1.png)
+![](../man/figures/opgd/opgd_plot-1.png)
