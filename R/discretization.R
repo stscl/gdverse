@@ -128,10 +128,10 @@ gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
     as.list()
 
   if(return_disc){
-    resdisc = purrr::pmap_dfc(out_g,
+    suppressMessages({resdisc = purrr::pmap_dfc(out_g,
                               \(x,k,method) st_unidisc(x = explanatory[,x,drop = TRUE],
                                                        k = k,method = method,...)) %>%
-      purrr::set_names(out_g[[1]])
+      purrr::set_names(out_g[[1]])})
     out_g = append(out_g,list("disv" = resdisc))
   }
   return(out_g)
