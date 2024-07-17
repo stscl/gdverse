@@ -7,11 +7,11 @@
 #' @param formula A formula of univariate discretization.
 #' @param data A data.frame or tibble of observation data.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
-#' @param minsize (optional) The min size of each discretization group.Default all use `1`.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, use `python`'s `joblib` package to
+#' @param minsize (optional) The min size of each discretization group. Default all use `1`.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use `python` `joblib` package to
 #' parallel computation.
 #'
-#' @return A tibble of discretized classes of columns which need to be discretized.
+#' @return A tibble of discretized columns which need to be discretized.
 #' @export
 #'
 #' @examples

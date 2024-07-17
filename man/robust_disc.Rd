@@ -13,13 +13,13 @@ robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
 
 \item{discnum}{A numeric vector of discretized classes of columns that need to be discretized.}
 
-\item{minsize}{(optional) The min size of each discretization group.Default all use \code{1}.}
+\item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use \code{python}'s \code{joblib} package to
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use \code{python} \code{joblib} package to
 parallel computation.}
 }
 \value{
-A tibble of discretized classes of columns which need to be discretized.
+A tibble of discretized columns which need to be discretized.
 }
 \description{
 Determines discretization interval breaks using an optimization algorithm for variance-based
