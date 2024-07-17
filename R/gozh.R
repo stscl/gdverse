@@ -183,12 +183,12 @@ gozh_detector = \(formula, data, cores = 1,
     return(interaction)
   }
 
-  newdata = xname %>%
+  suppressMessages({newdata = xname %>%
     purrr::map_dfc(calcul_rpartdisc)%>%
     purrr::set_names(xname) %>%
     dplyr::bind_cols(dplyr::select(dti,
                                    dplyr::all_of(yname)),
-                     .)
+                     .)})
 
   switch(type,
           "factor" = {
