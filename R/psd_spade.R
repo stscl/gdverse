@@ -199,9 +199,9 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
                              cores = cores,
                              ...)
       } else {
-        discdf = discn %>%
+        suppressMessages({discdf = discn %>%
           purrr::map_dfc(\(kn) st_unidisc(xv,kn,method = discm,...)) %>%
-          purrr::set_names(paste0('xobs_',discn))
+          purrr::set_names(paste0('xobs_',discn))})
         discdf = tibble::tibble(yobs = yv,
                                 xobs = xv) %>%
           dplyr::bind_cols(discdf)

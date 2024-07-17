@@ -126,7 +126,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' pp
 #' }
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
-                 cores = 6,seed = 123456789,permutations = 0, ...){
+                 cores = 6, seed = 123456789, permutations = 0, ...){
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
   if (permutations == 0){
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
