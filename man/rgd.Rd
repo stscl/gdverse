@@ -31,7 +31,7 @@ Default all \code{discvar} use \code{10}.}
 \item{cores}{(optional) Positive integer(default is 1). If cores > 1, use \code{python}'s \code{joblib} package to
 parallel computation.}
 
-\item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
+\item{type}{(optional) The type of geographical detector, which must be \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
 
 \item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}

@@ -11,7 +11,7 @@ gd(formula, data, type = "factor", alpha = 0.95)
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{type}{(optional) The type of geographical detector,which must be one of \code{factor}(default),
+\item{type}{(optional) The type of geographical detector, which must be one of \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}.}
 
 \item{alpha}{(optional) Specifies the size of the alpha (confidence level). Default is \code{0.95}.}

@@ -103,3 +103,54 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
   )
   return(res)
 }
+
+#' @title print spatial rough set-based factor detector
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for spatial rough set-based factor detector in `srsgd()`.
+#'
+#' @param x Return by `srsgd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+#'
+print.srs_factor_detector = \(x, ...) {
+  cat("spatial rough set-based geographical detector \n")
+  class(x) = 'factor_detector'
+  print(x)
+}
+
+#' @title print spatial rough set-based interaction detector
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for spatial rough set-based interaction detector in `srsgd()`.
+#'
+#' @param x Return by `srsgd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+#'
+print.srs_interaction_detector = \(x, ...) {
+  cat("spatial rough set-based geographical detector \n")
+  class(x) = 'interaction_detector'
+  print(x)
+}
+
+#' @title print spatial rough set-based ecological detector
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for spatial rough set-based ecological detector in `srsgd()`.
+#'
+#' @param x Return by `srsgd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @export
+#'
+print.srs_ecological_detector = \(x, ...) {
+  cat("spatial rough set-based geographical detector \n")
+  class(x) = 'ecological_detector'
+  print(x)
+}
