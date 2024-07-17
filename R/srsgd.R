@@ -8,18 +8,39 @@
 #' https://doi.org/10.1016/j.ins.2021.12.019
 #'
 #' @param formula A formula of spatial rough set-based geographical detector model.
-#' @param data A data.frame or tibble of observation data.
-#' @param wt Spatial adjacency matrix.
-#' @param type
-#' @param alpha
+#' @param data A data.frame, tibble or sf object of observation data.
+#' @param wt Spatial adjacency matrix. If `data` is a `sf` object, the queen adjacency
+#' matrix is used when no `wt` object is provided. In other cases, you must provide a
+#' `wt` object.
+#' @param type (optional) The type of geographical detector, which must be one of
+#' `factor`(default), `interaction` and `ecological`.
+#' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
 #'
-#' @return
+#' @return A list of tibble with the corresponding result under different detector types.
+#' \describe{
+#' \item{\code{factor}}{the result of spatial rough set-based factor detector}
+#' \item{\code{interaction}}{the result of spatial rough set-based interaction detector}
+#' \item{\code{ecological}}{the result of spatial rough set-based ecological detector}
+#' }
 #' @export
 #'
 #' @examples
-srsgd = \(formula,data,wt,type = "factor",alpha = 0.95){
+srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
   if (!(type %in% c("factor","interaction","ecological"))){
     stop("`type` must be one of `factor`,`interaction` and `ecological`!")
+  }
+
+  if (inherits(data,"sf")){
+    if (is.null(wt)){
+      nb_queen = spdep::poly2nb(data, queen=TRUE)
+      wt = spdep::nb2mat(nb_queen, style='B',
+                         zero.policy = TRUE)
+    }
+    data = sf::st_drop_geometry(data)
+  } else {
+    if (is.null(wt)){
+      stop("When data is not a `sf` object, you must provide `wt`!")
+    }
   }
 
   formula = stats::as.formula(formula)

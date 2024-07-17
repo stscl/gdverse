@@ -41,6 +41,8 @@ Imports:
     reticulate,
     rpart,
     scatterpie,
+    sf,
+    spdep,
     stats,
     tibble,
     tidyr,
@@ -51,8 +53,6 @@ Suggests:
     PieGlyph,
     Rdimtools,
     rmarkdown,
-    sf,
-    spdep,
     terra,
     tidyterra,
     tidyverse
