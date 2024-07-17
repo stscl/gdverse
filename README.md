@@ -7,6 +7,7 @@
 
 [![CRAN](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
 [![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)](https://spatlyu.r-universe.dev/gdverse)
+
 <!-- badges: end -->
 
 The goal of **gdverse** is to *support the geodetector model and its
@@ -42,6 +43,8 @@ Current models and functions provided by **gdverse** are:
 
 ## Installation
 
+### Install from source
+
 You can install the development version of **gdverse** from
 [github](https://github.com/SpatLyu/gdverse) with:
 
@@ -51,6 +54,12 @@ devtools::install_github("SpatLyu/gdverse",
                          build_vignettes = TRUE,
                          dep = TRUE)
 ```
+
+Please ensure that **Rcpp** is properly installed and the appropriate
+**C++** compilation environment is configured in advance if you want to
+install **gdverse** from github.
+
+### Install the binary version
 
 You can also install the binary version of **gdverse** from
 [r-universe](https://spatlyu.r-universe.dev/gdverse):
@@ -93,7 +102,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.11 sec elapsed
+## 4.08 sec elapsed
 fvc_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
