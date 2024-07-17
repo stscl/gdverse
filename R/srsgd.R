@@ -170,7 +170,10 @@ print.srs_ecological_detector = \(x, ...) {
 #'
 plot.srs_factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
   class(x) = 'factor_detector'
-  fig_factor = plot(x, slicenum, alpha, ...)
+  x$factor = x$factor %>%
+    dplyr::rename(`Q-statistic` = `PD`)
+  fig_factor = plot(x, slicenum, alpha, ...) +
+    ggplot2::labs(x = "", y = "Average local explanatory power")
   return(fig_factor)
 }
 
