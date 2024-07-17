@@ -7,6 +7,7 @@
 #' DOI: 10.1016/j.jag.2022.102782.
 #' @note
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
+#' See `vignette('RGDRID',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of RGD model.
 #' @param data A data.frame or tibble of observation data.
