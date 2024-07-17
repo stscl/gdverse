@@ -188,6 +188,8 @@ plot.srs_factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
 #'
 plot.srs_interaction_detector = \(x,alpha = 1,...){
   class(x) = 'interaction_detector'
+  x$interaction = x$interaction %>%
+    dplyr::rename(`Variable1 and Variable2 interact Q-statistics` = `Variable1 and Variable2 interact PD`)
   fig_interaction = plot(x, alpha, ...)
   return(fig_interaction)
 }
