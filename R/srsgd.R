@@ -203,8 +203,8 @@ plot.srs_interaction_detector = \(x,alpha = 1,...){
 #' @return A ggplot2 layer
 #' @export
 #'
-plot.ecological_detector = \(x, ...) {
+plot.srs_ecological_detector = \(x, ...) {
   class(x) = 'ecological_detector'
-  fig_ed = plot(x, ...)
+  fig_ed = plot(x)
   return(fig_ed)
 }
