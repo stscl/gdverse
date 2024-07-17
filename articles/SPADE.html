@@ -290,32 +290,33 @@ the <strong>SPADE</strong> spatial association detector.</p>
 <h3 id="opgd-modeling">OPGD modeling<a class="anchor" aria-label="anchor" href="#opgd-modeling"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">usfi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
-<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">usfi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,</span>
+<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                 cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">usfi_opgd</span></span>
 <span><span class="co">##                 OPGD Model                  </span></span>
 <span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |   DAR    | 0.43933223  | 4.880000e-10 |</span></span>
-<span><span class="co">## |   NDVI   | 0.39709785  | 2.020000e-10 |</span></span>
-<span><span class="co">## |   GAR    | 0.38226004  | 8.250000e-10 |</span></span>
-<span><span class="co">## |   RFD    | 0.26695978  | 7.400000e-10 |</span></span>
-<span><span class="co">## |    BD    | 0.26496790  | 3.250000e-10 |</span></span>
-<span><span class="co">## |    BH    | 0.24779725  | 8.800000e-11 |</span></span>
-<span><span class="co">## |   NDWI   | 0.20808065  | 6.590000e-10 |</span></span>
-<span><span class="co">## |   FAR    | 0.19795883  | 1.350000e-10 |</span></span>
-<span><span class="co">## |   SVF    | 0.13094230  | 4.970000e-10 |</span></span>
-<span><span class="co">## |    RL    | 0.12311769  | 8.890000e-10 |</span></span>
-<span><span class="co">## |   TER    | 0.11640460  | 6.773600e-08 |</span></span>
-<span><span class="co">## |   WAR    | 0.10615536  | 5.570000e-10 |</span></span>
-<span><span class="co">## |   LSI    | 0.07673167  | 3.213431e-06 |</span></span>
-<span><span class="co">## |   DTH    | 0.07628845  | 7.669056e-06 |</span></span>
-<span><span class="co">## |   DTP    | 0.07478988  | 7.950000e-10 |</span></span>
-<span><span class="co">## |   DTW    | 0.05575932  | 4.071996e-04 |</span></span>
-<span><span class="co">## |   DTR    | 0.05285988  | 3.936830e-07 |</span></span>
-<span><span class="co">## |   LPI    | 0.02875711  | 8.158332e-01 |</span></span></code></pre></div>
+<span><span class="co">## |   DAR    | 0.43965943  | 9.280000e-10 |</span></span>
+<span><span class="co">## |   NDVI   | 0.40392817  | 4.020000e-10 |</span></span>
+<span><span class="co">## |   GAR    | 0.38280266  | 3.850000e-10 |</span></span>
+<span><span class="co">## |   RFD    | 0.27730957  | 1.540000e-10 |</span></span>
+<span><span class="co">## |    BD    | 0.26966147  | 5.330000e-10 |</span></span>
+<span><span class="co">## |    BH    | 0.25846868  | 2.610000e-10 |</span></span>
+<span><span class="co">## |   NDWI   | 0.21994544  | 8.280000e-10 |</span></span>
+<span><span class="co">## |   FAR    | 0.20832309  | 2.230000e-10 |</span></span>
+<span><span class="co">## |   SVF    | 0.15333436  | 6.410000e-10 |</span></span>
+<span><span class="co">## |    RL    | 0.13261626  | 4.350000e-10 |</span></span>
+<span><span class="co">## |   TER    | 0.12144556  | 3.750000e-10 |</span></span>
+<span><span class="co">## |   WAR    | 0.10718665  | 7.480000e-10 |</span></span>
+<span><span class="co">## |   DTP    | 0.09015746  | 6.150000e-10 |</span></span>
+<span><span class="co">## |   DTW    | 0.08565851  | 1.184870e-07 |</span></span>
+<span><span class="co">## |   DTH    | 0.08466484  | 1.470018e-03 |</span></span>
+<span><span class="co">## |   LSI    | 0.08447881  | 2.057000e-09 |</span></span>
+<span><span class="co">## |   DTR    | 0.07530100  | 2.973400e-08 |</span></span>
+<span><span class="co">## |   LPI    | 0.03320575  | 2.950997e-02 |</span></span></code></pre></div>
 <p><strong>You can access the detailed q statistics by
 <code>usfi_opgd$factor</code>.</strong></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -323,24 +324,24 @@ the <strong>SPADE</strong> spatial association detector.</p>
 <span><span class="co">## # A tibble: 18 × 3</span></span>
 <span><span class="co">##    variable `Q-statistic` `P-value`</span></span>
 <span><span class="co">##    &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 DAR             0.439   4.88e-10</span></span>
-<span><span class="co">##  2 NDVI            0.397   2.02e-10</span></span>
-<span><span class="co">##  3 GAR             0.382   8.25e-10</span></span>
-<span><span class="co">##  4 RFD             0.267   7.40e-10</span></span>
-<span><span class="co">##  5 BD              0.265   3.25e-10</span></span>
-<span><span class="co">##  6 BH              0.248   8.79e-11</span></span>
-<span><span class="co">##  7 NDWI            0.208   6.59e-10</span></span>
-<span><span class="co">##  8 FAR             0.198   1.35e-10</span></span>
-<span><span class="co">##  9 SVF             0.131   4.97e-10</span></span>
-<span><span class="co">## 10 RL              0.123   8.89e-10</span></span>
-<span><span class="co">## 11 TER             0.116   6.77e- 8</span></span>
-<span><span class="co">## 12 WAR             0.106   5.57e-10</span></span>
-<span><span class="co">## 13 LSI             0.0767  3.21e- 6</span></span>
-<span><span class="co">## 14 DTH             0.0763  7.67e- 6</span></span>
-<span><span class="co">## 15 DTP             0.0748  7.95e-10</span></span>
-<span><span class="co">## 16 DTW             0.0558  4.07e- 4</span></span>
-<span><span class="co">## 17 DTR             0.0529  3.94e- 7</span></span>
-<span><span class="co">## 18 LPI             0.0288  8.16e- 1</span></span></code></pre></div>
+<span><span class="co">##  1 DAR             0.440   9.28e-10</span></span>
+<span><span class="co">##  2 NDVI            0.404   4.02e-10</span></span>
+<span><span class="co">##  3 GAR             0.383   3.85e-10</span></span>
+<span><span class="co">##  4 RFD             0.277   1.54e-10</span></span>
+<span><span class="co">##  5 BD              0.270   5.33e-10</span></span>
+<span><span class="co">##  6 BH              0.258   2.61e-10</span></span>
+<span><span class="co">##  7 NDWI            0.220   8.28e-10</span></span>
+<span><span class="co">##  8 FAR             0.208   2.23e-10</span></span>
+<span><span class="co">##  9 SVF             0.153   6.41e-10</span></span>
+<span><span class="co">## 10 RL              0.133   4.35e-10</span></span>
+<span><span class="co">## 11 TER             0.121   3.75e-10</span></span>
+<span><span class="co">## 12 WAR             0.107   7.48e-10</span></span>
+<span><span class="co">## 13 DTP             0.0902  6.15e-10</span></span>
+<span><span class="co">## 14 DTW             0.0857  1.18e- 7</span></span>
+<span><span class="co">## 15 DTH             0.0847  1.47e- 3</span></span>
+<span><span class="co">## 16 LSI             0.0845  2.06e- 9</span></span>
+<span><span class="co">## 17 DTR             0.0753  2.97e- 8</span></span>
+<span><span class="co">## 18 LPI             0.0332  2.95e- 2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="spade-modeling">SPADE modeling<a class="anchor" aria-label="anchor" href="#spade-modeling"></a>
@@ -416,8 +417,9 @@ etc.</p>
 <h4 id="run-spade">run SPADE<a class="anchor" aria-label="anchor" href="#run-spade"></a>
 </h4>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,</span>
-<span>                   wt <span class="op">=</span> <span class="va">wt3</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">usfi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>,</span>
+<span>                   data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">usfi</span><span class="op">)</span>,</span>
+<span>                   wt <span class="op">=</span> <span class="va">wt3</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">usfi_spade</span></span>
 <span><span class="co">## ***         Spatial Association Detector         </span></span>
 <span><span class="co">## </span></span>
