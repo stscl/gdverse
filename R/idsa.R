@@ -14,16 +14,16 @@
 #'
 #' @param formula A formula of IDSA model.
 #' @param data A data.frame or tibble of observation data.
-#' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
+#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`.
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
-#' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
+#' @param locations (optional) The spatial location coordinate columns name in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
-#' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
+#' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
-#' Others use `st_unidisc()`. You can try `unidisc_methods()`.
+#' Others use `st_unidisc()`. You can try `unidisc_methods()` to see supported methods in `st_unidisc()`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.
@@ -33,7 +33,7 @@
 #' cluster with that many cores is created and used. You can also supply a cluster
 #' object.
 #' @param seed (optional) Random number seed, default is `123456789`.
-#' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `cpsd_disc()`.
 #'
 #' @return A list with PID values tibble under different spatial overlays and performance evaluation indicators.

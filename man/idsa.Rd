@@ -25,20 +25,20 @@ idsa(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{wt}{(optional) The spatial weight matrix.When \code{wt} is not provided, must provide \code{locations}.
+\item{wt}{(optional) The spatial weight matrix. When \code{wt} is not provided, must provide \code{locations}.
 And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
 
 \item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}
 
-\item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
+\item{locations}{(optional) The spatial location coordinate columns name in \code{data}.
 Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
 
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
-Others use \code{st_unidisc()}. You can try \code{unidisc_methods()}.}
+Others use \code{st_unidisc()}. You can try \code{unidisc_methods()} to see supported methods in \code{st_unidisc()}.}
 
 \item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest SPADE model q-statistics to
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
@@ -53,7 +53,7 @@ object.}
 
 \item{seed}{(optional) Random number seed, default is \code{123456789}.}
 
-\item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
+\item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 
 \item{...}{(optional) Other arguments passed to \code{cpsd_disc()}.}
 }
