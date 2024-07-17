@@ -354,10 +354,12 @@ plot.risk_detector = \(x, ...) {
   zonevars = unique(g$variable)
   fig_rds = purrr::map(zonevars,\(x) plot_rduni(dplyr::filter(g,variable == x)
                                                 ,x,...))
-  fig_p = cowplot::plot_grid(plotlist = fig_rds,
-                             ncol = ceiling(sqrt(length(zonevars))),
-                             label_fontfamily = 'serif',
-                             label_fontface = 'plain')
+  # fig_p = cowplot::plot_grid(plotlist = fig_rds,
+  #                            ncol = ceiling(sqrt(length(zonevars))),
+  #                            label_fontfamily = 'serif',
+  #                            label_fontface = 'plain')
+  fig_p = patchwork::wrap_plots(fig_rds,
+                                ncol = ceiling(sqrt(length(zonevars))))
   return(fig_p)
 }
 
