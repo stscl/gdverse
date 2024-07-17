@@ -2,7 +2,7 @@
 % Please edit documentation in R/srsgd.R
 \name{srsgd}
 \alias{srsgd}
-\title{spatial rough set-based geographical detector model}
+\title{spatial rough set-based geographical detector(SRSGD) model}
 \usage{
 srsgd(formula, data, wt = NULL, type = "factor", alpha = 0.95)
 }

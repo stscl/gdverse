@@ -1,4 +1,4 @@
-#' @title spatial rough set-based geographical detector model
+#' @title spatial rough set-based geographical detector(SRSGD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for spatial rough set-based geographical detector model.
