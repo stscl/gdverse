@@ -22,13 +22,13 @@ spade(
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{wt}{(optional) The spatial weight matrix.When \code{wt} is not provided, must provide \code{locations}.
+\item{wt}{(optional) The spatial weight matrix. When \code{wt} is not provided, must provide \code{locations}.
 And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
 
-\item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
+\item{locations}{(optional) The spatial location coordinates columns name in \code{data}.
 Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
 
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};

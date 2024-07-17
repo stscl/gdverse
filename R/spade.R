@@ -15,11 +15,11 @@
 #'
 #' @param formula A formula of spatial association detector (SPADE) model.
 #' @param data A data.frame or tibble of observation data.
-#' @param wt (optional) The spatial weight matrix.When `wt` is not provided, must provide `locations`.
+#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`.
 #' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
-#' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
+#' @param locations (optional) The spatial location coordinates columns name in `data`.
 #' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
-#' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
+#' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
 #' Others use `st_unidisc()`.
