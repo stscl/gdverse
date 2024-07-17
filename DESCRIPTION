@@ -49,7 +49,6 @@ Imports:
     utils
 Suggests: 
     cowplot,
-    knitr,
     PieGlyph,
     Rdimtools,
     rmarkdown,
