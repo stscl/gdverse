@@ -1,6 +1,6 @@
 Package: gdverse
 Title: Geographical Detector Models
-Version: 0.5.0
+Version: 1.0.0
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
              email = "lyu.geosocial@gmail.com", 
