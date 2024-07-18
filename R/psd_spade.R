@@ -69,18 +69,17 @@ psd_spade = \(y,x,wt){
 #' @examples
 #' \dontrun{
 #' library(sf)
-#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
 #'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = usfi |>
+#' coord = ushi |>
 #'   st_centroid() |>
 #'   st_coordinates()
 #' wt = inverse_distance_weight(coord[,1],coord[,2])
-#' BH = usfi$BH
-#' BH_disc = st_unidisc(usfi$BH,12)
-#' SUHI = usfi$SUHI
+#' BH = ushi$BH
+#' BH_disc = st_unidisc(ushi$BH,12)
+#' SUHI = ushi$SUHI
 #' cpsd_spade(SUHI,BH,BH_disc,wt)
 #' }
-#'
 cpsd_spade = \(yobs,xobs,xdisc,wt){
   return(psd_spade(yobs,xdisc,wt) / psd_spade(xobs,xdisc,wt))
 }
@@ -118,22 +117,21 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @examples
 #' \dontrun{
 #' library(sf)
-#' usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
 #'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = usfi |>
+#' coord = ushi |>
 #'   st_centroid() |>
 #'   st_coordinates()
-#' usfi = usfi |>
+#' ushi = ushi |>
 #'   dplyr::bind_cols(coord) |>
 #'   st_drop_geometry()
-#' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#' psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
 #'            locations = c('X','Y'),cores = 6)
-#' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#' psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
 #'            locations = c('X','Y'),discmethod = 'rpart',cores = 6)
-#' psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+#' psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
 #'            locations = c('X','Y'),discmethod = 'robust',cores = 6)
 #' }
-#'
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
                discmethod = NULL, cores = 1, seed = 123456789, ...){
   doclust = FALSE
