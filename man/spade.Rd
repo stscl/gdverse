@@ -62,18 +62,18 @@ specify all variables in \code{formula} instead of using \code{.}!
 \examples{
 \dontrun{
 library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = usfi |>
+coord = ushi |>
   st_centroid() |>
   st_coordinates()
 wt = inverse_distance_weight(coord[,1],coord[,2])
-usfi = usfi |>
+ushi = ushi |>
   dplyr::bind_cols(coord) |>
   st_drop_geometry()
-spade('SUHI~.', data = usfi,locations = c('X','Y'),cores = 6)
-spade('SUHI~.', data = usfi, wt = wt,locations = c('X','Y'),
-      discmethod = c('sd','equal'),cores = 6)
+spade('SUHI~.', data = ushi, locations = c('X','Y'), cores = 6)
+spade('SUHI~.', data = ushi, wt = wt, locations = c('X','Y'),
+      discmethod = c('sd','equal'), cores = 6)
 }
 }
 \references{

@@ -30,18 +30,17 @@ The power of compensated spatial determinant formula is
 \examples{
 \dontrun{
 library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = usfi |>
+coord = ushi |>
   st_centroid() |>
   st_coordinates()
 wt = inverse_distance_weight(coord[,1],coord[,2])
-BH = usfi$BH
-BH_disc = st_unidisc(usfi$BH,12)
-SUHI = usfi$SUHI
+BH = ushi$BH
+BH_disc = st_unidisc(ushi$BH,12)
+SUHI = ushi$SUHI
 cpsd_spade(SUHI,BH,BH_disc,wt)
 }
-
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

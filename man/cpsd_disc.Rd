@@ -65,14 +65,14 @@ Consequently, the use of robust discretization is not advised.
 \examples{
 \dontrun{
 library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = usfi |>
+coord = ushi |>
   st_centroid() |>
   st_coordinates()
 wt = inverse_distance_weight(coord[,1],coord[,2])
-usfi = st_drop_geometry(usfi)
-cpsd_disc(SUHI ~ NDVI + BH, data = usfi,wt = wt,cores = 6)
+ushi = st_drop_geometry(ushi)
+cpsd_disc(SUHI ~ NDVI + BH, data = ushi,wt = wt,cores = 6)
 }
 }
 \references{

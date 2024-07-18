@@ -30,15 +30,16 @@ IDSA Q-saistics \code{PID}
 \examples{
 \dontrun{
 library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
   dplyr::select(dplyr::all_of(c("NDVI","BH","WAR","SUHI")))
-coord = usfi |>
+coord = ushi |>
   st_centroid() |>
   st_coordinates()
 wt = inverse_distance_weight(coord[,1],coord[,2])
-usf = usfi |>
+ushi_disc = ushi |>
   st_drop_geometry() |>
   dplyr::mutate(dplyr::across(1:3,\(.x) st_unidisc(.x,12)))
-pid_idsa('NDVI~.',rawdata = usfi,discdata = usf,wt = wt)
+pid_idsa('NDVI~.', rawdata = ushi,
+         discdata = ushi_disc, wt = wt)
 }
 }

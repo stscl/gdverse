@@ -53,22 +53,21 @@ The power of spatial and multilevel discretization determinant formula is
 \examples{
 \dontrun{
 library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = usfi |>
+coord = ushi |>
   st_centroid() |>
   st_coordinates()
-usfi = usfi |>
+ushi = ushi |>
   dplyr::bind_cols(coord) |>
   st_drop_geometry()
-psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
            locations = c('X','Y'),cores = 6)
-psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
            locations = c('X','Y'),discmethod = 'rpart',cores = 6)
-psmd_spade('SUHI ~ BH',data = dplyr::select(usfi,SUHI,BH,X,Y),
+psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
            locations = c('X','Y'),discmethod = 'robust',cores = 6)
 }
-
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
