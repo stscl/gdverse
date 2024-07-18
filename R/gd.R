@@ -1,4 +1,4 @@
-#' @title native geographical detector model
+#' @title native geographical detector(GD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for native geographical detector model.
