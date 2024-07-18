@@ -2,7 +2,7 @@
 % Please edit documentation in R/gd.R
 \name{gd}
 \alias{gd}
-\title{native geographical detector model}
+\title{native geographical detector(GD) model}
 \usage{
 gd(formula, data, type = "factor", alpha = 0.95)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/idsa.R
 \name{idsa}
 \alias{idsa}
-\title{interactive detector for spatial associations(IDSA)}
+\title{interactive detector for spatial associations(IDSA) model}
 \usage{
 idsa(
   formula,
