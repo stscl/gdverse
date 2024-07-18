@@ -21,8 +21,8 @@ library(sf)
 library(gdverse)
 library(magrittr)
 library(tidyverse)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse'))
-usfi
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
+ushi
 ## Simple feature collection with 1037 features and 19 fields
 ## Geometry type: POLYGON
 ## Dimension:     XY
@@ -48,7 +48,7 @@ usfi
 
 ### Data precessing
 
-There are originally 18 explanatory variables in the `usfi` tibble. If these 18 variables are used together, IDSA needs to be calculated about 2.62143 &times; 10<sup>5</sup> times, which is very time-consuming, and we need to reduce the dimension of the data or select appropriate variables.
+There are originally 18 explanatory variables in the `ushi` tibble. If these 18 variables are used together, IDSA needs to be calculated about 2.62143 &times; 10<sup>5</sup> times, which is very time-consuming, and we need to reduce the dimension of the data or select appropriate variables.
 
 Here we combine the understanding of the data and the diffusion maps method to generate the data after dimensionality reduction.Specifically, we combine data of the same class into one class using diffusion maps based on the classification of explanatory variables.
 
@@ -62,7 +62,7 @@ urbanbuilt_form = c("TER","NDVI","NDWI","BH","BD","RL","RFD","SVF","FAR")
 
 dm_n21 = \(xvecname){
   return(
-    usfi %>%
+    ushi %>%
       sf::st_drop_geometry() %>%
       dplyr::select(dplyr::all_of(xvecname)) %>%
       {Rdimtools::do.dm(as.data.frame(.),1)} %>%
@@ -73,7 +73,7 @@ dm_n21 = \(xvecname){
 }
 
 newdata = tibble::tibble(
-  SUHI = usfi$SUHI,
+  SUHI = ushi$SUHI,
   landscape = dm_n21(landscape),
   dist_cold_heat = dm_n21(dist_cold_heat),
   urbanbuilt_form = dm_n21(urbanbuilt_form),
@@ -101,7 +101,7 @@ We use the same spatial weight matrix as SPADE vignette.
 
 
 ``` r
-wt = usfi |>
+wt = ushi |>
   dplyr::filter(!if_any(everything(),is.na)) |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) %$%
@@ -152,9 +152,9 @@ The risk detection outcomes, as determined by IDSA, can be graphically represent
 
 ``` r
 idsa_risk = idsa.model$risk2
-usfi$risk = idsa_risk
+ushi$risk = idsa_risk
 
-ggplot(data = usfi) +
+ggplot(data = ushi) +
   geom_sf(aes(fill = risk),
           alpha = .65) +
   ggplot2::scale_fill_manual(values = c("No" = "#7fdbff",
