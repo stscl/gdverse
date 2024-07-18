@@ -4,7 +4,7 @@
 \alias{plot.lesh_result}
 \title{plot LESH model result}
 \usage{
-\method{plot}{lesh_result}(x, pie = TRUE, scatter = FALSE, ..., scatter_alpha = 1)
+\method{plot}{lesh_result}(x, pie = TRUE, scatter = FALSE, scatter_alpha = 1, n_pielegend = 3, ...)
 }
 \arguments{
 \item{x}{x Return by \code{lesh()}.}
@@ -13,9 +13,11 @@
 
 \item{scatter}{(optional) Whether to draw the interaction direction diagram. Default is \code{FALSE}.}
 
-\item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
-
 \item{scatter_alpha}{(optional) Picture transparency. Default is \code{1}.}
+
+\item{n_pielegend}{(optional) The number of interaction contributions pie plot legend. Default is \code{3}.}
+
+\item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
 \value{
 A ggplot2 layer.

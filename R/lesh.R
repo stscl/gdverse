@@ -84,8 +84,9 @@ print.lesh_result = \(x, ...) {
 #' @param x x Return by `lesh()`.
 #' @param pie (optional) Whether to draw the interaction contributions. Default is `TRUE`.
 #' @param scatter (optional) Whether to draw the interaction direction diagram. Default is `FALSE`.
-#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #' @param scatter_alpha (optional) Picture transparency. Default is `1`.
+#' @param n_pielegend (optional) The number of interaction contributions pie plot legend. Default is `3`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
 #' @export
@@ -96,8 +97,10 @@ print.lesh_result = \(x, ...) {
 #' g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 #' plot(g)
 #' }
-plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
-                     ..., scatter_alpha = 1) {
+plot.lesh_result = \(x, pie = TRUE,
+					 scatter = FALSE,
+                     scatter_alpha = 1,
+                     n_pielegend = 3,...) {
   fig_scatter = NULL
   fig_pie = NULL
   if (scatter) {
@@ -127,7 +130,7 @@ plot.lesh_result = \(x,pie = TRUE,scatter = FALSE,
                                   data = g_pie, cols = c('spd1', 'spd2'),
                                   color = NA, show.legend = FALSE) +
       ggplot2::scale_fill_manual(values = c('#75c7af','#fb9872')) +
-      suppressWarnings(scatterpie::geom_scatterpie_legend(g_pie$interactv * 15, n = 3,
+      suppressWarnings(scatterpie::geom_scatterpie_legend(g_pie$interactv * 15, n = n_pielegend,
                                          x = stats::quantile(g_pie$v1,0.99),
                                          y = stats::quantile(g_pie$v1,0.1),
                                          label_position = 'left',
