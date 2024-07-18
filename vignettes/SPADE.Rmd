@@ -17,8 +17,8 @@ library(sf)
 library(gdverse)
 library(magrittr)
 library(tidyverse)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse'))
-usfi
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
+ushi
 ## Simple feature collection with 1037 features and 19 fields
 ## Geometry type: POLYGON
 ## Dimension:     XY
@@ -43,11 +43,11 @@ usfi
 ```
 
 <div class="figure" style="text-align: center">
-<img src="../man/figures/spade/studyarea.png" alt="The study area map of USFI_Xian data"  />
-<p class="caption">The study area map of USFI_Xian data</p>
+<img src="../man/figures/spade/studyarea.png" alt="The study area map of USHI data"  />
+<p class="caption">The study area map of USHI data</p>
 </div>
 
-The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
+The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
 
 The meanings of each explanatory variable are as follows,and can be divided into three categories:
 
@@ -98,13 +98,13 @@ global_moranI = \(data,col,nb,wt){
   return(moranI)
 }
 
-usfi |>
+ushi |>
   dplyr::filter(!if_any(everything(),is.na)) |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) |>
-  dplyr::select(SUHI,nb,wt) -> new_usfi
+  dplyr::select(SUHI,nb,wt) -> new_ushi
 
-new_usfi
+new_ushi
 ## Simple feature collection with 1037 features and 3 fields
 ## Geometry type: POLYGON
 ## Dimension:     XY
@@ -126,7 +126,7 @@ new_usfi
 ## # ℹ 1,027 more rows
 set.seed(123456789)
 
-gmi = new_usfi |>
+gmi = new_ushi |>
   global_moranI(SUHI,nb,wt)
 gmi
 ## Moran'I Index       P Value 
@@ -143,7 +143,7 @@ We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://
 ``` r
 library(tidyrgeoda)
 
-new_usfi %>%
+new_ushi %>%
   mutate(lisa = st_local_moran(.,'SUHI',
                                wt = st_contiguity_weights(.),
                                significance_cutoff = 0.05)) %>%
@@ -173,10 +173,10 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 
 
 ``` r
-usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi),
-                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),
+ushi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(ushi),
+                 discvar = names(select(st_drop_geometry(ushi),-SUHI)),
                  cores = 6)
-usfi_opgd
+ushi_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
 ## 
@@ -202,11 +202,11 @@ usfi_opgd
 ## |   LPI    | 0.03320575  | 2.950997e-02 |
 ```
 
-**You can access the detailed q statistics by `usfi_opgd$factor`.**
+**You can access the detailed q statistics by `ushi_opgd$factor`.**
 
 
 ``` r
-usfi_opgd$factor
+ushi_opgd$factor
 ## # A tibble: 18 × 3
 ##    variable `Q-statistic` `P-value`
 ##    <chr>            <dbl>     <dbl>
@@ -242,27 +242,27 @@ In `gdverse`, when you not provide a spatial weight matrix, it will use **1st or
 
 
 ``` r
-coords = usfi |>
+coords = ushi |>
   st_centroid() |>
   st_coordinates()
 
 wt1 = inverse_distance_weight(coords[,1],coords[,2])
 ```
 
-You can also use gravity weight by assigning the `power` parameter in `inverse_distance_weight()` function.
+You can also use gravity model weight by assigning the `power` parameter in `inverse_distance_weight()` function.
 
 
 ``` r
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 ```
 
-You can also use spatial weight matrix from `sfdep`(which invoke `spdep`) or `tidyrgeoda`(which invoke `rgeoda``)
+You can also use spatial weight matrix from `sfdep`(which invokes `spdep`) or `tidyrgeoda`(which invokes `rgeoda`).
 
 #### using spatial weight matrix from sfdep
 
 
 ``` r
-wt3 = usfi |>
+wt3 = ushi |>
   dplyr::filter(!if_any(everything(),is.na)) |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) %$%
@@ -273,7 +273,7 @@ wt3 = usfi |>
 
 
 ``` r
-wt4 = tidyrgeoda::st_contiguity_weights(usfi) |>
+wt4 = tidyrgeoda::st_contiguity_weights(ushi) |>
   as.matrix() |>
   apply(1,\(x) x/sum(x)) |>
   t()
@@ -297,10 +297,10 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 
 ``` r
-usfi_spade = spade(SUHI ~ .,
-                   data = st_drop_geometry(usfi),
+ushi_spade = spade(SUHI ~ .,
+                   data = st_drop_geometry(ushi),
                    wt = wt3, cores = 6)
-usfi_spade
+ushi_spade
 ## ***         Spatial Association Detector         
 ## 
 ## | variable | Q-statistic |      P-value      |
@@ -323,16 +323,16 @@ usfi_spade
 ## |   LPI    | 0.13054984  | No Pseudo-P Value |
 ## |   DTH    | 0.08346346  | No Pseudo-P Value |
 ## |   WAR    |     NaN     | No Pseudo-P Value |
-plot(usfi_spade,slicenum = 8)
+plot(ushi_spade,slicenum = 8)
 ```
 
-![](../man/figures/spade/USFI_SPADE_factor-1.png)
+![](../man/figures/spade/ushi_SPADE_factor-1.png)
 
-**You can also access the detailed q statistics by `usfi_spade$factor`**
+**You can also access the detailed q statistics by `ushi_spade$factor`**
 
 
 ``` r
-usfi_spade$factor
+ushi_spade$factor
 ## # A tibble: 18 × 3
 ##    variable `Q-statistic` `P-value`        
 ##    <chr>            <dbl> <chr>            
@@ -364,7 +364,7 @@ We demonstrate the rationality of NA values calculated of `WAR` in the following
 
 
 ``` r
-WAR = usfi$WAR
+WAR = ushi$WAR
 skimr::skim(WAR)
 ```
 
@@ -393,7 +393,7 @@ Table: Data summary
 
 
 ``` r
-ggplot(data = usfi) +
+ggplot(data = ushi) +
   geom_histogram(aes(WAR),
                color='white',
                fill='gray60') +
@@ -424,23 +424,23 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 
 ``` r
 3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                  factor_detector(usfi$WAR, .) %>%
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                  factor_detector(ushi$WAR, .) %>%
                   {.[[1]]})
 ##  [1] 0.00000000 0.05795105 0.08069138 0.10177158 0.12117267 0.13904284 0.15732689 0.17377009
 ##  [9] 0.19092712 0.20432876 0.22190151 0.23780494 0.25057152 0.26498423 0.28119643 0.29570781
 ## [17] 0.30353784 0.32068449 0.33494156 0.34531717
 
 3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                   psd_spade(usfi$WAR, ., wt3))
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                   psd_spade(ushi$WAR, ., wt3))
 ##  [1]  0.0000000 -0.4065480 -0.3942882 -0.4219084 -0.6231376 -0.7273617 -0.7462245 -0.5883158
 ##  [9] -0.4720283 -0.4902740 -0.3850580 -0.3185052 -0.3402303 -0.3119740 -0.3468160 -0.3244028
 ## [17] -0.3453713 -0.3221619 -0.2500152 -0.2302331
 
 3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                   cpsd_spade(usfi$SUHI, usfi$WAR, ., wt3))
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                   cpsd_spade(ushi$SUHI, ushi$WAR, ., wt3))
 ##  [1]         NaN -0.15912828 -0.21327657 -0.27536506 -0.09128105 -0.03375476 -0.15168436
 ##  [8] -0.18804177 -0.23465648 -0.29911716 -0.35586536 -0.41570044 -0.43172541 -0.41268215
 ## [15] -0.52127019 -0.57350020 -0.48780407 -0.34204498 -0.60269473 -1.11353340
@@ -451,11 +451,11 @@ we examine the effect of removing the WAR variable on VIF and linear models:
 
 
 ``` r
-lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(usfi))
+lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(ushi))
 summary(lm.modelOne)
 ## 
 ## Call:
-## lm(formula = SUHI ~ ., data = st_drop_geometry(usfi))
+## lm(formula = SUHI ~ ., data = st_drop_geometry(ushi))
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
@@ -519,11 +519,11 @@ car::vif(lm.modelOne) |>
 
 
 ``` r
-lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(usfi) |> select(-WAR))
+lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(ushi) |> select(-WAR))
 summary(lm.modelTwo)
 ## 
 ## Call:
-## lm(formula = SUHI ~ ., data = select(st_drop_geometry(usfi), 
+## lm(formula = SUHI ~ ., data = select(st_drop_geometry(ushi), 
 ##     -WAR))
 ## 
 ## Residuals:

@@ -24,15 +24,15 @@ library(sf)
 library(gdverse)
 library(magrittr)
 library(tidyverse)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse'))
-usfi
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
+ushi
 ```
 
-```{r echo=FALSE, fig.align="center",fig.cap="The study area map of USFI_Xian data"}
+```{r echo=FALSE, fig.align="center",fig.cap="The study area map of USHI data"}
 knitr::include_graphics('../man/figures/spade/studyarea.png')
 ```
 
-The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban  heat island effect) and its influence factors.
+The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
 
 The meanings of each explanatory variable are as follows,and can be divided into three categories:
 
@@ -82,16 +82,16 @@ global_moranI = \(data,col,nb,wt){
   return(moranI)
 }
 
-usfi |>
+ushi |>
   dplyr::filter(!if_any(everything(),is.na)) |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) |>
-  dplyr::select(SUHI,nb,wt) -> new_usfi
+  dplyr::select(SUHI,nb,wt) -> new_ushi
 
-new_usfi
+new_ushi
 set.seed(123456789)
 
-gmi = new_usfi |>
+gmi = new_ushi |>
   global_moranI(SUHI,nb,wt)
 gmi
 ```
@@ -105,7 +105,7 @@ We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://
 ```{r SUHI_LISA,fig.width=7.5,fig.height=4}
 library(tidyrgeoda)
 
-new_usfi %>%
+new_ushi %>%
   mutate(lisa = st_local_moran(.,'SUHI',
                                wt = st_contiguity_weights(.),
                                significance_cutoff = 0.05)) %>%
@@ -132,16 +132,16 @@ Spatial dependence was neglected in native geodetector, which led to the **SPADE
 ### OPGD modeling
 
 ```{r}
-usfi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(usfi),
-                 discvar = names(select(st_drop_geometry(usfi),-SUHI)),
+ushi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(ushi),
+                 discvar = names(select(st_drop_geometry(ushi),-SUHI)),
                  cores = 6)
-usfi_opgd
+ushi_opgd
 ```
 
-**You can access the detailed q statistics by `usfi_opgd$factor`.**
+**You can access the detailed q statistics by `ushi_opgd$factor`.**
 
 ```{r}
-usfi_opgd$factor
+ushi_opgd$factor
 ```
 
 ### SPADE modeling
@@ -155,25 +155,25 @@ The biggest difference between SPADE and native GD and OPGD in actual modeling i
 In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
 
 ```{r}
-coords = usfi |>
+coords = ushi |>
   st_centroid() |>
   st_coordinates()
 
 wt1 = inverse_distance_weight(coords[,1],coords[,2])
 ```
 
-You can also use gravity weight by assigning the `power` parameter in `inverse_distance_weight()` function.
+You can also use gravity model weight by assigning the `power` parameter in `inverse_distance_weight()` function.
 
 ```{r}
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 ```
 
-You can also use spatial weight matrix from `sfdep`(which invoke `spdep`) or `tidyrgeoda`(which invoke `rgeoda``)
+You can also use spatial weight matrix from `sfdep`(which invokes `spdep`) or `tidyrgeoda`(which invokes `rgeoda`).
 
 #### using spatial weight matrix from sfdep
 
 ```{r}
-wt3 = usfi |>
+wt3 = ushi |>
   dplyr::filter(!if_any(everything(),is.na)) |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) %$%
@@ -183,7 +183,7 @@ wt3 = usfi |>
 #### using spatial weight matrix from tidyrgeoda
 
 ```{r}
-wt4 = tidyrgeoda::st_contiguity_weights(usfi) |>
+wt4 = tidyrgeoda::st_contiguity_weights(ushi) |>
   as.matrix() |>
   apply(1,\(x) x/sum(x)) |>
   t()
@@ -203,18 +203,18 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 #### run SPADE
 
-```{r USFI_SPADE_factor,fig.width=8.5,fig.height=6.5}
-usfi_spade = spade(SUHI ~ .,
-                   data = st_drop_geometry(usfi),
+```{r ushi_SPADE_factor,fig.width=8.5,fig.height=6.5}
+ushi_spade = spade(SUHI ~ .,
+                   data = st_drop_geometry(ushi),
                    wt = wt3, cores = 6)
-usfi_spade
-plot(usfi_spade,slicenum = 8)
+ushi_spade
+plot(ushi_spade,slicenum = 8)
 ```
 
-**You can also access the detailed q statistics by `usfi_spade$factor`**
+**You can also access the detailed q statistics by `ushi_spade$factor`**
 
 ```{r}
-usfi_spade$factor
+ushi_spade$factor
 ```
 
 The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
@@ -224,12 +224,12 @@ We demonstrate the rationality of NA values calculated of `WAR` in the following
 ### SPADE NA result explained
 
 ```{r}
-WAR = usfi$WAR
+WAR = ushi$WAR
 skimr::skim(WAR)
 ```
 
 ```{r WAR_Hist,fig.width=4.5,fig.height=3}
-ggplot(data = usfi) +
+ggplot(data = ushi) +
   geom_histogram(aes(WAR),
                color='white',
                fill='gray60') +
@@ -250,24 +250,24 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 
 ```{r}
 3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                  factor_detector(usfi$WAR, .) %>%
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                  factor_detector(ushi$WAR, .) %>%
                   {.[[1]]})
 
 3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                   psd_spade(usfi$WAR, ., wt3))
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                   psd_spade(ushi$WAR, ., wt3))
 
 3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(usfi$WAR,.k) %>%
-                   cpsd_spade(usfi$SUHI, usfi$WAR, ., wt3))
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                   cpsd_spade(ushi$SUHI, ushi$WAR, ., wt3))
 ```
 
 In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF. Here
 we examine the effect of removing the WAR variable on VIF and linear models:
 
 ```{r}
-lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(usfi))
+lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(ushi))
 summary(lm.modelOne)
 
 car::vif(lm.modelOne) |>
@@ -278,7 +278,7 @@ car::vif(lm.modelOne) |>
 ```
 
 ```{r}
-lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(usfi) |> select(-WAR))
+lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(ushi) |> select(-WAR))
 summary(lm.modelTwo)
 
 car::vif(lm.modelTwo) |>
