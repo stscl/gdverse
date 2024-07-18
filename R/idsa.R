@@ -1,4 +1,4 @@
-#' @title interactive detector for spatial associations(IDSA)
+#' @title interactive detector for spatial associations(IDSA) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for interactive detector for spatial associations model.
