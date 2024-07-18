@@ -31,11 +31,11 @@ one-to-one correspondence with \code{discnumvec}.
 }
 \examples{
 library(sf)
-usfi = read_sf(system.file('extdata/USFI_Xian.gpkg',package = 'gdverse')) |>
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
 3:10 \%>\%
-purrr::map_dbl(\(.k) st_unidisc(usfi$NDVI,.k) \%>\%
-               factor_detector(usfi$SUHI,.) \%>\%
+purrr::map_dbl(\(.k) st_unidisc(ushi$NDVI,.k) \%>\%
+               factor_detector(ushi$SUHI,.) \%>\%
                {.[[1]]}) \%>\%
  loess_optdiscnum(3:10)
 
