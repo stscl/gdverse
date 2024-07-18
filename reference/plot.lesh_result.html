@@ -55,7 +55,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'lesh_result'</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span>, scatter_alpha <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">FALSE</span>, scatter_alpha <span class="op">=</span> <span class="fl">1</span>, n_pielegend <span class="op">=</span> <span class="fl">3</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -74,12 +74,16 @@
 <dd><p>(optional) Whether to draw the interaction direction diagram. Default is <code>FALSE</code>.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>(optional) Other arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">ggplot2::theme()</a></code>.</p></dd>
-
-
 <dt id="arg-scatter-alpha">scatter_alpha<a class="anchor" aria-label="anchor" href="#arg-scatter-alpha"></a></dt>
 <dd><p>(optional) Picture transparency. Default is <code>1</code>.</p></dd>
+
+
+<dt id="arg-n-pielegend">n_pielegend<a class="anchor" aria-label="anchor" href="#arg-n-pielegend"></a></dt>
+<dd><p>(optional) The number of interaction contributions pie plot legend. Default is <code>3</code>.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>(optional) Other arguments passed to <code><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">ggplot2::theme()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
