@@ -16,9 +16,9 @@
 #'
 #' @param formula A formula of spatial rough set-based geographical detector model.
 #' @param data A data.frame, tibble or sf object of observation data.
-#' @param wt Spatial adjacency matrix. If `data` is a `sf` object, the queen adjacency
-#' matrix is used when no `wt` object is provided. In other cases, you must provide a
-#' `wt` object.
+#' @param wt Spatial adjacency matrix. If `data` is a `sf` polygon object, the queen
+#' adjacency matrix is used when no `wt` object is provided. In other cases, you must
+#' provide a `wt` object.
 #' @param type (optional) The type of geographical detector, which must be one of
 #' `factor`(default), `interaction` and `ecological`.
 #' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
