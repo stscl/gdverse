@@ -56,6 +56,7 @@ gozh = \(formula, data, cores = 1,
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print gozh_result
 #' @export
 print.gozh_result = \(x, ...) {
   cat("                GOZH Model                  \n")
@@ -77,6 +78,7 @@ print.gozh_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot gozh_result
 #' @export
 #'
 plot.gozh_result = \(x, ...) {
