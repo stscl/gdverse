@@ -120,6 +120,7 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print srs_factor_detector
 #' @export
 #'
 print.srs_factor_detector = \(x, ...) {
@@ -137,6 +138,7 @@ print.srs_factor_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print srs_interaction_detector
 #' @export
 #'
 print.srs_interaction_detector = \(x, ...) {
@@ -154,6 +156,7 @@ print.srs_interaction_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print srs_ecological_detector
 #' @export
 #'
 print.srs_ecological_detector = \(x, ...) {
@@ -173,6 +176,7 @@ print.srs_ecological_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
+#' @method plot srs_factor_detector
 #' @export
 #'
 plot.srs_factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
@@ -220,6 +224,7 @@ plot.srs_factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot srs_interaction_detector
 #' @export
 #'
 plot.srs_interaction_detector = \(x,alpha = 1,...){
@@ -239,6 +244,7 @@ plot.srs_interaction_detector = \(x,alpha = 1,...){
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot srs_ecological_detector
 #' @export
 #'
 plot.srs_ecological_detector = \(x, ...) {
