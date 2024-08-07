@@ -123,6 +123,7 @@ gd = \(formula,data,type = "factor",alpha = 0.95){
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print factor_detector
 #' @export
 #'
 print.factor_detector = \(x, ...) {
@@ -140,6 +141,7 @@ print.factor_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print interaction_detector
 #' @export
 #'
 print.interaction_detector = \(x, ...) {
@@ -163,6 +165,7 @@ print.interaction_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print risk_detector
 #' @export
 #'
 print.risk_detector = \(x, ...) {
@@ -197,6 +200,7 @@ print.risk_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print ecological_detector
 #' @export
 #'
 print.ecological_detector = \(x, ...) {
@@ -228,6 +232,7 @@ print.ecological_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
+#' @method plot factor_detector
 #' @export
 #'
 plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
@@ -284,6 +289,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot interaction_detector
 #' @export
 #'
 plot.interaction_detector = \(x,alpha = 1,...){
@@ -328,6 +334,7 @@ plot.interaction_detector = \(x,alpha = 1,...){
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot risk_detector
 #' @export
 #'
 plot.risk_detector = \(x, ...) {
@@ -373,6 +380,7 @@ plot.risk_detector = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot ecological_detector
 #' @export
 #'
 plot.ecological_detector = \(x, ...) {
