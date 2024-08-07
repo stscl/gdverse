@@ -77,6 +77,7 @@ rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print rgd_result
 #' @export
 print.rgd_result = \(x, ...) {
   cat("                 RGD Model                  \n")
@@ -98,6 +99,7 @@ print.rgd_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
 #'
 #' @return A ggplot2 layer
+#' @method plot rgd_result
 #' @export
 #'
 plot.rgd_result = \(x, ...) {
