@@ -54,6 +54,7 @@ Suggests:
     Rdimtools,
     rmarkdown,
     terra,
+    testthat (>= 3.0.0),
     tidyterra,
     tidyverse
 LinkingTo: 
@@ -63,3 +64,4 @@ Depends:
     R (>= 4.1.0)
 LazyData: true
 URL: https://spatlyu.github.io/gdverse/, https://github.com/SpatLyu/gdverse
+Config/testthat/edition: 3
