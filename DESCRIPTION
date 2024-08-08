@@ -26,6 +26,7 @@ Description: Support for a family of geographical detector models in R. There ar
              detector(RGD) and robust interactive detector(RID).
 License: GPL-3
 Encoding: UTF-8
+Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://spatlyu.github.io/gdverse, https://github.com/SpatLyu/gdverse
@@ -68,4 +69,3 @@ LinkingTo:
 VignetteBuilder: knitr
 LazyData: true
 Config/testthat/edition: 3
-Language: en-US
