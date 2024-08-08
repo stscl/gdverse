@@ -7,7 +7,7 @@
 F_informationloss(xvar, xdisc)
 }
 \arguments{
-\item{xvar}{The original un-discretized vector.}
+\item{xvar}{The original undiscretized vector.}
 
 \item{xdisc}{The discretized vector.}
 }

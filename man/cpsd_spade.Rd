@@ -9,7 +9,7 @@ cpsd_spade(yobs, xobs, xdisc, wt)
 \arguments{
 \item{yobs}{Variable Y}
 
-\item{xobs}{The original un-discretized covariable X.}
+\item{xobs}{The original undiscretized covariable X.}
 
 \item{xdisc}{The discretized covariable X.}
 

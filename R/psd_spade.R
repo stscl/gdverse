@@ -59,7 +59,7 @@ psd_spade = \(y,x,wt){
 #' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 #'
 #' @param yobs Variable Y
-#' @param xobs The original un-discretized covariable X.
+#' @param xobs The original undiscretized covariable X.
 #' @param xdisc The discretized covariable X.
 #' @param wt The spatial weight matrix.
 #'
@@ -236,7 +236,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 #' The information loss measured by information entropy formula is
 #' \eqn{F = -\sum\limits_{i=1}^N p_{(i)}\log_2 p_{(i)} - \left(-\sum\limits_{h=1}^L p_{(h)}\log_2 p_{(h)}\right)}
 #'
-#' @param xvar The original un-discretized vector.
+#' @param xvar The original undiscretized vector.
 #' @param xdisc The discretized vector.
 #'
 #' @return A numeric value of information loss measured by information entropy.
