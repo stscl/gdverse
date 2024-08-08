@@ -59,7 +59,6 @@ Suggests:
     Rcpp,
     Rdimtools,
     rmarkdown,
-    spelling,
     terra,
     testthat (>= 3.0.0),
     tidyterra,
