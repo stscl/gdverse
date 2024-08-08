@@ -1,0 +1,3 @@
+.onLoad = function(...) {
+  loadNamespace("Rcpp")
+}
