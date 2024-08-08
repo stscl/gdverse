@@ -14,7 +14,7 @@ rescale_vector(x, to_left = 0, to_right = 1)
 \item{to_right}{(optional) Specified maximum. Default is \code{1}.}
 }
 \value{
-A continuous vector which has rescaled.
+A continuous vector.
 }
 \description{
 rescale continuous vector to specified minimum and maximum

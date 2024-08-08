@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils_helper.R
 \name{all2int}
 \alias{all2int}
-\title{convert all discreted vectors to integer}
+\title{convert all discretized vectors to integer}
 \usage{
 all2int(x)
 }
 \arguments{
-\item{x}{A discreted vector.}
+\item{x}{A discretized vector.}
 }
 \value{
 An integer vector
 }
 \description{
-convert all discreted vectors to integer
+convert all discretized vectors to integer
 }
 \examples{
 all2int(factor(letters[1:3],levels = c('b','a','c')))

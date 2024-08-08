@@ -74,7 +74,7 @@ shuffle_vector = \(x,shuffle_rate,seed = 123456789){
 #' @param to_left (optional) Specified minimum. Default is `0`.
 #' @param to_right (optional) Specified maximum. Default is `1`.
 #'
-#' @return A continuous vector which has rescaled.
+#' @return A continuous vector.
 #' @export
 #'
 #' @examples
@@ -155,9 +155,9 @@ unidisc_methods = \(){
            "maximum","box"))
 }
 
-#' @ convert all discreted vectors to integer
+#' @title convert all discretized vectors to integer
 #'
-#' @param x A discreted vector.
+#' @param x A discretized vector.
 #'
 #' @return An integer vector
 #' @export

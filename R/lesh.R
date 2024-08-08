@@ -78,7 +78,7 @@ print.lesh_result = \(x, ...) {
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for LESH model interaction result in `lesh()`.
-#' @details
+#' @note
 #' When both `scatter` and `pie` are set to `TRUE` in RStudio, enlarge the drawing frame
 #' for normal display.
 #'
