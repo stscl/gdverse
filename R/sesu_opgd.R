@@ -84,6 +84,7 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
+#' @method print sesu_opgd
 #' @export
 #'
 print.sesu_opgd = \(x,...){
@@ -108,6 +109,7 @@ print.sesu_opgd = \(x,...){
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
+#' @method plot sesu_opgd
 #' @export
 #'
 plot.sesu_opgd = \(x,...){
