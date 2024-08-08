@@ -89,6 +89,7 @@ spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NU
 #' @param ... Other arguments.
 #'
 #' @return Formatted string output
+#' @method print spade_result
 #' @export
 print.spade_result = \(x, ...) {
   cat("***         Spatial Association Detector         ")
@@ -108,6 +109,7 @@ print.spade_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
+#' @method plot spade_result
 #' @export
 #'
 plot.spade_result = \(x, slicenum = 2, alpha = 0.95, ...) {
