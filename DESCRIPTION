@@ -58,6 +58,7 @@ Suggests:
     Rcpp,
     Rdimtools,
     rmarkdown,
+    spelling,
     terra,
     testthat (>= 3.0.0),
     tidyterra,
@@ -67,3 +68,4 @@ LinkingTo:
 VignetteBuilder: knitr
 LazyData: true
 Config/testthat/edition: 3
+Language: en-US
