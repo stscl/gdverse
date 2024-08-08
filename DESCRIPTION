@@ -51,6 +51,7 @@ Suggests:
     cowplot,
     knitr,
     PieGlyph,
+    Rcpp,
     Rdimtools,
     rmarkdown,
     terra,
