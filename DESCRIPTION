@@ -28,6 +28,10 @@ License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+URL: https://spatlyu.github.io/gdverse, https://github.com/SpatLyu/gdverse
+BugReports: https://github.com/SpatLyu/gdverse/issues
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     classInt,
     dplyr,
@@ -61,8 +65,5 @@ Suggests:
 LinkingTo: 
     Rcpp
 VignetteBuilder: knitr
-Depends: 
-    R (>= 4.1.0)
 LazyData: true
 Config/testthat/edition: 3
-URL: https://spatlyu.github.io/gdverse, https://github.com/SpatLyu/gdverse
