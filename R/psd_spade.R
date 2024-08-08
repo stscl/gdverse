@@ -231,7 +231,7 @@ psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
 #' @title measure information loss by information entropy
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for measure information loss by information entropy.
+#' Function for measure information loss by shannon information entropy.
 #' @details
 #' The information loss measured by information entropy formula is
 #' \eqn{F = -\sum\limits_{i=1}^N p_{(i)}\log_2 p_{(i)} - \left(-\sum\limits_{h=1}^L p_{(h)}\log_2 p_{(h)}\right)}

@@ -15,7 +15,7 @@ F_informationloss(xvar, xdisc)
 A numeric value of information loss measured by information entropy.
 }
 \description{
-Function for measure information loss by information entropy.
+Function for measure information loss by shannon information entropy.
 }
 \details{
 The information loss measured by information entropy formula is
