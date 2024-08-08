@@ -11,9 +11,9 @@ srsgd(formula, data, wt = NULL, type = "factor", alpha = 0.95)
 
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
-\item{wt}{Spatial adjacency matrix. If \code{data} is a \code{sf} object, the queen adjacency
-matrix is used when no \code{wt} object is provided. In other cases, you must provide a
-\code{wt} object.}
+\item{wt}{Spatial adjacency matrix. If \code{data} is a \code{sf} polygon object, the queen
+adjacency matrix is used when no \code{wt} object is provided. In other cases, you must
+provide a \code{wt} object.}
 
 \item{type}{(optional) The type of geographical detector, which must be one of
 \code{factor}(default), \code{interaction} and \code{ecological}.}
