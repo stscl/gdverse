@@ -1,0 +1,48 @@
+.navbar-brand.me-2 {
+    color: #344028 !important;
+}
+
+.nav-text.text-muted.me-auto {
+  --bs-text-opacity: 1;
+    color: #d5e64a !important;
+}
+
+h1,h2,h3 {
+  font-weight: bold;
+}
+
+h1 {
+  color: #5b7b75;
+}
+
+.nav-item input[type="search"] {
+    border-color: #6c757d;
+    background-color: #ffffff;
+    color: #344028;
+}
+
+.navbar-nav .nav-item>.nav-link {
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    color: white;
+}
+
+.navbar-brand {
+    color:white;
+}
+
+a, code a {
+  color: #5b7b75;
+}
+
+a:hover, code a:hover {
+  color: #e6dbca;
+}
+
+a:not([href]) {
+  color: inherit;
+}
+
+a:not([href]):hover {
+  color: inherit;
+}
