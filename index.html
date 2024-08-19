@@ -22,7 +22,7 @@
 ">
 <meta name="description" content="Supports various geographical detector models for spatial stratified heterogeneity analysis. There are 9 kinds of geographical detector models have been supported in gdverse, including native geographic detector(GD), optimal parameters-based geographical detector(OPGD), geographically optimal zones-based heterogeneity model(GOZH), locally explained heterogeneity model(LESH), spatial association detector(SPADE), interactive detector for spatial associations (IDSA), robust geographical detector(RGD), robust interactive detector(RID) and spatial rough set-based geographical detector(SRSGD).">
 <meta property="og:description" content="Supports various geographical detector models for spatial stratified heterogeneity analysis. There are 9 kinds of geographical detector models have been supported in gdverse, including native geographic detector(GD), optimal parameters-based geographical detector(OPGD), geographically optimal zones-based heterogeneity model(GOZH), locally explained heterogeneity model(LESH), spatial association detector(SPADE), interactive detector for spatial associations (IDSA), robust geographical detector(RGD), robust interactive detector(RID) and spatial rough set-based geographical detector(SRSGD).">
-<meta property="og:image" content="https://spatlyu.github.io/gdverse/logo.png">
+<meta property="og:image" content="https://ausgis.github.io/gdverse/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -60,7 +60,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/SpatLyu/gdverse/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ausgis/gdverse/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
@@ -88,7 +88,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>Full document of the most recent release of <strong>gdverse</strong> is online: <a href="https://spatlyu.github.io/gdverse/" class="uri">https://spatlyu.github.io/gdverse/</a></p>
+<p>Full document of the most recent release of <strong>gdverse</strong> is online: <a href="https://ausgis.github.io/gdverse/" class="uri">https://ausgis.github.io/gdverse/</a></p>
 <div class="figure" style="text-align: center">
 <img src="./reference/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="75%"><p class="caption">
 Functions in gdverse
@@ -156,10 +156,10 @@ Functions in gdverse
 <div class="section level3">
 <h3 id="install-from-source">Install from source<a class="anchor" aria-label="anchor" href="#install-from-source"></a>
 </h3>
-<p>You can install the development version of <strong>gdverse</strong> from <a href="https://github.com/SpatLyu/gdverse" class="external-link">github</a> with:</p>
+<p>You can install the development version of <strong>gdverse</strong> from <a href="https://github.com/ausgis/gdverse" class="external-link">github</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"SpatLyu/gdverse"</span>,</span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ausgis/gdverse"</span>,</span>
 <span>                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                         dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Please ensure that <strong>Rcpp</strong> is properly installed and the appropriate <strong>C++</strong> compilation environment is configured in advance if you want to install <strong>gdverse</strong> from github.</p>
@@ -167,10 +167,10 @@ Functions in gdverse
 <div class="section level3">
 <h3 id="install-the-binary-version">Install the binary version<a class="anchor" aria-label="anchor" href="#install-the-binary-version"></a>
 </h3>
-<p>You can also install the binary version of <strong>gdverse</strong> from <a href="https://spatlyu.r-universe.dev/gdverse" class="external-link">r-universe</a>:</p>
+<p>You can also install the binary version of <strong>gdverse</strong> from <a href="https://ausgis.r-universe.dev/gdverse" class="external-link">r-universe</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gdverse"</span>, </span>
-<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://spatlyu.r-universe.dev"</span>,</span>
+<span>                 repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://ausgis.r-universe.dev"</span>,</span>
 <span>                           <span class="st">"https://cran.rstudio.com/"</span><span class="op">)</span>,</span>
 <span>                 dep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -181,7 +181,7 @@ Functions in gdverse
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://spatlyu.github.io/gdverse">gdverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/gdverse">gdverse</a></span><span class="op">)</span></span>
 <span><span class="va">fvcpath</span> <span class="op">=</span> <span class="st">"https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"</span></span>
 <span><span class="va">fvc</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"/vsicurl/"</span>,<span class="va">fvcpath</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">fvc</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">fvc</span>,fact <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -206,7 +206,7 @@ Functions in gdverse
 <span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 4.08 sec elapsed</span></span>
+<span><span class="co">## 4.25 sec elapsed</span></span>
 <span><span class="va">fvc_opgd</span></span>
 <span><span class="co">##                 OPGD Model                  </span></span>
 <span><span class="co">## ***          Factor Detector            </span></span>
@@ -255,8 +255,8 @@ Functions in gdverse
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/SpatLyu/gdverse/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/SpatLyu/gdverse/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/ausgis/gdverse/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ausgis/gdverse/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -293,7 +293,7 @@ Functions in gdverse
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=gdverse" class="external-link"><img src="https://www.r-pkg.org/badges/version/gdverse" alt="CRAN"></a></li>
-<li><a href="https://spatlyu.r-universe.dev/gdverse" class="external-link"><img src="https://spatlyu.r-universe.dev/badges/gdverse" alt="r-universe"></a></li>
+<li><a href="https://ausgis.r-universe.dev/gdverse" class="external-link"><img src="https://ausgis.r-universe.dev/badges/gdverse" alt="r-universe"></a></li>
 </ul>
 </div>
 
