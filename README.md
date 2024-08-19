@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
-[![r-universe](https://spatlyu.r-universe.dev/badges/gdverse)](https://spatlyu.r-universe.dev/gdverse)
+[![r-universe](https://ausgis.r-universe.dev/badges/gdverse)](https://ausgis.r-universe.dev/gdverse)
 
 <!-- badges: end -->
 
@@ -16,7 +16,7 @@ variants*.
 ## Overview
 
 Full document of the most recent release of **gdverse** is online:
-<https://spatlyu.github.io/gdverse/>
+<https://ausgis.github.io/gdverse/>
 
 <div class="figure" style="text-align: center">
 
@@ -46,11 +46,11 @@ Current models and functions provided by **gdverse** are:
 ### Install from source
 
 You can install the development version of **gdverse** from
-[github](https://github.com/SpatLyu/gdverse) with:
+[github](https://github.com/ausgis/gdverse) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("SpatLyu/gdverse",
+devtools::install_github("ausgis/gdverse",
                          build_vignettes = TRUE,
                          dep = TRUE)
 ```
@@ -62,11 +62,11 @@ install **gdverse** from github.
 ### Install the binary version
 
 You can also install the binary version of **gdverse** from
-[r-universe](https://spatlyu.r-universe.dev/gdverse):
+[r-universe](https://ausgis.r-universe.dev/gdverse):
 
 ``` r
 install.packages("gdverse", 
-                 repos = c("https://spatlyu.r-universe.dev",
+                 repos = c("https://ausgis.r-universe.dev",
                            "https://cran.rstudio.com/"),
                  dep = TRUE)
 ```
@@ -102,7 +102,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.08 sec elapsed
+## 4.25 sec elapsed
 fvc_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
