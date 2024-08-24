@@ -23,7 +23,7 @@ vignette: >
 
 5. Install `mamba`
 
-   > `conda install -c conda-forge mamba -y`.
+   > `conda install -c conda-forge mamba -y`
 
 6. Set up python packages
 
