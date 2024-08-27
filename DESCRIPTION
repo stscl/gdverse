@@ -62,7 +62,6 @@ Suggests:
     rmarkdown,
     terra,
     testthat (>= 3.0.0),
-    tidyterra,
     tidyverse
 LinkingTo: 
     Rcpp
