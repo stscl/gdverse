@@ -18,15 +18,6 @@ variants*.
 Full document of the most recent release of **gdverse** is online:
 <https://ausgis.github.io/gdverse/>
 
-<div class="figure" style="text-align: center">
-
-<img src="./man/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="75%" />
-<p class="caption">
-Functions in gdverse
-</p>
-
-</div>
-
 Current models and functions provided by **gdverse** are:
 
 | *geodetector model* | *gdverse function* | *support status* |
@@ -41,12 +32,44 @@ Current models and functions provided by **gdverse** are:
 | **RID**             | `rid()`            | ✔️               |
 | **SRSGD**           | `srsgd()`          | ✔️               |
 
+<div class="figure" style="text-align: center">
+
+<img src="./man/figures/gdm.png" alt="Development of Geographical Detector Models" width="75%" />
+<p class="caption">
+Development of Geographical Detector Models
+</p>
+
+</div>
+
+<div class="figure" style="text-align: center">
+
+<img src="./man/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="75%" />
+<p class="caption">
+Functions in gdverse
+</p>
+
+</div>
+
 ## Installation
 
-### Install from source
+- Install from [CRAN](https://CRAN.R-project.org/package=gdverse) with:
 
-You can install the development version of **gdverse** from
-[github](https://github.com/ausgis/gdverse) with:
+``` r
+install.packages("gdverse", dep = TRUE)
+```
+
+- Install development binary version from
+  [r-universe](https://ausgis.r-universe.dev/gdverse) with:
+
+``` r
+install.packages('gdverse',
+                 repos = c("https://ausgis.r-universe.dev",
+                           "https://cran.rstudio.com/"),
+                 dep = TRUE)
+```
+
+- Install development source version from
+  [GitHub](https://github.com/ausgis/gdverse) with:
 
 ``` r
 # install.packages("devtools")
@@ -58,18 +81,6 @@ devtools::install_github("ausgis/gdverse",
 Please ensure that **Rcpp** is properly installed and the appropriate
 **C++** compilation environment is configured in advance if you want to
 install **gdverse** from github.
-
-### Install the binary version
-
-You can also install the binary version of **gdverse** from
-[r-universe](https://ausgis.r-universe.dev/gdverse):
-
-``` r
-install.packages("gdverse", 
-                 repos = c("https://ausgis.r-universe.dev",
-                           "https://cran.rstudio.com/"),
-                 dep = TRUE)
-```
 
 ## Example
 
@@ -102,7 +113,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.25 sec elapsed
+## 3.83 sec elapsed
 fvc_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
