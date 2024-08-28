@@ -12,12 +12,12 @@ gd(formula, data, type = "factor", alpha = 0.95)
 \item{data}{A data.frame or tibble of observation data.}
 
 \item{type}{(optional) The type of geographical detector, which must be one of \code{factor}(default),
-\code{interaction}, \code{risk}, \code{ecological}.}
+\code{interaction}, \code{risk}, \code{ecological}. You can run one or more types at one time.}
 
 \item{alpha}{(optional) Specifies the size of the alpha (confidence level). Default is \code{0.95}.}
 }
 \value{
-A list of tibble with the corresponding result under different detector types.
+A list of the GD model result.
 \describe{
 \item{\code{factor}}{the result of factor detector}
 \item{\code{interaction}}{the result of interaction detector}
@@ -28,32 +28,12 @@ A list of tibble with the corresponding result under different detector types.
 \description{
 Function for native geographical detector model.
 }
-\note{
-Note that only one type of geodetector is supported at a time in \code{gd()}.
-}
 \examples{
-gd(y ~ x1 + x2,
-   tibble::tibble(y = 1:7,
-                  x1 = c('x',rep('y',3),rep('z',3)),
-                  x2 = c(rep('a',2),rep('b',2),rep('c',3))))
-
-gd(y ~ x1 + x2,
-   tibble::tibble(y = 1:7,
-                  x1 = c('x',rep('y',3),rep('z',3)),
-                  x2 = c(rep('a',2),rep('b',2),rep('c',3))),
-   type = 'interaction')
-
-gd(y ~ x1 + x2,
-   tibble::tibble(y = 1:7,
-                  x1 = c('x',rep('y',3),rep('z',3)),
-                  x2 = c(rep('a',2),rep('b',2),rep('c',3))),
-   type = 'risk',alpha = 0.95)
-
-gd(y ~ x1 + x2,
-   tibble::tibble(y = 1:7,
-                  x1 = c('x',rep('y',3),rep('z',3)),
-                  x2 = c(rep('a',2),rep('b',2),rep('c',3))),
-   type = 'ecological',alpha = 0.95)
+data("NTDs")
+g = gd(incidence ~ watershed + elevation + soiltype,
+       data = NTDs,type = c('factor','interaction'))
+g
+plot(g)
 
 }
 \references{

@@ -33,7 +33,7 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 cluster with that many cores is created and used. You can also supply a cluster object.}
 
 \item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
-\code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
+\code{interaction}, \code{risk}, \code{ecological}. You can run one or more types at one time.}
 
 \item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
 
