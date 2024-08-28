@@ -69,6 +69,7 @@ reference:
   - st_fuzzyoverlay
   - loess_optdiscnum
   - loess_optscale
+  - geodetector
   - factor_detector
   - interaction_detector
   - risk_detector
