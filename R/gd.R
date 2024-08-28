@@ -24,28 +24,11 @@
 #' @export
 #'
 #' @examples
-#' gd(y ~ x1 + x2,
-#'    tibble::tibble(y = 1:7,
-#'                   x1 = c('x',rep('y',3),rep('z',3)),
-#'                   x2 = c(rep('a',2),rep('b',2),rep('c',3))))
-#'
-#' gd(y ~ x1 + x2,
-#'    tibble::tibble(y = 1:7,
-#'                   x1 = c('x',rep('y',3),rep('z',3)),
-#'                   x2 = c(rep('a',2),rep('b',2),rep('c',3))),
-#'    type = 'interaction')
-#'
-#' gd(y ~ x1 + x2,
-#'    tibble::tibble(y = 1:7,
-#'                   x1 = c('x',rep('y',3),rep('z',3)),
-#'                   x2 = c(rep('a',2),rep('b',2),rep('c',3))),
-#'    type = 'risk',alpha = 0.95)
-#'
-#' gd(y ~ x1 + x2,
-#'    tibble::tibble(y = 1:7,
-#'                   x1 = c('x',rep('y',3),rep('z',3)),
-#'                   x2 = c(rep('a',2),rep('b',2),rep('c',3))),
-#'    type = 'ecological',alpha = 0.95)
+#' data("NTDs")
+#' g = gd(incidence ~ watershed + elevation + soiltype,
+#'        data = NTDs,type = c('factor','interaction'))
+#' g
+#' plot(g)
 #'
 gd = \(formula, data, type = "factor", alpha = 0.95){
   if (length(type) == 1){
