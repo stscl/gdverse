@@ -297,9 +297,9 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
 #' @title print factor detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for factor detector in `gd()`.
+#' S3 method to format output for factor detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
@@ -315,9 +315,9 @@ print.factor_detector = \(x, ...) {
 #' @title print interaction detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for interaction detector in `gd()`.
+#' S3 method to format output for interaction detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
@@ -339,9 +339,9 @@ print.interaction_detector = \(x, ...) {
 #' @title print risk detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for risk detector in `gd()`.
+#' S3 method to format output for risk detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
@@ -374,9 +374,9 @@ print.risk_detector = \(x, ...) {
 #' @title print ecological detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for ecological detector in `gd()`.
+#' S3 method to format output for ecological detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
@@ -404,9 +404,9 @@ print.ecological_detector = \(x, ...) {
 #' @title plot factor detector result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for factor detector in `gd()`.
+#' S3 method to plot output for factor detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param slicenum (optional) The number of labels facing inward. Default is `2`.
 #' @param alpha (optional) Confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
@@ -462,9 +462,9 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
 #' @title plot interaction detector result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for interaction detector in `gd()`.
+#' S3 method to plot output for interaction detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param alpha (optional) Picture transparency. Default is `1`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
@@ -508,9 +508,9 @@ plot.interaction_detector = \(x,alpha = 1,...){
 #' @title plot risk detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for risk detector in `gd()`.
+#' S3 method to plot output for risk detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
@@ -554,9 +554,9 @@ plot.risk_detector = \(x, ...) {
 #' @title plot ecological detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for ecological detector in `gd()`.
+#' S3 method to plot output for ecological detector in `geodetector()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `geodetector()`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
