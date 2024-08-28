@@ -55,7 +55,7 @@ See \code{vignette('RGDRID',package = 'gdverse')} for more details.
 \examples{
 \dontrun{
 data('ndvi')
-g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1],
+g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1:-3],
         cores = 6, type =c('factor','interaction'))
 }
 }
