@@ -2,8 +2,6 @@
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for native geographical detector model.
-#' @note
-#' Note that only one type of geodetector is supported at a time in `gd()`.
 #' @references
 #' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010)
 #' Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study
@@ -13,10 +11,10 @@
 #' @param formula A formula of geographical detector model.
 #' @param data A data.frame or tibble of observation data.
 #' @param type (optional) The type of geographical detector, which must be one of `factor`(default),
-#' `interaction`, `risk`, `ecological`.
+#' `interaction`, `risk`, `ecological`. You can run one or more types at one time.
 #' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
 #'
-#' @return A list of tibble with the corresponding result under different detector types.
+#' @return A list of the GD model result.
 #' \describe{
 #' \item{\code{factor}}{the result of factor detector}
 #' \item{\code{interaction}}{the result of interaction detector}

@@ -550,7 +550,6 @@ plot.risk_detector = \(x, ...) {
   return(fig_p)
 }
 
-
 #' @title plot ecological detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
