@@ -178,8 +178,6 @@ ecological_detector = \(y,x1,x2,alpha = 0.95){
 
 #' @title geographical detector(GD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for geographical detector model.
 #' @note
 #' Note that only one type of geodetector is supported at a time in `geodetector()`.
 #' @references

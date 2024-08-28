@@ -41,8 +41,8 @@ gd = \(formula, data, type = "factor", alpha = 0.95){
                              alpha = alpha)[[1]]
     }
     names(res) = type
+    class(res) = "gd_result"
   }
-  class(res) = "gd_result"
   return(res)
 }
 
@@ -80,20 +80,13 @@ print.gd_result = \(x, ...) {
 #' @export
 #'
 plot.gd_result = \(x, ...) {
-  if (length(x) == 1){
-    res = x[1]
-    nx = names(x)
-    class(res) = paste0(nx[1],"_detector")
-    fig_p = plot(res)
-  } else {
-    fig_p = vector("list",length(x))
-    nx = names(x)
-    for (i in seq_along(x)){
-      res = x[i]
-      class(res) = paste0(nx[i],"_detector")
-      fig_p[[i]] = plot(res)
-    }
-    fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
+  fig_p = vector("list",length(x))
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0(nx[i],"_detector")
+    fig_p[[i]] = plot(res)
   }
+  fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
   return(fig_p)
 }
