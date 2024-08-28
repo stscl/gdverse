@@ -34,7 +34,7 @@
 #' @examples
 #' \dontrun{
 #' data('ndvi')
-#' g = rgd(NDVIchange ~ ., data = ndvi, dicsvar = names(ndvi)[-1],
+#' g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1],
 #'         cores = 6, type =c('factor','interaction'))
 #' }
 rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
