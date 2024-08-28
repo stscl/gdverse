@@ -71,7 +71,7 @@
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p>(optional) The type of geographical detector, which must be one of <code>factor</code>(default),
-<code>interaction</code>, <code>risk</code>, <code>ecological</code>.</p></dd>
+<code>interaction</code>, <code>risk</code>, <code>ecological</code>. You can run one or more types at one time.</p></dd>
 
 
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
@@ -80,7 +80,7 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of tibble with the corresponding result under different detector types.</p><dl><dt><code>factor</code></dt>
+    <p>A list of the GD model result.</p><dl><dt><code>factor</code></dt>
 <dd><p>the result of factor detector</p></dd>
 
 <dt><code>interaction</code></dt>
@@ -95,10 +95,6 @@
 
 </dl></div>
     <div class="section level2">
-    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Note that only one type of geodetector is supported at a time in <code>gd()</code>.</p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu &amp; Xiao‐Ying Zheng (2010)
 Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study
@@ -112,59 +108,28 @@ DOI: 10.1080/13658810802443457</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
-<span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
-<span class="r-in"><span>                  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'y'</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'z'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'b'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"NTDs"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">gd</span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span></span>
+<span class="r-in"><span>       data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">g</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ***          Factor Detector            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | variable | Q-statistic |  P-value   |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:-----------:|:----------:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |    x2    |  0.8928571  | 0.03167582 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |    x1    |  0.7714286  | 0.07936477 |</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
-<span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
-<span class="r-in"><span>                  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'y'</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'z'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'b'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | variable  | Q-statistic |   P-value   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:---------:|:-----------:|:-----------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | watershed |  0.6377737  | 0.000128803 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | elevation |  0.6067087  | 0.043382244 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | soiltype  |  0.3857168  | 0.372145486 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ***        Interaction Detector         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | Interactive variable |    Interaction    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------------------:|:-----------------:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |       x1 ∩ x2        | Weaken, nonlinear |</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
-<span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
-<span class="r-in"><span>                  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'y'</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'z'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'b'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   type <span class="op">=</span> <span class="st">'risk'</span>,alpha <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ***            Risk Detector            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | Interactive variable  | Interaction  |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:---------------------:|:------------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | watershed ∩ elevation | Enhance, bi- |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | watershed ∩ soiltype  | Enhance, bi- |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | elevation ∩ soiltype  | Enhance, bi- |</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable x1:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zone  | zonex | zoney |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:-----:|:-----:|:-----:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zoney |  No   |  NA   |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonez |  No   |  Yes  |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Variable x2:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zone  | zonea | zoneb |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:-----:|:-----:|:-----:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zoneb |  No   |  NA   |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonec |  Yes  |  Yes  |</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">gd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>,</span></span>
-<span class="r-in"><span>   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span></span>
-<span class="r-in"><span>                  x1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'x'</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'y'</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'z'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                  x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'b'</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>   type <span class="op">=</span> <span class="st">'ecological'</span>,alpha <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ***          Ecological Detector         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   | x2 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:--|:--:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |x1 | No |</span>
+<span class="r-in"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="gd-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

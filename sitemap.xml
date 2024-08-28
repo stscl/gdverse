@@ -21,6 +21,7 @@
 <url><loc>https://ausgis.github.io/gdverse/reference/gd.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/gd_bestunidisc.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/generate_subsets.html</loc></url>
+<url><loc>https://ausgis.github.io/gdverse/reference/geodetector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/gozh.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/gozh_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/idsa.html</loc></url>
@@ -36,6 +37,7 @@
 <url><loc>https://ausgis.github.io/gdverse/reference/pipe.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/plot.ecological_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/plot.factor_detector.html</loc></url>
+<url><loc>https://ausgis.github.io/gdverse/reference/plot.gd_result.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/plot.gozh_result.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/plot.idsa_result.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/plot.interaction_detector.html</loc></url>
@@ -51,6 +53,7 @@
 <url><loc>https://ausgis.github.io/gdverse/reference/plot.srs_interaction_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/print.ecological_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/print.factor_detector.html</loc></url>
+<url><loc>https://ausgis.github.io/gdverse/reference/print.gd_result.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/print.gozh_result.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/print.idsa_result.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/print.interaction_detector.html</loc></url>
