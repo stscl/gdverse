@@ -34,7 +34,7 @@ Current models and functions provided by **gdverse** are:
 
 <div class="figure" style="text-align: center">
 
-<img src="./man/figures/gdm.png" alt="Development of Geographical Detector Models" width="75%" />
+<img src="./man/figures/gdm.png" alt="Development of Geographical Detector Models" width="100%" />
 <p class="caption">
 Development of Geographical Detector Models
 </p>
@@ -113,7 +113,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 4.29 sec elapsed
+## 4.41 sec elapsed
 fvc_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            

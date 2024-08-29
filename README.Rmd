@@ -43,7 +43,7 @@ Current models and functions provided by **gdverse** are:
 | **RID**             | `rid()`            | ✔️               |
 | **SRSGD**           | `srsgd()`          | ✔️               |
 
-```{r echo=FALSE, out.width='75%', fig.align="center",fig.cap="Development of Geographical Detector Models"}
+```{r echo=FALSE, out.width='100%', fig.align="center",fig.cap="Development of Geographical Detector Models"}
 knitr::include_graphics('./man/figures/gdm.png')
 ```
 
