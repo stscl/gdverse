@@ -82,30 +82,23 @@ Please ensure that **Rcpp** is properly installed and the appropriate **C++** co
 ## Example
 
 ```{r example_gdverse}
-library(terra)
-library(tidyverse)
 library(gdverse)
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = terra::aggregate(fvc,fact = 5)
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-head(fvc)
+data("ndvi")
+ndvi
 ```
 
 ### OPGD model
 
 ```{r}
-tictoc::tic()
-fvc_opgd = opgd(fvc ~ ., data = fvc, 
-                discvar = names(select(fvc,-c(fvc,lulc))),
-                cores = 6, type = 'factor')
-tictoc::toc()
-fvc_opgd
+ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, 
+                 discvar = names(ndvi)[-1:-3],
+                 cores = 6, type ='factor')
+ndvi_opgd
 ```
 
 ### GOZH model
 
 ```{r}
-g = gozh(fvc ~ ., data = fvc, cores = 6, type = 'factor')
+g = gozh(NDVIchange ~ ., data = ndvi)
 g
 ```
