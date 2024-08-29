@@ -10,14 +10,18 @@ Authors@R: c(
              email = "2237768656@qq.com", 
              role = c("aut"),
              comment = c(ORCID = "0009-0002-6518-3613")),
-      person(given = "Yongze", family = "Song",
-             email = "yongze.song@outlook.com", 
+      person(given = "Wufan", family = "Zhao",
+             email = "wufanzhao@hkust-gz.edu.cn", 
              role = c("aut"),
-             comment = c(ORCID = "0000-0003-3420-9622")),
+             comment = c(ORCID = "0000-0002-0265-3465")),
       person(given = "Jianwu", family = "Yan",
              email = "yanjw2001@163.com", 
              role = c("aut"),
-             comment = c(ORCID = "0000-0001-9411-8453"))
+             comment = c(ORCID = "0000-0001-9411-8453")),
+      person(given = "Yongze", family = "Song",
+             email = "yongze.song@outlook.com", 
+             role = c("aut"),
+             comment = c(ORCID = "0000-0003-3420-9622"))
       )
 Description: Supports various geographical detector models for spatial stratified heterogeneity analysis. There are 9 kinds of 
              geographical detector models have been supported in this package, including native geographical detector(GD), optimal 
