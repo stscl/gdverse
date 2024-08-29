@@ -113,7 +113,7 @@ fvc_opgd = opgd(fvc ~ ., data = fvc,
                 discvar = names(select(fvc,-c(fvc,lulc))),
                 cores = 6, type = 'factor')
 tictoc::toc()
-## 3.83 sec elapsed
+## 4.29 sec elapsed
 fvc_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
