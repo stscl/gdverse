@@ -26,7 +26,7 @@ A list of tibble with the corresponding result under different detector types.
 }
 }
 \description{
-Function for geographical detector model.
+geographical detector(GD) model
 }
 \note{
 Note that only one type of geodetector is supported at a time in \code{geodetector()}.
