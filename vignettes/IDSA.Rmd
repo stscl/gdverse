@@ -18,9 +18,10 @@ In this vignette, we used the same data as SPADE vignette to demonstrate the use
 
 ``` r
 library(sf)
-library(gdverse)
-library(magrittr)
 library(tidyverse)
+library(magrittr)
+library(gdverse)
+
 ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
 ushi
 ## Simple feature collection with 1037 features and 19 fields
@@ -50,7 +51,7 @@ ushi
 
 There are originally 18 explanatory variables in the `ushi` tibble. If these 18 variables are used together, IDSA needs to be calculated about 2.62143 &times; 10<sup>5</sup> times, which is very time-consuming, and we need to reduce the dimension of the data or select appropriate variables.
 
-Here we combine the understanding of the data and the diffusion maps method to generate the data after dimensionality reduction.Specifically, we combine data of the same class into one class using diffusion maps based on the classification of explanatory variables.
+Here we combine the understanding of the data and the diffusion maps method to generate the data after dimensionality reduction. Specifically, we combine data of the same class into one class using diffusion maps based on the classification of explanatory variables.
 
 In SPADE vignette we proved the invalidity of `WAR` to explain `SUHI`, which is removed here.
 
