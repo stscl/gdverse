@@ -90,9 +90,10 @@
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">ushi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/USHI.gpkg'</span>,package <span class="op">=</span> <span class="st">'gdverse'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ushi</span></span>
 <span><span class="co">## Simple feature collection with 1037 features and 19 fields</span></span>
@@ -117,14 +118,14 @@
 <span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;,</span></span>
 <span><span class="co">## #   geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/spade/studyarea.png" alt="The study area map of USHI data"><p class="caption">
+<img src="../reference/figures/spade/studyarea.png" alt="The study area map of USHI data" width="120%"><p class="caption">
 The study area map of USHI data
 </p>
 </div>
-<p>The polygon spatial data are the streets divided based on roads
-within <em>the Ring expressway of Xi’an City</em>, and the attribute
-data are the <em>SUHI</em>(surface urban heat island effect) and its
-influence factors.</p>
+<p>This spatial polygon vector data <code>ushi</code> is the streets
+divided based on roads within <em>the Ring expressway of Xi’an
+City</em>, and the attribute data are the <em>SUHI</em>(surface urban
+heat island effect) and its influence factors.</p>
 <p>The meanings of each explanatory variable are as follows,and can be
 divided into three categories:</p>
 <ol style="list-style-type: decimal">
@@ -284,7 +285,8 @@ more details see <a href="https://spatlyu.github.io/tidyrgeoda/articles/Local-In
 <p>The global and local spatial autocorrelation shows that SUHI’s strong
 spatial dependence.</p>
 <p>Spatial dependence was neglected in native geodetector, which led to
-the <strong>SPADE</strong> spatial association detector.</p>
+the development of <strong>SPADE</strong>(spatial association
+detector).</p>
 </div>
 </div>
 <div class="section level3">
@@ -401,15 +403,15 @@ invokes <code>spdep</code>) or <code>tidyrgeoda</code>(which invokes
 <code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code> of the <code>gdverse</code>
 package to construct a spatial weight matrix if you’re not sure which
 spatial weight matrix should to be used as the SPADE paper is using
-this.In practice, the appropriate spatial weight matrix is selected
+this. In practice, the appropriate spatial weight matrix is selected
 considering the characteristics of the research object and the research
-area! </strong></p>
+area. </strong></p>
 <p>In the following section we will execute <em>SPADE</em> model using
 spatial weight matrix <code>wt3</code> which is constructed by queen
 contiguity.</p>
 <p>The test of <em>SPADE</em> model significance in <code>gdverse</code>
-is achieved by randomization null hypothesis use a pseudo-p value,this
-calculations are very time-consuming. Default <code>gdverse</code> sets
+is achieved by randomization null hypothesis use a pseudo-p value, this
+calculation is very time-consuming. Default <code>gdverse</code> sets
 the <code>permutations</code> parameter to 0 and does not calculate the
 pseudo-p value. If you want to calculate the pseudo-p value, specify the
 <code>permutations</code> parameter to a number such as 99,999,9999,
