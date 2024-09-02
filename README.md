@@ -42,7 +42,7 @@ Development of Geographical Detector Models
 
 <div class="figure" style="text-align: center">
 
-<img src="./man/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="75%" />
+<img src="./man/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="90%" />
 <p class="caption">
 Functions in gdverse
 </p>

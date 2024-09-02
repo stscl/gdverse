@@ -47,7 +47,7 @@ Current models and functions provided by **gdverse** are:
 knitr::include_graphics('./man/figures/gdm.png')
 ```
 
-```{r echo=FALSE, out.width='75%', fig.align="center",fig.cap="Functions in gdverse"}
+```{r echo=FALSE, out.width='90%', fig.align="center",fig.cap="Functions in gdverse"}
 knitr::include_graphics('./man/figures/gdverse_framework_bgtrans.png')
 ```
 
