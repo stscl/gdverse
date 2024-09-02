@@ -23,8 +23,8 @@ This vignette explains how to run **native geographic detector(GD)** in **gdvers
 
 ```{r setup}
 library(sf)
-library(gdverse)
 library(tidyverse)
+library(gdverse)
 ```
 
 See layers in `NTDs.gpkg`:
