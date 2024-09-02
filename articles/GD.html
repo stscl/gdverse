@@ -105,9 +105,9 @@ detector(GD)</strong> in <strong>gdverse</strong> package.</p>
 <span><span class="co">## 2  watershed       Polygon        9      2  unknown</span></span>
 <span><span class="co">## 3  elevation Multi Polygon        7      2  unknown</span></span>
 <span><span class="co">## 4   soiltype Multi Polygon        6      2  unknown</span></span></code></pre></div>
-<p>In <code>NTDs.gpkg</code>, disease is the dependent variable, which
-is a continuous numerical variable, while others are independent and
-discrete variables.</p>
+<p>In file <code>NTDs.gpkg</code>, <code>disease</code> layer is the
+dependent variable, which is a continuous numerical variable, while
+others are independent and discrete variables.</p>
 <p>Now we need to combine these layers together:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">watershed</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">ntdspath</span>,layer <span class="op">=</span> <span class="st">'watershed'</span><span class="op">)</span></span>
@@ -201,6 +201,7 @@ discrete variables.</p>
 <span><span class="co">## 2 165        6.53 (316574.1 3989433)         4        NA        2</span></span>
 <span><span class="co">## 3 166        6.43 (311439.1 3990674)         4        NA        2</span></span>
 <span><span class="co">## 4 188        6.26 (301567.5 3991906)        NA         2        3</span></span></code></pre></div>
+<p>Filter out all rows with no <code>NA</code> values:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">NTDs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_all</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="op">~</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">NTDs</span></span>
@@ -224,6 +225,7 @@ discrete variables.</p>
 <span><span class="co">##  9 8          6.1  (279032.9 4005677)         5         5        4</span></span>
 <span><span class="co">## 10 9          5.89 (282534.9 4004849)         5         5        4</span></span>
 <span><span class="co">## # ℹ 175 more rows</span></span></code></pre></div>
+<p>Remove unnecessary columns of data:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">NTDs</span> <span class="op">=</span> <span class="va">NTDs</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -391,6 +393,74 @@ argument is <code>0.95</code>.</p>
 <span><span class="co">## |:---------|:---------:|:--------:|</span></span>
 <span><span class="co">## |watershed |    No     |    No    |</span></span>
 <span><span class="co">## |elevation |    NA     |    No    |</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="running-four-basic-geodetectors-simultaneously">Running four basic geodetectors simultaneously<a class="anchor" aria-label="anchor" href="#running-four-basic-geodetectors-simultaneously"></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
+<span>       data <span class="op">=</span> <span class="va">NTDs</span>,</span>
+<span>       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"factor"</span>, <span class="st">"interaction"</span>, <span class="st">"risk"</span>, <span class="st">"ecological"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">g</span></span>
+<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | variable  | Q-statistic |   P-value   |</span></span>
+<span><span class="co">## |:---------:|:-----------:|:-----------:|</span></span>
+<span><span class="co">## | watershed |  0.6377737  | 0.000128803 |</span></span>
+<span><span class="co">## | elevation |  0.6067087  | 0.043382244 |</span></span>
+<span><span class="co">## | soiltype  |  0.3857168  | 0.372145486 |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ***        Interaction Detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | Interactive variable  | Interaction  |</span></span>
+<span><span class="co">## |:---------------------:|:------------:|</span></span>
+<span><span class="co">## | watershed ∩ elevation | Enhance, bi- |</span></span>
+<span><span class="co">## | watershed ∩ soiltype  | Enhance, bi- |</span></span>
+<span><span class="co">## | elevation ∩ soiltype  | Enhance, bi- |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ***            Risk Detector            </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Variable elevation:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  No   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |</span></span>
+<span><span class="co">## | zone7 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Variable soiltype:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  No   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |</span></span>
+<span><span class="co">## | zone5 |  No   |  Yes  |  Yes  |  Yes  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">##  Variable watershed:</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 | zone7 | zone8 |</span></span>
+<span><span class="co">## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|</span></span>
+<span><span class="co">## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone3 |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone4 |  Yes  |  No   |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  No   |  NA   |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |</span></span>
+<span><span class="co">## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |</span></span>
+<span><span class="co">## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ***          Ecological Detector         </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## |          | elevation | soiltype |</span></span>
+<span><span class="co">## |:---------|:---------:|:--------:|</span></span>
+<span><span class="co">## |watershed |    No     |    No    |</span></span>
+<span><span class="co">## |elevation |    NA     |    No    |</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/gd/gd_all-1.png"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
