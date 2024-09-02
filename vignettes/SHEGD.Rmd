@@ -15,8 +15,8 @@ The [**GOZH**(geographically optimal zones-based heterogeneity) model](https://d
 
 
 ``` r
-library(gdverse)
 library(tidyverse)
+library(gdverse)
 
 data("ndvi")
 head(ndvi)
