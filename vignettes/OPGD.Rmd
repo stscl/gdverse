@@ -40,7 +40,7 @@ g = gd_bestunidisc(NDVIchange ~ .,
                    data = select(ndvi,-c(Climatezone,Mining)),
                    discnum = 3:15, cores = 6)
 tictoc::toc()
-## 2.76 sec elapsed
+## 2.31 sec elapsed
 ```
 
 
@@ -154,13 +154,40 @@ gd(NDVIchange ~ .,data = new.ndvi,type = 'interaction')
 
 ``` r
 ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
-                 discvar = names(select(ndvi,-c(Climatezone,Mining))),
+                 discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                  cores = 6, type = c('factor','interaction'))
-## Error in `data[, formula.vars[1], drop = TRUE]` at gdverse/R/geodetector.R:235:3:
-## ! Can't subset columns that don't exist.
-## ✖ Column `NDVIchange` doesn't exist.
 ndvi_opgd
-## Error in eval(expr, envir, enclos): object 'ndvi_opgd' not found
+##                 OPGD Model                  
+## ***          Factor Detector            
+## 
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation |  0.8811989  | 9.91e-10 |
+## |  Climatezone  |  0.8218335  | 7.34e-10 |
+## |  Tempchange   |  0.3478433  | 2.41e-10 |
+## |  Popdensity   |  0.2059304  | 5.09e-10 |
+## |    Mining     |  0.1411154  | 6.73e-10 |
+## |      GDP      |  0.1069398  | 4.54e-10 |
+## 
+## ***        Interaction Detector         
+## 
+## |    Interactive variable     |    Interaction     |
+## |:---------------------------:|:------------------:|
+## |    Climatezone ∩ Mining     |    Enhance, bi-    |
+## |      Climatezone ∩ GDP      |    Enhance, bi-    |
+## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |
+## | Climatezone ∩ Precipitation |    Enhance, bi-    |
+## |  Climatezone ∩ Tempchange   |    Enhance, bi-    |
+## |        Mining ∩ GDP         | Enhance, nonlinear |
+## |     Mining ∩ Popdensity     | Enhance, nonlinear |
+## |   Mining ∩ Precipitation    |    Enhance, bi-    |
+## |     Mining ∩ Tempchange     |    Enhance, bi-    |
+## |      GDP ∩ Popdensity       |    Enhance, bi-    |
+## |     GDP ∩ Precipitation     |    Enhance, bi-    |
+## |      GDP ∩ Tempchange       | Enhance, nonlinear |
+## | Popdensity ∩ Precipitation  |    Enhance, bi-    |
+## |   Popdensity ∩ Tempchange   |    Enhance, bi-    |
+## | Precipitation ∩ Tempchange  |    Enhance, bi-    |
 ```
 
 You can use `plot()` to visualize the result.
@@ -168,5 +195,6 @@ You can use `plot()` to visualize the result.
 
 ``` r
 plot(ndvi_opgd)
-## Error in eval(expr, envir, enclos): object 'ndvi_opgd' not found
 ```
+
+![](../man/figures/opgd/opgd_plot-1.png)
