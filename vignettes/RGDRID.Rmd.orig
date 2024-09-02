@@ -46,8 +46,8 @@ knitr::opts_chunk$set(
 ### Load data and package
 
 ``` {r}
-library(gdverse)
 library(tidyverse)
+library(gdverse)
 
 data("ndvi")
 ```
