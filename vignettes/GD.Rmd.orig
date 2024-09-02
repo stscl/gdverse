@@ -199,7 +199,7 @@ ed99
 
 ### Running four basic geodetectors simultaneously
 
-```{r gd_all,fig.width=8.5,fig.height=15}
+```{r gd_all,fig.width=8.5,fig.height=12}
 g = gd(incidence ~ watershed + elevation + soiltype,
        data = NTDs,
        type = c("factor", "interaction", "risk", "ecological"))
