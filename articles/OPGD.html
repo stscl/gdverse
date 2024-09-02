@@ -45,8 +45,8 @@
     <li><a class="dropdown-item" href="../articles/SHEGD.html">Spatial Heterogeneity Explanation(GOZH&amp;LESH)</a></li>
     <li><a class="dropdown-item" href="../articles/SPADE.html">Spatial Association Detector(SPADE)</a></li>
     <li><a class="dropdown-item" href="../articles/IDSA.html">Interactive Detector For Spatial Associations(IDSA)</a></li>
-    <li><a class="dropdown-item" href="../articles/SESU.html">Compare Size Effect of Spatial Units(SESU)</a></li>
     <li><a class="dropdown-item" href="../articles/RGDRID.html">Robust Geographical Detector&amp;Robust Interaction Detector(RGD&amp;RID)</a></li>
+    <li><a class="dropdown-item" href="../articles/SESU.html">Compare Size Effect of Spatial Units(SESU)</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -89,316 +89,179 @@
 <h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
-<span><span class="va">fvcpath</span> <span class="op">=</span> <span class="st">"https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"</span></span>
-<span><span class="va">fvc</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/rast.html" class="external-link">rast</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"/vsicurl/"</span>,<span class="va">fvcpath</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">fvc</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/aggregate.html" class="external-link">aggregate</a></span><span class="op">(</span><span class="va">fvc</span>,fact <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="va">fvc</span></span>
-<span><span class="co">## class       : SpatRaster </span></span>
-<span><span class="co">## dimensions  : 84, 114, 13  (nrow, ncol, nlyr)</span></span>
-<span><span class="co">## resolution  : 5000, 5000  (x, y)</span></span>
-<span><span class="co">## extent      : -92742.16, 477257.8, 3589385, 4009385  (xmin, xmax, ymin, ymax)</span></span>
-<span><span class="co">## coord. ref. : Asia_North_Albers_Equal_Area_Conic </span></span>
-<span><span class="co">## source(s)   : memory</span></span>
-<span><span class="co">## names       :       fvc,   premax,    premin,   presum,   tmpmax,    tmpmin, ... </span></span>
-<span><span class="co">## min values  : 0.1527159, 111.2089,  2.340401, 3834.887, 10.92638, -9.976424, ... </span></span>
-<span><span class="co">## max values  : 0.8905939, 247.1408, 75.933422, 8276.911, 26.72104,  1.101411, ...</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "fvc"    "premax" "premin" "presum" "tmpmax" "tmpmin" "tmpavg" "pop"    "ntl"   </span></span>
-<span><span class="co">## [10] "lulc"   "elev"   "slope"  "aspect"</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="convert-data-from-spatraster-to-tibble">Convert data from <code>SpatRaster</code> to
-<code>tibble</code><a class="anchor" aria-label="anchor" href="#convert-data-from-spatraster-to-tibble"></a>
-</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc</span> <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rspatial.github.io/terra/reference/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">fvc</span>,na.rm <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fvc</span><span class="op">)</span></span>
-<span><span class="co">## # A tibble: 6 × 13</span></span>
-<span><span class="co">##     fvc premax premin presum tmpmax tmpmin tmpavg   pop   ntl  lulc  elev slope aspect</span></span>
-<span><span class="co">##   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">## 1 0.188   163.   6.86  3992.   21.2  -7.09   8.54  5.64  9.10    10 1645.  2.96   122.</span></span>
-<span><span class="co">## 2 0.162   162.   5.23  3922.   21.7  -6.90   8.92 23.1  10.5     10 1539.  1.86   174.</span></span>
-<span><span class="co">## 3 0.168   168.   4.15  4040.   21.2  -7.22   8.53  9.73  5.58    10 1611.  3.19   192.</span></span>
-<span><span class="co">## 4 0.186   174.   5.99  4254.   20.8  -7.42   8.21  6.84  2.89    10 1677.  3.32   213.</span></span>
-<span><span class="co">## 5 0.189   164.   7.86  4047.   21.2  -7.00   8.58  2.36 12.3     10 1643.  2.79   132.</span></span>
-<span><span class="co">## 6 0.171   161.   5.23  3944.   21.7  -6.85   8.91  3.17 10.1     10 1553.  1.93   137.</span></span></code></pre></div>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"ndvi"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/headtail.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ndvi</span><span class="op">)</span></span>
+<span><span class="co">## # A tibble: 6 × 7</span></span>
+<span><span class="co">##   NDVIchange Climatezone Mining Tempchange Precipitation   GDP Popdensity</span></span>
+<span><span class="co">##        &lt;dbl&gt; &lt;chr&gt;       &lt;fct&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span><span class="co">## 1    0.116   Bwk         low         0.256          237. 12.6      1.45  </span></span>
+<span><span class="co">## 2    0.0178  Bwk         low         0.273          214.  2.69     0.801 </span></span>
+<span><span class="co">## 3    0.138   Bsk         low         0.302          449. 20.1     11.5   </span></span>
+<span><span class="co">## 4    0.00439 Bwk         low         0.383          213.  0        0.0462</span></span>
+<span><span class="co">## 5    0.00316 Bwk         low         0.357          205.  0        0.0748</span></span>
+<span><span class="co">## 6    0.00838 Bwk         low         0.338          201.  0        0.549</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="determine-optimal-discretization-parameters">Determine optimal discretization parameters<a class="anchor" aria-label="anchor" href="#determine-optimal-discretization-parameters"></a>
 </h3>
-<p>Only <code>lulc</code> is a discrete category variable in the
-<code>fvc</code> data, we need to discretize others. We can use
-<code><a href="../reference/gd_bestunidisc.html">gd_bestunidisc()</a></code> to discretize them based on geodetector
-q-statistic.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p><code>Climatezone</code> and <code>Mining</code> is the discrete
+category variables in the <code>ndvi</code> data, we need to discretize
+others. We can use <code><a href="../reference/gd_bestunidisc.html">gd_bestunidisc()</a></code> to discretize them
+based on geodetector q-statistic.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="va">lulc</span><span class="op">)</span>,discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,</span>
+<span>                   data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                   discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 3.49 sec elapsed</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<span><span class="co">## 2.31 sec elapsed</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
-<span><span class="co">##  [1] "aspect" "elev"   "ntl"    "pop"    "premax" "premin" "presum" "slope"  "tmpavg"</span></span>
-<span><span class="co">## [10] "tmpmax" "tmpmin"</span></span>
+<span><span class="co">## [1] "GDP"           "Popdensity"    "Precipitation" "Tempchange"   </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $k</span></span>
-<span><span class="co">##  [1] 13 15 15 15 15 15 15 15 10 15 15</span></span>
+<span><span class="co">## [1] 14 15 15 15</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $method</span></span>
-<span><span class="co">##  [1] "pretty"   "fisher"   "fisher"   "quantile" "fisher"   "fisher"   "fisher"   "fisher"  </span></span>
-<span><span class="co">##  [9] "sd"       "quantile" "fisher"  </span></span>
+<span><span class="co">## [1] "quantile" "quantile" "fisher"   "equal"   </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $disv</span></span>
-<span><span class="co">## # A tibble: 5,240 × 11</span></span>
-<span><span class="co">##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
-<span><span class="co">##     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1      7     9     3     2      7      1      1     5      8      9      2</span></span>
-<span><span class="co">##  2      9     8     3     5      7      1      1     3      8     11      2</span></span>
-<span><span class="co">##  3     10     9     3     2      7      1      1     5      8      9      2</span></span>
-<span><span class="co">##  4     11     9     2     2      8      1      1     5      7      7      2</span></span>
-<span><span class="co">##  5      7     9     4     1      7      2      1     4      8      9      2</span></span>
-<span><span class="co">##  6      7     8     3     1      7      1      1     3      8     11      3</span></span>
-<span><span class="co">##  7      7     8     3     3      6      1      1     2      8     11      3</span></span>
-<span><span class="co">##  8     11     8     3     2      7      1      1     3      8     11      3</span></span>
-<span><span class="co">##  9      9     9     4     7      7      1      1     5      8      9      2</span></span>
-<span><span class="co">## 10     11     8     3     3      7      1      1     4      8     10      2</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span>
-<span><span class="va">new.fvc</span> <span class="op">=</span> <span class="va">g</span><span class="op">$</span><span class="va">disv</span></span>
-<span><span class="va">new.fvc</span></span>
-<span><span class="co">## # A tibble: 5,240 × 11</span></span>
-<span><span class="co">##    aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
-<span><span class="co">##     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1      7     9     3     2      7      1      1     5      8      9      2</span></span>
-<span><span class="co">##  2      9     8     3     5      7      1      1     3      8     11      2</span></span>
-<span><span class="co">##  3     10     9     3     2      7      1      1     5      8      9      2</span></span>
-<span><span class="co">##  4     11     9     2     2      8      1      1     5      7      7      2</span></span>
-<span><span class="co">##  5      7     9     4     1      7      2      1     4      8      9      2</span></span>
-<span><span class="co">##  6      7     8     3     1      7      1      1     3      8     11      3</span></span>
-<span><span class="co">##  7      7     8     3     3      6      1      1     2      8     11      3</span></span>
-<span><span class="co">##  8     11     8     3     2      7      1      1     3      8     11      3</span></span>
-<span><span class="co">##  9      9     9     4     7      7      1      1     5      8      9      2</span></span>
-<span><span class="co">## 10     11     8     3     3      7      1      1     4      8     10      2</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
-<p>The <code>new.fvc</code> is the discrete result of the optimal
+<span><span class="co">## # A tibble: 713 × 4</span></span>
+<span><span class="co">##      GDP Popdensity Precipitation Tempchange</span></span>
+<span><span class="co">##    &lt;int&gt;      &lt;int&gt;         &lt;int&gt;      &lt;int&gt;</span></span>
+<span><span class="co">##  1     7          6             5          3</span></span>
+<span><span class="co">##  2     5          4             4          3</span></span>
+<span><span class="co">##  3     7         10            10          3</span></span>
+<span><span class="co">##  4     3          1             4          4</span></span>
+<span><span class="co">##  5     3          2             4          3</span></span>
+<span><span class="co">##  6     3          3             4          3</span></span>
+<span><span class="co">##  7     7          6             4          3</span></span>
+<span><span class="co">##  8     8          8             5          3</span></span>
+<span><span class="co">##  9    11         11             7          3</span></span>
+<span><span class="co">## 10     8          9             8          3</span></span>
+<span><span class="co">## # ℹ 703 more rows</span></span>
+<span><span class="va">new.ndvi</span> <span class="op">=</span> <span class="va">g</span><span class="op">$</span><span class="va">disv</span></span>
+<span><span class="va">new.ndvi</span></span>
+<span><span class="co">## # A tibble: 713 × 4</span></span>
+<span><span class="co">##      GDP Popdensity Precipitation Tempchange</span></span>
+<span><span class="co">##    &lt;int&gt;      &lt;int&gt;         &lt;int&gt;      &lt;int&gt;</span></span>
+<span><span class="co">##  1     7          6             5          3</span></span>
+<span><span class="co">##  2     5          4             4          3</span></span>
+<span><span class="co">##  3     7         10            10          3</span></span>
+<span><span class="co">##  4     3          1             4          4</span></span>
+<span><span class="co">##  5     3          2             4          3</span></span>
+<span><span class="co">##  6     3          3             4          3</span></span>
+<span><span class="co">##  7     7          6             4          3</span></span>
+<span><span class="co">##  8     8          8             5          3</span></span>
+<span><span class="co">##  9    11         11             7          3</span></span>
+<span><span class="co">## 10     8          9             8          3</span></span>
+<span><span class="co">## # ℹ 703 more rows</span></span></code></pre></div>
+<p>The <code>new.ndvi</code> is the discreted result of the optimal
 discretization parameter based on the Q statistic of the geographical
-detector (factor detector), we can combine it with <code>fvc</code> and
-<code>lulc</code> col in <code>fvc</code> tibble now.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.fvc</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span>,<span class="va">new.fvc</span><span class="op">)</span></span>
-<span><span class="va">new.fvc</span></span>
-<span><span class="co">## # A tibble: 5,240 × 13</span></span>
-<span><span class="co">##      fvc  lulc aspect  elev   ntl   pop premax premin presum slope tmpavg tmpmax tmpmin</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt; &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;</span></span>
-<span><span class="co">##  1 0.188    10      7     9     3     2      7      1      1     5      8      9      2</span></span>
-<span><span class="co">##  2 0.162    10      9     8     3     5      7      1      1     3      8     11      2</span></span>
-<span><span class="co">##  3 0.168    10     10     9     3     2      7      1      1     5      8      9      2</span></span>
-<span><span class="co">##  4 0.186    10     11     9     2     2      8      1      1     5      7      7      2</span></span>
-<span><span class="co">##  5 0.189    10      7     9     4     1      7      2      1     4      8      9      2</span></span>
-<span><span class="co">##  6 0.171    10      7     8     3     1      7      1      1     3      8     11      3</span></span>
-<span><span class="co">##  7 0.153    10      7     8     3     3      6      1      1     2      8     11      3</span></span>
-<span><span class="co">##  8 0.163    10     11     8     3     2      7      1      1     3      8     11      3</span></span>
-<span><span class="co">##  9 0.176    10      9     9     4     7      7      1      1     5      8      9      2</span></span>
-<span><span class="co">## 10 0.177    10     11     8     3     3      7      1      1     4      8     10      2</span></span>
-<span><span class="co">## # ℹ 5,230 more rows</span></span></code></pre></div>
+detector (factor detector), we can combine it with other columns in
+<code>ndvi</code> tibble now.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new.ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span>,<span class="va">new.ndvi</span><span class="op">)</span></span>
+<span><span class="va">new.ndvi</span></span>
+<span><span class="co">## # A tibble: 713 × 7</span></span>
+<span><span class="co">##    NDVIchange Climatezone Mining   GDP Popdensity Precipitation Tempchange</span></span>
+<span><span class="co">##         &lt;dbl&gt; &lt;chr&gt;       &lt;fct&gt;  &lt;int&gt;      &lt;int&gt;         &lt;int&gt;      &lt;int&gt;</span></span>
+<span><span class="co">##  1    0.116   Bwk         low        7          6             5          3</span></span>
+<span><span class="co">##  2    0.0178  Bwk         low        5          4             4          3</span></span>
+<span><span class="co">##  3    0.138   Bsk         low        7         10            10          3</span></span>
+<span><span class="co">##  4    0.00439 Bwk         low        3          1             4          4</span></span>
+<span><span class="co">##  5    0.00316 Bwk         low        3          2             4          3</span></span>
+<span><span class="co">##  6    0.00838 Bwk         low        3          3             4          3</span></span>
+<span><span class="co">##  7    0.0335  Bwk         low        7          6             4          3</span></span>
+<span><span class="co">##  8    0.0387  Bwk         low        8          8             5          3</span></span>
+<span><span class="co">##  9    0.0882  Bsk         low       11         11             7          3</span></span>
+<span><span class="co">## 10    0.0690  Bsk         low        8          9             8          3</span></span>
+<span><span class="co">## # ℹ 703 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-geodetector">Run geodetector<a class="anchor" aria-label="anchor" href="#run-geodetector"></a>
 </h3>
 <p>Then, we can run geodetector model by <code><a href="../reference/gd.html">gd()</a></code> function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.ndvi</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
-<span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |  presum  | 0.66090313  | 8.340000e-10 |</span></span>
-<span><span class="co">## |   lulc   | 0.65972601  | 8.780000e-10 |</span></span>
-<span><span class="co">## |  premin  | 0.46550058  | 3.610000e-10 |</span></span>
-<span><span class="co">## |  tmpmin  | 0.43559812  | 8.540000e-10 |</span></span>
-<span><span class="co">## |  tmpmax  | 0.25364304  | 7.850000e-10 |</span></span>
-<span><span class="co">## |  slope   | 0.23570512  | 8.830000e-10 |</span></span>
-<span><span class="co">## |   elev   | 0.23554763  | 7.290000e-10 |</span></span>
-<span><span class="co">## |  tmpavg  | 0.22139249  | 7.620000e-10 |</span></span>
-<span><span class="co">## |   pop    | 0.19529044  | 2.430000e-10 |</span></span>
-<span><span class="co">## |  premax  | 0.14507334  | 5.960000e-10 |</span></span>
-<span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
-<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span>
-<span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.fvc</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
+<span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
+<span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
+<span><span class="co">## | Precipitation |  0.8811989  | 9.91e-10 |</span></span>
+<span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
+<span><span class="co">## |  Tempchange   |  0.3478433  | 2.41e-10 |</span></span>
+<span><span class="co">## |  Popdensity   |  0.2059304  | 5.09e-10 |</span></span>
+<span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
+<span><span class="co">## |      GDP      |  0.1069398  | 4.54e-10 |</span></span>
+<span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.ndvi</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## | Interactive variable |    Interaction     |</span></span>
-<span><span class="co">## |:--------------------:|:------------------:|</span></span>
-<span><span class="co">## |    lulc ∩ aspect     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     lulc ∩ elev      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      lulc ∩ ntl      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |      lulc ∩ pop      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ premax     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ premin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ presum     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     lulc ∩ slope     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ tmpavg     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ tmpmax     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ tmpmin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    aspect ∩ elev     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     aspect ∩ ntl     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     aspect ∩ pop     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ premax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ premin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ presum    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    aspect ∩ slope    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ tmpavg    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ tmpmax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ tmpmin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |      elev ∩ ntl      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |      elev ∩ pop      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |    elev ∩ premax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |    elev ∩ premin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    elev ∩ presum     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     elev ∩ slope     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    elev ∩ tmpavg     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    elev ∩ tmpmax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |    elev ∩ tmpmin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      ntl ∩ pop       | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ premax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ premin     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ presum     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ slope      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ tmpavg     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ tmpmax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ tmpmin     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ premax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ premin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     pop ∩ presum     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     pop ∩ slope      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     pop ∩ tmpavg     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ tmpmax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ tmpmin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premax ∩ premin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ presum    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    premax ∩ slope    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ tmpavg    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ tmpmax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ tmpmin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premin ∩ presum    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    premin ∩ slope    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premin ∩ tmpavg    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premin ∩ tmpmax    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premin ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    presum ∩ slope    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   presum ∩ tmpavg    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   presum ∩ tmpmax    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   presum ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    slope ∩ tmpavg    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    slope ∩ tmpmax    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    slope ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   tmpavg ∩ tmpmax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   tmpavg ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |</span></span></code></pre></div>
+<span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
+<span><span class="co">## |:---------------------------:|:------------------:|</span></span>
+<span><span class="co">## |    Climatezone ∩ Mining     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      Climatezone ∩ GDP      |    Enhance, bi-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Climatezone ∩ Precipitation |    Enhance, bi-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Tempchange   |    Enhance, bi-    |</span></span>
+<span><span class="co">## |        Mining ∩ GDP         | Enhance, nonlinear |</span></span>
+<span><span class="co">## |     Mining ∩ Popdensity     | Enhance, nonlinear |</span></span>
+<span><span class="co">## |   Mining ∩ Precipitation    |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Mining ∩ Tempchange     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     GDP ∩ Precipitation     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      GDP ∩ Tempchange       | Enhance, nonlinear |</span></span>
+<span><span class="co">## | Popdensity ∩ Precipitation  |    Enhance, bi-    |</span></span>
+<span><span class="co">## |   Popdensity ∩ Tempchange   |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Precipitation ∩ Tempchange  |    Enhance, bi-    |</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="you-can-also-use-opgd-in-one-time-to-get-result-above-">You can also use <code>opgd()</code> in one time to get result
 above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-time-to-get-result-above-"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fvc_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
-<span>                discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">fvc_opgd</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ndvi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
+<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                 cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ndvi_opgd</span></span>
 <span><span class="co">##                 OPGD Model                  </span></span>
 <span><span class="co">## ***          Factor Detector            </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
-<span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |  presum  | 0.66090313  | 8.340000e-10 |</span></span>
-<span><span class="co">## |   lulc   | 0.65972601  | 8.780000e-10 |</span></span>
-<span><span class="co">## |  premin  | 0.46550058  | 3.610000e-10 |</span></span>
-<span><span class="co">## |  tmpmin  | 0.43559812  | 8.540000e-10 |</span></span>
-<span><span class="co">## |  tmpmax  | 0.25364304  | 7.850000e-10 |</span></span>
-<span><span class="co">## |  slope   | 0.23570512  | 8.830000e-10 |</span></span>
-<span><span class="co">## |   elev   | 0.23554763  | 7.290000e-10 |</span></span>
-<span><span class="co">## |  tmpavg  | 0.22139249  | 7.620000e-10 |</span></span>
-<span><span class="co">## |   pop    | 0.19529044  | 2.430000e-10 |</span></span>
-<span><span class="co">## |  premax  | 0.14507334  | 5.960000e-10 |</span></span>
-<span><span class="co">## |  aspect  | 0.01859967  | 7.490531e-01 |</span></span>
-<span><span class="co">## |   ntl    | 0.01725685  | 1.384075e-01 |</span></span>
+<span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
+<span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
+<span><span class="co">## | Precipitation |  0.8811989  | 9.91e-10 |</span></span>
+<span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
+<span><span class="co">## |  Tempchange   |  0.3478433  | 2.41e-10 |</span></span>
+<span><span class="co">## |  Popdensity   |  0.2059304  | 5.09e-10 |</span></span>
+<span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
+<span><span class="co">## |      GDP      |  0.1069398  | 4.54e-10 |</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ***        Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## | Interactive variable |    Interaction     |</span></span>
-<span><span class="co">## |:--------------------:|:------------------:|</span></span>
-<span><span class="co">## |    lulc ∩ aspect     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     lulc ∩ elev      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      lulc ∩ ntl      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |      lulc ∩ pop      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ premax     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ premin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ presum     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     lulc ∩ slope     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ tmpavg     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ tmpmax     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    lulc ∩ tmpmin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    aspect ∩ elev     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     aspect ∩ ntl     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     aspect ∩ pop     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ premax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ premin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ presum    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    aspect ∩ slope    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ tmpavg    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ tmpmax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   aspect ∩ tmpmin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |      elev ∩ ntl      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |      elev ∩ pop      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |    elev ∩ premax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |    elev ∩ premin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    elev ∩ presum     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     elev ∩ slope     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    elev ∩ tmpavg     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    elev ∩ tmpmax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |    elev ∩ tmpmin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      ntl ∩ pop       | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ premax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ premin     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ presum     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ slope      | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ tmpavg     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ tmpmax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     ntl ∩ tmpmin     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ premax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ premin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     pop ∩ presum     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     pop ∩ slope      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     pop ∩ tmpavg     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ tmpmax     | Enhance, nonlinear |</span></span>
-<span><span class="co">## |     pop ∩ tmpmin     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premax ∩ premin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ presum    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    premax ∩ slope    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ tmpavg    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ tmpmax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premax ∩ tmpmin    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   premin ∩ presum    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    premin ∩ slope    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premin ∩ tmpavg    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premin ∩ tmpmax    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   premin ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    presum ∩ slope    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   presum ∩ tmpavg    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   presum ∩ tmpmax    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   presum ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    slope ∩ tmpavg    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    slope ∩ tmpmax    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |    slope ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   tmpavg ∩ tmpmax    | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   tmpavg ∩ tmpmin    |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   tmpmax ∩ tmpmin    | Enhance, nonlinear |</span></span></code></pre></div>
+<span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
+<span><span class="co">## |:---------------------------:|:------------------:|</span></span>
+<span><span class="co">## |    Climatezone ∩ Mining     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      Climatezone ∩ GDP      |    Enhance, bi-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Climatezone ∩ Precipitation |    Enhance, bi-    |</span></span>
+<span><span class="co">## |  Climatezone ∩ Tempchange   |    Enhance, bi-    |</span></span>
+<span><span class="co">## |        Mining ∩ GDP         | Enhance, nonlinear |</span></span>
+<span><span class="co">## |     Mining ∩ Popdensity     | Enhance, nonlinear |</span></span>
+<span><span class="co">## |   Mining ∩ Precipitation    |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     Mining ∩ Tempchange     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Enhance, bi-    |</span></span>
+<span><span class="co">## |     GDP ∩ Precipitation     |    Enhance, bi-    |</span></span>
+<span><span class="co">## |      GDP ∩ Tempchange       | Enhance, nonlinear |</span></span>
+<span><span class="co">## | Popdensity ∩ Precipitation  |    Enhance, bi-    |</span></span>
+<span><span class="co">## |   Popdensity ∩ Tempchange   |    Enhance, bi-    |</span></span>
+<span><span class="co">## | Precipitation ∩ Tempchange  |    Enhance, bi-    |</span></span></code></pre></div>
 <p>You can use <code><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot()</a></code> to visualize the result.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fvc_opgd</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_opgd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/opgd/opgd_plot-1.png"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
