@@ -35,7 +35,7 @@ st_layers(ntdspath)
 ## 4   soiltype Multi Polygon        6      2  unknown
 ```
 
-In `NTDs.gpkg`, disease is the dependent variable, which is a continuous numerical variable, while others are independent and discrete variables.
+In file `NTDs.gpkg`, `disease` layer is the dependent variable, which is a continuous numerical variable, while others are independent and discrete variables.
 
 Now we need to combine these layers together:
 
@@ -114,7 +114,7 @@ plot_grid(f1,f2,f3,f4, nrow = 2,label_fontfamily = 'serif',
 p
 ```
 
-![](../man/figures/gd/NTDs_map-1.png)
+![plot of chunk NTDs_map](man/figures/gd/NTDs_map-1.png)
 
 Attribute spatial join
 
@@ -147,6 +147,8 @@ NTDs %>%
 ## 4 188        6.26 (301567.5 3991906)        NA         2        3
 ```
 
+Filter out all rows with no `NA` values:
+
 
 ``` r
 NTDs %>%
@@ -172,6 +174,8 @@ NTDs
 ## 10 9          5.89 (282534.9 4004849)         5         5        4
 ## # ℹ 175 more rows
 ```
+
+Remove unnecessary columns of data:
 
 
 ``` r
@@ -212,7 +216,7 @@ fd
 plot(fd)
 ```
 
-![](../man/figures/gd/fd-1.png)
+![plot of chunk fd](man/figures/gd/fd-1.png)
 
 ### Interaction detector
 
@@ -231,7 +235,7 @@ id
 plot(id)
 ```
 
-![](../man/figures/gd/id-1.png)
+![plot of chunk id](man/figures/gd/id-1.png)
 
 ### Risk detector
 
@@ -277,7 +281,7 @@ rd
 plot(rd)
 ```
 
-![](../man/figures/gd/rd-1.png)
+![plot of chunk rd](man/figures/gd/rd-1.png)
 
 You can change the significant interval by assign `alpha` argument,the default value of `alpha` argument is `0.95`.
 
@@ -338,7 +342,7 @@ ed
 plot(ed)
 ```
 
-![](../man/figures/gd/ed-1.png)
+![plot of chunk ed](man/figures/gd/ed-1.png)
 
 You can also change the significant interval by assign `alpha` argument,the default value of `alpha` argument is `0.95`.
 
@@ -354,3 +358,73 @@ ed99
 ## |watershed |    No     |    No    |
 ## |elevation |    NA     |    No    |
 ```
+
+### Running four basic geodetectors simultaneously
+
+
+``` r
+g = gd(incidence ~ watershed + elevation + soiltype,
+       data = NTDs,
+       type = c("factor", "interaction", "risk", "ecological"))
+g
+## ***          Factor Detector            
+## 
+## | variable  | Q-statistic |   P-value   |
+## |:---------:|:-----------:|:-----------:|
+## | watershed |  0.6377737  | 0.000128803 |
+## | elevation |  0.6067087  | 0.043382244 |
+## | soiltype  |  0.3857168  | 0.372145486 |
+## 
+## ***        Interaction Detector         
+## 
+## | Interactive variable  | Interaction  |
+## |:---------------------:|:------------:|
+## | watershed ∩ elevation | Enhance, bi- |
+## | watershed ∩ soiltype  | Enhance, bi- |
+## | elevation ∩ soiltype  | Enhance, bi- |
+## 
+## ***            Risk Detector            
+## 
+##  Variable elevation:
+## 
+## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  No   |  NA   |  NA   |  NA   |  NA   |
+## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |
+## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
+## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |
+## | zone7 |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |  Yes  |
+## 
+##  Variable soiltype:
+## 
+## | zone  | zone1 | zone2 | zone3 | zone4 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  No   |  NA   |  NA   |
+## | zone4 |  Yes  |  Yes  |  Yes  |  NA   |
+## | zone5 |  No   |  Yes  |  Yes  |  Yes  |
+## 
+##  Variable watershed:
+## 
+## | zone  | zone1 | zone2 | zone3 | zone4 | zone5 | zone6 | zone7 | zone8 |
+## |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+## | zone2 |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone3 |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone4 |  Yes  |  No   |  Yes  |  NA   |  NA   |  NA   |  NA   |  NA   |
+## | zone5 |  Yes  |  Yes  |  Yes  |  Yes  |  NA   |  NA   |  NA   |  NA   |
+## | zone6 |  Yes  |  Yes  |  Yes  |  Yes  |  No   |  NA   |  NA   |  NA   |
+## | zone7 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  NA   |  NA   |
+## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |
+## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |
+## 
+## ***          Ecological Detector         
+## 
+## |          | elevation | soiltype |
+## |:---------|:---------:|:--------:|
+## |watershed |    No     |    No    |
+## |elevation |    NA     |    No    |
+plot(g)
+```
+
+![plot of chunk gd_all](man/figures/gd/gd_all-1.png)
