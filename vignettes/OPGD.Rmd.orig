@@ -20,48 +20,36 @@ knitr::opts_chunk$set(
 ### Load data and package
 
 ``` {r}
-library(terra)
 library(tidyverse)
 library(gdverse)
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = terra::aggregate(fvc,fact = 5)
-fvc
-```
 
-``` {r}
-names(fvc)
-```
-
-### Convert data from `SpatRaster` to `tibble`
-
-``` {r}
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-head(fvc)
+data("ndvi")
+head(ndvi)
 ```
 
 ### Determine optimal discretization parameters
 
-Only `lulc` is a discrete category variable in the `fvc` data, we need to discretize others.
-We can use `gd_bestunidisc()` to discretize them based on geodetector q-statistic.
+`Climatezone` and `Mining` is the discrete category variables in the `ndvi` data, we need to discretize others. We can use `gd_bestunidisc()` to discretize them based on geodetector q-statistic.
 
 ```{r}
 tictoc::tic()
-g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
+g = gd_bestunidisc(NDVIchange ~ .,
+                   data = select(ndvi,-c(Climatezone,Mining)),
+                   discnum = 3:15, cores = 6)
 tictoc::toc()
 ```
 
 ```{r}
 g
-new.fvc = g$disv
-new.fvc
+new.ndvi = g$disv
+new.ndvi
 ```
 
-The `new.fvc` is the discrete result of the optimal discretization parameter based on the Q statistic of the geographical detector (factor detector), we can combine it with `fvc` and `lulc` col in `fvc` tibble now.
+The `new.ndvi` is the discreted result of the optimal discretization parameter based on the Q statistic of the geographical detector (factor detector), we can combine it with other columns in `ndvi` tibble now.
 
 ```{r}
-new.fvc = bind_cols(select(fvc,fvc,lulc),new.fvc)
-new.fvc
+new.ndvi = bind_cols(select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
+new.ndvi
 ```
 
 ### Run geodetector
@@ -69,21 +57,21 @@ new.fvc
 Then, we can run geodetector model by `gd()` function.
 
 ```{r}
-gd(fvc ~ .,data = new.fvc,type = 'factor')
-gd(fvc ~ .,data = new.fvc,type = 'interaction')
+gd(NDVIchange ~ .,data = new.ndvi,type = 'factor')
+gd(NDVIchange ~ .,data = new.ndvi,type = 'interaction')
 ```
 
 ### You can also use `opgd()` in one time to get result above.
 
 ```{r}
-fvc_opgd = opgd(fvc ~ ., data = fvc, discnum = 3:15,
-                discvar = names(select(fvc,-c(fvc,lulc))),
-                cores = 6, type = c('factor','interaction'))
-fvc_opgd
+ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
+                 discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+                 cores = 6, type = c('factor','interaction'))
+ndvi_opgd
 ```
 
 You can use `plot()` to visualize the result.
 
 ```{r opgd_plot,fig.width=10.5,fig.height=4.25}
-plot(fvc_opgd)
+plot(ndvi_opgd)
 ```
