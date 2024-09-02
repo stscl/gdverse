@@ -10,8 +10,7 @@
 
 <!-- badges: end -->
 
-The goal of **gdverse** is to *support the geodetector model and its
-variants*.
+**Family of Geographical Detector Models In R**
 
 ## Overview
 
