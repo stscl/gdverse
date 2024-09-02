@@ -64,7 +64,7 @@ install.packages("gdverse", dep = TRUE)
 ``` r
 install.packages('gdverse',
                  repos = c("https://ausgis.r-universe.dev",
-                           "https://cran.rstudio.com/"),
+                           "https://cloud.r-project.org"),
                  dep = TRUE)
 ```
 
