@@ -34,7 +34,7 @@ ntdspath = system.file("extdata", "NTDs.gpkg",package = 'gdverse')
 st_layers(ntdspath)
 ```
 
-In `NTDs.gpkg`, disease is the dependent variable, which is a continuous numerical variable, while others are independent and discrete variables.
+In file `NTDs.gpkg`, `disease` layer is the dependent variable, which is a continuous numerical variable, while others are independent and discrete variables.
 
 Now we need to combine these layers together:
 
@@ -128,11 +128,15 @@ NTDs %>%
   dplyr::filter(if_any(everything(),~is.na(.x)))
 ```
 
+Filter out all rows with no `NA` values:
+
 ```{r}
 NTDs %>%
   dplyr::filter(if_all(everything(),~!is.na(.x))) -> NTDs
 NTDs
 ```
+
+Remove unnecessary columns of data:
 
 ```{r}
 NTDs = NTDs %>%
@@ -191,4 +195,14 @@ You can also change the significant interval by assign `alpha` argument,the defa
 ed99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'ecological',alpha = 0.99)
 ed99
+```
+
+### Running four basic geodetectors simultaneously
+
+```{r gd_all,fig.width=8.5,fig.height=15}
+g = gd(incidence ~ watershed + elevation + soiltype,
+       data = NTDs,
+       type = c("factor", "interaction", "risk", "ecological"))
+g
+plot(g)
 ```
