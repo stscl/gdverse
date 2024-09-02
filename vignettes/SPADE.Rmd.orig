@@ -21,18 +21,19 @@ knitr::opts_chunk$set(
 
 ``` {r}
 library(sf)
-library(gdverse)
-library(magrittr)
 library(tidyverse)
+library(magrittr)
+library(gdverse)
+
 ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
 ushi
 ```
 
-```{r echo=FALSE, fig.align="center",fig.cap="The study area map of USHI data"}
+```{r echo=FALSE, out.width='120%', fig.align="center",fig.cap="The study area map of USHI data"}
 knitr::include_graphics('../man/figures/spade/studyarea.png')
 ```
 
-The polygon spatial data are the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
+This spatial polygon vector data `ushi` is the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
 
 The meanings of each explanatory variable are as follows,and can be divided into three categories:
 
@@ -127,7 +128,7 @@ new_ushi %>%
 
 The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
 
-Spatial dependence was neglected in native geodetector, which led to the **SPADE** spatial association detector.
+Spatial dependence was neglected in native geodetector, which led to the development of **SPADE**(spatial association detector).
 
 ### OPGD modeling
 
@@ -195,11 +196,11 @@ The `wt3` is identical `wt4`
 identical(wt3,wt4)
 ```
 
-**We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this.In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area! **
+**We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this. In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area. **
 
-In the following section we will execute *SPADE* model using  spatial weight matrix `wt3` which is constructed by queen contiguity.
+In the following section we will execute *SPADE* model using spatial weight matrix `wt3` which is constructed by queen contiguity.
 
-The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value,this calculations are very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
+The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value, this calculation is very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
 
 #### run SPADE
 
