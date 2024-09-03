@@ -58,7 +58,9 @@ Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of
 gdverse supports modifications to the default ploting results, such as adding subfigure annotations and adjusting the size of the text on the x-y axis:
 
 ```{r lesh_own,fig.width=12.5,fig.height=5.75}
-plot(lesh.m, pie = TRUE, scatter = TRUE, pielegend_num = 5) +
+plot(lesh.m, pie = TRUE, scatter = TRUE,
+     pielegend_num = 5, pieradius_factor = 12,
+     pielegend.x = 0.98, pielegend.y = 0.15) +
   patchwork::plot_annotation(tag_levels = 'a',
                              tag_prefix = '(',
                              tag_suffix = ')',
