@@ -27,8 +27,6 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-Full document of the most recent release of **gdverse** is online: <https://ausgis.github.io/gdverse/>
-
 Current models and functions provided by **gdverse** are:
 
 | *geodetector model* | *gdverse function* | *support status* |
@@ -47,8 +45,8 @@ Current models and functions provided by **gdverse** are:
 knitr::include_graphics('./man/figures/gdm.png')
 ```
 
-```{r echo=FALSE, out.width='90%', fig.align="center",fig.cap="Functions in gdverse"}
-knitr::include_graphics('./man/figures/gdverse_framework_bgtrans.png')
+```{r echo=FALSE, out.width='95%', fig.align="center",fig.cap="Function organization in gdverse package"}
+knitr::include_graphics('./man/figures/gdverse_funs.png')
 ```
 
 ## Installation

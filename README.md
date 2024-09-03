@@ -14,9 +14,6 @@
 
 ## Overview
 
-Full document of the most recent release of **gdverse** is online:
-<https://ausgis.github.io/gdverse/>
-
 Current models and functions provided by **gdverse** are:
 
 | *geodetector model* | *gdverse function* | *support status* |
@@ -42,7 +39,7 @@ Development of Geographical Detector Models
 
 <div class="figure" style="text-align: center">
 
-<img src="./man/figures/gdverse_framework_bgtrans.png" alt="Functions in gdverse" width="90%" />
+<img src="./man/figures/gdverse_funs.png" alt="Functions in gdverse" width="95%" />
 <p class="caption">
 Functions in gdverse
 </p>
