@@ -51,7 +51,7 @@ gozh.uvi
 plot(gozh.uvi)
 ```
 
-![plot of chunk gozh_uni](man/figures/shegd/gozh_uni-1.png)
+![](../man/figures/shegd/gozh_uni-1.png)
 
 ### Variable interaction detection
 
@@ -82,7 +82,7 @@ gozh.bi
 plot(gozh.bi)
 ```
 
-![plot of chunk gozh_bi](man/figures/shegd/gozh_bi-1.png)
+![](../man/figures/shegd/gozh_bi-1.png)
 
 ### Variable interaction contribution
 
@@ -113,7 +113,7 @@ lesh.m
 plot(lesh.m, pie = TRUE, scatter = TRUE)
 ```
 
-![plot of chunk lesh](man/figures/shegd/lesh-1.png)
+![](../man/figures/shegd/lesh-1.png)
 
 Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of the interactive contribution of variables,and the rest remains consistent.
 
@@ -122,7 +122,6 @@ gdverse supports modifications to the default ploting results, such as adding su
 
 ``` r
 plot(lesh.m, pie = TRUE, scatter = TRUE,
-     pielegend_num = 5, pielegend_zie = 15,
      pielegend_x = 0.98, pielegend_y = 0.15) +
   patchwork::plot_annotation(tag_levels = 'a',
                              tag_prefix = '(',
@@ -135,7 +134,7 @@ plot(lesh.m, pie = TRUE, scatter = TRUE,
                  axis.title = element_text(family = 'serif',size = 15))
 ```
 
-![plot of chunk lesh_own](man/figures/shegd/lesh_own-1.png)
+![](../man/figures/shegd/lesh_own-1.png)
 
 And you can only look at the contribution part of the variable interaction:
 
@@ -144,7 +143,7 @@ And you can only look at the contribution part of the variable interaction:
 plot(lesh.m, pie = TRUE, scatter = FALSE)
 ```
 
-![plot of chunk lesh_only](man/figures/shegd/lesh_only-1.png)
+![](../man/figures/shegd/lesh_only-1.png)
 
 By accessing the concrete result through `lesh.m$interaction`, which returns a `tibble`.
 
