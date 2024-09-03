@@ -132,8 +132,8 @@ plot.lesh_result = \(x, pie = TRUE,
     g_pie = g_pie %>%
       dplyr::mutate(variable1 = factor(variable1,levels = gv$variable1),
                     variable2 = factor(variable2,levels = rev(gv$variable2))) %>%
-      dplyr::mutate(v1 = rescale_vector(as.numeric(variable1),-80,80),
-                    v2 = rescale_vector(as.numeric(variable2),-80,80))
+      dplyr::mutate(v1 = rescale_vector(as.numeric(variable1),-87.5,87.5),
+                    v2 = rescale_vector(as.numeric(variable2),-87.5,87.5))
     #--- use scatterpie package ---
     fig_pie = ggplot2::ggplot(data = g_pie,
                               ggplot2::aes(x = v1, y = v2)) +
@@ -155,9 +155,9 @@ plot.lesh_result = \(x, pie = TRUE,
       ggplot2::scale_y_continuous(name = "",
                                   breaks = g_pie$v2,
                                   labels = g_pie$variable2) +
-      ggplot2::guides(fill = ggplot2::guide_legend(
-        override.aes = list(size = pielegend_size)
-        )) +
+      ggplot2::guides(
+        fill = ggplot2::guide_legend(
+          override.aes = list(size = pielegend_size))) +
       ggplot2::coord_equal() +
       ggplot2::theme_bw() +
       ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
