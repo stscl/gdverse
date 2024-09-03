@@ -142,22 +142,19 @@ plot.lesh_result = \(x, pie = TRUE,
                                   data = g_pie, cols = c('spd1', 'spd2'),
                                   color = NA, show.legend = FALSE) +
       ggplot2::scale_fill_manual(values = c('#75c7af','#fb9872')) +
-      suppressWarnings(scatterpie::geom_scatterpie_legend(
+      suppressWarnings({scatterpie::geom_scatterpie_legend(
                                          g_pie$interactv * pieradius_factor,
                                          n = pielegend_num,
                                          x = stats::quantile(g_pie$v1,pielegend_x),
                                          y = stats::quantile(g_pie$v1,pielegend_y),
                                          label_position = 'left',
-                                         labeller = \(.x) round(.x/pieradius_factor,1))) +
+                                         labeller = \(.x) round(.x/pieradius_factor,1))}) +
       ggplot2::scale_x_continuous(name = "",
                                   breaks = g_pie$v1,
                                   labels = g_pie$variable1) +
       ggplot2::scale_y_continuous(name = "",
                                   breaks = g_pie$v2,
                                   labels = g_pie$variable2) +
-      ggplot2::guides(
-        fill = ggplot2::guide_legend(
-          override.aes = list(size = pielegend_size))) +
       ggplot2::coord_equal() +
       ggplot2::theme_bw() +
       ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
