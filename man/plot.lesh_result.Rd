@@ -4,7 +4,17 @@
 \alias{plot.lesh_result}
 \title{plot LESH model result}
 \usage{
-\method{plot}{lesh_result}(x, pie = TRUE, scatter = FALSE, scatter_alpha = 1, n_pielegend = 3, ...)
+\method{plot}{lesh_result}(
+  x,
+  pie = TRUE,
+  scatter = FALSE,
+  scatter_alpha = 1,
+  pieradius_factor = 15,
+  pielegend_x = 0.99,
+  pielegend_y = 0.1,
+  pielegend_num = 3,
+  ...
+)
 }
 \arguments{
 \item{x}{x Return by \code{lesh()}.}
@@ -15,7 +25,13 @@
 
 \item{scatter_alpha}{(optional) Picture transparency. Default is \code{1}.}
 
-\item{n_pielegend}{(optional) The number of interaction contributions pie plot legend. Default is \code{3}.}
+\item{pieradius_factor}{(optional) The radius expansion factor of interaction contributions pie plot. Default is \code{15}.}
+
+\item{pielegend_x}{(optional) The X-axis relative position of interaction contributions pie plot legend. Default is \code{0.99}.}
+
+\item{pielegend_y}{(optional) The Y-axis relative position of interaction contributions pie plot legend. Default is \code{0.1}.}
+
+\item{pielegend_num}{(optional) The number of interaction contributions pie plot legend. Default is \code{3}.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
