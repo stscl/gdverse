@@ -39,9 +39,9 @@ Development of Geographical Detector Models
 
 <div class="figure" style="text-align: center">
 
-<img src="./man/figures/gdverse_funs.png" alt="Functions in gdverse" width="95%" />
+<img src="./man/figures/gdverse_funs.png" alt="Function organization in gdverse package" width="95%" />
 <p class="caption">
-Functions in gdverse
+Function organization in gdverse package
 </p>
 
 </div>
