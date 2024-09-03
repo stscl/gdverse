@@ -122,7 +122,7 @@ gdverse supports modifications to the default ploting results, such as adding su
 
 ``` r
 plot(lesh.m, pie = TRUE, scatter = TRUE,
-     pielegend_num = 5, pieradius_factor = 18,
+     pielegend_num = 5, pieradius_factor = 10,
      pielegend.x = 0.98, pielegend.y = 0.15) +
   patchwork::plot_annotation(tag_levels = 'a',
                              tag_prefix = '(',
