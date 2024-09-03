@@ -90,6 +90,7 @@ print.lesh_result = \(x, ...) {
 #' @param pielegend_x (optional) The X-axis relative position of interaction contributions pie plot legend. Default is `0.99`.
 #' @param pielegend_y (optional) The Y-axis relative position of interaction contributions pie plot legend. Default is `0.1`.
 #' @param pielegend_num (optional) The number of interaction contributions pie plot legend. Default is `3`.
+#' @param pielegend_size (optional) The size of interaction contributions pie plot legend. Default is `5`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
@@ -109,6 +110,7 @@ plot.lesh_result = \(x, pie = TRUE,
 					           pielegend_x = 0.99,
 					           pielegend_y = 0.1,
 					           pielegend_num = 3,
+					           pielegend_size = 5,
 					           ...) {
   fig_scatter = NULL
   fig_pie = NULL
@@ -153,6 +155,9 @@ plot.lesh_result = \(x, pie = TRUE,
       ggplot2::scale_y_continuous(name = "",
                                   breaks = g_pie$v2,
                                   labels = g_pie$variable2) +
+      ggplot2::guides(fill = ggplot2::guide_legend(
+        override.aes = list(size = pielegend_size)
+        )) +
       ggplot2::coord_equal() +
       ggplot2::theme_bw() +
       ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
