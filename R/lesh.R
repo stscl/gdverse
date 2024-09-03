@@ -140,7 +140,8 @@ plot.lesh_result = \(x, pie = TRUE,
                                   data = g_pie, cols = c('spd1', 'spd2'),
                                   color = NA, show.legend = FALSE) +
       ggplot2::scale_fill_manual(values = c('#75c7af','#fb9872')) +
-      suppressWarnings(scatterpie::geom_scatterpie_legend(g_pie$interactv * pieradius_factor,
+      suppressWarnings(scatterpie::geom_scatterpie_legend(
+                                         g_pie$interactv * pieradius_factor,
                                          n = pielegend_num,
                                          x = stats::quantile(g_pie$v1,pielegend_x),
                                          y = stats::quantile(g_pie$v1,pielegend_y),
