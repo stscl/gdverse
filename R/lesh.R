@@ -86,7 +86,10 @@ print.lesh_result = \(x, ...) {
 #' @param pie (optional) Whether to draw the interaction contributions. Default is `TRUE`.
 #' @param scatter (optional) Whether to draw the interaction direction diagram. Default is `FALSE`.
 #' @param scatter_alpha (optional) Picture transparency. Default is `1`.
-#' @param n_pielegend (optional) The number of interaction contributions pie plot legend. Default is `3`.
+#' @param pieradius_factor (optional) The radius expansion factor of interaction contributions pie plot. Default is `15`.
+#' @param pielegend_x (optional) The X-axis relative position of interaction contributions pie plot legend. Default is `0.99`.
+#' @param pielegend_y (optional) The Y-axis relative position of interaction contributions pie plot legend. Default is `0.1`.
+#' @param pielegend_num (optional) The number of interaction contributions pie plot legend. Default is `3`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
@@ -100,9 +103,13 @@ print.lesh_result = \(x, ...) {
 #' plot(g)
 #' }
 plot.lesh_result = \(x, pie = TRUE,
-					 scatter = FALSE,
+					           scatter = FALSE,
                      scatter_alpha = 1,
-                     n_pielegend = 3,...) {
+					           pieradius_factor = 15,
+					           pielegend_x = 0.99,
+					           pielegend_y = 0.1,
+					           pielegend_num = 3,
+					           ...) {
   fig_scatter = NULL
   fig_pie = NULL
   if (scatter) {
@@ -128,15 +135,17 @@ plot.lesh_result = \(x, pie = TRUE,
     #--- use scatterpie package ---
     fig_pie = ggplot2::ggplot(data = g_pie,
                               ggplot2::aes(x = v1, y = v2)) +
-      scatterpie::geom_scatterpie(ggplot2::aes(x = v1, y = v2, r = 15 * interactv),
+      scatterpie::geom_scatterpie(ggplot2::aes(x = v1, y = v2,
+                                  r = pieradius_factor * interactv),
                                   data = g_pie, cols = c('spd1', 'spd2'),
                                   color = NA, show.legend = FALSE) +
       ggplot2::scale_fill_manual(values = c('#75c7af','#fb9872')) +
-      suppressWarnings(scatterpie::geom_scatterpie_legend(g_pie$interactv * 15, n = n_pielegend,
-                                         x = stats::quantile(g_pie$v1,0.99),
-                                         y = stats::quantile(g_pie$v1,0.1),
+      suppressWarnings(scatterpie::geom_scatterpie_legend(g_pie$interactv * pieradius_factor,
+                                         n = pielegend_num,
+                                         x = stats::quantile(g_pie$v1,pielegend_x),
+                                         y = stats::quantile(g_pie$v1,pielegend_y),
                                          label_position = 'left',
-                                         labeller = \(.x) round(.x/15,1))) +
+                                         labeller = \(.x) round(.x/pieradius_factor,1))) +
       ggplot2::scale_x_continuous(name = "",
                                   breaks = g_pie$v1,
                                   labels = g_pie$variable1) +
