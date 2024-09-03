@@ -57,7 +57,7 @@ plot(gozh.uvi)
 
 
 ``` r
-gozh.bi = gozh(NDVIchange ~ ., data = ndvi,type = 'interaction')
+gozh.bi = gozh(NDVIchange ~ ., data = ndvi, type = 'interaction')
 gozh.bi
 ##                 GOZH Model                  
 ## ***        Interaction Detector         
@@ -88,7 +88,7 @@ plot(gozh.bi)
 
 
 ``` r
-lesh.m = lesh(NDVIchange ~ ., data = ndvi,cores = 6)
+lesh.m = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 lesh.m
 ## ***    Spatial Interaction Association Detector      
 ##                      LESH Model                     
@@ -116,6 +116,24 @@ plot(lesh.m, pie = TRUE, scatter = TRUE)
 ![](../man/figures/shegd/lesh-1.png)
 
 Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of the interactive contribution of variables,and the rest remains consistent.
+
+gdverse supports modifications to the default ploting results, such as adding subfigure annotations and adjusting the size of the text on the x-y axis:
+
+
+``` r
+plot(lesh.m, pie = TRUE, scatter = TRUE, pielegend_num = 5) +
+  patchwork::plot_annotation(tag_levels = 'a',
+                             tag_prefix = '(',
+                             tag_suffix = ')',
+                             tag_sep = '',
+                             theme = theme(plot.tag = element_text(family = "serif"))) &
+  ggplot2::theme(axis.text.y = element_text(family = 'serif',size = 15),
+                 axis.text.x = element_text(family = 'serif',size = 15,
+                                            angle = 30,vjust = 0.85,hjust = 0.75),
+                 axis.title = element_text(family = 'serif',size = 15))
+```
+
+![](../man/figures/shegd/lesh_own-1.png)
 
 And you can only look at the contribution part of the variable interaction:
 
