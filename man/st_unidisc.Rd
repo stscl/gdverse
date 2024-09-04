@@ -27,7 +27,7 @@ by sampling \verb{10\%}(the default value for \code{samp_prop}).}
 see \code{?classInt::classify_intervals()}.}
 }
 \value{
-A discrete vectors after being discretized.
+A discrete vector after being discretized.
 }
 \description{
 Function to classify univariate vector to interval, a wrapper of \code{classInt::classify_intervals()}.
@@ -37,7 +37,7 @@ xvar = c(22361, 9573, 4836, 5309, 10384, 4359, 11016, 4414, 3327, 3408,
          17816, 6909, 6936, 7990, 3758, 3569, 21965, 3605, 2181, 1892,
          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
          7508, 5203)
-st_unidisc(xvar,k = 6,method = 'sd')
+st_unidisc(xvar, k = 6, method = 'sd')
 
 }
 \author{

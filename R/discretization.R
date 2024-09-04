@@ -17,7 +17,7 @@
 #' @param ... (optional) Other arguments passed to `classInt::classify_intervals()`,
 #' see `?classInt::classify_intervals()`.
 #'
-#' @return A discrete vectors after being discretized.
+#' @return A discrete vector after being discretized.
 #' @export
 #'
 #' @examples
@@ -25,7 +25,7 @@
 #'          17816, 6909, 6936, 7990, 3758, 3569, 21965, 3605, 2181, 1892,
 #'          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
 #'          7508, 5203)
-#' st_unidisc(xvar,k = 6,method = 'sd')
+#' st_unidisc(xvar, k = 6, method = 'sd')
 #'
 st_unidisc = \(x,k,method = "quantile",factor = FALSE,
                seed = 123456789, ...){
@@ -62,14 +62,15 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' data("ndvi")
 #' g = gd_bestunidisc(NDVIchange ~ .,
-#'                    discvar = names(dplyr::select(ndvi,-c(Climatezone,Mining))),
+#'                    data = dplyr::select(ndvi,-c(Climatezone,Mining)),
 #'                    discnum = 3:15,
-#'                    cores = 6)
+#'                    cores = 12)
 #' g
-#'
-gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
+#' }
+gd_bestunidisc = \(formula, data, discnum = NULL, discmethod = NULL,
                    cores = 1,return_disc = TRUE,seed = 123456789,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {

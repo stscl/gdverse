@@ -46,13 +46,14 @@ A list with the optimal parameter in the provided parameter combination with \co
 Function for determining the best univariate discretization based on geodetector q-statistic.
 }
 \examples{
+\donttest{
 data("ndvi")
 g = gd_bestunidisc(NDVIchange ~ .,
-                   discvar = names(select(ndvi,-c(Climatezone,Mining))),
+                   data = dplyr::select(ndvi,-c(Climatezone,Mining)),
                    discnum = 3:15,
-                   cores = 6)
+                   cores = 12)
 g
-
+}
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
