@@ -37,17 +37,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(sf)
-#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = ushi |>
-#'   st_centroid() |>
-#'   st_coordinates()
-#' wt = inverse_distance_weight(coord[,1],coord[,2])
-#' ushi = st_drop_geometry(ushi)
-#' cpsd_disc(SUHI ~ NDVI + BH, data = ushi,wt = wt,cores = 6)
-#' }
+#' data('sim')
+#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' cpsd_disc(y ~ xa + xb + xc,
+#'           data = sim,
+#'           wt = wt)
+#'
 cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 2L,
                increase_rate = 0.05,cores = 1,return_disc = TRUE,seed = 123456789,...){
   if (!(strategy %in% c(1L,2L))){
@@ -189,11 +184,11 @@ cpsd_disc =  \(formula, data, wt, discnum = NULL, discmethod = NULL, strategy = 
 #' @export
 #'
 #' @examples
-#' data('NTDs')
-#' wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
-#' sz = st_fuzzyoverlay(incidence ~ watershed + elevation + soiltype,
-#'                      data = NTDs)
-#' psd_iev(dplyr::select(NTDs,-c(X,Y,incidence)),sz,wt)
+#' data('sim')
+#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) st_unidisc(.x,5)))
+#' sz = st_fuzzyoverlay(y ~ xa + xb + xc, data = sim1)
+#' psd_iev(dplyr::select(sim1,xa:xc),sz,wt)
 #'
 psd_iev = \(discdata,spzone,wt){
   xname = names(discdata)
@@ -220,20 +215,12 @@ psd_iev = \(discdata,spzone,wt){
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(sf)
-#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","WAR","SUHI")))
-#' coord = ushi |>
-#'   st_centroid() |>
-#'   st_coordinates()
-#' wt = inverse_distance_weight(coord[,1],coord[,2])
-#' ushi_disc = ushi |>
-#'   st_drop_geometry() |>
-#'   dplyr::mutate(dplyr::across(1:3,\(.x) st_unidisc(.x,12)))
-#' pid_idsa('NDVI~.', rawdata = ushi,
-#'          discdata = ushi_disc, wt = wt)
-#' }
+#' data('sim')
+#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) st_unidisc(.x,5)))
+#' pid_idsa(y ~ xa + xb + xc, rawdata = sim,
+#'          discdata = sim1, wt = wt)
+#'
 pid_idsa = \(formula, rawdata, discdata,
              wt, overlaymethod = 'and'){
   formula = stats::as.formula(formula)
