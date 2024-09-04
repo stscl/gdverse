@@ -11,7 +11,7 @@ st_unidisc(x, k, method = "quantile", factor = FALSE, seed = 123456789, ...)
 
 \item{k}{(optional) Number of classes required, if missing, \code{grDevices::nclass.Sturges()} is used;
 see also the "dpih" and "headtails" styles for automatic choice of the number of classes. \code{k} must
-greater than \code{3} !}
+greater than \code{3}.}
 
 \item{method}{Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is \code{quantile}.}
@@ -30,7 +30,7 @@ see \code{?classInt::classify_intervals()}.}
 A discrete vectors after being discretized.
 }
 \description{
-Function to classify univariate vector to interval,a wrapper of \code{classInt::classify_intervals()}.
+Function to classify univariate vector to interval, a wrapper of \code{classInt::classify_intervals()}.
 }
 \examples{
 xvar = c(22361, 9573, 4836, 5309, 10384, 4359, 11016, 4414, 3327, 3408,
@@ -38,6 +38,7 @@ xvar = c(22361, 9573, 4836, 5309, 10384, 4359, 11016, 4414, 3327, 3408,
          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
          7508, 5203)
 st_unidisc(xvar,k = 6,method = 'sd')
+
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}

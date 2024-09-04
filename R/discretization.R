@@ -1,12 +1,12 @@
 #' @title univariate discretization
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function to classify univariate vector to interval,a wrapper of `classInt::classify_intervals()`.
+#' Function to classify univariate vector to interval, a wrapper of `classInt::classify_intervals()`.
 #'
 #' @param x A continuous numerical variable.
 #' @param k (optional) Number of classes required, if missing, `grDevices::nclass.Sturges()` is used;
 #' see also the "dpih" and "headtails" styles for automatic choice of the number of classes. `k` must
-#' greater than `3` !
+#' greater than `3`.
 #' @param method Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 #' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
@@ -26,6 +26,7 @@
 #'          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
 #'          7508, 5203)
 #' st_unidisc(xvar,k = 6,method = 'sd')
+#'
 st_unidisc = \(x,k,method = "quantile",factor = FALSE,
                seed = 123456789, ...){
   if (k<=2) {stop(" `k` must greater than 3 !")}
@@ -61,16 +62,13 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(terra)
-#' library(tidyverse)
-#' fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-#' fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-#' fvc = terra::aggregate(fvc,fact = 5)
-#' fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-#' g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
+#' data("ndvi")
+#' g = gd_bestunidisc(NDVIchange ~ .,
+#'                    discvar = names(select(ndvi,-c(Climatezone,Mining))),
+#'                    discnum = 3:15,
+#'                    cores = 6)
 #' g
-#' }
+#'
 gd_bestunidisc = \(formula,data,discnum = NULL,discmethod = NULL,
                    cores = 1,return_disc = TRUE,seed = 123456789,...){
   doclust = FALSE

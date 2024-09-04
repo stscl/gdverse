@@ -46,16 +46,13 @@ A list with the optimal parameter in the provided parameter combination with \co
 Function for determining the best univariate discretization based on geodetector q-statistic.
 }
 \examples{
-\dontrun{
-library(terra)
-library(tidyverse)
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = terra::aggregate(fvc,fact = 5)
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-g = gd_bestunidisc(fvc ~ .,data = select(fvc,-lulc),discnum = 3:15,cores = 6)
+data("ndvi")
+g = gd_bestunidisc(NDVIchange ~ .,
+                   discvar = names(select(ndvi,-c(Climatezone,Mining))),
+                   discnum = 3:15,
+                   cores = 6)
 g
-}
+
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
