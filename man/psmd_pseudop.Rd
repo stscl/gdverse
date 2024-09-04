@@ -11,7 +11,7 @@ psmd_pseudop(
   locations = NULL,
   discnum = NULL,
   discmethod = NULL,
-  cores = 6,
+  cores = 1,
   seed = 123456789,
   permutations = 0,
   ...
@@ -34,7 +34,7 @@ Useful and must provided when \code{wt} is not provided.}
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
 Others use \code{st_unidisc()}.}
 
-\item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
@@ -54,22 +54,11 @@ The power of spatial and multilevel discretization determinant formula is
 \eqn{PSMDQ_s = MEAN(Q_s)}
 }
 \examples{
-\dontrun{
-library(sf)
-ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = ushi |>
-  st_centroid() |>
-  st_coordinates()
-ushi = ushi |>
-  dplyr::bind_cols(coord) |>
-  st_drop_geometry()
-tictoc::tic()
-pp = psmd_pseudop('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-                  locations = c('X','Y'),cores = 6)
-tictoc::toc()
-pp
-}
+data('sim')
+psmd_pseudop(y ~ .,
+             data = dplyr::select(sim,1:4),
+             locations = c('lo','la'))
+
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

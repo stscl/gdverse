@@ -25,9 +25,9 @@ The power of spatial determinant formula is
 \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
 }
 \examples{
-data('NTDs')
-wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
-psd_spade(NTDs$incidence,NTDs$soiltype,wt)
+data('sim')
+wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+psd_spade(sim$y,st_unidisc(sim$xa,5),wt)
 
 }
 \references{

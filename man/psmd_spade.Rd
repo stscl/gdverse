@@ -51,23 +51,11 @@ The power of spatial and multilevel discretization determinant formula is
 \eqn{PSMDQ_s = MEAN(Q_s)}
 }
 \examples{
-\dontrun{
-library(sf)
-ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = ushi |>
-  st_centroid() |>
-  st_coordinates()
-ushi = ushi |>
-  dplyr::bind_cols(coord) |>
-  st_drop_geometry()
-psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-           locations = c('X','Y'),cores = 6)
-psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-           locations = c('X','Y'),discmethod = 'rpart',cores = 6)
-psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-           locations = c('X','Y'),discmethod = 'robust',cores = 6)
-}
+data('sim')
+psmd_spade(y ~ .,
+           data = dplyr::select(sim,1:4),
+           locations = c('lo','la'))
+
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

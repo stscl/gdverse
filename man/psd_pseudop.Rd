@@ -4,7 +4,7 @@
 \alias{psd_pseudop}
 \title{calculate power of spatial determinant(PSD) and the corresponding pseudo-p value}
 \usage{
-psd_pseudop(y, x, wt, cores = 6, seed = 123456789, permutations = 0)
+psd_pseudop(y, x, wt, cores = 1, seed = 123456789, permutations = 0)
 }
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
@@ -13,7 +13,7 @@ psd_pseudop(y, x, wt, cores = 6, seed = 123456789, permutations = 0)
 
 \item{wt}{The spatial weight matrix.}
 
-\item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
@@ -31,14 +31,10 @@ The power of spatial determinant formula is
 \eqn{q_s = 1 - \frac{\sum_{h=1}^L N_h \Gamma_h}{N \Gamma}}
 }
 \examples{
-\dontrun{
-data('NTDs')
-wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
-tictoc::tic()
-pp = psd_pseudop(NTDs$incidence,NTDs$soiltype,wt)
-tictoc::toc()
-pp
-}
+data('sim')
+wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+psd_pseudop(sim$y,st_unidisc(sim$xa,5),wt)
+
 }
 \references{
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
