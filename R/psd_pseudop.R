@@ -13,7 +13,7 @@
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariable X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param wt The spatial weight matrix.
-#' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
@@ -22,15 +22,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' data('NTDs')
-#' wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
-#' tictoc::tic()
-#' pp = psd_pseudop(NTDs$incidence,NTDs$soiltype,wt)
-#' tictoc::toc()
-#' pp
-#' }
-psd_pseudop = \(y,x,wt,cores = 6,
+#' data('sim')
+#' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+#' psd_pseudop(sim$y,st_unidisc(sim$xa,5),wt)
+#'
+psd_pseudop = \(y,x,wt,cores = 1,
                 seed = 123456789,
                 permutations = 0){
   qs = psd_spade(y,x,wt)
@@ -99,7 +95,7 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
 #' Others use `st_unidisc()`.
-#' @param cores (optional) A positive integer(default is 6). If cores > 1, use parallel computation.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
@@ -109,24 +105,13 @@ psd_pseudop = \(y,x,wt,cores = 6,
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(sf)
-#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = ushi |>
-#'   st_centroid() |>
-#'   st_coordinates()
-#' ushi = ushi |>
-#'   dplyr::bind_cols(coord) |>
-#'   st_drop_geometry()
-#' tictoc::tic()
-#' pp = psmd_pseudop('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-#'                   locations = c('X','Y'),cores = 6)
-#' tictoc::toc()
-#' pp
-#' }
+#' data('sim')
+#' psmd_pseudop(y ~ .,
+#'              data = dplyr::select(sim,1:4),
+#'              locations = c('lo','la'))
+#'
 psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
-                 cores = 6, seed = 123456789, permutations = 0, ...){
+                 cores = 1, seed = 123456789, permutations = 0, ...){
   qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
   if (permutations == 0){
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
@@ -182,4 +167,3 @@ psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmeth
   }
   return(fd)
 }
-

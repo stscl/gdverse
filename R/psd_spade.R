@@ -19,9 +19,9 @@
 #' @export
 #'
 #' @examples
-#' data('NTDs')
-#' wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
-#' psd_spade(NTDs$incidence,NTDs$soiltype,wt)
+#' data('sim')
+#' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+#' psd_spade(sim$y,st_unidisc(sim$xa,5),wt)
 #'
 psd_spade = \(y,x,wt){
   gdf = tibble::tibble(x = x, y = y,
@@ -67,19 +67,12 @@ psd_spade = \(y,x,wt){
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(sf)
-#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = ushi |>
-#'   st_centroid() |>
-#'   st_coordinates()
-#' wt = inverse_distance_weight(coord[,1],coord[,2])
-#' BH = ushi$BH
-#' BH_disc = st_unidisc(ushi$BH,12)
-#' SUHI = ushi$SUHI
-#' cpsd_spade(SUHI,BH,BH_disc,wt)
-#' }
+#' data('sim')
+#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' xa = sim$xa
+#' xa_disc = st_unidisc(xa,5)
+#' cpsd_spade(sim$y,xa,xa_disc,wt)
+#'
 cpsd_spade = \(yobs,xobs,xdisc,wt){
   return(psd_spade(yobs,xdisc,wt) / psd_spade(xobs,xdisc,wt))
 }
@@ -115,23 +108,11 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' library(sf)
-#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-#' coord = ushi |>
-#'   st_centroid() |>
-#'   st_coordinates()
-#' ushi = ushi |>
-#'   dplyr::bind_cols(coord) |>
-#'   st_drop_geometry()
-#' psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-#'            locations = c('X','Y'),cores = 6)
-#' psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-#'            locations = c('X','Y'),discmethod = 'rpart',cores = 6)
-#' psmd_spade('SUHI ~ BH',data = dplyr::select(ushi,SUHI,BH,X,Y),
-#'            locations = c('X','Y'),discmethod = 'robust',cores = 6)
-#' }
+#' data('sim')
+#' psmd_spade(y ~ .,
+#'            data = dplyr::select(sim,1:4),
+#'            locations = c('lo','la'))
+#'
 psmd_spade = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,
                discmethod = NULL, cores = 1, seed = 123456789, ...){
   doclust = FALSE
