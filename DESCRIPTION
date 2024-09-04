@@ -23,12 +23,10 @@ Authors@R: c(
              role = c("aut"),
              comment = c(ORCID = "0000-0001-9411-8453"))
       )
-Description: Supports various geographical detector models for spatial stratified heterogeneity analysis. There are 9 kinds of 
-             geographical detector models have been supported in this package, including native geographical detector(GD), optimal 
-             parameters-based geographical detector(OPGD), geographically optimal zones-based heterogeneity model(GOZH), locally 
-             explained heterogeneity model(LESH), spatial association detector(SPADE), interactive detector for spatial associations
-             (IDSA), robust geographical detector(RGD), robust interactive detector(RID) and spatial rough set-based geographical 
-             detector(SRSGD).
+Description: Analyzing spatial factors and exploring spatial associations based on the concept of 
+             spatial stratified heterogeneity, also takes into account local spatial dependencies, 
+             spatial interpretability, potential spatial interactions, and robust spatial stratification.
+             Additionally, it supports geographical detector models established in academic literature.
 License: GPL-3
 Encoding: UTF-8
 Language: en-US
