@@ -34,7 +34,7 @@
 #'
 #' @examples
 #' data('sim')
-#' opgd(y~ xa + xb + xc, data = sim,
+#' opgd(y ~ xa + xb + xc, data = sim,
 #'      discvar = paste0('x',letters[1:3]),
 #'      discnum = 3:6)
 #'
