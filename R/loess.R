@@ -25,12 +25,10 @@
 #' @export
 #'
 #' @examples
-#' library(sf)
-#' ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-#'   dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
+#' data('sim')
 #' 3:10 %>%
-#' purrr::map_dbl(\(.k) st_unidisc(ushi$NDVI,.k) %>%
-#'                factor_detector(ushi$SUHI,.) %>%
+#'   purrr::map_dbl(\(.k) st_unidisc(sim$xa,.k) %>%
+#'                factor_detector(sim$y,.) %>%
 #'                {.[[1]]}) %>%
 #'  loess_optdiscnum(3:10)
 #'
