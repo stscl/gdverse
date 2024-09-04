@@ -23,11 +23,11 @@ PSD of an interaction of explanatory variables (PSD-IEV)
 \eqn{\phi = 1 - \frac{\sum_{i=1}^m \sum_{k=1}^{n_i}N_{i,k}\tau_{i,k}}{\sum_{i=1}^m N_i \tau_i}}
 }
 \examples{
-data('NTDs')
-wt = inverse_distance_weight(NTDs$X,NTDs$Y,power = 2)
-sz = st_fuzzyoverlay(incidence ~ watershed + elevation + soiltype,
-                     data = NTDs)
-psd_iev(dplyr::select(NTDs,-c(X,Y,incidence)),sz,wt)
+data('sim')
+wt = inverse_distance_weight(sim$lo,sim$la)
+sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) st_unidisc(.x,5)))
+sz = st_fuzzyoverlay(y ~ xa + xb + xc, data = sim1)
+psd_iev(dplyr::select(sim1,xa:xc),sz,wt)
 
 }
 \references{

@@ -63,17 +63,12 @@ When the \code{discmethod} is configured to \code{robust}, it will operate at a 
 Consequently, the use of robust discretization is not advised.
 }
 \examples{
-\dontrun{
-library(sf)
-ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-  dplyr::select(dplyr::all_of(c("NDVI","BH","SUHI")))
-coord = ushi |>
-  st_centroid() |>
-  st_coordinates()
-wt = inverse_distance_weight(coord[,1],coord[,2])
-ushi = st_drop_geometry(ushi)
-cpsd_disc(SUHI ~ NDVI + BH, data = ushi,wt = wt,cores = 6)
-}
+data('sim')
+wt = inverse_distance_weight(sim$lo,sim$la)
+cpsd_disc(y ~ xa + xb + xc,
+          data = sim,
+          wt = wt)
+
 }
 \references{
 Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,

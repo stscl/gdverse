@@ -28,18 +28,10 @@ IDSA Q-saistics \code{PID}
 \eqn{Q_{IDSA} = \frac{\theta_r}{\phi}}
 }
 \examples{
-\dontrun{
-library(sf)
-ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse')) |>
-  dplyr::select(dplyr::all_of(c("NDVI","BH","WAR","SUHI")))
-coord = ushi |>
-  st_centroid() |>
-  st_coordinates()
-wt = inverse_distance_weight(coord[,1],coord[,2])
-ushi_disc = ushi |>
-  st_drop_geometry() |>
-  dplyr::mutate(dplyr::across(1:3,\(.x) st_unidisc(.x,12)))
-pid_idsa('NDVI~.', rawdata = ushi,
-         discdata = ushi_disc, wt = wt)
-}
+data('sim')
+wt = inverse_distance_weight(sim$lo,sim$la)
+sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) st_unidisc(.x,5)))
+pid_idsa(y ~ xa + xb + xc, rawdata = sim,
+         discdata = sim1, wt = wt)
+
 }
