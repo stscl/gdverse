@@ -64,7 +64,7 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @examples
 #' data("ndvi")
 #' g = gd_bestunidisc(NDVIchange ~ .,
-#'                    discvar = names(select(ndvi,-c(Climatezone,Mining))),
+#'                    discvar = names(dplyr::select(ndvi,-c(Climatezone,Mining))),
 #'                    discnum = 3:15,
 #'                    cores = 6)
 #' g
