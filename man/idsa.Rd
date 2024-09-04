@@ -14,7 +14,7 @@ idsa(
   discmethod = NULL,
   strategy = 2L,
   increase_rate = 0.05,
-  cores = 6,
+  cores = 1,
   seed = 123456789,
   alpha = 0.95,
   ...
@@ -79,8 +79,9 @@ to ensure the trade-off between analysis results and calculation speed.
 }
 \examples{
 data('sim')
-g = idsa(y ~ ., data = sim, locations = c('lo','la'),
-         discvar = c("xa","xb","xc"), cores = 1)
+g = idsa(y ~ ., data = sim,
+         locations = c('lo','la'),
+         discvar = c("xa","xb","xc"))
 g
 
 }

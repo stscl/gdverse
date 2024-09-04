@@ -49,8 +49,9 @@
 #'
 #' @examples
 #' data('sim')
-#' g = idsa(y ~ ., data = sim, locations = c('lo','la'),
-#'          discvar = c("xa","xb","xc"), cores = 1)
+#' g = idsa(y ~ ., data = sim,
+#'          locations = c('lo','la'),
+#'          discvar = c("xa","xb","xc"))
 #' g
 #'
 idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
