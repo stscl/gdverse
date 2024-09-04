@@ -23,6 +23,7 @@ estimated scatter plot smoothing (LOESS) model.
 }
 \examples{
 \dontrun{
+## The following code takes a long time to run:
 library(tidyverse)
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))

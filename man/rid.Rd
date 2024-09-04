@@ -54,6 +54,7 @@ See \code{vignette('RGDRID',package = 'gdverse')} for more details.
 }
 \examples{
 \dontrun{
+## The following code needs to configure the Python environment to run:
 data('sim')
 g = rid(y ~ ., data = sim \%>\% dplyr::select(-dplyr::any_of(c('lo','la'))),
         discvar = c("xa","xb","xc"), discnum = 4, cores = 6)
