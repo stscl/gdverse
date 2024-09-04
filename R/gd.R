@@ -28,7 +28,6 @@
 #' g = gd(incidence ~ watershed + elevation + soiltype,
 #'        data = NTDs,type = c('factor','interaction'))
 #' g
-#' plot(g)
 #'
 gd = \(formula, data, type = "factor", alpha = 0.95){
   if (length(type) == 1){

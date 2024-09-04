@@ -28,11 +28,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('ndvi')
-#' g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
+#' g = lesh(NDVIchange ~ ., data = ndvi)
 #' g
-#' }
+#'
 lesh = \(formula,data,cores = 1,...){
   spd = spd_lesh(formula,data,cores,...)
   pd = gozh(formula,data,cores,type = 'interaction',...)[[1]]

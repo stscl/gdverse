@@ -58,6 +58,7 @@ gozh = \(formula, data, cores = 1,
 #' @return Formatted string output
 #' @method print gozh_result
 #' @export
+#'
 print.gozh_result = \(x, ...) {
   cat("                GOZH Model                  \n")
   nx = names(x)
