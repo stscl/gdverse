@@ -15,10 +15,9 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('ndvi')
 #' rpart_disc(NDVIchange ~ ., data = ndvi)
-#' }
+#'
 rpart_disc = \(formula,data,...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)

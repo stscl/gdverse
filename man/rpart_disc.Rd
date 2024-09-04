@@ -20,10 +20,9 @@ A vector that being discretized.
 discretization of variables based on recursive partitioning
 }
 \examples{
-\dontrun{
 data('ndvi')
 rpart_disc(NDVIchange ~ ., data = ndvi)
-}
+
 }
 \references{
 Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
