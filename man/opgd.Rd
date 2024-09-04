@@ -53,12 +53,11 @@ A list of the OPGD model result.
 Function for optimal parameters-based geographical detector(OPGD) model.
 }
 \examples{
-\dontrun{
-data("ndvi")
-opgd(NDVIchange ~ ., data = ndvi,
-     discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-     discnum = 3:15, cores = 12)
-}
+data('sim')
+opgd(y ~ xa + xb + xc, data = sim,
+     discvar = paste0('x',letters[1:3]),
+     discnum = 3:6)
+
 }
 \references{
 Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector

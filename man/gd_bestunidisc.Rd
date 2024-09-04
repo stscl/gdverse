@@ -41,19 +41,21 @@ by sampling \verb{10\%}(the default value for \code{samp_prop} in \code{st_unidi
 \value{
 A list with the optimal parameter in the provided parameter combination with \code{k},
 \code{method} and \code{disc}(when \code{return_disc} is \code{TRUE}).
+\describe{
+\item{\code{k}}{the interaction result of LESH model}
+\item{\code{method}}{a tibble of the SHAP power of determinants}
+\item{\code{disc}}{a tibble of the SHAP power of determinants}
+}
 }
 \description{
 Function for determining the best univariate discretization based on geodetector q-statistic.
 }
 \examples{
-\dontrun{
-data("ndvi")
-g = gd_bestunidisc(NDVIchange ~ .,
-                   data = dplyr::select(ndvi,-c(Climatezone,Mining)),
-                   discnum = 3:15,
-                   cores = 12)
-g
-}
+data('sim')
+gd_bestunidisc(y ~ xa + xb + xc, data = sim,
+               discvar = paste0('x',letters[1:3]),
+               discnum = 3:6)
+
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
