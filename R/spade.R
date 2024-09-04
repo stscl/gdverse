@@ -43,7 +43,7 @@
 #' g
 #'
 spade = \(formula, data, wt = NULL,
-          locations = NULL,discnum = NULL,discmethod = NULL,
+          locations = NULL, discnum = NULL, discmethod = NULL,
           cores = 1, seed = 123456789, permutations = 0, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)

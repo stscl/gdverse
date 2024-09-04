@@ -11,7 +11,7 @@ spade(
   locations = NULL,
   discnum = NULL,
   discmethod = NULL,
-  cores = 6,
+  cores = 1,
   seed = 123456789,
   permutations = 0,
   ...
@@ -34,7 +34,7 @@ Useful and must provided when \code{wt} is not provided. When \code{wt} is provi
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
 Others use \code{st_unidisc()}.}
 
-\item{cores}{(optional) A positive integer(default is 6). If cores > 1, use parallel computation.}
+\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
 \item{seed}{(optional) Random number seed, default is \code{123456789}.}
 
