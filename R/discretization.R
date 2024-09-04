@@ -67,15 +67,11 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @export
 #'
 #' @examples
+#' data('sim')
+#' gd_bestunidisc(y ~ xa + xb + xc, data = sim,
+#'                discvar = paste0('x',letters[1:3]),
+#'                discnum = 3:6)
 #'
-#' \dontrun{
-#' data("ndvi")
-#' g = gd_bestunidisc(NDVIchange ~ .,
-#'                    data = dplyr::select(ndvi,-c(Climatezone,Mining)),
-#'                    discnum = 3:15,
-#'                    cores = 12)
-#' g
-#' }
 gd_bestunidisc = \(formula, data, discnum = NULL, discmethod = NULL,
                    cores = 1,return_disc = TRUE,seed = 123456789,...){
   doclust = FALSE
