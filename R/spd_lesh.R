@@ -30,11 +30,10 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('ndvi')
-#' g = spd_lesh(NDVIchange ~ ., data = ndvi, cores = 6)
+#' g = spd_lesh(NDVIchange ~ ., data = ndvi)
 #' g
-#' }
+#'
 spd_lesh = \(formula,data,cores = 1,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
