@@ -95,12 +95,6 @@ print.lesh_result = \(x, ...) {
 #' @method plot lesh_result
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' data('ndvi')
-#' g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
-#' plot(g)
-#' }
 plot.lesh_result = \(x, pie = TRUE,
 					           scatter = FALSE,
                      scatter_alpha = 1,
