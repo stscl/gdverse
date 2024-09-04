@@ -42,9 +42,10 @@ by sampling \verb{10\%}(the default value for \code{samp_prop} in \code{st_unidi
 A list with the optimal parameter in the provided parameter combination with \code{k},
 \code{method} and \code{disc}(when \code{return_disc} is \code{TRUE}).
 \describe{
-\item{\code{k}}{the interaction result of LESH model}
-\item{\code{method}}{a tibble of the SHAP power of determinants}
-\item{\code{disc}}{a tibble of the SHAP power of determinants}
+\item{\code{x}}{the name of the variable that needs to be discretized}
+\item{\code{k}}{optimal discretization number}
+\item{\code{method}}{optimal discretization method}
+\item{\code{disc}}{optimal discretization results}
 }
 }
 \description{

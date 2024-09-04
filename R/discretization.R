@@ -60,9 +60,10 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
 #' `method` and `disc`(when `return_disc` is `TRUE`).
 #' \describe{
-#' \item{\code{k}}{the interaction result of LESH model}
-#' \item{\code{method}}{a tibble of the SHAP power of determinants}
-#' \item{\code{disc}}{a tibble of the SHAP power of determinants}
+#' \item{\code{x}}{the name of the variable that needs to be discretized}
+#' \item{\code{k}}{optimal discretization number}
+#' \item{\code{method}}{optimal discretization method}
+#' \item{\code{disc}}{optimal discretization results}
 #' }
 #' @export
 #'
