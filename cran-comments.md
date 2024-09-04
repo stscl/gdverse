@@ -6,7 +6,7 @@ This is a resubmission. In this submission I have:
 
 * Update package description details in `DESCRIPTION` file.
 
-* Remove unnecessary use of `\dontrun{}` in package examples and only retain `\dontrun{}`   where `robust_disc`, `rgd`, `rid` (requires configuration of python dependencies) and    `loess_optscale`, `sesu_opgd`, `sesu_gozh` (takes a long time to run). We also add the   necessary prompts for the examples which using `\dontrun{}`
+* Remove unnecessary use of `\dontrun{}` in package examples and only retain `\dontrun{}`   where `robust_disc`, `rgd`, and `rid` (which require configuration of Python dependencies) and `loess_optscale`, `sesu_opgd`, and `sesu_gozh` (which take a long time  to run) are involved. Additionally, we have added the necessary prompts for the examples that use `\dontrun{}`.
 
 ## R CMD check results
 
