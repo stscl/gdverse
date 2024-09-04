@@ -3,11 +3,12 @@
 #' See \code{magrittr::\link[magrittr:pipe]{\%>\%}} for details.
 #'
 #' @name %>%
+#' @usage lhs \%>\% rhs
 #' @rdname pipe
 #' @keywords internal
-#' @export
 #' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
+#' @return `NULL` (this is the magrittr pipe operator)
+#' @export
 NULL
 
 #' @title calculate inverse distance weight
