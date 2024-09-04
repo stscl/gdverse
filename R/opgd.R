@@ -33,12 +33,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' data("ndvi")
-#' opgd(NDVIchange ~ ., data = ndvi,
-#'      discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-#'      discnum = 3:15, cores = 12)
-#' }
+#' data('sim')
+#' opgd(y~ xa + xb + xc, data = sim,
+#'      discvar = paste0('x',letters[1:3]),
+#'      discnum = 3:6)
+#'
 opgd = \(formula,data,discvar,discnum = NULL,discmethod = NULL,
          cores = 1, type = "factor", alpha = 0.95, ...){
   formula = stats::as.formula(formula)
