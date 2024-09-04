@@ -54,15 +54,10 @@ Function for optimal parameters-based geographical detector(OPGD) model.
 }
 \examples{
 \dontrun{
-library(terra)
-library(tidyverse)
-fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
-fvc = terra::rast(paste0("/vsicurl/",fvcpath))
-fvc = terra::aggregate(fvc,fact = 5)
-fvc = as_tibble(terra::as.data.frame(fvc,na.rm = T))
-opgd(fvc ~ ., data = fvc,
-     discvar = names(select(fvc,-c(fvc,lulc))),
-     cores = 6, type =c('factor','interaction'))
+data("ndvi")
+opgd(NDVIchange ~ ., data = ndvi,
+     discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+     discnum = 3:15, cores = 12)
 }
 }
 \references{

@@ -46,7 +46,7 @@ A list with the optimal parameter in the provided parameter combination with \co
 Function for determining the best univariate discretization based on geodetector q-statistic.
 }
 \examples{
-\donttest{
+\dontrun{
 data("ndvi")
 g = gd_bestunidisc(NDVIchange ~ .,
                    data = dplyr::select(ndvi,-c(Climatezone,Mining)),

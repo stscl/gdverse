@@ -33,7 +33,6 @@ data("NTDs")
 g = gd(incidence ~ watershed + elevation + soiltype,
        data = NTDs,type = c('factor','interaction'))
 g
-plot(g)
 
 }
 \references{

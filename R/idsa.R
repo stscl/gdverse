@@ -48,15 +48,14 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' data('sim')
 #' g = idsa(y ~ ., data = sim, locations = c('lo','la'),
-#'          discvar = c("xa","xb","xc"), cores = 6)
+#'          discvar = c("xa","xb","xc"), cores = 1)
 #' g
-#' }
+#'
 idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
          discnum = NULL,discmethod = NULL,strategy = 2L,increase_rate = 0.05,
-         cores = 6, seed = 123456789, alpha = 0.95, ...){
+         cores = 1, seed = 123456789, alpha = 0.95, ...){
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)

@@ -33,11 +33,10 @@ When there are a large number of explanatory variables, the data dimensionality 
 to ensure the trade-off between analysis results and calculation speed.
 }
 \examples{
-\dontrun{
 data('ndvi')
-g = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
+g = lesh(NDVIchange ~ ., data = ndvi)
 g
-}
+
 }
 \references{
 Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., & Hou, Z. (2023). A locally explained heterogeneity model for

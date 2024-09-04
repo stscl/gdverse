@@ -78,12 +78,11 @@ When there are a large number of explanatory variables, the data dimensionality 
 to ensure the trade-off between analysis results and calculation speed.
 }
 \examples{
-\dontrun{
 data('sim')
 g = idsa(y ~ ., data = sim, locations = c('lo','la'),
-         discvar = c("xa","xb","xc"), cores = 6)
+         discvar = c("xa","xb","xc"), cores = 1)
 g
-}
+
 }
 \references{
 Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
