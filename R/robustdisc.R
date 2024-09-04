@@ -20,6 +20,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' ## The following code needs to configure the Python environment to run:
 #' data('ndvi')
 #' robust_disc(NDVIchange ~ GDP,data = ndvi,discnum = 5)
 #' robust_disc(NDVIchange ~ .,

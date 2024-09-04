@@ -33,6 +33,7 @@
 #'
 #' @examples
 #' \dontrun{
+#' ## The following code needs to configure the Python environment to run:
 #' data('ndvi')
 #' g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1:-3],
 #'         cores = 6, type =c('factor','interaction'))

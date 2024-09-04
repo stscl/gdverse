@@ -73,6 +73,7 @@ loess_optdiscnum = \(qvec, discnumvec, increase_rate = 0.05){
 #'
 #' @examples
 #' \dontrun{
+#' ## The following code takes a long time to run:
 #' library(tidyverse)
 #' fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 #' fvc = terra::rast(paste0("/vsicurl/",fvcpath))
