@@ -2,7 +2,7 @@
 title: "Compare Size Effect of Spatial Units(SESU)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SESU}
+  %\VignetteIndexEntry{sesu}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

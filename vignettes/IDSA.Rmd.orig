@@ -2,7 +2,7 @@
 title: "Interactive Detector For Spatial Associations(IDSA)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{IDSA}
+  %\VignetteIndexEntry{idsa}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

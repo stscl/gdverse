@@ -2,7 +2,7 @@
 title: "Optimal Parameters-based Geographical Detector(OPGD)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{OPGD}
+  %\VignetteIndexEntry{opgd}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -2,7 +2,7 @@
 title: "Spatial Heterogeneity Explanation(GOZH & LESH)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SHEGD}
+  %\VignetteIndexEntry{shegd}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

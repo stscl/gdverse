@@ -2,7 +2,7 @@
 title: "Spatial Association Detector(SPADE)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SPADE}
+  %\VignetteIndexEntry{spade}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

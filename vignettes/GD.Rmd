@@ -2,7 +2,7 @@
 title: "Geographical Detector(GD)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{GD}
+  %\VignetteIndexEntry{gd}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

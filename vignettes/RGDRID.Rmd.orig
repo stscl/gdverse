@@ -2,7 +2,7 @@
 title: "Robust Geographical Detector & Robust Interaction Detector(RGD & RID)"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{RGDRID}
+  %\VignetteIndexEntry{rgdrid}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
