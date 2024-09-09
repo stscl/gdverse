@@ -118,14 +118,14 @@
 <span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;,</span></span>
 <span><span class="co">## #   geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<img src="../reference/figures/spade/studyarea.png" alt="The study area map of USHI data" width="120%"><p class="caption">
-The study area map of USHI data
+<img src="../reference/figures/spade/XianSUHII.png" alt="Overview Map of the Study Area Regarding SUHII" width="80%"><p class="caption">
+Overview Map of the Study Area Regarding SUHII
 </p>
 </div>
-<p>This spatial polygon vector data <code>ushi</code> is the streets
+<p>This spatial polygon vector data <code>suhii</code> is the streets
 divided based on roads within <em>the Ring expressway of Xi’an
-City</em>, and the attribute data are the <em>SUHI</em>(surface urban
-heat island effect) and its influence factors.</p>
+City</em>, and the attribute data are the <em>SUHII</em>(Intensity of
+surface urban heat island effect) and its influence factors.</p>
 <p>The meanings of each explanatory variable are as follows,and can be
 divided into three categories:</p>
 <ol style="list-style-type: decimal">
@@ -230,18 +230,18 @@ I</strong>:</p>
 <span><span class="co">## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669</span></span>
 <span><span class="co">## Projected CRS: WGS 84 / UTM zone 49N</span></span>
 <span><span class="co">## # A tibble: 1,037 × 4</span></span>
-<span><span class="co">##     SUHI nb         wt                                                                  geom</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;nb&gt;       &lt;list&gt;                                                     &lt;POLYGON [m]&gt;</span></span>
-<span><span class="co">##  1 1.76  &lt;int [12]&gt; &lt;dbl [12]&gt; ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 2978…</span></span>
-<span><span class="co">##  2 0.519 &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 2973…</span></span>
-<span><span class="co">##  3 3.04  &lt;int [9]&gt;  &lt;dbl [9]&gt;  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390…</span></span>
-<span><span class="co">##  4 3.22  &lt;int [4]&gt;  &lt;dbl [4]&gt;  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229…</span></span>
-<span><span class="co">##  5 3.47  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 2967…</span></span>
-<span><span class="co">##  6 4.71  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 2964…</span></span>
-<span><span class="co">##  7 1.24  &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 2963…</span></span>
-<span><span class="co">##  8 4.30  &lt;int [8]&gt;  &lt;dbl [8]&gt;  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 2961…</span></span>
-<span><span class="co">##  9 3.76  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 2962…</span></span>
-<span><span class="co">## 10 4.23  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 2970…</span></span>
+<span><span class="co">##     SUHI nb         wt                                                                   geom</span></span>
+<span><span class="co">##    &lt;dbl&gt; &lt;nb&gt;       &lt;list&gt;                                                      &lt;POLYGON [m]&gt;</span></span>
+<span><span class="co">##  1 1.76  &lt;int [12]&gt; &lt;dbl [12]&gt; ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 29784…</span></span>
+<span><span class="co">##  2 0.519 &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 29739…</span></span>
+<span><span class="co">##  3 3.04  &lt;int [9]&gt;  &lt;dbl [9]&gt;  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.…</span></span>
+<span><span class="co">##  4 3.22  &lt;int [4]&gt;  &lt;dbl [4]&gt;  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.…</span></span>
+<span><span class="co">##  5 3.47  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 29678…</span></span>
+<span><span class="co">##  6 4.71  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 29646…</span></span>
+<span><span class="co">##  7 1.24  &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 29634…</span></span>
+<span><span class="co">##  8 4.30  &lt;int [8]&gt;  &lt;dbl [8]&gt;  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 29614…</span></span>
+<span><span class="co">##  9 3.76  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 29628…</span></span>
+<span><span class="co">## 10 4.23  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 29702…</span></span>
 <span><span class="co">## # ℹ 1,027 more rows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
 <span></span>
@@ -284,7 +284,7 @@ more details see <a href="https://spatlyu.github.io/tidyrgeoda/articles/Local-In
 <p><img src="../reference/figures/spade/SUHI_LISA-1.png"></p>
 <p>The global and local spatial autocorrelation shows that SUHI’s strong
 spatial dependence.</p>
-<p>Spatial dependence was neglected in native geodetector, which led to
+<p>Spatial dependence was neglected in native geodetector, which leds to
 the development of <strong>SPADE</strong>(spatial association
 detector).</p>
 </div>
@@ -374,38 +374,18 @@ by default, which can be created by
 function.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wt2</span> <span class="op">=</span> <span class="fu"><a href="../reference/inverse_distance_weight.html">inverse_distance_weight</a></span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p>You can also use spatial weight matrix from <code>sfdep</code>(which
-invokes <code>spdep</code>) or <code>tidyrgeoda</code>(which invokes
-<code>rgeoda</code>).</p>
 <div class="section level4">
-<h4 id="using-spatial-weight-matrix-from-sfdep">using spatial weight matrix from sfdep<a class="anchor" aria-label="anchor" href="#using-spatial-weight-matrix-from-sfdep"></a>
+<h4 id="using-spatial-weight-matrix-from-sdsfun">using spatial weight matrix from sdsfun<a class="anchor" aria-label="anchor" href="#using-spatial-weight-matrix-from-sdsfun"></a>
 </h4>
+<p>I have also developed the <a href="https://stscl.github.io/sdsfun/" class="external-link">sdsfun</a> package to facilitate
+the construction of spatial weight matrices, which requires an input of
+an sf object.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="va">ushi</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">is.na</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">st_contiguity</span><span class="op">(</span><span class="va">geom</span><span class="op">)</span>,</span>
-<span>         wt <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">st_weights</span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/exposition.html" class="external-link">%$%</a></span></span>
-<span>  <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">wt_as_matrix</span><span class="op">(</span><span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="using-spatial-weight-matrix-from-tidyrgeoda">using spatial weight matrix from tidyrgeoda<a class="anchor" aria-label="anchor" href="#using-spatial-weight-matrix-from-tidyrgeoda"></a>
-</h4>
+<code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu">spdep_contiguity_swm</span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span></code></pre></div>
+<p>Or using a spatial weight matrix based on distance kernel
+functions.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt4</span> <span class="op">=</span> <span class="fu">tidyrgeoda</span><span class="fu">::</span><span class="fu">st_contiguity_weights</span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/coerce.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="fl">1</span>,\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/transpose.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>The <code>wt3</code> is identical <code>wt4</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rspatial.github.io/terra/reference/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">wt3</span>,<span class="va">wt4</span><span class="op">)</span></span>
-<span><span class="co">## [1] TRUE</span></span></code></pre></div>
-<p><strong>We recommend using the inverse distance weight function
-<code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code> of the <code>gdverse</code>
-package to construct a spatial weight matrix if you’re not sure which
-spatial weight matrix should to be used as the SPADE paper is using
-this. In practice, the appropriate spatial weight matrix is selected
-considering the characteristics of the research object and the research
-area. </strong></p>
+<code class="sourceCode R"><span><span class="va">wt4</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu">spdep_distance_swm</span><span class="op">(</span><span class="va">ushi</span>,k <span class="op">=</span> <span class="fl">3</span>, kernel <span class="op">=</span> <span class="st">'gaussian'</span><span class="op">)</span></span></code></pre></div>
 <p>In the following section we will execute <em>SPADE</em> model using
 spatial weight matrix <code>wt3</code> which is constructed by queen
 contiguity.</p>
@@ -420,7 +400,7 @@ etc.</p>
 <div class="section level4">
 <h4 id="run-spade">run SPADE<a class="anchor" aria-label="anchor" href="#run-spade"></a>
 </h4>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ushi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>,</span>
 <span>                   data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span>,</span>
 <span>                   wt <span class="op">=</span> <span class="va">wt3</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
@@ -451,7 +431,7 @@ etc.</p>
 <p><img src="../reference/figures/spade/ushi_SPADE_factor-1.png"></p>
 <p><strong>You can also access the detailed q statistics by
 <code>ushi_spade$factor</code></strong></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ushi_spade</span><span class="op">$</span><span class="va">factor</span></span>
 <span><span class="co">## # A tibble: 18 × 3</span></span>
 <span><span class="co">##    variable `Q-statistic` `P-value`        </span></span>
@@ -484,7 +464,7 @@ SPADE are more reliable in most cases.</p>
 <div class="section level3">
 <h3 id="spade-na-result-explained">SPADE NA result explained<a class="anchor" aria-label="anchor" href="#spade-na-result-explained"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">WAR</span> <span class="op">=</span> <span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span></span>
 <span><span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -566,7 +546,7 @@ SPADE are more reliable in most cases.</p>
 <td align="left">▇▁▁▁▁</td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ushi</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span>,</span>
 <span>               color<span class="op">=</span><span class="st">'white'</span>,</span>
@@ -574,7 +554,7 @@ SPADE are more reliable in most cases.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/spade/WAR_Hist-1.png"></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">moments</span><span class="fu">::</span><span class="fu">skewness</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
 <span><span class="co">## [1] 11.6917</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">shapiro.test</a></span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
@@ -593,7 +573,7 @@ because it can’t provide sufficient information for modeling SUHI.</p>
 <p>Let’s look at the specific calculation process of the PSMD(power of
 spatial and multilevel discretization determinant) value corresponding
 to WAR:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>                  <span class="fu"><a href="../reference/factor_detector.html">factor_detector</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -619,7 +599,7 @@ to WAR:</p>
 relationships between variables and select appropriate variables for
 subsequent modeling through methods such as VIF. Here we examine the
 effect of removing the WAR variable on VIF and linear models:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm.modelOne</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span></span>
 <span><span class="co">## </span></span>
@@ -684,7 +664,7 @@ effect of removing the WAR variable on VIF and linear models:</p>
 <span><span class="co">## 16 RFD       89.4 </span></span>
 <span><span class="co">## 17 SVF        3.02</span></span>
 <span><span class="co">## 18 FAR       31.3</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm.modelTwo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">WAR</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span></span>
 <span><span class="co">## </span></span>
