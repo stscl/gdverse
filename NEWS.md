@@ -1,6 +1,6 @@
 # gdverse 1.0-1
 
-* Update SPADE and IDSA vignettes.
+* Unify all vignetts filenames to lowercase.
 
 # gdverse 1.0.0
 
