@@ -6,6 +6,7 @@
 <!-- badges: start -->
 
 [![CRAN](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
+[![Downloads](https://cranlogs.r-pkg.org/badges/gdverse)](https://CRAN.R-project.org/package=gdverse)
 [![r-universe](https://ausgis.r-universe.dev/badges/gdverse)](https://ausgis.r-universe.dev/gdverse)
 
 <!-- badges: end -->
