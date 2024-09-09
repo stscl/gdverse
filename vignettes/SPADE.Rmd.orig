@@ -177,90 +177,15 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 #### run SPADE
 
 ```{r ushi_SPADE_factor,fig.width=8.5,fig.height=6.5}
-ushi_spade = spade(SUHI ~ .,
-                   data = st_drop_geometry(ushi),
-                   wt = wt3, cores = 6)
-ushi_spade
-plot(ushi_spade,slicenum = 8)
+suhii_spade = spade(SUHII ~ .,
+                    data = st_drop_geometry(suhii),
+                    wt = wt3, cores = 12)
+suhii_spade
+plot(suhii_spade,slicenum = 6)
 ```
 
-**You can also access the detailed q statistics by `ushi_spade$factor`**
+**You can also access the detailed q statistics by `suhii_spade$factor`**
 
 ```{r}
-ushi_spade$factor
+suhii_spade$factor
 ```
-
-The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
-
-We demonstrate the rationality of NA values calculated of `WAR` in the following section:
-
-### SPADE NA result explained
-
-```{r}
-WAR = ushi$WAR
-skimr::skim(WAR)
-```
-
-```{r WAR_Hist,fig.width=4.5,fig.height=3}
-ggplot(data = ushi) +
-  geom_histogram(aes(WAR),
-               color='white',
-               fill='gray60') +
-  scale_y_continuous(expand = c(0,0)) +
-  theme_classic()
-```
-
-```{r}
-moments::skewness(WAR)
-shapiro.test(WAR)
-```
-
-From the histogram of `WAR`,its skewness and the result of shapiro.test, you will find that the WAR variable is heavily skewed, with a large number of zeros, which do not provide sufficient information for modeling SUHI.
-
-In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
-
-Let's look at the specific calculation process of the PSMD(power of spatial and multilevel discretization determinant) value corresponding to WAR:
-
-```{r}
-3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
-                  factor_detector(ushi$WAR, .) %>%
-                  {.[[1]]})
-
-3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
-                   psd_spade(ushi$WAR, ., wt3))
-
-3:22 %>%
-  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
-                   cpsd_spade(ushi$SUHI, ushi$WAR, ., wt3))
-```
-
-In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF. Here
-we examine the effect of removing the WAR variable on VIF and linear models:
-
-```{r}
-lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(ushi))
-summary(lm.modelOne)
-
-car::vif(lm.modelOne) |>
-  tibble::as_tibble_row() |>
-  tidyr::pivot_longer(everything(),
-                      names_to = 'variable',
-                      values_to = 'VIF')
-```
-
-```{r}
-lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(ushi) |> select(-WAR))
-summary(lm.modelTwo)
-
-car::vif(lm.modelTwo) |>
-  tibble::as_tibble_row() |>
-  tidyr::pivot_longer(everything(),
-                      names_to = 'variable',
-                      values_to = 'VIF')
-```
-
-You can see that the model does not change much before and after removing the WAR variable.In other words, WAR does not do much to model SUHI.
-
-This suggests another use of `SPADE` model for selecting modeling variables.
