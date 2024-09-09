@@ -14,19 +14,19 @@ navbar:
       text: Vignettes
       menu:
       - text: Geographical Detector(GD)
-        href: articles/GD.html
+        href: articles/gd.html
       - text: Optimal Parameters-based Geographical Detector(OPGD)
-        href: articles/OPGD.html
+        href: articles/opgd.html
       - text: Spatial Heterogeneity Explanation(GOZH&LESH)
-        href: articles/SHEGD.html
+        href: articles/shegd.html
       - text: Spatial Association Detector(SPADE)
-        href: articles/SPADE.html
+        href: articles/spade.html
       - text: Interactive Detector For Spatial Associations(IDSA)
-        href: articles/IDSA.html
+        href: articles/idsa.html
       - text: Robust Geographical Detector&Robust Interaction Detector(RGD&RID)
-        href: articles/RGDRID.html
+        href: articles/rgdrid.html
       - text: Compare Size Effect of Spatial Units(SESU)
-        href: articles/SESU.html
+        href: articles/sesu.html
 
 reference:
 - title: Geographical Detector Models
