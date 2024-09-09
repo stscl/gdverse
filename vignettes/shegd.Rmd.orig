@@ -1,0 +1,90 @@
+---
+title: "Spatial Heterogeneity Explanation(GOZH & LESH)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shegd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  warning = FALSE,
+  message = FALSE,
+  fig.path = "man/figures/shegd/"
+)
+```
+
+The [**GOZH**(geographically optimal zones-based heterogeneity) model](https://doi.org/10.1016/j.isprsjprs.2022.01.009) generates the optimal spatial zone based on the binary classification of the decision tree and then calculates the power of determinants.The [**LESH**(locally explained heterogeneity model)](https://doi.org/10.1080/17538947.2023.2271883) based on GOZH model and combined with additive shapely theory to reasonably allocate variable interaction's power of determinants.In this vignette ,we use `ndvi` data in `gdverse` package to demonstrate the *spatial heterogeneity explanation* based on **GOZH** and **LESH** model.
+
+### Load data and package
+
+``` {r}
+library(tidyverse)
+library(gdverse)
+
+data("ndvi")
+head(ndvi)
+```
+
+### Univariate power of determinants detection
+
+```{r gozh_uni,fig.width=5.5,fig.height=3.5}
+gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
+gozh.uvi
+plot(gozh.uvi)
+```
+
+### Variable interaction detection
+
+```{r gozh_bi,fig.width=7.25,fig.height=4.25}
+gozh.bi = gozh(NDVIchange ~ ., data = ndvi, type = 'interaction')
+gozh.bi
+plot(gozh.bi)
+```
+
+### Variable interaction contribution
+
+```{r lesh,fig.width=12.5,fig.height=5.75}
+lesh.m = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
+lesh.m
+plot(lesh.m, pie = TRUE, scatter = TRUE)
+```
+
+Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of the interactive contribution of variables,and the rest remains consistent.
+
+gdverse supports modifications to the default ploting results, such as adding subfigure annotations and adjusting the size of the text on the x-y axis:
+
+```{r lesh_own,fig.width=12.5,fig.height=5.75}
+plot(lesh.m, pie = TRUE, scatter = TRUE,
+     pielegend_x = 0.98, pielegend_y = 0.15) +
+  patchwork::plot_annotation(tag_levels = 'a',
+                             tag_prefix = '(',
+                             tag_suffix = ')',
+                             tag_sep = '',
+                             theme = theme(plot.tag = element_text(family = "serif"))) &
+  ggplot2::theme(axis.text.y = element_text(family = 'serif',size = 15),
+                 axis.text.x = element_text(family = 'serif',size = 15,
+                                            angle = 30,vjust = 0.85,hjust = 0.75),
+                 axis.title = element_text(family = 'serif',size = 15))
+```
+
+And you can only look at the contribution part of the variable interaction:
+
+```{r lesh_only,fig.width=5.75,fig.height=5.25}
+plot(lesh.m, pie = TRUE, scatter = FALSE)
+```
+
+By accessing the concrete result through `lesh.m$interaction`, which returns a `tibble`.
+
+```{r}
+lesh.m$interaction
+```
+
+Use `lesh.m$spd_lesh` to access the SHAP power of determinants:
+
+```{r}
+lesh.m$spd_lesh
+```

@@ -1,0 +1,118 @@
+---
+title: "Robust Geographical Detector & Robust Interaction Detector(RGD & RID)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rgdrid}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  warning = FALSE,
+  message = FALSE,
+  fig.path = "man/figures/rgdrid/"
+)
+```
+
+### Set up python dependence
+
+1. Install **miniconda**
+2. Open the conda terminal and perform steps 3 to 6
+3. Create a new conda env `gdverse`
+
+   > `conda create -n gdverse python=3.9 -y`
+
+4. Activate this env
+
+   > `conda activate gdverse`
+
+5. Install `mamba`
+
+   > `conda install -c conda-forge mamba -y`
+
+6. Set up python packages
+
+   > `mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y`
+
+7. Configure `GDVERSE_PYTHON` environment variable
+
+   - Temporarily setting up `gdverse` python dependence environment using `Sys.setenv()` in the R console or R code like `Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")`.
+
+   - Or using `usethis::edit_r_environ()` to set long-available `gdverse` python dependencies environment path.
+
+### Load data and package
+
+``` {r}
+library(tidyverse)
+library(gdverse)
+
+data("ndvi")
+```
+
+``` {r}
+names(ndvi)
+```
+
+### Determine discretization use offline change point detection
+
+`Climatezone` and `Mining` is the discrete category variables in the `ndvi` data, we need to discretize others.You can use `robust_disc()` to discretize them based on offline change point detection.When executing `robust_disc()`, note that each `discvar` can use a `discnum` parameter of its own. You can pass in a vector of equal length to `discvar` to use different `discnum` for different `discvar`.
+
+```{r}
+tictoc::tic()
+new.ndvi = robust_disc(NDVIchange ~ .,
+                       data = select(ndvi,-c(Climatezone,Mining)),
+                       discnum = 10,cores = 6)
+tictoc::toc()
+```
+
+```{r}
+new.ndvi
+```
+
+The `new.ndvi` is the discrete result,we can combine it with `NDVIchange`,`Climatezone` and `Mining` cols in `ndvi` tibble now.
+
+```{r}
+new.ndvi = bind_cols(select(ndvi,c(NDVIchange,Climatezone,Mining)),new.ndvi)
+new.ndvi
+```
+
+### Run geodetector
+
+Then, we can run geodetector model by `gd()` function.
+
+```{r}
+g1 = gd(NDVIchange ~ .,data = new.ndvi, type = 'factor')
+g1
+```
+
+```{r}
+g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
+g2
+```
+
+### You can also use `rgd()` in one time to get result above.
+
+```{r}
+ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
+               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 10, cores = 6, type = c('factor','interaction'))
+ndvi_rgd
+```
+
+```{r rgd_id,fig.width=10.25,fig.height=4.25}
+plot(ndvi_rgd)
+```
+
+### Run RID
+
+`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Fuzzy And Join` are used to generate a new spatial partition of the interaction variables.
+
+```{r}
+ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
+               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 10, cores = 6)
+ndvi_rid
+```

@@ -1,0 +1,280 @@
+---
+title: "Spatial Association Detector(SPADE)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{spade}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  warning = FALSE,
+  message = FALSE,
+  fig.path = "man/figures/spade/"
+)
+```
+
+### Load data and package
+
+``` {r}
+library(sf)
+library(tidyverse)
+library(magrittr)
+library(gdverse)
+
+ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
+ushi
+```
+
+```{r echo=FALSE, out.width='80%', fig.align="center",fig.cap="Overview Map of the Study Area Regarding SUHII"}
+knitr::include_graphics('../man/figures/spade/XianSUHII.png')
+```
+
+This spatial polygon vector data `suhii` is the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHII*(Intensity of surface urban heat island effect) and its influence factors.
+
+The meanings of each explanatory variable are as follows,and can be divided into three categories:
+
+1. Landscape pattern and Land cover characteristic indicators
+- `LPI` Largest patch index (Area and Edge metric)(landscape level)
+- `LSI` Landscape shape index (Aggregation metric)(landscape level)
+- `GAR` The proportion of green space area
+- `DAR` The proportion of industrial space area
+- `WAR` The proportion of water space area
+2. Distances from cold and heat sources indicators
+- `DTH`  Distance to the nearest power plant(Heat source)
+- `DTP`  Distance to the nearest urban park(Cold source)
+- `DTR`  Distance to the nearest urban main road(Heat source)
+- `DTW`  Distance to the nearest water body(Cold source)
+3. Urban built space form indicators
+- `BH` Building height
+- `BD` Building density
+- `RL` Roughness length
+- `NDVI` Normalized Difference Vegetation Index
+- `NDWI` Normalized Difference Water Index
+- `RFD` Strewn degree (describing the roughness of buildings in three dimensional space)
+- `SVF` Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity)
+- `FAR` Floor Area Ratio (The ratio of the total floor area of buildings on a site to the net land area of that site)
+- `TER` Topographic Relief (The ratio of the average elevation of the unit to
+the average elevation of the entire study area)
+
+And the `SUHI` stands for surface urban heat island effect intensity.
+
+### Spatial pattern of SUHI
+
+#### global spatial autocorrelation of SUHI
+
+here I use `sfdep` to calculate the global **Moran's I**:
+
+```{r}
+global_moranI = \(data,col,nb,wt){
+  I = sfdep::global_moran(dplyr::pull(data,{{col}}),
+                          dplyr::pull(data,{{nb}}),
+                          dplyr::pull(data,{{wt}}),
+                          na_ok = T)$I
+  PValue = sfdep::global_moran_test(dplyr::pull(data,{{col}}),
+                                    dplyr::pull(data,{{nb}}),
+                                    dplyr::pull(data,{{wt}}),
+                                    na.action = na.omit)$p.value
+  moranI = c(I,PValue)
+  names(moranI) = c("Moran'I Index","P Value")
+  return(moranI)
+}
+
+ushi |>
+  dplyr::filter(!if_any(everything(),is.na)) |>
+  mutate(nb = sfdep::st_contiguity(geom),
+         wt = sfdep::st_weights(nb)) |>
+  dplyr::select(SUHI,nb,wt) -> new_ushi
+
+new_ushi
+set.seed(123456789)
+
+gmi = new_ushi |>
+  global_moranI(SUHI,nb,wt)
+gmi
+```
+
+The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
+
+#### local spatial autocorrelation of SUHI
+
+We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
+
+```{r SUHI_LISA,fig.width=7.5,fig.height=4}
+library(tidyrgeoda)
+
+new_ushi %>%
+  mutate(lisa = st_local_moran(.,'SUHI',
+                               wt = st_contiguity_weights(.),
+                               significance_cutoff = 0.05)) %>%
+  select(lisa) %>%
+  ggplot() +
+  geom_sf(aes(fill = lisa),lwd = .1,color = 'grey') +
+  scale_fill_lisa(name = 'SUHI-LISA') +
+  theme_bw() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    panel.grid = element_blank(),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
+    legend.key.size = unit(.5, 'cm')
+  )
+```
+
+The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
+
+Spatial dependence was neglected in native geodetector, which leds to the development of **SPADE**(spatial association detector).
+
+### OPGD modeling
+
+```{r}
+ushi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(ushi),
+                 discvar = names(select(st_drop_geometry(ushi),-SUHI)),
+                 cores = 6)
+ushi_opgd
+```
+
+**You can access the detailed q statistics by `ushi_opgd$factor`.**
+
+```{r}
+ushi_opgd$factor
+```
+
+### SPADE modeling
+
+*SPADE* explicitly considers the spatial variance by assigning the weight of the influence based on spatial distribution and also minimizes the influence of the number of levels on PD values by using the multilevel discretization and considering information loss due to discretization.
+
+When response variable has a strong spatial dependence, maybe *SPADE* is a best choice.
+
+The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
+
+In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
+
+```{r}
+coords = ushi |>
+  st_centroid() |>
+  st_coordinates()
+
+wt1 = inverse_distance_weight(coords[,1],coords[,2])
+```
+
+You can also use gravity model weight by assigning the `power` parameter in `inverse_distance_weight()` function.
+
+```{r}
+wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
+```
+
+#### using spatial weight matrix from sdsfun
+
+I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
+
+```{r}
+wt3 = sdsfun::spdep_contiguity_swm(ushi)
+```
+
+Or using a spatial weight matrix based on distance kernel functions.
+
+```{r}
+wt4 = sdsfun::spdep_distance_swm(ushi,k = 3, kernel = 'gaussian')
+```
+
+
+In the following section we will execute *SPADE* model using spatial weight matrix `wt3` which is constructed by queen contiguity.
+
+The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value, this calculation is very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
+
+#### run SPADE
+
+```{r ushi_SPADE_factor,fig.width=8.5,fig.height=6.5}
+ushi_spade = spade(SUHI ~ .,
+                   data = st_drop_geometry(ushi),
+                   wt = wt3, cores = 6)
+ushi_spade
+plot(ushi_spade,slicenum = 8)
+```
+
+**You can also access the detailed q statistics by `ushi_spade$factor`**
+
+```{r}
+ushi_spade$factor
+```
+
+The result of `WAR` is `NA` and you can also see a big difference between the OPGD and SPADE model. The results of SPADE are more reliable in most cases.
+
+We demonstrate the rationality of NA values calculated of `WAR` in the following section:
+
+### SPADE NA result explained
+
+```{r}
+WAR = ushi$WAR
+skimr::skim(WAR)
+```
+
+```{r WAR_Hist,fig.width=4.5,fig.height=3}
+ggplot(data = ushi) +
+  geom_histogram(aes(WAR),
+               color='white',
+               fill='gray60') +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_classic()
+```
+
+```{r}
+moments::skewness(WAR)
+shapiro.test(WAR)
+```
+
+From the histogram of `WAR`,its skewness and the result of shapiro.test, you will find that the WAR variable is heavily skewed, with a large number of zeros, which do not provide sufficient information for modeling SUHI.
+
+In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
+
+Let's look at the specific calculation process of the PSMD(power of spatial and multilevel discretization determinant) value corresponding to WAR:
+
+```{r}
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                  factor_detector(ushi$WAR, .) %>%
+                  {.[[1]]})
+
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                   psd_spade(ushi$WAR, ., wt3))
+
+3:22 %>%
+  purrr::map_dbl(\(.k) st_unidisc(ushi$WAR,.k) %>%
+                   cpsd_spade(ushi$SUHI, ushi$WAR, ., wt3))
+```
+
+In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF. Here
+we examine the effect of removing the WAR variable on VIF and linear models:
+
+```{r}
+lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(ushi))
+summary(lm.modelOne)
+
+car::vif(lm.modelOne) |>
+  tibble::as_tibble_row() |>
+  tidyr::pivot_longer(everything(),
+                      names_to = 'variable',
+                      values_to = 'VIF')
+```
+
+```{r}
+lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(ushi) |> select(-WAR))
+summary(lm.modelTwo)
+
+car::vif(lm.modelTwo) |>
+  tibble::as_tibble_row() |>
+  tidyr::pivot_longer(everything(),
+                      names_to = 'variable',
+                      values_to = 'VIF')
+```
+
+You can see that the model does not change much before and after removing the WAR variable.In other words, WAR does not do much to model SUHI.
+
+This suggests another use of `SPADE` model for selecting modeling variables.

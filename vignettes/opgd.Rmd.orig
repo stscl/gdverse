@@ -1,0 +1,77 @@
+---
+title: "Optimal Parameters-based Geographical Detector(OPGD)"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{opgd}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "##",
+  warning = FALSE,
+  message = FALSE,
+  fig.path = "man/figures/opgd/"
+)
+```
+
+### Load data and package
+
+``` {r}
+library(tidyverse)
+library(gdverse)
+
+data("ndvi")
+head(ndvi)
+```
+
+### Determine optimal discretization parameters
+
+`Climatezone` and `Mining` is the discrete category variables in the `ndvi` data, we need to discretize others. We can use `gd_bestunidisc()` to discretize them based on geodetector q-statistic.
+
+```{r}
+tictoc::tic()
+g = gd_bestunidisc(NDVIchange ~ .,
+                   data = select(ndvi,-c(Climatezone,Mining)),
+                   discnum = 3:15, cores = 6)
+tictoc::toc()
+```
+
+```{r}
+g
+new.ndvi = g$disv
+new.ndvi
+```
+
+The `new.ndvi` is the discreted result of the optimal discretization parameter based on the Q statistic of the geographical detector (factor detector), we can combine it with other columns in `ndvi` tibble now.
+
+```{r}
+new.ndvi = bind_cols(select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
+new.ndvi
+```
+
+### Run geodetector
+
+Then, we can run geodetector model by `gd()` function.
+
+```{r}
+gd(NDVIchange ~ .,data = new.ndvi,type = 'factor')
+gd(NDVIchange ~ .,data = new.ndvi,type = 'interaction')
+```
+
+### You can also use `opgd()` in one time to get result above.
+
+```{r}
+ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
+                 discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+                 cores = 6, type = c('factor','interaction'))
+ndvi_opgd
+```
+
+You can use `plot()` to visualize the result.
+
+```{r opgd_plot,fig.width=10.5,fig.height=4.25}
+plot(ndvi_opgd)
+```
