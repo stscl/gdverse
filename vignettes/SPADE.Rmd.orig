@@ -176,10 +176,9 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 #### run SPADE
 
-```{r ushi_SPADE_factor,fig.width=8.5,fig.height=6.5}
-suhii_spade = spade(SUHII ~ .,
-                    data = st_drop_geometry(suhii),
-                    wt = wt3, cores = 12)
+```{r suhii_SPADE_factor,fig.width=8.5,fig.height=6.5}
+suhii_spade = spade(SUHII ~ ., data = st_drop_geometry(suhii),
+                    wt = wt3, discnum = 3:10, cores = 6)
 suhii_spade
 plot(suhii_spade,slicenum = 6)
 ```
