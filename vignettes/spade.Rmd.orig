@@ -29,7 +29,7 @@ ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
 ushi
 ```
 
-```{r echo=FALSE, out.width='80%', fig.align="center",fig.cap="Overview Map of the Study Area Regarding SUHII"}
+```{r echo=FALSE, out.width='100%', fig.align="center",fig.cap="Overview Map of the Study Area Regarding SUHII"}
 knitr::include_graphics('../man/figures/spade/XianSUHII.png')
 ```
 

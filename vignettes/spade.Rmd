@@ -44,7 +44,7 @@ ushi
 ```
 
 <div class="figure" style="text-align: center">
-<img src="../man/figures/spade/XianSUHII.png" alt="Overview Map of the Study Area Regarding SUHII" width="80%" />
+<img src="../man/figures/spade/XianSUHII.png" alt="Overview Map of the Study Area Regarding SUHII" width="100%" />
 <p class="caption">Overview Map of the Study Area Regarding SUHII</p>
 </div>
 
