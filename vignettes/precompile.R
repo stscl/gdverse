@@ -13,7 +13,7 @@ knitr::knit("vignettes/SHEGD.Rmd.orig",
             "vignettes/SHEGD.Rmd")
 
 knitr::knit("vignettes/spade.Rmd.orig",
-            "vignettes/SPADE.Rmd")
+            "vignettes/spade.Rmd")
 
 knitr::knit("vignettes/IDSA.Rmd.orig",
             "vignettes/IDSA.Rmd")

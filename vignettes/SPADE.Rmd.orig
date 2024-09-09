@@ -121,7 +121,7 @@ Spatial dependence was neglected in native geodetector, which leds to the develo
 
 ```{r}
 suhii_opgd = opgd(SUHII ~ ., data = st_drop_geometry(suhii),
-                  discvar = names(select(st_drop_geometry(new_suhii),-SUHII)),
+                  discvar = names(select(st_drop_geometry(suhii),-SUHII)),
                   cores = 12)
 suhii_opgd
 ```
