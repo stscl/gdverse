@@ -29,8 +29,8 @@ ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
 ushi
 ```
 
-```{r echo=FALSE, out.width='120%', fig.align="center",fig.cap="The study area map of USHI data"}
-knitr::include_graphics('../man/figures/spade/studyarea.png')
+```{r echo=FALSE, out.width='80%', fig.align="center",fig.cap="Overview Map of the Study Area Regarding SUHII"}
+knitr::include_graphics('../man/figures/spade/XianSUHII.png')
 ```
 
 This spatial polygon vector data `ushi` is the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
