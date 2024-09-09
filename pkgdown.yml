@@ -2,14 +2,14 @@ pandoc: 3.1.11
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
-  GD: GD.html
-  IDSA: IDSA.html
-  OPGD: OPGD.html
-  RGDRID: RGDRID.html
-  SESU: SESU.html
-  SHEGD: SHEGD.html
-  SPADE: SPADE.html
-last_built: 2024-09-09T15:48Z
+  gd: gd.html
+  idsa: idsa.html
+  opgd: opgd.html
+  rgdrid: rgdrid.html
+  sesu: sesu.html
+  shegd: shegd.html
+  spade: spade.html
+last_built: 2024-09-09T15:53Z
 urls:
   reference: https://ausgis.github.io/gdverse/reference
   article: https://ausgis.github.io/gdverse/articles
