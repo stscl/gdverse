@@ -7,10 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-
 ### Load data and package
-
 
 ``` r
 library(sf)
@@ -43,37 +40,74 @@ ushi
 ## #   geom <POLYGON [m]>
 ```
 
-<div class="figure" style="text-align: center">
-<img src="../man/figures/spade/studyarea.png" alt="The study area map of USHI data" width="120%" />
-<p class="caption">The study area map of USHI data</p>
-</div>
+::: {.figure style="text-align: center"}
+<img src="../man/figures/spade/studyarea.png" alt="The study area map of USHI data" width="120%"/>
+
+<p class="caption">
+
+The study area map of USHI data
+
+</p>
+:::
 
 This spatial polygon vector data `ushi` is the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
 
+| Indicator | Meaning                                                                                                                              | Formula                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Data source     |
+|------------------|-------------------|------------------|------------------|
+| SUHII     | Intensity of surface urban heat island effect                                                                                        | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              SUHII = LST - LST_{mean\_suburbs}                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              $$                                                 | Landsat8 Images |
+| BH        | Building height (the height from the roof surface to the outdoor ground level)                                                       | /                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | CNBH10m Dataset |
+| BD        | Building density (the ratio of the land area occupied by buildings to the total land area)                                           | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              BD = \frac{\sum_{i=1}^nBS_i}{S_{land}}                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              $$                                                                                                                                                                                                                                                                                                 | CNBH10m DataSet |
+| SVF       | Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity) | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    SVF= \frac{1}{2\pi}\int_{0}^{2\pi}\left[\cos\beta\cos^{2}\phi+\sin\beta\cos(\vartheta-a)(90-\phi-\sin\phi\cos\phi)\right]\,d\vartheta                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $$                                                                                                                                                                                                                                                                                                                                                                                                           | GLO-30 DEM      |
+| FAR       | Floor Area Ratio (the ratio of the total floor area of buildings on a site to the net land area of that site)                        | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            FAR = \frac{\sum_{i=1}^nBS_i\times\frac{BH}{3}}{s_{land}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | CNBH10m Dataset |
+| RD        | Road density (the ratio of the total road length to the area of the region)                                                          | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                    RD = \frac{RL_i\times RW_i}{S_{land}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                    $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | OpenStreetMap   |
+| ELEV      | Elevation                                                                                                                            | /                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | GLO-30 DEM      |
+| NDVI      | Normalized difference vegetation index                                                                                               | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                    NDVI = \frac{NIR -R}{NIR + R}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                    $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Landsat8 Image  |
+| NDWI      | Normalized difference water index                                                                                                    | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                    NDWI = \frac{G - NIR}{G + NIR}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+                                                                                                                                                    $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Landsat8 Image  |
+
+: table_suhii
+
 The meanings of each explanatory variable are as follows,and can be divided into three categories:
 
-1. Landscape pattern and Land cover characteristic indicators
-- `LPI` Largest patch index (Area and Edge metric)(landscape level)
-- `LSI` Landscape shape index (Aggregation metric)(landscape level)
-- `GAR` The proportion of green space area
-- `DAR` The proportion of industrial space area
-- `WAR` The proportion of water space area
-2. Distances from cold and heat sources indicators
-- `DTH`  Distance to the nearest power plant(Heat source)
-- `DTP`  Distance to the nearest urban park(Cold source)
-- `DTR`  Distance to the nearest urban main road(Heat source)
-- `DTW`  Distance to the nearest water body(Cold source)
-3. Urban built space form indicators
-- `BH` Building height
-- `BD` Building density
-- `RL` Roughness length
-- `NDVI` Normalized Difference Vegetation Index
-- `NDWI` Normalized Difference Water Index
-- `RFD` Strewn degree (describing the roughness of buildings in three dimensional space)
-- `SVF` Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity)
-- `FAR` Floor Area Ratio (The ratio of the total floor area of buildings on a site to the net land area of that site)
-- `TER` Topographic Relief (The ratio of the average elevation of the unit to
-the average elevation of the entire study area)
+1.  Landscape pattern and Land cover characteristic indicators
+
+-   `LPI` Largest patch index (Area and Edge metric)(landscape level)
+-   `LSI` Landscape shape index (Aggregation metric)(landscape level)
+-   `GAR` The proportion of green space area
+-   `DAR` The proportion of industrial space area
+-   `WAR` The proportion of water space area
+
+2.  Distances from cold and heat sources indicators
+
+-   `DTH` Distance to the nearest power plant(Heat source)
+-   `DTP` Distance to the nearest urban park(Cold source)
+-   `DTR` Distance to the nearest urban main road(Heat source)
+-   `DTW` Distance to the nearest water body(Cold source)
+
+3.  Urban built space form indicators
+
+-   `BH` Building height
+-   `BD` Building density
+-   `RL` Roughness length
+-   `NDVI` Normalized Difference Vegetation Index
+-   `NDWI` Normalized Difference Water Index
+-   `RFD` Strewn degree (describing the roughness of buildings in three dimensional space)
+-   `SVF` Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity)
+-   `FAR` Floor Area Ratio (The ratio of the total floor area of buildings on a site to the net land area of that site)
+-   `TER` Topographic Relief (The ratio of the average elevation of the unit to the average elevation of the entire study area)
 
 And the `SUHI` stands for surface urban heat island effect intensity.
 
@@ -82,7 +116,6 @@ And the `SUHI` stands for surface urban heat island effect intensity.
 #### global spatial autocorrelation of SUHI
 
 here I use `sfdep` to calculate the global **Moran's I**:
-
 
 ``` r
 global_moranI = \(data,col,nb,wt){
@@ -134,12 +167,11 @@ gmi
 ##  5.359564e-01 5.078059e-217
 ```
 
-The global Moran's Index is 0.5359564 and the P value is 5.0780594 &times; 10<sup>-217</sup>,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
+The global Moran's Index is 0.5359564 and the P value is 5.0780594 × 10<sup>-217</sup>,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
 
 #### local spatial autocorrelation of SUHI
 
 We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
-
 
 ``` r
 library(tidyrgeoda)
@@ -172,7 +204,6 @@ Spatial dependence was neglected in native geodetector, which led to the develop
 
 ### OPGD modeling
 
-
 ``` r
 ushi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(ushi),
                  discvar = names(select(st_drop_geometry(ushi),-SUHI)),
@@ -204,7 +235,6 @@ ushi_opgd
 ```
 
 **You can access the detailed q statistics by `ushi_opgd$factor`.**
-
 
 ``` r
 ushi_opgd$factor
@@ -241,7 +271,6 @@ The biggest difference between SPADE and native GD and OPGD in actual modeling i
 
 In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
 
-
 ``` r
 coords = ushi |>
   st_centroid() |>
@@ -252,7 +281,6 @@ wt1 = inverse_distance_weight(coords[,1],coords[,2])
 
 You can also use gravity model weight by assigning the `power` parameter in `inverse_distance_weight()` function.
 
-
 ``` r
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 ```
@@ -260,7 +288,6 @@ wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 You can also use spatial weight matrix from `sfdep`(which invokes `spdep`) or `tidyrgeoda`(which invokes `rgeoda`).
 
 #### using spatial weight matrix from sfdep
-
 
 ``` r
 wt3 = ushi |>
@@ -272,7 +299,6 @@ wt3 = ushi |>
 
 #### using spatial weight matrix from tidyrgeoda
 
-
 ``` r
 wt4 = tidyrgeoda::st_contiguity_weights(ushi) |>
   as.matrix() |>
@@ -282,20 +308,18 @@ wt4 = tidyrgeoda::st_contiguity_weights(ushi) |>
 
 The `wt3` is identical `wt4`
 
-
 ``` r
 identical(wt3,wt4)
 ## [1] TRUE
 ```
 
-**We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this. In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area. **
+**We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this. In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area.**
 
 In the following section we will execute *SPADE* model using spatial weight matrix `wt3` which is constructed by queen contiguity.
 
 The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value, this calculation is very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
 
 #### run SPADE
-
 
 ``` r
 ushi_spade = spade(SUHI ~ .,
@@ -331,7 +355,6 @@ plot(ushi_spade,slicenum = 8)
 
 **You can also access the detailed q statistics by `ushi_spade$factor`**
 
-
 ``` r
 ushi_spade$factor
 ## # A tibble: 18 × 3
@@ -363,35 +386,29 @@ We demonstrate the rationality of NA values calculated of `WAR` in the following
 
 ### SPADE NA result explained
 
-
 ``` r
 WAR = ushi$WAR
 skimr::skim(WAR)
 ```
 
+|                                                  |      |
+|:-------------------------------------------------|:-----|
+| Name                                             | WAR  |
+| Number of rows                                   | 1037 |
+| Number of columns                                | 1    |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_   |      |
+| Column type frequency:                           |      |
+| numeric                                          | 1    |
+| \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |      |
+| Group variables                                  | None |
 
-Table: Data summary
-
-|                         |     |
-|:------------------------|:----|
-|Name                     |WAR  |
-|Number of rows           |1037 |
-|Number of columns        |1    |
-|_______________________  |     |
-|Column type frequency:   |     |
-|numeric                  |1    |
-|________________________ |     |
-|Group variables          |None |
-
+: Data summary
 
 **Variable type: numeric**
 
-|skim_variable | n_missing| complete_rate| mean|   sd| p0| p25| p50| p75| p100|hist  |
-|:-------------|---------:|-------------:|----:|----:|--:|---:|---:|---:|----:|:-----|
-|data          |         0|             1| 0.01| 0.04|  0|   0|   0|   0| 0.73|▇▁▁▁▁ |
-
-
-
+| skim_variable | n_missing | complete_rate | mean |   sd |  p0 | p25 | p50 | p75 | p100 | hist  |
+|:------|------:|------:|------:|------:|------:|------:|------:|------:|------:|:------|
+| data          |         0 |             1 | 0.01 | 0.04 |   0 |   0 |   0 |   0 | 0.73 | ▇▁▁▁▁ |
 
 ``` r
 ggplot(data = ushi) +
@@ -404,13 +421,12 @@ ggplot(data = ushi) +
 
 ![](../man/figures/spade/WAR_Hist-1.png)
 
-
 ``` r
 moments::skewness(WAR)
 ## [1] 11.6917
 shapiro.test(WAR)
 ## 
-## 	Shapiro-Wilk normality test
+##  Shapiro-Wilk normality test
 ## 
 ## data:  WAR
 ## W = 0.14693, p-value < 2.2e-16
@@ -421,7 +437,6 @@ From the histogram of `WAR`,its skewness and the result of shapiro.test, you wil
 In fact, the WAR variable represents the proportion of the water area of each block, and the WAR value is NA in the SPADE result probably because it can't provide sufficient information for modeling SUHI.
 
 Let's look at the specific calculation process of the PSMD(power of spatial and multilevel discretization determinant) value corresponding to WAR:
-
 
 ``` r
 3:22 %>%
@@ -447,9 +462,7 @@ Let's look at the specific calculation process of the PSMD(power of spatial and 
 ## [15] -0.52127019 -0.57350020 -0.48780407 -0.34204498 -0.60269473 -1.11353340
 ```
 
-In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF. Here
-we examine the effect of removing the WAR variable on VIF and linear models:
-
+In most cases, we use linear regression to explore linear relationships between variables and select appropriate variables for subsequent modeling through methods such as VIF. Here we examine the effect of removing the WAR variable on VIF and linear models:
 
 ``` r
 lm.modelOne = lm(SUHI ~ ., data = st_drop_geometry(ushi))
@@ -487,7 +500,7 @@ summary(lm.modelOne)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 1.06 on 1018 degrees of freedom
-## Multiple R-squared:  0.6173,	Adjusted R-squared:  0.6106 
+## Multiple R-squared:  0.6173, Adjusted R-squared:  0.6106 
 ## F-statistic: 91.23 on 18 and 1018 DF,  p-value: < 2.2e-16
 
 car::vif(lm.modelOne) |>
@@ -517,7 +530,6 @@ car::vif(lm.modelOne) |>
 ## 17 SVF        3.02
 ## 18 FAR       31.3
 ```
-
 
 ``` r
 lm.modelTwo = lm(SUHI ~ ., data = st_drop_geometry(ushi) |> select(-WAR))
@@ -555,7 +567,7 @@ summary(lm.modelTwo)
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 1.064 on 1019 degrees of freedom
-## Multiple R-squared:  0.614,	Adjusted R-squared:  0.6076 
+## Multiple R-squared:  0.614,  Adjusted R-squared:  0.6076 
 ## F-statistic: 95.36 on 17 and 1019 DF,  p-value: < 2.2e-16
 
 car::vif(lm.modelTwo) |>

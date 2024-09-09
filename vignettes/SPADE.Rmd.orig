@@ -25,42 +25,29 @@ library(tidyverse)
 library(magrittr)
 library(gdverse)
 
-ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
-ushi
+suhii = read_sf(system.file('extdata/SUHII.gpkg',package = 'gdverse'))
+suhii
 ```
 
 ```{r echo=FALSE, out.width='80%', fig.align="center",fig.cap="Overview Map of the Study Area Regarding SUHII"}
 knitr::include_graphics('../man/figures/spade/XianSUHII.png')
 ```
 
-This spatial polygon vector data `ushi` is the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHI*(surface urban heat island effect) and its influence factors.
+This spatial polygon vector data `suhii` is the streets divided based on roads within *the Ring expressway of Xi'an City*, and the attribute data are the *SUHII*(Intensity of surface urban heat island effect) and its influence factors.
 
-The meanings of each explanatory variable are as follows,and can be divided into three categories:
+The meanings of each explanatory variable are as follows:
 
-1. Landscape pattern and Land cover characteristic indicators
-- `LPI` Largest patch index (Area and Edge metric)(landscape level)
-- `LSI` Landscape shape index (Aggregation metric)(landscape level)
-- `GAR` The proportion of green space area
-- `DAR` The proportion of industrial space area
-- `WAR` The proportion of water space area
-2. Distances from cold and heat sources indicators
-- `DTH`  Distance to the nearest power plant(Heat source)
-- `DTP`  Distance to the nearest urban park(Cold source)
-- `DTR`  Distance to the nearest urban main road(Heat source)
-- `DTW`  Distance to the nearest water body(Cold source)
-3. Urban built space form indicators
-- `BH` Building height
-- `BD` Building density
-- `RL` Roughness length
-- `NDVI` Normalized Difference Vegetation Index
-- `NDWI` Normalized Difference Water Index
-- `RFD` Strewn degree (describing the roughness of buildings in three dimensional space)
-- `SVF` Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity)
-- `FAR` Floor Area Ratio (The ratio of the total floor area of buildings on a site to the net land area of that site)
-- `TER` Topographic Relief (The ratio of the average elevation of the unit to
-the average elevation of the entire study area)
-
-And the `SUHI` stands for surface urban heat island effect intensity.
+| Indicator | Meaning | Formula| Data source     |
+|------------------|-------------------|------------------|------------------|
+| SUHII     | Intensity of surface urban heat island effect| $$ SUHII = LST - LST_{mean\_suburbs} $$ | Landsat8 Images |
+| BH        | Building height (the height from the roof surface to the outdoor ground level) | /  | CNBH10m Dataset |
+| BD        | Building density (the ratio of the land area occupied by buildings to the total land area) | $$ BD = \frac{\sum_{i=1}^nBS_i}{S_{land}} $$| CNBH10m DataSet |
+| SVF       | Sky View Factor (the ratio of the visible sky area at a specific point or area to the total ground area in its surrounding vicinity) | $$  SVF= \frac{1}{2\pi}\int_{0}^{2\pi}\left[\cos\beta\cos^{2}\phi+\sin\beta\cos(\vartheta-a)(90-\phi-\sin\phi\cos\phi)\right]\,d\vartheta $$ | GLO-30 DEM      |
+| FAR       | Floor Area Ratio (the ratio of the total floor area of buildings on a site to the net land area of that site)  | $$ FAR = \frac{\sum_{i=1}^nBS_i\times\frac{BH}{3}}{s_{land}} $$  | CNBH10m Dataset |
+| RD        | Road density (the ratio of the total road length to the area of the region) | $$ RD = \frac{RL_i\times RW_i}{S_{land}} $$  | OpenStreetMap   |
+| ELEV      | Elevation | /| GLO-30 DEM      |
+| NDVI      | Normalized difference vegetation index | $$ NDVI = \frac{NIR -R}{NIR + R} $$  | Landsat8 Image  |
+| NDWI      | Normalized difference water index | $$ NDWI = \frac{G - NIR}{G + NIR} $$   | Landsat8 Image  |
 
 ### Spatial pattern of SUHI
 
