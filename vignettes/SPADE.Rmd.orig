@@ -70,37 +70,37 @@ global_moranI = \(data,col,nb,wt){
   return(moranI)
 }
 
-ushi |>
+suhii |>
   dplyr::filter(!if_any(everything(),is.na)) |>
   mutate(nb = sfdep::st_contiguity(geom),
          wt = sfdep::st_weights(nb)) |>
-  dplyr::select(SUHI,nb,wt) -> new_ushi
+  dplyr::select(SUHII,nb,wt) -> new_suhii
 
-new_ushi
+new_suhii
 set.seed(123456789)
 
-gmi = new_ushi |>
-  global_moranI(SUHI,nb,wt)
+gmi = new_suhii |>
+  global_moranI(SUHII,nb,wt)
 gmi
 ```
 
-The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
+The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`, which shows that SUHII in the core urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
 
 #### local spatial autocorrelation of SUHI
 
 We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html)
 
-```{r SUHI_LISA,fig.width=7.5,fig.height=4}
+```{r SUHII_LISA,fig.width=7.5,fig.height=4}
 library(tidyrgeoda)
 
-new_ushi %>%
-  mutate(lisa = st_local_moran(.,'SUHI',
+new_suhii %>%
+  mutate(lisa = st_local_moran(., 'SUHII',
                                wt = st_contiguity_weights(.),
                                significance_cutoff = 0.05)) %>%
   select(lisa) %>%
   ggplot() +
   geom_sf(aes(fill = lisa),lwd = .1,color = 'grey') +
-  scale_fill_lisa(name = 'SUHI-LISA') +
+  scale_fill_lisa(name = 'SUHII-LISA') +
   theme_bw() +
   theme(
     axis.text = element_blank(),
@@ -113,23 +113,23 @@ new_ushi %>%
   )
 ```
 
-The global and local spatial autocorrelation shows that SUHI's strong spatial dependence.
+The global and local spatial autocorrelation shows that SUHII's strong spatial dependence.
 
-Spatial dependence was neglected in native geodetector, which led to the development of **SPADE**(spatial association detector).
+Spatial dependence was neglected in native geodetector, which leds to the development of **SPADE**(spatial association detector).
 
 ### OPGD modeling
 
 ```{r}
-ushi_opgd = opgd(SUHI ~ ., data = st_drop_geometry(ushi),
-                 discvar = names(select(st_drop_geometry(ushi),-SUHI)),
-                 cores = 6)
-ushi_opgd
+suhii_opgd = opgd(SUHII ~ ., data = st_drop_geometry(suhii),
+                  discvar = names(select(st_drop_geometry(new_suhii),-SUHII)),
+                  cores = 12)
+suhii_opgd
 ```
 
-**You can access the detailed q statistics by `ushi_opgd$factor`.**
+**You can access the detailed q statistics by `suhii_opgd$factor`.**
 
 ```{r}
-ushi_opgd$factor
+suhii_opgd$factor
 ```
 
 ### SPADE modeling
@@ -138,12 +138,12 @@ ushi_opgd$factor
 
 When response variable has a strong spatial dependence, maybe *SPADE* is a best choice.
 
-The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
+The biggest difference between SPADE and native GD & OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
 In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
 
 ```{r}
-coords = ushi |>
+coords = suhii |>
   st_centroid() |>
   st_coordinates()
 
@@ -156,34 +156,19 @@ You can also use gravity model weight by assigning the `power` parameter in `inv
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 ```
 
-You can also use spatial weight matrix from `sfdep`(which invokes `spdep`) or `tidyrgeoda`(which invokes `rgeoda`).
+#### using spatial weight matrix from sdsfun
 
-#### using spatial weight matrix from sfdep
-
-```{r}
-wt3 = ushi |>
-  dplyr::filter(!if_any(everything(),is.na)) |>
-  mutate(nb = sfdep::st_contiguity(geom),
-         wt = sfdep::st_weights(nb)) %$%
-  sfdep::wt_as_matrix(nb,wt)
-```
-
-#### using spatial weight matrix from tidyrgeoda
+I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
 
 ```{r}
-wt4 = tidyrgeoda::st_contiguity_weights(ushi) |>
-  as.matrix() |>
-  apply(1,\(x) x/sum(x)) |>
-  t()
+wt3 = sdsfun::spdep_contiguity_swm(suhii)
 ```
 
-The `wt3` is identical `wt4`
+Or using a spatial weight matrix based on distance kernel functions.
 
 ```{r}
-identical(wt3,wt4)
+wt4 = spdep_distance_swm(suhii,k = 3, kernel = 'gaussian')
 ```
-
-**We recommend using the inverse distance weight function `inverse_distance_weight()` of the `gdverse` package to construct a spatial weight matrix if you're not sure which spatial weight matrix should to be used as the SPADE paper is using this. In practice, the appropriate spatial weight matrix is selected considering the characteristics of the research object and the research area. **
 
 In the following section we will execute *SPADE* model using spatial weight matrix `wt3` which is constructed by queen contiguity.
 
