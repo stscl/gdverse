@@ -1,6 +1,6 @@
 # gdverse 1.0-1
 
-* Unify all vignetts filenames to lowercase.
+* Unify all vignettes filenames to lowercase.
 
 # gdverse 1.0.0
 
