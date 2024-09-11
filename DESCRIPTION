@@ -1,5 +1,5 @@
 Package: gdverse
-Title: Geographical Detector Models
+Title: Analysis of Spatial Stratified Heterogeneity
 Version: 1.0-1
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
