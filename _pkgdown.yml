@@ -29,7 +29,7 @@ navbar:
         href: articles/sesu.html
 
 reference:
-- title: Geographical Detector Models
+- title: Analysis of Spatial Stratified Heterogeneity
   contents:
   - gd
   - opgd
