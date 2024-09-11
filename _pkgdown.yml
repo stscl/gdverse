@@ -29,7 +29,7 @@ navbar:
         href: articles/sesu.html
 
 reference:
-- title: Analysis of Spatial Stratified Heterogeneity
+- title: Geographical Detector Models
   contents:
   - gd
   - opgd
@@ -101,7 +101,7 @@ reference:
 
 home:
   title: |
-    gdverse | Geographical Detector Models
+    gdverse | Analysis of Spatial Stratified Heterogeneity
 authors:
   Wenbo Lv:
     href: https://spatlyu.github.io/
