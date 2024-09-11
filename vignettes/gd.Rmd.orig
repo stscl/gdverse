@@ -165,7 +165,7 @@ plot(id)
 
 ### Risk detector
 
-```{r rd,fig.width=7.5,fig.height=4.5}
+```{r rd,fig.width=5.25,fig.height=4.5}
 rd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'risk')
 rd
