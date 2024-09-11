@@ -11,7 +11,7 @@
 
 <!-- badges: end -->
 
-**Family of Geographical Detector Models In R**
+**Analysis of Spatial Stratified Heterogeneity**
 
 ## Overview
 
