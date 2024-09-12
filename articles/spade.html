@@ -200,60 +200,190 @@ intensity.</p>
 <div class="section level4">
 <h4 id="global-spatial-autocorrelation-of-suhi">global spatial autocorrelation of SUHI<a class="anchor" aria-label="anchor" href="#global-spatial-autocorrelation-of-suhi"></a>
 </h4>
-<p>here I use <code>sfdep</code> to calculate the global <strong>Moran’s
-I</strong>:</p>
+<p>here I use <code>geocomplexity</code> to calculate the global
+<strong>Moran’s I</strong>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">global_moranI</span> <span class="op">=</span> \<span class="op">(</span><span class="va">data</span>,<span class="va">col</span>,<span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">I</span> <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">global_moran</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">data</span>,<span class="op">{</span><span class="op">{</span><span class="va">col</span><span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>
-<span>                          <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">data</span>,<span class="op">{</span><span class="op">{</span><span class="va">nb</span><span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>
-<span>                          <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">data</span>,<span class="op">{</span><span class="op">{</span><span class="va">wt</span><span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>
-<span>                          na_ok <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">$</span><span class="va">I</span></span>
-<span>  <span class="va">PValue</span> <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">global_moran_test</span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">data</span>,<span class="op">{</span><span class="op">{</span><span class="va">col</span><span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>
-<span>                                    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">data</span>,<span class="op">{</span><span class="op">{</span><span class="va">nb</span><span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>
-<span>                                    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">data</span>,<span class="op">{</span><span class="op">{</span><span class="va">wt</span><span class="op">}</span><span class="op">}</span><span class="op">)</span>,</span>
-<span>                                    na.action <span class="op">=</span> <span class="va">na.omit</span><span class="op">)</span><span class="op">$</span><span class="va">p.value</span></span>
-<span>  <span class="va">moranI</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">I</span>,<span class="va">PValue</span><span class="op">)</span></span>
-<span>  <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">moranI</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Moran'I Index"</span>,<span class="st">"P Value"</span><span class="op">)</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">moranI</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ushi</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">is.na</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">st_contiguity</span><span class="op">(</span><span class="va">geom</span><span class="op">)</span>,</span>
-<span>         wt <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">st_weights</span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">SUHI</span>,<span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">new_ushi</span></span>
-<span></span>
-<span><span class="va">new_ushi</span></span>
-<span><span class="co">## Simple feature collection with 1037 features and 3 fields</span></span>
-<span><span class="co">## Geometry type: POLYGON</span></span>
-<span><span class="co">## Dimension:     XY</span></span>
-<span><span class="co">## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669</span></span>
-<span><span class="co">## Projected CRS: WGS 84 / UTM zone 49N</span></span>
-<span><span class="co">## # A tibble: 1,037 × 4</span></span>
-<span><span class="co">##     SUHI nb         wt                                                                   geom</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;nb&gt;       &lt;list&gt;                                                      &lt;POLYGON [m]&gt;</span></span>
-<span><span class="co">##  1 1.76  &lt;int [12]&gt; &lt;dbl [12]&gt; ((297871.4 3787333, 297864.8 3787343, 297852.8 3787362, 29784…</span></span>
-<span><span class="co">##  2 0.519 &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((297398.6 3788768, 297397.5 3788779, 297395.2 3788804, 29739…</span></span>
-<span><span class="co">##  3 3.04  &lt;int [9]&gt;  &lt;dbl [9]&gt;  ((297391.4 3789405, 297391 3789429, 297390.5 3789454, 297390.…</span></span>
-<span><span class="co">##  4 3.22  &lt;int [4]&gt;  &lt;dbl [4]&gt;  ((297244.1 3790712, 297240.4 3790729, 297235 3790751, 297229.…</span></span>
-<span><span class="co">##  5 3.47  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296806.9 3791969, 296806.7 3791970, 296797.7 3791990, 29678…</span></span>
-<span><span class="co">##  6 4.71  &lt;int [6]&gt;  &lt;dbl [6]&gt;  ((296484.5 3792805, 296481.4 3792815, 296474.7 3792837, 29646…</span></span>
-<span><span class="co">##  7 1.24  &lt;int [2]&gt;  &lt;dbl [2]&gt;  ((296356.5 3793294, 296355.5 3793298, 296351.3 3793316, 29634…</span></span>
-<span><span class="co">##  8 4.30  &lt;int [8]&gt;  &lt;dbl [8]&gt;  ((296154.6 3794673, 296152.3 3794688, 296148.6 3794713, 29614…</span></span>
-<span><span class="co">##  9 3.76  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296261.4 3798947, 296268.7 3798960, 296280.2 3798979, 29628…</span></span>
-<span><span class="co">## 10 4.23  &lt;int [5]&gt;  &lt;dbl [5]&gt;  ((296996.6 3800017, 297000.9 3800022, 297013.3 3800038, 29702…</span></span>
-<span><span class="co">## # ℹ 1,027 more rows</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">gmi</span> <span class="op">=</span> <span class="va">new_ushi</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">global_moranI</span><span class="op">(</span><span class="va">SUHI</span>,<span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span></span>
+<span><span class="va">gmi</span> <span class="op">=</span> <span class="fu">geocomplexity</span><span class="fu">::</span><span class="fu">moran_test</span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span>
 <span><span class="va">gmi</span></span>
-<span><span class="co">## Moran'I Index       P Value </span></span>
-<span><span class="co">##  5.359564e-01 5.078059e-217</span></span></code></pre></div>
-<p>The global Moran’s Index is 0.5359564 and the P value is 5.0780594 ×
-10<sup>-217</sup>,which shows that SUHI in the main urban area of Xi’an
-has significant positive spatial autocorrelation in the global
-scale.</p>
+<span><span class="co">## ***                 global spatial autocorrelation test</span></span></code></pre></div>
+<table style="width:99%;" class="table">
+<colgroup>
+<col width="15%">
+<col width="19%">
+<col width="18%">
+<col width="16%">
+<col width="11%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th align="center">Variable</th>
+<th align="center">MoranI</th>
+<th align="center">EI</th>
+<th align="center">VarI</th>
+<th align="center">zI</th>
+<th align="center">pI</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="center">LPI</td>
+<td align="center">0.298685***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">17.48</td>
+<td align="center">9.972e-69</td>
+</tr>
+<tr class="even">
+<td align="center">LSI</td>
+<td align="center">0.370536***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">21.67</td>
+<td align="center">1.853e-104</td>
+</tr>
+<tr class="odd">
+<td align="center">GAR</td>
+<td align="center">0.421646***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">24.65</td>
+<td align="center">1.648e-134</td>
+</tr>
+<tr class="even">
+<td align="center">DAR</td>
+<td align="center">0.493366***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">28.84</td>
+<td align="center">3.526e-183</td>
+</tr>
+<tr class="odd">
+<td align="center">WAR</td>
+<td align="center">0.222443***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">13.03</td>
+<td align="center">3.955e-39</td>
+</tr>
+<tr class="even">
+<td align="center">TER</td>
+<td align="center">0.969507***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">56.62</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">NDVI</td>
+<td align="center">0.335154***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">19.61</td>
+<td align="center">6.518e-86</td>
+</tr>
+<tr class="even">
+<td align="center">NDWI</td>
+<td align="center">0.24996***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">14.64</td>
+<td align="center">7.965e-49</td>
+</tr>
+<tr class="odd">
+<td align="center">DTH</td>
+<td align="center">0.975702***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">56.98</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">DTP</td>
+<td align="center">0.763939***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">44.62</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">DTR</td>
+<td align="center">0.81955***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">47.87</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">DTW</td>
+<td align="center">0.826076***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">48.25</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">BH</td>
+<td align="center">0.419635***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">24.54</td>
+<td align="center">2.964e-133</td>
+</tr>
+<tr class="even">
+<td align="center">BD</td>
+<td align="center">0.310015***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">18.14</td>
+<td align="center">7.414e-74</td>
+</tr>
+<tr class="odd">
+<td align="center">RL</td>
+<td align="center">0.29453***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">17.24</td>
+<td align="center">6.796e-67</td>
+</tr>
+<tr class="even">
+<td align="center">RFD</td>
+<td align="center">0.296268***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">17.34</td>
+<td align="center">1.171e-67</td>
+</tr>
+<tr class="odd">
+<td align="center">SVF</td>
+<td align="center">0.439656***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">25.71</td>
+<td align="center">5.121e-146</td>
+</tr>
+<tr class="even">
+<td align="center">FAR</td>
+<td align="center">0.413345***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">24.17</td>
+<td align="center">2.287e-129</td>
+</tr>
+<tr class="odd">
+<td align="center">SUHI</td>
+<td align="center">0.535956***</td>
+<td align="center">-0.0009653</td>
+<td align="center">0.0002938</td>
+<td align="center">31.32</td>
+<td align="center">1.128e-215</td>
+</tr>
+</tbody>
+</table>
+<p>The global Moran’I Index of SUHI is <code>0.535956</code> and the P
+value is <code>1.128e-215</code>,which shows that SUHI in the main urban
+area of Xi’an has significant positive spatial autocorrelation in the
+global scale.</p>
 </div>
 <div class="section level4">
 <h4 id="local-spatial-autocorrelation-of-suhi">local spatial autocorrelation of SUHI<a class="anchor" aria-label="anchor" href="#local-spatial-autocorrelation-of-suhi"></a>
@@ -263,7 +393,7 @@ more details see <a href="https://spatlyu.github.io/tidyrgeoda/articles/Local-In
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tidyrgeoda</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">new_ushi</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">ushi</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>lisa <span class="op">=</span> <span class="fu">st_local_moran</span><span class="op">(</span><span class="va">.</span>,<span class="st">'SUHI'</span>,</span>
 <span>                               wt <span class="op">=</span> <span class="fu">st_contiguity_weights</span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,</span>
 <span>                               significance_cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -359,7 +489,7 @@ discretization.</p>
 <p>The biggest difference between SPADE and native GD and OPGD in actual
 modeling is that SPADE requires a spatial weight matrix to calculate
 spatial variance.</p>
-<p>In <code>gdverse</code>, when you not provide a spatial weight
+<p>In <code>spade</code> function, when you not provide a spatial weight
 matrix, it will use <strong>1st order inverse distance weight</strong>
 by default, which can be created by
 <code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code>.</p>
@@ -401,9 +531,7 @@ etc.</p>
 <h4 id="run-spade">run SPADE<a class="anchor" aria-label="anchor" href="#run-spade"></a>
 </h4>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ushi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>,</span>
-<span>                   data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span>,</span>
-<span>                   wt <span class="op">=</span> <span class="va">wt3</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">ushi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ushi</span>, wt <span class="op">=</span> <span class="va">wt3</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">ushi_spade</span></span>
 <span><span class="co">## ***         Spatial Association Detector         </span></span>
 <span><span class="co">## </span></span>
