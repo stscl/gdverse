@@ -73,7 +73,8 @@ st_unidisc = \(x,k,method = "quantile",factor = FALSE,
 #'                discvar = paste0('x',letters[1:3]),
 #'                discnum = 3:6)
 #'
-gd_bestunidisc = \(formula, data, discnum = NULL, discmethod = NULL,
+gd_bestunidisc = \(formula, data, discnum = 3:22,
+                   discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box"),
                    cores = 1,return_disc = TRUE,seed = 123456789,...){
   doclust = FALSE
   if (inherits(cores, "cluster")) {
@@ -83,10 +84,6 @@ gd_bestunidisc = \(formula, data, discnum = NULL, discmethod = NULL,
     cores = parallel::makeCluster(cores)
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
-  if (is.null(discmethod)) {
-    discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")
-  }
-  if (is.null(discnum)){discnum = 3:22}
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
