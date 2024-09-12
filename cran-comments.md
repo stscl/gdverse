@@ -2,4 +2,4 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* This release updates the API settings for `IDSA` and `SPADE` models.
