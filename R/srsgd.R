@@ -47,9 +47,8 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
 
   if (inherits(data,"sf")){
     if (is.null(wt)){
-      nb_queen = spdep::poly2nb(data, queen=TRUE)
-      wt = spdep::nb2mat(nb_queen, style='B',
-                         zero.policy = TRUE)
+      wt = sdsfun::spdep_contiguity_swm(data, style='B',
+                                        zero.policy = TRUE)
     }
     data = sf::st_drop_geometry(data)
   } else {
