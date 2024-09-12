@@ -2,7 +2,7 @@
 
 * Unify all vignettes filenames to lowercase.
 
-* Support for using `sf` object as input in `SPADE` and `IDSA` models.
+* Support for using `sf` object as input in all models.
 
 # gdverse 1.0.0
 
