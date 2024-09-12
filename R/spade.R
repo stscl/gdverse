@@ -33,9 +33,7 @@
 #' @examples
 #' data('sim')
 #' sim1 = sf::st_as_sf(sim,coords = c('lo','la'))
-#' g = spade(y ~ ., data = sim1,
-#'           locations = c('lo','la'),
-#'           discvar = c("xa","xb","xc"))
+#' g = spade(y ~ ., data = sim1)
 #' g
 #'
 spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
@@ -72,7 +70,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
   for (i in seq_along(xdiscname)){
     qv_disc[[i]] = psmd_pseudop(data[,yname,drop=TRUE],
                                 data[,xdiscname[i],drop=TRUE],
-                                wt_spade, discnum, discmethod,
+                                wt_spade, discnum, discmethod[i],
                                 cores, seed, permutations, ...)
   }
   if (!is.null(xundiscname)) {
