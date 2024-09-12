@@ -17,7 +17,7 @@ rid(
 \arguments{
 \item{formula}{A formula of RID model.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A data.frame, tibble or sf object of observation data.}
 
 \item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}

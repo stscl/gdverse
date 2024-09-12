@@ -20,7 +20,7 @@ spade(
 \arguments{
 \item{formula}{A formula of spatial association detector (SPADE) model.}
 
-\item{data}{A data.frame, tibble or sf of observation data.}
+\item{data}{A data.frame, tibble or sf object of observation data.}
 
 \item{wt}{(optional) The spatial weight matrix. When \code{data} is not an \code{sf} object, must provide \code{wt}.}
 

@@ -9,7 +9,7 @@ gozh(formula, data, cores = 1, type = "factor", alpha = 0.95, ...)
 \arguments{
 \item{formula}{A formula of GOZH model.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A data.frame, tibble or sf object of observation data.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster object.}

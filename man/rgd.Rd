@@ -18,7 +18,7 @@ rgd(
 \arguments{
 \item{formula}{A formula of RGD model.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A data.frame, tibble or sf object of observation data.}
 
 \item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
