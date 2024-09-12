@@ -8,9 +8,9 @@ spade(
   formula,
   data,
   wt = NULL,
-  locations = NULL,
-  discnum = NULL,
-  discmethod = NULL,
+  discvar = NULL,
+  discnum = 3:22,
+  discmethod = "quantile",
   cores = 1,
   seed = 123456789,
   permutations = 0,
@@ -20,19 +20,20 @@ spade(
 \arguments{
 \item{formula}{A formula of spatial association detector (SPADE) model.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A data.frame, tibble or sf of observation data.}
 
-\item{wt}{(optional) The spatial weight matrix. When \code{wt} is not provided, must provide \code{locations}.
-And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
+\item{wt}{(optional) The spatial weight matrix. When \code{data} is not an \code{sf} object, must provide \code{wt}.}
 
-\item{locations}{(optional) The spatial location coordinates columns name in \code{data}.
-Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
+\item{discvar}{(optional) Name of continuous variable columns that need to be discretized. Noted that
+when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent variables are
+used as \code{discvar}.}
 
 \item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
-\item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
-Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
-Others use \code{st_unidisc()}.}
+\item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}. Note
+that when using different \code{discmethod} for \code{discvar}, please ensure that the lengths of
+both are consistent. Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use
+\code{rpart_disc()}; Others use \code{st_unidisc()}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
@@ -52,18 +53,10 @@ A list of the SPADE model result.
 \description{
 Function for spatial association detector (SPADE) model.
 }
-\note{
-The columns in the \code{locations} part of data are only used to construct spatial weight matrix
-when \code{wt} is \code{NULL}, and are not considered as explanatory variables. If you need to include
-spatial locations as explanatory variables, build a spatial weight matrix ahead of time,
-leaving the \code{locations} parameter to \code{NULL}.The most recommended method is to explicitly
-specify all variables in \code{formula} instead of using \code{.}!
-}
 \examples{
 data('sim')
-g = spade(y ~ ., data = sim,
-          locations = c('lo','la'),
-          discvar = c("xa","xb","xc"))
+sim1 = sf::st_as_sf(sim,coords = c('lo','la'))
+g = spade(y ~ ., data = sim1)
 g
 
 }

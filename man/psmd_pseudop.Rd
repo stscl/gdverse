@@ -5,12 +5,11 @@
 \title{power of spatial and multilevel discretization determinant(PSMD) and the corresponding pseudo-p value}
 \usage{
 psmd_pseudop(
-  formula,
-  data,
-  wt = NULL,
-  locations = NULL,
-  discnum = NULL,
-  discmethod = NULL,
+  yobs,
+  xobs,
+  wt,
+  discnum = 3:22,
+  discmethod = "quantile",
   cores = 1,
   seed = 123456789,
   permutations = 0,
@@ -18,21 +17,18 @@ psmd_pseudop(
 )
 }
 \arguments{
-\item{formula}{A formula of calculate power of spatial and multilevel discretization determinant \eqn{PSMDQ_s}.}
+\item{yobs}{Variable Y}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{xobs}{The original undiscretized covariable X.}
 
-\item{wt}{(optional) The spatial weight matrix.When \code{wt} is not provided, must provide \code{locations}.
-And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
+\item{wt}{The spatial weight matrix.}
 
-\item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
-Useful and must provided when \code{wt} is not provided.}
-
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
-Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
-Others use \code{st_unidisc()}.}
+If \code{discmethod} is set to \code{robust}, the function \code{robust_disc()} will be used. Conversely,
+if \code{discmethod} is set to \code{rpart}, the \code{rpart_disc()} function will be used. Others use
+\code{st_unidisc()}. Currently, only one \code{discmethod} can be used at a time.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
@@ -55,9 +51,8 @@ The power of spatial and multilevel discretization determinant formula is
 }
 \examples{
 data('sim')
-psmd_pseudop(y ~ .,
-             data = dplyr::select(sim,1:4),
-             locations = c('lo','la'))
+wt = inverse_distance_weight(sim$lo,sim$la)
+psmd_pseudop(sim$y,sim$xa,wt)
 
 }
 \references{

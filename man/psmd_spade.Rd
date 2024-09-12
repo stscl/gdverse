@@ -5,29 +5,24 @@
 \title{power of spatial and multilevel discretization determinant(PSMD)}
 \usage{
 psmd_spade(
-  formula,
-  data,
-  wt = NULL,
-  locations = NULL,
-  discnum = NULL,
-  discmethod = NULL,
+  yobs,
+  xobs,
+  wt,
+  discnum = 3:22,
+  discmethod = "quantile",
   cores = 1,
   seed = 123456789,
   ...
 )
 }
 \arguments{
-\item{formula}{A formula of calculate power of spatial and multilevel discretization determinant \code{PSMDQ_s}.}
+\item{yobs}{Variable Y}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{xobs}{The original undiscretized covariable X.}
 
-\item{wt}{(optional) The spatial weight matrix. When \code{wt} is not provided, must provide \code{locations},
-then \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
+\item{wt}{The spatial weight matrix.}
 
-\item{locations}{(optional) The geospatial locations coordinate columns name which in \code{data}.
-Useful and must provided when \code{wt} is not provided.}
-
-\item{discnum}{(optional) Number of multilevel discretization.Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
 If \code{discmethod} is set to \code{robust}, the function \code{robust_disc()} will be used. Conversely,
@@ -52,9 +47,8 @@ The power of spatial and multilevel discretization determinant formula is
 }
 \examples{
 data('sim')
-psmd_spade(y ~ .,
-           data = dplyr::select(sim,1:4),
-           locations = c('lo','la'))
+wt = inverse_distance_weight(sim$lo,sim$la)
+psmd_spade(sim$y,sim$xa,wt)
 
 }
 \references{
