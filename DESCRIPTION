@@ -49,6 +49,7 @@ Imports:
     reticulate,
     rpart,
     scatterpie,
+    sdsfun,
     sf,
     spdep,
     stats,
