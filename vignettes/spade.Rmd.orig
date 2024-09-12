@@ -131,7 +131,7 @@ When response variable has a strong spatial dependence, maybe *SPADE* is a best 
 
 The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
-In `gdverse`, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
+In `spade` function, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
 
 ```{r}
 coords = ushi |>
@@ -169,9 +169,8 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 #### run SPADE
 
 ```{r ushi_SPADE_factor,fig.width=8.5,fig.height=6.5}
-ushi_spade = spade(SUHI ~ .,
-                   data = st_drop_geometry(ushi),
-                   wt = wt3, cores = 6)
+ushi_spade = spade(SUHI ~ ., data = ushi, wt = wt3,
+                   cores = 12, permutations = 99)
 ushi_spade
 plot(ushi_spade,slicenum = 8)
 ```
