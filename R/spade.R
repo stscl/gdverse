@@ -40,27 +40,36 @@
 #'           discvar = c("xa","xb","xc"))
 #' g
 #'
-spade = \(formula, data, wt = NULL, discnum = NULL, discmethod = NULL,
+spade = \(formula, data, wt = NULL, discnum = 3:22, discmethod = 'quantile',
           cores = 1, seed = 123456789, permutations = 0, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {
-    sfj = sf::st_as_sf(sfj)
+    if (is.null(wt)){
+      wt_spade = sdsfun::inverse_distance_swm(data)
+    } else {
+      wt_spade = wt
+    }
+    data = sf::st_drop_geometry(data)
+  } else if (inherits(data,'data.frame')) {
+    if (is.null(wt)){
+      stop("When data is dataframe or tibblw, please provide wt !")
+    } else {
+      wt_spade = wt
+    }
   }
   if (formula.vars[2] != "."){
-    data = dplyr::select(data,dplyr::all_of(c(formula.vars,locations)))
+    data = dplyr::select(data,dplyr::all_of(formula.vars))
   }
   yname = formula.vars[1]
-  xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
-  if (is.null(discmethod)) {discmethod = rep('quantile',length(xname))}
+  xname = colnames(data)[-which(colnames(data) == yname)]
+  if (length(discmethod) == 1) {discmethod = rep('quantile',length(xname))}
   qv = vector("list",length = length(xname))
   for (i in seq_along(xname)){
-    qv[[i]] = psmd_pseudop(
-      formula = paste(yname,'~',xname[i]),
-      data = dplyr::select(data,
-                           dplyr::all_of(c(yname,xname[i],locations))),
-      wt = wt, locations = locations, discnum = discnum, discmethod = discmethod[i],
-      cores = cores, seed = seed, permutations = permutations, ...)
+    qv[[i]] = psmd_pseudop(data[,yname,drop=TRUE],
+                           data[,xname[i],drop=TRUE],
+                           wt_spade, discnum, discmethod,
+                           cores, seed, permutations, ...)
   }
   res = purrr::list_rbind(qv) %>%
     dplyr::mutate(variable = xname) %>%
