@@ -130,13 +130,16 @@ psmd_pseudop = \(yobs, xobs, wt, discnum = 3:22,
 
     set.seed(seed)
     randomnum = stats::runif(1)
-    wt_perm = wt
     xperm = shuffle_vector(xobs,randomnum,seed = seed)
     yperm = shuffle_vector(yobs,randomnum,seed = seed)
+    wt_perm = wt
+    seedn = seed
+    discn = discnum
+    discm = discmethod
     calcul_psmd = \(p_shuffle){
       xperm_new = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
       yperm_new = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
-      return(psmd_spade(yperm_new,xperm_new,wt_perm,discnum,discmethod,cores=1,seed,...))
+      return(psmd_spade(yperm_new,xperm_new,wt_perm,discn,discm,1,seedn,...))
     }
 
     if (doclust) {
