@@ -66,7 +66,7 @@ idsa = \(formula, data, wt = NULL, overlaymethod = 'and', discnum = NULL,
     data = sf::st_drop_geometry(data)
   } else if (inherits(data,'data.frame')) {
     if (is.null(wt)){
-      stop("When `data` is `data.frame` or `tibble`, please provide `wt` in spade input!")
+      stop("When `data` is `data.frame` or `tibble`, please provide `wt` in idsa input!")
     } else {
       wt_idsa = wt
     }
