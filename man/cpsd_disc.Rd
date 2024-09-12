@@ -8,8 +8,8 @@ cpsd_disc(
   formula,
   data,
   wt,
-  discnum = NULL,
-  discmethod = NULL,
+  discnum = 3:22,
+  discmethod = "quantile",
   strategy = 2L,
   increase_rate = 0.05,
   cores = 1,
@@ -54,6 +54,12 @@ by sampling \verb{10\%}(the default value for \code{samp_prop} in \code{st_unidi
 \value{
 A list with the optimal parameter in the provided parameter combination with \code{k},
 \code{method} and \code{disc}(when \code{return_disc} is \code{TRUE}).
+\describe{
+\item{\code{x}}{discretization variable name}
+\item{\code{k}}{optimal number of spatial data discreteization}
+\item{\code{method}}{optimal spatial data discretization method}
+\item{\code{disc}}{the result of optimal spatial data discretization}
+}
 }
 \description{
 Function for determining the optimal spatial data discretization based on SPADE q-statistics.

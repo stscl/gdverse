@@ -9,9 +9,8 @@ idsa(
   data,
   wt = NULL,
   overlaymethod = "and",
-  locations = NULL,
-  discnum = NULL,
-  discmethod = NULL,
+  discnum = 3:22,
+  discmethod = "quantile",
   strategy = 2L,
   increase_rate = 0.05,
   cores = 1,
@@ -23,16 +22,12 @@ idsa(
 \arguments{
 \item{formula}{A formula of IDSA model.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A data.frame, tibble or sf of observation data.}
 
-\item{wt}{(optional) The spatial weight matrix. When \code{wt} is not provided, must provide \code{locations}.
-And \code{gdverse} will use \code{locations} columns to construct spatial weight use \code{inverse_distance_weight()}.}
+\item{wt}{(optional) The spatial weight matrix. When \code{data} is not an \code{sf} object, must provide \code{wt}.}
 
 \item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}
-
-\item{locations}{(optional) The spatial location coordinate columns name in \code{data}.
-Useful and must provided when \code{wt} is not provided. When \code{wt} is provided, \code{locations} is not need.}
 
 \item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
@@ -79,9 +74,8 @@ to ensure the trade-off between analysis results and calculation speed.
 }
 \examples{
 data('sim')
-g = idsa(y ~ ., data = sim,
-         locations = c('lo','la'),
-         discvar = c("xa","xb","xc"))
+sim1 = sf::st_as_sf(sim,coords = c('lo','la'))
+g = idsa(y ~ ., data = sim1)
 g
 
 }
