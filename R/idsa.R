@@ -13,13 +13,10 @@
 #' to ensure the trade-off between analysis results and calculation speed.
 #'
 #' @param formula A formula of IDSA model.
-#' @param data A data.frame or tibble of observation data.
-#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`.
-#' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
+#' @param data A data.frame, tibble or sf of observation data.
+#' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
-#' @param locations (optional) The spatial location coordinate columns name in `data`.
-#' Useful and must provided when `wt` is not provided. When `wt` is provided, `locations` is not need.
 #' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
@@ -54,31 +51,32 @@
 #'          discvar = c("xa","xb","xc"))
 #' g
 #'
-idsa = \(formula, data, wt = NULL, overlaymethod = 'and', locations = NULL,
-         discnum = NULL,discmethod = NULL,strategy = 2L,increase_rate = 0.05,
+idsa = \(formula, data, wt = NULL, overlaymethod = 'and', discnum = NULL,
+         discmethod = NULL, strategy = 2L, increase_rate = 0.05,
          cores = 1, seed = 123456789, alpha = 0.95, ...){
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
+  if (inherits(data,'sf')) {
+    if (is.null(wt)){
+      wt_idsa = sdsfun::inverse_distance_swm(data)
+    } else {
+      wt_idsa = wt
+    }
+    data = sf::st_drop_geometry(data)
+  } else if (inherits(data,'data.frame')) {
+    if (is.null(wt)){
+      stop("When `data` is `data.frame` or `tibble`, please provide `wt` in spade input!")
+    } else {
+      wt_idsa = wt
+    }
+  }
   if (formula.vars[2] != "."){
-    data = dplyr::select(data,dplyr::all_of(c(formula.vars,locations)))
+    data = dplyr::select(data,dplyr::all_of(formula.vars))
   }
   yname = formula.vars[1]
-  xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
+  xname = colnames(data)[-which(colnames(data) == yname)]
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,xname)))
-
-  if (is.null(wt)) {
-    if (is.null(locations)) {
-      stop("When `wt` is not provided, please provided `locations` coordinate columns name which in `data` !")
-    } else {
-      locations = data[, locations]
-      wt_idsa = inverse_distance_weight(locations[,1,drop = TRUE],
-                                        locations[,2,drop = TRUE])
-    }
-  } else {
-    wt_idsa = wt
-  }
-
   g = cpsd_disc(paste0(yname,'~',paste0(xname,collapse = '+')),
                 data = discdf, wt = wt_idsa, discnum = discnum,
                 discmethod = discmethod, strategy = strategy,
