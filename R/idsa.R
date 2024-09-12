@@ -46,9 +46,8 @@
 #'
 #' @examples
 #' data('sim')
-#' g = idsa(y ~ ., data = sim,
-#'          locations = c('lo','la'),
-#'          discvar = c("xa","xb","xc"))
+#' sim1 = sf::st_as_sf(sim,coords = c('lo','la'))
+#' g = idsa(y ~ ., data = sim1)
 #' g
 #'
 idsa = \(formula, data, wt = NULL, overlaymethod = 'and', discnum = NULL,
