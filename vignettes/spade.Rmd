@@ -312,7 +312,7 @@ ushi_spade
 plot(ushi_spade,slicenum = 8)
 ```
 
-![plot of chunk ushi_SPADE_factor](man/figures/spade/ushi_SPADE_factor-1.png)
+![](../man/figures/spade/ushi_SPADE_factor-1.png)
 
 **You can also access the detailed q statistics by `ushi_spade$factor`**
 
@@ -387,7 +387,7 @@ ggplot(data = ushi) +
   theme_classic()
 ```
 
-![plot of chunk WAR_Hist](man/figures/spade/WAR_Hist-1.png)
+![](../man/figures/spade/WAR_Hist-1.png)
 
 
 ``` r
