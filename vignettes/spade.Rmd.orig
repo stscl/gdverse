@@ -66,38 +66,16 @@ And the `SUHI` stands for surface urban heat island effect intensity.
 
 #### global spatial autocorrelation of SUHI
 
-here I use `sfdep` to calculate the global **Moran's I**:
+here I use `geocomplexity` to calculate the global **Moran's I**:
 
 ```{r}
-global_moranI = \(data,col,nb,wt){
-  I = sfdep::global_moran(dplyr::pull(data,{{col}}),
-                          dplyr::pull(data,{{nb}}),
-                          dplyr::pull(data,{{wt}}),
-                          na_ok = T)$I
-  PValue = sfdep::global_moran_test(dplyr::pull(data,{{col}}),
-                                    dplyr::pull(data,{{nb}}),
-                                    dplyr::pull(data,{{wt}}),
-                                    na.action = na.omit)$p.value
-  moranI = c(I,PValue)
-  names(moranI) = c("Moran'I Index","P Value")
-  return(moranI)
-}
-
-ushi |>
-  dplyr::filter(!if_any(everything(),is.na)) |>
-  mutate(nb = sfdep::st_contiguity(geom),
-         wt = sfdep::st_weights(nb)) |>
-  dplyr::select(SUHI,nb,wt) -> new_ushi
-
-new_ushi
 set.seed(123456789)
 
-gmi = new_ushi |>
-  global_moranI(SUHI,nb,wt)
+gmi = geocomplexity::moran_test(ushi)
 gmi
 ```
 
-The global Moran's Index is `r gmi[1]` and the P value is `r gmi[2]`,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
+The global Moran'I Index of SUHI is `0.535956` and the P value is `1.128e-215`,which shows that SUHI in the main urban area of Xi'an has significant positive spatial autocorrelation in the global scale.
 
 #### local spatial autocorrelation of SUHI
 
