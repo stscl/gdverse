@@ -67,6 +67,8 @@ A list with PID values tibble under different spatial overlays and performance e
 Function for interactive detector for spatial associations model.
 }
 \note{
+\strong{Please note that all variables in the IDSA model need to be continuous data}.
+
 The IDSA model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
 When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
 When there are a large number of explanatory variables, the data dimensionality reduction method can be used
