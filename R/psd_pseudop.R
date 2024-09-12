@@ -110,9 +110,12 @@ psd_pseudop = \(y,x,wt,cores = 1,
 #'              data = dplyr::select(sim,1:4),
 #'              locations = c('lo','la'))
 #'
-psmd_pseudop = \(formula,data,wt = NULL,locations = NULL,discnum = NULL,discmethod = NULL,
-                 cores = 1, seed = 123456789, permutations = 0, ...){
-  qs = psmd_spade(formula,data,wt,locations,discnum,discmethod,cores,seed,...)
+psmd_pseudop = \(yobs, xobs, wt,
+                 discnum = 3:22,
+                 discmethod = 'quantile',
+                 seed = 123456789,
+                 permutations = 0, ...){
+  qs = psmd_spade(yobs,xobs,wt,locations,discnum,discmethod,cores,seed,...)
   if (permutations == 0){
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
   } else {
