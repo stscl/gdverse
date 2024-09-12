@@ -84,7 +84,7 @@ We will use `tidyrgeoda` to run the `LISA`, more details see [**here**](https://
 ```{r SUHI_LISA,fig.width=7.5,fig.height=4}
 library(tidyrgeoda)
 
-new_ushi %>%
+ushi %>%
   mutate(lisa = st_local_moran(.,'SUHI',
                                wt = st_contiguity_weights(.),
                                significance_cutoff = 0.05)) %>%
@@ -169,8 +169,7 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 #### run SPADE
 
 ```{r ushi_SPADE_factor,fig.width=8.5,fig.height=6.5}
-ushi_spade = spade(SUHI ~ ., data = ushi, wt = wt3,
-                   cores = 12, permutations = 99)
+ushi_spade = spade(SUHI ~ ., data = ushi, wt = wt3, cores = 12)
 ushi_spade
 plot(ushi_spade,slicenum = 8)
 ```
