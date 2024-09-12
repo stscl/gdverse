@@ -78,8 +78,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
     for (i in seq_along(xundiscname)){
       qv_undisc[[i]] = psd_pseudop(data[,yname,drop=TRUE],
                                    data[,xundiscname[i],drop=TRUE],
-                                   wt_spade, discnum, discmethod,
-                                   cores, seed, permutations, ...)
+                                   wt_spade, cores, seed, permutations)
     }
     qv = purrr::list_cbind(c(qv_disc,qv_undisc))
     xname = c(xdiscname,xundiscname)
