@@ -15,8 +15,7 @@
 #'
 #' @param formula A formula of spatial association detector (SPADE) model.
 #' @param data A data.frame, tibble or sf of observation data.
-#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`.
-#' And `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
+#' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
 #' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
@@ -53,7 +52,7 @@ spade = \(formula, data, wt = NULL, discnum = 3:22, discmethod = 'quantile',
     data = sf::st_drop_geometry(data)
   } else if (inherits(data,'data.frame')) {
     if (is.null(wt)){
-      stop("When data is dataframe or tibblw, please provide wt !")
+      stop("When `data` is `data.frame` or `tibble`, please provide `wt` in spade input!")
     } else {
       wt_spade = wt
     }
