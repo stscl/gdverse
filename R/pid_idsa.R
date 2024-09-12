@@ -34,6 +34,12 @@
 #'
 #' @return A list with the optimal parameter in the provided parameter combination with `k`,
 #' `method` and `disc`(when `return_disc` is `TRUE`).
+#' \describe{
+#' \item{\code{x}}{discretization variable name}
+#' \item{\code{k}}{optimal number of spatial data discreteization}
+#' \item{\code{method}}{optimal spatial data discretization method}
+#' \item{\code{disc}}{the result of optimal spatial data discretization}
+#' }
 #' @export
 #'
 #' @examples
