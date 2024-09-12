@@ -15,7 +15,7 @@
 #' to ensure the trade-off between analysis results and calculation speed.
 #'
 #' @param formula A formula of IDSA model.
-#' @param data A data.frame, tibble or sf of observation data.
+#' @param data A data.frame, tibble or sf object of observation data.
 #' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.

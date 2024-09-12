@@ -10,7 +10,7 @@
 #' See `vignette('RGDRID',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of RGD model.
-#' @param data A data.frame or tibble of observation data.
+#' @param data A data.frame, tibble or sf object of observation data.
 #' @param discvar Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
@@ -43,6 +43,7 @@ rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
+  if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
   }

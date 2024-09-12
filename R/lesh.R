@@ -15,7 +15,7 @@
 #' https://doi.org/10.1080/17538947.2023.2271883
 #'
 #' @param formula A formula of LESH model.
-#' @param data A data.frame or tibble of observation data.
+#' @param data A data.frame, tibble or sf object of observation data.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster object.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
@@ -33,6 +33,7 @@
 #' g
 #'
 lesh = \(formula,data,cores = 1,...){
+  if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   spd = spd_lesh(formula,data,cores,...)
   pd = gozh(formula,data,cores,type = 'interaction',...)[[1]]
   res = pd %>%
