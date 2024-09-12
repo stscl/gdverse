@@ -58,8 +58,8 @@
 <span>  <span class="va">formula</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  <span class="va">wt</span>,</span>
-<span>  discnum <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  discmethod <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>,</span>
+<span>  discmethod <span class="op">=</span> <span class="st">"quantile"</span>,</span>
 <span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -130,8 +130,20 @@ by sampling <code>10%</code>(the default value for <code>samp_prop</code> in <co
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with the optimal parameter in the provided parameter combination with <code>k</code>,
-<code>method</code> and <code>disc</code>(when <code>return_disc</code> is <code>TRUE</code>).</p>
-    </div>
+<code>method</code> and <code>disc</code>(when <code>return_disc</code> is <code>TRUE</code>).</p><dl><dt><code>x</code></dt>
+<dd><p>discretization variable name</p></dd>
+
+<dt><code>k</code></dt>
+<dd><p>optimal number of spatial data discreteization</p></dd>
+
+<dt><code>method</code></dt>
+<dd><p>optimal spatial data discretization method</p></dd>
+
+<dt><code>disc</code></dt>
+<dd><p>the result of optimal spatial data discretization</p></dd>
+
+
+</dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>When the <code>discmethod</code> is configured to <code>robust</code>, it will operate at a significantly reduced speed.
