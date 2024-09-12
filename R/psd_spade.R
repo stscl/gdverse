@@ -109,9 +109,8 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #'
 #' @examples
 #' data('sim')
-#' psmd_spade(y ~ .,
-#'            data = dplyr::select(sim,1:4),
-#'            locations = c('lo','la'))
+#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' psmd_spade(sim$y,sim$xa,wt)
 #'
 psmd_spade = \(yobs, xobs, wt = NULL,
                discnum = 3:22, discmethod = 'quantile',
