@@ -381,11 +381,11 @@ function.</p>
 the construction of spatial weight matrices, which requires an input of
 an sf object.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu">spdep_contiguity_swm</span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span></code></pre></div>
 <p>Or using a spatial weight matrix based on distance kernel
 functions.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt4</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu">spdep_distance_swm</span><span class="op">(</span><span class="va">ushi</span>,k <span class="op">=</span> <span class="fl">3</span>, kernel <span class="op">=</span> <span class="st">'gaussian'</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wt4</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_distance_swm.html" class="external-link">spdep_distance_swm</a></span><span class="op">(</span><span class="va">ushi</span>,k <span class="op">=</span> <span class="fl">3</span>, kernel <span class="op">=</span> <span class="st">'gaussian'</span><span class="op">)</span></span></code></pre></div>
 <p>In the following section we will execute <em>SPADE</em> model using
 spatial weight matrix <code>wt3</code> which is constructed by queen
 contiguity.</p>
