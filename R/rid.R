@@ -42,7 +42,7 @@
 #'         discvar = c("xa","xb","xc"), discnum = 4, cores = 6)
 #' g
 #' }
-rid = \(formula,data,overlaymethod = 'and', discvar,
+rid = \(formula,data,overlaymethod = 'and',discvar,
         discnum = NULL, minsize = NULL, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
