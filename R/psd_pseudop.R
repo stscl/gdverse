@@ -110,12 +110,10 @@ psd_pseudop = \(y,x,wt,cores = 1,
 #'              data = dplyr::select(sim,1:4),
 #'              locations = c('lo','la'))
 #'
-psmd_pseudop = \(yobs, xobs, wt,
-                 discnum = 3:22,
-                 discmethod = 'quantile',
-                 seed = 123456789,
-                 permutations = 0, ...){
-  qs = psmd_spade(yobs,xobs,wt,locations,discnum,discmethod,cores,seed,...)
+psmd_pseudop = \(yobs, xobs, wt, discnum = 3:22,
+                 discmethod = 'quantile', cores = 1,
+                 seed = 123456789, permutations = 0, ...){
+  qs = psmd_spade(yobs,xobs,wt,discnum,discmethod,cores,seed,...)
   if (permutations == 0){
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
   } else {
@@ -133,26 +131,15 @@ psmd_pseudop = \(yobs, xobs, wt,
       on.exit(parallel::stopCluster(cores), add=TRUE)
     }
 
-    formula = stats::as.formula(formula)
-    formula.vars = all.vars(formula)
-    if (formula.vars[2] == "."){
-      if (length(!(which(colnames(data) %in% c(formula.vars[1],locations)))) > 1) {
-        stop('please only keep `dependent` and `independent` columns in `data`; When `wt` is not provided, please make sure `locations` coordinate columns is also contained in `data` .')
-      } else {
-        xname = colnames(data)[-which(colnames(data) %in% c(formula.vars[1],locations))]
-      }
-    } else {
-      xname = formula.vars[2][-which(formula.vars[2] %in% c(formula.vars[1],locations))]
-    }
-    data = as.data.frame(data)
     set.seed(seed)
     randomnum = stats::runif(1)
-    xperm = shuffle_vector(data[,xname,drop = TRUE],randomnum,seed = seed)
-    yperm = shuffle_vector(data[,formula.vars[1],drop = TRUE],randomnum,seed = seed)
+    wt_perm = wt
+    xperm = shuffle_vector(xobs,randomnum,seed = seed)
+    yperm = shuffle_vector(yobs,randomnum,seed = seed)
     calcul_psmd = \(p_shuffle){
-      data[,xname] = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
-      data[,formula.vars[1]] = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
-      return(psmd_spade(formula,data,wt,locations,discnum,discmethod,cores=1,seed,...))
+      xperm_new = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
+      yperm_new = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
+      return(psmd_spade(yperm_new,xperm_new,wt_perm,discnum,discmethod,cores=1,seed,...))
     }
 
     if (doclust) {
