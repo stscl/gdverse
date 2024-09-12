@@ -139,7 +139,8 @@ psmd_pseudop = \(yobs, xobs, wt, discnum = 3:22,
     calcul_psmd = \(p_shuffle){
       xperm_new = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
       yperm_new = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
-      return(psmd_spade(yperm_new,xperm_new,wt_perm,discn,discm,1,seedn,...))
+      return(psmd_spade(yperm_new,xperm_new,wt_perm,discn,discm,
+                        cores = 1,seed = seedn, ...))
     }
 
     if (doclust) {
