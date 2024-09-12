@@ -8,8 +8,9 @@ opgd(
   formula,
   data,
   discvar,
-  discnum = NULL,
-  discmethod = NULL,
+  discnum = 3:22,
+  discmethod = c("sd", "equal", "pretty", "quantile", "fisher", "headtails", "maximum",
+    "box"),
   cores = 1,
   type = "factor",
   alpha = 0.95,
@@ -26,8 +27,8 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
-\item{discmethod}{(optional) A vector of methods for discretization,default is using
-\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
+\item{discmethod}{(optional) A vector of methods for discretization, default is using
+\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 cluster with that many cores is created and used. You can also supply a cluster object.}

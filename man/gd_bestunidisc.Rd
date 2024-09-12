@@ -7,8 +7,9 @@
 gd_bestunidisc(
   formula,
   data,
-  discnum = NULL,
-  discmethod = NULL,
+  discnum = 3:22,
+  discmethod = c("sd", "equal", "pretty", "quantile", "fisher", "headtails", "maximum",
+    "box"),
   cores = 1,
   return_disc = TRUE,
   seed = 123456789,
