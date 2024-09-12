@@ -106,9 +106,8 @@ psd_pseudop = \(y,x,wt,cores = 1,
 #'
 #' @examples
 #' data('sim')
-#' psmd_pseudop(y ~ .,
-#'              data = dplyr::select(sim,1:4),
-#'              locations = c('lo','la'))
+#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' psmd_pseudop(sim$y,sim$xa,wt)
 #'
 psmd_pseudop = \(yobs, xobs, wt, discnum = 3:22,
                  discmethod = 'quantile', cores = 1,
