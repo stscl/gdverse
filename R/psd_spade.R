@@ -89,19 +89,16 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 #' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 #'
-#' @param formula A formula of calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
-#' @param data A data.frame or tibble of observation data.
-#' @param wt (optional) The spatial weight matrix. When `wt` is not provided, must provide `locations`,
-#' then `gdverse` will use `locations` columns to construct spatial weight use `inverse_distance_weight()`.
-#' @param locations (optional) The geospatial locations coordinate columns name which in `data`.
-#' Useful and must provided when `wt` is not provided.
-#' @param discnum (optional) Number of multilevel discretization.Default will use `3:22`.
+#' @param yobs Variable Y
+#' @param xobs The original undiscretized covariable X.
+#' @param wt The spatial weight matrix.
+#' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' If `discmethod` is set to `robust`, the function `robust_disc()` will be used. Conversely,
 #' if `discmethod` is set to `rpart`, the `rpart_disc()` function will be used. Others use
 #' `st_unidisc()`. Currently, only one `discmethod` can be used at a time.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
+#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A value of power of spatial and multilevel discretization determinant `PSMDQ_s`.
@@ -112,9 +109,11 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' wt = inverse_distance_weight(sim$lo,sim$la)
 #' psmd_spade(sim$y,sim$xa,wt)
 #'
-psmd_spade = \(yobs, xobs, wt = NULL,
-               discnum = 3:22, discmethod = 'quantile',
-               cores = 1, seed = 123456789, ...){
+psmd_spade = \(yobs, xobs, wt,
+               discnum = 3:22,
+               discmethod = 'quantile',
+               seed = 123456789,
+               cores = 1, ...){
   doclust = FALSE
   if (cores > 1) {
     doclust = TRUE
