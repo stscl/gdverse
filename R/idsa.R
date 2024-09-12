@@ -50,8 +50,8 @@
 #' g = idsa(y ~ ., data = sim1)
 #' g
 #'
-idsa = \(formula, data, wt = NULL, overlaymethod = 'and', discnum = NULL,
-         discmethod = NULL, strategy = 2L, increase_rate = 0.05,
+idsa = \(formula, data, wt = NULL, overlaymethod = 'and', discnum = 3:22,
+         discmethod = "quantile", strategy = 2L, increase_rate = 0.05,
          cores = 1, seed = 123456789, alpha = 0.95, ...){
 
   formula = stats::as.formula(formula)
