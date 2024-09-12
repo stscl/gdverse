@@ -129,6 +129,7 @@ psmd_spade = \(yobs, xobs, wt = NULL,
     xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
     out_g = cpsd_spade(yobs,xobs,xdisc,wt)
   } else {
+    wt_cpsd = wt # ensure that R can access wt during parallel computation.
     spade_disc = \(yv,xv,discn,discm,cores,...){
       if (discm == 'robust') {
         discdf = rep(list("xobs" = xv),length(discn))
@@ -157,7 +158,7 @@ psmd_spade = \(yobs, xobs, wt = NULL,
       yvar = discdf[,'yobs',drop = TRUE]
       xvar = discdf[,'xobs',drop = TRUE]
       xdisc = discdf[,paramn,drop = TRUE]
-      return(cpsd_spade(yvar,xvar,xdisc,wt))
+      return(cpsd_spade(yvar,xvar,xdisc,wt_cpsd))
     }
 
     if (doclust) {
