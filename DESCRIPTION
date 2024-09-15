@@ -58,7 +58,6 @@ Imports:
 Suggests: 
     cowplot,
     knitr,
-    PieGlyph,
     Rcpp,
     Rdimtools,
     rmarkdown,
