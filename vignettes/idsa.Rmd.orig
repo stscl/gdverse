@@ -78,7 +78,7 @@ wt = sdsfun::spdep_contiguity_swm(ushi)
 ### IDSA modeling
 
 ```{r idsa_modeling,fig.width=4.25,fig.height=3.5}
-idsa.model = idsa(SUHI ~ . ,data = newdata, wt = wt, cores = 6)
+idsa.model = idsa(SUHI ~ ., data = newdata, wt = wt, cores = 6)
 idsa.model
 plot(idsa.model)
 ```
