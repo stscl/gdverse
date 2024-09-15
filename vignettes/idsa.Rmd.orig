@@ -72,11 +72,7 @@ newdata
 We use the same spatial weight matrix as SPADE vignette.
 
 ```{r}
-wt = ushi |>
-  dplyr::filter(!if_any(everything(),is.na)) |>
-  mutate(nb = sfdep::st_contiguity(geom),
-         wt = sfdep::st_weights(nb)) %$%
-  sfdep::wt_as_matrix(nb,wt)
+wt = sdsfun::spdep_contiguity_swm(ushi)
 ```
 
 ### IDSA modeling
