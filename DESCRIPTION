@@ -58,7 +58,9 @@ Imports:
 Suggests: 
     cowplot,
     knitr,
+    PieGlyph,
     Rcpp,
+    Rdimtools,
     rmarkdown,
     terra,
     testthat (>= 3.0.0)
