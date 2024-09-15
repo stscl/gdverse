@@ -181,29 +181,25 @@ explain <code>SUHI</code>, which is removed here.</p>
 </h3>
 <p>We use the same spatial weight matrix as SPADE vignette.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt</span> <span class="op">=</span> <span class="va">ushi</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">if_any</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">is.na</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">st_contiguity</span><span class="op">(</span><span class="va">geom</span><span class="op">)</span>,</span>
-<span>         wt <span class="op">=</span> <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">st_weights</span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/exposition.html" class="external-link">%$%</a></span></span>
-<span>  <span class="fu">sfdep</span><span class="fu">::</span><span class="fu">wt_as_matrix</span><span class="op">(</span><span class="va">nb</span>,<span class="va">wt</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wt</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="idsa-modeling">IDSA modeling<a class="anchor" aria-label="anchor" href="#idsa-modeling"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">idsa.model</span> <span class="op">=</span> <span class="fu"><a href="../reference/idsa.html">idsa</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span> ,data <span class="op">=</span> <span class="va">newdata</span>, wt <span class="op">=</span> <span class="va">wt</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">idsa.model</span> <span class="op">=</span> <span class="fu"><a href="../reference/idsa.html">idsa</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">newdata</span>, wt <span class="op">=</span> <span class="va">wt</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">idsa.model</span></span>
 <span><span class="co">## ***     Interactive Detector For Spatial Associations </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |                   varibale                   |     PID     |</span></span>
 <span><span class="co">## |:--------------------------------------------:|:-----------:|</span></span>
-<span><span class="co">## | landscape ∩ dist_cold_heat ∩ urbanbuilt_form | 0.456037749 |</span></span>
-<span><span class="co">## |       dist_cold_heat ∩ urbanbuilt_form       | 0.409391856 |</span></span>
-<span><span class="co">## |               urbanbuilt_form                | 0.345502490 |</span></span>
-<span><span class="co">## |         landscape ∩ urbanbuilt_form          | 0.330585501 |</span></span>
-<span><span class="co">## |                dist_cold_heat                | 0.123563063 |</span></span>
-<span><span class="co">## |          landscape ∩ dist_cold_heat          | 0.071627057 |</span></span>
-<span><span class="co">## |                  landscape                   | 0.004188307 |</span></span>
+<span><span class="co">## | landscape ∩ dist_cold_heat ∩ urbanbuilt_form | 0.455535905 |</span></span>
+<span><span class="co">## |       dist_cold_heat ∩ urbanbuilt_form       | 0.408837104 |</span></span>
+<span><span class="co">## |               urbanbuilt_form                | 0.345728704 |</span></span>
+<span><span class="co">## |         landscape ∩ urbanbuilt_form          | 0.330273768 |</span></span>
+<span><span class="co">## |                dist_cold_heat                | 0.123441382 |</span></span>
+<span><span class="co">## |          landscape ∩ dist_cold_heat          | 0.071538071 |</span></span>
+<span><span class="co">## |                  landscape                   | 0.004183838 |</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  --------- IDSA model performance evaluation: --------</span></span>
 <span><span class="co">##  * Number of overlay zones :  11 </span></span>
