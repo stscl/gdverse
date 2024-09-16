@@ -38,14 +38,18 @@
 #' g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1:-3],
 #'         cores = 6, type =c('factor','interaction'))
 #' }
-rgd = \(formula,data,discvar,discnum = NULL,minsize = NULL,
+rgd = \(formula, data, discvar = NULL,
+        discnum = NULL, minsize = NULL,
         cores = 1, type = "factor", alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
-  yname = formula.vars[1]
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
+  }
+  yname = formula.vars[1]
+  if (is.null(discvar)) {
+    discvar = colnames(data)[-which(colnames(data) == yname)]
   }
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   if (is.null(discnum)) {discnum = rep(10,length(discvar))}
