@@ -1,9 +1,9 @@
 # gdverse 1.0-2
 
-* Using new example data in the vignettes for `spade` and `idsa`.
-
 * When the `discvar` input for the `opgd`, `rgd`, `rid`, `spade` functions is `NULL`, 
   it is assumed that all independent variables in the `formula` need to be discretized.
+  
+* Using new example data in the vignettes for `spade` and `idsa`.
 
 # gdverse 1.0-1
 
