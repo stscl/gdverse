@@ -19,13 +19,14 @@
 #'
 #' @param formula A formula of RID model.
 #' @param data A data.frame, tibble or sf object of observation data.
-#' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
-#' Default is `and`.
 #' @param discvar Name of continuous variable columns that need to be discretized. Noted that
-#' when `formula` has `discvar`, `data` must have these columns.
+#' when `formula` has `discvar`, `data` must have these columns. By default, all independent
+#' variables are used as `discvar`.
 #' @param discnum A numeric vector for the number of discretized classes of columns that need
 #' to be discretized. Default all `discvar` use `10`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
+#' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
+#' Default is `and`.
 #' @param cores (optional) Positive integer(default is 1). If cores > 1, use parallel computation.
 #'
 #' @return A list of the RID model result.
