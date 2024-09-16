@@ -84,16 +84,16 @@ Or using a spatial weight matrix based on distance kernel functions.
 wt4 = sdsfun::spdep_distance_swm(boston, k = 6, kernel = 'gaussian')
 ```
 
-In the following section we will execute *SPADE* model using spatial weight matrix `wt4` which is constructed by distance kernel function.
+In the following section we will execute *SPADE* model using spatial weight matrix `wt4` which is constructed by the gaussian distance kernel function and six nearest neighbor objects.
 
 The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value, this calculation is very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
 
 #### run SPADE
 
 ```{r spade,fig.width=8.5,fig.height=6.5}
-boston_spade = spade(SUHI ~ ., data = ushi, wt = wt3, cores = 12)
+boston_spade = spade(CMEDV ~ ., data = boston, wt = wt3, cores = 12)
 boston_spade
-plot(ushi_spade,slicenum = 3)
+plot(boston_spade,slicenum = 3)
 ```
 
 **You can also access the detailed q statistics by `boston_spade$factor`**
