@@ -20,16 +20,13 @@ library(gdverse)
 depression = system.file('extdata/Depression.csv',package = 'gdverse') %>%
   read_csv() %>%
   st_as_sf(coords = c('X','Y'), crs = 4326)
-## Error in `x[coords]`:
-## ! Can't subset columns that don't exist.
-## ✖ Columns `X` and `Y` don't exist.
 depression
-## Simple feature collection with 1072 features and 12 fields
+## Simple feature collection with 1072 features and 11 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -83.1795 ymin: 32.11464 xmax: -78.6023 ymax: 35.17354
 ## Geodetic CRS:  WGS 84
-## # A tibble: 1,072 × 13
+## # A tibble: 1,072 × 12
 ##    Depression_prevelence PopulationDensity Population65 NoHealthInsurance
 ##  *                 <dbl>             <dbl>        <dbl>             <dbl>
 ##  1                  23.1              61.5         22.5              7.98
@@ -43,9 +40,9 @@ depression
 ##  9                  22.7              67.2         15.7             17.8 
 ## 10                  20.6             254.          11.3             12.7 
 ## # ℹ 1,062 more rows
-## # ℹ 9 more variables: Neighbor_Disadvantage <dbl>, Beer <dbl>, MentalHealthPati <dbl>,
-## #   Generalhosptials <dbl>, NatureParks <dbl>, Casinos <dbl>, DrinkingPlaces <dbl>,
-## #   X.HouseRent <dbl>, geometry <POINT [°]>
+## # ℹ 8 more variables: Neighbor_Disadvantage <dbl>, Beer <dbl>, MentalHealthPati <dbl>,
+## #   NatureParks <dbl>, Casinos <dbl>, DrinkingPlaces <dbl>, X.HouseRent <dbl>,
+## #   geometry <POINT [°]>
 ```
 
 ### Spatial Autocorrelation of Depression Prevelence
@@ -79,8 +76,6 @@ gmi
 
    MentalHealthPati       0.19318***    -0.0009337   0.0003192   10.86   8.534e-28 
 
-   Generalhosptials      0.264652***    -0.0009337   0.0003192   14.86   2.806e-50 
-
       NatureParks        0.0895589***   -0.0009337   0.0003192   5.065   2.045e-07 
 
         Casinos          0.243212***    -0.0009337   0.0003192   13.66   8.28e-43  
@@ -113,7 +108,6 @@ depression_opgd
 ## |    DrinkingPlaces     | 0.06639594  | 1.000000e+00 |
 ## |      NatureParks      | 0.06525932  | 1.000000e+00 |
 ## |      X.HouseRent      | 0.06111156  | 1.000000e+00 |
-## |   Generalhosptials    | 0.04181905  | 4.304640e-04 |
 ## |   MentalHealthPati    | 0.02532353  | 1.000000e+00 |
 ## |         Beer          | 0.02458667  | 1.000000e+00 |
 ## |        Casinos        | 0.01936872  | 4.363429e-01 |
@@ -124,7 +118,7 @@ depression_opgd
 
 ``` r
 depression_opgd$factor
-## # A tibble: 11 × 3
+## # A tibble: 10 × 3
 ##    variable              `Q-statistic` `P-value`
 ##    <chr>                         <dbl>     <dbl>
 ##  1 Neighbor_Disadvantage        0.159   2.34e- 2
@@ -134,10 +128,9 @@ depression_opgd$factor
 ##  5 DrinkingPlaces               0.0664  1.00e+ 0
 ##  6 NatureParks                  0.0653  1.00e+ 0
 ##  7 X.HouseRent                  0.0611  1   e+ 0
-##  8 Generalhosptials             0.0418  4.30e- 4
-##  9 MentalHealthPati             0.0253  1   e+ 0
-## 10 Beer                         0.0246  1   e+ 0
-## 11 Casinos                      0.0194  4.36e- 1
+##  8 MentalHealthPati             0.0253  1   e+ 0
+##  9 Beer                         0.0246  1   e+ 0
+## 10 Casinos                      0.0194  4.36e- 1
 ```
 
 ### Spatial Weight Matrix
@@ -206,18 +199,17 @@ depression_spade
 ## |   NoHealthInsurance   | 0.07912873  | No Pseudo-P Value |
 ## |   MentalHealthPati    | 0.07778826  | No Pseudo-P Value |
 ## |      X.HouseRent      | 0.07250500  | No Pseudo-P Value |
-## |   Generalhosptials    | -0.26040682 | No Pseudo-P Value |
 plot(depression_spade,slicenum = 6)
 ```
 
-![plot of chunk spade](man/figures/spade/spade-1.png)
+![](../man/figures/spade/spade-1.png)
 
 **You can also access the detailed q statistics by `depression_spade$factor`**
 
 
 ``` r
 depression_spade$factor
-## # A tibble: 11 × 3
+## # A tibble: 10 × 3
 ##    variable              `Q-statistic` `P-value`        
 ##    <chr>                         <dbl> <chr>            
 ##  1 PopulationDensity            0.224  No Pseudo-P Value
@@ -230,5 +222,4 @@ depression_spade$factor
 ##  8 NoHealthInsurance            0.0791 No Pseudo-P Value
 ##  9 MentalHealthPati             0.0778 No Pseudo-P Value
 ## 10 X.HouseRent                  0.0725 No Pseudo-P Value
-## 11 Generalhosptials            -0.260  No Pseudo-P Value
 ```
