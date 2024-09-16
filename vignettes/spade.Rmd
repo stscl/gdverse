@@ -20,25 +20,28 @@ library(gdverse)
 depression = system.file('extdata/Depression.csv',package = 'gdverse') %>%
   read_csv() %>%
   st_as_sf(coords = c('X','Y'), crs = 4326)
+## Error in `x[coords]`:
+## ! Can't subset columns that don't exist.
+## ✖ Columns `X` and `Y` don't exist.
 depression
-## Simple feature collection with 1072 features and 13 fields
+## Simple feature collection with 1072 features and 12 fields
 ## Geometry type: POINT
 ## Dimension:     XY
 ## Bounding box:  xmin: -83.1795 ymin: 32.11464 xmax: -78.6023 ymax: 35.17354
 ## Geodetic CRS:  WGS 84
-## # A tibble: 1,072 × 14
-##    Depression_prevelence PopulationDensity PopulationFemale Population65 NoHealthInsurance
-##  *                 <dbl>             <dbl>            <dbl>        <dbl>             <dbl>
-##  1                  23.1              61.5             53.4         22.5              7.98
-##  2                  22.8              58.3             48.1         16.8             11.0 
-##  3                  23.2              35.9             50.9         24.5              9.31
-##  4                  21.8              76.1             52.1         21.8             13.2 
-##  5                  20.7              47.3             50.3         22.0             11   
-##  6                  21.3              32.5             56.6         19.2             13.0 
-##  7                  22                36.9             49.9         19.2             10.8 
-##  8                  21.2              61.5             49.3         15.9              8.57
-##  9                  22.7              67.2             49.1         15.7             17.8 
-## 10                  20.6             254.              55.2         11.3             12.7 
+## # A tibble: 1,072 × 13
+##    Depression_prevelence PopulationDensity Population65 NoHealthInsurance
+##  *                 <dbl>             <dbl>        <dbl>             <dbl>
+##  1                  23.1              61.5         22.5              7.98
+##  2                  22.8              58.3         16.8             11.0 
+##  3                  23.2              35.9         24.5              9.31
+##  4                  21.8              76.1         21.8             13.2 
+##  5                  20.7              47.3         22.0             11   
+##  6                  21.3              32.5         19.2             13.0 
+##  7                  22                36.9         19.2             10.8 
+##  8                  21.2              61.5         15.9              8.57
+##  9                  22.7              67.2         15.7             17.8 
+## 10                  20.6             254.          11.3             12.7 
 ## # ℹ 1,062 more rows
 ## # ℹ 9 more variables: Neighbor_Disadvantage <dbl>, Beer <dbl>, MentalHealthPati <dbl>,
 ## #   Generalhosptials <dbl>, NatureParks <dbl>, Casinos <dbl>, DrinkingPlaces <dbl>,
@@ -59,41 +62,85 @@ gmi
 ```
 
 
-------------------------------------------------------------------------------------
-       Variable             MoranI          EI         VarI        zI        pI     
------------------------ -------------- ------------ ----------- -------- -----------
- Depression_prevelence   0.339557***    -0.0009337   0.0003192   19.06    2.892e-81 
+-----------------------------------------------------------------------------------
+       Variable             MoranI          EI         VarI       zI        pI     
+----------------------- -------------- ------------ ----------- ------- -----------
+ Depression_prevelence   0.339557***    -0.0009337   0.0003192   19.06   2.892e-81 
 
-   PopulationDensity     0.365364***    -0.0009337   0.0003192    20.5    1.052e-93 
+   PopulationDensity     0.365364***    -0.0009337   0.0003192   20.5    1.052e-93 
 
-   PopulationFemale       0.00142671    -0.0009337   0.0003192   0.1321    0.4474   
+     Population65        0.180436***    -0.0009337   0.0003192   10.15   1.641e-24 
 
-     Population65        0.180436***    -0.0009337   0.0003192   10.15    1.641e-24 
+   NoHealthInsurance     0.0791199***   -0.0009337   0.0003192   4.48    3.724e-06 
 
-   NoHealthInsurance     0.0791199***   -0.0009337   0.0003192    4.48    3.724e-06 
+ Neighbor_Disadvantage   0.113811***    -0.0009337   0.0003192   6.422   6.723e-11 
 
- Neighbor_Disadvantage   0.113811***    -0.0009337   0.0003192   6.422    6.723e-11 
+         Beer            0.0902263***   -0.0009337   0.0003192   5.102   1.68e-07  
 
-         Beer            0.0902263***   -0.0009337   0.0003192   5.102    1.68e-07  
+   MentalHealthPati       0.19318***    -0.0009337   0.0003192   10.86   8.534e-28 
 
-   MentalHealthPati       0.19318***    -0.0009337   0.0003192   10.86    8.534e-28 
+   Generalhosptials      0.264652***    -0.0009337   0.0003192   14.86   2.806e-50 
 
-   Generalhosptials      0.264652***    -0.0009337   0.0003192   14.86    2.806e-50 
+      NatureParks        0.0895589***   -0.0009337   0.0003192   5.065   2.045e-07 
 
-      NatureParks        0.0895589***   -0.0009337   0.0003192   5.065    2.045e-07 
+        Casinos          0.243212***    -0.0009337   0.0003192   13.66   8.28e-43  
 
-        Casinos          0.243212***    -0.0009337   0.0003192   13.66    8.28e-43  
+    DrinkingPlaces       0.239054***    -0.0009337   0.0003192   13.43   1.97e-41  
 
-    DrinkingPlaces       0.239054***    -0.0009337   0.0003192   13.43    1.97e-41  
-
-      X.HouseRent        0.141887***    -0.0009337   0.0003192   7.993    6.562e-16 
-------------------------------------------------------------------------------------
+      X.HouseRent        0.141887***    -0.0009337   0.0003192   7.993   6.562e-16 
+-----------------------------------------------------------------------------------
 
 
 
 The global Moran'I Index of Depression Prevelence is `0.339557` and the P value is ` 2.892e-81`, which shows that Depression Prevelence has a moderate level of positive spatial autocorrelation in the global scale.
 
-### SPADE modeling
+### OPGD modeling
+
+
+``` r
+depression_opgd = opgd(Depression_prevelence ~ .,
+                       data = depression, cores = 12)
+depression_opgd
+##                 OPGD Model                  
+## ***          Factor Detector            
+## 
+## |       variable        | Q-statistic |   P-value    |
+## |:---------------------:|:-----------:|:------------:|
+## | Neighbor_Disadvantage | 0.15931057  | 2.340391e-02 |
+## |     Population65      | 0.11095945  | 9.999944e-01 |
+## |   PopulationDensity   | 0.11065749  | 2.140000e-10 |
+## |   NoHealthInsurance   | 0.08182401  | 8.340000e-10 |
+## |    DrinkingPlaces     | 0.06639594  | 1.000000e+00 |
+## |      NatureParks      | 0.06525932  | 1.000000e+00 |
+## |      X.HouseRent      | 0.06111156  | 1.000000e+00 |
+## |   Generalhosptials    | 0.04181905  | 4.304640e-04 |
+## |   MentalHealthPati    | 0.02532353  | 1.000000e+00 |
+## |         Beer          | 0.02458667  | 1.000000e+00 |
+## |        Casinos        | 0.01936872  | 4.363429e-01 |
+```
+
+**You can access the detailed q statistics by `depression_opgd$factor`**
+
+
+``` r
+depression_opgd$factor
+## # A tibble: 11 × 3
+##    variable              `Q-statistic` `P-value`
+##    <chr>                         <dbl>     <dbl>
+##  1 Neighbor_Disadvantage        0.159   2.34e- 2
+##  2 Population65                 0.111   1.00e+ 0
+##  3 PopulationDensity            0.111   2.14e-10
+##  4 NoHealthInsurance            0.0818  8.34e-10
+##  5 DrinkingPlaces               0.0664  1.00e+ 0
+##  6 NatureParks                  0.0653  1.00e+ 0
+##  7 X.HouseRent                  0.0611  1   e+ 0
+##  8 Generalhosptials             0.0418  4.30e- 4
+##  9 MentalHealthPati             0.0253  1   e+ 0
+## 10 Beer                         0.0246  1   e+ 0
+## 11 Casinos                      0.0194  4.36e- 1
+```
+
+### Spatial Weight Matrix
 
 *SPADE* explicitly considers the spatial variance by assigning the weight of the influence based on spatial distribution and also minimizes the influence of the number of levels on PD values by using the multilevel discretization and considering information loss due to discretization.
 
@@ -119,8 +166,6 @@ You can also use gravity model weight by assigning the `power` parameter in `inv
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 ```
 
-#### using spatial weight matrix from sdsfun
-
 I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
 
 
@@ -139,28 +184,29 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 In the following section we will execute *SPADE* model using spatial weight matrix `wt1`.
 
-#### run SPADE
+### SPADE modeling
 
 
 ``` r
-depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt3, cores = 12)
+depression_spade = spade(Depression_prevelence ~ .,
+                         data = depression,
+                         wt = wt1, cores = 12)
 depression_spade
 ## ***         Spatial Association Detector         
 ## 
 ## |       variable        | Q-statistic |      P-value      |
 ## |:---------------------:|:-----------:|:-----------------:|
-## |        Casinos        | 0.43911707  | No Pseudo-P Value |
-## |    DrinkingPlaces     | 0.21758789  | No Pseudo-P Value |
-## | Neighbor_Disadvantage | 0.17187329  | No Pseudo-P Value |
-## |   Generalhosptials    | 0.15686793  | No Pseudo-P Value |
-## |     Population65      | 0.14341885  | No Pseudo-P Value |
-## |         Beer          | 0.14045856  | No Pseudo-P Value |
-## |   MentalHealthPati    | 0.13336243  | No Pseudo-P Value |
-## |      X.HouseRent      | 0.08895817  | No Pseudo-P Value |
-## |   NoHealthInsurance   | 0.04637770  | No Pseudo-P Value |
-## |   PopulationDensity   | 0.03952872  | No Pseudo-P Value |
-## |      NatureParks      | -0.04264754 | No Pseudo-P Value |
-## |   PopulationFemale    | -0.05748651 | No Pseudo-P Value |
+## |   PopulationDensity   | 0.22350789  | No Pseudo-P Value |
+## |    DrinkingPlaces     | 0.18296329  | No Pseudo-P Value |
+## | Neighbor_Disadvantage | 0.17159619  | No Pseudo-P Value |
+## |        Casinos        | 0.16623609  | No Pseudo-P Value |
+## |     Population65      | 0.15732787  | No Pseudo-P Value |
+## |      NatureParks      | 0.13953548  | No Pseudo-P Value |
+## |         Beer          | 0.10609591  | No Pseudo-P Value |
+## |   NoHealthInsurance   | 0.07912873  | No Pseudo-P Value |
+## |   MentalHealthPati    | 0.07778826  | No Pseudo-P Value |
+## |      X.HouseRent      | 0.07250500  | No Pseudo-P Value |
+## |   Generalhosptials    | -0.26040682 | No Pseudo-P Value |
 plot(depression_spade,slicenum = 6)
 ```
 
@@ -171,19 +217,18 @@ plot(depression_spade,slicenum = 6)
 
 ``` r
 depression_spade$factor
-## # A tibble: 12 × 3
+## # A tibble: 11 × 3
 ##    variable              `Q-statistic` `P-value`        
 ##    <chr>                         <dbl> <chr>            
-##  1 Casinos                      0.439  No Pseudo-P Value
-##  2 DrinkingPlaces               0.218  No Pseudo-P Value
+##  1 PopulationDensity            0.224  No Pseudo-P Value
+##  2 DrinkingPlaces               0.183  No Pseudo-P Value
 ##  3 Neighbor_Disadvantage        0.172  No Pseudo-P Value
-##  4 Generalhosptials             0.157  No Pseudo-P Value
-##  5 Population65                 0.143  No Pseudo-P Value
-##  6 Beer                         0.140  No Pseudo-P Value
-##  7 MentalHealthPati             0.133  No Pseudo-P Value
-##  8 X.HouseRent                  0.0890 No Pseudo-P Value
-##  9 NoHealthInsurance            0.0464 No Pseudo-P Value
-## 10 PopulationDensity            0.0395 No Pseudo-P Value
-## 11 NatureParks                 -0.0426 No Pseudo-P Value
-## 12 PopulationFemale            -0.0575 No Pseudo-P Value
+##  4 Casinos                      0.166  No Pseudo-P Value
+##  5 Population65                 0.157  No Pseudo-P Value
+##  6 NatureParks                  0.140  No Pseudo-P Value
+##  7 Beer                         0.106  No Pseudo-P Value
+##  8 NoHealthInsurance            0.0791 No Pseudo-P Value
+##  9 MentalHealthPati             0.0778 No Pseudo-P Value
+## 10 X.HouseRent                  0.0725 No Pseudo-P Value
+## 11 Generalhosptials            -0.260  No Pseudo-P Value
 ```
