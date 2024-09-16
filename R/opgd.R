@@ -10,8 +10,9 @@
 #'
 #' @param formula A formula of OPGD model.
 #' @param data A data.frame, tibble or sf object of observation data.
-#' @param discvar Name of continuous variable columns that need to be discretized.Noted that
-#' when `formula` has `discvar`, `data` must have these columns.
+#' @param discvar Name of continuous variable columns that need to be discretized. Noted that
+#' when `formula` has `discvar`, `data` must have these columns. By default, all independent
+#' variables are used as `discvar`.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`.
