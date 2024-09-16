@@ -57,10 +57,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rid</span><span class="op">(</span></span>
 <span>  <span class="va">formula</span>,</span>
 <span>  <span class="va">data</span>,</span>
-<span>  overlaymethod <span class="op">=</span> <span class="st">"and"</span>,</span>
-<span>  <span class="va">discvar</span>,</span>
+<span>  discvar <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  discnum <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  minsize <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  overlaymethod <span class="op">=</span> <span class="st">"and"</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -77,14 +77,10 @@
 <dd><p>A data.frame, tibble or sf object of observation data.</p></dd>
 
 
-<dt id="arg-overlaymethod">overlaymethod<a class="anchor" aria-label="anchor" href="#arg-overlaymethod"></a></dt>
-<dd><p>(optional) Spatial overlay method. One of <code>and</code>, <code>or</code>, <code>intersection</code>.
-Default is <code>and</code>.</p></dd>
-
-
 <dt id="arg-discvar">discvar<a class="anchor" aria-label="anchor" href="#arg-discvar"></a></dt>
 <dd><p>Name of continuous variable columns that need to be discretized. Noted that
-when <code>formula</code> has <code>discvar</code>, <code>data</code> must have these columns.</p></dd>
+when <code>formula</code> has <code>discvar</code>, <code>data</code> must have these columns. By default, all independent
+variables are used as <code>discvar</code>.</p></dd>
 
 
 <dt id="arg-discnum">discnum<a class="anchor" aria-label="anchor" href="#arg-discnum"></a></dt>
@@ -94,6 +90,11 @@ to be discretized. Default all <code>discvar</code> use <code>10</code>.</p></dd
 
 <dt id="arg-minsize">minsize<a class="anchor" aria-label="anchor" href="#arg-minsize"></a></dt>
 <dd><p>(optional) The min size of each discretization group. Default all use <code>1</code>.</p></dd>
+
+
+<dt id="arg-overlaymethod">overlaymethod<a class="anchor" aria-label="anchor" href="#arg-overlaymethod"></a></dt>
+<dd><p>(optional) Spatial overlay method. One of <code>and</code>, <code>or</code>, <code>intersection</code>.
+Default is <code>and</code>.</p></dd>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>

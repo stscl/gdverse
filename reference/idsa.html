@@ -58,9 +58,9 @@
 <span>  <span class="va">formula</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  wt <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  overlaymethod <span class="op">=</span> <span class="st">"and"</span>,</span>
 <span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>,</span>
 <span>  discmethod <span class="op">=</span> <span class="st">"quantile"</span>,</span>
+<span>  overlaymethod <span class="op">=</span> <span class="st">"and"</span>,</span>
 <span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
@@ -86,11 +86,6 @@
 <dd><p>(optional) The spatial weight matrix. When <code>data</code> is not an <code>sf</code> object, must provide <code>wt</code>.</p></dd>
 
 
-<dt id="arg-overlaymethod">overlaymethod<a class="anchor" aria-label="anchor" href="#arg-overlaymethod"></a></dt>
-<dd><p>(optional) Spatial overlay method. One of <code>and</code>, <code>or</code>, <code>intersection</code>.
-Default is <code>and</code>.</p></dd>
-
-
 <dt id="arg-discnum">discnum<a class="anchor" aria-label="anchor" href="#arg-discnum"></a></dt>
 <dd><p>(optional) Number of multilevel discretization. Default will use <code>3:22</code>.</p></dd>
 
@@ -99,6 +94,11 @@ Default is <code>and</code>.</p></dd>
 <dd><p>(optional) The discretization methods. Default all use <code>quantile</code>.
 Noted that <code>robust</code> will use <code><a href="robust_disc.html">robust_disc()</a></code>; <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>;
 Others use <code><a href="st_unidisc.html">st_unidisc()</a></code>. You can try <code><a href="unidisc_methods.html">unidisc_methods()</a></code> to see supported methods in <code><a href="st_unidisc.html">st_unidisc()</a></code>.</p></dd>
+
+
+<dt id="arg-overlaymethod">overlaymethod<a class="anchor" aria-label="anchor" href="#arg-overlaymethod"></a></dt>
+<dd><p>(optional) Spatial overlay method. One of <code>and</code>, <code>or</code>, <code>intersection</code>.
+Default is <code>and</code>.</p></dd>
 
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>

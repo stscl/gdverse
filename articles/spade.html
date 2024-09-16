@@ -91,131 +91,54 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ausgis.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ushi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/USHI.gpkg'</span>,package <span class="op">=</span> <span class="st">'gdverse'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">ushi</span></span>
-<span><span class="co">## Simple feature collection with 1037 features and 19 fields</span></span>
-<span><span class="co">## Geometry type: POLYGON</span></span>
+<span><span class="va">depression</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'extdata/Depression.csv'</span>,package <span class="op">=</span> <span class="st">'gdverse'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span>coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'X'</span>,<span class="st">'Y'</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span></span>
+<span><span class="va">depression</span></span>
+<span><span class="co">## Simple feature collection with 1072 features and 13 fields</span></span>
+<span><span class="co">## Geometry type: POINT</span></span>
 <span><span class="co">## Dimension:     XY</span></span>
-<span><span class="co">## Bounding box:  xmin: 295713 ymin: 3784916 xmax: 324202.2 ymax: 3804669</span></span>
-<span><span class="co">## Projected CRS: WGS 84 / UTM zone 49N</span></span>
-<span><span class="co">## # A tibble: 1,037 × 20</span></span>
-<span><span class="co">##      LPI   LSI   GAR    DAR      WAR   TER  NDVI   NDWI   DTH   DTP    DTR   DTW    BH    BD</span></span>
-<span><span class="co">##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">##  1  57.2 10.5  0.630 0.273  0.00219  0.979 0.497 -0.356  5.66 1.08  0.934   1.16 3.16  0.635</span></span>
-<span><span class="co">##  2  85.7  2.35 0.905 0.0952 0        0.977 0.514 -0.288  5.66 1.41  0.0807  1.57 0.310 0.139</span></span>
-<span><span class="co">##  3  41.2  7.85 0.436 0.449  0.000672 0.972 0.365 -0.296  4.38 1.88  0.516   2.37 3.99  0.671</span></span>
-<span><span class="co">##  4  39.1  5.40 0.534 0.377  0        0.966 0.395 -0.299  4.25 1.97  0.442   2.81 4.63  0.634</span></span>
-<span><span class="co">##  5  32.0  8.04 0.405 0.437  0        0.968 0.354 -0.302  3.65 1.34  0.615   2.55 4.07  0.642</span></span>
-<span><span class="co">##  6  58.3  7.91 0.332 0.615  0.000377 0.966 0.312 -0.271  3.69 0.700 0.592   2.25 7.91  0.777</span></span>
-<span><span class="co">##  7  98.4  3.34 0.984 0.0161 0        0.948 0.451 -0.248  5.39 1.36  0.124   3.64 0.216 0.111</span></span>
-<span><span class="co">##  8  44.6 17.6  0.416 0.502  0.000672 0.949 0.365 -0.295  5.11 1.20  0.926   2.50 6.49  0.747</span></span>
-<span><span class="co">##  9  35.9  9.81 0.464 0.467  0.00134  0.936 0.379 -0.309  7.10 2.01  1.03    2.75 5.49  0.692</span></span>
-<span><span class="co">## 10  44.3  9.49 0.403 0.504  0.000547 0.926 0.310 -0.278  8.51 2.68  0.658   3.20 3.27  0.601</span></span>
-<span><span class="co">## # ℹ 1,027 more rows</span></span>
-<span><span class="co">## # ℹ 6 more variables: RL &lt;dbl&gt;, RFD &lt;dbl&gt;, SVF &lt;dbl&gt;, FAR &lt;dbl&gt;, SUHI &lt;dbl&gt;,</span></span>
-<span><span class="co">## #   geom &lt;POLYGON [m]&gt;</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<img src="../reference/figures/spade/XianSUHII.png" alt="Overview Map of the Study Area Regarding SUHII" width="100%"><p class="caption">
-Overview Map of the Study Area Regarding SUHII
-</p>
-</div>
-<p>This spatial polygon vector data <code>suhii</code> is the streets
-divided based on roads within <em>the Ring expressway of Xi’an
-City</em>, and the attribute data are the <em>SUHII</em>(Intensity of
-surface urban heat island effect) and its influence factors.</p>
-<p>The meanings of each explanatory variable are as follows,and can be
-divided into three categories:</p>
-<ol style="list-style-type: decimal">
-<li>Landscape pattern and Land cover characteristic indicators</li>
-</ol>
-<ul>
-<li>
-<code>LPI</code> Largest patch index (Area and Edge
-metric)(landscape level)</li>
-<li>
-<code>LSI</code> Landscape shape index (Aggregation
-metric)(landscape level)</li>
-<li>
-<code>GAR</code> The proportion of green space area</li>
-<li>
-<code>DAR</code> The proportion of industrial space area</li>
-<li>
-<code>WAR</code> The proportion of water space area</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Distances from cold and heat sources indicators</li>
-</ol>
-<ul>
-<li>
-<code>DTH</code> Distance to the nearest power plant(Heat
-source)</li>
-<li>
-<code>DTP</code> Distance to the nearest urban park(Cold
-source)</li>
-<li>
-<code>DTR</code> Distance to the nearest urban main road(Heat
-source)</li>
-<li>
-<code>DTW</code> Distance to the nearest water body(Cold
-source)</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>Urban built space form indicators</li>
-</ol>
-<ul>
-<li>
-<code>BH</code> Building height</li>
-<li>
-<code>BD</code> Building density</li>
-<li>
-<code>RL</code> Roughness length</li>
-<li>
-<code>NDVI</code> Normalized Difference Vegetation Index</li>
-<li>
-<code>NDWI</code> Normalized Difference Water Index</li>
-<li>
-<code>RFD</code> Strewn degree (describing the roughness of
-buildings in three dimensional space)</li>
-<li>
-<code>SVF</code> Sky View Factor (the ratio of the visible sky area
-at a specific point or area to the total ground area in its surrounding
-vicinity)</li>
-<li>
-<code>FAR</code> Floor Area Ratio (The ratio of the total floor area
-of buildings on a site to the net land area of that site)</li>
-<li>
-<code>TER</code> Topographic Relief (The ratio of the average
-elevation of the unit to the average elevation of the entire study
-area)</li>
-</ul>
-<p>And the <code>SUHI</code> stands for surface urban heat island effect
-intensity.</p>
+<span><span class="co">## Bounding box:  xmin: -83.1795 ymin: 32.11464 xmax: -78.6023 ymax: 35.17354</span></span>
+<span><span class="co">## Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">## # A tibble: 1,072 × 14</span></span>
+<span><span class="co">##    Depression_prevelence PopulationDensity PopulationFemale Population65 NoHealthInsurance</span></span>
+<span><span class="co">##  *                 &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;</span></span>
+<span><span class="co">##  1                  23.1              61.5             53.4         22.5              7.98</span></span>
+<span><span class="co">##  2                  22.8              58.3             48.1         16.8             11.0 </span></span>
+<span><span class="co">##  3                  23.2              35.9             50.9         24.5              9.31</span></span>
+<span><span class="co">##  4                  21.8              76.1             52.1         21.8             13.2 </span></span>
+<span><span class="co">##  5                  20.7              47.3             50.3         22.0             11   </span></span>
+<span><span class="co">##  6                  21.3              32.5             56.6         19.2             13.0 </span></span>
+<span><span class="co">##  7                  22                36.9             49.9         19.2             10.8 </span></span>
+<span><span class="co">##  8                  21.2              61.5             49.3         15.9              8.57</span></span>
+<span><span class="co">##  9                  22.7              67.2             49.1         15.7             17.8 </span></span>
+<span><span class="co">## 10                  20.6             254.              55.2         11.3             12.7 </span></span>
+<span><span class="co">## # ℹ 1,062 more rows</span></span>
+<span><span class="co">## # ℹ 9 more variables: Neighbor_Disadvantage &lt;dbl&gt;, Beer &lt;dbl&gt;, MentalHealthPati &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   Generalhosptials &lt;dbl&gt;, NatureParks &lt;dbl&gt;, Casinos &lt;dbl&gt;, DrinkingPlaces &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   X.HouseRent &lt;dbl&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="spatial-pattern-of-suhi">Spatial pattern of SUHI<a class="anchor" aria-label="anchor" href="#spatial-pattern-of-suhi"></a>
+<h3 id="spatial-autocorrelation-of-depression-prevelence">Spatial Autocorrelation of Depression Prevelence<a class="anchor" aria-label="anchor" href="#spatial-autocorrelation-of-depression-prevelence"></a>
 </h3>
-<div class="section level4">
-<h4 id="global-spatial-autocorrelation-of-suhi">global spatial autocorrelation of SUHI<a class="anchor" aria-label="anchor" href="#global-spatial-autocorrelation-of-suhi"></a>
-</h4>
 <p>here I use <code>geocomplexity</code> to calculate the global
 <strong>Moran’s I</strong>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">gmi</span> <span class="op">=</span> <span class="fu">geocomplexity</span><span class="fu">::</span><span class="fu">moran_test</span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span>
+<span><span class="va">gmi</span> <span class="op">=</span> <span class="fu">geocomplexity</span><span class="fu">::</span><span class="fu">moran_test</span><span class="op">(</span><span class="va">depression</span><span class="op">)</span></span>
 <span><span class="va">gmi</span></span>
 <span><span class="co">## ***                 global spatial autocorrelation test</span></span></code></pre></div>
-<table style="width:99%;" class="table">
+<table class="table">
 <colgroup>
+<col width="28%">
+<col width="17%">
 <col width="15%">
-<col width="19%">
-<col width="18%">
-<col width="16%">
-<col width="11%">
-<col width="18%">
+<col width="14%">
+<col width="10%">
+<col width="14%">
 </colgroup>
 <thead><tr class="header">
 <th align="center">Variable</th>
@@ -227,254 +150,115 @@ intensity.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="center">LPI</td>
-<td align="center">0.298685***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">17.48</td>
-<td align="center">9.972e-69</td>
+<td align="center">Depression_prevelence</td>
+<td align="center">0.339557***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">19.06</td>
+<td align="center">2.892e-81</td>
 </tr>
 <tr class="even">
-<td align="center">LSI</td>
-<td align="center">0.370536***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">21.67</td>
-<td align="center">1.853e-104</td>
+<td align="center">PopulationDensity</td>
+<td align="center">0.365364***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">20.5</td>
+<td align="center">1.052e-93</td>
 </tr>
 <tr class="odd">
-<td align="center">GAR</td>
-<td align="center">0.421646***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">24.65</td>
-<td align="center">1.648e-134</td>
+<td align="center">PopulationFemale</td>
+<td align="center">0.00142671</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">0.1321</td>
+<td align="center">0.4474</td>
 </tr>
 <tr class="even">
-<td align="center">DAR</td>
-<td align="center">0.493366***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">28.84</td>
-<td align="center">3.526e-183</td>
+<td align="center">Population65</td>
+<td align="center">0.180436***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">10.15</td>
+<td align="center">1.641e-24</td>
 </tr>
 <tr class="odd">
-<td align="center">WAR</td>
-<td align="center">0.222443***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">13.03</td>
-<td align="center">3.955e-39</td>
+<td align="center">NoHealthInsurance</td>
+<td align="center">0.0791199***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">4.48</td>
+<td align="center">3.724e-06</td>
 </tr>
 <tr class="even">
-<td align="center">TER</td>
-<td align="center">0.969507***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">56.62</td>
-<td align="center">0</td>
+<td align="center">Neighbor_Disadvantage</td>
+<td align="center">0.113811***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">6.422</td>
+<td align="center">6.723e-11</td>
 </tr>
 <tr class="odd">
-<td align="center">NDVI</td>
-<td align="center">0.335154***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">19.61</td>
-<td align="center">6.518e-86</td>
+<td align="center">Beer</td>
+<td align="center">0.0902263***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">5.102</td>
+<td align="center">1.68e-07</td>
 </tr>
 <tr class="even">
-<td align="center">NDWI</td>
-<td align="center">0.24996***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">14.64</td>
-<td align="center">7.965e-49</td>
+<td align="center">MentalHealthPati</td>
+<td align="center">0.19318***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">10.86</td>
+<td align="center">8.534e-28</td>
 </tr>
 <tr class="odd">
-<td align="center">DTH</td>
-<td align="center">0.975702***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">56.98</td>
-<td align="center">0</td>
+<td align="center">Generalhosptials</td>
+<td align="center">0.264652***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">14.86</td>
+<td align="center">2.806e-50</td>
 </tr>
 <tr class="even">
-<td align="center">DTP</td>
-<td align="center">0.763939***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">44.62</td>
-<td align="center">0</td>
+<td align="center">NatureParks</td>
+<td align="center">0.0895589***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">5.065</td>
+<td align="center">2.045e-07</td>
 </tr>
 <tr class="odd">
-<td align="center">DTR</td>
-<td align="center">0.81955***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">47.87</td>
-<td align="center">0</td>
+<td align="center">Casinos</td>
+<td align="center">0.243212***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">13.66</td>
+<td align="center">8.28e-43</td>
 </tr>
 <tr class="even">
-<td align="center">DTW</td>
-<td align="center">0.826076***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">48.25</td>
-<td align="center">0</td>
+<td align="center">DrinkingPlaces</td>
+<td align="center">0.239054***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">13.43</td>
+<td align="center">1.97e-41</td>
 </tr>
 <tr class="odd">
-<td align="center">BH</td>
-<td align="center">0.419635***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">24.54</td>
-<td align="center">2.964e-133</td>
-</tr>
-<tr class="even">
-<td align="center">BD</td>
-<td align="center">0.310015***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">18.14</td>
-<td align="center">7.414e-74</td>
-</tr>
-<tr class="odd">
-<td align="center">RL</td>
-<td align="center">0.29453***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">17.24</td>
-<td align="center">6.796e-67</td>
-</tr>
-<tr class="even">
-<td align="center">RFD</td>
-<td align="center">0.296268***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">17.34</td>
-<td align="center">1.171e-67</td>
-</tr>
-<tr class="odd">
-<td align="center">SVF</td>
-<td align="center">0.439656***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">25.71</td>
-<td align="center">5.121e-146</td>
-</tr>
-<tr class="even">
-<td align="center">FAR</td>
-<td align="center">0.413345***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">24.17</td>
-<td align="center">2.287e-129</td>
-</tr>
-<tr class="odd">
-<td align="center">SUHI</td>
-<td align="center">0.535956***</td>
-<td align="center">-0.0009653</td>
-<td align="center">0.0002938</td>
-<td align="center">31.32</td>
-<td align="center">1.128e-215</td>
+<td align="center">X.HouseRent</td>
+<td align="center">0.141887***</td>
+<td align="center">-0.0009337</td>
+<td align="center">0.0003192</td>
+<td align="center">7.993</td>
+<td align="center">6.562e-16</td>
 </tr>
 </tbody>
 </table>
-<p>The global Moran’I Index of SUHI is <code>0.535956</code> and the P
-value is <code>1.128e-215</code>,which shows that SUHI in the main urban
-area of Xi’an has significant positive spatial autocorrelation in the
-global scale.</p>
-</div>
-<div class="section level4">
-<h4 id="local-spatial-autocorrelation-of-suhi">local spatial autocorrelation of SUHI<a class="anchor" aria-label="anchor" href="#local-spatial-autocorrelation-of-suhi"></a>
-</h4>
-<p>We will use <code>tidyrgeoda</code> to run the <code>LISA</code>,
-more details see <a href="https://spatlyu.github.io/tidyrgeoda/articles/Local-Indicators-of-Spatial-Association.html" class="external-link"><strong>here</strong></a></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tidyrgeoda</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ushi</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>lisa <span class="op">=</span> <span class="fu">st_local_moran</span><span class="op">(</span><span class="va">.</span>,<span class="st">'SUHI'</span>,</span>
-<span>                               wt <span class="op">=</span> <span class="fu">st_contiguity_weights</span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,</span>
-<span>                               significance_cutoff <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">lisa</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">lisa</span><span class="op">)</span>,lwd <span class="op">=</span> <span class="fl">.1</span>,color <span class="op">=</span> <span class="st">'grey'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_lisa</span><span class="op">(</span>name <span class="op">=</span> <span class="st">'SUHI-LISA'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>    axis.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.ticks <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    axis.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">7.5</span><span class="op">)</span>,</span>
-<span>    legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">7.5</span><span class="op">)</span>,</span>
-<span>    legend.key.size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">.5</span>, <span class="st">'cm'</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/spade/SUHI_LISA-1.png"></p>
-<p>The global and local spatial autocorrelation shows that SUHI’s strong
-spatial dependence.</p>
-<p>Spatial dependence was neglected in native geodetector, which leds to
-the development of <strong>SPADE</strong>(spatial association
-detector).</p>
-</div>
-</div>
-<div class="section level3">
-<h3 id="opgd-modeling">OPGD modeling<a class="anchor" aria-label="anchor" href="#opgd-modeling"></a>
-</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ushi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span>,</span>
-<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span>,<span class="op">-</span><span class="va">SUHI</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                 cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
-<span><span class="va">ushi_opgd</span></span>
-<span><span class="co">##                 OPGD Model                  </span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## | variable | Q-statistic |   P-value    |</span></span>
-<span><span class="co">## |:--------:|:-----------:|:------------:|</span></span>
-<span><span class="co">## |   DAR    | 0.43965943  | 9.280000e-10 |</span></span>
-<span><span class="co">## |   NDVI   | 0.40392817  | 4.020000e-10 |</span></span>
-<span><span class="co">## |   GAR    | 0.38280266  | 3.850000e-10 |</span></span>
-<span><span class="co">## |   RFD    | 0.27730957  | 1.540000e-10 |</span></span>
-<span><span class="co">## |    BD    | 0.26966147  | 5.330000e-10 |</span></span>
-<span><span class="co">## |    BH    | 0.25846868  | 2.610000e-10 |</span></span>
-<span><span class="co">## |   NDWI   | 0.21994544  | 8.280000e-10 |</span></span>
-<span><span class="co">## |   FAR    | 0.20832309  | 2.230000e-10 |</span></span>
-<span><span class="co">## |   SVF    | 0.15333436  | 6.410000e-10 |</span></span>
-<span><span class="co">## |    RL    | 0.13261626  | 4.350000e-10 |</span></span>
-<span><span class="co">## |   TER    | 0.12144556  | 3.750000e-10 |</span></span>
-<span><span class="co">## |   WAR    | 0.10718665  | 7.480000e-10 |</span></span>
-<span><span class="co">## |   DTP    | 0.09015746  | 6.150000e-10 |</span></span>
-<span><span class="co">## |   DTW    | 0.08565851  | 1.184870e-07 |</span></span>
-<span><span class="co">## |   DTH    | 0.08466484  | 1.470018e-03 |</span></span>
-<span><span class="co">## |   LSI    | 0.08447881  | 2.057000e-09 |</span></span>
-<span><span class="co">## |   DTR    | 0.07530100  | 2.973400e-08 |</span></span>
-<span><span class="co">## |   LPI    | 0.03320575  | 2.950997e-02 |</span></span></code></pre></div>
-<p><strong>You can access the detailed q statistics by
-<code>ushi_opgd$factor</code>.</strong></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ushi_opgd</span><span class="op">$</span><span class="va">factor</span></span>
-<span><span class="co">## # A tibble: 18 × 3</span></span>
-<span><span class="co">##    variable `Q-statistic` `P-value`</span></span>
-<span><span class="co">##    &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 DAR             0.440   9.28e-10</span></span>
-<span><span class="co">##  2 NDVI            0.404   4.02e-10</span></span>
-<span><span class="co">##  3 GAR             0.383   3.85e-10</span></span>
-<span><span class="co">##  4 RFD             0.277   1.54e-10</span></span>
-<span><span class="co">##  5 BD              0.270   5.33e-10</span></span>
-<span><span class="co">##  6 BH              0.258   2.61e-10</span></span>
-<span><span class="co">##  7 NDWI            0.220   8.28e-10</span></span>
-<span><span class="co">##  8 FAR             0.208   2.23e-10</span></span>
-<span><span class="co">##  9 SVF             0.153   6.41e-10</span></span>
-<span><span class="co">## 10 RL              0.133   4.35e-10</span></span>
-<span><span class="co">## 11 TER             0.121   3.75e-10</span></span>
-<span><span class="co">## 12 WAR             0.107   7.48e-10</span></span>
-<span><span class="co">## 13 DTP             0.0902  6.15e-10</span></span>
-<span><span class="co">## 14 DTW             0.0857  1.18e- 7</span></span>
-<span><span class="co">## 15 DTH             0.0847  1.47e- 3</span></span>
-<span><span class="co">## 16 LSI             0.0845  2.06e- 9</span></span>
-<span><span class="co">## 17 DTR             0.0753  2.97e- 8</span></span>
-<span><span class="co">## 18 LPI             0.0332  2.95e- 2</span></span></code></pre></div>
+<p>The global Moran’I Index of Depression Prevelence is
+<code>0.339557</code> and the P value is <code>2.892e-81</code>, which
+shows that Depression Prevelence has a moderate level of positive
+spatial autocorrelation in the global scale.</p>
 </div>
 <div class="section level3">
 <h3 id="spade-modeling">SPADE modeling<a class="anchor" aria-label="anchor" href="#spade-modeling"></a>
@@ -493,8 +277,8 @@ spatial variance.</p>
 matrix, it will use <strong>1st order inverse distance weight</strong>
 by default, which can be created by
 <code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coords</span> <span class="op">=</span> <span class="va">ushi</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">coords</span> <span class="op">=</span> <span class="va">depression</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -502,7 +286,7 @@ by default, which can be created by
 <p>You can also use gravity model weight by assigning the
 <code>power</code> parameter in <code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code>
 function.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wt2</span> <span class="op">=</span> <span class="fu"><a href="../reference/inverse_distance_weight.html">inverse_distance_weight</a></span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="using-spatial-weight-matrix-from-sdsfun">using spatial weight matrix from sdsfun<a class="anchor" aria-label="anchor" href="#using-spatial-weight-matrix-from-sdsfun"></a>
@@ -510,15 +294,15 @@ function.</p>
 <p>I have also developed the <a href="https://stscl.github.io/sdsfun/" class="external-link">sdsfun</a> package to facilitate
 the construction of spatial weight matrices, which requires an input of
 an sf object.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">depression</span><span class="op">)</span></span></code></pre></div>
 <p>Or using a spatial weight matrix based on distance kernel
 functions.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt4</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_distance_swm.html" class="external-link">spdep_distance_swm</a></span><span class="op">(</span><span class="va">ushi</span>,k <span class="op">=</span> <span class="fl">3</span>, kernel <span class="op">=</span> <span class="st">'gaussian'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wt4</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_distance_swm.html" class="external-link">spdep_distance_swm</a></span><span class="op">(</span><span class="va">depression</span>, k <span class="op">=</span> <span class="fl">6</span>, kernel <span class="op">=</span> <span class="st">'gaussian'</span><span class="op">)</span></span></code></pre></div>
 <p>In the following section we will execute <em>SPADE</em> model using
-spatial weight matrix <code>wt3</code> which is constructed by queen
-contiguity.</p>
+spatial weight matrix <code>wt4</code> which is constructed by the
+gaussian distance kernel function and six nearest neighbor objects.</p>
 <p>The test of <em>SPADE</em> model significance in <code>gdverse</code>
 is achieved by randomization null hypothesis use a pseudo-p value, this
 calculation is very time-consuming. Default <code>gdverse</code> sets
@@ -530,337 +314,47 @@ etc.</p>
 <div class="section level4">
 <h4 id="run-spade">run SPADE<a class="anchor" aria-label="anchor" href="#run-spade"></a>
 </h4>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ushi_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ushi</span>, wt <span class="op">=</span> <span class="va">wt3</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
-<span><span class="va">ushi_spade</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">depression_spade</span> <span class="op">=</span> <span class="fu"><a href="../reference/spade.html">spade</a></span><span class="op">(</span><span class="va">Depression_prevelence</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">depression</span>, wt <span class="op">=</span> <span class="va">wt4</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">depression_spade</span></span>
 <span><span class="co">## ***         Spatial Association Detector         </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## | variable | Q-statistic |      P-value      |</span></span>
-<span><span class="co">## |:--------:|:-----------:|:-----------------:|</span></span>
-<span><span class="co">## |   DAR    | 0.51354520  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   NDVI   | 0.47435470  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   NDWI   | 0.43652650  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   GAR    | 0.42037121  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   RFD    | 0.35902741  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    BD    | 0.35397385  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    BH    | 0.32947163  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   TER    | 0.31556969  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   FAR    | 0.22828609  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTR    | 0.22245435  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTW    | 0.19009188  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTP    | 0.14935992  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   LSI    | 0.14875273  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    RL    | 0.13422740  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   SVF    | 0.13294874  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   LPI    | 0.13054984  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   DTH    | 0.08346346  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   WAR    |     NaN     | No Pseudo-P Value |</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ushi_spade</span>,slicenum <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/spade/ushi_SPADE_factor-1.png"></p>
+<span><span class="co">## |       variable        | Q-statistic |      P-value      |</span></span>
+<span><span class="co">## |:---------------------:|:-----------:|:-----------------:|</span></span>
+<span><span class="co">## |        Casinos        |  1.2330489  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   Generalhosptials    |  0.5777290  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |    DrinkingPlaces     |  0.3733018  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   PopulationDensity   |  0.3673534  | No Pseudo-P Value |</span></span>
+<span><span class="co">## | Neighbor_Disadvantage |  0.3577323  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |      NatureParks      |  0.3422158  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |         Beer          |  0.3326362  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |     Population65      |  0.3136113  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   NoHealthInsurance   |  0.2598323  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |      X.HouseRent      |  0.2341995  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   PopulationFemale    |  0.2290267  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   MentalHealthPati    |  0.1862595  | No Pseudo-P Value |</span></span>
+<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">depression_spade</span>,slicenum <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/spade/spade-1.png"></p>
 <p><strong>You can also access the detailed q statistics by
-<code>ushi_spade$factor</code></strong></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ushi_spade</span><span class="op">$</span><span class="va">factor</span></span>
-<span><span class="co">## # A tibble: 18 × 3</span></span>
-<span><span class="co">##    variable `Q-statistic` `P-value`        </span></span>
-<span><span class="co">##    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;            </span></span>
-<span><span class="co">##  1 DAR             0.514  No Pseudo-P Value</span></span>
-<span><span class="co">##  2 NDVI            0.474  No Pseudo-P Value</span></span>
-<span><span class="co">##  3 NDWI            0.437  No Pseudo-P Value</span></span>
-<span><span class="co">##  4 GAR             0.420  No Pseudo-P Value</span></span>
-<span><span class="co">##  5 RFD             0.359  No Pseudo-P Value</span></span>
-<span><span class="co">##  6 BD              0.354  No Pseudo-P Value</span></span>
-<span><span class="co">##  7 BH              0.329  No Pseudo-P Value</span></span>
-<span><span class="co">##  8 TER             0.316  No Pseudo-P Value</span></span>
-<span><span class="co">##  9 FAR             0.228  No Pseudo-P Value</span></span>
-<span><span class="co">## 10 DTR             0.222  No Pseudo-P Value</span></span>
-<span><span class="co">## 11 DTW             0.190  No Pseudo-P Value</span></span>
-<span><span class="co">## 12 DTP             0.149  No Pseudo-P Value</span></span>
-<span><span class="co">## 13 LSI             0.149  No Pseudo-P Value</span></span>
-<span><span class="co">## 14 RL              0.134  No Pseudo-P Value</span></span>
-<span><span class="co">## 15 SVF             0.133  No Pseudo-P Value</span></span>
-<span><span class="co">## 16 LPI             0.131  No Pseudo-P Value</span></span>
-<span><span class="co">## 17 DTH             0.0835 No Pseudo-P Value</span></span>
-<span><span class="co">## 18 WAR           NaN      No Pseudo-P Value</span></span></code></pre></div>
-<p>The result of <code>WAR</code> is <code>NA</code> and you can also
-see a big difference between the OPGD and SPADE model. The results of
-SPADE are more reliable in most cases.</p>
-<p>We demonstrate the rationality of NA values calculated of
-<code>WAR</code> in the following section:</p>
+<code>depression_spade$factor</code></strong></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">depression_spade</span><span class="op">$</span><span class="va">factor</span></span>
+<span><span class="co">## # A tibble: 12 × 3</span></span>
+<span><span class="co">##    variable              `Q-statistic` `P-value`        </span></span>
+<span><span class="co">##    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;            </span></span>
+<span><span class="co">##  1 Casinos                       1.23  No Pseudo-P Value</span></span>
+<span><span class="co">##  2 Generalhosptials              0.578 No Pseudo-P Value</span></span>
+<span><span class="co">##  3 DrinkingPlaces                0.373 No Pseudo-P Value</span></span>
+<span><span class="co">##  4 PopulationDensity             0.367 No Pseudo-P Value</span></span>
+<span><span class="co">##  5 Neighbor_Disadvantage         0.358 No Pseudo-P Value</span></span>
+<span><span class="co">##  6 NatureParks                   0.342 No Pseudo-P Value</span></span>
+<span><span class="co">##  7 Beer                          0.333 No Pseudo-P Value</span></span>
+<span><span class="co">##  8 Population65                  0.314 No Pseudo-P Value</span></span>
+<span><span class="co">##  9 NoHealthInsurance             0.260 No Pseudo-P Value</span></span>
+<span><span class="co">## 10 X.HouseRent                   0.234 No Pseudo-P Value</span></span>
+<span><span class="co">## 11 PopulationFemale              0.229 No Pseudo-P Value</span></span>
+<span><span class="co">## 12 MentalHealthPati              0.186 No Pseudo-P Value</span></span></code></pre></div>
 </div>
-</div>
-<div class="section level3">
-<h3 id="spade-na-result-explained">SPADE NA result explained<a class="anchor" aria-label="anchor" href="#spade-na-result-explained"></a>
-</h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">WAR</span> <span class="op">=</span> <span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span></span>
-<span><span class="fu">skimr</span><span class="fu">::</span><span class="fu">skim</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<caption>Data summary</caption>
-<tbody>
-<tr class="odd">
-<td align="left">Name</td>
-<td align="left">WAR</td>
-</tr>
-<tr class="even">
-<td align="left">Number of rows</td>
-<td align="left">1037</td>
-</tr>
-<tr class="odd">
-<td align="left">Number of columns</td>
-<td align="left">1</td>
-</tr>
-<tr class="even">
-<td align="left">_______________________</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Column type frequency:</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">numeric</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">________________________</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Group variables</td>
-<td align="left">None</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Variable type: numeric</strong></p>
-<table class="table">
-<colgroup>
-<col width="18%">
-<col width="13%">
-<col width="18%">
-<col width="6%">
-<col width="6%">
-<col width="4%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="6%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">skim_variable</th>
-<th align="right">n_missing</th>
-<th align="right">complete_rate</th>
-<th align="right">mean</th>
-<th align="right">sd</th>
-<th align="right">p0</th>
-<th align="right">p25</th>
-<th align="right">p50</th>
-<th align="right">p75</th>
-<th align="right">p100</th>
-<th align="left">hist</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">data</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0.01</td>
-<td align="right">0.04</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">0.73</td>
-<td align="left">▇▁▁▁▁</td>
-</tr></tbody>
-</table>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ushi</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span>,</span>
-<span>               color<span class="op">=</span><span class="st">'white'</span>,</span>
-<span>               fill<span class="op">=</span><span class="st">'gray60'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/spade/WAR_Hist-1.png"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">moments</span><span class="fu">::</span><span class="fu">skewness</span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
-<span><span class="co">## [1] 11.6917</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html" class="external-link">shapiro.test</a></span><span class="op">(</span><span class="va">WAR</span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##  Shapiro-Wilk normality test</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## data:  WAR</span></span>
-<span><span class="co">## W = 0.14693, p-value &lt; 2.2e-16</span></span></code></pre></div>
-<p>From the histogram of <code>WAR</code>,its skewness and the result of
-shapiro.test, you will find that the WAR variable is heavily skewed,
-with a large number of zeros, which do not provide sufficient
-information for modeling SUHI.</p>
-<p>In fact, the WAR variable represents the proportion of the water area
-of each block, and the WAR value is NA in the SPADE result probably
-because it can’t provide sufficient information for modeling SUHI.</p>
-<p>Let’s look at the specific calculation process of the PSMD(power of
-spatial and multilevel discretization determinant) value corresponding
-to WAR:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>                  <span class="fu"><a href="../reference/factor_detector.html">factor_detector</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>                  <span class="op">{</span><span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">##  [1] 0.00000000 0.05795105 0.08069138 0.10177158 0.12117267 0.13904284 0.15732689 0.17377009</span></span>
-<span><span class="co">##  [9] 0.19092712 0.20432876 0.22190151 0.23780494 0.25057152 0.26498423 0.28119643 0.29570781</span></span>
-<span><span class="co">## [17] 0.30353784 0.32068449 0.33494156 0.34531717</span></span>
-<span></span>
-<span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>                   <span class="fu"><a href="../reference/psd_spade.html">psd_spade</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span>, <span class="va">wt3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">##  [1]  0.0000000 -0.4065480 -0.3942882 -0.4219084 -0.6231376 -0.7273617 -0.7462245 -0.5883158</span></span>
-<span><span class="co">##  [9] -0.4720283 -0.4902740 -0.3850580 -0.3185052 -0.3402303 -0.3119740 -0.3468160 -0.3244028</span></span>
-<span><span class="co">## [17] -0.3453713 -0.3221619 -0.2500152 -0.2302331</span></span>
-<span></span>
-<span><span class="fl">3</span><span class="op">:</span><span class="fl">22</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dbl</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">.k</span><span class="op">)</span> <span class="fu"><a href="../reference/st_unidisc.html">st_unidisc</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>,<span class="va">.k</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>                   <span class="fu"><a href="../reference/cpsd_spade.html">cpsd_spade</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">$</span><span class="va">SUHI</span>, <span class="va">ushi</span><span class="op">$</span><span class="va">WAR</span>, <span class="va">.</span>, <span class="va">wt3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">##  [1]         NaN -0.15912828 -0.21327657 -0.27536506 -0.09128105 -0.03375476 -0.15168436</span></span>
-<span><span class="co">##  [8] -0.18804177 -0.23465648 -0.29911716 -0.35586536 -0.41570044 -0.43172541 -0.41268215</span></span>
-<span><span class="co">## [15] -0.52127019 -0.57350020 -0.48780407 -0.34204498 -0.60269473 -1.11353340</span></span></code></pre></div>
-<p>In most cases, we use linear regression to explore linear
-relationships between variables and select appropriate variables for
-subsequent modeling through methods such as VIF. Here we examine the
-effect of removing the WAR variable on VIF and linear models:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lm.modelOne</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Call:</span></span>
-<span><span class="co">## lm(formula = SUHI ~ ., data = st_drop_geometry(ushi))</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Residuals:</span></span>
-<span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">## -4.1991 -0.6899 -0.0366  0.6837  3.7666 </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Coefficients:</span></span>
-<span><span class="co">##               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)  22.156854   5.003326   4.428 1.05e-05 ***</span></span>
-<span><span class="co">## LPI          -0.002280   0.002701  -0.844  0.39872    </span></span>
-<span><span class="co">## LSI          -0.004190   0.023320  -0.180  0.85746    </span></span>
-<span><span class="co">## GAR           6.869974   0.902865   7.609 6.27e-14 ***</span></span>
-<span><span class="co">## DAR           6.746594   0.829310   8.135 1.19e-15 ***</span></span>
-<span><span class="co">## WAR           5.283058   1.784052   2.961  0.00313 ** </span></span>
-<span><span class="co">## TER          -1.388985   0.670337  -2.072  0.03851 *  </span></span>
-<span><span class="co">## NDVI        -15.268701   1.620501  -9.422  &lt; 2e-16 ***</span></span>
-<span><span class="co">## NDWI        -15.408610   2.127737  -7.242 8.72e-13 ***</span></span>
-<span><span class="co">## DTH           0.015604   0.012255   1.273  0.20318    </span></span>
-<span><span class="co">## DTP           0.091178   0.098705   0.924  0.35584    </span></span>
-<span><span class="co">## DTR          -0.069387   0.064638  -1.073  0.28331    </span></span>
-<span><span class="co">## DTW          -0.195546   0.067418  -2.901  0.00381 ** </span></span>
-<span><span class="co">## BH            0.197986   0.034505   5.738 1.26e-08 ***</span></span>
-<span><span class="co">## BD            6.151962   2.181999   2.819  0.00490 ** </span></span>
-<span><span class="co">## RL            0.008593   0.228118   0.038  0.96996    </span></span>
-<span><span class="co">## RFD           0.117208   0.741697   0.158  0.87447    </span></span>
-<span><span class="co">## SVF         -22.397352   4.954590  -4.521 6.89e-06 ***</span></span>
-<span><span class="co">## FAR          -1.260657   0.112759 -11.180  &lt; 2e-16 ***</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Residual standard error: 1.06 on 1018 degrees of freedom</span></span>
-<span><span class="co">## Multiple R-squared:  0.6173, Adjusted R-squared:  0.6106 </span></span>
-<span><span class="co">## F-statistic: 91.23 on 18 and 1018 DF,  p-value: &lt; 2.2e-16</span></span>
-<span></span>
-<span><span class="fu">car</span><span class="fu">::</span><span class="fu">vif</span><span class="op">(</span><span class="va">lm.modelOne</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble_row</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                      names_to <span class="op">=</span> <span class="st">'variable'</span>,</span>
-<span>                      values_to <span class="op">=</span> <span class="st">'VIF'</span><span class="op">)</span></span>
-<span><span class="co">## # A tibble: 18 × 2</span></span>
-<span><span class="co">##    variable    VIF</span></span>
-<span><span class="co">##    &lt;chr&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 LPI        1.68</span></span>
-<span><span class="co">##  2 LSI        1.50</span></span>
-<span><span class="co">##  3 GAR       31.1 </span></span>
-<span><span class="co">##  4 DAR       28.5 </span></span>
-<span><span class="co">##  5 WAR        5.85</span></span>
-<span><span class="co">##  6 TER        1.18</span></span>
-<span><span class="co">##  7 NDVI      20.5 </span></span>
-<span><span class="co">##  8 NDWI      13.2 </span></span>
-<span><span class="co">##  9 DTH        1.15</span></span>
-<span><span class="co">## 10 DTP        2.06</span></span>
-<span><span class="co">## 11 DTR        1.15</span></span>
-<span><span class="co">## 12 DTW        2.00</span></span>
-<span><span class="co">## 13 BH        31.9 </span></span>
-<span><span class="co">## 14 BD       105.  </span></span>
-<span><span class="co">## 15 RL         2.96</span></span>
-<span><span class="co">## 16 RFD       89.4 </span></span>
-<span><span class="co">## 17 SVF        3.02</span></span>
-<span><span class="co">## 18 FAR       31.3</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lm.modelTwo</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">SUHI</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_drop_geometry</a></span><span class="op">(</span><span class="va">ushi</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">WAR</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rspatial.github.io/terra/reference/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Call:</span></span>
-<span><span class="co">## lm(formula = SUHI ~ ., data = select(st_drop_geometry(ushi), </span></span>
-<span><span class="co">##     -WAR))</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Residuals:</span></span>
-<span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">## -4.1752 -0.7118 -0.0227  0.6896  3.6784 </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Coefficients:</span></span>
-<span><span class="co">##               Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span><span class="co">## (Intercept)  21.011090   5.007323   4.196 2.95e-05 ***</span></span>
-<span><span class="co">## LPI          -0.000917   0.002671  -0.343 0.731475    </span></span>
-<span><span class="co">## LSI          -0.002172   0.023399  -0.093 0.926046    </span></span>
-<span><span class="co">## GAR           5.283103   0.729402   7.243 8.64e-13 ***</span></span>
-<span><span class="co">## DAR           5.300795   0.672909   7.877 8.53e-15 ***</span></span>
-<span><span class="co">## TER          -1.174510   0.668949  -1.756 0.079431 .  </span></span>
-<span><span class="co">## NDVI        -13.026040   1.438097  -9.058  &lt; 2e-16 ***</span></span>
-<span><span class="co">## NDWI        -10.693806   1.416860  -7.548 9.82e-14 ***</span></span>
-<span><span class="co">## DTH           0.011362   0.012217   0.930 0.352593    </span></span>
-<span><span class="co">## DTP           0.115158   0.098747   1.166 0.243809    </span></span>
-<span><span class="co">## DTR          -0.058443   0.064778  -0.902 0.367161    </span></span>
-<span><span class="co">## DTW          -0.226617   0.066850  -3.390 0.000726 ***</span></span>
-<span><span class="co">## BH            0.192503   0.034587   5.566 3.34e-08 ***</span></span>
-<span><span class="co">## BD            5.951972   2.189252   2.719 0.006665 ** </span></span>
-<span><span class="co">## RL            0.061282   0.228288   0.268 0.788413    </span></span>
-<span><span class="co">## RFD           0.100502   0.744497   0.135 0.892644    </span></span>
-<span><span class="co">## SVF         -19.414910   4.869603  -3.987 7.17e-05 ***</span></span>
-<span><span class="co">## FAR          -1.227348   0.112624 -10.898  &lt; 2e-16 ***</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Residual standard error: 1.064 on 1019 degrees of freedom</span></span>
-<span><span class="co">## Multiple R-squared:  0.614,  Adjusted R-squared:  0.6076 </span></span>
-<span><span class="co">## F-statistic: 95.36 on 17 and 1019 DF,  p-value: &lt; 2.2e-16</span></span>
-<span></span>
-<span><span class="fu">car</span><span class="fu">::</span><span class="fu">vif</span><span class="op">(</span><span class="va">lm.modelTwo</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble_row</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                      names_to <span class="op">=</span> <span class="st">'variable'</span>,</span>
-<span>                      values_to <span class="op">=</span> <span class="st">'VIF'</span><span class="op">)</span></span>
-<span><span class="co">## # A tibble: 17 × 2</span></span>
-<span><span class="co">##    variable    VIF</span></span>
-<span><span class="co">##    &lt;chr&gt;     &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 LPI        1.63</span></span>
-<span><span class="co">##  2 LSI        1.50</span></span>
-<span><span class="co">##  3 GAR       20.2 </span></span>
-<span><span class="co">##  4 DAR       18.6 </span></span>
-<span><span class="co">##  5 TER        1.16</span></span>
-<span><span class="co">##  6 NDVI      16.0 </span></span>
-<span><span class="co">##  7 NDWI       5.83</span></span>
-<span><span class="co">##  8 DTH        1.13</span></span>
-<span><span class="co">##  9 DTP        2.05</span></span>
-<span><span class="co">## 10 DTR        1.15</span></span>
-<span><span class="co">## 11 DTW        1.96</span></span>
-<span><span class="co">## 12 BH        31.8 </span></span>
-<span><span class="co">## 13 BD       104.  </span></span>
-<span><span class="co">## 14 RL         2.94</span></span>
-<span><span class="co">## 15 RFD       89.4 </span></span>
-<span><span class="co">## 16 SVF        2.90</span></span>
-<span><span class="co">## 17 FAR       31.0</span></span></code></pre></div>
-<p>You can see that the model does not change much before and after
-removing the WAR variable.In other words, WAR does not do much to model
-SUHI.</p>
-<p>This suggests another use of <code>SPADE</code> model for selecting
-modeling variables.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
