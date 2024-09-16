@@ -26,7 +26,7 @@ Authors@R: c(
 Description: Analyzing spatial factors and exploring spatial associations based on the concept of spatial 
              stratified heterogeneity, and also takes into account local spatial dependencies, spatial 
              interpretability, potential spatial interactions, and robust spatial stratification. Additionally, 
-             supports geographical detector models established in academic literature.
+             it supports geographical detector models established in academic literature.
 License: GPL-3
 Encoding: UTF-8
 Language: en-US
