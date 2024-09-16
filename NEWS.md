@@ -1,3 +1,7 @@
+# gdverse 1.0-2
+
+* Using new example data in the vignettes for `spade` and `idsa`.
+
 # gdverse 1.0-1
 
 * Unify all vignettes filenames to lowercase.
