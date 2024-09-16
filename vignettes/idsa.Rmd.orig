@@ -44,7 +44,7 @@ wt = sdsfun::inverse_distance_swm(depression)
 
 ### IDSA modeling
 
-```{r idsa_modeling,fig.width=8.25,fig.height=6.5}
+```{r idsa_modeling,fig.width=8.25,fig.height=7.5}
 tictoc::tic()
 idsa.model = idsa(Depression_prevelence ~ .,
                   data = depression,
