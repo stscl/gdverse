@@ -19,32 +19,29 @@ knitr::opts_chunk$set(
 
 ### Load data and package
 
-We use the [`corrected boston bousing data`](https://jakubnowosad.com/spData/reference/boston.html) from the `spData` package and select a few variables to show how to apply the SPADE model.
-
 ``` {r}
 library(sf)
 library(tidyverse)
 library(gdverse)
 
-boston = spData::boston.c %>%
-  as_tibble() %>%
-  select(CMEDV,CRIM,RM,DIS,RAD,PTRATIO,LON,LAT) %>%
-  st_as_sf(coords = c('LON','LAT'), crs = 4326)
-boston
+depression = system.file('extdata/Depression.csv',package = 'gdverse') %>%
+  read_csv() %>%
+  st_as_sf(coords = c('X','Y'), crs = 4326)
+depression
 ```
 
-### Spatial Autocorrelation of CMEDV
+### Spatial Autocorrelation of Depression Prevelence
 
 here I use `geocomplexity` to calculate the global **Moran's I**:
 
 ```{r}
 set.seed(123456789)
 
-gmi = geocomplexity::moran_test(boston)
+gmi = geocomplexity::moran_test(depression)
 gmi
 ```
 
-The global Moran'I Index of CMEDV is `0.336586` and the P value is `6.689e-39`,which shows that `CMEDV` has significant positive spatial autocorrelation in the global scale.
+The global Moran'I Index of Depression Prevelence is `0.339557` and the P value is ` 2.892e-81`, which shows that Depression Prevelence has a moderate level of positive spatial autocorrelation in the global scale.
 
 ### SPADE modeling
 
@@ -57,7 +54,7 @@ The biggest difference between SPADE and native GD and OPGD in actual modeling i
 In `spade` function, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
 
 ```{r}
-coords = boston |>
+coords = depression |>
   st_centroid() |>
   st_coordinates()
 
@@ -75,13 +72,13 @@ wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
 
 ```{r}
-wt3 = sdsfun::spdep_contiguity_swm(boston)
+wt3 = sdsfun::spdep_contiguity_swm(depression)
 ```
 
 Or using a spatial weight matrix based on distance kernel functions.
 
 ```{r}
-wt4 = sdsfun::spdep_distance_swm(boston, k = 6, kernel = 'gaussian')
+wt4 = sdsfun::spdep_distance_swm(depression, k = 6, kernel = 'gaussian')
 ```
 
 In the following section we will execute *SPADE* model using spatial weight matrix `wt4` which is constructed by the gaussian distance kernel function and six nearest neighbor objects.
@@ -90,14 +87,14 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 #### run SPADE
 
-```{r spade,fig.width=8.5,fig.height=6.5}
-boston_spade = spade(CMEDV ~ ., data = boston, wt = wt3, cores = 12)
-boston_spade
-plot(boston_spade,slicenum = 3)
+```{r spade,fig.width=8.5,fig.height=7.5}
+depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt4, cores = 12)
+depression_spade
+plot(depression_spade,slicenum = 6)
 ```
 
-**You can also access the detailed q statistics by `boston_spade$factor`**
+**You can also access the detailed q statistics by `depression_spade$factor`**
 
 ```{r}
-boston_spade$factor
+depression_spade$factor
 ```
