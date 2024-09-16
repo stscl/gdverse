@@ -38,15 +38,19 @@
 #'      discvar = paste0('x',letters[1:3]),
 #'      discnum = 3:6)
 #'
-opgd = \(formula, data, discvar, discnum = 3:22,
-         discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box"),
+opgd = \(formula, data, discvar = NULL, discnum = 3:22,
+         discmethod = c("sd","equal","pretty","quantile","fisher",
+                        "headtails","maximum","box"),
          cores = 1, type = "factor", alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
-  yname = formula.vars[1]
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
+  }
+  yname = formula.vars[1]
+  if (is.null(discvar)) {
+    discvar = colnames(data)[-which(colnames(data) == yname)]
   }
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   g = gd_bestunidisc(paste0(yname,'~',paste0(discvar,collapse = '+')),
