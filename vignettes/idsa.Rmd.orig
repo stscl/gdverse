@@ -26,45 +26,12 @@ In this vignette, we used the same data as the SPADE vignette to demonstrate the
 ``` {r}
 library(sf)
 library(tidyverse)
-library(magrittr)
 library(gdverse)
 
-ushi = read_sf(system.file('extdata/USHI.gpkg',package = 'gdverse'))
-ushi
-```
-
-### Data precessing
-
-There are originally 18 explanatory variables in the `ushi` tibble. If these 18 variables are used together, IDSA needs to be calculated about `r 2^18-1` times, which is very time-consuming, and we need to reduce the dimension of the data or select appropriate variables.
-
-Here we combine the understanding of the data and the diffusion maps method to generate the data after dimensionality reduction. Specifically, we combine data of the same class into one class using diffusion maps based on the classification of explanatory variables.
-
-In SPADE vignette we proved the invalidity of `WAR` to explain `SUHI`, which is removed here.
-
-```{r}
-landscape = c("LPI","LSI","GAR","DAR")
-dist_cold_heat = c("DTH","DTP","DTR","DTW")
-urbanbuilt_form = c("TER","NDVI","NDWI","BH","BD","RL","RFD","SVF","FAR")
-
-dm_n21 = \(xvecname){
-  return(
-    ushi %>%
-      sf::st_drop_geometry() %>%
-      dplyr::select(dplyr::all_of(xvecname)) %>%
-      {Rdimtools::do.dm(as.data.frame(.),1)} %>%
-      {.$Y} %>%
-      {.[,1]} %>%
-      gdverse::rescale_vector(0,1)
-  )
-}
-
-newdata = tibble::tibble(
-  SUHI = ushi$SUHI,
-  landscape = dm_n21(landscape),
-  dist_cold_heat = dm_n21(dist_cold_heat),
-  urbanbuilt_form = dm_n21(urbanbuilt_form),
-)
-newdata
+depression = system.file('extdata/Depression.csv',package = 'gdverse') %>%
+  read_csv() %>%
+  st_as_sf(coords = c('X','Y'), crs = 4326)
+depression
 ```
 
 ### Construct spatial Weight
@@ -72,13 +39,15 @@ newdata
 We use the same spatial weight matrix as SPADE vignette.
 
 ```{r}
-wt = sdsfun::spdep_contiguity_swm(ushi)
+wt = sdsfun::inverse_distance_swm(depression)
 ```
 
 ### IDSA modeling
 
-```{r idsa_modeling,fig.width=4.25,fig.height=3.5}
-idsa.model = idsa(SUHI ~ ., data = newdata, wt = wt, cores = 6)
+```{r idsa_modeling,fig.width=8.25,fig.height=6.5}
+idsa.model = idsa(Depression_prevelence ~ .,
+                  data = depression,
+                  wt = wt, cores = 12)
 idsa.model
 plot(idsa.model)
 ```
@@ -87,14 +56,12 @@ The risk detection outcomes, as determined by IDSA, can be graphically represent
 
 ```{r idsa_map,fig.width=6.5,fig.height=4}
 idsa_risk = idsa.model$risk2
-ushi$risk = idsa_risk
+depression$risk = idsa_risk
 
-ggplot(data = ushi) +
+ggplot(data = depression) +
   geom_sf(aes(fill = risk),
           alpha = .65) +
   ggplot2::scale_fill_manual(values = c("No" = "#7fdbff",
                                         "Yes" = "#ffa500")) +
   theme_bw()
 ```
-
-This vignette is a special case because the explanatory variables are dimensionally reduced in advance and is used as a coping strategy when IDSA is executed in the face of many explanatory variables.
