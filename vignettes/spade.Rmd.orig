@@ -43,7 +43,20 @@ gmi
 
 The global Moran'I Index of Depression Prevelence is `0.339557` and the P value is ` 2.892e-81`, which shows that Depression Prevelence has a moderate level of positive spatial autocorrelation in the global scale.
 
-### SPADE modeling
+### OPGD modeling
+
+```{r}
+depression_opgd = opgd(Depression_prevelence ~ ., data = depression, cores = 12)
+depression_opgd
+```
+
+**You can access the detailed q statistics by `depression_opgd$factor`**
+
+```{r}
+depression_opgd$factor
+```
+
+### Spatial Weight Matrix
 
 *SPADE* explicitly considers the spatial variance by assigning the weight of the influence based on spatial distribution and also minimizes the influence of the number of levels on PD values by using the multilevel discretization and considering information loss due to discretization.
 
@@ -67,8 +80,6 @@ You can also use gravity model weight by assigning the `power` parameter in `inv
 wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
 ```
 
-#### using spatial weight matrix from sdsfun
-
 I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
 
 ```{r}
@@ -83,12 +94,12 @@ wt4 = sdsfun::spdep_distance_swm(depression, k = 6, kernel = 'gaussian')
 
 The test of *SPADE* model significance in `gdverse` is achieved by randomization null hypothesis use a pseudo-p value, this calculation is very time-consuming. Default `gdverse` sets the `permutations` parameter to 0 and does not calculate the pseudo-p value. If you want to calculate the pseudo-p value, specify the `permutations` parameter to a number such as 99,999,9999, etc.
 
-In the following section we will execute *SPADE* model using spatial weight matrix `wt3`.
+In the following section we will execute *SPADE* model using spatial weight matrix `wt1`.
 
-#### run SPADE
+### SPADE modeling
 
 ```{r spade,fig.width=8.5,fig.height=7.5}
-depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt3, cores = 12)
+depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt1, cores = 12)
 depression_spade
 plot(depression_spade,slicenum = 6)
 ```
