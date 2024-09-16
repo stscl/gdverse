@@ -12,7 +12,8 @@
 #' @param formula A formula of RGD model.
 #' @param data A data.frame, tibble or sf object of observation data.
 #' @param discvar Name of continuous variable columns that need to be discretized. Noted that
-#' when `formula` has `discvar`, `data` must have these columns.
+#' when `formula` has `discvar`, `data` must have these columns. By default, all independent
+#' variables are used as `discvar`.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
 #' Default all `discvar` use `10`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
