@@ -7,7 +7,7 @@
 rgd(
   formula,
   data,
-  discvar,
+  discvar = NULL,
   discnum = NULL,
   minsize = NULL,
   cores = 1,
@@ -21,7 +21,8 @@ rgd(
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
 \item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
-when \code{formula} has \code{discvar}, \code{data} must have these columns.}
+when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
+variables are used as \code{discvar}.}
 
 \item{discnum}{A numeric vector of discretized classes of columns that need to be discretized.
 Default all \code{discvar} use \code{10}.}

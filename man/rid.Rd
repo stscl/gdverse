@@ -7,10 +7,10 @@
 rid(
   formula,
   data,
-  overlaymethod = "and",
-  discvar,
+  discvar = NULL,
   discnum = NULL,
   minsize = NULL,
+  overlaymethod = "and",
   cores = 1
 )
 }
@@ -19,16 +19,17 @@ rid(
 
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
-\item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
-Default is \code{and}.}
-
 \item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
-when \code{formula} has \code{discvar}, \code{data} must have these columns.}
+when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
+variables are used as \code{discvar}.}
 
 \item{discnum}{A numeric vector for the number of discretized classes of columns that need
 to be discretized. Default all \code{discvar} use \code{10}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
+
+\item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
+Default is \code{and}.}
 
 \item{cores}{(optional) Positive integer(default is 1). If cores > 1, use parallel computation.}
 }

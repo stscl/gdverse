@@ -7,7 +7,7 @@
 opgd(
   formula,
   data,
-  discvar,
+  discvar = NULL,
   discnum = 3:22,
   discmethod = c("sd", "equal", "pretty", "quantile", "fisher", "headtails", "maximum",
     "box"),
@@ -22,8 +22,9 @@ opgd(
 
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
-\item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
-when \code{formula} has \code{discvar}, \code{data} must have these columns.}
+\item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
+when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
+variables are used as \code{discvar}.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
