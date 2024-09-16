@@ -32,8 +32,8 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install system dependencies
-        run: sudo apt-get install libglu1-mesa
+      # - name: Install system dependencies
+      #   run: sudo apt-get install libglu1-mesa
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
