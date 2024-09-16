@@ -143,28 +143,28 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 
 ``` r
-depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt4, cores = 12)
+depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt3, cores = 12)
 depression_spade
 ## ***         Spatial Association Detector         
 ## 
-## |       variable        | Q-statistic |      P-value      |
-## |:---------------------:|:-----------:|:-----------------:|
-## |        Casinos        |  1.2330489  | No Pseudo-P Value |
-## |   Generalhosptials    |  0.5777290  | No Pseudo-P Value |
-## |    DrinkingPlaces     |  0.3733018  | No Pseudo-P Value |
-## |   PopulationDensity   |  0.3673534  | No Pseudo-P Value |
-## | Neighbor_Disadvantage |  0.3577323  | No Pseudo-P Value |
-## |      NatureParks      |  0.3422158  | No Pseudo-P Value |
-## |         Beer          |  0.3326362  | No Pseudo-P Value |
-## |     Population65      |  0.3136113  | No Pseudo-P Value |
-## |   NoHealthInsurance   |  0.2598323  | No Pseudo-P Value |
-## |      X.HouseRent      |  0.2341995  | No Pseudo-P Value |
-## |   PopulationFemale    |  0.2290267  | No Pseudo-P Value |
-## |   MentalHealthPati    |  0.1862595  | No Pseudo-P Value |
+## |       variable        | Q-statistic  |      P-value      |
+## |:---------------------:|:------------:|:-----------------:|
+## |   Generalhosptials    | 0.713129950  | No Pseudo-P Value |
+## |         Beer          | 0.299178193  | No Pseudo-P Value |
+## |      NatureParks      | 0.241494175  | No Pseudo-P Value |
+## | Neighbor_Disadvantage | 0.223868294  | No Pseudo-P Value |
+## |   MentalHealthPati    | 0.218770886  | No Pseudo-P Value |
+## |    DrinkingPlaces     | 0.218687191  | No Pseudo-P Value |
+## |   NoHealthInsurance   | 0.136173768  | No Pseudo-P Value |
+## |     Population65      | 0.104728974  | No Pseudo-P Value |
+## |   PopulationFemale    | 0.077133069  | No Pseudo-P Value |
+## |        Casinos        | 0.056337671  | No Pseudo-P Value |
+## |   PopulationDensity   | -0.002441396 | No Pseudo-P Value |
+## |      X.HouseRent      | -0.033097439 | No Pseudo-P Value |
 plot(depression_spade,slicenum = 6)
 ```
 
-![](../man/figures/spade/spade-1.png)
+![plot of chunk spade](man/figures/spade/spade-1.png)
 
 **You can also access the detailed q statistics by `depression_spade$factor`**
 
@@ -174,16 +174,16 @@ depression_spade$factor
 ## # A tibble: 12 × 3
 ##    variable              `Q-statistic` `P-value`        
 ##    <chr>                         <dbl> <chr>            
-##  1 Casinos                       1.23  No Pseudo-P Value
-##  2 Generalhosptials              0.578 No Pseudo-P Value
-##  3 DrinkingPlaces                0.373 No Pseudo-P Value
-##  4 PopulationDensity             0.367 No Pseudo-P Value
-##  5 Neighbor_Disadvantage         0.358 No Pseudo-P Value
-##  6 NatureParks                   0.342 No Pseudo-P Value
-##  7 Beer                          0.333 No Pseudo-P Value
-##  8 Population65                  0.314 No Pseudo-P Value
-##  9 NoHealthInsurance             0.260 No Pseudo-P Value
-## 10 X.HouseRent                   0.234 No Pseudo-P Value
-## 11 PopulationFemale              0.229 No Pseudo-P Value
-## 12 MentalHealthPati              0.186 No Pseudo-P Value
+##  1 Generalhosptials            0.713   No Pseudo-P Value
+##  2 Beer                        0.299   No Pseudo-P Value
+##  3 NatureParks                 0.241   No Pseudo-P Value
+##  4 Neighbor_Disadvantage       0.224   No Pseudo-P Value
+##  5 MentalHealthPati            0.219   No Pseudo-P Value
+##  6 DrinkingPlaces              0.219   No Pseudo-P Value
+##  7 NoHealthInsurance           0.136   No Pseudo-P Value
+##  8 Population65                0.105   No Pseudo-P Value
+##  9 PopulationFemale            0.0771  No Pseudo-P Value
+## 10 Casinos                     0.0563  No Pseudo-P Value
+## 11 PopulationDensity          -0.00244 No Pseudo-P Value
+## 12 X.HouseRent                -0.0331  No Pseudo-P Value
 ```
