@@ -43,8 +43,8 @@
 #'         discvar = c("xa","xb","xc"), discnum = 4, cores = 6)
 #' g
 #' }
-rid = \(formula,data,overlaymethod = 'and',discvar,
-        discnum = NULL, minsize = NULL, cores = 1){
+rid = \(formula, data, discvar = NULL, discnum = NULL,
+        minsize = NULL, overlaymethod = 'and', cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
@@ -55,6 +55,9 @@ rid = \(formula,data,overlaymethod = 'and',discvar,
     dti = data
   }
   xname = colnames(dti)[-which(colnames(dti) == yname)]
+  if (is.null(discvar)) {
+    discvar = xname
+  }
   discdf =  dplyr::select(dti,dplyr::all_of(c(yname,discvar)))
   if (is.null(discnum)) {discnum = rep(10,length(discvar))}
   g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
