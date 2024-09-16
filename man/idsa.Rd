@@ -8,9 +8,9 @@ idsa(
   formula,
   data,
   wt = NULL,
-  overlaymethod = "and",
   discnum = 3:22,
   discmethod = "quantile",
+  overlaymethod = "and",
   strategy = 2L,
   increase_rate = 0.05,
   cores = 1,
@@ -26,14 +26,14 @@ idsa(
 
 \item{wt}{(optional) The spatial weight matrix. When \code{data} is not an \code{sf} object, must provide \code{wt}.}
 
-\item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
-Default is \code{and}.}
-
 \item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
 Others use \code{st_unidisc()}. You can try \code{unidisc_methods()} to see supported methods in \code{st_unidisc()}.}
+
+\item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
+Default is \code{and}.}
 
 \item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest SPADE model q-statistics to
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
