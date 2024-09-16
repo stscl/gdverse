@@ -11,41 +11,41 @@ vignette: >
 
 ### Load data and package
 
-We use the [`corrected boston bousing data`](https://jakubnowosad.com/spData/reference/boston.html) from the `spData` package and select a few variables to show how to apply the SPADE model.
-
 
 ``` r
 library(sf)
 library(tidyverse)
 library(gdverse)
 
-boston = spData::boston.c %>%
-  as_tibble() %>%
-  select(CMEDV,CRIM,RM,DIS,RAD,PTRATIO,LON,LAT) %>%
-  st_as_sf(coords = c('LON','LAT'), crs = 4326)
-boston
-## Simple feature collection with 506 features and 6 fields
+depression = system.file('extdata/Depression.csv',package = 'gdverse') %>%
+  read_csv() %>%
+  st_as_sf(coords = c('X','Y'), crs = 4326)
+depression
+## Simple feature collection with 1072 features and 13 fields
 ## Geometry type: POINT
 ## Dimension:     XY
-## Bounding box:  xmin: -71.2895 ymin: 42.03 xmax: -70.81 ymax: 42.381
+## Bounding box:  xmin: -83.1795 ymin: 32.11464 xmax: -78.6023 ymax: 35.17354
 ## Geodetic CRS:  WGS 84
-## # A tibble: 506 × 7
-##    CMEDV    CRIM    RM   DIS   RAD PTRATIO          geometry
-##  * <dbl>   <dbl> <dbl> <dbl> <int>   <dbl>       <POINT [°]>
-##  1  24   0.00632  6.58  4.09     1    15.3  (-70.955 42.255)
-##  2  21.6 0.0273   6.42  4.97     2    17.8  (-70.95 42.2875)
-##  3  34.7 0.0273   7.18  4.97     2    17.8  (-70.936 42.283)
-##  4  33.4 0.0324   7.00  6.06     3    18.7  (-70.928 42.293)
-##  5  36.2 0.0690   7.15  6.06     3    18.7  (-70.922 42.298)
-##  6  28.7 0.0298   6.43  6.06     3    18.7 (-70.9165 42.304)
-##  7  22.9 0.0883   6.01  5.56     5    15.2  (-70.936 42.297)
-##  8  22.1 0.145    6.17  5.95     5    15.2  (-70.9375 42.31)
-##  9  16.5 0.211    5.63  6.08     5    15.2  (-70.933 42.312)
-## 10  18.9 0.170    6.00  6.59     5    15.2  (-70.929 42.316)
-## # ℹ 496 more rows
+## # A tibble: 1,072 × 14
+##    Depression_prevelence PopulationDensity PopulationFemale Population65 NoHealthInsurance
+##  *                 <dbl>             <dbl>            <dbl>        <dbl>             <dbl>
+##  1                  23.1              61.5             53.4         22.5              7.98
+##  2                  22.8              58.3             48.1         16.8             11.0 
+##  3                  23.2              35.9             50.9         24.5              9.31
+##  4                  21.8              76.1             52.1         21.8             13.2 
+##  5                  20.7              47.3             50.3         22.0             11   
+##  6                  21.3              32.5             56.6         19.2             13.0 
+##  7                  22                36.9             49.9         19.2             10.8 
+##  8                  21.2              61.5             49.3         15.9              8.57
+##  9                  22.7              67.2             49.1         15.7             17.8 
+## 10                  20.6             254.              55.2         11.3             12.7 
+## # ℹ 1,062 more rows
+## # ℹ 9 more variables: Neighbor_Disadvantage <dbl>, Beer <dbl>, MentalHealthPati <dbl>,
+## #   Generalhosptials <dbl>, NatureParks <dbl>, Casinos <dbl>, DrinkingPlaces <dbl>,
+## #   X.HouseRent <dbl>, geometry <POINT [°]>
 ```
 
-### Spatial Autocorrelation of CMEDV
+### Spatial Autocorrelation of Depression Prevelence
 
 here I use `geocomplexity` to calculate the global **Moran's I**:
 
@@ -53,31 +53,45 @@ here I use `geocomplexity` to calculate the global **Moran's I**:
 ``` r
 set.seed(123456789)
 
-gmi = geocomplexity::moran_test(boston)
+gmi = geocomplexity::moran_test(depression)
 gmi
 ## ***                 global spatial autocorrelation test
 ```
 
 
--------------------------------------------------------------------
- Variable     MoranI         EI        VarI      zI         pI     
----------- ------------- ---------- ---------- ------- ------------
-  CMEDV     0.336586***   -0.00198   0.000679   12.99   6.689e-39  
+------------------------------------------------------------------------------------
+       Variable             MoranI          EI         VarI        zI        pI     
+----------------------- -------------- ------------ ----------- -------- -----------
+ Depression_prevelence   0.339557***    -0.0009337   0.0003192   19.06    2.892e-81 
 
-   CRIM     0.490946***   -0.00198   0.000679   18.92   4.129e-80  
+   PopulationDensity     0.365364***    -0.0009337   0.0003192    20.5    1.052e-93 
 
-    RM      0.187615***   -0.00198   0.000679   7.276   1.718e-13  
+   PopulationFemale       0.00142671    -0.0009337   0.0003192   0.1321    0.4474   
 
-   DIS      0.489222***   -0.00198   0.000679   18.85   1.445e-79  
+     Population65        0.180436***    -0.0009337   0.0003192   10.15    1.641e-24 
 
-   RAD      0.829335***   -0.00198   0.000679   31.9    1.198e-223 
+   NoHealthInsurance     0.0791199***   -0.0009337   0.0003192    4.48    3.724e-06 
 
- PTRATIO    0.462886***   -0.00198   0.000679   17.84   1.723e-71  
--------------------------------------------------------------------
+ Neighbor_Disadvantage   0.113811***    -0.0009337   0.0003192   6.422    6.723e-11 
+
+         Beer            0.0902263***   -0.0009337   0.0003192   5.102    1.68e-07  
+
+   MentalHealthPati       0.19318***    -0.0009337   0.0003192   10.86    8.534e-28 
+
+   Generalhosptials      0.264652***    -0.0009337   0.0003192   14.86    2.806e-50 
+
+      NatureParks        0.0895589***   -0.0009337   0.0003192   5.065    2.045e-07 
+
+        Casinos          0.243212***    -0.0009337   0.0003192   13.66    8.28e-43  
+
+    DrinkingPlaces       0.239054***    -0.0009337   0.0003192   13.43    1.97e-41  
+
+      X.HouseRent        0.141887***    -0.0009337   0.0003192   7.993    6.562e-16 
+------------------------------------------------------------------------------------
 
 
 
-The global Moran'I Index of CMEDV is `0.336586` and the P value is `6.689e-39`,which shows that `CMEDV` has significant positive spatial autocorrelation in the global scale.
+The global Moran'I Index of Depression Prevelence is `0.339557` and the P value is ` 2.892e-81`, which shows that Depression Prevelence has a moderate level of positive spatial autocorrelation in the global scale.
 
 ### SPADE modeling
 
@@ -91,7 +105,7 @@ In `spade` function, when you not provide a spatial weight matrix, it will use *
 
 
 ``` r
-coords = boston |>
+coords = depression |>
   st_centroid() |>
   st_coordinates()
 
@@ -111,14 +125,14 @@ I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to f
 
 
 ``` r
-wt3 = sdsfun::spdep_contiguity_swm(boston)
+wt3 = sdsfun::spdep_contiguity_swm(depression)
 ```
 
 Or using a spatial weight matrix based on distance kernel functions.
 
 
 ``` r
-wt4 = sdsfun::spdep_distance_swm(boston, k = 6, kernel = 'gaussian')
+wt4 = sdsfun::spdep_distance_swm(depression, k = 6, kernel = 'gaussian')
 ```
 
 In the following section we will execute *SPADE* model using spatial weight matrix `wt4` which is constructed by the gaussian distance kernel function and six nearest neighbor objects.
@@ -129,33 +143,47 @@ The test of *SPADE* model significance in `gdverse` is achieved by randomization
 
 
 ``` r
-boston_spade = spade(CMEDV ~ ., data = boston, wt = wt3, cores = 12)
-boston_spade
+depression_spade = spade(Depression_prevelence ~ ., data = depression, wt = wt4, cores = 12)
+depression_spade
 ## ***         Spatial Association Detector         
 ## 
-## | variable | Q-statistic |      P-value      |
-## |:--------:|:-----------:|:-----------------:|
-## |   CRIM   | 0.99998547  | No Pseudo-P Value |
-## |    RM    | 0.58681097  | No Pseudo-P Value |
-## |   DIS    | 0.35004448  | No Pseudo-P Value |
-## |   RAD    | 0.14994034  | No Pseudo-P Value |
-## | PTRATIO  | 0.07880127  | No Pseudo-P Value |
-plot(boston_spade,slicenum = 3)
+## |       variable        | Q-statistic |      P-value      |
+## |:---------------------:|:-----------:|:-----------------:|
+## |        Casinos        |  1.2330489  | No Pseudo-P Value |
+## |   Generalhosptials    |  0.5777290  | No Pseudo-P Value |
+## |    DrinkingPlaces     |  0.3733018  | No Pseudo-P Value |
+## |   PopulationDensity   |  0.3673534  | No Pseudo-P Value |
+## | Neighbor_Disadvantage |  0.3577323  | No Pseudo-P Value |
+## |      NatureParks      |  0.3422158  | No Pseudo-P Value |
+## |         Beer          |  0.3326362  | No Pseudo-P Value |
+## |     Population65      |  0.3136113  | No Pseudo-P Value |
+## |   NoHealthInsurance   |  0.2598323  | No Pseudo-P Value |
+## |      X.HouseRent      |  0.2341995  | No Pseudo-P Value |
+## |   PopulationFemale    |  0.2290267  | No Pseudo-P Value |
+## |   MentalHealthPati    |  0.1862595  | No Pseudo-P Value |
+plot(depression_spade,slicenum = 6)
 ```
 
-![plot of chunk spade](man/figures/spade/spade-1.png)
+![](../man/figures/spade/spade-1.png)
 
-**You can also access the detailed q statistics by `boston_spade$factor`**
+**You can also access the detailed q statistics by `depression_spade$factor`**
 
 
 ``` r
-boston_spade$factor
-## # A tibble: 5 × 3
-##   variable `Q-statistic` `P-value`        
-##   <chr>            <dbl> <chr>            
-## 1 CRIM            1.00   No Pseudo-P Value
-## 2 RM              0.587  No Pseudo-P Value
-## 3 DIS             0.350  No Pseudo-P Value
-## 4 RAD             0.150  No Pseudo-P Value
-## 5 PTRATIO         0.0788 No Pseudo-P Value
+depression_spade$factor
+## # A tibble: 12 × 3
+##    variable              `Q-statistic` `P-value`        
+##    <chr>                         <dbl> <chr>            
+##  1 Casinos                       1.23  No Pseudo-P Value
+##  2 Generalhosptials              0.578 No Pseudo-P Value
+##  3 DrinkingPlaces                0.373 No Pseudo-P Value
+##  4 PopulationDensity             0.367 No Pseudo-P Value
+##  5 Neighbor_Disadvantage         0.358 No Pseudo-P Value
+##  6 NatureParks                   0.342 No Pseudo-P Value
+##  7 Beer                          0.333 No Pseudo-P Value
+##  8 Population65                  0.314 No Pseudo-P Value
+##  9 NoHealthInsurance             0.260 No Pseudo-P Value
+## 10 X.HouseRent                   0.234 No Pseudo-P Value
+## 11 PopulationFemale              0.229 No Pseudo-P Value
+## 12 MentalHealthPati              0.186 No Pseudo-P Value
 ```
