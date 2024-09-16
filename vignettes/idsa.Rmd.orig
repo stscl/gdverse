@@ -61,9 +61,8 @@ idsa_risk = idsa.model$risk2
 depression$risk = idsa_risk
 
 ggplot(data = depression) +
-  geom_sf(aes(fill = risk),
-          alpha = .65) +
-  ggplot2::scale_fill_manual(values = c("No" = "#7fdbff",
-                                        "Yes" = "#ffa500")) +
-  theme_bw()
+    ggplot2::geom_sf(aes(color = risk), alpha = .65) +
+    ggplot2::scale_color_manual(values = c("No" = "#7fdbff",
+                                          "Yes" = "#ffa500")) +
+    theme_bw()
 ```
