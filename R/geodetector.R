@@ -427,7 +427,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
   fig_factor = ggplot2::ggplot(g,
                                ggplot2::aes(x = qv, y = variable, fill = variable_col)) +
     ggplot2::geom_col() +
-    ggplot2::scale_x_continuous(expand = ggplot2:::expansion(mult = c(0, 0.1))) +
+    ggplot2::scale_x_continuous(expand = ggplot2::expansion(mult = c(0, 0.1))) +
     ggplot2::scale_y_discrete(limits = rev) +
     ggplot2::scale_fill_manual(breaks = c("first", "others"),
                                values = c("#DE3533","#808080")) +
