@@ -4,7 +4,7 @@
 \alias{plot.srs_factor_detector}
 \title{plot spatial rough set-based factor detector result}
 \usage{
-\method{plot}{srs_factor_detector}(x, slicenum = 2, alpha = 0.95, ...)
+\method{plot}{srs_factor_detector}(x, slicenum = 2, ...)
 }
 \arguments{
 \item{x}{Return by \code{srsgd()}.}

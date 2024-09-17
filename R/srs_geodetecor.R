@@ -308,7 +308,7 @@ print.srs_ecological_detector = \(x, ...) {
 #' @method plot srs_factor_detector
 #' @export
 #'
-plot.srs_factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
+plot.srs_factor_detector = \(x, slicenum = 2, ...) {
   g = x$factor %>%
     dplyr::select(variable, qv = `PD`) %>%
     dplyr::filter(!is.na(qv)) %>%
