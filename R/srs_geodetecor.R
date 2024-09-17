@@ -1,3 +1,115 @@
+#' @title spatial rough set-based geographical detector
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' Function for spatial rough set-based geographical detector model.
+#' @references
+#' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
+#' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
+#' https://doi.org/10.1016/j.ins.2021.12.019
+#' @note
+#' The Spatial Rough Set-based Geographical Detector Model (SRSGD) conducts spatial
+#' hierarchical heterogeneity analysis utilizing a geographical detector for data
+#' where *the dependent variable* is *discrete*. Given the complementary relationship
+#' between SRSGD and the native version of geographical detector, I strive to maintain
+#' consistency with `gd()` function when establishing `srsgd()` function. This implies
+#' that all input variable data in srsgd must *be discretized prior to use*.
+#'
+#' @param formula A formula of spatial rough set-based geographical detector model.
+#' @param data A data.frame, tibble or sf object of observation data.
+#' @param wt Spatial adjacency matrix. If `data` is a `sf` polygon object, the queen
+#' adjacency matrix is used when no `wt` object is provided. In other cases, you must
+#' provide a `wt` object.
+#' @param type (optional) The type of geographical detector, which must be one of
+#' `factor`(default), `interaction` and `ecological`.
+#' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
+#'
+#' @return A list of tibble with the corresponding result under different detector types.
+#' \describe{
+#' \item{\code{factor}}{the result of spatial rough set-based factor detector}
+#' \item{\code{interaction}}{the result of spatial rough set-based interaction detector}
+#' \item{\code{ecological}}{the result of spatial rough set-based ecological detector}
+#' }
+#' @export
+#'
+#' @examples
+#' data('srs_table')
+#' data('srs_wt')
+#' srs_geodetector(d ~ a1 + a2 + a3, data = srs_table, wt = srs_wt)
+#' srs_geodetector(d ~ a1 + a2 + a3, data = srs_table,
+#'                 wt = srs_wt, type = 'interaction')
+#' srs_geodetector(d ~ a1 + a2 + a3, data = srs_table,
+#'                 wt = srs_wt, type = 'ecological')
+#'
+srs_geodetector = \(formula, data, wt = NULL, type = "factor", alpha = 0.95){
+  if (!(type %in% c("factor","interaction","ecological"))){
+    stop("`type` must be one of `factor`,`interaction` and `ecological`!")
+  }
+
+  if (inherits(data,"sf")){
+    if (is.null(wt)){
+      wt = sdsfun::spdep_contiguity_swm(data, style='B',
+                                        zero.policy = TRUE)
+    }
+    data = sf::st_drop_geometry(data)
+  } else {
+    if (is.null(wt)){
+      stop("When data is not a `sf` object, you must provide `wt`!")
+    }
+  }
+
+  formula = stats::as.formula(formula)
+  formula.vars = all.vars(formula)
+  response = data[, formula.vars[1], drop = TRUE]
+  if (formula.vars[2] == "."){
+    explanatory = data[,-which(colnames(data) == formula.vars[1])]
+  } else {
+    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
+  }
+
+  switch(type,
+         "factor" = {
+           res = purrr::map_dfr(names(explanatory),
+                                \(i) srs_factor_detector(response,
+                                                         data[,i,drop = TRUE],
+                                                         wt)) %>%
+             dplyr::mutate(variable = names(explanatory)) %>%
+             dplyr::select(variable,dplyr::everything()) %>%
+             dplyr::arrange(dplyr::desc(`PD`))
+           res = list("factor" = res)
+           class(res) = "srs_factor_detector"
+         },
+         "interaction" = {
+           res = utils::combn(names(explanatory), 2, simplify = FALSE) %>%
+             purrr::map_dfr(\(i) srs_interaction_detector(response,
+                                                          data[,i[1],drop = TRUE],
+                                                          data[,i[2],drop = TRUE],
+                                                          wt) %>%
+                              tibble::as_tibble() %>%
+                              dplyr::mutate(variable1 = i[1],
+                                            variable2 = i[2]) %>%
+                              dplyr::select(variable1,variable2,Interaction,
+                                            dplyr::everything()))
+           res = list("interaction" = res)
+           class(res) = "srs_interaction_detector"
+         },
+         "ecological" = {
+           res = utils::combn(names(explanatory), 2, simplify = FALSE) %>%
+             purrr::map_dfr(\(i) srs_ecological_detector(response,
+                                                         data[,i[1],drop = TRUE],
+                                                         data[,i[2],drop = TRUE],
+                                                         wt, alpha) %>%
+                              tibble::as_tibble() %>%
+                              dplyr::mutate(variable1 = i[1],
+                                            variable2 = i[2]) %>%
+                              dplyr::select(variable1,variable2,Ecological,
+                                            dplyr::everything()))
+           res = list("ecological" = res)
+           class(res) = "srs_ecological_detector"
+         }
+  )
+  return(res)
+}
+
 #' @title spatial rough set-based factor detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
