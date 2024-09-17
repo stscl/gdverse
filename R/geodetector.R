@@ -406,7 +406,7 @@ print.ecological_detector = \(x, ...) {
 #'
 #' @param x Return by `geodetector()`.
 #' @param slicenum (optional) The number of labels facing inward. Default is `2`.
-#' @param alpha (optional) Confidence level.Default is `0.95`.
+#' @param alpha (optional) Confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
