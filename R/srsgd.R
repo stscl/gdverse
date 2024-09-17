@@ -56,16 +56,16 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
   return(res)
 }
 
-#' @title print GD result
+#' @title print SRSGD result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for GD model from `gd()`.
+#' S3 method to format output for SRSGD model from `srsgd()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `srsgd()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print gd_result
+#' @method print srsgd_result
 #' @export
 print.srsgd_result = \(x, ...) {
   nx = names(x)
@@ -77,16 +77,16 @@ print.srsgd_result = \(x, ...) {
   }
 }
 
-#' @title plot GD result
+#' @title plot SRSGD result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for GD model result in `gd()`.
+#' S3 method to plot output for SRSGD model result in `srsgd()`.
 #'
-#' @param x Return by `gd()`.
+#' @param x Return by `srsgd()`.
 #' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
 #'
 #' @return A ggplot2 layer
-#' @method plot gd_result
+#' @method plot srsgd_result
 #' @export
 #'
 plot.srsgd_result = \(x, ...) {
@@ -94,7 +94,7 @@ plot.srsgd_result = \(x, ...) {
   nx = names(x)
   for (i in seq_along(x)){
     res = x[i]
-    class(res) = paste0(nx[i],"_detector")
+    class(res) = paste0("srs",nx[i],"_detector")
     fig_p[[i]] = plot(res)
   }
   fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
