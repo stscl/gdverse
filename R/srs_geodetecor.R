@@ -267,7 +267,7 @@ srs_ecological_detector = \(y,x1,x2,wt,alpha = 0.95){
 #' @export
 #'
 print.srs_factor_detector = \(x, ...) {
-  cat("Spatial Rough Set-based Geographical Detector \n")
+  cat("Spatial Rough Set-based Factor Detector \n")
   class(x) = 'factor_detector'
   print(x)
 }
@@ -285,7 +285,7 @@ print.srs_factor_detector = \(x, ...) {
 #' @export
 #'
 print.srs_interaction_detector = \(x, ...) {
-  cat("Spatial Rough Set-based Geographical Detector \n")
+  cat("Spatial Rough Set-based Interaction Detector \n")
   class(x) = 'interaction_detector'
   print(x)
 }
@@ -303,7 +303,7 @@ print.srs_interaction_detector = \(x, ...) {
 #' @export
 #'
 print.srs_ecological_detector = \(x, ...) {
-  cat("Spatial Rough Set-based Geographical Detector \n")
+  cat("Spatial Rough Set-based Ecological Detector \n")
   class(x) = 'ecological_detector'
   print(x)
 }

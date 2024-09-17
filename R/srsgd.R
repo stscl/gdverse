@@ -41,71 +41,62 @@
 #'       wt = srs_wt, type = 'ecological')
 #'
 srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
-  if (!(type %in% c("factor","interaction","ecological"))){
-    stop("`type` must be one of `factor`,`interaction` and `ecological`!")
-  }
-
-  if (inherits(data,"sf")){
-    if (is.null(wt)){
-      wt = sdsfun::spdep_contiguity_swm(data, style='B',
-                                        zero.policy = TRUE)
-    }
-    data = sf::st_drop_geometry(data)
+  if (length(type) == 1){
+    res = srs_geodetector(formula,data,wt,type,alpha)
   } else {
-    if (is.null(wt)){
-      stop("When data is not a `sf` object, you must provide `wt`!")
+    res = vector("list", length(type))
+    for (i in seq_along(type)){
+      res[[i]] = srs_geodetector(formula, data, wt,
+                                 type = type[i],
+                                 alpha = alpha)[[1]]
     }
+    names(res) = type
+    class(res) = "srsgd_result"
   }
-
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
-  }
-
-  switch(type,
-         "factor" = {
-           res = purrr::map_dfr(names(explanatory),
-                                \(i) srs_factor_detector(response,
-                                                         data[,i,drop = TRUE],
-                                                         wt)) %>%
-             dplyr::mutate(variable = names(explanatory)) %>%
-             dplyr::select(variable,dplyr::everything()) %>%
-             dplyr::arrange(dplyr::desc(`PD`))
-           res = list("factor" = res)
-           class(res) = "srs_factor_detector"
-         },
-         "interaction" = {
-           res = utils::combn(names(explanatory), 2, simplify = FALSE) %>%
-             purrr::map_dfr(\(i) srs_interaction_detector(response,
-                                                          data[,i[1],drop = TRUE],
-                                                          data[,i[2],drop = TRUE],
-                                                          wt) %>%
-                              tibble::as_tibble() %>%
-                              dplyr::mutate(variable1 = i[1],
-                                            variable2 = i[2]) %>%
-                              dplyr::select(variable1,variable2,Interaction,
-                                            dplyr::everything()))
-           res = list("interaction" = res)
-           class(res) = "srs_interaction_detector"
-         },
-         "ecological" = {
-           res = utils::combn(names(explanatory), 2, simplify = FALSE) %>%
-             purrr::map_dfr(\(i) srs_ecological_detector(response,
-                                                         data[,i[1],drop = TRUE],
-                                                         data[,i[2],drop = TRUE],
-                                                         wt, alpha) %>%
-                              tibble::as_tibble() %>%
-                              dplyr::mutate(variable1 = i[1],
-                                            variable2 = i[2]) %>%
-                              dplyr::select(variable1,variable2,Ecological,
-                                            dplyr::everything()))
-           res = list("ecological" = res)
-           class(res) = "srs_ecological_detector"
-         }
-  )
   return(res)
+}
+
+#' @title print GD result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for GD model from `gd()`.
+#'
+#' @param x Return by `gd()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @method print gd_result
+#' @export
+print.srsgd_result = \(x, ...) {
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0("srs",nx[i],"_detector")
+    print(res)
+    cat("\n")
+  }
+}
+
+#' @title plot GD result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for GD model result in `gd()`.
+#'
+#' @param x Return by `gd()`.
+#' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
+#'
+#' @return A ggplot2 layer
+#' @method plot gd_result
+#' @export
+#'
+plot.srsgd_result = \(x, ...) {
+  fig_p = vector("list",length(x))
+  nx = names(x)
+  for (i in seq_along(x)){
+    res = x[i]
+    class(res) = paste0(nx[i],"_detector")
+    fig_p[[i]] = plot(res)
+  }
+  fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
+  return(fig_p)
 }
