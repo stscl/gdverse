@@ -134,37 +134,29 @@ plot.spade_result = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
     g = x$factor %>%
       dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
       dplyr::filter(!is.na(qv)) %>%
-      dplyr::mutate(significance = dplyr::if_else(pv <= 1-alpha,
-                                                  'Significant',
-                                                  'Not Significant',
-                                                  NA))
-    ylimits = round(max(g$qv) + 0.05,1)
+      dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
+      dplyr::mutate(variable_col = c("first",rep("others",times = nrow(.)-1))) %>%
+      dplyr::mutate(qv_text = paste0(sprintf("%4.2f", qv * 100), "%"))
     fig_factor = ggplot2::ggplot(g,
-                                 ggplot2::aes(x = stats::reorder(variable,qv),
-                                              y = qv)) +
-      ggplot2::geom_bar(stat = "identity", fill = "#bebebe", alpha = 1) +
-      ggplot2::geom_bar(data = dplyr::slice(g,1),
-                        stat = "identity", fill = "#ff0000", alpha = 1) +
+                                 ggplot2::aes(x = qv, y = variable, fill = variable_col)) +
+      ggplot2::geom_col() +
+      ggplot2::scale_x_continuous(expand = ggplot2::expansion(mult = c(0, 0.1))) +
+      ggplot2::scale_y_discrete(limits = rev) +
+      ggplot2::scale_fill_manual(breaks = c("first", "others"),
+                                 values = c("#DE3533","#808080")) +
       ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
-                         ggplot2::aes(label = round(qv,4)),
-                         hjust = 1.25, color = "black") +
+                         ggplot2::aes(label = qv_text),
+                         hjust = 1.25, color = "black", fontface = "bold") +
       ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
-                         ggplot2::aes(label = round(qv,4)),
-                         hjust = -0.1, color = "black") +
-      ggplot2::scale_y_continuous(limits = c(0,ylimits),
-                                  breaks = seq(0,ylimits,by = 0.1),
-                                  expand = c(0,0)) +
-      ggplot2::coord_flip() +
-      ggplot2::theme_minimal() +
-      ggplot2::labs(x = "", y = "Q statistic") +
-      ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,hjust = 1,color = 'black'),
-                     axis.text.y = ggplot2::element_text(color = 'black'),
-                     legend.position = "inside",
-                     legend.justification.inside = c('right','bottom'),
-                     panel.grid = ggplot2::element_blank(), ...)
+                         ggplot2::aes(label = qv_text),
+                         hjust = -0.1, color = "black", fontface = "bold") +
+      ggplot2::labs(x = "Q value", y = "") +
+      ggplot2::theme_bw() +
+      ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
+                     legend.position = "off", ...)
   } else {
     class(x) = "factor_detector"
-    fig_factor = plot.factor_detector(x, slicenum, alpha, ...)
+    fig_factor = plot.factor_detector(x, slicenum, alpha, keep, ...)
   }
   return(fig_factor)
 }
