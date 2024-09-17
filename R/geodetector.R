@@ -437,7 +437,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
     ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
                        ggplot2::aes(label = qv_text),
                        hjust = -0.1, color = "black", fontface = "bold") +
-    ggplot2::labs(x = "Q statistic", y = "") +
+    ggplot2::labs(x = "Q value", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
                    legend.position = "off")
