@@ -417,7 +417,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
   g = x$factor %>%
     dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
     dplyr::filter(!is.na(qv)) %>%
-    dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE))
+    dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
     dplyr::mutate(significance = dplyr::if_else(pv <= 1-alpha,
                                                 'Significant',
                                                 'Not Significant',
