@@ -170,16 +170,16 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
 #'
 print.idsa_result = \(x, ...) {
   cat("***     Interactive Detector For Spatial Associations ")
-  print(knitr::kable(dplyr::rename(x$interaction, PID = pid_idsa),
-                     format = "markdown",digits = 12,align = 'c',...))
+  print(knitr::kable(utils::head(dplyr::rename(x$interaction, PID = pid_idsa),5),
+                     format = "markdown", digits = 12, align = 'c', ...))
   cat("\n --------- IDSA model performance evaluation: --------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
       "\n ## Different of response variable between a pair of overlay zones:")
   x = dplyr::select(x$risk1,zone1st,zone2nd,Risk)
-  print(knitr::kable(utils::head(x,5),format = "markdown",align = 'c',...))
-  cat("\n #### Only the first five pairs of overlay zones are displayed! ####")
+  print(knitr::kable(utils::head(x,5), format = "markdown", align = 'c', ...))
+  cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
 }
 
 #' @title plot IDSA risk result
