@@ -87,7 +87,7 @@ reference:
   - all2int
   - F_informationloss
 
-- title: S3 Methods
+- title: S3 Methods for Geographical Detector Models
   contents:
   - starts_with("plot")
   - starts_with("print")
