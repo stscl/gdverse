@@ -3,6 +3,9 @@
 * When the `discvar` input for the `opgd`, `rgd`, `rid`, `spade` functions is `NULL`, 
   it is assumed that all independent variables in the `formula` need to be discretized.
   
+* Updating the S3 method for plotting various factor detectors to better conform 
+  to academic publication requirements.
+  
 * Using new example data in the vignettes for `spade` and `idsa`.
 
 # gdverse 1.0-1
