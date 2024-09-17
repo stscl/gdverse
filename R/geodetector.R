@@ -431,6 +431,12 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
     ggplot2::scale_y_discrete(limits = rev) +
     ggplot2::scale_fill_manual(breaks = c("first", "others"),
                                values = c("#DE3533","#808080")) +
+    ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
+                       ggplot2::aes(label = qv_text),
+                       hjust = 1.25, color = "black", fontface = "bold") +
+    ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
+                       ggplot2::aes(label = qv_text),
+                       hjust = -0.1, color = "black", fontface = "bold") +
     ggplot2::labs(x = "Q statistic", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
