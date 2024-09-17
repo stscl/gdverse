@@ -421,39 +421,47 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
                                                 'Significant',
                                                 'Not Significant',
                                                 NA))
-  ylimits = round(max(g$qv) + 0.05,1)
-  fig_factor = ggplot2::ggplot(g,
-                               ggplot2::aes(x = stats::reorder(variable,qv),
-                                            y = qv)) +
-    ggplot2::geom_bar(stat = "identity", fill = "#bebebe",
-                      ggplot2::aes(alpha = significance),
-                      show.legend = FALSE) +
-    ggplot2::geom_bar(data = dplyr::slice(g,1),
-                      ggplot2::aes(alpha = significance),
-                      stat = "identity",fill = "#ff0000",
-                      show.legend = FALSE) +
-    ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
-                       ggplot2::aes(label = round(qv,4)),
-                       hjust = 1.25, color = "black") +
-    ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
-                       ggplot2::aes(label = round(qv,4)),
-                       hjust = -0.1, color = "black") +
-    ggplot2::scale_y_continuous(limits = c(0,ylimits),
-                                breaks = seq(0,ylimits,by = 0.1),
-                                expand = c(0,0)) +
-    ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25,
-                                           "Significant" = 1),
-                                na.value = 0.85,name = '') +
-    ggplot2::coord_flip() +
-    ggplot2::theme_minimal() +
+  fig_factor = ggplot2::ggplot(election_data_sorted,
+                               ggplot2::aes(x = seats_won, y = party)) +
+    ggplot2::geom_col() +
+    ggplot2::scale_x_continuous(expand = ggplot2:::expansion(mult = c(0, 0.1))) +
+    ggplot2::scale_y_discrete(limits = rev) +
     ggplot2::labs(x = "", y = "Q statistic") +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,
-                                                       hjust = 1,
-                                                       color = 'black'),
-                   axis.text.y = ggplot2::element_text(color = 'black'),
-                   legend.position = "inside",
-                   legend.justification.inside = c('right','bottom'),
-                   panel.grid = ggplot2::element_blank(), ...)
+    ggplot2::theme_bw() +
+    ggplot2::theme(panel.grid.major.y = element_blank())
+  # ylimits = round(max(g$qv) + 0.05,1)
+  # fig_factor = ggplot2::ggplot(g,
+  #                              ggplot2::aes(x = stats::reorder(variable,qv),
+  #                                           y = qv)) +
+  #   ggplot2::geom_bar(stat = "identity", fill = "#bebebe",
+  #                     ggplot2::aes(alpha = significance),
+  #                     show.legend = FALSE) +
+  #   ggplot2::geom_bar(data = dplyr::slice(g,1),
+  #                     ggplot2::aes(alpha = significance),
+  #                     stat = "identity",fill = "#ff0000",
+  #                     show.legend = FALSE) +
+  #   ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
+  #                      ggplot2::aes(label = round(qv,4)),
+  #                      hjust = 1.25, color = "black") +
+  #   ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
+  #                      ggplot2::aes(label = round(qv,4)),
+  #                      hjust = -0.1, color = "black") +
+  #   ggplot2::scale_y_continuous(limits = c(0,ylimits),
+  #                               breaks = seq(0,ylimits,by = 0.1),
+  #                               expand = c(0,0)) +
+  #   ggplot2::scale_alpha_manual(values = c("Not Significant" = 0.25,
+  #                                          "Significant" = 1),
+  #                               na.value = 0.85,name = '') +
+  #   ggplot2::coord_flip() +
+  #   ggplot2::theme_minimal() +
+  #   ggplot2::labs(x = "", y = "Q statistic") +
+  #   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 0,
+  #                                                      hjust = 1,
+  #                                                      color = 'black'),
+  #                  axis.text.y = ggplot2::element_text(color = 'black'),
+  #                  legend.position = "inside",
+  #                  legend.justification.inside = c('right','bottom'),
+  #                  panel.grid = ggplot2::element_blank(), ...)
   return(fig_factor)
 }
 
