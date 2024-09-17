@@ -432,7 +432,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
                                values = c("#DE3533","#808080")) +
     ggplot2::labs(x = "Q statistic", y = "") +
     ggplot2::theme_bw() +
-    ggplot2::theme(panel.grid.major.y = ggplot2::element_blank())
+    ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
+                   legend.position = "off")
   # ylimits = round(max(g$qv) + 0.05,1)
   # fig_factor = ggplot2::ggplot(g,
   #                              ggplot2::aes(x = stats::reorder(variable,qv),
