@@ -418,15 +418,18 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
     dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
     dplyr::filter(!is.na(qv)) %>%
     dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
+    dplyr::mutate(variable_col = c("first",rep("others",times = nrow(.)-1))) %>%
     dplyr::mutate(significance = dplyr::if_else(pv <= 1-alpha,
                                                 'Significant',
                                                 'Not Significant',
                                                 NA))
   fig_factor = ggplot2::ggplot(g,
-                               ggplot2::aes(x = qv, y = variable)) +
+                               ggplot2::aes(x = qv, y = variable, fill = variable_col)) +
     ggplot2::geom_col() +
     ggplot2::scale_x_continuous(expand = ggplot2:::expansion(mult = c(0, 0.1))) +
     ggplot2::scale_y_discrete(limits = rev) +
+    ggplot2::scale_fill_manual(breaks = c("first", "others"),
+                               values = c("#DE3533","#808080")) +
     ggplot2::labs(x = "Q statistic", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank())
