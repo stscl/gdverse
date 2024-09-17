@@ -427,7 +427,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
     ggplot2::geom_col() +
     ggplot2::scale_x_continuous(expand = ggplot2:::expansion(mult = c(0, 0.1))) +
     ggplot2::scale_y_discrete(limits = rev) +
-    ggplot2::labs(x = "", y = "Q statistic") +
+    ggplot2::labs(x = "Q statistic", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = element_blank())
   # ylimits = round(max(g$qv) + 0.05,1)
