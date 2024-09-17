@@ -104,7 +104,7 @@ depression_spade = spade(Depression_prevelence ~ .,
                          data = depression,
                          wt = wt1, cores = 12)
 depression_spade
-plot(depression_spade,slicenum = 6)
+plot(depression_spade, slicenum = 6)
 ```
 
 **You can also access the detailed q statistics by `depression_spade$factor`**

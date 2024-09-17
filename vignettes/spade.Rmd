@@ -199,7 +199,7 @@ depression_spade
 ## |   NoHealthInsurance   | 0.07912873  | No Pseudo-P Value |
 ## |   MentalHealthPati    | 0.07778826  | No Pseudo-P Value |
 ## |      X.HouseRent      | 0.07250500  | No Pseudo-P Value |
-plot(depression_spade,slicenum = 6)
+plot(depression_spade, slicenum = 6)
 ```
 
 ![](../man/figures/spade/spade-1.png)
