@@ -422,7 +422,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
                                                 'Not Significant',
                                                 NA))
   fig_factor = ggplot2::ggplot(g,
-                               ggplot2::aes(x = variable, y = qv)) +
+                               ggplot2::aes(x = qv, y = variable)) +
     ggplot2::geom_col() +
     ggplot2::scale_x_continuous(expand = ggplot2:::expansion(mult = c(0, 0.1))) +
     ggplot2::scale_y_discrete(limits = rev) +
