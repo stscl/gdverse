@@ -176,7 +176,7 @@ ecological_detector = \(y,x1,x2,alpha = 0.95){
   return(ecod)
 }
 
-#' @title geographical detector(GD) model
+#' @title geographical detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @note
 #' Note that only one type of geodetector is supported at a time in `geodetector()`.
