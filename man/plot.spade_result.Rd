@@ -4,7 +4,7 @@
 \alias{plot.spade_result}
 \title{plot SPADE power of spatial and multilevel discretization determinant}
 \usage{
-\method{plot}{spade_result}(x, slicenum = 2, alpha = 0.95, ...)
+\method{plot}{spade_result}(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...)
 }
 \arguments{
 \item{x}{Return by \code{spade()}.The number of labels facing inward.}
@@ -12,6 +12,9 @@
 \item{slicenum}{(optional) The number of labels facing inward. Default is \code{2}.}
 
 \item{alpha}{(optional) Confidence level.Default is \code{0.95}.}
+
+\item{keep}{(optional) Whether to keep Q-value results for insignificant variables,
+default is \code{TRUE}.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
