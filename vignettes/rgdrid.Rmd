@@ -63,7 +63,7 @@ new.ndvi = robust_disc(NDVIchange ~ .,
                        data = select(ndvi,-c(Climatezone,Mining)),
                        discnum = 10,cores = 6)
 tictoc::toc()
-## 20.31 sec elapsed
+## 20.95 sec elapsed
 ```
 
 
