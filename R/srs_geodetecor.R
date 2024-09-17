@@ -1,18 +1,5 @@
 #' @title spatial rough set-based geographical detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for spatial rough set-based geographical detector model.
-#' @references
-#' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
-#' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
-#' https://doi.org/10.1016/j.ins.2021.12.019
-#' @note
-#' The Spatial Rough Set-based Geographical Detector Model (SRSGD) conducts spatial
-#' hierarchical heterogeneity analysis utilizing a geographical detector for data
-#' where *the dependent variable* is *discrete*. Given the complementary relationship
-#' between SRSGD and the native version of geographical detector, I strive to maintain
-#' consistency with `gd()` function when establishing `srsgd()` function. This implies
-#' that all input variable data in srsgd must *be discretized prior to use*.
 #'
 #' @param formula A formula of spatial rough set-based geographical detector model.
 #' @param data A data.frame, tibble or sf object of observation data.

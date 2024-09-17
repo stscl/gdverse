@@ -180,11 +180,6 @@ ecological_detector = \(y,x1,x2,alpha = 0.95){
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @note
 #' Note that only one type of geodetector is supported at a time in `geodetector()`.
-#' @references
-#' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010)
-#' Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study
-#' of the Heshun Region, China, International Journal of Geographical Information Science, 24:1, 107-127,
-#' DOI: 10.1080/13658810802443457
 #'
 #' @param formula A formula of geographical detector model.
 #' @param data A data.frame or tibble of observation data.
