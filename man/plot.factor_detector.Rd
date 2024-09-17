@@ -11,7 +11,7 @@
 
 \item{slicenum}{(optional) The number of labels facing inward. Default is \code{2}.}
 
-\item{alpha}{(optional) Confidence level.Default is \code{0.95}.}
+\item{alpha}{(optional) Confidence level. Default is \code{0.95}.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
