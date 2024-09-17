@@ -121,13 +121,15 @@ print.spade_result = \(x, ...) {
 #' @param x Return by `spade()`.The number of labels facing inward.
 #' @param slicenum (optional) The number of labels facing inward. Default is `2`.
 #' @param alpha (optional) Confidence level.Default is `0.95`.
+#' @param keep (optional) Whether to keep Q-value results for insignificant variables,
+#' default is `TRUE`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
 #' @method plot spade_result
 #' @export
 #'
-plot.spade_result = \(x, slicenum = 2, alpha = 0.95, ...) {
+plot.spade_result = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
   if ("No Pseudo-P Value" %in% x$factor$`P-value`) {
     g = x$factor %>%
       dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
