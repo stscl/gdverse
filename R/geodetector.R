@@ -407,13 +407,15 @@ print.ecological_detector = \(x, ...) {
 #' @param x Return by `geodetector()`.
 #' @param slicenum (optional) The number of labels facing inward. Default is `2`.
 #' @param alpha (optional) Confidence level. Default is `0.95`.
+#' @param keep (optional) Whether to keep Q-value results for insignificant variables,
+#' default is `TRUE`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
 #' @method plot factor_detector
 #' @export
 #'
-plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
+plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
   g = x$factor %>%
     dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
     dplyr::filter(!is.na(qv)) %>%
@@ -424,6 +426,10 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, ...) {
                                                 'Significant',
                                                 'Not Significant',
                                                 NA))
+  if (!keep) {
+    g = dplyr::filter(g,significance == 'Significant')
+  }
+
   fig_factor = ggplot2::ggplot(g,
                                ggplot2::aes(x = qv, y = variable, fill = variable_col)) +
     ggplot2::geom_col() +
