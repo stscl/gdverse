@@ -66,6 +66,7 @@ reference:
   - interaction_detector
   - risk_detector
   - ecological_detector
+  - srs_geodetector
   - srs_factor_detector
   - srs_interaction_detector
   - srs_ecological_detector
