@@ -34,11 +34,8 @@
 #' @examples
 #' data('srs_table')
 #' data('srs_wt')
-#' srsgd(d ~ a1 + a2 + a3, data = srs_table, wt = srs_wt)
-#' srsgd(d ~ a1 + a2 + a3, data = srs_table,
-#'       wt = srs_wt, type = 'interaction')
-#' srsgd(d ~ a1 + a2 + a3, data = srs_table,
-#'       wt = srs_wt, type = 'ecological')
+#' srsgd(d ~ a1 + a2 + a3, data = srs_table, wt = srs_wt,
+#'       type = c('factor','interaction','ecological'))
 #'
 srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
   if (length(type) == 1){

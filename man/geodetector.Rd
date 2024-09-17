@@ -2,7 +2,7 @@
 % Please edit documentation in R/geodetector.R
 \name{geodetector}
 \alias{geodetector}
-\title{geographical detector(GD) model}
+\title{geographical detector}
 \usage{
 geodetector(formula, data, type = "factor", alpha = 0.95)
 }
@@ -26,7 +26,7 @@ A list of tibble with the corresponding result under different detector types.
 }
 }
 \description{
-geographical detector(GD) model
+geographical detector
 }
 \note{
 Note that only one type of geodetector is supported at a time in \code{geodetector()}.
@@ -55,12 +55,6 @@ geodetector(y ~ x1 + x2,
                   x2 = c(rep('a',2),rep('b',2),rep('c',3))),
    type = 'ecological',alpha = 0.95)
 
-}
-\references{
-Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010)
-Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study
-of the Heshun Region, China, International Journal of Geographical Information Science, 24:1, 107-127,
-DOI: 10.1080/13658810802443457
 }
 \author{
 Wenbo Lv \email{lyu.geosocial@gmail.com}
