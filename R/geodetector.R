@@ -416,13 +416,15 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
     dplyr::filter(!is.na(qv)) %>%
     dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
     dplyr::mutate(variable_col = c("first",rep("others",times = nrow(.)-1))) %>%
-    dplyr::mutate(qv_text = paste0(sprintf("%4.2f", qv * 100), "%")) %>%
-    dplyr::mutate(significance = dplyr::if_else(pv <= 1-alpha,
-                                                'Significant',
-                                                'Not Significant',
-                                                NA))
+    dplyr::mutate(qv_text = paste0(sprintf("%4.2f", qv * 100), "%"))
+
   if (!keep) {
-    g = dplyr::filter(g,significance == 'Significant')
+    g = g %>%
+      dplyr::mutate(significance = dplyr::if_else(pv <= 1 - alpha,
+                                                  'Significant',
+                                                  'Not Significant',
+                                                  NA)) %>%
+      dplyr::filter(significance == 'Significant')
   }
 
   fig_factor = ggplot2::ggplot(g,
