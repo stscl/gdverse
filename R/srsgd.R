@@ -66,9 +66,10 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
 #' @export
 print.srsgd_result = \(x, ...) {
   nx = names(x)
+  cat("Spatial Rough Set-based Geographical Detector \n")
   for (i in seq_along(x)){
     res = x[i]
-    class(res) = paste0("srs_",nx[i],"_detector")
+    class(res) = paste0(nx[i],"_detector")
     print(res)
     cat("\n")
   }
@@ -91,7 +92,7 @@ plot.srsgd_result = \(x, ...) {
   nx = names(x)
   for (i in seq_along(x)){
     res = x[i]
-    class(res) = paste0("srs_",nx[i],"_detector")
+    class(res) = paste0(nx[i],"_detector")
     fig_p[[i]] = plot(res)
   }
   fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
