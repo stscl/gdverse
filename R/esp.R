@@ -1,3 +1,41 @@
+#' enhanced stratified power(ESP) model
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' Function for enhanced stratified power model.
+#'
+#' @param formula A formula of ESP model.
+#' @param data A data.frame, tibble or sf object of observation data.
+#' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
+#' @param discvar (optional) Name of continuous variable columns that need to be discretized. Noted that
+#' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are
+#' used as `discvar`.
+#' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
+#' Default all `discvar` use `10`.
+#' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
+#' Default is `and`.
+#' @param minsize (optional) The min size of each discretization group. Default all use `1`.
+#' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python` `joblib` package to
+#' parallel computation.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
+#'
+#' @return A list with ESP model result.
+#' \describe{
+#' \item{\code{interaction}}{the interaction result of IDSA model}
+#' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
+#' \item{\code{risk2}}{risk detection result of the input data}
+#' \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
+#' \item{\code{number_overlay_zones}}{the number of overlay zones}
+#' \item{\code{percentage_finely_divided_zones}}{the percentage of finely divided zones that are determined by the interaction of variables}
+#' }
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' ## The following code needs to configure the Python environment to run:
+#' data('sim')
+#' sim1 = sf::st_as_sf(sim,coords = c('lo','la'))
+#' g = esp(y ~ ., data = sim1, discnum = 5)
+#' }
 esp = \(formula, data, wt = NULL, discvar = NULL,
         discnum = 10, overlaymethod = 'and',
         minsize = 1, cores = 1, alpha = 0.95){
@@ -177,4 +215,30 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
              "percentage_finely_divided_zones" =  percentzone)
   class(res) = "esp_result"
   return(res)
+}
+
+#' @title print ESP result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to format output for ESP model from `esp()`.
+#'
+#' @param x Return by `esp()`.
+#' @param ... (optional) Other arguments passed to `knitr::kable()`.
+#'
+#' @return Formatted string output
+#' @method print esp_result
+#' @export
+#'
+print.esp_result = \(x, ...) {
+  cat("***       Enhanced Stratified Power   ")
+  print(knitr::kable(utils::head(dplyr::rename(x$psd, PSD = psd),5),
+                     format = "markdown", digits = 12, align = 'c', ...))
+  cat("\n --------- ESP model performance evaluation: --------\n",
+      "* Number of overlay zones : ", x$number_overlay_zones, "\n",
+      "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
+      "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
+      "\n ## Different of response variable between a pair of overlay zones:")
+  x = dplyr::select(x$risk1,zone1st,zone2nd,Risk)
+  print(knitr::kable(utils::head(x,5), format = "markdown", align = 'c', ...))
+  cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
 }
