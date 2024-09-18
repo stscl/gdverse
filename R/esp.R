@@ -145,9 +145,36 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
   interactvar = xs[[which.max(out_psd)]]
-  res_psd = tibble::tibble(variable = xsname) %>%
-    dplyr::bind_cols(out_psd) %>%
-    dplyr::arrange(dplyr::desc(pid_idsa))
+  if (overlaymethod == 'intersection'){
+    reszone = dti %>%
+      dplyr::select(dplyr::all_of(interactvar)) %>%
+      purrr::reduce(paste,sep = '_')
+  } else {
+    reszone = st_fuzzyoverlay(paste(yname,'~',paste0(interactvar,collapse = '+')),
+                              dti, spfom)
+  }
+  zonenum = as.numeric(table(reszone))
+  percentzone = length(which(zonenum==1)) / length(reszone)
+  risk1 = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
+  risk2 = risk1 %>%
+    dplyr::select(dplyr::all_of(c('zone1st','zone2nd','Risk'))) %>%
+    tidyr::pivot_longer(cols = dplyr::all_of(c('zone1st','zone2nd')),
+                        names_to = 'zone', values_to = 'zone_risk') %>%
+    dplyr::distinct(zone_risk,.keep_all = TRUE)
+  risk2 = tibble::tibble(reszone = paste0('zone',reszone)) %>%
+    dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
+    dplyr::pull(Risk)
+  res_psd = tibble::tibble(variable = xsname,
+                           psd = out_psd) %>%
+    dplyr::arrange(dplyr::desc(psd))
+  res_spd = tibble::tibble(variable = xname,
+                           spd = out_spd) %>%
+    dplyr::arrange(dplyr::desc(spd))
 
-  return(list(out_psd,out_spd))
+  res = list("psd" = res_psd, "spd" = res_spd, "risk1" = risk1, "risk2" = risk2,
+             "number_individual_explanatory_variables" = length(interactvar),
+             "number_overlay_zones" = length(zonenum),
+             "percentage_finely_divided_zones" =  percentzone)
+  class(res) = "esp_result"
+  return(res)
 }
