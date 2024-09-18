@@ -1,6 +1,6 @@
 esp = \(formula, data, wt = NULL, discvar = NULL,
         discnum = 10, overlaymethod = 'and',
-        minsize = 1, cores = 1, alpha = 0.95, ...){
+        minsize = 1, cores = 1, alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
 
@@ -32,18 +32,17 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
     xdiscname = discvar
     xundiscname = xname[-which(xname %in% discvar)]
   }
-  discdf = dplyr::select(dplyr::all_of(c(yname,xdiscname)))
+  discdf = dplyr::select(data,dplyr::all_of(c(yname,xdiscname)))
 
   cores_disc = cores
-  dti = robust_disc(paste0(yname," ~ . "), discdf, discnum,
-                    cores = cores_disc, ...)
+  dti = robust_disc(paste0(yname,"~ ."), discdf, discnum, minsize, cores_disc)
   if (!is.null(xundiscname)){
     dti = data %>%
-      dplyr::select(dplyr::all_of(c(yname,xundiscname))) %>%
+      dplyr::select(dplyr::any_of(c(yname,xundiscname))) %>%
       dplyr::bind_cols(dti)
   } else {
     dti = data %>%
-      dplyr::select(dplyr::all_of(yname)) %>%
+      dplyr::select(dplyr::any_of(yname)) %>%
       dplyr::bind_cols(dti)
   }
 
@@ -92,6 +91,6 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   } else {
     out_g = purrr::map_dfr(xs, calcul_psd)
   }
-
+ return(out_g)
 
 }
