@@ -334,8 +334,8 @@ print.esp_result = \(x, ...) {
 #' S3 method to plot output for ESP result in `esp()`.
 #'
 #' @param x Return by `esp()`.
-#' @param low_color (optional) The low color of the color gradient, defaul is `#6600CC`.
-#' @param high_color (optional) The high color of the color gradient, defaul is `#FFCC33`.
+#' @param low_color (optional) The low color of the color gradient, default is `#6600CC`.
+#' @param high_color (optional) The high color of the color gradient, default is `#FFCC33`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
