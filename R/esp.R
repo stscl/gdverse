@@ -3,6 +3,7 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
         seed = 123456789, alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
+
   if (inherits(data,'sf')) {
     if (is.null(wt)){
       wt_esp = sdsfun::inverse_distance_swm(data)
@@ -17,9 +18,11 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
       wt_esp = wt
     }
   }
+
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
   }
+
   yname = formula.vars[1]
   xname = colnames(data)[-which(colnames(data) == yname)]
   if (is.null(discvar)) {
@@ -29,4 +32,23 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
     xdiscname = discvar
     xundiscname = xname[-which(xname %in% discvar)]
   }
+  discdf = dplyr::select(dplyr::all_of(c(yname,xdiscname)))
+
+  cores_disc = cores
+  dti = robust_disc(paste0(yname," ~ . "), discdf, discnum,
+                    cores = cores_disc, ...)
+  if (!is.null(xundiscname)){
+    dti = data %>%
+      dplyr::select(dplyr::all_of(c(yname,xundiscname))) %>%
+      dplyr::bind_cols(dti)
+  } else {
+    dti = data %>%
+      dplyr::select(dplyr::all_of(yname)) %>%
+      dplyr::bind_cols(dti)
+  }
+
+  cores_spvar = cores
+
+
+
 }
