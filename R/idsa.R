@@ -117,7 +117,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
     parallel::clusterExport(cores,c('spvar','psd_spade',
                                     'cpsd_spade','psd_iev',
                                     'st_fuzzyoverlay','pid_idsa'))
-    out_g = parallel::parLapply(cores,xs, calcul_pid)
+    out_g = parallel::parLapply(cores, xs, calcul_pid)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
     out_g = purrr::map_dfr(xs, calcul_pid)

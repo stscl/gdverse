@@ -48,6 +48,9 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   }
 
   cores_spvar = cores
+  xs = generate_subsets(xname,empty = FALSE, self = TRUE)
+  spfom = overlaymethod
+
   psd_esp = \(formula, discdata, wt,
               overlaymethod = 'and'){
     formula = stats::as.formula(formula)
@@ -68,6 +71,27 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
     return(qtheta)
   }
 
+  calcul_psd = \(.x){
+    qv = psd_esp(paste(yname,'~',paste0(.x,collapse = '+')),
+                 dti, wt_esp, spfom)
+    names(qv) = 'psd'
+    return(qv)
+  }
+
+  doclust = FALSE
+  if (cores_spvar > 1) {
+    doclust = TRUE
+    cores = parallel::makeCluster(cores_spvar)
+    on.exit(parallel::stopCluster(cores), add=TRUE)
+  }
+
+  if (doclust) {
+    parallel::clusterExport(cores,c('spvar','psd_spade','st_fuzzyoverlay'))
+    out_g = parallel::parLapply(cores, xs, calcul_psd)
+    out_g = tibble::as_tibble(do.call(rbind, out_g))
+  } else {
+    out_g = purrr::map_dfr(xs, calcul_psd)
+  }
 
 
 }
