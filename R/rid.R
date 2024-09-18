@@ -24,9 +24,9 @@
 #' variables are used as `discvar`.
 #' @param discnum A numeric vector for the number of discretized classes of columns that need
 #' to be discretized. Default all `discvar` use `10`.
-#' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
+#' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer(default is 1). If cores > 1, use parallel computation.
 #'
 #' @return A list of the RID model result.
@@ -44,7 +44,7 @@
 #' g
 #' }
 rid = \(formula, data, discvar = NULL, discnum = 10,
-        minsize = 1, overlaymethod = 'and', cores = 1){
+        overlaymethod = 'and', minsize = 1, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
