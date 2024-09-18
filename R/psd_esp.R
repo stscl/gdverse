@@ -13,10 +13,7 @@ psd_esp = \(formula, discdata, wt,
   } else {
     fuzzyzone = st_fuzzyoverlay(formula,discdata,overlaymethod)
   }
-
-  qtheta = psd_spade(rawdata[,yname,drop = TRUE],
+  qtheta = psd_spade(discdata[,yname,drop = TRUE],
                      fuzzyzone, wt)
-  qphi = psd_iev(dplyr::select(discdata,-dplyr::any_of(yname)),
-                 fuzzyzone, wt)
-  return(qtheta / qphi)
+  return(qtheta)
 }
