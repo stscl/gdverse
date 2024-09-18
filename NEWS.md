@@ -8,6 +8,8 @@
   
 * Using new example data in the vignettes for `spade` and `idsa`.
 
+* Adding the `esp` function to the package.
+
 # gdverse 1.0-1
 
 * Unify all vignettes filenames to lowercase.
