@@ -92,9 +92,9 @@ rescale_vector = \(x,to_left = 0,to_right = 1){
 #'
 #' @param set A vector
 #' including the empty set and the set itself. Default is `TRUE`.
-#' @param empty (optional) When `empty` is `TRUE`,the generated subset includes the empty set,
+#' @param empty (optional) When `empty` is `TRUE`, the generated subset includes the empty set,
 #' otherwise the empty set is removed. Default is `TRUE`.
-#' @param self (optional) When `self` is `TRUE`,the resulting subset includes the set itself,
+#' @param self (optional) When `self` is `TRUE`, the resulting subset includes the set itself,
 #' otherwise the set itself is removed. Default is `TRUE`.
 #'
 #' @return A list with the subsets

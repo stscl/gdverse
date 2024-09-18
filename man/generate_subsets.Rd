@@ -10,10 +10,10 @@ generate_subsets(set, empty = TRUE, self = TRUE)
 \item{set}{A vector
 including the empty set and the set itself. Default is \code{TRUE}.}
 
-\item{empty}{(optional) When \code{empty} is \code{TRUE},the generated subset includes the empty set,
+\item{empty}{(optional) When \code{empty} is \code{TRUE}, the generated subset includes the empty set,
 otherwise the empty set is removed. Default is \code{TRUE}.}
 
-\item{self}{(optional) When \code{self} is \code{TRUE},the resulting subset includes the set itself,
+\item{self}{(optional) When \code{self} is \code{TRUE}, the resulting subset includes the set itself,
 otherwise the set itself is removed. Default is \code{TRUE}.}
 }
 \value{
