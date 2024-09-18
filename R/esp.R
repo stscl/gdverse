@@ -246,9 +246,9 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
                                     interact_type)) %>%
     dplyr::select(variable1,variable2,Interaction,
                   dplyr::everything()) %>%
-    dplyr::left_join(dplyr::select(spd,variable,spd1 = spd),
+    dplyr::left_join(dplyr::select(res_spd,variable,spd1 = spd),
                      by = c("variable1" = "variable")) %>%
-    dplyr::left_join(dplyr::select(spd,variable,spd2 = spd),
+    dplyr::left_join(dplyr::select(res_spd,variable,spd2 = spd),
                      by = c("variable2" = "variable")) %>%
     dplyr::mutate(spd = (spd1 + spd2), spd1 = spd1 / spd, spd2 = spd2 / spd,
                   `Variable1 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd1,
