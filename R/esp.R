@@ -1,6 +1,6 @@
 esp = \(formula, data, wt = NULL, discvar = NULL,
-        discnum = 15, overlaymethod = 'and', cores = 1,
-        minsize = 1, alpha = 0.95, ...){
+        discnum = 10, overlaymethod = 'and',
+        minsize = 1, cores = 1, alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
 
