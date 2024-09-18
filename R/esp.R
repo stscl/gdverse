@@ -361,7 +361,6 @@ plot.esp_result = \(x, slicenum = 2,
                    axis.text.y = ggplot2::element_text(color = 'black'),
                    legend.position = "none",
                    panel.grid = ggplot2::element_blank(), ...)
-  return(fig_rd)
   # fig3
   class(x) = 'lesh_result'
   fig3 = plot.lesh_result(x, pie = FALSE, scatter = TRUE,
