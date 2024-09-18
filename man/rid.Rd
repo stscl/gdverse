@@ -51,7 +51,7 @@ When there are a large number of explanatory variables, the data dimensionality 
 to ensure the trade-off between analysis results and calculation speed.
 
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rid()}.
-See \code{vignette('RGDRID',package = 'gdverse')} for more details.
+See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 }
 \examples{
 \dontrun{

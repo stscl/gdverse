@@ -51,7 +51,7 @@ Function for robust geographical detector(RGD) model.
 }
 \note{
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
-See \code{vignette('RGDRID',package = 'gdverse')} for more details.
+See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 }
 \examples{
 \dontrun{

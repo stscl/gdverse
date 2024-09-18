@@ -6,7 +6,7 @@
 #'
 #' @note
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `robust_disc()`.
-#' See `vignette('RGDRID',package = 'gdverse')` for more details.
+#' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of univariate discretization.
 #' @param data A data.frame or tibble of observation data.
