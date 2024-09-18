@@ -269,22 +269,26 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
     return(xs[which(step_interaction == .s)][step_indice])
   })
   new_psd_indice = vector("logical",length(xs))
+  new_xsname = vector("character",length(xname)*(length(xname)+1)/2)
   for (i in seq_along(xs)) {
     if (step_interaction[i] == 1){
       new_psd_indice[i] = TRUE
+      new_xsname[i] = xs[[i]]
     } else {
       current_name = max_psd_names[step_interaction[i] - 1]
       if (all(unlist(current_name) %in% unlist(xs[i]))) {
         new_psd_indice[i] = TRUE
+        new_xsname[i] = setdiff(xs[i], current_name)
       } else {
         new_psd_indice[i] = FALSE
       }
     }
   }
-
+  print(new_xsname)
   determination = tibble::tibble(variable = xsname[new_psd_indice],
                                  psd = out_psd[new_psd_indice],
-                                 step = step_interaction[new_psd_indice]) %>%
+                                 step = step_interaction[new_psd_indice],
+                                 name = new_xsname) %>%
     dplyr::group_by(step) %>%
     dplyr::arrange(psd,.by_group=TRUE) %>%
     dplyr::ungroup()
