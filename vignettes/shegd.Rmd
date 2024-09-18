@@ -179,7 +179,7 @@ Use `lesh.m$spd_lesh` to access the SHAP power of determinants:
 ``` r
 lesh.m$spd_lesh
 ## # A tibble: 6 × 2
-##   varibale      spd_theta
+##   variable      spd_theta
 ##   <chr>             <dbl>
 ## 1 Precipitation    0.218 
 ## 2 Climatezone      0.176 
