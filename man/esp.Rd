@@ -57,6 +57,10 @@ A list with ESP model result.
 \description{
 Function for enhanced stratified power model.
 }
+\note{
+Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
+See \code{vignette('rgdrid',package = 'gdverse')} for more details.
+}
 \examples{
 \dontrun{
 ## The following code needs to configure the Python environment to run:

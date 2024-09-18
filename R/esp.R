@@ -2,6 +2,9 @@
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for enhanced stratified power model.
+#' @note
+#' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
+#' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of ESP model.
 #' @param data A data.frame, tibble or sf object of observation data.
