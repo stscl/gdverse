@@ -1,6 +1,6 @@
-esp = \(formula, data, wt = NULL, discnum = 3:22,
-         discmethod = "quantile", overlaymethod = 'and',
-         cores = 1, seed = 123456789, alpha = 0.95, ...){
+esp = \(formula, data, wt = NULL, discnum = 15,
+        overlaymethod = 'and', cores = 1,
+        seed = 123456789, alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {
