@@ -47,6 +47,7 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   }
 
   cores_spvar = cores
+  cores_shap = cores
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
   spfom = overlaymethod
 
@@ -73,7 +74,7 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   calcul_psd = \(.x){
     qv = psd_esp(paste(yname,'~',paste0(.x,collapse = '+')),
                  dti, wt_esp, spfom)
-    names(qv) = 'psd'
+    names(qv) = 'PSD'
     return(qv)
   }
 
@@ -91,6 +92,59 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   } else {
     out_g = purrr::map_dfr(xs, calcul_psd)
   }
- return(out_g)
+  out_psd = dplyr::pull(out_g,1)
+  m = length(xname)
+  mf = factorial(m)
 
+  get_value_by_varname = \(fv,namelist,valuevec){
+    for (ni in seq_along(namelist)) {
+      if (setequal(fv,namelist[[ni]])) {
+        res = valuevec[ni]
+        break
+      } else {
+        res = 0
+      }
+    }
+    return(res)
+  }
+
+  calcul_shap = \(xvar){
+    fullxvar = xname[-which(xname == xvar)]
+    fullvar = generate_subsets(fullxvar,empty = FALSE,self = TRUE)
+
+    calcul_unishap = \(xvar,fullxvar,namelist,valuevec){
+      n = length(fullxvar)
+      v1 = get_value_by_varname(c(xvar,fullxvar),namelist,valuevec)
+      v2 = get_value_by_varname(fullxvar,namelist,valuevec)
+      thetax = factorial(n) * factorial(m - n - 1) * (v1 - v2) / mf
+      return(thetax)
+    }
+
+    thetaxs = purrr::map_dbl(fullvar, \(.x) calcul_unishap(xvar,.x,xs,out_psd))
+    thetax = sum(thetaxs)
+    names(thetax) = 'SPD'
+    return(thetax)
+  }
+
+  doclust = FALSE
+  if (cores_shap > 1) {
+    doclust = TRUE
+    cores = parallel::makeCluster(cores_shap)
+    on.exit(parallel::stopCluster(cores), add = TRUE)
+  }
+
+  if (doclust) {
+    parallel::clusterExport(cores,c('generate_subsets'))
+    out_g = parallel::parLapply(cores,xname,calcul_shap)
+    out_g = tibble::as_tibble(do.call(rbind, out_g))
+  } else {
+    out_g = purrr::map_dfr(xname,calcul_shap)
+  }
+  out_spd = dplyr::pull(out_g,1)
+
+  IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
+  xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
+  interactvar = xs[[which.max(out_psd)]]
+
+  return(list(out_psd,out_spd))
 }
