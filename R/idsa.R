@@ -144,7 +144,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
   risk2 = tibble::tibble(reszone = paste0('zone',reszone)) %>%
     dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
     dplyr::pull(Risk)
-  out_g = tibble::tibble(varibale = xsname) %>%
+  out_g = tibble::tibble(variable = xsname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(pid_idsa))
 

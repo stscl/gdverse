@@ -145,6 +145,9 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
   interactvar = xs[[which.max(out_psd)]]
+  res_psd = tibble::tibble(variable = xsname) %>%
+    dplyr::bind_cols(out_psd) %>%
+    dplyr::arrange(dplyr::desc(pid_idsa))
 
   return(list(out_psd,out_spd))
 }
