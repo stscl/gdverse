@@ -272,7 +272,7 @@ construct the data under <code>2000-10000</code> m spatial units with
 <h2 id="comparison-of-size-effect-of-spatial-units-based-on-opgd-model">Comparison of Size Effect of Spatial Units based on OPGD model<a class="anchor" aria-label="anchor" href="#comparison-of-size-effect-of-spatial-units-based-on-opgd-model"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">discvar</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">fvc1000</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">discvar</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">fvc1000</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="../reference/sesu_opgd.html">sesu_opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>,su <span class="op">=</span> <span class="va">su</span>,discvar <span class="op">=</span> <span class="va">discvar</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">g1</span></span>
 <span><span class="co">##       Size Effect Of Spatial Units      </span></span>
@@ -718,7 +718,7 @@ explanatory variables)</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

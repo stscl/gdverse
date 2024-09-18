@@ -114,7 +114,7 @@ based on geodetector q-statistic.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd_bestunidisc.html">gd_bestunidisc</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,</span>
-<span>                   data <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                   data <span class="op">=</span> <span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                   discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">## 2.79 sec elapsed</span></span></code></pre></div>
@@ -165,7 +165,7 @@ discretization parameter based on the Q statistic of the geographical
 detector (factor detector), we can combine it with other columns in
 <code>ndvi</code> tibble now.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span>,<span class="va">new.ndvi</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">new.ndvi</span> <span class="op">=</span> <span class="fu">bind_cols</span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span>,<span class="va">new.ndvi</span><span class="op">)</span></span>
 <span><span class="va">new.ndvi</span></span>
 <span><span class="co">## # A tibble: 713 × 7</span></span>
 <span><span class="co">##    NDVIchange Climatezone Mining   GDP Popdensity Precipitation Tempchange</span></span>
@@ -225,7 +225,7 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_opgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>,</span>
-<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                 discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                 cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ndvi_opgd</span></span>
 <span><span class="co">##                 OPGD Model                  </span></span>
@@ -275,7 +275,7 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
