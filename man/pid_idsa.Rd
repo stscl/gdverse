@@ -11,7 +11,7 @@ pid_idsa(formula, rawdata, discdata, wt, overlaymethod = "and")
 
 \item{rawdata}{Raw observation data}
 
-\item{discdata}{Discrete explanatory variables data}
+\item{discdata}{Observed data with discrete explanatory variables}
 
 \item{wt}{Spatial weight matrix}
 

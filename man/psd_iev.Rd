@@ -7,7 +7,7 @@
 psd_iev(discdata, spzone, wt)
 }
 \arguments{
-\item{discdata}{Discreted explanatory variables data. A tibble or dataframe .}
+\item{discdata}{Observed data with discrete explanatory variables. A \code{tibble} or \code{data.frame} .}
 
 \item{spzone}{Fuzzy overlay spatial zones. Returned from \code{st_fuzzyoverlay()}.}
 
