@@ -262,6 +262,13 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
     dplyr::select(-dplyr::starts_with('spd'))
 
+  determination = tibble::tibble(variable = xsname,
+                                 psd = out_psd,
+                                 step = sapply(xs, length)) %>%
+    dplyr::group_by(step) %>%
+    dplyr::arrange(psd,.by_group=TRUE) %>%
+    dplyr::ungroup()
+
   res = list("factor" = factor, "interaction" = interaction, "risk1" = risk1, "risk2" = risk2,
              "psd" = res_psd, "spd" = res_spd, "determination" = determination,
              "number_individual_explanatory_variables" = length(interactvar),
@@ -311,6 +318,6 @@ print.esp_result = \(x, ...) {
 #' @export
 #'
 plot.esp_result = \(x, ...){
-
+  fig_p = ggplot2::ggplot()
   return(fig_p)
 }
