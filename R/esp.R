@@ -304,26 +304,16 @@ print.esp_result = \(x, ...) {
 #'
 #' @param x Return by `esp()`.
 #' @param slicenum (optional) The number of labels facing inward in factor plot. Default is `2`.
-#' @param scatter_alpha (optional) Picture transparency. Default is `1`.
-#' @param pieradius_factor (optional) The radius expansion factor of interaction contributions pie plot. Default is `15`.
-#' @param pielegend_x (optional) The X-axis relative position of interaction contributions pie plot legend. Default is `0.99`.
-#' @param pielegend_y (optional) The Y-axis relative position of interaction contributions pie plot legend. Default is `0.1`.
-#' @param pielegend_num (optional) The number of interaction contributions pie plot legend. Default is `3`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
 #' @method plot esp_result
 #' @export
 #'
-plot.esp_result = \(x, slicenum = 2,
-                    scatter_alpha = 1,
-                    pieradius_factor = 15,
-                    pielegend_x = 0.99,
-                    pielegend_y = 0.1,
-                    pielegend_num = 3, ...){
+plot.esp_result = \(x, slicenum = 2, ...){
   # fig1
   g_factor = x$factor %>%
-    dplyr::select(variable, qv = `Q-statistic`) %>%
+    dplyr::select(variable, qv = `Q-statistics`) %>%
     dplyr::filter(!is.na(qv)) %>%
     dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
     dplyr::mutate(variable_col = c("first",rep("others",times = nrow(.)-1))) %>%
@@ -361,22 +351,8 @@ plot.esp_result = \(x, slicenum = 2,
                    axis.text.y = ggplot2::element_text(color = 'black'),
                    legend.position = "none",
                    panel.grid = ggplot2::element_blank(), ...)
-  # fig3
-  class(x) = 'lesh_result'
-  fig3 = plot.lesh_result(x, pie = FALSE, scatter = TRUE,
-                          scatter_alpha = 1,
-                          pieradius_factor = 15,
-                          pielegend_x = 0.99,
-                          pielegend_y = 0.1,
-                          pielegend_num = 3,)
-  # fig4
-  fig4 = plot.lesh_result(x, pie = TRUE, scatter = FALSE,
-                          scatter_alpha = 1,
-                          pieradius_factor = 15,
-                          pielegend_x = 0.99,
-                          pielegend_y = 0.1,
-                          pielegend_num = 3,)
 
-  fig_p = patchwork::wrap_plots(fig1, fig2, fig3, fig4, ncol = 1)
+  fig_p = patchwork::wrap_plots(fig1, fig2, nrow = 2) +
+    patchwork::plot_layout(heights = c(1, 1), widths = c(1, 1))
   return(fig_p)
 }
