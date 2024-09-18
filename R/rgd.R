@@ -39,9 +39,8 @@
 #' g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1:-3],
 #'         cores = 6, type =c('factor','interaction'))
 #' }
-rgd = \(formula, data, discvar = NULL,
-        discnum = NULL, minsize = NULL,
-        cores = 1, type = "factor", alpha = 0.95){
+rgd = \(formula, data, discvar = NULL, discnum = 10,
+        minsize = 1, cores = 1, type = "factor", alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
@@ -53,7 +52,7 @@ rgd = \(formula, data, discvar = NULL,
     discvar = colnames(data)[-which(colnames(data) == yname)]
   }
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
-  if (is.null(discnum)) {discnum = rep(10,length(discvar))}
+  if (length(discnum)==1) {discnum = rep(discnum,length(discvar))}
   g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
                   discdf, discnum, minsize, cores = cores)
   discedvar = colnames(data[,-which(colnames(data) %in% discvar)])

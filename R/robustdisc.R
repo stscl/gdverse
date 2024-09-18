@@ -27,7 +27,7 @@
 #'             data = dplyr::select(ndvi,-c(Climatezone,Mining)),
 #'             discnum = 10,cores = 6)
 #' }
-robust_disc = \(formula,data,discnum,minsize = NULL,cores = 1) {
+robust_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   response = data[, formula.vars[1], drop = TRUE]
@@ -38,7 +38,7 @@ robust_disc = \(formula,data,discnum,minsize = NULL,cores = 1) {
   }
   y = formula.vars[1]
   xvars = names(explanatory)
-  if (is.null(minsize)) {minsize = rep(1,length(xvars))}
+  if (length(minsize)==1) {minsize = rep(1,length(xvars))}
   if (length(discnum)==1) {discnum = rep(discnum,length(xvars))}
   gs = as.integer(discnum)
   minsizes = as.integer(minsize)
