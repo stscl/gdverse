@@ -63,6 +63,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
     xdiscname = xname
     xundiscname = NULL
   } else {
+    xdiscname = discvar
     xundiscname = xname[-which(xname %in% discvar)]
   }
   if (length(discmethod) == 1) {discmethod = rep('quantile',length(xdiscname))}

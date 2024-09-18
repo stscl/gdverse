@@ -1,5 +1,5 @@
-esp = \(formula, data, wt = NULL, discnum = 15,
-        overlaymethod = 'and', cores = 1,
+esp = \(formula, data, wt = NULL, discvar = NULL,
+        discnum = 15, overlaymethod = 'and', cores = 1,
         seed = 123456789, alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
@@ -19,5 +19,14 @@ esp = \(formula, data, wt = NULL, discnum = 15,
   }
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
+  }
+  yname = formula.vars[1]
+  xname = colnames(data)[-which(colnames(data) == yname)]
+  if (is.null(discvar)) {
+    xdiscname = xname
+    xundiscname = NULL
+  } else {
+    xdiscname = discvar
+    xundiscname = xname[-which(xname %in% discvar)]
   }
 }
