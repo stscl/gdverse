@@ -296,3 +296,88 @@ print.esp_result = \(x, ...) {
   print(knitr::kable(utils::head(x,5), format = "markdown", align = 'c', ...))
   cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
 }
+
+#' @title plot ESP result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for ESP result in `esp()`.
+#'
+#' @param x Return by `esp()`.
+#' @param slicenum (optional) The number of labels facing inward in factor plot. Default is `2`.
+#' @param scatter_alpha (optional) Picture transparency. Default is `1`.
+#' @param pieradius_factor (optional) The radius expansion factor of interaction contributions pie plot. Default is `15`.
+#' @param pielegend_x (optional) The X-axis relative position of interaction contributions pie plot legend. Default is `0.99`.
+#' @param pielegend_y (optional) The Y-axis relative position of interaction contributions pie plot legend. Default is `0.1`.
+#' @param pielegend_num (optional) The number of interaction contributions pie plot legend. Default is `3`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer
+#' @method plot esp_result
+#' @export
+#'
+plot.esp_result = \(x, slicenum = 2,
+                    scatter_alpha = 1,
+                    pieradius_factor = 15,
+                    pielegend_x = 0.99,
+                    pielegend_y = 0.1,
+                    pielegend_num = 3, ...){
+  # fig1
+  g_factor = x$factor %>%
+    dplyr::select(variable, qv = `Q-statistic`) %>%
+    dplyr::filter(!is.na(qv)) %>%
+    dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
+    dplyr::mutate(variable_col = c("first",rep("others",times = nrow(.)-1))) %>%
+    dplyr::mutate(qv_text = paste0(sprintf("%4.2f", qv * 100), "%"))
+  fig1 = ggplot2::ggplot(g_factor,
+                         ggplot2::aes(x = qv, y = variable, fill = variable_col)) +
+    ggplot2::geom_col() +
+    ggplot2::scale_x_continuous(expand = ggplot2::expansion(mult = c(0, 0.1))) +
+    ggplot2::scale_y_discrete(limits = rev) +
+    ggplot2::scale_fill_manual(breaks = c("first", "others"),
+                               values = c("#DE3533","#808080")) +
+    ggplot2::geom_text(data = dplyr::slice(g_factor, seq(1,slicenum)),
+                       ggplot2::aes(label = qv_text),
+                       hjust = 1.25, color = "black", fontface = "bold") +
+    ggplot2::geom_text(data = dplyr::slice(g_factor, -seq(1,slicenum)),
+                       ggplot2::aes(label = qv_text),
+                       hjust = -0.1, color = "black", fontface = "bold") +
+    ggplot2::labs(x = "Q value", y = "") +
+    ggplot2::theme_bw() +
+    ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
+                   legend.position = "off", ...)
+  # fig2
+  grd = dplyr::select(x$risk1,zone1st,zone2nd,Risk) %>%
+    dplyr::mutate(risk = forcats::fct_recode(Risk,"Y" = "Yes", "N" = "No"))
+  fig2 = ggplot2::ggplot(data = grd,
+                           ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
+    ggplot2::geom_tile(color = "white", size = 0.75) +
+    ggplot2::geom_text(ggplot2::aes(label = risk), color = "black") +
+    ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
+    ggplot2::coord_fixed() +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(axis.title.x = ggplot2::element_blank(),
+                   axis.title.y = ggplot2::element_blank(),
+                   axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black'),
+                   axis.text.y = ggplot2::element_text(color = 'black'),
+                   legend.position = "none",
+                   panel.grid = ggplot2::element_blank(), ...)
+  return(fig_rd)
+  # fig3
+  class(x) = 'lesh_result'
+  fig3 = plot.lesh_result(x, pie = FALSE, scatter = TRUE,
+                          scatter_alpha = 1,
+                          pieradius_factor = 15,
+                          pielegend_x = 0.99,
+                          pielegend_y = 0.1,
+                          pielegend_num = 3,)
+  # fig4
+  fig4 = plot.lesh_result(x, pie = TRUE, scatter = FALSE,
+                          scatter_alpha = 1,
+                          pieradius_factor = 15,
+                          pielegend_x = 0.99,
+                          pielegend_y = 0.1,
+                          pielegend_num = 3,)
+
+  fig_p = patchwork::wrap_plots(fig1, fig2, fig3, fig4, ncol = 1)
+  return(fig_p)
+}
