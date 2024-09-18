@@ -209,11 +209,59 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
                            spd = out_spd) %>%
     dplyr::arrange(dplyr::desc(spd))
 
-  res = list("psd" = res_psd, "spd" = res_spd, "risk1" = risk1, "risk2" = risk2,
+  factor_indice = which(sapply(xs, length) == 1)
+  factor = tibble::tibble(variable = xsname[factor_indice],
+                          psd = out_psd[factor_indice])
+
+  interact_type = \(qv1,qv2,qv12){
+    if (qv12 < min(qv1, qv2)) {
+      interaction = c("Weaken, nonlinear")
+    } else if (qv12 >= min(qv1, qv2) & qv12 <= max(qv1, qv2)) {
+      interaction = c("Weaken, uni-")
+    } else if (qv12 > max(qv1, qv2) & (qv12 < qv1 + qv2)) {
+      interaction = c("Enhance, bi-")
+    } else if (qv12 == qv1 + qv2) {
+      interaction = c("Independent")
+    } else {
+      interaction = c("Enhance, nonlinear")
+    }
+    return(interaction)
+  }
+
+  interaction_indice = which(sapply(xs, length) == 2)
+  interaction_qv = out_psd[interaction_indice]
+  interaction_xv = xs[interaction_indice]
+  variable1 = purrr::map_chr(seq_along(interaction_xv),
+                             \(.x) interaction_xv[[.x]][1])
+  variable2 = purrr::map_chr(seq_along(interaction_xv),
+                             \(.x) interaction_xv[[.x]][2])
+  qv1 = purrr::map_dbl(variable1, \(.x) get_value_by_varname(.x,xs,out_psd))
+  qv2 = purrr::map_dbl(variable2, \(.x) get_value_by_varname(.x,xs,out_psd))
+  interaction = tibble::tibble(
+    "Variable1 Q-statistics" = qv1, "Variable2 Q-statistics" = qv2,
+    "Variable1 and Variable2 interact Q-statistics" = interaction_qv,
+    "variable1" = variable1, "variable2" = variable2,
+    "Interaction" = purrr::pmap_chr(list(qv1 = qv1, qv2 = qv2,
+                                         qv12 = interaction_qv),
+                                    interact_type)) %>%
+    dplyr::select(variable1,variable2,Interaction,
+                  dplyr::everything()) %>%
+    dplyr::left_join(dplyr::select(spd,variable,spd1 = spd),
+                     by = c("variable1" = "variable")) %>%
+    dplyr::left_join(dplyr::select(spd,variable,spd2 = spd),
+                     by = c("variable2" = "variable")) %>%
+    dplyr::mutate(spd = (spd1 + spd2), spd1 = spd1 / spd, spd2 = spd2 / spd,
+                  `Variable1 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd1,
+                  `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
+    dplyr::select(-dplyr::starts_with('spd'))
+
+  res = list("factor" = factor, "interaction" = interaction,
+             "risk1" = risk1, "risk2" = risk2, "psd" = res_psd, "spd" = res_spd,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
   class(res) = "esp_result"
+
   return(res)
 }
 
