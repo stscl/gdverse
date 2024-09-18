@@ -28,7 +28,8 @@
 #' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{risk2}}{risk detection result of the input data}
 #' \item{\code{psd}}{power of spatial determinants}
-#' \item{\code{spd}}{SHAP power of determinants}
+#' \item{\code{spd}}{shap power of determinants}
+#' \item{\code{determination}}{determination of the optimal interaction of variables}
 #' \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 #' \item{\code{number_overlay_zones}}{the number of overlay zones}
 #' \item{\code{percentage_finely_divided_zones}}{the percentage of finely divided zones that are determined by the interaction of variables}
@@ -261,8 +262,8 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
     dplyr::select(-dplyr::starts_with('spd'))
 
-  res = list("factor" = factor, "interaction" = interaction,
-             "risk1" = risk1, "risk2" = risk2, "psd" = res_psd, "spd" = res_spd,
+  res = list("factor" = factor, "interaction" = interaction, "risk1" = risk1, "risk2" = risk2,
+             "psd" = res_psd, "spd" = res_spd, "determination" = determination,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
@@ -303,56 +304,13 @@ print.esp_result = \(x, ...) {
 #' S3 method to plot output for ESP result in `esp()`.
 #'
 #' @param x Return by `esp()`.
-#' @param slicenum (optional) The number of labels facing inward in factor plot. Default is `2`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
 #' @method plot esp_result
 #' @export
 #'
-plot.esp_result = \(x, slicenum = 2, ...){
-  # fig1
-  g_factor = x$factor %>%
-    dplyr::select(variable, qv = `Q-statistics`) %>%
-    dplyr::filter(!is.na(qv)) %>%
-    dplyr::mutate(variable = forcats::fct_reorder(variable, qv, .desc = TRUE)) %>%
-    dplyr::mutate(variable_col = c("first",rep("others",times = nrow(.)-1))) %>%
-    dplyr::mutate(qv_text = paste0(sprintf("%4.2f", qv * 100), "%"))
-  fig1 = ggplot2::ggplot(g_factor,
-                         ggplot2::aes(x = qv, y = variable, fill = variable_col)) +
-    ggplot2::geom_col() +
-    ggplot2::scale_x_continuous(expand = ggplot2::expansion(mult = c(0, 0.1))) +
-    ggplot2::scale_y_discrete(limits = rev) +
-    ggplot2::scale_fill_manual(breaks = c("first", "others"),
-                               values = c("#DE3533","#808080")) +
-    ggplot2::geom_text(data = dplyr::slice(g_factor, seq(1,slicenum)),
-                       ggplot2::aes(label = qv_text),
-                       hjust = 1.25, color = "black", fontface = "bold") +
-    ggplot2::geom_text(data = dplyr::slice(g_factor, -seq(1,slicenum)),
-                       ggplot2::aes(label = qv_text),
-                       hjust = -0.1, color = "black", fontface = "bold") +
-    ggplot2::labs(x = "Q value", y = "") +
-    ggplot2::theme_bw() +
-    ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
-                   legend.position = "off", ...)
-  # fig2
-  grd = dplyr::select(x$risk1,zone1st,zone2nd,Risk) %>%
-    dplyr::mutate(risk = forcats::fct_recode(Risk,"Y" = "Yes", "N" = "No"))
-  fig2 = ggplot2::ggplot(data = grd,
-                           ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
-    ggplot2::geom_tile(color = "white", size = 0.75) +
-    ggplot2::geom_text(ggplot2::aes(label = risk), color = "black") +
-    ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
-    ggplot2::coord_fixed() +
-    ggplot2::theme_minimal() +
-    ggplot2::theme(axis.title.x = ggplot2::element_blank(),
-                   axis.title.y = ggplot2::element_blank(),
-                   axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black'),
-                   axis.text.y = ggplot2::element_text(color = 'black'),
-                   legend.position = "none",
-                   panel.grid = ggplot2::element_blank(), ...)
+plot.esp_result = \(x, ...){
 
-  fig_p = patchwork::wrap_plots(fig1, fig2, nrow = 2) +
-    patchwork::plot_layout(heights = c(1, 1), widths = c(1, 1))
   return(fig_p)
 }
