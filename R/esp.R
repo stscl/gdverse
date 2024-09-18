@@ -211,7 +211,7 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
 
   factor_indice = which(sapply(xs, length) == 1)
   factor = tibble::tibble(variable = xsname[factor_indice],
-                          psd = out_psd[factor_indice])
+                          `Q-statistics` = out_psd[factor_indice])
 
   interact_type = \(qv1,qv2,qv12){
     if (qv12 < min(qv1, qv2)) {
