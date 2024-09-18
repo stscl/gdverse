@@ -120,7 +120,7 @@ spd_lesh = \(formula,data,cores = 1,...){
     out_g = purrr::map_dfr(xname,calcul_shap)
   }
 
-  out_g = tibble::tibble(varibale = xname) %>%
+  out_g = tibble::tibble(variable = xname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(spd_theta))
   return(out_g)

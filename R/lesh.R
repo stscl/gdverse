@@ -37,10 +37,10 @@ lesh = \(formula,data,cores = 1,...){
   spd = spd_lesh(formula,data,cores,...)
   pd = gozh(formula,data,cores,type = 'interaction',...)[[1]]
   res = pd %>%
-    dplyr::left_join(dplyr::select(spd,varibale,spd1 = spd_theta),
-                     by = c("variable1" = "varibale")) %>%
-    dplyr::left_join(dplyr::select(spd,varibale,spd2 = spd_theta),
-                     by = c("variable2" = "varibale")) %>%
+    dplyr::left_join(dplyr::select(spd,variable,spd1 = spd_theta),
+                     by = c("variable1" = "variable")) %>%
+    dplyr::left_join(dplyr::select(spd,variable,spd2 = spd_theta),
+                     by = c("variable2" = "variable")) %>%
     dplyr::mutate(spd = (spd1 + spd2), spd1 = spd1 / spd, spd2 = spd2 / spd,
                   `Variable1 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd1,
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
