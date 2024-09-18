@@ -340,7 +340,21 @@ print.esp_result = \(x, ...) {
 #' @method plot esp_result
 #' @export
 #'
-plot.esp_result = \(x, ...){
-  fig_p = ggplot2::ggplot()
+plot.esp_result = \(x, low_color = "#6600CC",
+                    high_color = "#FFCC33", ...){
+  g = x$determination
+  gv1 = dplyr::count(g,name)
+  g = g %>%
+    dplyr::left_join(gv1,by = "name") %>%
+    dplyr::mutate(name = forcats::fct_reorder(name, n, .desc = FALSE),
+                  step = factor(step))
+  fig_p = ggplot2::ggplot(g,
+                          ggplot2::aes(x = step, y = name)) +
+    ggplot2::geom_point(ggplot2::aes(col = psd, size = psd)) +
+    ggplot2::scale_color_gradient(low = low_color,
+                                  high = high_color) +
+    # scale_color_gradientn(colours = myPalette(100)) +
+    ggplot2::coord_fixed() +
+    ggplot2::theme_classic()
   return(fig_p)
 }
