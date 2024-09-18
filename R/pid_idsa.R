@@ -180,7 +180,7 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
 #' @details
 #' \eqn{\phi = 1 - \frac{\sum_{i=1}^m \sum_{k=1}^{n_i}N_{i,k}\tau_{i,k}}{\sum_{i=1}^m N_i \tau_i}}
 #'
-#' @param discdata Discreted explanatory variables data. A tibble or dataframe .
+#' @param discdata Observed data with discrete explanatory variables. A `tibble` or `data.frame` .
 #' @param spzone Fuzzy overlay spatial zones. Returned from `st_fuzzyoverlay()`.
 #' @param wt Spatial weight matrix
 #'
@@ -210,7 +210,7 @@ psd_iev = \(discdata,spzone,wt){
 #'
 #' @param formula A formula for IDSA Q-saistics
 #' @param rawdata Raw observation data
-#' @param discdata Discrete explanatory variables data
+#' @param discdata Observed data with discrete explanatory variables
 #' @param wt Spatial weight matrix
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
