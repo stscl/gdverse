@@ -352,8 +352,8 @@ plot.esp_result = \(x, low_color = "#6600CC",
                   step = factor(step))
   g_arrow1 = dplyr::slice_tail(g,n = 1,by = step) %>%
     dplyr::rename(x = step,y = name) %>%
-    dplyr::mutate(xend = c(tail(x, n = -1), NA),
-                  yend = c(tail(y, n = -1), NA))
+    dplyr::mutate(xend = c(utils::tail(x, n = -1), NA),
+                  yend = c(utils::tail(y, n = -1), NA))
   fig_p = ggplot2::ggplot(g,
                           ggplot2::aes(x = step, y = name)) +
     ggplot2::geom_point(ggplot2::aes(col = psd, size = psd)) +
@@ -361,7 +361,7 @@ plot.esp_result = \(x, low_color = "#6600CC",
                           ggplot2::aes(x = x, y = y,
                                        xend = xend,
                                        yend = yend),
-                          arrow = arrow(length = unit(0.3, "cm")),
+                          arrow = ggplot2::arrow(length = ggplot2::unit(0.3, "cm")),
                           color = "grey40", na.rm = TRUE) +
     ggplot2::scale_color_gradient(low = low_color,
                                   high = high_color) +
