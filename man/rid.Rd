@@ -8,8 +8,8 @@ rid(
   formula,
   data,
   discvar = NULL,
-  discnum = NULL,
-  minsize = NULL,
+  discnum = 10,
+  minsize = 1,
   overlaymethod = "and",
   cores = 1
 )

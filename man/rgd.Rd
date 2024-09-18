@@ -8,8 +8,8 @@ rgd(
   formula,
   data,
   discvar = NULL,
-  discnum = NULL,
-  minsize = NULL,
+  discnum = 10,
+  minsize = 1,
   cores = 1,
   type = "factor",
   alpha = 0.95

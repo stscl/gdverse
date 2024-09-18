@@ -4,7 +4,7 @@
 \alias{robust_disc}
 \title{univariate discretization based on offline change point detection}
 \usage{
-robust_disc(formula, data, discnum, minsize = NULL, cores = 1)
+robust_disc(formula, data, discnum, minsize = 1, cores = 1)
 }
 \arguments{
 \item{formula}{A formula of univariate discretization.}
