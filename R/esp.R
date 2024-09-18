@@ -340,7 +340,8 @@ print.esp_result = \(x, ...) {
 #' @method plot esp_result
 #' @export
 #'
-plot.esp_result = \(x, low_color = "#6600CC",
+plot.esp_result = \(x, shrink_factor = 0.8,
+                    low_color = "#6600CC",
                     high_color = "#FFCC33", ...){
   g = x$determination
   gv1 = dplyr::count(g,name)
@@ -348,13 +349,24 @@ plot.esp_result = \(x, low_color = "#6600CC",
     dplyr::left_join(gv1,by = "name") %>%
     dplyr::mutate(name = forcats::fct_reorder(name, n, .desc = FALSE),
                   step = factor(step))
+  g_text = dplyr::slice_tail(g,n = 1,by = step)
   fig_p = ggplot2::ggplot(g,
                           ggplot2::aes(x = step, y = name)) +
     ggplot2::geom_point(ggplot2::aes(col = psd, size = psd)) +
     ggplot2::scale_color_gradient(low = low_color,
                                   high = high_color) +
-    # scale_color_gradientn(colours = myPalette(100)) +
+    ggplot2::geom_segment(data = g_text,
+                          ggplot2::aes(x = step,y = name,
+                                       xend = c(tail(step, n = -1), NA),
+                                       yend = c(tail(name, n = -1), NA)),
+                                       arrow = arrow(length = unit(0.5, "cm")),
+                          color = "grey40") +
+    ggplot2::labs(x = "No. of variables in fuzzy overlay", y = "",
+                  size = "", color = "Q value") +
+    ggplot2::guides(size = "none") +
     ggplot2::coord_fixed() +
-    ggplot2::theme_classic()
+    ggplot2::theme_classic() +
+    ggplot2::theme(legend.position = "inside",
+                   legend.justification = c('right','bottom'))
   return(fig_p)
 }
