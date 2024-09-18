@@ -48,7 +48,8 @@ A list with ESP model result.
 \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{risk2}}{risk detection result of the input data}
 \item{\code{psd}}{power of spatial determinants}
-\item{\code{spd}}{SHAP power of determinants}
+\item{\code{spd}}{shap power of determinants}
+\item{\code{determination}}{determination of the optimal interaction of variables}
 \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 \item{\code{number_overlay_zones}}{the number of overlay zones}
 \item{\code{percentage_finely_divided_zones}}{the percentage of finely divided zones that are determined by the interaction of variables}

@@ -4,31 +4,14 @@
 \alias{plot.esp_result}
 \title{plot ESP result}
 \usage{
-\method{plot}{esp_result}(
-  x,
-  slicenum = 2,
-  scatter_alpha = 1,
-  pieradius_factor = 15,
-  pielegend_x = 0.99,
-  pielegend_y = 0.1,
-  pielegend_num = 3,
-  ...
-)
+\method{plot}{esp_result}(x, low_color = "#6600CC", high_color = "#FFCC33", ...)
 }
 \arguments{
 \item{x}{Return by \code{esp()}.}
 
-\item{slicenum}{(optional) The number of labels facing inward in factor plot. Default is \code{2}.}
+\item{low_color}{(optional) The low color of the color gradient, defaul is \verb{#6600CC}.}
 
-\item{scatter_alpha}{(optional) Picture transparency. Default is \code{1}.}
-
-\item{pieradius_factor}{(optional) The radius expansion factor of interaction contributions pie plot. Default is \code{15}.}
-
-\item{pielegend_x}{(optional) The X-axis relative position of interaction contributions pie plot legend. Default is \code{0.99}.}
-
-\item{pielegend_y}{(optional) The Y-axis relative position of interaction contributions pie plot legend. Default is \code{0.1}.}
-
-\item{pielegend_num}{(optional) The number of interaction contributions pie plot legend. Default is \code{3}.}
+\item{high_color}{(optional) The high color of the color gradient, defaul is \verb{#FFCC33}.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
