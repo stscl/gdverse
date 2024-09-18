@@ -262,9 +262,29 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
     dplyr::select(-dplyr::starts_with('spd'))
 
-  determination = tibble::tibble(variable = xsname,
-                                 psd = out_psd,
-                                 step = sapply(xs, length)) %>%
+  step_interaction = sapply(xs, length)
+  max_psd_names = sapply(unique(step_interaction), function(.s) {
+    step_psd = out_psd[which(step_interaction == .s)]
+    step_indice = which.max(step_psd)
+    return(xs[which(step_interaction == .s)][step_indice])
+  })
+  new_psd_indice = vector("logical",length(xs))
+  for (i in seq_along(xs)) {
+    if (step_interaction[i] == 1){
+      new_psd_indice[i] = TRUE
+    } else {
+      current_name = max_psd_names[step_interaction[i] - 1]
+      if (all(unlist(current_name) %in% unlist(xs[i]))) {
+        new_psd_indice[i] = TRUE
+      } else {
+        new_psd_indice[i] = FALSE
+      }
+    }
+  }
+
+  determination = tibble::tibble(variable = xsname[new_psd_indice],
+                                 psd = out_psd[new_psd_indice],
+                                 step = step_interaction[new_psd_indice]) %>%
     dplyr::group_by(step) %>%
     dplyr::arrange(psd,.by_group=TRUE) %>%
     dplyr::ungroup()
