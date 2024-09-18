@@ -9,9 +9,9 @@
 \arguments{
 \item{x}{Return by \code{esp()}.}
 
-\item{low_color}{(optional) The low color of the color gradient, defaul is \verb{#6600CC}.}
+\item{low_color}{(optional) The low color of the color gradient, default is \verb{#6600CC}.}
 
-\item{high_color}{(optional) The high color of the color gradient, defaul is \verb{#FFCC33}.}
+\item{high_color}{(optional) The high color of the color gradient, default is \verb{#FFCC33}.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
