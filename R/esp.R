@@ -351,7 +351,7 @@ plot.esp_result = \(x, low_color = "#6600CC",
     dplyr::mutate(name = forcats::fct_reorder(name, n, .desc = FALSE),
                   step = factor(step))
   g_arrow1 = dplyr::slice_tail(g,n = 1,by = step) %>%
-    dplyr::rename(x = step,y = name) %>%
+    dplyr::rename(x = step, y = name) %>%
     dplyr::mutate(xend = c(utils::tail(x, n = -1), NA),
                   yend = c(utils::tail(y, n = -1), NA))
   fig_p = ggplot2::ggplot(g,
