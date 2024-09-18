@@ -20,9 +20,12 @@
 #'
 #' @return A list with ESP model result.
 #' \describe{
-#' \item{\code{interaction}}{the interaction result of IDSA model}
+#' \item{\code{factor}}{results of ESP model factor detection}
+#' \item{\code{interaction}}{results of ESP model interaction detection}
 #' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{risk2}}{risk detection result of the input data}
+#' \item{\code{psd}}{power of spatial determinants}
+#' \item{\code{spd}}{SHAP power of determinants}
 #' \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 #' \item{\code{number_overlay_zones}}{the number of overlay zones}
 #' \item{\code{percentage_finely_divided_zones}}{the percentage of finely divided zones that are determined by the interaction of variables}
@@ -278,10 +281,10 @@ esp = \(formula, data, wt = NULL, discvar = NULL,
 #' @export
 #'
 print.esp_result = \(x, ...) {
-  cat("***       Enhanced Stratified Power   ")
+  cat("***       Enhanced Stratified Power Model   ")
   print(knitr::kable(utils::head(dplyr::rename(x$psd, PSD = psd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n --------- ESP model performance evaluation: --------\n",
+  cat("\n ---------- ESP model performance evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
