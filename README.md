@@ -8,7 +8,7 @@
 [![cran](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
 [![downloads_all](https://badgen.net/cran/dt/gdverse?color=orange)](https://CRAN.R-project.org/package=gdverse)
 [![downloads_month](https://cranlogs.r-pkg.org/badges/gdverse)](https://CRAN.R-project.org/package=gdverse)
-[![r-universe](https://ausgis.r-universe.dev/badges/gdverse)](https://ausgis.r-universe.dev/gdverse)
+[![r-universe](https://ausgis.r-universe.dev/badges/gdverse?color=cyan)](https://ausgis.r-universe.dev/gdverse)
 
 <!-- badges: end -->
 
