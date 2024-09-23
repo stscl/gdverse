@@ -105,9 +105,11 @@ ndvi
 ### OPGD model
 
 ``` r
+discvar = names(ndvi)[-1:-3]
+discvar
+## [1] "Tempchange"    "Precipitation" "GDP"           "Popdensity"
 ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, 
-                 discvar = names(ndvi)[-1:-3],
-                 cores = 6, type ='factor')
+                 discvar = discvar, cores = 6)
 ndvi_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
