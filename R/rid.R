@@ -121,6 +121,6 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
 #' @export
 print.rid_result = \(x, ...) {
   cat("***          Robust Interaction Detector       ")
-  print(knitr::kable(dplyr::rename(x$interaction, PD = qv_rid),
+  print(knitr::kable(utils::head(dplyr::rename(x$interaction, PD = qv_rid),5),
                      format = "markdown",digits = 12,align = 'c',...))
 }
