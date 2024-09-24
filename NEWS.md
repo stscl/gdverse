@@ -1,6 +1,6 @@
 # gdverse 1.0-3
 
-* Updating the `RGD` Model API Settings
+* Updating the `RGD` Model API Settings.
 
 # gdverse 1.0-2
 
