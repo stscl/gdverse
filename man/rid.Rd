@@ -9,7 +9,7 @@ rid(
   data,
   discvar = NULL,
   discnum = 10,
-  overlaymethod = "and",
+  overlaymethod = "intersection",
   minsize = 1,
   cores = 1
 )
@@ -27,7 +27,7 @@ variables are used as \code{discvar}.}
 to be discretized. Default all \code{discvar} use \code{10}.}
 
 \item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
-Default is \code{and}.}
+Default is \code{intersection}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
