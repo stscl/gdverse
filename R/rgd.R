@@ -62,8 +62,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
   }
   qv = purrr::map2_dfr(resqv, discnum,
                        \(.x,.n) .x %>%
-                         dplyr::mutate(rank = dplyr::min_rank(dplyr::desc(`Q-statistic`)),
-                                       discnum = .n))
+                         dplyr::mutate(discnum = .n))
   disc = purrr::map2_dfr(resdisc, discnum,
                          \(.x,.n) dplyr::mutate(.x,discnum = .n))
   res = list("factor" = qv, "disc" = disc)
