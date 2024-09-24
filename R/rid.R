@@ -7,7 +7,6 @@
 #' A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.
 #' https://doi.org/10.1016/j.spasta.2024.100814
 #' @note
-#' For bivariate spatial interactions, use the `RGD` function and specify the `type` parameter as `interaction`.
 #'
 #' The RID model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
 #' When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
@@ -39,8 +38,9 @@
 #' \dontrun{
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
-#' g = rid(y ~ ., data = sim %>% dplyr::select(-dplyr::any_of(c('lo','la'))),
-#'         discvar = c("xa","xb","xc"), discnum = 4, cores = 6)
+#' g = rid(y ~ .,
+#'         data =  dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'         discnum = 4, cores = 6)
 #' g
 #' }
 rid = \(formula, data, discvar = NULL, discnum = 10,

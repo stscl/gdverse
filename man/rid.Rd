@@ -43,8 +43,6 @@ A list of the RID model result.
 Function for robust interaction detector(RID) model.
 }
 \note{
-For bivariate spatial interactions, use the \code{RGD} function and specify the \code{type} parameter as \code{interaction}.
-
 The RID model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
 When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
 When there are a large number of explanatory variables, the data dimensionality reduction method can be used
@@ -57,8 +55,9 @@ See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 \dontrun{
 ## The following code needs to configure the Python environment to run:
 data('sim')
-g = rid(y ~ ., data = sim \%>\% dplyr::select(-dplyr::any_of(c('lo','la'))),
-        discvar = c("xa","xb","xc"), discnum = 4, cores = 6)
+g = rid(y ~ .,
+        data =  dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+        discnum = 4, cores = 6)
 g
 }
 }
