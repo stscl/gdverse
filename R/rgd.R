@@ -15,20 +15,14 @@
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent
 #' variables are used as `discvar`.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
-#' Default all `discvar` use `10`.
+#' Default all `discvar` use `3:22`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python` `joblib` package to
 #' parallel computation.
-#' @param type (optional) The type of geographical detector, which must be `factor`(default),
-#' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
-#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #'
 #' @return A list of the RGD model result.
 #' \describe{
-#' \item{\code{factor}}{the result of factor detector}
-#' \item{\code{interaction}}{the result of interaction detector}
-#' \item{\code{risk}}{the result of risk detector}
-#' \item{\code{ecological}}{the result of ecological detector}
+#' \item{\code{factor}}{the result of RGD model}
 #' }
 #' @export
 #'
@@ -36,11 +30,11 @@
 #' \dontrun{
 #' ## The following code needs to configure the Python environment to run:
 #' data('ndvi')
-#' g = rgd(NDVIchange ~ ., data = ndvi, discvar = names(ndvi)[-1:-3],
-#'         cores = 6, type =c('factor','interaction'))
+#' g = rgd(NDVIchange ~ ., data = ndvi,
+#'         discvar = names(ndvi)[-1:-3],
+#'         cores = 6)
 #' }
-rgd = \(formula, data, discvar = NULL, discnum = 10,
-        minsize = 1, cores = 1, type = "factor", alpha = 0.95){
+rgd = \(formula, data, discvar = 3:22, discnum = 10, minsize = 1, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
