@@ -79,7 +79,7 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
                                 newdti,spfom)
     }
     qv = factor_detector(newdti[,yname,drop = TRUE],reszone)[[1]]
-    names(qv) = 'qv_rid'
+    names(qv) = 'PD'
     return(qv)
   }
 
@@ -103,7 +103,7 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
   out_g = tibble::tibble(varibale = xsname) %>%
     dplyr::bind_cols(out_g) %>%
-    dplyr::arrange(dplyr::desc(qv_rid))
+    dplyr::arrange(dplyr::desc(PD))
   res = list("interaction" = out_g)
   class(res) = "rid_result"
   return(res)
@@ -121,7 +121,7 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
 #' @export
 print.rid_result = \(x, ...) {
   cat("***          Robust Interaction Detector       ")
-  print(knitr::kable(utils::head(dplyr::rename(x$interaction, PD = qv_rid),5),
-                     format = "markdown",digits = 12,align = 'c',...))
+  print(knitr::kable(utils::head(x$interaction,5), format = "markdown",
+                     digits = 12, align = 'c', ...))
   cat("\n #### Only the first five pairs of interactions are displayed! ####")
 }
