@@ -60,9 +60,13 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
       dplyr::bind_cols(g)
     resqv[[i]] = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
   }
-  names(resqv) = paste0("discnum_",discnum)
-  names(resdisc) = paste0("discnum_",discnum)
-  res = list("factor" = resqv, "disc" = resdisc)
+  qv = purrr::map2_dfr(resqv, discnum,
+                       \(.x,.n) .x %>%
+                         dplyr::mutate(rank = dplyr::min_rank(dplyr::desc(`Q-statistic`)),
+                                       discnum = .n))
+  disc = purrr::map2_dfr(resdisc, discnum,
+                         \(.x,.n) dplyr::mutate(.x,discnum = .n))
+  res = list("factor" = qv, "disc" = disc)
   class(res) = "rgd_result"
   return(res)
 }
@@ -79,9 +83,12 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
 #' @method print rgd_result
 #' @export
 print.rgd_result = \(x, ...) {
-  cat("***                  Robust Geographical Detector       ")
+  cat("***          Robust Geographical Detector       ")
   qv = x[[1]]
-  print(knitr::kable(qv[[length(qv)]],format = "markdown",digits = 12,align = 'c',...))
+  qv = qv %>%
+    dplyr::filter(discnum == max(qv$discnum)) %>%
+    dplyr::select(1:3)
+  print(knitr::kable(qv,format = "markdown",digits = 12,align = 'c',...))
   cat("\n")
   cat("#### Only display the results corresponding to the maximum number of discretizations.")
 }
@@ -92,28 +99,23 @@ print.rgd_result = \(x, ...) {
 #' S3 method to plot output for RGD model result in `rgd()`.
 #'
 #' @param x Return by `rgd()`.
-#' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
+#' @param slicenum (optional) The number of labels facing inward. Default is `2`.
+#' @param alpha (optional) Confidence level. Default is `0.95`.
+#' @param keep (optional) Whether to keep Q-value results for insignificant variables,
+#' default is `TRUE`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
 #' @method plot rgd_result
 #' @export
 #'
-plot.rgd_result = \(x, ...) {
+plot.rgd_result = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
   qv = x[[1]]
-  qv = purrr::map2_dfr(qv, names(qv),
-                       \(.x,.n) .x %>%
-                       dplyr::mutate(rank = dplyr::min_rank(dplyr::desc(`Q-statistic`)),
-                                     discnum = as.numeric(unlist(strsplit(.n, "_"))[2])) %>%
-                       dplyr::select(variable,rank,discnum)) %>%
-    dplyr::mutate(rank = factor(rank), discnum = factor(discnum))
-  fig_p = ggplot2::ggplot(qv, ggplot2::aes(x = discnum, y = rank,
-                                           group = variable)) +
-    ggplot2::geom_line(size = 3, color = 'grey', alpha = 0.5) +
-    ggplot2::geom_point(size = 4, color = 'grey', alpha = 0.5) +
-    ggplot2::scale_y_reverse() +  # Reverse the Y axis to match rank order
-    # ggplot2::scale_x_continuous(breaks = 3:12) +
-    ggplot2::theme_minimal() +
-    ggplot2::labs(x = "Number of intervals", y = "Rank of B-value") +
-    ggplot2::theme(legend.position = "right")
+  qv = qv %>%
+    dplyr::filter(discnum == max(qv$discnum)) %>%
+    dplyr::select(1:3)
+  res = list("factor" = qv)
+  class(res) = "factor_detector"
+  fig_p = plot.factor_detector(res, slicenum, alpha, keep, ...)
   return(fig_p)
 }
