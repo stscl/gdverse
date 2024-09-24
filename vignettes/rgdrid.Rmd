@@ -15,7 +15,7 @@ vignette: >
 2. Open the conda terminal and perform steps 3 to 6
 3. Create a new conda env `gdverse`
 
-   > `conda create -n gdverse python=3.9 -y`
+   > `conda create -n gdverse python=3.10 -y`
 
 4. Activate this env
 
@@ -27,7 +27,7 @@ vignette: >
 
 6. Set up python packages
 
-   > `mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y`
+   > `mamba install -c conda-forge numpy joblib pandas ruptures -y`
 
 7. Configure `GDVERSE_PYTHON` environment variable
 
@@ -52,116 +52,15 @@ names(ndvi)
 ## [6] "GDP"           "Popdensity"
 ```
 
-### Determine discretization use offline change point detection
-
-`Climatezone` and `Mining` is the discrete category variables in the `ndvi` data, we need to discretize others.You can use `robust_disc()` to discretize them based on offline change point detection.When executing `robust_disc()`, note that each `discvar` can use a `discnum` parameter of its own. You can pass in a vector of equal length to `discvar` to use different `discnum` for different `discvar`.
-
-
-``` r
-tictoc::tic()
-new.ndvi = robust_disc(NDVIchange ~ .,
-                       data = select(ndvi,-c(Climatezone,Mining)),
-                       discnum = 10,cores = 6)
-tictoc::toc()
-## 20.95 sec elapsed
-```
-
-
-``` r
-new.ndvi
-## # A tibble: 713 × 4
-##    Tempchange Precipitation GDP     Popdensity
-##    <chr>      <chr>         <chr>   <chr>     
-##  1 group1     group5        group7  group6    
-##  2 group1     group5        group7  group4    
-##  3 group1     group9        group8  group10   
-##  4 group1     group5        group1  group3    
-##  5 group1     group3        group1  group3    
-##  6 group1     group3        group1  group4    
-##  7 group1     group5        group7  group6    
-##  8 group1     group5        group8  group10   
-##  9 group1     group7        group10 group10   
-## 10 group1     group7        group9  group10   
-## # ℹ 703 more rows
-```
-
-The `new.ndvi` is the discrete result,we can combine it with `NDVIchange`,`Climatezone` and `Mining` cols in `ndvi` tibble now.
-
-
-``` r
-new.ndvi = bind_cols(select(ndvi,c(NDVIchange,Climatezone,Mining)),new.ndvi)
-new.ndvi
-## # A tibble: 713 × 7
-##    NDVIchange Climatezone Mining Tempchange Precipitation GDP     Popdensity
-##         <dbl> <chr>       <fct>  <chr>      <chr>         <chr>   <chr>     
-##  1    0.116   Bwk         low    group1     group5        group7  group6    
-##  2    0.0178  Bwk         low    group1     group5        group7  group4    
-##  3    0.138   Bsk         low    group1     group9        group8  group10   
-##  4    0.00439 Bwk         low    group1     group5        group1  group3    
-##  5    0.00316 Bwk         low    group1     group3        group1  group3    
-##  6    0.00838 Bwk         low    group1     group3        group1  group4    
-##  7    0.0335  Bwk         low    group1     group5        group7  group6    
-##  8    0.0387  Bwk         low    group1     group5        group8  group10   
-##  9    0.0882  Bsk         low    group1     group7        group10 group10   
-## 10    0.0690  Bsk         low    group1     group7        group9  group10   
-## # ℹ 703 more rows
-```
-
-### Run geodetector
-
-Then, we can run geodetector model by `gd()` function.
-
-
-``` r
-g1 = gd(NDVIchange ~ .,data = new.ndvi, type = 'factor')
-g1
-## ***          Factor Detector            
-## 
-## |   variable    | Q-statistic | P-value  |
-## |:-------------:|:-----------:|:--------:|
-## | Precipitation |  0.8933049  | 3.25e-10 |
-## |  Climatezone  |  0.8218335  | 7.34e-10 |
-## |  Tempchange   |  0.3874615  | 7.59e-10 |
-## |  Popdensity   |  0.2622265  | 3.65e-10 |
-## |      GDP      |  0.1491878  | 3.63e-10 |
-## |    Mining     |  0.1411154  | 6.73e-10 |
-```
-
-
-``` r
-g2 = gd(NDVIchange ~ .,data = new.ndvi, type = 'interaction')
-g2
-## ***        Interaction Detector         
-## 
-## |    Interactive variable     | Interaction  |
-## |:---------------------------:|:------------:|
-## |    Climatezone ∩ Mining     | Enhance, bi- |
-## |  Climatezone ∩ Tempchange   | Enhance, bi- |
-## | Climatezone ∩ Precipitation | Enhance, bi- |
-## |      Climatezone ∩ GDP      | Enhance, bi- |
-## |  Climatezone ∩ Popdensity   | Enhance, bi- |
-## |     Mining ∩ Tempchange     | Enhance, bi- |
-## |   Mining ∩ Precipitation    | Enhance, bi- |
-## |        Mining ∩ GDP         | Enhance, bi- |
-## |     Mining ∩ Popdensity     | Enhance, bi- |
-## | Tempchange ∩ Precipitation  | Enhance, bi- |
-## |      Tempchange ∩ GDP       | Enhance, bi- |
-## |   Tempchange ∩ Popdensity   | Enhance, bi- |
-## |     Precipitation ∩ GDP     | Enhance, bi- |
-## | Precipitation ∩ Popdensity  | Enhance, bi- |
-## |      GDP ∩ Popdensity       | Enhance, bi- |
-```
-
-### You can also use `rgd()` in one time to get result above.
+### Run RGD
 
 
 ``` r
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-               discnum = 10, cores = 6, type = c('factor','interaction'))
+               discnum = 3:10, cores = 12)
 ndvi_rgd
-##                  RGD Model                  
-## ***          Factor Detector            
+## ***          Robust Geographical Detector       
 ## 
 ## |   variable    | Q-statistic | P-value  |
 ## |:-------------:|:-----------:|:--------:|
@@ -172,25 +71,7 @@ ndvi_rgd
 ## |      GDP      |  0.1491878  | 3.63e-10 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
 ## 
-## ***        Interaction Detector         
-## 
-## |    Interactive variable     | Interaction  |
-## |:---------------------------:|:------------:|
-## |    Climatezone ∩ Mining     | Enhance, bi- |
-## |  Climatezone ∩ Tempchange   | Enhance, bi- |
-## | Climatezone ∩ Precipitation | Enhance, bi- |
-## |      Climatezone ∩ GDP      | Enhance, bi- |
-## |  Climatezone ∩ Popdensity   | Enhance, bi- |
-## |     Mining ∩ Tempchange     | Enhance, bi- |
-## |   Mining ∩ Precipitation    | Enhance, bi- |
-## |        Mining ∩ GDP         | Enhance, bi- |
-## |     Mining ∩ Popdensity     | Enhance, bi- |
-## | Tempchange ∩ Precipitation  | Enhance, bi- |
-## |      Tempchange ∩ GDP       | Enhance, bi- |
-## |   Tempchange ∩ Popdensity   | Enhance, bi- |
-## |     Precipitation ∩ GDP     | Enhance, bi- |
-## | Precipitation ∩ Popdensity  | Enhance, bi- |
-## |      GDP ∩ Popdensity       | Enhance, bi- |
+## #### Only display the results corresponding to the maximum number of discretizations.
 ```
 
 
@@ -202,79 +83,79 @@ plot(ndvi_rgd)
 
 ### Run RID
 
-`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Fuzzy And Join` are used to generate a new spatial partition of the interaction variables.
+`RID` allows you to obtain the interactions of all possible combinations of variables. By default, `Spatial Intersection` are used to generate a new spatial partition of the interaction variables.
 
 
 ``` r
 ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-               discnum = 10, cores = 6)
+               discnum = 10, cores = 12)
 ndvi_rid
 ## ***          Robust Interaction Detector       
 ## 
 ## |                               varibale                               |    PD     |
 ## |:--------------------------------------------------------------------:|:---------:|
-## |                     Climatezone ∩ Precipitation                      | 0.8983194 |
+## |       Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP        | 0.9684917 |
+## | Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity | 0.9628383 |
+## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.9618024 |
+## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.9611111 |
+## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.9601571 |
+## |     Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity      | 0.9597470 |
+## |        Climatezone ∩ Tempchange ∩ Precipitation ∩ Popdensity         | 0.9557646 |
+## |        Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.9554015 |
+## |           Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity           | 0.9541564 |
+## |                   Tempchange ∩ Precipitation ∩ GDP                   | 0.9535530 |
+## |          Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation           | 0.9522481 |
+## |            Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity             | 0.9513551 |
+## |               Tempchange ∩ Precipitation ∩ Popdensity                | 0.9493200 |
+## |       Climatezone ∩ Mining ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.9464817 |
+## |               Climatezone ∩ Tempchange ∩ Precipitation               | 0.9463031 |
+## |              Climatezone ∩ Mining ∩ Precipitation ∩ GDP              | 0.9462355 |
+## |                 Mining ∩ Tempchange ∩ Precipitation                  | 0.9437051 |
+## |          Climatezone ∩ Mining ∩ Precipitation ∩ Popdensity           | 0.9401919 |
+## |                      Tempchange ∩ Precipitation                      | 0.9361996 |
+## |            Climatezone ∩ Precipitation ∩ GDP ∩ Popdensity            | 0.9357268 |
+## |              Mining ∩ Precipitation ∩ GDP ∩ Popdensity               | 0.9334925 |
+## |                  Climatezone ∩ Precipitation ∩ GDP                   | 0.9324555 |
+## |                     Mining ∩ Precipitation ∩ GDP                     | 0.9301882 |
+## |                 Climatezone ∩ Mining ∩ Precipitation                 | 0.9280920 |
+## |               Climatezone ∩ Precipitation ∩ Popdensity               | 0.9261818 |
+## |                 Mining ∩ Precipitation ∩ Popdensity                  | 0.9232713 |
+## |                   Precipitation ∩ GDP ∩ Popdensity                   | 0.9202210 |
+## |                     Climatezone ∩ Precipitation                      | 0.9142208 |
+## |                         Precipitation ∩ GDP                          | 0.9127418 |
+## |                      Precipitation ∩ Popdensity                      | 0.9115116 |
+## |               Climatezone ∩ Mining ∩ Tempchange ∩ GDP                | 0.9083874 |
+## |                        Mining ∩ Precipitation                        | 0.9077486 |
+## |         Climatezone ∩ Mining ∩ Tempchange ∩ GDP ∩ Popdensity         | 0.9025073 |
 ## |                            Precipitation                             | 0.8933049 |
-## |                  Climatezone ∩ Precipitation ∩ GDP                   | 0.8470890 |
-## |                 Climatezone ∩ Mining ∩ Precipitation                 | 0.8448562 |
-## |               Climatezone ∩ Precipitation ∩ Popdensity               | 0.8426167 |
-## |            Climatezone ∩ Precipitation ∩ GDP ∩ Popdensity            | 0.8351028 |
-## |               Climatezone ∩ Tempchange ∩ Precipitation               | 0.8343010 |
-## |              Climatezone ∩ Mining ∩ Precipitation ∩ GDP              | 0.8302478 |
-## |                         Precipitation ∩ GDP                          | 0.8291002 |
-## |          Climatezone ∩ Mining ∩ Precipitation ∩ Popdensity           | 0.8266936 |
-## |                      Tempchange ∩ Precipitation                      | 0.8262867 |
+## |             Climatezone ∩ Tempchange ∩ GDP ∩ Popdensity              | 0.8932967 |
+## |            Climatezone ∩ Mining ∩ Tempchange ∩ Popdensity            | 0.8909290 |
+## |                    Climatezone ∩ Tempchange ∩ GDP                    | 0.8900496 |
+## |                Climatezone ∩ Tempchange ∩ Popdensity                 | 0.8773048 |
+## |                  Climatezone ∩ Mining ∩ Tempchange                   | 0.8738940 |
+## |               Climatezone ∩ Mining ∩ GDP ∩ Popdensity                | 0.8737628 |
+## |                       Climatezone ∩ Tempchange                       | 0.8589825 |
+## |                    Climatezone ∩ GDP ∩ Popdensity                    | 0.8588435 |
+## |                      Climatezone ∩ Mining ∩ GDP                      | 0.8580946 |
+## |                  Climatezone ∩ Mining ∩ Popdensity                   | 0.8559584 |
+## |                          Climatezone ∩ GDP                           | 0.8421280 |
+## |                       Climatezone ∩ Popdensity                       | 0.8363342 |
+## |                         Climatezone ∩ Mining                         | 0.8344738 |
 ## |                             Climatezone                              | 0.8218335 |
-## |       Climatezone ∩ Mining ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.8206854 |
-## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.8033886 |
-## |                   Precipitation ∩ GDP ∩ Popdensity                   | 0.7984676 |
-## |        Climatezone ∩ Tempchange ∩ Precipitation ∩ Popdensity         | 0.7941671 |
-## |                         Climatezone ∩ Mining                         | 0.7930330 |
-## |                      Precipitation ∩ Popdensity                      | 0.7928397 |
-## |          Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation           | 0.7926405 |
-## |     Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity      | 0.7914425 |
-## |                   Tempchange ∩ Precipitation ∩ GDP                   | 0.7898127 |
-## |       Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP        | 0.7826698 |
-## |                     Mining ∩ Precipitation ∩ GDP                     | 0.7780201 |
-## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.7767463 |
-## | Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity | 0.7748192 |
-## |                        Mining ∩ Precipitation                        | 0.7742147 |
-## |                       Climatezone ∩ Tempchange                       | 0.7593504 |
-## |            Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity             | 0.7592357 |
-## |               Tempchange ∩ Precipitation ∩ Popdensity                | 0.7564501 |
-## |                  Climatezone ∩ Mining ∩ Popdensity                   | 0.7554556 |
-## |                      Climatezone ∩ Mining ∩ GDP                      | 0.7546429 |
-## |              Mining ∩ Precipitation ∩ GDP ∩ Popdensity               | 0.7529482 |
-## |                  Climatezone ∩ Mining ∩ Tempchange                   | 0.7485414 |
-## |                       Climatezone ∩ Popdensity                       | 0.7478818 |
-## |                          Climatezone ∩ GDP                           | 0.7442993 |
-## |                 Mining ∩ Precipitation ∩ Popdensity                  | 0.7428155 |
-## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.7390511 |
-## |                    Climatezone ∩ Tempchange ∩ GDP                    | 0.7373548 |
-## |                 Mining ∩ Tempchange ∩ Precipitation                  | 0.7348493 |
-## |               Climatezone ∩ Mining ∩ GDP ∩ Popdensity                | 0.7337329 |
-## |               Climatezone ∩ Mining ∩ Tempchange ∩ GDP                | 0.7316833 |
-## |                    Climatezone ∩ GDP ∩ Popdensity                    | 0.7217405 |
-## |                Climatezone ∩ Tempchange ∩ Popdensity                 | 0.7203489 |
-## |            Climatezone ∩ Mining ∩ Tempchange ∩ Popdensity            | 0.7190660 |
-## |        Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.7124629 |
-## |         Climatezone ∩ Mining ∩ Tempchange ∩ GDP ∩ Popdensity         | 0.7106643 |
-## |             Climatezone ∩ Tempchange ∩ GDP ∩ Popdensity              | 0.7100158 |
-## |           Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity           | 0.7016658 |
-## |                Mining ∩ Tempchange ∩ GDP ∩ Popdensity                | 0.4132554 |
-## |                      Mining ∩ Tempchange ∩ GDP                       | 0.4057062 |
-## |                         Mining ∩ Tempchange                          | 0.4032055 |
-## |                   Mining ∩ Tempchange ∩ Popdensity                   | 0.4026808 |
-## |                    Tempchange ∩ GDP ∩ Popdensity                     | 0.3996984 |
-## |                       Tempchange ∩ Popdensity                        | 0.3990126 |
-## |                           Tempchange ∩ GDP                           | 0.3914879 |
+## |                Mining ∩ Tempchange ∩ GDP ∩ Popdensity                | 0.6283004 |
+## |                    Tempchange ∩ GDP ∩ Popdensity                     | 0.5794539 |
+## |                      Mining ∩ Tempchange ∩ GDP                       | 0.5612049 |
+## |                   Mining ∩ Tempchange ∩ Popdensity                   | 0.5473784 |
+## |                           Tempchange ∩ GDP                           | 0.4990112 |
+## |                       Tempchange ∩ Popdensity                        | 0.4787564 |
+## |                         Mining ∩ Tempchange                          | 0.4584914 |
+## |                      Mining ∩ GDP ∩ Popdensity                       | 0.4581629 |
+## |                         Mining ∩ Popdensity                          | 0.3993162 |
 ## |                              Tempchange                              | 0.3874615 |
-## |                      Mining ∩ GDP ∩ Popdensity                       | 0.3293260 |
-## |                         Mining ∩ Popdensity                          | 0.3188582 |
-## |                           GDP ∩ Popdensity                           | 0.2773077 |
+## |                           GDP ∩ Popdensity                           | 0.3271684 |
+## |                             Mining ∩ GDP                             | 0.2845774 |
 ## |                              Popdensity                              | 0.2622265 |
-## |                             Mining ∩ GDP                             | 0.2157334 |
 ## |                                 GDP                                  | 0.1491878 |
 ## |                                Mining                                | 0.1411154 |
 ```
