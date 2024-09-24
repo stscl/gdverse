@@ -149,6 +149,7 @@ path.</p></li>
 <code class="sourceCode R"><span><span class="va">ndvi_rgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
 <span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>               discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="co">## Error in Sys.setenv(PATH = new_path): 'names' and 'val' are of different lengths</span></span>
 <span><span class="va">ndvi_rgd</span></span>
 <span><span class="co">## ***          Robust Geographical Detector       </span></span>
 <span><span class="co">## </span></span>
@@ -161,7 +162,7 @@ path.</p></li>
 <span><span class="co">## |      GDP      |  0.1491878  | 3.63e-10 |</span></span>
 <span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## #### Only display the results corresponding to the maximum number of discretizations.</span></span></code></pre></div>
+<span><span class="co">## #### Only display the results corresponding to the maximum number of discretizations! ####</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/rgdrid/rgd_id-1.png"></p>
@@ -177,6 +178,7 @@ partition of the interaction variables.</p>
 <code class="sourceCode R"><span><span class="va">ndvi_rid</span> <span class="op">=</span> <span class="fu"><a href="../reference/rid.html">rid</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
 <span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span><span class="co">## Error in Sys.setenv(PATH = new_path): 'names' and 'val' are of different lengths</span></span>
 <span><span class="va">ndvi_rid</span></span>
 <span><span class="co">## ***          Robust Interaction Detector       </span></span>
 <span><span class="co">## </span></span>
@@ -187,64 +189,8 @@ partition of the interaction variables.</p>
 <span><span class="co">## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.9618024 |</span></span>
 <span><span class="co">## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.9611111 |</span></span>
 <span><span class="co">## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.9601571 |</span></span>
-<span><span class="co">## |     Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity      | 0.9597470 |</span></span>
-<span><span class="co">## |        Climatezone ∩ Tempchange ∩ Precipitation ∩ Popdensity         | 0.9557646 |</span></span>
-<span><span class="co">## |        Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.9554015 |</span></span>
-<span><span class="co">## |           Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity           | 0.9541564 |</span></span>
-<span><span class="co">## |                   Tempchange ∩ Precipitation ∩ GDP                   | 0.9535530 |</span></span>
-<span><span class="co">## |          Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation           | 0.9522481 |</span></span>
-<span><span class="co">## |            Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity             | 0.9513551 |</span></span>
-<span><span class="co">## |               Tempchange ∩ Precipitation ∩ Popdensity                | 0.9493200 |</span></span>
-<span><span class="co">## |       Climatezone ∩ Mining ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.9464817 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Tempchange ∩ Precipitation               | 0.9463031 |</span></span>
-<span><span class="co">## |              Climatezone ∩ Mining ∩ Precipitation ∩ GDP              | 0.9462355 |</span></span>
-<span><span class="co">## |                 Mining ∩ Tempchange ∩ Precipitation                  | 0.9437051 |</span></span>
-<span><span class="co">## |          Climatezone ∩ Mining ∩ Precipitation ∩ Popdensity           | 0.9401919 |</span></span>
-<span><span class="co">## |                      Tempchange ∩ Precipitation                      | 0.9361996 |</span></span>
-<span><span class="co">## |            Climatezone ∩ Precipitation ∩ GDP ∩ Popdensity            | 0.9357268 |</span></span>
-<span><span class="co">## |              Mining ∩ Precipitation ∩ GDP ∩ Popdensity               | 0.9334925 |</span></span>
-<span><span class="co">## |                  Climatezone ∩ Precipitation ∩ GDP                   | 0.9324555 |</span></span>
-<span><span class="co">## |                     Mining ∩ Precipitation ∩ GDP                     | 0.9301882 |</span></span>
-<span><span class="co">## |                 Climatezone ∩ Mining ∩ Precipitation                 | 0.9280920 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Precipitation ∩ Popdensity               | 0.9261818 |</span></span>
-<span><span class="co">## |                 Mining ∩ Precipitation ∩ Popdensity                  | 0.9232713 |</span></span>
-<span><span class="co">## |                   Precipitation ∩ GDP ∩ Popdensity                   | 0.9202210 |</span></span>
-<span><span class="co">## |                     Climatezone ∩ Precipitation                      | 0.9142208 |</span></span>
-<span><span class="co">## |                         Precipitation ∩ GDP                          | 0.9127418 |</span></span>
-<span><span class="co">## |                      Precipitation ∩ Popdensity                      | 0.9115116 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Mining ∩ Tempchange ∩ GDP                | 0.9083874 |</span></span>
-<span><span class="co">## |                        Mining ∩ Precipitation                        | 0.9077486 |</span></span>
-<span><span class="co">## |         Climatezone ∩ Mining ∩ Tempchange ∩ GDP ∩ Popdensity         | 0.9025073 |</span></span>
-<span><span class="co">## |                            Precipitation                             | 0.8933049 |</span></span>
-<span><span class="co">## |             Climatezone ∩ Tempchange ∩ GDP ∩ Popdensity              | 0.8932967 |</span></span>
-<span><span class="co">## |            Climatezone ∩ Mining ∩ Tempchange ∩ Popdensity            | 0.8909290 |</span></span>
-<span><span class="co">## |                    Climatezone ∩ Tempchange ∩ GDP                    | 0.8900496 |</span></span>
-<span><span class="co">## |                Climatezone ∩ Tempchange ∩ Popdensity                 | 0.8773048 |</span></span>
-<span><span class="co">## |                  Climatezone ∩ Mining ∩ Tempchange                   | 0.8738940 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Mining ∩ GDP ∩ Popdensity                | 0.8737628 |</span></span>
-<span><span class="co">## |                       Climatezone ∩ Tempchange                       | 0.8589825 |</span></span>
-<span><span class="co">## |                    Climatezone ∩ GDP ∩ Popdensity                    | 0.8588435 |</span></span>
-<span><span class="co">## |                      Climatezone ∩ Mining ∩ GDP                      | 0.8580946 |</span></span>
-<span><span class="co">## |                  Climatezone ∩ Mining ∩ Popdensity                   | 0.8559584 |</span></span>
-<span><span class="co">## |                          Climatezone ∩ GDP                           | 0.8421280 |</span></span>
-<span><span class="co">## |                       Climatezone ∩ Popdensity                       | 0.8363342 |</span></span>
-<span><span class="co">## |                         Climatezone ∩ Mining                         | 0.8344738 |</span></span>
-<span><span class="co">## |                             Climatezone                              | 0.8218335 |</span></span>
-<span><span class="co">## |                Mining ∩ Tempchange ∩ GDP ∩ Popdensity                | 0.6283004 |</span></span>
-<span><span class="co">## |                    Tempchange ∩ GDP ∩ Popdensity                     | 0.5794539 |</span></span>
-<span><span class="co">## |                      Mining ∩ Tempchange ∩ GDP                       | 0.5612049 |</span></span>
-<span><span class="co">## |                   Mining ∩ Tempchange ∩ Popdensity                   | 0.5473784 |</span></span>
-<span><span class="co">## |                           Tempchange ∩ GDP                           | 0.4990112 |</span></span>
-<span><span class="co">## |                       Tempchange ∩ Popdensity                        | 0.4787564 |</span></span>
-<span><span class="co">## |                         Mining ∩ Tempchange                          | 0.4584914 |</span></span>
-<span><span class="co">## |                      Mining ∩ GDP ∩ Popdensity                       | 0.4581629 |</span></span>
-<span><span class="co">## |                         Mining ∩ Popdensity                          | 0.3993162 |</span></span>
-<span><span class="co">## |                              Tempchange                              | 0.3874615 |</span></span>
-<span><span class="co">## |                           GDP ∩ Popdensity                           | 0.3271684 |</span></span>
-<span><span class="co">## |                             Mining ∩ GDP                             | 0.2845774 |</span></span>
-<span><span class="co">## |                              Popdensity                              | 0.2622265 |</span></span>
-<span><span class="co">## |                                 GDP                                  | 0.1491878 |</span></span>
-<span><span class="co">## |                                Mining                                | 0.1411154 |</span></span></code></pre></div>
+<span><span class="co">## </span></span>
+<span><span class="co">##  #### Only the first five pairs of interactions are displayed! ####</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
