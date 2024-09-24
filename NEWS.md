@@ -1,3 +1,7 @@
+# gdverse 1.0-3
+
+* Updating the `RGD` Model API Settings
+
 # gdverse 1.0-2
 
 * When the `discvar` input for the `opgd`, `rgd`, `rid`, `spade` functions is `NULL`, 
