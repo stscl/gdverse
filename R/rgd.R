@@ -62,7 +62,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
   }
   names(resqv) = paste0("discnum_",discnum)
   names(resdisc) = paste0("discnum_",discnum)
-  res = c("factor" = resqv, "disc" = resdisc)
+  res = list("factor" = resqv, "disc" = resdisc)
   class(res) = "rgd_result"
   return(res)
 }
@@ -82,6 +82,7 @@ print.rgd_result = \(x, ...) {
   cat("***                  Robust Geographical Detector       ")
   qv = x[[1]]
   print(knitr::kable(qv[[length(qv)]],format = "markdown",digits = 12,align = 'c',...))
+  cat("\n")
   cat("#### Only display the results corresponding to the maximum number of discretizations.")
 }
 
@@ -98,20 +99,21 @@ print.rgd_result = \(x, ...) {
 #' @export
 #'
 plot.rgd_result = \(x, ...) {
-  if (length(x) == 1){
-    res = x[1]
-    nx = names(x)
-    class(res) = paste0(nx[1],"_detector")
-    fig_p = plot(res)
-  } else {
-    fig_p = vector("list",length(x))
-    nx = names(x)
-    for (i in seq_along(x)){
-      res = x[i]
-      class(res) = paste0(nx[i],"_detector")
-      fig_p[[i]] = plot(res)
-    }
-    fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
-  }
+  qv = x[[1]]
+  qv = purrr::map2_dfr(qv, names(qv),
+                       \(.x,.n) .x %>%
+                       dplyr::mutate(rank = dplyr::min_rank(dplyr::desc(`Q-statistic`)),
+                                     discnum = as.numeric(unlist(strsplit(.n, "_"))[2])) %>%
+                       dplyr::select(variable,rank,discnum)) %>%
+    dplyr::mutate(rank = factor(rank), discnum = factor(discnum))
+  fig_p = ggplot2::ggplot(qv, ggplot2::aes(x = discnum, y = rank,
+                                           group = variable)) +
+    ggplot2::geom_line(size = 3, color = 'grey', alpha = 0.5) +
+    ggplot2::geom_point(size = 4, color = 'grey', alpha = 0.5) +
+    ggplot2::scale_y_reverse() +  # Reverse the Y axis to match rank order
+    # ggplot2::scale_x_continuous(breaks = 3:12) +
+    ggplot2::theme_minimal() +
+    ggplot2::labs(x = "Number of intervals", y = "Rank of B-value") +
+    ggplot2::theme(legend.position = "right")
   return(fig_p)
 }
