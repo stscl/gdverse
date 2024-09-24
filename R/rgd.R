@@ -89,7 +89,7 @@ print.rgd_result = \(x, ...) {
     dplyr::select(1:3)
   print(knitr::kable(qv,format = "markdown",digits = 12,align = 'c',...))
   cat("\n")
-  cat("#### Only display the results corresponding to the maximum number of discretizations.")
+  cat("#### Only display the results corresponding to the maximum number of discretizations! ####")
 }
 
 #' @title plot RGD result

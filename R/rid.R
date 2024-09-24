@@ -123,4 +123,5 @@ print.rid_result = \(x, ...) {
   cat("***          Robust Interaction Detector       ")
   print(knitr::kable(utils::head(dplyr::rename(x$interaction, PD = qv_rid),5),
                      format = "markdown",digits = 12,align = 'c',...))
+  cat("\n #### Only the first five pairs of interactions are displayed! ####")
 }
