@@ -94,7 +94,7 @@
 <li>
 <p>Create a new conda env <code>gdverse</code></p>
 <blockquote>
-<p><code>conda create -n gdverse python=3.9 -y</code></p>
+<p><code>conda create -n gdverse python=3.10 -y</code></p>
 </blockquote>
 </li>
 <li>
@@ -112,7 +112,7 @@
 <li>
 <p>Set up python packages</p>
 <blockquote>
-<p><code>mamba install -c conda-forge numpy==1.23.5 joblib pandas ruptures -y</code></p>
+<p><code>mamba install -c conda-forge numpy joblib pandas ruptures -y</code></p>
 </blockquote>
 </li>
 <li>
@@ -143,111 +143,14 @@ path.</p></li>
 <span><span class="co">## [6] "GDP"           "Popdensity"</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="determine-discretization-use-offline-change-point-detection">Determine discretization use offline change point detection<a class="anchor" aria-label="anchor" href="#determine-discretization-use-offline-change-point-detection"></a>
+<h3 id="run-rgd">Run RGD<a class="anchor" aria-label="anchor" href="#run-rgd"></a>
 </h3>
-<p><code>Climatezone</code> and <code>Mining</code> is the discrete
-category variables in the <code>ndvi</code> data, we need to discretize
-others.You can use <code><a href="../reference/robust_disc.html">robust_disc()</a></code> to discretize them based
-on offline change point detection.When executing
-<code><a href="../reference/robust_disc.html">robust_disc()</a></code>, note that each <code>discvar</code> can use
-a <code>discnum</code> parameter of its own. You can pass in a vector of
-equal length to <code>discvar</code> to use different
-<code>discnum</code> for different <code>discvar</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">tic</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">new.ndvi</span> <span class="op">=</span> <span class="fu"><a href="../reference/robust_disc.html">robust_disc</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,</span>
-<span>                       data <span class="op">=</span> <span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                       discnum <span class="op">=</span> <span class="fl">10</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
-<span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 20.95 sec elapsed</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.ndvi</span></span>
-<span><span class="co">## # A tibble: 713 × 4</span></span>
-<span><span class="co">##    Tempchange Precipitation GDP     Popdensity</span></span>
-<span><span class="co">##    &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;     </span></span>
-<span><span class="co">##  1 group1     group5        group7  group6    </span></span>
-<span><span class="co">##  2 group1     group5        group7  group4    </span></span>
-<span><span class="co">##  3 group1     group9        group8  group10   </span></span>
-<span><span class="co">##  4 group1     group5        group1  group3    </span></span>
-<span><span class="co">##  5 group1     group3        group1  group3    </span></span>
-<span><span class="co">##  6 group1     group3        group1  group4    </span></span>
-<span><span class="co">##  7 group1     group5        group7  group6    </span></span>
-<span><span class="co">##  8 group1     group5        group8  group10   </span></span>
-<span><span class="co">##  9 group1     group7        group10 group10   </span></span>
-<span><span class="co">## 10 group1     group7        group9  group10   </span></span>
-<span><span class="co">## # ℹ 703 more rows</span></span></code></pre></div>
-<p>The <code>new.ndvi</code> is the discrete result,we can combine it
-with <code>NDVIchange</code>,<code>Climatezone</code> and
-<code>Mining</code> cols in <code>ndvi</code> tibble now.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">new.ndvi</span> <span class="op">=</span> <span class="fu">bind_cols</span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,<span class="va">new.ndvi</span><span class="op">)</span></span>
-<span><span class="va">new.ndvi</span></span>
-<span><span class="co">## # A tibble: 713 × 7</span></span>
-<span><span class="co">##    NDVIchange Climatezone Mining Tempchange Precipitation GDP     Popdensity</span></span>
-<span><span class="co">##         &lt;dbl&gt; &lt;chr&gt;       &lt;fct&gt;  &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt;     </span></span>
-<span><span class="co">##  1    0.116   Bwk         low    group1     group5        group7  group6    </span></span>
-<span><span class="co">##  2    0.0178  Bwk         low    group1     group5        group7  group4    </span></span>
-<span><span class="co">##  3    0.138   Bsk         low    group1     group9        group8  group10   </span></span>
-<span><span class="co">##  4    0.00439 Bwk         low    group1     group5        group1  group3    </span></span>
-<span><span class="co">##  5    0.00316 Bwk         low    group1     group3        group1  group3    </span></span>
-<span><span class="co">##  6    0.00838 Bwk         low    group1     group3        group1  group4    </span></span>
-<span><span class="co">##  7    0.0335  Bwk         low    group1     group5        group7  group6    </span></span>
-<span><span class="co">##  8    0.0387  Bwk         low    group1     group5        group8  group10   </span></span>
-<span><span class="co">##  9    0.0882  Bsk         low    group1     group7        group10 group10   </span></span>
-<span><span class="co">## 10    0.0690  Bsk         low    group1     group7        group9  group10   </span></span>
-<span><span class="co">## # ℹ 703 more rows</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="run-geodetector">Run geodetector<a class="anchor" aria-label="anchor" href="#run-geodetector"></a>
-</h3>
-<p>Then, we can run geodetector model by <code><a href="../reference/gd.html">gd()</a></code> function.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.ndvi</span>, type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
-<span><span class="va">g1</span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
-<span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
-<span><span class="co">## | Precipitation |  0.8933049  | 3.25e-10 |</span></span>
-<span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
-<span><span class="co">## |  Tempchange   |  0.3874615  | 7.59e-10 |</span></span>
-<span><span class="co">## |  Popdensity   |  0.2622265  | 3.65e-10 |</span></span>
-<span><span class="co">## |      GDP      |  0.1491878  | 3.63e-10 |</span></span>
-<span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>,data <span class="op">=</span> <span class="va">new.ndvi</span>, type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
-<span><span class="va">g2</span></span>
-<span><span class="co">## ***        Interaction Detector         </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |    Interactive variable     | Interaction  |</span></span>
-<span><span class="co">## |:---------------------------:|:------------:|</span></span>
-<span><span class="co">## |    Climatezone ∩ Mining     | Enhance, bi- |</span></span>
-<span><span class="co">## |  Climatezone ∩ Tempchange   | Enhance, bi- |</span></span>
-<span><span class="co">## | Climatezone ∩ Precipitation | Enhance, bi- |</span></span>
-<span><span class="co">## |      Climatezone ∩ GDP      | Enhance, bi- |</span></span>
-<span><span class="co">## |  Climatezone ∩ Popdensity   | Enhance, bi- |</span></span>
-<span><span class="co">## |     Mining ∩ Tempchange     | Enhance, bi- |</span></span>
-<span><span class="co">## |   Mining ∩ Precipitation    | Enhance, bi- |</span></span>
-<span><span class="co">## |        Mining ∩ GDP         | Enhance, bi- |</span></span>
-<span><span class="co">## |     Mining ∩ Popdensity     | Enhance, bi- |</span></span>
-<span><span class="co">## | Tempchange ∩ Precipitation  | Enhance, bi- |</span></span>
-<span><span class="co">## |      Tempchange ∩ GDP       | Enhance, bi- |</span></span>
-<span><span class="co">## |   Tempchange ∩ Popdensity   | Enhance, bi- |</span></span>
-<span><span class="co">## |     Precipitation ∩ GDP     | Enhance, bi- |</span></span>
-<span><span class="co">## | Precipitation ∩ Popdensity  | Enhance, bi- |</span></span>
-<span><span class="co">## |      GDP ∩ Popdensity       | Enhance, bi- |</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="you-can-also-use-rgd-in-one-time-to-get-result-above-">You can also use <code>rgd()</code> in one time to get result
-above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-time-to-get-result-above-"></a>
-</h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_rgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
 <span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">6</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'factor'</span>,<span class="st">'interaction'</span><span class="op">)</span><span class="op">)</span></span>
+<span>               discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">ndvi_rgd</span></span>
-<span><span class="co">##                  RGD Model                  </span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">## ***          Robust Geographical Detector       </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
 <span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
@@ -258,26 +161,8 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-t
 <span><span class="co">## |      GDP      |  0.1491878  | 3.63e-10 |</span></span>
 <span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## ***        Interaction Detector         </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## |    Interactive variable     | Interaction  |</span></span>
-<span><span class="co">## |:---------------------------:|:------------:|</span></span>
-<span><span class="co">## |    Climatezone ∩ Mining     | Enhance, bi- |</span></span>
-<span><span class="co">## |  Climatezone ∩ Tempchange   | Enhance, bi- |</span></span>
-<span><span class="co">## | Climatezone ∩ Precipitation | Enhance, bi- |</span></span>
-<span><span class="co">## |      Climatezone ∩ GDP      | Enhance, bi- |</span></span>
-<span><span class="co">## |  Climatezone ∩ Popdensity   | Enhance, bi- |</span></span>
-<span><span class="co">## |     Mining ∩ Tempchange     | Enhance, bi- |</span></span>
-<span><span class="co">## |   Mining ∩ Precipitation    | Enhance, bi- |</span></span>
-<span><span class="co">## |        Mining ∩ GDP         | Enhance, bi- |</span></span>
-<span><span class="co">## |     Mining ∩ Popdensity     | Enhance, bi- |</span></span>
-<span><span class="co">## | Tempchange ∩ Precipitation  | Enhance, bi- |</span></span>
-<span><span class="co">## |      Tempchange ∩ GDP       | Enhance, bi- |</span></span>
-<span><span class="co">## |   Tempchange ∩ Popdensity   | Enhance, bi- |</span></span>
-<span><span class="co">## |     Precipitation ∩ GDP     | Enhance, bi- |</span></span>
-<span><span class="co">## | Precipitation ∩ Popdensity  | Enhance, bi- |</span></span>
-<span><span class="co">## |      GDP ∩ Popdensity       | Enhance, bi- |</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<span><span class="co">## #### Only display the results corresponding to the maximum number of discretizations.</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/rgdrid/rgd_id-1.png"></p>
 </div>
@@ -286,78 +171,78 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-rgd-in-one-t
 </h3>
 <p><code>RID</code> allows you to obtain the interactions of all
 possible combinations of variables. By default,
-<code>Spatial Fuzzy And Join</code> are used to generate a new spatial
+<code>Spatial Intersection</code> are used to generate a new spatial
 partition of the interaction variables.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_rid</span> <span class="op">=</span> <span class="fu"><a href="../reference/rid.html">rid</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
 <span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">ndvi_rid</span></span>
 <span><span class="co">## ***          Robust Interaction Detector       </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |                               varibale                               |    PD     |</span></span>
 <span><span class="co">## |:--------------------------------------------------------------------:|:---------:|</span></span>
-<span><span class="co">## |                     Climatezone ∩ Precipitation                      | 0.8983194 |</span></span>
+<span><span class="co">## |       Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP        | 0.9684917 |</span></span>
+<span><span class="co">## | Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity | 0.9628383 |</span></span>
+<span><span class="co">## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.9618024 |</span></span>
+<span><span class="co">## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.9611111 |</span></span>
+<span><span class="co">## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.9601571 |</span></span>
+<span><span class="co">## |     Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity      | 0.9597470 |</span></span>
+<span><span class="co">## |        Climatezone ∩ Tempchange ∩ Precipitation ∩ Popdensity         | 0.9557646 |</span></span>
+<span><span class="co">## |        Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.9554015 |</span></span>
+<span><span class="co">## |           Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity           | 0.9541564 |</span></span>
+<span><span class="co">## |                   Tempchange ∩ Precipitation ∩ GDP                   | 0.9535530 |</span></span>
+<span><span class="co">## |          Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation           | 0.9522481 |</span></span>
+<span><span class="co">## |            Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity             | 0.9513551 |</span></span>
+<span><span class="co">## |               Tempchange ∩ Precipitation ∩ Popdensity                | 0.9493200 |</span></span>
+<span><span class="co">## |       Climatezone ∩ Mining ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.9464817 |</span></span>
+<span><span class="co">## |               Climatezone ∩ Tempchange ∩ Precipitation               | 0.9463031 |</span></span>
+<span><span class="co">## |              Climatezone ∩ Mining ∩ Precipitation ∩ GDP              | 0.9462355 |</span></span>
+<span><span class="co">## |                 Mining ∩ Tempchange ∩ Precipitation                  | 0.9437051 |</span></span>
+<span><span class="co">## |          Climatezone ∩ Mining ∩ Precipitation ∩ Popdensity           | 0.9401919 |</span></span>
+<span><span class="co">## |                      Tempchange ∩ Precipitation                      | 0.9361996 |</span></span>
+<span><span class="co">## |            Climatezone ∩ Precipitation ∩ GDP ∩ Popdensity            | 0.9357268 |</span></span>
+<span><span class="co">## |              Mining ∩ Precipitation ∩ GDP ∩ Popdensity               | 0.9334925 |</span></span>
+<span><span class="co">## |                  Climatezone ∩ Precipitation ∩ GDP                   | 0.9324555 |</span></span>
+<span><span class="co">## |                     Mining ∩ Precipitation ∩ GDP                     | 0.9301882 |</span></span>
+<span><span class="co">## |                 Climatezone ∩ Mining ∩ Precipitation                 | 0.9280920 |</span></span>
+<span><span class="co">## |               Climatezone ∩ Precipitation ∩ Popdensity               | 0.9261818 |</span></span>
+<span><span class="co">## |                 Mining ∩ Precipitation ∩ Popdensity                  | 0.9232713 |</span></span>
+<span><span class="co">## |                   Precipitation ∩ GDP ∩ Popdensity                   | 0.9202210 |</span></span>
+<span><span class="co">## |                     Climatezone ∩ Precipitation                      | 0.9142208 |</span></span>
+<span><span class="co">## |                         Precipitation ∩ GDP                          | 0.9127418 |</span></span>
+<span><span class="co">## |                      Precipitation ∩ Popdensity                      | 0.9115116 |</span></span>
+<span><span class="co">## |               Climatezone ∩ Mining ∩ Tempchange ∩ GDP                | 0.9083874 |</span></span>
+<span><span class="co">## |                        Mining ∩ Precipitation                        | 0.9077486 |</span></span>
+<span><span class="co">## |         Climatezone ∩ Mining ∩ Tempchange ∩ GDP ∩ Popdensity         | 0.9025073 |</span></span>
 <span><span class="co">## |                            Precipitation                             | 0.8933049 |</span></span>
-<span><span class="co">## |                  Climatezone ∩ Precipitation ∩ GDP                   | 0.8470890 |</span></span>
-<span><span class="co">## |                 Climatezone ∩ Mining ∩ Precipitation                 | 0.8448562 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Precipitation ∩ Popdensity               | 0.8426167 |</span></span>
-<span><span class="co">## |            Climatezone ∩ Precipitation ∩ GDP ∩ Popdensity            | 0.8351028 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Tempchange ∩ Precipitation               | 0.8343010 |</span></span>
-<span><span class="co">## |              Climatezone ∩ Mining ∩ Precipitation ∩ GDP              | 0.8302478 |</span></span>
-<span><span class="co">## |                         Precipitation ∩ GDP                          | 0.8291002 |</span></span>
-<span><span class="co">## |          Climatezone ∩ Mining ∩ Precipitation ∩ Popdensity           | 0.8266936 |</span></span>
-<span><span class="co">## |                      Tempchange ∩ Precipitation                      | 0.8262867 |</span></span>
+<span><span class="co">## |             Climatezone ∩ Tempchange ∩ GDP ∩ Popdensity              | 0.8932967 |</span></span>
+<span><span class="co">## |            Climatezone ∩ Mining ∩ Tempchange ∩ Popdensity            | 0.8909290 |</span></span>
+<span><span class="co">## |                    Climatezone ∩ Tempchange ∩ GDP                    | 0.8900496 |</span></span>
+<span><span class="co">## |                Climatezone ∩ Tempchange ∩ Popdensity                 | 0.8773048 |</span></span>
+<span><span class="co">## |                  Climatezone ∩ Mining ∩ Tempchange                   | 0.8738940 |</span></span>
+<span><span class="co">## |               Climatezone ∩ Mining ∩ GDP ∩ Popdensity                | 0.8737628 |</span></span>
+<span><span class="co">## |                       Climatezone ∩ Tempchange                       | 0.8589825 |</span></span>
+<span><span class="co">## |                    Climatezone ∩ GDP ∩ Popdensity                    | 0.8588435 |</span></span>
+<span><span class="co">## |                      Climatezone ∩ Mining ∩ GDP                      | 0.8580946 |</span></span>
+<span><span class="co">## |                  Climatezone ∩ Mining ∩ Popdensity                   | 0.8559584 |</span></span>
+<span><span class="co">## |                          Climatezone ∩ GDP                           | 0.8421280 |</span></span>
+<span><span class="co">## |                       Climatezone ∩ Popdensity                       | 0.8363342 |</span></span>
+<span><span class="co">## |                         Climatezone ∩ Mining                         | 0.8344738 |</span></span>
 <span><span class="co">## |                             Climatezone                              | 0.8218335 |</span></span>
-<span><span class="co">## |       Climatezone ∩ Mining ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.8206854 |</span></span>
-<span><span class="co">## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.8033886 |</span></span>
-<span><span class="co">## |                   Precipitation ∩ GDP ∩ Popdensity                   | 0.7984676 |</span></span>
-<span><span class="co">## |        Climatezone ∩ Tempchange ∩ Precipitation ∩ Popdensity         | 0.7941671 |</span></span>
-<span><span class="co">## |                         Climatezone ∩ Mining                         | 0.7930330 |</span></span>
-<span><span class="co">## |                      Precipitation ∩ Popdensity                      | 0.7928397 |</span></span>
-<span><span class="co">## |          Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation           | 0.7926405 |</span></span>
-<span><span class="co">## |     Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity      | 0.7914425 |</span></span>
-<span><span class="co">## |                   Tempchange ∩ Precipitation ∩ GDP                   | 0.7898127 |</span></span>
-<span><span class="co">## |       Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP        | 0.7826698 |</span></span>
-<span><span class="co">## |                     Mining ∩ Precipitation ∩ GDP                     | 0.7780201 |</span></span>
-<span><span class="co">## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.7767463 |</span></span>
-<span><span class="co">## | Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity | 0.7748192 |</span></span>
-<span><span class="co">## |                        Mining ∩ Precipitation                        | 0.7742147 |</span></span>
-<span><span class="co">## |                       Climatezone ∩ Tempchange                       | 0.7593504 |</span></span>
-<span><span class="co">## |            Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity             | 0.7592357 |</span></span>
-<span><span class="co">## |               Tempchange ∩ Precipitation ∩ Popdensity                | 0.7564501 |</span></span>
-<span><span class="co">## |                  Climatezone ∩ Mining ∩ Popdensity                   | 0.7554556 |</span></span>
-<span><span class="co">## |                      Climatezone ∩ Mining ∩ GDP                      | 0.7546429 |</span></span>
-<span><span class="co">## |              Mining ∩ Precipitation ∩ GDP ∩ Popdensity               | 0.7529482 |</span></span>
-<span><span class="co">## |                  Climatezone ∩ Mining ∩ Tempchange                   | 0.7485414 |</span></span>
-<span><span class="co">## |                       Climatezone ∩ Popdensity                       | 0.7478818 |</span></span>
-<span><span class="co">## |                          Climatezone ∩ GDP                           | 0.7442993 |</span></span>
-<span><span class="co">## |                 Mining ∩ Precipitation ∩ Popdensity                  | 0.7428155 |</span></span>
-<span><span class="co">## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.7390511 |</span></span>
-<span><span class="co">## |                    Climatezone ∩ Tempchange ∩ GDP                    | 0.7373548 |</span></span>
-<span><span class="co">## |                 Mining ∩ Tempchange ∩ Precipitation                  | 0.7348493 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Mining ∩ GDP ∩ Popdensity                | 0.7337329 |</span></span>
-<span><span class="co">## |               Climatezone ∩ Mining ∩ Tempchange ∩ GDP                | 0.7316833 |</span></span>
-<span><span class="co">## |                    Climatezone ∩ GDP ∩ Popdensity                    | 0.7217405 |</span></span>
-<span><span class="co">## |                Climatezone ∩ Tempchange ∩ Popdensity                 | 0.7203489 |</span></span>
-<span><span class="co">## |            Climatezone ∩ Mining ∩ Tempchange ∩ Popdensity            | 0.7190660 |</span></span>
-<span><span class="co">## |        Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity        | 0.7124629 |</span></span>
-<span><span class="co">## |         Climatezone ∩ Mining ∩ Tempchange ∩ GDP ∩ Popdensity         | 0.7106643 |</span></span>
-<span><span class="co">## |             Climatezone ∩ Tempchange ∩ GDP ∩ Popdensity              | 0.7100158 |</span></span>
-<span><span class="co">## |           Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity           | 0.7016658 |</span></span>
-<span><span class="co">## |                Mining ∩ Tempchange ∩ GDP ∩ Popdensity                | 0.4132554 |</span></span>
-<span><span class="co">## |                      Mining ∩ Tempchange ∩ GDP                       | 0.4057062 |</span></span>
-<span><span class="co">## |                         Mining ∩ Tempchange                          | 0.4032055 |</span></span>
-<span><span class="co">## |                   Mining ∩ Tempchange ∩ Popdensity                   | 0.4026808 |</span></span>
-<span><span class="co">## |                    Tempchange ∩ GDP ∩ Popdensity                     | 0.3996984 |</span></span>
-<span><span class="co">## |                       Tempchange ∩ Popdensity                        | 0.3990126 |</span></span>
-<span><span class="co">## |                           Tempchange ∩ GDP                           | 0.3914879 |</span></span>
+<span><span class="co">## |                Mining ∩ Tempchange ∩ GDP ∩ Popdensity                | 0.6283004 |</span></span>
+<span><span class="co">## |                    Tempchange ∩ GDP ∩ Popdensity                     | 0.5794539 |</span></span>
+<span><span class="co">## |                      Mining ∩ Tempchange ∩ GDP                       | 0.5612049 |</span></span>
+<span><span class="co">## |                   Mining ∩ Tempchange ∩ Popdensity                   | 0.5473784 |</span></span>
+<span><span class="co">## |                           Tempchange ∩ GDP                           | 0.4990112 |</span></span>
+<span><span class="co">## |                       Tempchange ∩ Popdensity                        | 0.4787564 |</span></span>
+<span><span class="co">## |                         Mining ∩ Tempchange                          | 0.4584914 |</span></span>
+<span><span class="co">## |                      Mining ∩ GDP ∩ Popdensity                       | 0.4581629 |</span></span>
+<span><span class="co">## |                         Mining ∩ Popdensity                          | 0.3993162 |</span></span>
 <span><span class="co">## |                              Tempchange                              | 0.3874615 |</span></span>
-<span><span class="co">## |                      Mining ∩ GDP ∩ Popdensity                       | 0.3293260 |</span></span>
-<span><span class="co">## |                         Mining ∩ Popdensity                          | 0.3188582 |</span></span>
-<span><span class="co">## |                           GDP ∩ Popdensity                           | 0.2773077 |</span></span>
+<span><span class="co">## |                           GDP ∩ Popdensity                           | 0.3271684 |</span></span>
+<span><span class="co">## |                             Mining ∩ GDP                             | 0.2845774 |</span></span>
 <span><span class="co">## |                              Popdensity                              | 0.2622265 |</span></span>
-<span><span class="co">## |                             Mining ∩ GDP                             | 0.2157334 |</span></span>
 <span><span class="co">## |                                 GDP                                  | 0.1491878 |</span></span>
 <span><span class="co">## |                                Mining                                | 0.1411154 |</span></span></code></pre></div>
 </div>
