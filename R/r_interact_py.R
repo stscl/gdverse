@@ -29,6 +29,6 @@ gdverse_pyinit = function() {
     stop('python dependencies for gdverse cannot be loaded properly.')
   } else {
     message("\n", "Please set `GDVERSE_PYTHON` environment variable to appropriate python path!")
-    message("\n", "Run `vignette('RGDRID',package = 'gdverse')` to see more details")
+    message("\n", "Run `vignette('rgdrid',package = 'gdverse')` to see more details")
   }
 }
