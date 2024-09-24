@@ -59,7 +59,6 @@ names(ndvi)
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 3:10, cores = 12)
-## Error in Sys.setenv(PATH = new_path): 'names' and 'val' are of different lengths
 ndvi_rgd
 ## ***          Robust Geographical Detector       
 ## 
@@ -72,7 +71,7 @@ ndvi_rgd
 ## |      GDP      |  0.1491878  | 3.63e-10 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
 ## 
-## #### Only display the results corresponding to the maximum number of discretizations! ####
+## #### Only display the results corresponding to the maximum number of discretizations!
 ```
 
 
@@ -91,7 +90,6 @@ plot(ndvi_rgd)
 ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 10, cores = 12)
-## Error in Sys.setenv(PATH = new_path): 'names' and 'val' are of different lengths
 ndvi_rid
 ## ***          Robust Interaction Detector       
 ## 
