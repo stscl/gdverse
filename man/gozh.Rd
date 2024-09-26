@@ -11,8 +11,8 @@ gozh(formula, data, cores = 1, type = "factor", alpha = 0.95, ...)
 
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
@@ -22,7 +22,7 @@ cluster with that many cores is created and used. You can also supply a cluster 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A list of GOZH model result.
+A list.
 \describe{
 \item{\code{factor}}{the result of factor detector}
 \item{\code{interaction}}{the result of interaction detector}

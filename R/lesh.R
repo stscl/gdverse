@@ -16,11 +16,11 @@
 #'
 #' @param formula A formula of LESH model.
 #' @param data A data.frame, tibble or sf object of observation data.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list of LESH model result.
+#' @return A list.
 #' \describe{
 #' \item{\code{interaction}}{the interaction result of LESH model}
 #' \item{\code{spd_lesh}}{a tibble of the SHAP power of determinants}

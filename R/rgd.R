@@ -17,10 +17,10 @@
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
 #' Default all `discvar` use `3:22`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
-#' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python` `joblib` package to
-#' parallel computation.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #'
-#' @return A list of the RGD model result.
+#' @return A list.
 #' \describe{
 #' \item{\code{factor}}{the result of RGD model}
 #' \item{\code{disc}}{robust discrete results}

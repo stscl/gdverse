@@ -11,13 +11,13 @@ lesh(formula, data, cores = 1, ...)
 
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A list of LESH model result.
+A list.
 \describe{
 \item{\code{interaction}}{the interaction result of LESH model}
 \item{\code{spd_lesh}}{a tibble of the SHAP power of determinants}

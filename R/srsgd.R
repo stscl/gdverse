@@ -23,7 +23,7 @@
 #' `factor`(default), `interaction` and `ecological`.
 #' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
 #'
-#' @return A list of tibble with the corresponding result under different detector types.
+#' @return A list.
 #' \describe{
 #' \item{\code{factor}}{the result of spatial rough set-based factor detector}
 #' \item{\code{interaction}}{the result of spatial rough set-based interaction detector}

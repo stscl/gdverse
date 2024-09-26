@@ -22,14 +22,14 @@
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
 #' @param discmethod (optional) A vector of methods for discretization,default is used
 #' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `gdverse`.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
 #' Default is `5%`.
 #' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.
 #'
-#' @return A list with SESU OPGD results
+#' @return A list.
 #' \describe{
 #' \item{\code{sesu}}{a tibble representing size effects of spatial units}
 #' \item{\code{optsu}}{optimal spatial unit}

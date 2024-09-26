@@ -11,14 +11,14 @@
 #'
 #' @param formula A formula of GOZH model.
 #' @param data A data.frame, tibble or sf object of observation data.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list of GOZH model result.
+#' @return A list.
 #' \describe{
 #' \item{\code{factor}}{the result of factor detector}
 #' \item{\code{interaction}}{the result of interaction detector}

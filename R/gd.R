@@ -14,7 +14,7 @@
 #' `interaction`, `risk`, `ecological`. You can run one or more types at one time.
 #' @param alpha (optional) Specifies the size of the alpha (confidence level). Default is `0.95`.
 #'
-#' @return A list of the GD model result.
+#' @return A list.
 #' \describe{
 #' \item{\code{factor}}{the result of factor detector}
 #' \item{\code{interaction}}{the result of interaction detector}

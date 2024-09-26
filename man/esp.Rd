@@ -35,13 +35,13 @@ Default is \code{and}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
-\item{cores}{(optional) Positive integer(default is 1). If cores > 1, use \code{python} \code{joblib} package to
-parallel computation.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 }
 \value{
-A list with ESP model result.
+A list.
 \describe{
 \item{\code{factor}}{results of ESP model factor detection}
 \item{\code{interaction}}{results of ESP model interaction detection}

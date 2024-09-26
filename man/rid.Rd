@@ -31,10 +31,11 @@ Default is \code{intersection}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
-\item{cores}{(optional) Positive integer(default is 1). If cores > 1, use parallel computation.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 }
 \value{
-A list of the RID model result.
+A list.
 \describe{
 \item{\code{interaction}}{the result of RID model}
 }

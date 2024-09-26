@@ -17,11 +17,11 @@
 #' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
-#' @param cores (optional) Positive integer(default is 1). If cores > 1, use `python` `joblib` package to
-#' parallel computation.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #'
-#' @return A list with ESP model result.
+#' @return A list.
 #' \describe{
 #' \item{\code{factor}}{results of ESP model factor detection}
 #' \item{\code{interaction}}{results of ESP model interaction detection}

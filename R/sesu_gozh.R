@@ -24,8 +24,8 @@
 #' @param formula A formula of comparison of size effects of spatial units.
 #' @param datalist A list of \code{data.frame} or \code{tibble}.
 #' @param su A vector of sizes of spatial units.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param strategy (optional) Calculation strategies of Q statistics at different scales. Default
 #' is `2L`, see `details` for more contents.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
@@ -33,7 +33,7 @@
 #' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
-#' @return A list with SESU GOZH results.
+#' @return A list.
 #' \describe{
 #' \item{\code{sesu}}{a tibble representing size effects of spatial units}
 #' \item{\code{optsu}}{optimal spatial unit}

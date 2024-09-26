@@ -22,8 +22,8 @@ sesu_gozh(
 
 \item{su}{A vector of sizes of spatial units.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{strategy}{(optional) Calculation strategies of Q statistics at different scales. Default
 is \code{2L}, see \code{details} for more contents.}
@@ -36,7 +36,7 @@ Default is \verb{5\%}.}
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
 \value{
-A list with SESU GOZH results.
+A list.
 \describe{
 \item{\code{sesu}}{a tibble representing size effects of spatial units}
 \item{\code{optsu}}{optimal spatial unit}

@@ -42,9 +42,8 @@ spatial data are selected by combining LOESS model.}
 \item{increase_rate}{(optional) The critical increase rate of the number of discretization.
 Default is \verb{5\%}.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{seed}{(optional) Random number seed, default is \code{123456789}.}
 
@@ -53,7 +52,7 @@ object.}
 \item{...}{(optional) Other arguments passed to \code{cpsd_disc()}.}
 }
 \value{
-A list with PID values tibble under different spatial overlays and performance evaluation indicators.
+A list.
 \describe{
 \item{\code{interaction}}{the interaction result of IDSA model}
 \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}

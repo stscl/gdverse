@@ -20,11 +20,11 @@ Default all \code{discvar} use \code{3:22}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
-\item{cores}{(optional) Positive integer(default is 1). If cores > 1, use \code{python} \code{joblib} package to
-parallel computation.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 }
 \value{
-A list of the RGD model result.
+A list.
 \describe{
 \item{\code{factor}}{the result of RGD model}
 \item{\code{disc}}{robust discrete results}

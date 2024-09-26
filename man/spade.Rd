@@ -35,7 +35,8 @@ that when using different \code{discmethod} for \code{discvar}, please ensure th
 both are consistent. Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use
 \code{rpart_disc()}; Others use \code{st_unidisc()}.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{seed}{(optional) Random number seed, default is \code{123456789}.}
 
@@ -45,7 +46,7 @@ which means no pseudo-p values are calculated.}
 \item{...}{(optional) Other arguments passed to \code{st_unidisc()},\code{robust_disc()} or \code{rpart_disc()}.}
 }
 \value{
-A list of the SPADE model result.
+A list.
 \describe{
 \item{\code{factor}}{the result of SPADE model}
 }

@@ -32,8 +32,8 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 \item{discmethod}{(optional) A vector of methods for discretization,default is used
 \code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{increase_rate}{(optional) The critical increase rate of the number of discretization.
 Default is \verb{5\%}.}
@@ -43,7 +43,7 @@ Default is \verb{5\%}.}
 \item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.}
 }
 \value{
-A list with SESU OPGD results
+A list.
 \describe{
 \item{\code{sesu}}{a tibble representing size effects of spatial units}
 \item{\code{optsu}}{optimal spatial unit}

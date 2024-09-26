@@ -18,13 +18,14 @@
 #' that when using different `discmethod` for `discvar`, please ensure that the lengths of
 #' both are consistent. Noted that `robust` will use `robust_disc()`; `rpart` will use
 #' `rpart_disc()`; Others use `st_unidisc()`.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param seed (optional) Random number seed, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
 #' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
 #'
-#' @return A list of the SPADE model result.
+#' @return A list.
 #' \describe{
 #' \item{\code{factor}}{the result of SPADE model}
 #' }
