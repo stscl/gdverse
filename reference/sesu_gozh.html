@@ -86,8 +86,8 @@ geographically optimal zones-based heterogeneity(GOZH) model.</p>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
-<dd><p>(optional) A positive integer(default is 1). If cores &gt; 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster object.</p></dd>
+<dd><p>(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.</p></dd>
 
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
@@ -110,7 +110,7 @@ Default is <code>5%</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with SESU GOZH results.</p><dl><dt><code>sesu</code></dt>
+    <p>A list.</p><dl><dt><code>sesu</code></dt>
 <dd><p>a tibble representing size effects of spatial units</p></dd>
 
 <dt><code>optsu</code></dt>
