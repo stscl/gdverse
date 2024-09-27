@@ -21,7 +21,8 @@
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
 #' Default is `5%`.
 #'
-#' @return A optimal number of spatial data discretization.
+#' @return A numeric vector about optimal number of spatial data discretization and the critical
+#' increase rate of the number of discretization.
 #' @export
 #'
 #' @examples
@@ -50,9 +51,11 @@ loess_optdiscnum = \(qvec, discnumvec, increase_rate = 0.05){
 
   # debug: when no increase_rate is satisfied, the highest Q-statistic is selected
   if (is.na(lrtbf[1,1,drop = TRUE])){
-    res = c('discnum' = discnumvec[which.max(qvec)])
+    res = c('discnum' = discnumvec[which.max(qvec)],
+            'increase_rate' = increase_rate)
   } else {
-    res = c('discnum' = lrtbf[1,1,drop = TRUE])
+    res = c('discnum' = lrtbf[1,1,drop = TRUE],
+            'increase_rate' = increase_rate)
   }
   return(res)
 }
@@ -68,7 +71,8 @@ loess_optdiscnum = \(qvec, discnumvec, increase_rate = 0.05){
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
 #' Default is `5%`.
 #'
-#' @return A optimal number of spatial scale
+#' @return A numeric vector about optimal number of spatial scale and the critical
+#' increase rate of q value.
 #' @export
 #'
 #' @examples
@@ -92,6 +96,6 @@ loess_optdiscnum = \(qvec, discnumvec, increase_rate = 0.05){
 #' }
 loess_optscale = \(qvec, spscalevec, increase_rate = 0.05){
   optsu = loess_optdiscnum(qvec,spscalevec,increase_rate)
-  names(optsu) = 'spscale'
+  names(optsu) = c('spscale','increase_rate')
   return(optsu)
 }

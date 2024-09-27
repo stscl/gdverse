@@ -38,7 +38,7 @@
 #' \item{\code{sesu}}{a tibble representing size effects of spatial units}
 #' \item{\code{optsu}}{optimal spatial unit}
 #' \item{\code{strategy}}{the optimal analytical scale selection strategy}
-#' \item{\code{increase_rate}}{the critical increase rate of the number of discretization}
+#' \item{\code{increase_rate}}{the critical increase rate}
 #' }
 #' @export
 #'
