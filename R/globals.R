@@ -10,5 +10,6 @@ utils::globalVariables(c(".", "Ecological", "Interaction", "Interactive variable
                          "risk", "n", "lr", "lr_before", "k", "method", "spade_cpsd",
                          "qv_theta", "qv_rid", "su", "v1", "v2", "zone_risk", "PD",
                          "Variable1 and Variable2 interact PD", "psd", "spd", "qv_text",
-                         "variable_col", "name", "step", "xend", "y", "yend", "discnum"))
+                         "variable_col", "name", "step", "xend", "y", "yend", "discnum",
+                         "rate"))
 
