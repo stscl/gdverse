@@ -33,6 +33,7 @@
 #' \describe{
 #' \item{\code{sesu}}{a tibble representing size effects of spatial units}
 #' \item{\code{optsu}}{optimal spatial unit}
+#' \item{\code{increase_rate}}{the critical increase rate of q value}
 #' }
 #' @export
 #'

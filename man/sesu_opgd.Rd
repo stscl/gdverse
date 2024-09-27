@@ -9,8 +9,9 @@ sesu_opgd(
   datalist,
   su,
   discvar,
-  discnum = NULL,
-  discmethod = NULL,
+  discnum = 3:22,
+  discmethod = c("sd", "equal", "pretty", "quantile", "fisher", "headtails", "maximum",
+    "box"),
   cores = 1,
   increase_rate = 0.05,
   alpha = 0.95,
@@ -47,6 +48,7 @@ A list.
 \describe{
 \item{\code{sesu}}{a tibble representing size effects of spatial units}
 \item{\code{optsu}}{optimal spatial unit}
+\item{\code{increase_rate}}{the critical increase rate of q value}
 }
 }
 \description{
