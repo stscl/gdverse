@@ -1,6 +1,8 @@
 # gdverse 1.0-3
 
-* Updating the `RGD` Model API Settings (#2).
+* Update the `RGD` Model API Settings (#2).
+
+* Fix bug caused by changes in default parameters of `opgd` in `sesu_opgd` (#4).
 
 # gdverse 1.0-2
 
