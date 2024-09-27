@@ -38,6 +38,7 @@
 #' \item{\code{sesu}}{a tibble representing size effects of spatial units}
 #' \item{\code{optsu}}{optimal spatial unit}
 #' \item{\code{strategy}}{the optimal analytical scale selection strategy}
+#' \item{\code{increase_rate}}{the critical increase rate of the number of discretization}
 #' }
 #' @export
 #'
@@ -100,7 +101,8 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
       dplyr::pull(`Q-statistic`)
     optsu = loess_optscale(qv,su,increase_rate)
   }
-  res = list('sesu' = sesu, 'optsu' = optsu, 'strategy' = strategy)
+  res = list('sesu' = sesu, 'optsu' = optsu, 'strategy' = strategy,
+             'increase_rate' = increase_rate)
   class(res) = 'sesu_gozh'
   return(res)
 }
@@ -146,29 +148,45 @@ plot.sesu_gozh = \(x,...){
     class(x) ='sesu_opgd'
     return(plot.sesu_opgd(x,...))
   } else {
+    increase_rate = x$increase_rate
     g = purrr::list_rbind(x$sesu$sesu_result) %>%
       dplyr::rename(qv = `Q-statistic`, pv = `P-value`)
-    spunits = x$sesu$spatial_units
-    qvrange = range(g$qv)
-    surange = range(g$su)
-    suvalue = surange[2] - surange[1]
-    fig_g = ggplot2::ggplot(g, ggplot2::aes(x = su, y = qv)) +
-      ggplot2::geom_point(shape = 1, color = "#0000ff",size = 2.75) +
-      ggplot2::geom_line(color = "#0000ff",linetype = 3) +
-      ggplot2::geom_vline(xintercept = x$optsu,
-                          color = "#ff0000", linetype = 2) +
-      ggplot2::scale_x_continuous(name = 'Size of spatial uint',
-                                  breaks = x$sesu$spatial_units,
-                                  limits = c(surange[1] - 0.05 * suvalue,
-                                             surange[2] + 0.05 * suvalue),
-                                  expand = c(0,0)) +
-      ggplot2::scale_y_continuous(name = "Q statistic", expand = c(0,0),
-                                  limits = c(qvrange[1]-0.05,qvrange[2]+0.05),
-                                  # breaks = round(seq(qvrange[1],qvrange[2],
-                                  #                    length.out = length(g$su)),3)
-                                  ) +
+    loessf = stats::loess(qv ~ su, data = g)
+    loessrate = (loessf$fitted - dplyr::lag(loessf$fitted)) / dplyr::lag(loessf$fitted)
+    sesu_q$rate = loessrate
+    maxrate = max(g$rate, na.rm = TRUE)
+    maxqv = max(g$qv)
+
+    fig_g = fig_sesu = ggplot2::ggplot(data = g, ggplot2::aes(x = su)) +
+      ggplot2::geom_line(ggplot2::aes(y = qv, color = "qv")) +
+      ggplot2::geom_point(ggplot2::aes(y = qv, color = "qv")) +
+      ggplot2::geom_line(ggplot2::aes(y = rate * maxqv / maxrate, color = "rate")) +
+      ggplot2::geom_point(ggplot2::aes(y = rate * maxqv / maxrate, color = "rate")) +
+      ggplot2::geom_hline(yintercept = increase_rate * maxqv / maxrate,
+                          color = "grey40", linetype = "dashed") +
+      ggplot2::scale_color_manual(values = c("qv" = "#f8766d", "rate" = "#6598cc"),
+                                  labels = c("Q value", "Increase rate"), name = "") +
+      ggplot2::scale_x_continuous(
+        name = "Size of spatial unit",
+        breaks = g$su
+      ) +
+      ggplot2::scale_y_continuous(
+        name = "Q value",
+        sec.axis = ggplot2::sec_axis(~ . * maxrate / maxqv,
+                                     name = "Increase rate")
+      ) +
       ggplot2::theme_bw() +
-      ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
+      ggplot2::theme(
+        axis.title.y.right = ggplot2::element_text(color = "#6598cc"),
+        axis.text.y.right = ggplot2::element_text(color = "#6598cc"),
+        axis.title.y.left = ggplot2::element_text(color = "#f8766d"),
+        axis.text.y.left = ggplot2::element_text(color = "#f8766d"),
+        panel.grid = ggplot2::element_blank(),
+        legend.position = "inside",
+        legend.justification = c('left','bottom'),
+        legend.background = ggplot2::element_rect(fill = 'transparent'),
+        ...
+      )
     return(fig_g)
   }
 }
