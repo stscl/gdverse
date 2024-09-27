@@ -79,7 +79,8 @@ Default is <code>5%</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A optimal number of spatial data discretization.</p>
+    <p>A numeric vector about optimal number of spatial data discretization and the critical
+increase rate of the number of discretization.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -108,8 +109,8 @@ DOI:10.1080/13658816.2021.1882680</p>
 <span class="r-in"><span>               <span class="fu"><a href="factor_detector.html">factor_detector</a></span><span class="op">(</span><span class="va">sim</span><span class="op">$</span><span class="va">y</span>,<span class="va">.</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>               <span class="op">{</span><span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">}</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span> <span class="fu">loess_optdiscnum</span><span class="op">(</span><span class="fl">3</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> discnum </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       discnum increase_rate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          7.00          0.05 </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

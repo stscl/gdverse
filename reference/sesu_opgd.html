@@ -62,8 +62,9 @@ optimal parameters geographical detector(OPGD) model.</p>
 <span>  <span class="va">datalist</span>,</span>
 <span>  <span class="va">su</span>,</span>
 <span>  <span class="va">discvar</span>,</span>
-<span>  discnum <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  discmethod <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>,</span>
+<span>  discmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sd"</span>, <span class="st">"equal"</span>, <span class="st">"pretty"</span>, <span class="st">"quantile"</span>, <span class="st">"fisher"</span>, <span class="st">"headtails"</span>, <span class="st">"maximum"</span>,</span>
+<span>    <span class="st">"box"</span><span class="op">)</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
@@ -126,6 +127,9 @@ Default is <code>5%</code>.</p></dd>
 
 <dt><code>optsu</code></dt>
 <dd><p>optimal spatial unit</p></dd>
+
+<dt><code>increase_rate</code></dt>
+<dd><p>the critical increase rate of q value</p></dd>
 
 
 </dl></div>

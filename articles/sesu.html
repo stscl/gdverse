@@ -275,8 +275,7 @@ construct the data under <code>2000-10000</code> m spatial units with
 <code class="sourceCode R"><span><span class="va">discvar</span> <span class="op">=</span> <span class="fu"><a href="https://rspatial.github.io/terra/reference/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">fvc1000</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">fvc</span>,<span class="va">lulc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g1</span> <span class="op">=</span> <span class="fu"><a href="../reference/sesu_opgd.html">sesu_opgd</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>,su <span class="op">=</span> <span class="va">su</span>,discvar <span class="op">=</span> <span class="va">discvar</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">g1</span></span>
-<span><span class="co">##       Size Effect Of Spatial Units      </span></span>
-<span><span class="co">##                OPGD Model                </span></span>
+<span><span class="co">##    Size Effect Of Spatial Units Using OPGD Model   </span></span>
 <span><span class="co">##  ***    Optimal Spatial Unit: 5000</span></span>
 <span><span class="co">##  Spatial Unit: 1000 </span></span>
 <span><span class="co">## </span></span>
@@ -456,9 +455,8 @@ construct the data under <code>2000-10000</code> m spatial units with
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu"><a href="../reference/sesu_gozh.html">sesu_gozh</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>,su <span class="op">=</span> <span class="va">su</span>,cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">g2</span></span>
-<span><span class="co">##       Size Effect Of Spatial Units      </span></span>
-<span><span class="co">##                GOZH Model                </span></span>
-<span><span class="co">##  ***    Optimal Spatial Unit: 4000</span></span>
+<span><span class="co">##    Size Effect Of Spatial Units Using GOZH Model   </span></span>
+<span><span class="co">##  ***        Optimal Spatial Unit: 4000</span></span>
 <span><span class="co">##  Spatial Unit: 1000 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
@@ -527,9 +525,8 @@ the mean of the individual Q statistic for all explanatory variables) in
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g3</span> <span class="op">=</span> <span class="fu"><a href="../reference/sesu_gozh.html">sesu_gozh</a></span><span class="op">(</span><span class="va">fvc</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">fvc</span>,su <span class="op">=</span> <span class="va">su</span>,cores <span class="op">=</span> <span class="fl">6</span>,strategy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">g3</span></span>
-<span><span class="co">##       Size Effect Of Spatial Units      </span></span>
-<span><span class="co">##                GOZH Model                </span></span>
-<span><span class="co">##  ***    Optimal Spatial Unit: 10000</span></span>
+<span><span class="co">##    Size Effect Of Spatial Units Using GOZH Model   </span></span>
+<span><span class="co">##  ***        Optimal Spatial Unit: 10000</span></span>
 <span><span class="co">##  Spatial Unit: 1000 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable | Q-statistic | P-value  |</span></span>
@@ -703,8 +700,8 @@ the mean of the individual Q statistic for all explanatory variables) in
 <p><img src="../reference/figures/sesu/gozh2-1.png"></p>
 <p>As shown above, strategy <code>2</code> results in a better trade-off
 between spatial unit expressive detail and explanatory power than
-strategy <code>1</code>. So gdverse’s <code><a href="../reference/sesu_gozh.html">sesu_gozh()</a></code> defaults
-to use strategy <code>2</code>(using the interactive Q statistic for all
+strategy <code>1</code>. So <code><a href="../reference/sesu_gozh.html">sesu_gozh()</a></code> defaults to use
+strategy <code>2</code>(using the interactive Q statistic for all
 explanatory variables)</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
