@@ -15,7 +15,8 @@ loess_optdiscnum(qvec, discnumvec, increase_rate = 0.05)
 Default is \verb{5\%}.}
 }
 \value{
-A optimal number of spatial data discretization.
+A numeric vector about optimal number of spatial data discretization and the critical
+increase rate of the number of discretization.
 }
 \description{
 Function for determining optimal spatial data discretization for individual variables

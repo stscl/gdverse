@@ -15,7 +15,8 @@ loess_optscale(qvec, spscalevec, increase_rate = 0.05)
 Default is \verb{5\%}.}
 }
 \value{
-A optimal number of spatial scale
+A numeric vector about optimal number of spatial scale and the critical
+increase rate of q value.
 }
 \description{
 Function for determining optimal spatial data analysis scale based on locally
