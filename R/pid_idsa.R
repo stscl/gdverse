@@ -132,7 +132,7 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
     optimalk = out_param$x %>%
       purrr::map2_dbl(out_param$method, \(.x,.method) loess_optdiscnum(
         out_g[which(out_g$x==.x & out_g$method==.method),"spade_cpsd",drop = TRUE],
-        out_g[which(out_g$x==.x & out_g$method==.method),"k",drop = TRUE],increase_rate))
+        out_g[which(out_g$x==.x & out_g$method==.method),"k",drop = TRUE],increase_rate)[1])
     out_g = out_param %>%
       dplyr::mutate(k = optimalk) %>%
       dplyr::select(x,k,method) %>%

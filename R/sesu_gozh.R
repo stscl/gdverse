@@ -38,7 +38,7 @@
 #' \item{\code{sesu}}{a tibble representing size effects of spatial units}
 #' \item{\code{optsu}}{optimal spatial unit}
 #' \item{\code{strategy}}{the optimal analytical scale selection strategy}
-#' \item{\code{increase_rate}}{the critical increase rate}
+#' \item{\code{increase_rate}}{the critical increase rate of the number of discretization}
 #' }
 #' @export
 #'
@@ -101,8 +101,10 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
       dplyr::pull(`Q-statistic`)
     optsu = loess_optscale(qv,su,increase_rate)
   }
-  res = list('sesu' = sesu, 'optsu' = optsu, 'strategy' = strategy,
-             'increase_rate' = increase_rate)
+  res = list('sesu' = sesu,
+             'optsu' = optsu[1],
+             'strategy' = strategy,
+             'increase_rate' = optsu[2])
   class(res) = 'sesu_gozh'
   return(res)
 }
