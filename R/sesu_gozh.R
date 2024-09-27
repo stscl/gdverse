@@ -59,7 +59,7 @@
 #'           su = c(1000,5000),
 #'           cores = 6)
 #' }
-sesu_gozh = \(formula,datalist,su, cores = 1, strategy = 2L,
+sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
               increase_rate = 0.05, alpha = 0.95, ...){
   if (strategy == 1) {
     res_sesu = purrr::map2(datalist, su,
@@ -120,9 +120,8 @@ sesu_gozh = \(formula,datalist,su, cores = 1, strategy = 2L,
 print.sesu_gozh = \(x,...){
   g = purrr::list_rbind(x$sesu$sesu_result)
   spunits = x$sesu$spatial_units
-  cat("      Size Effect Of Spatial Units      \n",
-      "              GOZH Model                \n",
-      "***    Optimal Spatial Unit:",x$optsu)
+  cat("   Size Effect Of Spatial Units Using GOZH Model   \n",
+      "***        Optimal Spatial Unit:",x$optsu)
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
     print(knitr::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),

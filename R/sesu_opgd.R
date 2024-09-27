@@ -91,8 +91,7 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
 print.sesu_opgd = \(x,...){
   g = purrr::list_rbind(x$sesu$sesu_result)
   spunits = x$sesu$spatial_units
-  cat("      Size Effect Of Spatial Units      \n",
-      "              OPGD Model                \n",
+  cat("   Size Effect Of Spatial Units Using OPGD Model   \n",
       "***    Optimal Spatial Unit:",x$optsu)
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
