@@ -153,7 +153,7 @@ plot.sesu_gozh = \(x,...){
       dplyr::rename(qv = `Q-statistic`, pv = `P-value`)
     loessf = stats::loess(qv ~ su, data = g)
     loessrate = (loessf$fitted - dplyr::lag(loessf$fitted)) / dplyr::lag(loessf$fitted)
-    sesu_q$rate = loessrate
+    g$rate = loessrate
     maxrate = max(g$rate, na.rm = TRUE)
     maxqv = max(g$qv)
 
