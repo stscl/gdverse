@@ -55,7 +55,8 @@
 #'           discvar = names(select(fvc5000,-c(fvc,lulc))),
 #'           cores = 6)
 #' }
-sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
+sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:22,
+              discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box"),
               cores = 1, increase_rate = 0.05, alpha = 0.95, ...){
   res_sesu = purrr::map2(datalist, su,
                          \(.tbf, .spsu) opgd(formula,.tbf,discvar,discnum,
@@ -71,7 +72,8 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = NULL,discmethod = NULL,
     dplyr::group_by(su) %>%
     dplyr::summarise(qv = mean(`Q-statistic`,na.rm = T))
   optsu = loess_optscale(optsu$qv,optsu$su,increase_rate)
-  res = list('sesu' = sesu,'optsu' = optsu)
+  res = list('sesu' = sesu,'optsu' = optsu[1],
+             'increase_rate' = optsu[2])
   class(res) = 'sesu_opgd'
   return(res)
 }
