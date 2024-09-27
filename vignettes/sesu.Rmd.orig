@@ -17,7 +17,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-**gdverse** provides the `sesu_opgd()` and `sesu_gozh()` function to support the selection of optimal spatial analysis scales which based on **OPGD** and **GOZH** respectively. Please refer to the help documentation of the corresponding function for more details.
+**gdverse** provides the `sesu_opgd()` and `sesu_gozh()` function to support the selection of optimal spatial analysis scales which based on **OPGD** and **GOZH** respectively. Please
+refer to the help documentation of the corresponding function for more details.
 
 Here, we use [FVC raster data](https://github.com/SpatLyu/rdevdata/blob/main/FVC.tif) as an example to demonstrate the optimal spatial analysis scale selection function in **gdverse**.
 
@@ -72,4 +73,5 @@ g3
 plot(g3)
 ```
 
-As shown above, strategy `2` results in a better trade-off between spatial unit expressive detail and explanatory power than strategy `1`. So gdverse's `sesu_gozh()` defaults to use strategy `2`(using the interactive Q statistic for all explanatory variables)
+As shown above, strategy `2` results in a better trade-off between spatial unit expressive detail and explanatory power than strategy `1`. So `sesu_gozh()` defaults to use
+strategy `2`(using the interactive Q statistic for all explanatory variables)
