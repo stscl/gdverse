@@ -277,8 +277,9 @@ g2
 ## |:-------------:|:-----------:|:--------:|
 ## | TotalVariable |  0.8182764  | 3.27e-10 |
 plot(g2)
-## Error: object 'sesu_q' not found
 ```
+
+![](../man/figures/sesu/gozh1-1.png)
 
 You can also use the same strategy as `sesu_opgd()` (use the mean of the individual Q statistic for all explanatory variables) in `sesu_gozh()` by assign `strategy` to `1`.
 

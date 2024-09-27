@@ -41,7 +41,7 @@ loess_optdiscnum = \(qvec, discnumvec, increase_rate = 0.05){
   loessf = stats::loess(qvec ~ discnumvec)
   loessrate = (loessf$fitted - dplyr::lag(loessf$fitted)) / dplyr::lag(loessf$fitted)
   increase_rate = ifelse(max(loessrate,na.rm = TRUE) < increase_rate,
-                         increase_rate*0.1, increase_rate)
+                         increase_rate * 0.1, increase_rate)
   lrtbf = tibble::tibble(discnum = discnumvec,
                          qstatistic = qvec,
                          lr = loessrate,
