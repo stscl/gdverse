@@ -59,7 +59,7 @@ knitr::include_graphics('./man/figures/gdverse_funs.png')
 install.packages("gdverse", dep = TRUE)
 ```
 
-- Install development binary version from [r-universe](https://ausgis.r-universe.dev/gdverse) with:
+- Install development binary version from [R-universe](https://ausgis.r-universe.dev/gdverse) with:
 
 ``` r
 install.packages('gdverse',

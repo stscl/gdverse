@@ -57,7 +57,7 @@ install.packages("gdverse", dep = TRUE)
 ```
 
 - Install development binary version from
-  [r-universe](https://ausgis.r-universe.dev/gdverse) with:
+  [R-universe](https://ausgis.r-universe.dev/gdverse) with:
 
 ``` r
 install.packages('gdverse',
