@@ -9,9 +9,7 @@ st_unidisc(x, k, method = "quantile", factor = FALSE, seed = 123456789, ...)
 \arguments{
 \item{x}{A continuous numerical variable.}
 
-\item{k}{(optional) Number of classes required, if missing, \code{grDevices::nclass.Sturges()} is used;
-see also the "dpih" and "headtails" styles for automatic choice of the number of classes. \code{k} must
-greater than \code{3}.}
+\item{k}{(optional) Number of classes required, \code{k} must greater than \code{1}.}
 
 \item{method}{Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is \code{quantile}.}
@@ -37,7 +35,7 @@ xvar = c(22361, 9573, 4836, 5309, 10384, 4359, 11016, 4414, 3327, 3408,
          17816, 6909, 6936, 7990, 3758, 3569, 21965, 3605, 2181, 1892,
          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
          7508, 5203)
-st_unidisc(xvar, k = 6, method = 'sd')
+st_unidisc(xvar, k = 5, method = 'sd')
 
 }
 \author{
