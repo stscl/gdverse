@@ -7,8 +7,8 @@
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
 #' DOI:10.1080/13658816.2021.1882680
 #' @note
-#' Independent variables in the `data` provided to `st_fuzzyoverlay()` must be discretized variables,
-#' and dependent variable are continuous variable.
+#' Independent variables in the `data` provided to `st_fuzzyoverlay()` must be discretized
+#' variables, and dependent variable are continuous variable.
 #'
 #' @param formula A formula of spatial fuzzy overlay.
 #' @param data A data.frame or tibble of discretized data.

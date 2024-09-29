@@ -21,7 +21,7 @@
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
 #' Others use `st_unidisc()`. You can try `unidisc_methods()` to see supported methods in `st_unidisc()`.
-#' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
+#' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
@@ -52,7 +52,7 @@
 #' g
 #'
 idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
-         overlaymethod = 'and', strategy = 2L, increase_rate = 0.05,
+         overlay = 'and', strategy = 2L, increase_rate = 0.05,
          cores = 1, seed = 123456789, alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
@@ -86,7 +86,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
     dplyr::bind_cols(g$disv)
   dti = dplyr::select(data,dplyr::all_of(names(newdti)))
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
-  spfom = overlaymethod
+  spfom = overlay
 
   calcul_pid = \(.x){
     if (length(.x) == 1) {
@@ -124,7 +124,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
   interactvar = xs[[which.max(out_g$pid_idsa)]]
-  if (overlaymethod == 'intersection'){
+  if (overlay == 'intersection'){
     reszone = newdti %>%
       dplyr::select(dplyr::all_of(interactvar)) %>%
       purrr::reduce(paste,sep = '_')

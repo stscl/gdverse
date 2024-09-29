@@ -23,7 +23,7 @@
 #' variables are used as `discvar`.
 #' @param discnum A numeric vector for the number of discretized classes of columns that need
 #' to be discretized. Default all `discvar` use `10`.
-#' @param overlaymethod (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
+#' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `intersection`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
@@ -45,7 +45,7 @@
 #' g
 #' }
 rid = \(formula, data, discvar = NULL, discnum = 10,
-        overlaymethod = 'intersection', minsize = 1, cores = 1){
+        overlay = 'intersection', minsize = 1, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
@@ -68,7 +68,7 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
     dplyr::select(dplyr::all_of(discedvar)) %>%
     dplyr::bind_cols(g)
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
-  spfom = overlaymethod
+  spfom = overlay
 
   interact_pd = \(xvar){
     if (spfom == 'intersection'){
