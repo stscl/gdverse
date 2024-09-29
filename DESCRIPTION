@@ -59,6 +59,7 @@ Suggests:
     cowplot,
     knitr,
     Rcpp,
+    readr,
     rmarkdown,
     terra,
     testthat (>= 3.0.0)
