@@ -10,7 +10,7 @@ idsa(
   wt = NULL,
   discnum = 3:22,
   discmethod = "quantile",
-  overlaymethod = "and",
+  overlay = "and",
   strategy = 2L,
   increase_rate = 0.05,
   cores = 1,
@@ -32,7 +32,7 @@ idsa(
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
 Others use \code{st_unidisc()}. You can try \code{unidisc_methods()} to see supported methods in \code{st_unidisc()}.}
 
-\item{overlaymethod}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
+\item{overlay}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}
 
 \item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest SPADE model q-statistics to
