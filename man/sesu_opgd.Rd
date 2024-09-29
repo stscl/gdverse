@@ -57,7 +57,7 @@ optimal parameters geographical detector(OPGD) model.
 }
 \details{
 Firstly, the \code{OPGD} model is executed for each data in the datalist (all \code{significant}
-Q statistic of each data are averaged to represent the spatial connection strength under
+Q statistic of each data are averaged to represent the spatial association strength under
 this spatial unit), and then the \code{loess_optscale} function is used to select the optimal
 spatial analysis scale.
 }
