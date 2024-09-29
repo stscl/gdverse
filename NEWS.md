@@ -10,6 +10,8 @@
 
 * Add `readr` as a dependence of type `Suggests`.
 
+* Recompile vignettes due to internal function changes.
+
 # gdverse 1.0-2
 
 * When the `discvar` input for the `opgd`, `rgd`, `rid`, `spade` functions is `NULL`, 
