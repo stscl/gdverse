@@ -4,6 +4,8 @@
 
 * Fix bug caused by changes in default parameters of `opgd` in `sesu_opgd` (#4).
 
+* Maintaining the same results for `st_unidisc` and `ClassInt::classify_intervals` (#5).
+
 # gdverse 1.0-2
 
 * When the `discvar` input for the `opgd`, `rgd`, `rid`, `spade` functions is `NULL`, 
