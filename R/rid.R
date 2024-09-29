@@ -59,7 +59,7 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
   if (is.null(discvar)) {
     discvar = xname
   }
-  discdf =  dplyr::select(dti,dplyr::all_of(c(yname,discvar)))
+  discdf = dplyr::select(dti,dplyr::all_of(c(yname,discvar)))
   if (length(discnum)==0) {discnum = rep(discnum,length(discvar))}
   g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
                   discdf, discnum, minsize, cores = cores)
