@@ -114,14 +114,14 @@ ndvi_opgd
 ##                 OPGD Model                  
 ## ***          Factor Detector            
 ## 
-## |   variable    | Q-statistic | P-value  |
-## |:-------------:|:-----------:|:--------:|
-## | Precipitation |  0.8842705  | 8.58e-10 |
-## |  Climatezone  |  0.8218335  | 7.34e-10 |
-## |  Tempchange   |  0.3681294  | 3.56e-10 |
-## |  Popdensity   |  0.2203510  | 9.65e-10 |
-## |    Mining     |  0.1411154  | 6.73e-10 |
-## |      GDP      |  0.1155403  | 9.91e-10 |
+## |   variable    | Q-statistic |  P-value  |
+## |:-------------:|:-----------:|:---------:|
+## | Precipitation |  0.8785871  | 9.190e-10 |
+## |  Climatezone  |  0.8218335  | 7.340e-10 |
+## |  Tempchange   |  0.3681294  | 3.560e-10 |
+## |  Popdensity   |  0.2158606  | 1.740e-10 |
+## |    Mining     |  0.1411154  | 6.730e-10 |
+## |      GDP      |  0.1092089  | 4.324e-09 |
 ```
 
 ### GOZH model
