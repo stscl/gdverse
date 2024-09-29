@@ -10,7 +10,7 @@
 #' doi: 10.1080/15481603.2020.1760434.
 #' @details
 #' Firstly, the `OPGD` model is executed for each data in the datalist (all `significant`
-#' Q statistic of each data are averaged to represent the spatial connection strength under
+#' Q statistic of each data are averaged to represent the spatial association strength under
 #' this spatial unit), and then the `loess_optscale` function is used to select the optimal
 #' spatial analysis scale.
 #'
@@ -60,8 +60,8 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:22,
               discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box"),
               cores = 1, increase_rate = 0.05, alpha = 0.95, ...){
   res_sesu = purrr::map2(datalist, su,
-                         \(.tbf, .spsu) opgd(formula,.tbf,discvar,discnum,
-                                             discmethod,cores,type = "factor",
+                         \(.tbf, .spsu) opgd(formula, .tbf, discvar, discnum,
+                                             discmethod, cores, type = "factor",
                                              alpha = alpha, ...) %>%
                                 purrr::pluck('factor') %>%
                                 dplyr::mutate(su = .spsu))
