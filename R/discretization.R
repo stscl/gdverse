@@ -4,9 +4,7 @@
 #' Function to classify univariate vector to interval, a wrapper of `classInt::classify_intervals()`.
 #'
 #' @param x A continuous numerical variable.
-#' @param k (optional) Number of classes required, if missing, `grDevices::nclass.Sturges()` is used;
-#' see also the "dpih" and "headtails" styles for automatic choice of the number of classes. `k` must
-#' greater than `3`.
+#' @param k (optional) Number of classes required, `k` must greater than `1`.
 #' @param method Chosen classify style: one of "fixed", "sd", "equal", "pretty", "quantile", "kmeans",
 #' "hclust", "bclust", "fisher", "jenks", "dpih", "headtails", "maximum", or "box". Default is `quantile`.
 #' @param factor (optional) Default is `FALSE`, if `TRUE` returns cols as a factor with intervals as
@@ -25,13 +23,13 @@
 #'          17816, 6909, 6936, 7990, 3758, 3569, 21965, 3605, 2181, 1892,
 #'          2459, 2934, 6399, 8578, 8537, 4840, 12132, 3734, 4372, 9073,
 #'          7508, 5203)
-#' st_unidisc(xvar, k = 6, method = 'sd')
+#' st_unidisc(xvar, k = 5, method = 'sd')
 #'
 st_unidisc = \(x,k,method = "quantile",factor = FALSE,
                seed = 123456789, ...){
-  if (k<=2) {stop(" `k` must greater than 3 !")}
+  if (k <= 1) {stop(" `k` must greater than 1 !")}
   set.seed(seed)
-  discedvec = suppressWarnings(classInt::classify_intervals(var = x, n = k - 1,
+  discedvec = suppressWarnings(classInt::classify_intervals(var = x, n = k,
                                                             style = method,...,
                                                             factor = factor))
   return(discedvec)
