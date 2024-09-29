@@ -103,22 +103,21 @@
 <span><span class="co">## Bounding box:  xmin: -83.1795 ymin: 32.11464 xmax: -78.6023 ymax: 35.17354</span></span>
 <span><span class="co">## Geodetic CRS:  WGS 84</span></span>
 <span><span class="co">## # A tibble: 1,072 × 12</span></span>
-<span><span class="co">##    Depression_prevelence PopulationDensity Population65 NoHealthInsurance</span></span>
-<span><span class="co">##  *                 &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;</span></span>
-<span><span class="co">##  1                  23.1              61.5         22.5              7.98</span></span>
-<span><span class="co">##  2                  22.8              58.3         16.8             11.0 </span></span>
-<span><span class="co">##  3                  23.2              35.9         24.5              9.31</span></span>
-<span><span class="co">##  4                  21.8              76.1         21.8             13.2 </span></span>
-<span><span class="co">##  5                  20.7              47.3         22.0             11   </span></span>
-<span><span class="co">##  6                  21.3              32.5         19.2             13.0 </span></span>
-<span><span class="co">##  7                  22                36.9         19.2             10.8 </span></span>
-<span><span class="co">##  8                  21.2              61.5         15.9              8.57</span></span>
-<span><span class="co">##  9                  22.7              67.2         15.7             17.8 </span></span>
-<span><span class="co">## 10                  20.6             254.          11.3             12.7 </span></span>
+<span><span class="co">##    Depression_prevelence PopulationDensity Population65 NoHealthInsurance Neighbor_Disadvantage</span></span>
+<span><span class="co">##  *                 &lt;dbl&gt;             &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;                 &lt;dbl&gt;</span></span>
+<span><span class="co">##  1                  23.1              61.5         22.5              7.98               -0.0525</span></span>
+<span><span class="co">##  2                  22.8              58.3         16.8             11.0                -0.254 </span></span>
+<span><span class="co">##  3                  23.2              35.9         24.5              9.31               -0.0540</span></span>
+<span><span class="co">##  4                  21.8              76.1         21.8             13.2                 0.0731</span></span>
+<span><span class="co">##  5                  20.7              47.3         22.0             11                   0.763 </span></span>
+<span><span class="co">##  6                  21.3              32.5         19.2             13.0                 0.422 </span></span>
+<span><span class="co">##  7                  22                36.9         19.2             10.8                 0.113 </span></span>
+<span><span class="co">##  8                  21.2              61.5         15.9              8.57               -0.154 </span></span>
+<span><span class="co">##  9                  22.7              67.2         15.7             17.8                -0.320 </span></span>
+<span><span class="co">## 10                  20.6             254.          11.3             12.7                 0.457 </span></span>
 <span><span class="co">## # ℹ 1,062 more rows</span></span>
-<span><span class="co">## # ℹ 8 more variables: Neighbor_Disadvantage &lt;dbl&gt;, Beer &lt;dbl&gt;, MentalHealthPati &lt;dbl&gt;,</span></span>
-<span><span class="co">## #   NatureParks &lt;dbl&gt;, Casinos &lt;dbl&gt;, DrinkingPlaces &lt;dbl&gt;, X.HouseRent &lt;dbl&gt;,</span></span>
-<span><span class="co">## #   geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
+<span><span class="co">## # ℹ 7 more variables: Beer &lt;dbl&gt;, MentalHealthPati &lt;dbl&gt;, NatureParks &lt;dbl&gt;, Casinos &lt;dbl&gt;,</span></span>
+<span><span class="co">## #   DrinkingPlaces &lt;dbl&gt;, X.HouseRent &lt;dbl&gt;, geometry &lt;POINT [°]&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="spatial-autocorrelation-of-depression-prevelence">Spatial Autocorrelation of Depression Prevelence<a class="anchor" aria-label="anchor" href="#spatial-autocorrelation-of-depression-prevelence"></a>
@@ -257,11 +256,11 @@ spatial autocorrelation in the global scale.</p>
 <span><span class="co">## |       variable        | Q-statistic |   P-value    |</span></span>
 <span><span class="co">## |:---------------------:|:-----------:|:------------:|</span></span>
 <span><span class="co">## | Neighbor_Disadvantage | 0.15931057  | 2.340391e-02 |</span></span>
-<span><span class="co">## |     Population65      | 0.11095945  | 9.999944e-01 |</span></span>
+<span><span class="co">## |     Population65      | 0.11198802  | 1.000000e+00 |</span></span>
 <span><span class="co">## |   PopulationDensity   | 0.11065749  | 2.140000e-10 |</span></span>
 <span><span class="co">## |   NoHealthInsurance   | 0.08182401  | 8.340000e-10 |</span></span>
 <span><span class="co">## |    DrinkingPlaces     | 0.06639594  | 1.000000e+00 |</span></span>
-<span><span class="co">## |      NatureParks      | 0.06525932  | 1.000000e+00 |</span></span>
+<span><span class="co">## |      NatureParks      | 0.06620973  | 1.000000e+00 |</span></span>
 <span><span class="co">## |      X.HouseRent      | 0.06111156  | 1.000000e+00 |</span></span>
 <span><span class="co">## |   MentalHealthPati    | 0.02532353  | 1.000000e+00 |</span></span>
 <span><span class="co">## |         Beer          | 0.02458667  | 1.000000e+00 |</span></span>
@@ -274,11 +273,11 @@ spatial autocorrelation in the global scale.</p>
 <span><span class="co">##    variable              `Q-statistic` `P-value`</span></span>
 <span><span class="co">##    &lt;chr&gt;                         &lt;dbl&gt;     &lt;dbl&gt;</span></span>
 <span><span class="co">##  1 Neighbor_Disadvantage        0.159   2.34e- 2</span></span>
-<span><span class="co">##  2 Population65                 0.111   1.00e+ 0</span></span>
+<span><span class="co">##  2 Population65                 0.112   1.00e+ 0</span></span>
 <span><span class="co">##  3 PopulationDensity            0.111   2.14e-10</span></span>
 <span><span class="co">##  4 NoHealthInsurance            0.0818  8.34e-10</span></span>
 <span><span class="co">##  5 DrinkingPlaces               0.0664  1.00e+ 0</span></span>
-<span><span class="co">##  6 NatureParks                  0.0653  1.00e+ 0</span></span>
+<span><span class="co">##  6 NatureParks                  0.0662  1.00e+ 0</span></span>
 <span><span class="co">##  7 X.HouseRent                  0.0611  1   e+ 0</span></span>
 <span><span class="co">##  8 MentalHealthPati             0.0253  1   e+ 0</span></span>
 <span><span class="co">##  9 Beer                         0.0246  1   e+ 0</span></span>
@@ -343,16 +342,16 @@ spatial weight matrix <code>wt1</code>.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## |       variable        | Q-statistic |      P-value      |</span></span>
 <span><span class="co">## |:---------------------:|:-----------:|:-----------------:|</span></span>
-<span><span class="co">## |   PopulationDensity   | 0.22350789  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    DrinkingPlaces     | 0.18296329  | No Pseudo-P Value |</span></span>
-<span><span class="co">## | Neighbor_Disadvantage | 0.17159619  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |        Casinos        | 0.16623609  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |     Population65      | 0.15732787  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |      NatureParks      | 0.13953548  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |         Beer          | 0.10609591  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   NoHealthInsurance   | 0.07912873  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   MentalHealthPati    | 0.07778826  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |      X.HouseRent      | 0.07250500  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   PopulationDensity   | 0.21913312  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |    DrinkingPlaces     | 0.18218144  | No Pseudo-P Value |</span></span>
+<span><span class="co">## | Neighbor_Disadvantage | 0.17579910  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |        Casinos        | 0.16521261  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |     Population65      | 0.15817339  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |      NatureParks      | 0.13422702  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |         Beer          | 0.10537747  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   NoHealthInsurance   | 0.07977094  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   MentalHealthPati    | 0.07784887  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |      X.HouseRent      | 0.07566471  | No Pseudo-P Value |</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">depression_spade</span>, slicenum <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/spade/spade-1.png"></p>
 <p><strong>You can also access the detailed q statistics by
@@ -362,16 +361,16 @@ spatial weight matrix <code>wt1</code>.</p>
 <span><span class="co">## # A tibble: 10 × 3</span></span>
 <span><span class="co">##    variable              `Q-statistic` `P-value`        </span></span>
 <span><span class="co">##    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;            </span></span>
-<span><span class="co">##  1 PopulationDensity            0.224  No Pseudo-P Value</span></span>
-<span><span class="co">##  2 DrinkingPlaces               0.183  No Pseudo-P Value</span></span>
-<span><span class="co">##  3 Neighbor_Disadvantage        0.172  No Pseudo-P Value</span></span>
-<span><span class="co">##  4 Casinos                      0.166  No Pseudo-P Value</span></span>
-<span><span class="co">##  5 Population65                 0.157  No Pseudo-P Value</span></span>
-<span><span class="co">##  6 NatureParks                  0.140  No Pseudo-P Value</span></span>
-<span><span class="co">##  7 Beer                         0.106  No Pseudo-P Value</span></span>
-<span><span class="co">##  8 NoHealthInsurance            0.0791 No Pseudo-P Value</span></span>
+<span><span class="co">##  1 PopulationDensity            0.219  No Pseudo-P Value</span></span>
+<span><span class="co">##  2 DrinkingPlaces               0.182  No Pseudo-P Value</span></span>
+<span><span class="co">##  3 Neighbor_Disadvantage        0.176  No Pseudo-P Value</span></span>
+<span><span class="co">##  4 Casinos                      0.165  No Pseudo-P Value</span></span>
+<span><span class="co">##  5 Population65                 0.158  No Pseudo-P Value</span></span>
+<span><span class="co">##  6 NatureParks                  0.134  No Pseudo-P Value</span></span>
+<span><span class="co">##  7 Beer                         0.105  No Pseudo-P Value</span></span>
+<span><span class="co">##  8 NoHealthInsurance            0.0798 No Pseudo-P Value</span></span>
 <span><span class="co">##  9 MentalHealthPati             0.0778 No Pseudo-P Value</span></span>
-<span><span class="co">## 10 X.HouseRent                  0.0725 No Pseudo-P Value</span></span></code></pre></div>
+<span><span class="co">## 10 X.HouseRent                  0.0757 No Pseudo-P Value</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
