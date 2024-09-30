@@ -1,3 +1,7 @@
+# gdverse 1.0-4
+
+* Resolve potential bugs.
+
 # gdverse 1.0-3
 
 * Update the `RGD` Model API Settings (#2).
