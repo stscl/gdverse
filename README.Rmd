@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# gdverse <img src="man/figures/logo.png" align="right" height="120"/>
+# gdverse <a href="https://ausgis.github.io/gdverse/"><img src="man/figures/logo.png" align="right" height="139" alt="gdverse website" /></a>
 
 <!-- badges: start -->
 [![cran](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
