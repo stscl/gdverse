@@ -20,7 +20,7 @@
 #' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
-#' Others use `st_unidisc()`. You can try `unidisc_methods()` to see supported methods in `st_unidisc()`.
+#' Others use `sdsfun::discretize_vector()`.
 #' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
@@ -113,8 +113,8 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('spvar','psd_spade',
-                                    'cpsd_spade','psd_iev',
+    parallel::clusterExport(cores,c('spvar', 'psd_spade',
+                                    'cpsd_spade', 'psd_iev',
                                     'st_fuzzyoverlay','pid_idsa'))
     out_g = parallel::parLapply(cores, xs, calcul_pid)
     out_g = tibble::as_tibble(do.call(rbind, out_g))

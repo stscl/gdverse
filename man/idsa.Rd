@@ -30,7 +30,7 @@ idsa(
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
-Others use \code{st_unidisc()}. You can try \code{unidisc_methods()} to see supported methods in \code{st_unidisc()}.}
+Others use \code{sdsfun::discretize_vector()}.}
 
 \item{overlay}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}
