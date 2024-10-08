@@ -97,7 +97,7 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
       #                      cores = cores_rdisc,
       #                      ...)
       # xdisc = xdisc[,1,drop = TRUE]
-      q = 0.01 * paramgd[[2]] ### Subsequent confirmation is required
+      q = 0.01 * paramgd[[2]] # Subsequent confirmation is required
     } else {
       xdisc = sdsfun::discretize_vector(xobs, n = paramgd[[2]],
                                         method = paramgd[[3]],
@@ -130,7 +130,7 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
     out_g = dplyr::bind_cols(paradf,out_g)
     out_param = tidyr::expand(out_g,tidyr::nesting(x,method))
     optimalk = out_param$x %>%
-      purrr::map2_dbl(out_param$method, \(.x,.method) loess_optdiscnum(
+      purrr::map2_dbl(out_param$method, \(.x,.method) sdsfun::loess_optnum(
         out_g[which(out_g$x==.x & out_g$method==.method),"spade_cpsd",drop = TRUE],
         out_g[which(out_g$x==.x & out_g$method==.method),"k",drop = TRUE],increase_rate)[1])
     out_g = out_param %>%
@@ -239,7 +239,7 @@ pid_idsa = \(formula, rawdata, discdata,
       dplyr::select(-dplyr::any_of(yname)) %>%
       purrr::reduce(paste,sep = '_')
   } else {
-    fuzzyzone = st_fuzzyoverlay(formula,discdata,overlaymethod)
+    fuzzyzone = sdsfun::fuzzyoverlay(formula,discdata,overlaymethod)
   }
 
   qtheta = psd_spade(rawdata[,yname,drop = TRUE],

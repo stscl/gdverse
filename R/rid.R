@@ -76,8 +76,8 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
         dplyr::select(dplyr::all_of(xvar)) %>%
         purrr::reduce(paste, sep = '_')
     } else {
-      reszone = st_fuzzyoverlay(paste(yname,'~',paste0(xvar,collapse = '+')),
-                                newdti,spfom)
+      reszone = sdsfun::fuzzyoverlay(paste(yname,'~',paste0(xvar,collapse = '+')),
+                                     newdti,spfom)
     }
     qv = factor_detector(newdti[,yname,drop = TRUE],reszone)[[1]]
     names(qv) = 'PD'
@@ -94,7 +94,7 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('factor_detector','st_fuzzyoverlay'))
+    parallel::clusterExport(cores,c('factor_detector'))
     out_g = parallel::parLapply(cores,xs, interact_pd)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {

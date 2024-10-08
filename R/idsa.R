@@ -65,7 +65,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
     data = sf::st_drop_geometry(data)
   } else if (inherits(data,'data.frame')) {
     if (is.null(wt)){
-      stop("When `data` is `data.frame` or `tibble`, please provide `wt` in idsa input!")
+      stop("When `data` is `data.frame` or `tibble`, please provide `wt`!")
     } else {
       wt_idsa = wt
     }
@@ -113,9 +113,8 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('spvar', 'psd_spade',
-                                    'cpsd_spade', 'psd_iev',
-                                    'st_fuzzyoverlay','pid_idsa'))
+    parallel::clusterExport(cores,c('spvar', 'psd_spade', 'cpsd_spade',
+                                    'psd_iev','pid_idsa'))
     out_g = parallel::parLapply(cores, xs, calcul_pid)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
@@ -129,8 +128,9 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
       dplyr::select(dplyr::all_of(interactvar)) %>%
       purrr::reduce(paste,sep = '_')
   } else {
-    reszone = st_fuzzyoverlay(paste(yname,'~',paste0(interactvar,collapse = '+')),
-                              newdti, spfom)
+    reszone = sdsfun::fuzzyoverlay(paste(yname,'~',
+                                         paste0(interactvar,collapse = '+')),
+                                   newdti, spfom)
   }
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
