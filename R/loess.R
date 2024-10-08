@@ -28,7 +28,7 @@
 #' @examples
 #' data('sim')
 #' 3:10 %>%
-#'   purrr::map_dbl(\(.k) st_unidisc(sim$xa,.k) %>%
+#'   purrr::map_dbl(\(.k) sdsfun::discretize_vector(sim$xa,.k) %>%
 #'                factor_detector(sim$y,.) %>%
 #'                {.[[1]]}) %>%
 #'  loess_optdiscnum(3:10)
@@ -89,9 +89,9 @@ loess_optdiscnum = \(qvec, discnumvec, increase_rate = 0.05){
 #'   terra::as.data.frame(na.rm = T) %>%
 #'   as_tibble()
 #' qv1000 = factor_detector(fvc1000$fvc,
-#'                          st_unidisc(fvc1000$premax,10,'quantile'))[[1]]
+#'                          sdsfun::discretize_vector(fvc1000$premax,10,'quantile'))[[1]]
 #' qv5000 = factor_detector(fvc5000$fvc,
-#'                          st_unidisc(fvc5000$premax,10,'quantile'))[[1]]
+#'                          sdsfun::discretize_vector(fvc5000$premax,10,'quantile'))[[1]]
 #' loess_optscale(c(qv1000,qv5000),c(1000,5000))
 #' }
 loess_optscale = \(qvec, spscalevec, increase_rate = 0.05){
