@@ -1,6 +1,6 @@
-# gdverse 1.0-4
+# gdverse 1.1.0
 
-* Resolve potential bugs.
+* The general discretization of variables in **gdverse** now uses `sdsfun::discretize_vector()` (#6).
 
 # gdverse 1.0-3
 
