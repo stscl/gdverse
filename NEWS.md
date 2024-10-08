@@ -2,6 +2,8 @@
 
 * The general discretization of variables in **gdverse** now uses `sdsfun::discretize_vector()` (#6).
 
+* Algorithm functions migrated to `sdsfun` (#8).
+
 # gdverse 1.0-3
 
 * Update the `RGD` Model API Settings (#2).
