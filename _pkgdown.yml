@@ -48,7 +48,6 @@ reference:
 
 - title: Variable Discretization Methods
   contents:
-  - st_unidisc
   - gd_bestunidisc
   - rpart_disc
   - robust_disc
