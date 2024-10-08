@@ -1,8 +1,8 @@
 # gdverse 1.1.0
 
-* The general discretization of variables in **gdverse** now uses `sdsfun::discretize_vector()` (#6).
+* The general variable discretization in **gdverse** now utilizes `sdsfun::discretize_vector()` (#6).
 
-* Algorithm functions migrated to `sdsfun` (#8).
+* Algorithm functions are migrated to `sdsfun` (#8).
 
 # gdverse 1.0-3
 
