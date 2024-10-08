@@ -140,32 +140,32 @@ demonstrate the use of the IDSA model.</p>
 <span>                  data <span class="op">=</span> <span class="va">depression</span>,</span>
 <span>                  wt <span class="op">=</span> <span class="va">wt</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 133.83 sec elapsed</span></span>
+<span><span class="co">## 134.56 sec elapsed</span></span>
 <span><span class="va">idsa.model</span></span>
 <span><span class="co">## ***     Interactive Detector For Spatial Associations </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |                                                                           variable                                                                            |    PID    |</span></span>
-<span><span class="co">## |:-------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|</span></span>
-<span><span class="co">## |                          PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ X.HouseRent                           | 0.8171008 |</span></span>
-<span><span class="co">## |                                 PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                                  | 0.7607872 |</span></span>
-<span><span class="co">## |                  PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces ∩ X.HouseRent                  | 0.7431438 |</span></span>
-<span><span class="co">## | PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces ∩ X.HouseRent | 0.7380790 |</span></span>
-<span><span class="co">## |                   PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ X.HouseRent                    | 0.7344367 |</span></span>
+<span><span class="co">## |                                                          variable                                                           |    PID    |</span></span>
+<span><span class="co">## |:---------------------------------------------------------------------------------------------------------------------------:|:---------:|</span></span>
+<span><span class="co">## |                PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                 | 0.9207981 |</span></span>
+<span><span class="co">## |         PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ X.HouseRent          | 0.8712018 |</span></span>
+<span><span class="co">## | PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces | 0.8510630 |</span></span>
+<span><span class="co">## |        PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces        | 0.8481700 |</span></span>
+<span><span class="co">## |                     PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati                      | 0.8471561 |</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  --------- IDSA model performance evaluation: --------</span></span>
-<span><span class="co">##  * Number of overlay zones :  40 </span></span>
-<span><span class="co">##  * Percentage of finely divided zones :  0.004664179 </span></span>
-<span><span class="co">##  * Number of individual explanatory variables :  7 </span></span>
+<span><span class="co">##  * Number of overlay zones :  33 </span></span>
+<span><span class="co">##  * Percentage of finely divided zones :  0.002798507 </span></span>
+<span><span class="co">##  * Number of individual explanatory variables :  6 </span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ## Different of response variable between a pair of overlay zones:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |   zone1st   |   zone2nd   | Risk |</span></span>
-<span><span class="co">## |:-----------:|:-----------:|:----:|</span></span>
-<span><span class="co">## | zoneBeer_10 | zoneBeer_11 | Yes  |</span></span>
-<span><span class="co">## | zoneBeer_10 | zoneBeer_2  |  No  |</span></span>
-<span><span class="co">## | zoneBeer_10 | zoneBeer_3  |  No  |</span></span>
-<span><span class="co">## | zoneBeer_10 | zoneBeer_6  |  No  |</span></span>
-<span><span class="co">## | zoneBeer_10 | zoneBeer_7  |  No  |</span></span>
+<span><span class="co">## |  zone1st   |  zone2nd   | Risk |</span></span>
+<span><span class="co">## |:----------:|:----------:|:----:|</span></span>
+<span><span class="co">## | zoneBeer_2 | zoneBeer_3 |  No  |</span></span>
+<span><span class="co">## | zoneBeer_2 | zoneBeer_6 |  No  |</span></span>
+<span><span class="co">## | zoneBeer_2 | zoneBeer_7 |  No  |</span></span>
+<span><span class="co">## | zoneBeer_2 | zoneBeer_8 |  No  |</span></span>
+<span><span class="co">## | zoneBeer_2 | zoneBeer_9 |  No  |</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  #### Only the first five pairs of interactions and overlay zones are displayed! ####</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">idsa.model</span><span class="op">)</span></span></code></pre></div>

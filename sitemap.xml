@@ -29,7 +29,6 @@
 <url><loc>https://ausgis.github.io/gdverse/reference/interaction_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/inverse_distance_weight.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/lesh.html</loc></url>
-<url><loc>https://ausgis.github.io/gdverse/reference/loess_optdiscnum.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/loess_optscale.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/ndvi.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/opgd.html</loc></url>
@@ -87,7 +86,6 @@
 <url><loc>https://ausgis.github.io/gdverse/reference/sim.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/spade.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/spd_lesh.html</loc></url>
-<url><loc>https://ausgis.github.io/gdverse/reference/spvar.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/srs_ecological_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/srs_factor_detector.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/srs_geodetector.html</loc></url>
@@ -95,7 +93,6 @@
 <url><loc>https://ausgis.github.io/gdverse/reference/srs_table.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/srs_wt.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/srsgd.html</loc></url>
-<url><loc>https://ausgis.github.io/gdverse/reference/st_fuzzyoverlay.html</loc></url>
 <url><loc>https://ausgis.github.io/gdverse/reference/weight_assign.html</loc></url>
 </urlset>
 
