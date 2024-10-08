@@ -40,7 +40,6 @@ reference:
   - rgd
   - rid
   - srsgd
-  # - esp
 
 - title: Compare Size Effect of Spatial Units
   contents:
@@ -80,7 +79,6 @@ reference:
 - title: Utility Functions
   contents:
   - inverse_distance_weight
-  - unidisc_methods
   - shuffle_vector
   - rescale_vector
   - generate_subsets
