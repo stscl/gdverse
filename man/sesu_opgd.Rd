@@ -10,8 +10,7 @@ sesu_opgd(
   su,
   discvar,
   discnum = 3:22,
-  discmethod = c("sd", "equal", "pretty", "quantile", "fisher", "headtails", "maximum",
-    "box"),
+  discmethod = c("sd", "equal", "geometric", "quantile", "natural"),
   cores = 1,
   increase_rate = 0.05,
   alpha = 0.95,
@@ -30,8 +29,8 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
-\item{discmethod}{(optional) A vector of methods for discretization,default is used
-\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}in \code{gdverse}.}
+\item{discmethod}{(optional) A vector of methods for discretization, default is using
+\code{c("sd","equal","geometric","quantile","natural")} by invoking \code{sdsfun}.}
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
