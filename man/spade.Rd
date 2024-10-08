@@ -33,7 +33,7 @@ used as \code{discvar}.}
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}. Note
 that when using different \code{discmethod} for \code{discvar}, please ensure that the lengths of
 both are consistent. Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use
-\code{rpart_disc()}; Others use \code{st_unidisc()}.}
+\code{rpart_disc()}; Others use \code{sdsfun::discretize_vector()}.}
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
@@ -43,7 +43,8 @@ multi-core parallel computing.}
 \item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{0},
 which means no pseudo-p values are calculated.}
 
-\item{...}{(optional) Other arguments passed to \code{st_unidisc()},\code{robust_disc()} or \code{rpart_disc()}.}
+\item{...}{(optional) Other arguments passed to \code{sdsfun::discretize_vector()},\code{robust_disc()} or
+\code{rpart_disc()}.}
 }
 \value{
 A list.

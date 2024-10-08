@@ -23,7 +23,7 @@ gd_bestunidisc(
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization, default is using
-\code{c("sd","equal","geometric","quantile","natural")}by invoking \code{sdsfun}.}
+\code{c("sd","equal","geometric","quantile","natural")} by invoking \code{sdsfun}.}
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
