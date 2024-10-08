@@ -191,13 +191,13 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
 #' data('sim')
 #' wt = inverse_distance_weight(sim$lo,sim$la)
 #' sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) sdsfun::discretize_vector(.x,5)))
-#' sz = st_fuzzyoverlay(y ~ xa + xb + xc, data = sim1)
+#' sz = sdsfun::fuzzyoverlay(y ~ xa + xb + xc, data = sim1)
 #' psd_iev(dplyr::select(sim1,xa:xc),sz,wt)
 #'
 psd_iev = \(discdata,spzone,wt){
   xname = names(discdata)
   totalsv = purrr::map_dbl(discdata,
-                           \(.x) spvar(.x, wt))
+                           \(.x) sdsfun::spvar(.x, wt))
   qv = purrr::map_dbl(discdata,
                       \(.y) psd_spade(.y,spzone,wt)) %>%
     {(-1*. + 1)*totalsv}
