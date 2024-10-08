@@ -32,12 +32,10 @@ depression
 
 ### Spatial Autocorrelation of Depression Prevelence
 
-here I use `geocomplexity` to calculate the global **Moran's I**:
-
 ```{r}
 set.seed(123456789)
 
-gmi = geocomplexity::moran_test(depression)
+gmi = sdsfun::moran_test(depression)
 gmi
 ```
 
