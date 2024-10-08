@@ -382,7 +382,7 @@ plot(g1)
 g2 = sesu_gozh(fvc ~ ., data = fvc,su = su,cores = 6)
 g2
 ##    Size Effect Of Spatial Units Using GOZH Model   
-##  ***        Optimal Spatial Unit: 4000
+##  ***        Optimal Spatial Unit: 9000
 ##  Spatial Unit: 1000 
 ## 
 ## |   variable    | Q-statistic | P-value  |
@@ -454,7 +454,7 @@ You can also use the same strategy as `sesu_opgd()` (use the mean of the individ
 g3 = sesu_gozh(fvc ~ ., data = fvc,su = su,cores = 6,strategy = 1)
 g3
 ##    Size Effect Of Spatial Units Using GOZH Model   
-##  ***        Optimal Spatial Unit: 10000
+##  ***        Optimal Spatial Unit: 6000
 ##  Spatial Unit: 1000 
 ## 
 ## | variable | Q-statistic | P-value  |
