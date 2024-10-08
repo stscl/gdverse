@@ -92,12 +92,12 @@ psd_pseudop = \(y,x,wt,cores = 1,
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' If `discmethod` is set to `robust`, the function `robust_disc()` will be used. Conversely,
 #' if `discmethod` is set to `rpart`, the `rpart_disc()` function will be used. Others use
-#' `st_unidisc()`. Currently, only one `discmethod` can be used at a time.
+#' `sdsfun::discretize_vector()`. Currently, only one `discmethod` can be used at a time.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
-#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
+#' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()`,`robust_disc()` or `rpart_disc()`.
 #'
 #' @return A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
 #' @export
@@ -140,12 +140,12 @@ psmd_pseudop = \(yobs, xobs, wt, discnum = 3:22,
       xperm_new = shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
       yperm_new = shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
       return(psmd_spade(yperm_new,xperm_new,wt_perm,discn,discm,
-                        cores = 1,seed = seedn, ...))
+                        cores = 1, seed = seedn, ...))
     }
 
     if (doclust) {
-      parallel::clusterExport(cores,c('st_unidisc','robust_disc','rpart_disc','spvar','shuffle_vector',
-                                      'psd_spade','cpsd_spade','psmd_spade','inverse_distance_weight'))
+      parallel::clusterExport(cores,c('robust_disc','rpart_disc','spvar','shuffle_vector','psd_spade',
+                                      'cpsd_spade','psmd_spade','inverse_distance_weight'))
       out_g = parallel::parLapply(cores,permutation,calcul_psmd)
       out_g = as.numeric(do.call(rbind, out_g))
     } else {

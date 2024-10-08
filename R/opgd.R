@@ -15,7 +15,7 @@
 #' variables are used as `discvar`.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
-#' `c("sd","equal","geometric","quantile","natural")`by invoking `sdsfun`.
+#' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),
