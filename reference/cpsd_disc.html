@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0-4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,7 @@
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
 <dd><p>(optional) The discretization methods. Default all use <code>quantile</code>.
 Noted that <code>robust</code> will use <code><a href="robust_disc.html">robust_disc()</a></code>; <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>;
-Others use <code><a href="st_unidisc.html">st_unidisc()</a></code>. You can try <code><a href="unidisc_methods.html">unidisc_methods()</a></code>.</p></dd>
+Others use <code><a href="https://stscl.github.io/sdsfun/reference/discretize_vector.html" class="external-link">sdsfun::discretize_vector()</a></code>.</p></dd>
 
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
@@ -120,11 +120,11 @@ Default is <code>TRUE</code>.</p></dd>
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
 <dd><p>(optional) Random seed number, default is <code>123456789</code>.Setting random seed is useful when
 the sample size is greater than <code>3000</code>(the default value for <code>largeN</code>) and the data is discretized
-by sampling <code>10%</code>(the default value for <code>samp_prop</code> in <code><a href="st_unidisc.html">st_unidisc()</a></code>).</p></dd>
+by sampling <code>10%</code>(the default value for <code>samp_prop</code> in <code>st_unidisc()</code>).</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>(optional) Other arguments passed to <code><a href="st_unidisc.html">st_unidisc()</a></code>,<code><a href="robust_disc.html">robust_disc()</a></code> or <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
+<dd><p>(optional) Other arguments passed to <code>st_unidisc()</code>,<code><a href="robust_disc.html">robust_disc()</a></code> or <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

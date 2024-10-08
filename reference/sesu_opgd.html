@@ -9,7 +9,7 @@ optimal parameters geographical detector(OPGD) model."><meta property="og:image"
 
     <a class="navbar-brand me-2" href="../index.html">gdverse</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0-4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,8 +63,7 @@ optimal parameters geographical detector(OPGD) model.</p>
 <span>  <span class="va">su</span>,</span>
 <span>  <span class="va">discvar</span>,</span>
 <span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>,</span>
-<span>  discmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sd"</span>, <span class="st">"equal"</span>, <span class="st">"pretty"</span>, <span class="st">"quantile"</span>, <span class="st">"fisher"</span>, <span class="st">"headtails"</span>, <span class="st">"maximum"</span>,</span>
-<span>    <span class="st">"box"</span><span class="op">)</span>,</span>
+<span>  discmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sd"</span>, <span class="st">"equal"</span>, <span class="st">"geometric"</span>, <span class="st">"quantile"</span>, <span class="st">"natural"</span><span class="op">)</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  alpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
@@ -98,8 +97,8 @@ when <code>formula</code> has <code>discvar</code>, <code>data</code> must have 
 
 
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
-<dd><p>(optional) A vector of methods for discretization,default is used
-<code>c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")</code>in <code>gdverse</code>.</p></dd>
+<dd><p>(optional) A vector of methods for discretization, default is using
+<code>c("sd","equal","geometric","quantile","natural")</code> by invoking <code>sdsfun</code>.</p></dd>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
