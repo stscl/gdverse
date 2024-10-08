@@ -38,9 +38,9 @@ psd_spade = \(y,x,wt){
   sprss = \(indice){
     yn = y[indice]
     wtn = wt[indice,indice]
-    return(length(yn) * spvar(yn,wtn))
+    return(length(yn) * sdsfun::spvar(yn,wtn))
   }
-  qv = 1 - sum(tapply(indices, x, sprss)) / (length(y) * spvar(y,wt))
+  qv = 1 - sum(tapply(indices, x, sprss)) / (length(y) * sdsfun::spvar(y,wt))
   return(qv)
 }
 
@@ -160,7 +160,7 @@ psmd_spade = \(yobs, xobs, wt, discnum = 3:22,
     }
 
     if (doclust) {
-      parallel::clusterExport(cores,c('robust_disc','psd_spade','cpsd_spade','spvar'))
+      parallel::clusterExport(cores,c('robust_disc','psd_spade','cpsd_spade'))
       out_g = parallel::parLapply(cores,paste0('xobs_',discnum),calcul_cpsd)
       out_g = as.numeric(do.call(rbind, out_g))
     } else {

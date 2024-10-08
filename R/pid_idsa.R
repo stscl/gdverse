@@ -111,7 +111,7 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
 
   if (doclust) {
     parallel::clusterExport(cores,c('robust_disc','rpart_disc',
-                                    'psd_spade','cpsd_spade','spvar'))
+                                    'psd_spade','cpsd_spade'))
     out_g = parallel::parLapply(cores,parak,calcul_disc,...)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
