@@ -21,7 +21,7 @@
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`. You can run one or more types at one time.
 #' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
-#' @param ... (optional) Other arguments passed to `gd_bestunidisc()`.A useful parameter is `seed`,
+#' @param ... (optional) Other arguments passed to `gd_bestunidisc()`. A useful parameter is `seed`,
 #'  which is used to set the random number seed.
 #'
 #' @return A list.
@@ -40,8 +40,7 @@
 #'      discnum = 3:6)
 #'
 opgd = \(formula, data, discvar = NULL, discnum = 3:22,
-         discmethod = c("sd","equal","pretty","quantile","fisher",
-                        "headtails","maximum","box"),
+         discmethod = c("sd","equal","geometric","quantile","natural"),
          cores = 1, type = "factor", alpha = 0.95, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
@@ -55,8 +54,8 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:22,
   }
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   g = gd_bestunidisc(paste0(yname,'~',paste0(discvar,collapse = '+')),
-                     data = discdf,discnum = discnum,
-                     discmethod = discmethod,cores = cores,...)
+                     data = discdf, discnum = discnum,
+                     discmethod = discmethod, cores = cores, ...)
   discedvar = colnames(data[,-which(colnames(data) %in% discvar)])
   newdata = data %>%
     dplyr::select(dplyr::all_of(discedvar)) %>%
