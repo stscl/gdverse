@@ -20,7 +20,8 @@
 #' @examples
 #' data('sim')
 #' sim = sim %>%
-#'   dplyr::mutate(dplyr::across(4:6,\(.x) st_unidisc(.x,4,"quantile")))
+#'   dplyr::mutate(dplyr::across(4:6,
+#'                               \(.x) sdsfun::discretize_vector(.x,4,"quantile")))
 #' fo1 = st_fuzzyoverlay(y~xa+xb+xc,data = sim, method = 'and')
 #' fo2 = st_fuzzyoverlay(y~xa+xb+xc,data = sim, method = 'or')
 #' fo1

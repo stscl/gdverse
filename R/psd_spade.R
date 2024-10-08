@@ -21,7 +21,7 @@
 #' @examples
 #' data('sim')
 #' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
-#' psd_spade(sim$y,st_unidisc(sim$xa,5),wt)
+#' psd_spade(sim$y,sdsfun::discretize_vector(sim$xa,5),wt)
 #'
 psd_spade = \(y,x,wt){
   gdf = tibble::tibble(x = x, y = y,
@@ -70,7 +70,7 @@ psd_spade = \(y,x,wt){
 #' data('sim')
 #' wt = inverse_distance_weight(sim$lo,sim$la)
 #' xa = sim$xa
-#' xa_disc = st_unidisc(xa,5)
+#' xa_disc = sdsfun::discretize_vector(xa,5)
 #' cpsd_spade(sim$y,xa,xa_disc,wt)
 #'
 cpsd_spade = \(yobs,xobs,xdisc,wt){

@@ -24,7 +24,7 @@
 #' @examples
 #' data('sim')
 #' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
-#' psd_pseudop(sim$y,st_unidisc(sim$xa,5),wt)
+#' psd_pseudop(sim$y,sdsfun::discretize_vector(sim$xa,5),wt)
 #'
 psd_pseudop = \(y,x,wt,cores = 1,
                 seed = 123456789,
