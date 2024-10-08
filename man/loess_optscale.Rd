@@ -36,9 +36,9 @@ fvc5000 = fvc \%>\%
   terra::as.data.frame(na.rm = T) \%>\%
   as_tibble()
 qv1000 = factor_detector(fvc1000$fvc,
-                         st_unidisc(fvc1000$premax,10,'quantile'))[[1]]
+                         sdsfun::discretize_vector(fvc1000$premax,10,'quantile'))[[1]]
 qv5000 = factor_detector(fvc5000$fvc,
-                         st_unidisc(fvc5000$premax,10,'quantile'))[[1]]
+                         sdsfun::discretize_vector(fvc5000$premax,10,'quantile'))[[1]]
 loess_optscale(c(qv1000,qv5000),c(1000,5000))
 }
 }

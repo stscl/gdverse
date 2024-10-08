@@ -20,8 +20,8 @@
 #' @param discvar Name of continuous variable columns that need to be discretized.Noted that
 #' when `formula` has `discvar`, `data` must have these columns.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
-#' @param discmethod (optional) A vector of methods for discretization,default is used
-#' `c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")`in `gdverse`.
+#' @param discmethod (optional) A vector of methods for discretization, default is using
+#' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
@@ -57,7 +57,7 @@
 #'           cores = 6)
 #' }
 sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:22,
-              discmethod = c("sd","equal","pretty","quantile","fisher","headtails","maximum","box"),
+              discmethod = c("sd","equal","geometric","quantile","natural"),
               cores = 1, increase_rate = 0.05, alpha = 0.95, ...){
   res_sesu = purrr::map2(datalist, su,
                          \(.tbf, .spsu) opgd(formula, .tbf, discvar, discnum,

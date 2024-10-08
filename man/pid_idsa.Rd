@@ -30,7 +30,7 @@ IDSA Q-saistics \code{PID}
 \examples{
 data('sim')
 wt = inverse_distance_weight(sim$lo,sim$la)
-sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) st_unidisc(.x,5)))
+sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) sdsfun::discretize_vector(.x,5)))
 pid_idsa(y ~ xa + xb + xc, rawdata = sim,
          discdata = sim1, wt = wt)
 

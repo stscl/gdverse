@@ -9,8 +9,7 @@ opgd(
   data,
   discvar = NULL,
   discnum = 3:22,
-  discmethod = c("sd", "equal", "pretty", "quantile", "fisher", "headtails", "maximum",
-    "box"),
+  discmethod = c("sd", "equal", "geometric", "quantile", "natural"),
   cores = 1,
   type = "factor",
   alpha = 0.95,
@@ -29,7 +28,7 @@ variables are used as \code{discvar}.}
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization, default is using
-\code{c("sd","equal","pretty","quantile","fisher","headtails","maximum","box")}.}
+\code{c("sd","equal","geometric","quantile","natural")} by invoking \code{sdsfun}.}
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
@@ -39,7 +38,7 @@ multi-core parallel computing.}
 
 \item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
 
-\item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}.A useful parameter is \code{seed},
+\item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}. A useful parameter is \code{seed},
 which is used to set the random number seed.}
 }
 \value{

@@ -40,7 +40,6 @@ reference:
   - rgd
   - rid
   - srsgd
-  # - esp
 
 - title: Compare Size Effect of Spatial Units
   contents:
@@ -49,7 +48,6 @@ reference:
 
 - title: Variable Discretization Methods
   contents:
-  - st_unidisc
   - gd_bestunidisc
   - rpart_disc
   - robust_disc
@@ -80,7 +78,6 @@ reference:
 - title: Utility Functions
   contents:
   - inverse_distance_weight
-  - unidisc_methods
   - shuffle_vector
   - rescale_vector
   - generate_subsets

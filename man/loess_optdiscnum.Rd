@@ -33,7 +33,7 @@ one-to-one correspondence with \code{discnumvec}.
 \examples{
 data('sim')
 3:10 \%>\%
-  purrr::map_dbl(\(.k) st_unidisc(sim$xa,.k) \%>\%
+  purrr::map_dbl(\(.k) sdsfun::discretize_vector(sim$xa,.k) \%>\%
                factor_detector(sim$y,.) \%>\%
                {.[[1]]}) \%>\%
  loess_optdiscnum(3:10)

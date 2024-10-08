@@ -17,13 +17,14 @@
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`. Note
 #' that when using different `discmethod` for `discvar`, please ensure that the lengths of
 #' both are consistent. Noted that `robust` will use `robust_disc()`; `rpart` will use
-#' `rpart_disc()`; Others use `st_unidisc()`.
+#' `rpart_disc()`; Others use `sdsfun::discretize_vector()`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #' @param seed (optional) Random number seed, default is `123456789`.
 #' @param permutations (optional) The number of permutations for the PSD computation. Default is `0`,
 #' which means no pseudo-p values are calculated.
-#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
+#' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()`,`robust_disc()` or
+#' `rpart_disc()`.
 #'
 #' @return A list.
 #' \describe{
@@ -50,7 +51,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
     data = sf::st_drop_geometry(data)
   } else if (inherits(data,'data.frame')) {
     if (is.null(wt)){
-      stop("When `data` is `data.frame` or `tibble`, please provide `wt` in spade input!")
+      stop("When `data` is `data.frame` or `tibble`, please provide `wt`!")
     } else {
       wt_spade = wt
     }

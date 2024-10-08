@@ -28,7 +28,7 @@ psmd_pseudop(
 \item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
 If \code{discmethod} is set to \code{robust}, the function \code{robust_disc()} will be used. Conversely,
 if \code{discmethod} is set to \code{rpart}, the \code{rpart_disc()} function will be used. Others use
-\code{st_unidisc()}. Currently, only one \code{discmethod} can be used at a time.}
+\code{sdsfun::discretize_vector()}. Currently, only one \code{discmethod} can be used at a time.}
 
 \item{cores}{(optional) A positive integer(default is 1). If cores > 1, use parallel computation.}
 
@@ -37,7 +37,7 @@ if \code{discmethod} is set to \code{rpart}, the \code{rpart_disc()} function wi
 \item{permutations}{(optional) The number of permutations for the PSD computation. Default is \code{0},
 which means no pseudo-p values are calculated.}
 
-\item{...}{(optional) Other arguments passed to \code{st_unidisc()},\code{robust_disc()} or \code{rpart_disc()}.}
+\item{...}{(optional) Other arguments passed to \code{sdsfun::discretize_vector()},\code{robust_disc()} or \code{rpart_disc()}.}
 }
 \value{
 A tibble of power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.

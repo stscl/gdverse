@@ -21,7 +21,7 @@
 #' @examples
 #' data('sim')
 #' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
-#' psd_spade(sim$y,st_unidisc(sim$xa,5),wt)
+#' psd_spade(sim$y,sdsfun::discretize_vector(sim$xa,5),wt)
 #'
 psd_spade = \(y,x,wt){
   gdf = tibble::tibble(x = x, y = y,
@@ -70,7 +70,7 @@ psd_spade = \(y,x,wt){
 #' data('sim')
 #' wt = inverse_distance_weight(sim$lo,sim$la)
 #' xa = sim$xa
-#' xa_disc = st_unidisc(xa,5)
+#' xa_disc = sdsfun::discretize_vector(xa,5)
 #' cpsd_spade(sim$y,xa,xa_disc,wt)
 #'
 cpsd_spade = \(yobs,xobs,xdisc,wt){
@@ -96,10 +96,11 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #' @param discmethod (optional) The discretization methods. Default will use `quantile`.
 #' If `discmethod` is set to `robust`, the function `robust_disc()` will be used. Conversely,
 #' if `discmethod` is set to `rpart`, the `rpart_disc()` function will be used. Others use
-#' `st_unidisc()`. Currently, only one `discmethod` can be used at a time.
+#' `sdsfun::discretize_vector()`. Currently, only one `discmethod` can be used at a time.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use parallel computation.
 #' @param seed (optional) Random seed number, default is `123456789`.
-#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
+#' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()`,`robust_disc()` or
+#' `rpart_disc()`.
 #'
 #' @return A value of power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @export
@@ -141,7 +142,7 @@ psmd_spade = \(yobs, xobs, wt, discnum = 3:22,
                              ...)
       } else {
         suppressMessages({discdf = discn %>%
-          purrr::map_dfc(\(kn) st_unidisc(xv,kn,method = discm,...)) %>%
+          purrr::map_dfc(\(kn) sdsfun::discretize_vector(xv,kn,method = discm,...)) %>%
           purrr::set_names(paste0('xobs_',discn))})
         discdf = tibble::tibble(yobs = yv,
                                 xobs = xv) %>%
@@ -159,8 +160,7 @@ psmd_spade = \(yobs, xobs, wt, discnum = 3:22,
     }
 
     if (doclust) {
-      parallel::clusterExport(cores,c('st_unidisc','robust_disc',
-                                      'psd_spade','cpsd_spade','spvar'))
+      parallel::clusterExport(cores,c('robust_disc','psd_spade','cpsd_spade','spvar'))
       out_g = parallel::parLapply(cores,paste0('xobs_',discnum),calcul_cpsd)
       out_g = as.numeric(do.call(rbind, out_g))
     } else {
