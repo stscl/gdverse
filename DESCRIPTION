@@ -1,6 +1,6 @@
 Package: gdverse
 Title: Analysis of Spatial Stratified Heterogeneity
-Version: 1.0-4
+Version: 1.1.0
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
              email = "lyu.geosocial@gmail.com", 
@@ -37,7 +37,6 @@ BugReports: https://github.com/ausgis/gdverse/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    classInt,
     dplyr,
     forcats,
     geosphere,
