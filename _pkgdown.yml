@@ -55,10 +55,7 @@ reference:
 
 - title: Important Algorithm Functions
   contents:
-  - spvar
   - spd_lesh
-  - st_fuzzyoverlay
-  - loess_optdiscnum
   - loess_optscale
   - geodetector
   - factor_detector
