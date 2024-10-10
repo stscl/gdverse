@@ -124,8 +124,8 @@ plot.lesh_result = \(x, pie = TRUE,
     g_pie = g_pie %>%
       dplyr::mutate(variable1 = factor(variable1,levels = gv$variable1),
                     variable2 = factor(variable2,levels = rev(gv$variable2))) %>%
-      dplyr::mutate(v1 = rescale_vector(as.numeric(variable1),-87.5,87.5),
-                    v2 = rescale_vector(as.numeric(variable2),-87.5,87.5))
+      dplyr::mutate(v1 = sdsfun::normalize_vector(as.numeric(variable1),-87.5,87.5),
+                    v2 = sdsfun::normalize_vector(as.numeric(variable2),-87.5,87.5))
     #--- use scatterpie package ---
     fig_pie = ggplot2::ggplot(data = g_pie,
                               ggplot2::aes(x = v1, y = v2)) +

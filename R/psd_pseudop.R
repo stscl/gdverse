@@ -36,7 +36,7 @@ psd_pseudop = \(y,x,wt,cores = 1,
     set.seed(seed)
     permutation = data.frame(
       x1 = stats::runif(permutations, min = 0, max = 1),
-      x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+      x2 = sdsfun::normalize_vector(stats::rnorm(permutations), 0.001, 0.999)
     ) %>%
       split(.,seq_len(nrow(.)))
 
@@ -117,7 +117,7 @@ psmd_pseudop = \(yobs, xobs, wt, discnum = 3:22,
     set.seed(seed)
     permutation = data.frame(
       x1 = stats::runif(permutations, min = 0, max = 1),
-      x2 = rescale_vector(stats::rnorm(permutations), 0.001, 0.999)
+      x2 = sdsfun::normalize_vector(stats::rnorm(permutations), 0.001, 0.999)
     ) %>%
       split(.,seq_len(nrow(.)))
 
