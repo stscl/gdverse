@@ -23,7 +23,7 @@ Authors@R: c(
              role = c("aut"),
              comment = c(ORCID = "0000-0001-9411-8453"))
       )
-Description: Analyzing spatial factors and exploring spatial associations based on the concepts of spatial 
+Description: Analyzing spatial factors and exploring spatial associations based on the concept of spatial 
              stratified heterogeneity, and also takes into account local spatial dependencies, spatial 
              interpretability, potential spatial interactions, and robust spatial stratification. Additionally, 
              it supports geographical detector models established in academic literature.
