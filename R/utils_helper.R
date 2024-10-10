@@ -71,14 +71,13 @@ shuffle_vector = \(x,shuffle_rate,seed = 123456789){
 
 #' @title generate subsets of a set
 #'
-#' @param set A vector
-#' including the empty set and the set itself. Default is `TRUE`.
+#' @param set A vector.
 #' @param empty (optional) When `empty` is `TRUE`, the generated subset includes the empty set,
 #' otherwise the empty set is removed. Default is `TRUE`.
 #' @param self (optional) When `self` is `TRUE`, the resulting subset includes the set itself,
 #' otherwise the set itself is removed. Default is `TRUE`.
 #'
-#' @return A list with the subsets
+#' @return A list.
 #' @export
 #'
 #' @examples
