@@ -10,7 +10,7 @@ all2int(x)
 \item{x}{A discretized vector.}
 }
 \value{
-An integer vector
+An integer vector.
 }
 \description{
 convert all discretized vectors to integer

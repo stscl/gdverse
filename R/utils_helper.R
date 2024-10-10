@@ -22,7 +22,7 @@ NULL
 #' @param locx The x axis location.
 #' @param locy The y axis location.
 #' @param power (optional) Default is 1. Set to 2 for gravity weights.
-#' @param is_arc (optional) FALSE (default) or TRUE, whether to compute arc distance.
+#' @param is_arc (optional) `FALSE` (default) or `TRUE`, whether to compute arc distance.
 #'
 #' @return A inverse distance weight matrices with class of `matrix`.
 #' @export
@@ -123,7 +123,7 @@ weight_assign = \(x,w,list = FALSE){
 #'
 #' @param x A discretized vector.
 #'
-#' @return An integer vector
+#' @return An integer vector.
 #' @export
 #'
 #' @examples

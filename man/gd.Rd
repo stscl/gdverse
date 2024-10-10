@@ -9,7 +9,7 @@ gd(formula, data, type = "factor", alpha = 0.95)
 \arguments{
 \item{formula}{A formula of geographical detector model.}
 
-\item{data}{A data.frame, tibble or sf object of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
 \item{type}{(optional) The type of geographical detector, which must be one of \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}. You can run one or more types at one time.}

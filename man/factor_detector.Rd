@@ -19,8 +19,8 @@ A list.
 }
 }
 \description{
-The factor detector q-statistic measures the spatial stratified heterogeneity of a variable Y,
-or the determinant power of a covariate X of Y.
+The factor detector q-statistic measures the spatial stratified heterogeneity of a
+variable Y, or the determinant power of a covariate X of Y.
 }
 \examples{
 factor_detector(y = 1:7,x = c('x',rep('y',3),rep('z',3)))

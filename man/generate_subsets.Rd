@@ -7,8 +7,7 @@
 generate_subsets(set, empty = TRUE, self = TRUE)
 }
 \arguments{
-\item{set}{A vector
-including the empty set and the set itself. Default is \code{TRUE}.}
+\item{set}{A vector.}
 
 \item{empty}{(optional) When \code{empty} is \code{TRUE}, the generated subset includes the empty set,
 otherwise the empty set is removed. Default is \code{TRUE}.}
@@ -17,7 +16,7 @@ otherwise the empty set is removed. Default is \code{TRUE}.}
 otherwise the set itself is removed. Default is \code{TRUE}.}
 }
 \value{
-A list with the subsets
+A list.
 }
 \description{
 generate subsets of a set

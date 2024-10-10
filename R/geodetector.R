@@ -1,8 +1,8 @@
 #' @title factor detector
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' The factor detector q-statistic measures the spatial stratified heterogeneity of a variable Y,
-#' or the determinant power of a covariate X of Y.
+#' The factor detector q-statistic measures the spatial stratified heterogeneity of a
+#' variable Y, or the determinant power of a covariate X of Y.
 #'
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.

@@ -13,7 +13,7 @@ inverse_distance_weight(locx, locy, power = 1, is_arc = FALSE)
 
 \item{power}{(optional) Default is 1. Set to 2 for gravity weights.}
 
-\item{is_arc}{(optional) FALSE (default) or TRUE, whether to compute arc distance.}
+\item{is_arc}{(optional) \code{FALSE} (default) or \code{TRUE}, whether to compute arc distance.}
 }
 \value{
 A inverse distance weight matrices with class of \code{matrix}.
