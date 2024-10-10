@@ -2,4 +2,5 @@
 
 0 errors | 0 warnings | 1 note
 
-* This release utilizes `sdsfun::discretize_vector()` for the general variable discretization.
+* This release better supports spatial stratified heterogeneity analysis. For more details, 
+please refer to `NEWS.md`.
