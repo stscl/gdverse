@@ -1,10 +1,12 @@
+# gdverse 1.1-1
+
+* Clear the `WORDLIST` to ensure the source code remains clean and organized.
+
 # gdverse 1.1.0
 
 * The general variable discretization in **gdverse** now utilizes `sdsfun::discretize_vector()` (#6).
 
 * Algorithm functions are migrated to `sdsfun` (#8).
-
-* Clear the `WORDLIST` to ensure the source code remains clean and organized.
 
 # gdverse 1.0-3
 
