@@ -76,7 +76,6 @@ reference:
   contents:
   - inverse_distance_weight
   - shuffle_vector
-  - rescale_vector
   - generate_subsets
   - weight_assign
   - all2int
