@@ -134,9 +134,7 @@ all2int = \(x){
   if (inherits(x,"factor")){
     x = as.integer(x)
   } else if (inherits(x,'character')) {
-    x = x %>%
-      as.factor() %>%
-      as.integer()
+    x = as.integer(as.factor(x))
   }
   return(x)
 }
