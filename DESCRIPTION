@@ -29,7 +29,6 @@ Description: Analyzing spatial factors and exploring spatial associations based 
              it supports geographical detector models established in academic literature.
 License: GPL-3
 Encoding: UTF-8
-Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 URL: https://ausgis.github.io/gdverse/, https://github.com/ausgis/gdverse
