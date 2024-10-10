@@ -4,6 +4,8 @@
 
 * Algorithm functions are migrated to `sdsfun` (#8).
 
+* Clear the `WORDLIST` to ensure the source code remains clean and organized.
+
 # gdverse 1.0-3
 
 * Update the `RGD` Model API Settings (#2).
