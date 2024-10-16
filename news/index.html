@@ -29,7 +29,7 @@
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ausgis/gdverse/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/stscl/gdverse/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch"><li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
@@ -44,7 +44,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/ausgis/gdverse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/stscl/gdverse/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
@@ -54,14 +54,14 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.1.0" id="gdverse-110">gdverse 1.1.0<a class="anchor" aria-label="anchor" href="#gdverse-110"></a></h2><p class="text-muted">CRAN release: 2024-10-10</p>
-<ul><li><p>The general variable discretization in <strong>gdverse</strong> now utilizes <code><a href="https://stscl.github.io/sdsfun/reference/discretize_vector.html" class="external-link">sdsfun::discretize_vector()</a></code> (<a href="https://github.com/ausgis/gdverse/issues/6" class="external-link">#6</a>).</p></li>
-<li><p>Algorithm functions are migrated to <code>sdsfun</code> (<a href="https://github.com/ausgis/gdverse/issues/8" class="external-link">#8</a>).</p></li>
+<ul><li><p>The general variable discretization in <strong>gdverse</strong> now utilizes <code><a href="https://stscl.github.io/sdsfun/reference/discretize_vector.html" class="external-link">sdsfun::discretize_vector()</a></code> (<a href="https://github.com/stscl/gdverse/issues/6" class="external-link">#6</a>).</p></li>
+<li><p>Algorithm functions are migrated to <code>sdsfun</code> (<a href="https://github.com/stscl/gdverse/issues/8" class="external-link">#8</a>).</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0-3" id="gdverse-10-3">gdverse 1.0-3<a class="anchor" aria-label="anchor" href="#gdverse-10-3"></a></h2><p class="text-muted">CRAN release: 2024-09-30</p>
-<ul><li><p>Update the <code>RGD</code> Model API Settings (<a href="https://github.com/ausgis/gdverse/issues/2" class="external-link">#2</a>).</p></li>
-<li><p>Fix bug caused by changes in default parameters of <code>opgd</code> in <code>sesu_opgd</code> (<a href="https://github.com/ausgis/gdverse/issues/4" class="external-link">#4</a>).</p></li>
-<li><p>Maintain the same results for <code>st_unidisc</code> and <code>ClassInt::classify_intervals</code> (<a href="https://github.com/ausgis/gdverse/issues/5" class="external-link">#5</a>).</p></li>
+<ul><li><p>Update the <code>RGD</code> Model API Settings (<a href="https://github.com/stscl/gdverse/issues/2" class="external-link">#2</a>).</p></li>
+<li><p>Fix bug caused by changes in default parameters of <code>opgd</code> in <code>sesu_opgd</code> (<a href="https://github.com/stscl/gdverse/issues/4" class="external-link">#4</a>).</p></li>
+<li><p>Maintain the same results for <code>st_unidisc</code> and <code>ClassInt::classify_intervals</code> (<a href="https://github.com/stscl/gdverse/issues/5" class="external-link">#5</a>).</p></li>
 <li><p>The parameter <code>overlaymethod</code> in <code>rid</code> and <code>idsa</code> has been renamed to <code>overlay</code>.</p></li>
 <li><p>Add <code>readr</code> as a dependence of type <code>Suggests</code>.</p></li>
 <li><p>Recompile vignettes due to internal function changes.</p></li>
