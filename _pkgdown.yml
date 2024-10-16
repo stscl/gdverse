@@ -1,7 +1,7 @@
 url: https://stscl.github.io/gdverse/
 template:
   bootstrap: 5
-  # bootswatch: spacelab
+  bootswatch: spacelab
   math-rendering: mathjax
   light-switch: true
   bslib:
