@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# gdverse <a href="https://ausgis.github.io/gdverse/"><img src="man/figures/logo.png" align="right" height="139" alt="gdverse website" /></a>
+# gdverse <a href="https://stscl.github.io/gdverse/"><img src="man/figures/logo.png" align="right" height="139" alt="gdverse website" /></a>
 
 <!-- badges: start -->
 
 [![cran](https://www.r-pkg.org/badges/version/gdverse)](https://CRAN.R-project.org/package=gdverse)
 [![downloads_all](https://badgen.net/cran/dt/gdverse?color=orange)](https://CRAN.R-project.org/package=gdverse)
 [![downloads_month](https://cranlogs.r-pkg.org/badges/gdverse)](https://CRAN.R-project.org/package=gdverse)
-[![r-universe](https://ausgis.r-universe.dev/badges/gdverse?color=cyan)](https://ausgis.r-universe.dev/gdverse)
+[![r-universe](https://stscl.r-universe.dev/badges/gdverse?color=cyan)](https://stscl.r-universe.dev/gdverse)
 
 <!-- badges: end -->
 
@@ -57,21 +57,21 @@ install.packages("gdverse", dep = TRUE)
 ```
 
 - Install development binary version from
-  [R-universe](https://ausgis.r-universe.dev/gdverse) with:
+  [R-universe](https://stscl.r-universe.dev/gdverse) with:
 
 ``` r
 install.packages('gdverse',
-                 repos = c("https://ausgis.r-universe.dev",
+                 repos = c("https://stscl.r-universe.dev",
                            "https://cloud.r-project.org"),
                  dep = TRUE)
 ```
 
 - Install development source version from
-  [GitHub](https://github.com/ausgis/gdverse) with:
+  [GitHub](https://github.com/stscl/gdverse) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("ausgis/gdverse",
+devtools::install_github("stscl/gdverse",
                          build_vignettes = TRUE,
                          dep = TRUE)
 ```
