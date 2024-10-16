@@ -31,8 +31,8 @@ License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://ausgis.github.io/gdverse/, https://github.com/ausgis/gdverse
-BugReports: https://github.com/ausgis/gdverse/issues
+URL: https://stscl.github.io/gdverse/, https://github.com/stscl/gdverse
+BugReports: https://github.com/stscl/gdverse/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
