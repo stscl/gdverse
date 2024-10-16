@@ -2,6 +2,8 @@
 
 * Clear the `WORDLIST` to ensure the source code remains clean and organized.
 
+* Move the source code from `ausgis/gdverse` on GitHub to `stscl/gdverse`.
+
 # gdverse 1.1.0
 
 * The general variable discretization in **gdverse** now utilizes `sdsfun::discretize_vector()` (#6).
