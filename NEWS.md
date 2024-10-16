@@ -2,7 +2,7 @@
 
 * Clear the `WORDLIST` to ensure the source code remains clean and organized.
 
-* Move the source code from `ausgis/gdverse` on GitHub to `stscl/gdverse`.
+* Migrate the source code from `ausgis/gdverse` to `stscl/gdverse` on GitHub.
 
 # gdverse 1.1.0
 
