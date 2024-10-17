@@ -1,3 +1,5 @@
+# gdverse 1.1-2
+
 # gdverse 1.1-1
 
 * Clear the `WORDLIST` to ensure the source code remains clean and organized.
