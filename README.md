@@ -18,17 +18,17 @@
 
 Current models and functions provided by **gdverse** are:
 
-| *Model*   | *Function* | *Support Status* |
-|-----------|------------|------------------|
-| **GD**    | `gd()`     | ✔️               |
-| **OPGD**  | `opgd()`   | ✔️               |
-| **GOZH**  | `gozh()`   | ✔️               |
-| **LESH**  | `lesh()`   | ✔️               |
-| **SPADE** | `spade()`  | ✔️               |
-| **IDSA**  | `idsa()`   | ✔️               |
-| **RGD**   | `rgd()`    | ✔️               |
-| **RID**   | `rid()`    | ✔️               |
-| **SRSGD** | `srsgd()`  | ✔️               |
+| *Model* | *Function* | *Support Status* |
+|----|----|----|
+| [GD](https://doi.org/10.1080/13658810802443457) | `gd()` | ✔️ |
+| [OPGD](https://doi.org/10.1080/15481603.2020.1760434) | `opgd()` | ✔️ |
+| [GOZH](https://doi.org/10.1016/j.isprsjprs.2022.01.009) | `gozh()` | ✔️ |
+| [LESH](https://doi.org/10.1080/17538947.2023.2271883) | `lesh()` | ✔️ |
+| [SPADE](https://doi.org/10.1080/13658816.2018.1476693) | `spade()` | ✔️ |
+| [IDSA](https://doi.org/10.1080/13658816.2021.1882680) | `idsa()` | ✔️ |
+| [RGD](https://doi.org/10.1016/j.jag.2022.102782) | `rgd()` | ✔️ |
+| [RID](https://doi.org/10.1016/j.spasta.2024.100814) | `rid()` | ✔️ |
+| [SRSGD](https://doi.org/10.1016/j.ins.2021.12.019) | `srsgd()` | ✔️ |
 
 <div class="figure" style="text-align: center">
 
