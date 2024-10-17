@@ -18,17 +18,17 @@
 
 Current models and functions provided by **gdverse** are:
 
-| *geodetector model* | *gdverse function* | *support status* |
-|---------------------|--------------------|------------------|
-| **GD**              | `gd()`             | ✔️               |
-| **OPGD**            | `opgd()`           | ✔️               |
-| **GOZH**            | `gozh()`           | ✔️               |
-| **LESH**            | `lesh()`           | ✔️               |
-| **SPADE**           | `spade()`          | ✔️               |
-| **IDSA**            | `idsa()`           | ✔️               |
-| **RGD**             | `rgd()`            | ✔️               |
-| **RID**             | `rid()`            | ✔️               |
-| **SRSGD**           | `srsgd()`          | ✔️               |
+| *Model*   | *Function* | *Support Status* |
+|-----------|------------|------------------|
+| **GD**    | `gd()`     | ✔️               |
+| **OPGD**  | `opgd()`   | ✔️               |
+| **GOZH**  | `gozh()`   | ✔️               |
+| **LESH**  | `lesh()`   | ✔️               |
+| **SPADE** | `spade()`  | ✔️               |
+| **IDSA**  | `idsa()`   | ✔️               |
+| **RGD**   | `rgd()`    | ✔️               |
+| **RID**   | `rid()`    | ✔️               |
+| **SRSGD** | `srsgd()`  | ✔️               |
 
 <div class="figure" style="text-align: center">
 

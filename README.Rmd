@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 
 Current models and functions provided by **gdverse** are:
 
-| *geodetector model* | *gdverse function* | *support status* |
+| *Model* | *Function* | *Support Status* |
 |---------------------|--------------------|------------------|
 | **GD**              | `gd()`             | ✔️               |
 | **OPGD**            | `opgd()`           | ✔️               |
