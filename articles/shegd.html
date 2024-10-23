@@ -88,11 +88,11 @@
 <p>The <a href="https://doi.org/10.1016/j.isprsjprs.2022.01.009" class="external-link"><strong>GOZH</strong>(geographically
 optimal zones-based heterogeneity) model</a> generates the optimal
 spatial zone based on the binary classification of the decision tree and
-then calculates the power of determinants.The <a href="https://doi.org/10.1080/17538947.2023.2271883" class="external-link"><strong>LESH</strong>(locally
+then calculates the power of determinants. The <a href="https://doi.org/10.1080/17538947.2023.2271883" class="external-link"><strong>LESH</strong>(locally
 explained heterogeneity model)</a> based on GOZH model and combined with
 additive shapely theory to reasonably allocate variable interaction’s
-power of determinants.In this vignette ,we use <code>ndvi</code> data in
-<code>gdverse</code> package to demonstrate the <em>spatial
+power of determinants. In this vignette, we use <code>ndvi</code> data
+in <code>gdverse</code> package to demonstrate the <em>spatial
 heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <strong>LESH</strong> model.</p>
 <div class="section level3">
@@ -191,9 +191,9 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd/lesh-1.png"></p>
-<p>Compared to <strong>GOZH Interaction Detector</strong> ,
+<p>Compared to <strong>GOZH Interaction Detector</strong>,
 <strong>LESH</strong> only has a decomposition of the interactive
-contribution of variables,and the rest remains consistent.</p>
+contribution of variables, and the rest remains consistent.</p>
 <p>gdverse supports modifications to the default ploting results, such
 as adding subfigure annotations and adjusting the size of the text on
 the x-y axis:</p>
