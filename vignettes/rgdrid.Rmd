@@ -91,15 +91,23 @@ ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 10, cores = 12)
 ndvi_rid
-## ***          Robust Interaction Detector       
+## ***    Robust Interaction Detector    
 ## 
-## |                               varibale                               |    PD     |
-## |:--------------------------------------------------------------------:|:---------:|
-## |       Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP        | 0.9684917 |
-## | Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ GDP ∩ Popdensity | 0.9628383 |
-## |            Climatezone ∩ Tempchange ∩ Precipitation ∩ GDP            | 0.9618024 |
-## |    Climatezone ∩ Mining ∩ Tempchange ∩ Precipitation ∩ Popdensity    | 0.9611111 |
-## |              Mining ∩ Tempchange ∩ Precipitation ∩ GDP               | 0.9601571 |
-## 
-##  #### Only the first five pairs of interactions are displayed! ####
+## |   variable1   |   variable2   | Interaction  |
+## |:-------------:|:-------------:|:------------:|
+## |  Climatezone  |    Mining     | Enhance, bi- |
+## |  Climatezone  |  Tempchange   | Enhance, bi- |
+## |  Climatezone  | Precipitation | Enhance, bi- |
+## |  Climatezone  |      GDP      | Enhance, bi- |
+## |  Climatezone  |  Popdensity   | Enhance, bi- |
+## |    Mining     |  Tempchange   | Enhance, bi- |
+## |    Mining     | Precipitation | Enhance, bi- |
+## |    Mining     |      GDP      | Enhance, bi- |
+## |    Mining     |  Popdensity   | Enhance, bi- |
+## |  Tempchange   | Precipitation | Enhance, bi- |
+## |  Tempchange   |      GDP      | Enhance, bi- |
+## |  Tempchange   |  Popdensity   | Enhance, bi- |
+## | Precipitation |      GDP      | Enhance, bi- |
+## | Precipitation |  Popdensity   | Enhance, bi- |
+## |      GDP      |  Popdensity   | Enhance, bi- |
 ```
