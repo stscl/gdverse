@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 ### Set up python dependence
 
 1. Install **miniconda**
-2. Open the conda terminal and perform steps 3 to 6
+2. Open the conda terminal and perform steps `3` to `6`
 3. Create a new conda env `gdverse`
 
    > `conda create -n gdverse python=3.10 -y`
