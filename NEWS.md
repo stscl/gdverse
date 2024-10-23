@@ -1,5 +1,8 @@
 # gdverse 1.1-2
 
+* Beautify the narrative and other writing details in the vignettes, without making 
+  any changes at the user level.
+
 # gdverse 1.1-1
 
 * Clear the `WORDLIST` to ensure the source code remains clean and organized.
