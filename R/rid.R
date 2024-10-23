@@ -44,8 +44,8 @@
 #'         discnum = 4, cores = 6)
 #' g
 #' }
-rid = \(formula, data, discvar = NULL, discnum = 10,
-        overlay = 'intersection', minsize = 1, cores = 1){
+rid = \(formula, data, discvar = NULL,
+        discnum = 10, minsize = 1, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
@@ -67,45 +67,16 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
   newdti = dti %>%
     dplyr::select(dplyr::all_of(discedvar)) %>%
     dplyr::bind_cols(g)
-  xs = generate_subsets(xname,empty = FALSE, self = TRUE)
-  spfom = overlay
-
-  interact_pd = \(xvar){
-    if (spfom == 'intersection'){
-      reszone = newdti %>%
-        dplyr::select(dplyr::all_of(xvar)) %>%
-        purrr::reduce(paste, sep = '_')
-    } else {
-      reszone = sdsfun::fuzzyoverlay(paste(yname,'~',paste0(xvar,collapse = '+')),
-                                     newdti,spfom)
-    }
-    qv = factor_detector(newdti[,yname,drop = TRUE],reszone)[[1]]
-    names(qv) = 'PD'
-    return(qv)
-  }
-
-  doclust = FALSE
-  if (inherits(cores, "cluster")) {
-    doclust = TRUE
-  } else if (cores > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add=TRUE)
-  }
-
-  if (doclust) {
-    parallel::clusterExport(cores,c('factor_detector'))
-    out_g = parallel::parLapply(cores,xs, interact_pd)
-    out_g = tibble::as_tibble(do.call(rbind, out_g))
-  } else {
-    out_g = purrr::map_dfr(xs, interact_pd)
-  }
-  IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
-  xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
-  out_g = tibble::tibble(varibale = xsname) %>%
-    dplyr::bind_cols(out_g) %>%
-    dplyr::arrange(dplyr::desc(PD))
-  res = list("interaction" = out_g)
+  res = utils::combn(names(xname), 2, simplify = FALSE) %>%
+    purrr::map_dfr(\(i) interaction_detector(dti[,yname,drop = TRUE],
+                                             newdti[,i[1],drop = TRUE],
+                                             newdti[,i[2],drop = TRUE]) %>%
+                     tibble::as_tibble() %>%
+                     dplyr::mutate(variable1 = i[1],
+                                   variable2 = i[2]) %>%
+                     dplyr::select(variable1,variable2,Interaction,
+                                   dplyr::everything()))
+  res = list("interaction" = res)
   class(res) = "rid_result"
   return(res)
 }
@@ -122,7 +93,6 @@ rid = \(formula, data, discvar = NULL, discnum = 10,
 #' @export
 print.rid_result = \(x, ...) {
   cat("***          Robust Interaction Detector       ")
-  print(knitr::kable(utils::head(x$interaction,5), format = "markdown",
+  print(knitr::kable(x$interaction, format = "markdown",
                      digits = 12, align = 'c', ...))
-  cat("\n #### Only the first five pairs of interactions are displayed! ####")
 }
