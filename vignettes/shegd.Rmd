@@ -9,7 +9,12 @@ vignette: >
 
 
 
-The [**GOZH**(geographically optimal zones-based heterogeneity) model](https://doi.org/10.1016/j.isprsjprs.2022.01.009) generates the optimal spatial zone based on the binary classification of the decision tree and then calculates the power of determinants.The [**LESH**(locally explained heterogeneity model)](https://doi.org/10.1080/17538947.2023.2271883) based on GOZH model and combined with additive shapely theory to reasonably allocate variable interaction's power of determinants.In this vignette ,we use `ndvi` data in `gdverse` package to demonstrate the *spatial heterogeneity explanation* based on **GOZH** and **LESH** model.
+The [**GOZH**(geographically optimal zones-based heterogeneity) model](https://doi.org/10.1016/j.isprsjprs.2022.01.009)
+generates the optimal spatial zone based on the binary classification of the decision tree and then calculates the power
+of determinants. The [**LESH**(locally explained heterogeneity model)](https://doi.org/10.1080/17538947.2023.2271883)
+based on GOZH model and combined with additive shapely theory to reasonably allocate variable interaction's power of determinants.
+In this vignette, we use `ndvi` data in `gdverse` package to demonstrate the *spatial heterogeneity explanation* based on **GOZH**
+and **LESH** model.
 
 ### Load data and package
 
@@ -115,9 +120,11 @@ plot(lesh.m, pie = TRUE, scatter = TRUE)
 
 ![](../man/figures/shegd/lesh-1.png)
 
-Compared to **GOZH Interaction Detector** , **LESH** only has a decomposition of the interactive contribution of variables,and the rest remains consistent.
+Compared to **GOZH Interaction Detector**, **LESH** only has a decomposition of the interactive contribution
+of variables, and the rest remains consistent.
 
-gdverse supports modifications to the default ploting results, such as adding subfigure annotations and adjusting the size of the text on the x-y axis:
+gdverse supports modifications to the default ploting results, such as adding subfigure annotations and adjusting
+the size of the text on the x-y axis:
 
 
 ``` r
