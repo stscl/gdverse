@@ -4,15 +4,7 @@
 \alias{rid}
 \title{robust interaction detector(RID) model}
 \usage{
-rid(
-  formula,
-  data,
-  discvar = NULL,
-  discnum = 10,
-  overlay = "intersection",
-  minsize = 1,
-  cores = 1
-)
+rid(formula, data, discvar = NULL, discnum = 10, minsize = 1, cores = 1)
 }
 \arguments{
 \item{formula}{A formula of RID model.}
@@ -25,9 +17,6 @@ variables are used as \code{discvar}.}
 
 \item{discnum}{A numeric vector for the number of discretized classes of columns that need
 to be discretized. Default all \code{discvar} use \code{10}.}
-
-\item{overlay}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
-Default is \code{intersection}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 

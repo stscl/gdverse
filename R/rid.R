@@ -23,8 +23,6 @@
 #' variables are used as `discvar`.
 #' @param discnum A numeric vector for the number of discretized classes of columns that need
 #' to be discretized. Default all `discvar` use `10`.
-#' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
-#' Default is `intersection`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
@@ -67,7 +65,7 @@ rid = \(formula, data, discvar = NULL,
   newdti = dti %>%
     dplyr::select(dplyr::all_of(discedvar)) %>%
     dplyr::bind_cols(g)
-  res = utils::combn(names(xname), 2, simplify = FALSE) %>%
+  res = utils::combn(xname, 2, simplify = FALSE) %>%
     purrr::map_dfr(\(i) interaction_detector(dti[,yname,drop = TRUE],
                                              newdti[,i[1],drop = TRUE],
                                              newdti[,i[2],drop = TRUE]) %>%
@@ -92,7 +90,8 @@ rid = \(formula, data, discvar = NULL,
 #' @return Formatted string output
 #' @export
 print.rid_result = \(x, ...) {
-  cat("***          Robust Interaction Detector       ")
-  print(knitr::kable(x$interaction, format = "markdown",
-                     digits = 12, align = 'c', ...))
+  cat("***    Robust Interaction Detector    ")
+  print(knitr::kable(dplyr::select(x$interaction,1:3),
+                     format = "markdown", digits = 12,
+                     align = 'c', ...))
 }
