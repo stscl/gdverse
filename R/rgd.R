@@ -83,7 +83,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
 #' @method print rgd_result
 #' @export
 print.rgd_result = \(x, ...) {
-  cat("***          Robust Geographical Detector       ")
+  cat("***      Robust Geographical Detector    ")
   qv = x[[1]]
   qv = qv %>%
     dplyr::filter(discnum == max(qv$discnum)) %>%

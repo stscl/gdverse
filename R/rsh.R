@@ -42,7 +42,8 @@
 #' g = esp(y ~ ., data = sim1, discnum = 5)
 #' }
 rsh = \(formula, data, discvar = NULL, discnum = 3:22,
-        overlay = 'and', minsize = 1, cores = 1){
+        overlay = 'and', strategy = 2L, increase_rate = 0.05,
+        minsize = 1, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
 
@@ -67,7 +68,33 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 
   rgd_res = gdverse::rgd(paste0(yname," ~ ."),data = discdf,
                          discnum = discnum, minsize = minsize, cores = cores)
+  qs = rgd_res[[1]]
   dti = rgd_res[[2]]
+  qs$variable = factor(qs$variable,levels = xdiscname)
+  qs = dplyr::rename(qs,qvalue = `Q-statistic`)
+
+  if (strategy == 1L) {
+    out_g = dplyr::bind_cols(paradf,out_g) %>%
+      dplyr::group_by(x) %>%
+      dplyr::slice_max(order_by = spade_cpsd,
+                       with_ties = FALSE) %>%
+      dplyr::ungroup() %>%
+      dplyr::select(-spade_cpsd) %>%
+      as.list()
+  } else {
+    suppressWarnings({opt_discnum = dplyr::group_split(qs,variable) |>
+      purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue,
+                                                 .df$discnum)[1])})
+    opt_discdf = purrr::map_dfc(seq_along(opt_discnum),
+                                \(.n) {dn = which(discnum == opt_discnum[.n])
+                                return(dplyr::select(discdf[[dn]],
+                                                     dplyr::all_of(paste0("x",.n))))
+                                })
+    opt_fdv = dplyr::group_split(fdv,Variable) |>
+      purrr::map2_dfr(opt_discnum,
+                      \(.qv,.discn) dplyr::filter(.qv,DiscNum == .discn)) |>
+      dplyr::select(-DiscNum)
+  }
   cores_disc = cores
   dti = robust_disc(paste0(yname,"~ ."), discdf, discnum, minsize, cores_disc)
   if (!is.null(xundiscname)){
