@@ -148,23 +148,22 @@ path.</p></li>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_rgd</span> <span class="op">=</span> <span class="fu"><a href="../reference/rgd.html">rgd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
-<span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>               discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>               discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">ndvi_rgd</span></span>
-<span><span class="co">## ***          Robust Geographical Detector       </span></span>
+<span><span class="co">## ***      Robust Geographical Detector    </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
 <span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
-<span><span class="co">## | Precipitation |  0.8933049  | 3.25e-10 |</span></span>
+<span><span class="co">## | Precipitation |  0.8883955  | 4.77e-10 |</span></span>
 <span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
-<span><span class="co">## |  Tempchange   |  0.3874615  | 7.59e-10 |</span></span>
-<span><span class="co">## |  Popdensity   |  0.2622265  | 3.65e-10 |</span></span>
+<span><span class="co">## |  Tempchange   |  0.3722571  | 3.22e-10 |</span></span>
+<span><span class="co">## |  Popdensity   |  0.2480558  | 2.10e-10 |</span></span>
 <span><span class="co">## |      GDP      |  0.1491878  | 3.63e-10 |</span></span>
 <span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## #### Only display the results corresponding to the maximum number of discretizations!</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">## #### Only display the results corresponding to the maximum number of discretizations!</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/rgdrid/rgd_id-1.png"></p>
 </div>
 <div class="section level3">
@@ -174,10 +173,10 @@ path.</p></li>
 possible combinations of variables. By default,
 <code>Spatial Intersection</code> are used to generate a new spatial
 partition of the interaction variables.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ndvi_rid</span> <span class="op">=</span> <span class="fu"><a href="../reference/rid.html">rid</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>,</span>
-<span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>               discnum <span class="op">=</span> <span class="fl">10</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
+<span>               discvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">NDVIchange</span>,<span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>               discnum <span class="op">=</span> <span class="fl">8</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">ndvi_rid</span></span>
 <span><span class="co">## ***    Robust Interaction Detector    </span></span>
 <span><span class="co">## </span></span>
@@ -197,7 +196,9 @@ partition of the interaction variables.</p>
 <span><span class="co">## |  Tempchange   |  Popdensity   | Enhance, bi- |</span></span>
 <span><span class="co">## | Precipitation |      GDP      | Enhance, bi- |</span></span>
 <span><span class="co">## | Precipitation |  Popdensity   | Enhance, bi- |</span></span>
-<span><span class="co">## |      GDP      |  Popdensity   | Enhance, bi- |</span></span></code></pre></div>
+<span><span class="co">## |      GDP      |  Popdensity   | Enhance, bi- |</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rid</span><span class="op">)</span></span></code></pre></div>
+<p><img src="../reference/figures/rgdrid/rid_plot-1.png"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
