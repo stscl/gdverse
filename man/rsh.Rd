@@ -32,7 +32,7 @@ Default all \code{discvar} use \code{3:22}.}
 \item{overlay}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}
 
-\item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest q-statistics to
+\item{strategy}{(optional) Optimal discretization strategy. When \code{strategy} is \code{1L}, choose the highest q-statistics to
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
 spatial data are selected by combining LOESS model.}
 

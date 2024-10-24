@@ -15,7 +15,7 @@
 #' Default all `discvar` use `3:22`.
 #' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
-#' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest q-statistics to
+#' @param strategy (optional) Optimal discretization strategy. When `strategy` is `1L`, choose the highest q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization. Default is `5%`.
