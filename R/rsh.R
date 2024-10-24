@@ -6,7 +6,7 @@
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
-#' @param formula A formula of ESP model.
+#' @param formula A formula of RSH model.
 #' @param data A data.frame, tibble or sf object of observation data.
 #' @param discvar (optional) Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are
@@ -15,7 +15,7 @@
 #' Default all `discvar` use `3:22`.
 #' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
-#' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
+#' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
