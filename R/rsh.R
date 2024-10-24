@@ -89,10 +89,6 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
       purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue, .df$discnum,
                                                  increase_rate = increase_rate)[1])})
   }
-  factor = dplyr::group_split(rgd_res[[1]],variable) |>
-    purrr::map2_dfr(opt_discnum,
-                    \(.qv,.discn) dplyr::filter(.qv,discnum == .discn)) |>
-    dplyr::select(-discnum)
   dti = purrr::map_dfc(seq_along(opt_discnum),
                        \(.n) {dn = which(dti$discnum == opt_discnum[.n])
                        return(dti[dn,.n])})
@@ -106,6 +102,9 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
       dplyr::select(dplyr::any_of(yname)) %>%
       dplyr::bind_cols(dti)
   }
+
+  rpd_factor = gd(paste0(yname,' ~ .'),data = dti,type = "factor")[[1]]
+
   xname = colnames(dti)[-which(colnames(dti) == yname)]
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
   spfom = overlay
@@ -292,8 +291,10 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
     dplyr::arrange(rpd,.by_group=TRUE) %>%
     dplyr::ungroup()
 
-  res = list("factor" = factor, "interaction" = interaction, "risk1" = risk1, "risk2" = risk2,
-             "rpd" = res_rpd, "spd" = res_spd, "determination" = determination,
+  res = list("factor" = rpd_factor, "interaction" = interaction,
+             "risk1" = risk1, "risk2" = risk2,
+             "rpd" = res_rpd, "spd" = res_spd,
+             "determination" = determination,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
@@ -316,9 +317,9 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 print.rsh_result = \(x, ...) {
   cat("***      Robust Stratified Heterogeneity Model     \n")
   cat("\n ---------- Global Power of Determinat : ------------\n")
-  print(knitr::kable(x$factor, format = "markdown", digits = 5, align = 'c', ...))
+  print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- Global Variable Interaction : ------------\n")
-  print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 5, align = 'c', ...))
+  print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- RSH Model Variable Interaction : ------------\n")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
