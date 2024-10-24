@@ -33,8 +33,6 @@ A list.
 Function for robust interaction detector(RID) model.
 }
 \note{
-\strong{Please note that all variables in the RID model need to be continuous data}.
-
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rid()}.
 See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 }

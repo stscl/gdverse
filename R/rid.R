@@ -7,8 +7,6 @@
 #' A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.
 #' https://doi.org/10.1016/j.spasta.2024.100814
 #' @note
-#' **Please note that all variables in the RID model need to be continuous data**.
-#'
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rid()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
@@ -90,4 +88,20 @@ print.rid_result = \(x, ...) {
   print(knitr::kable(dplyr::select(x$interaction,1:3),
                      format = "markdown", digits = 12,
                      align = 'c', ...))
+}
+
+#' @title plot RID result
+#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
+#' @description
+#' S3 method to plot output for RID model from `rid()`.
+#'
+#' @param x Return by `rid()`.
+#' @param alpha (optional) Picture transparency. Default is `1`.
+#' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
+#'
+#' @return A ggplot2 layer
+#' @export
+plot.rid_result = \(x, alpha = 1, ...) {
+  class(x) = "interaction_detector"
+  plot.interaction_detector(x,alpha,...)
 }
