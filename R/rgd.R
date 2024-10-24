@@ -64,8 +64,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
     resqv[[i]] = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
   }
   qv = purrr::map2_dfr(resqv, discnum,
-                       \(.x,.n) .x %>%
-                         dplyr::mutate(discnum = .n))
+                       \(.x,.n) dplyr::mutate(.x,discnum = .n))
   disc = purrr::map2_dfr(resdisc, discnum,
                          \(.x,.n) dplyr::mutate(.x,discnum = .n))
   res = list("factor" = qv, "disc" = disc)
