@@ -365,6 +365,9 @@ plot.rsh_result = \(x, low_color = "#6600CC",
                                        yend = yend),
                           arrow = ggplot2::arrow(length = ggplot2::unit(0.3, "cm")),
                           color = "grey40", na.rm = TRUE) +
+    ggplot2::geom_point(data = dplyr::filter(g,rpd == max(g$rpd)),
+                        ggplot2::aes(x = step, y = name),
+                        color = "red", shape = "*", size = 12.5) +
     ggplot2::scale_color_gradient(low = low_color,
                                   high = high_color) +
     ggplot2::labs(x = "No. of variables in fuzzy overlay", y = "",
