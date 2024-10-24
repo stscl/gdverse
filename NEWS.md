@@ -1,5 +1,7 @@
 # gdverse 1.1-2
 
+* Align the RID model and algorithm with the original framework presented in paper (#9).
+
 * Beautify the narrative and other writing details in the vignettes, without making 
   any changes at the user level.
 
