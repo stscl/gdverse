@@ -49,8 +49,8 @@ multi-core parallel computing.}
 \value{
 A list.
 \describe{
-\item{\code{factor}}{results of RSH model factor detection}
-\item{\code{interaction}}{results of RSH model interaction detection}
+\item{\code{factor}}{factor detect results}
+\item{\code{interaction}}{interaction detect results}
 \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{risk2}}{risk detection result of the input data}
 \item{\code{rpd}}{robust power of determinants}
@@ -65,8 +65,6 @@ A list.
 Function for robust stratified heterogeneity model.
 }
 \note{
-\strong{Please note that all variables in the RSH model need to be continuous data}.
-
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
 See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 }
