@@ -40,10 +40,11 @@ See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 \examples{
 \dontrun{
 ## The following code needs to configure the Python environment to run:
-data('ndvi')
-g = rgd(NDVIchange ~ ., data = ndvi,
-        discvar = names(ndvi)[-1:-3],
-        discnum = 3:8, cores = 6)
+data('sim')
+g = rgd(y ~ .,
+        data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+        discnum = 3:6, cores = 6)
+g
 }
 }
 \references{
