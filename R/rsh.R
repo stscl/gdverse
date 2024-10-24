@@ -82,11 +82,8 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
   qs = dplyr::rename(qs,qvalue = `Q-statistic`)
 
   if (strategy == 1L) {
-    suppressWarnings({opt_discnum = dplyr::group_split(qs,variable) |>
-      purrr::map_dbl(\(.df) {
-        maxqv = which.max(.df$qvalue)
-        return(.df$discnum[which(.df$qvalue == maxqv)[1]])
-      })})
+    opt_discnum = dplyr::group_split(qs,variable) |>
+      purrr::map_dbl(\(.df) .df$discnum[which.max(.df$qvalue)])
   } else {
     suppressWarnings({opt_discnum = dplyr::group_split(qs,variable) |>
       purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue, .df$discnum,
