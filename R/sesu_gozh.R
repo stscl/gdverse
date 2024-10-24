@@ -118,7 +118,6 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print sesu_gozh
 #' @export
 #'
 print.sesu_gozh = \(x,...){
@@ -142,7 +141,6 @@ print.sesu_gozh = \(x,...){
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
-#' @method plot sesu_gozh
 #' @export
 #'
 plot.sesu_gozh = \(x,...){

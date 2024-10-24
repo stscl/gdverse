@@ -314,7 +314,6 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print rsh_result
 #' @export
 #'
 print.rsh_result = \(x, ...) {
@@ -347,7 +346,6 @@ print.rsh_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
-#' @method plot rsh_result
 #' @export
 #'
 plot.rsh_result = \(x, low_color = "#6600CC",

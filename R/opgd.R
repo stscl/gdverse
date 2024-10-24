@@ -83,7 +83,6 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print opgd_result
 #' @export
 #'
 print.opgd_result = \(x, ...) {
@@ -106,7 +105,6 @@ print.opgd_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
 #'
 #' @return A ggplot2 layer
-#' @method plot opgd_result
 #' @export
 #'
 plot.opgd_result = \(x, ...) {

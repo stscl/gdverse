@@ -164,7 +164,6 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print idsa_result
 #' @export
 #'
 print.idsa_result = \(x, ...) {
@@ -190,7 +189,6 @@ print.idsa_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
-#' @method plot idsa_result
 #' @export
 #'
 plot.idsa_result = \(x, ...) {

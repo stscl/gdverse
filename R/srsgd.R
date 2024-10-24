@@ -62,7 +62,6 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print srsgd_result
 #' @export
 print.srsgd_result = \(x, ...) {
   nx = names(x)
@@ -84,7 +83,6 @@ print.srsgd_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
 #'
 #' @return A ggplot2 layer
-#' @method plot srsgd_result
 #' @export
 #'
 plot.srsgd_result = \(x, ...) {

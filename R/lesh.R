@@ -59,7 +59,6 @@ lesh = \(formula,data,cores = 1,...){
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print lesh_result
 #' @export
 #'
 print.lesh_result = \(x, ...) {
@@ -93,7 +92,6 @@ print.lesh_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
-#' @method plot lesh_result
 #' @export
 #'
 plot.lesh_result = \(x, pie = TRUE,

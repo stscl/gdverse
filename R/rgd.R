@@ -79,7 +79,6 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
-#' @method print rgd_result
 #' @export
 print.rgd_result = \(x, ...) {
   cat("***      Robust Geographical Detector    ")
@@ -105,7 +104,6 @@ print.rgd_result = \(x, ...) {
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer
-#' @method plot rgd_result
 #' @export
 #'
 plot.rgd_result = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
