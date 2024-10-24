@@ -3,6 +3,8 @@
 #' @description
 #' Function for robust stratified heterogeneity model.
 #' @note
+#' **Please note that all variables in the RSH model need to be continuous data**.
+#'
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
@@ -221,10 +223,6 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
                            spd = out_spd) %>%
     dplyr::arrange(dplyr::desc(spd))
 
-  factor_indice = which(sapply(xs, length) == 1)
-  factor = tibble::tibble(variable = xsname[factor_indice],
-                          `Q-statistics` = out_rpd[factor_indice])
-
   interact_type = \(qv1,qv2,qv12){
     if (qv12 < min(qv1, qv2)) {
       interaction = c("Weaken, nonlinear")
@@ -322,9 +320,13 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 print.rsh_result = \(x, ...) {
   cat("***      Robust Stratified Heterogeneity Model   ")
   cat("\n ---------- Global Power of Determinat : ------------\n")
+  print(knitr::kable(x$factor, format = "markdown", digits = 5, align = 'c', ...))
+  cat("\n ---------- Global Variable Interaction : ------------\n")
+  print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 5, align = 'c', ...))
+  cat("\n ---------- RSH Model Variable Interaction : ------------\n")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- RSH model performance evaluation: ---------\n",
+  cat("\n ---------- RSH Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
