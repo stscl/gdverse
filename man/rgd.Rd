@@ -34,6 +34,8 @@ A list.
 Function for robust geographical detector(RGD) model.
 }
 \note{
+\strong{Please note that all variables in the RGD model need to be continuous data}.
+
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
 See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 }

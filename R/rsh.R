@@ -318,7 +318,7 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @export
 #'
 print.rsh_result = \(x, ...) {
-  cat("***      Robust Stratified Heterogeneity Model   ")
+  cat("***      Robust Stratified Heterogeneity Model     \n")
   cat("\n ---------- Global Power of Determinat : ------------\n")
   print(knitr::kable(x$factor, format = "markdown", digits = 5, align = 'c', ...))
   cat("\n ---------- Global Variable Interaction : ------------\n")

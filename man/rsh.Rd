@@ -65,6 +65,8 @@ A list.
 Function for robust stratified heterogeneity model.
 }
 \note{
+\strong{Please note that all variables in the RSH model need to be continuous data}.
+
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
 See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 }
