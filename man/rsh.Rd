@@ -53,7 +53,7 @@ A list.
 \item{\code{interaction}}{results of RSH model interaction detection}
 \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{risk2}}{risk detection result of the input data}
-\item{\code{rpd}}{power of spatial determinants}
+\item{\code{rpd}}{robust power of determinants}
 \item{\code{spd}}{shap power of determinants}
 \item{\code{determination}}{determination of the optimal interaction of variables}
 \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
