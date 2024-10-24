@@ -57,25 +57,21 @@ names(ndvi)
 
 ``` r
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
-               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-               discnum = 3:10, cores = 12)
+               discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 3:8, cores = 12)
 ndvi_rgd
-## ***          Robust Geographical Detector       
+## ***      Robust Geographical Detector    
 ## 
 ## |   variable    | Q-statistic | P-value  |
 ## |:-------------:|:-----------:|:--------:|
-## | Precipitation |  0.8933049  | 3.25e-10 |
+## | Precipitation |  0.8883955  | 4.77e-10 |
 ## |  Climatezone  |  0.8218335  | 7.34e-10 |
-## |  Tempchange   |  0.3874615  | 7.59e-10 |
-## |  Popdensity   |  0.2622265  | 3.65e-10 |
+## |  Tempchange   |  0.3722571  | 3.22e-10 |
+## |  Popdensity   |  0.2480558  | 2.10e-10 |
 ## |      GDP      |  0.1491878  | 3.63e-10 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
 ## 
 ## #### Only display the results corresponding to the maximum number of discretizations!
-```
-
-
-``` r
 plot(ndvi_rgd)
 ```
 
@@ -88,8 +84,8 @@ plot(ndvi_rgd)
 
 ``` r
 ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
-               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-               discnum = 10, cores = 12)
+               discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 8, cores = 12)
 ndvi_rid
 ## ***    Robust Interaction Detector    
 ## 
@@ -110,4 +106,7 @@ ndvi_rid
 ## | Precipitation |      GDP      | Enhance, bi- |
 ## | Precipitation |  Popdensity   | Enhance, bi- |
 ## |      GDP      |  Popdensity   | Enhance, bi- |
+plot(ndvi_rid)
 ```
+
+![](../man/figures/rgdrid/rid_plot-1.png)
