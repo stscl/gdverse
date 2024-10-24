@@ -30,10 +30,11 @@
 #' @examples
 #' \dontrun{
 #' ## The following code needs to configure the Python environment to run:
-#' data('ndvi')
-#' g = rgd(NDVIchange ~ ., data = ndvi,
-#'         discvar = names(ndvi)[-1:-3],
-#'         discnum = 3:8, cores = 6)
+#' data('sim')
+#' g = rgd(y ~ .,
+#'         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'         discnum = 3:6, cores = 6)
+#' g
 #' }
 rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
   formula = stats::as.formula(formula)

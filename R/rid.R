@@ -38,7 +38,7 @@
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' g = rid(y ~ .,
-#'         data =  dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
 #'         discnum = 4, cores = 6)
 #' g
 #' }
