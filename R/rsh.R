@@ -45,7 +45,7 @@
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' sim1 = dplyr::select(sim,-dplyr::any_of(c('lo','la')))
-#' g = rsh(y ~ ., data = sim1, discnum = 3:8)
+#' g = rsh(y ~ ., data = sim1, discnum = 3:8, cores = 6)
 #' g
 #' }
 rsh = \(formula, data, discvar = NULL, discnum = 3:22,
@@ -73,7 +73,7 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
   }
   discdf = dplyr::select(data,dplyr::all_of(c(yname,xdiscname)))
 
-  rgd_res = gdverse::rgd(paste0(yname," ~ ."),data = discdf,
+  rgd_res = gdverse::rgd(paste0(yname," ~ ."), data = discdf,
                          discnum = discnum, minsize = minsize, cores = cores)
   qs = rgd_res[[1]]
   dti = rgd_res[[2]]
@@ -201,13 +201,13 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
   interactvar = xs[[which.max(out_rpd)]]
-  if (overlaymethod == 'intersection'){
+  if (overlay == 'intersection'){
     reszone = dti %>%
       dplyr::select(dplyr::all_of(interactvar)) %>%
       purrr::reduce(paste,sep = '_')
   } else {
     reszone = sdsfun::fuzzyoverlay(paste(yname,'~',paste0(interactvar,collapse = '+')),
-                                   dti, spfom)
+                                   dti, overlay)
   }
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
