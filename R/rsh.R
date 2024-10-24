@@ -12,17 +12,23 @@
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are
 #' used as `discvar`.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
-#' Default all `discvar` use `10`.
+#' Default all `discvar` use `3:22`.
 #' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
+#' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
+#' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
+#' spatial data are selected by combining LOESS model.
+#' @param increase_rate (optional) The critical increase rate of the number of discretization.
+#' Default is `5%`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #'
 #' @return A list.
 #' \describe{
-#' \item{\code{factor}}{results of ESP model factor detection}
-#' \item{\code{interaction}}{results of ESP model interaction detection}
+#' \item{\code{factor}}{results of RSH model factor detection}
+#' \item{\code{interaction}}{results of RSH model interaction detection}
 #' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{risk2}}{risk detection result of the input data}
 #' \item{\code{rpd}}{power of spatial determinants}
@@ -38,12 +44,13 @@
 #' \dontrun{
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
-#' sim1 = sf::st_as_sf(sim,coords = c('lo','la'))
-#' g = esp(y ~ ., data = sim1, discnum = 5)
+#' sim1 = dplyr::select(sim,-dplyr::any_of(c('lo','la')))
+#' g = rsh(y ~ ., data = sim1, discnum = 3:8)
+#' g
 #' }
 rsh = \(formula, data, discvar = NULL, discnum = 3:22,
         overlay = 'and', strategy = 2L, increase_rate = 0.05,
-        minsize = 1, cores = 1){
+        minsize = 1, cores = 1, alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
 
@@ -74,29 +81,20 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
   qs = dplyr::rename(qs,qvalue = `Q-statistic`)
 
   if (strategy == 1L) {
-    out_g = dplyr::bind_cols(paradf,out_g) %>%
-      dplyr::group_by(x) %>%
-      dplyr::slice_max(order_by = spade_cpsd,
-                       with_ties = FALSE) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(-spade_cpsd) %>%
-      as.list()
+    suppressWarnings({opt_discnum = dplyr::group_split(qs,variable) |>
+      purrr::map_dbl(\(.df) {
+        maxqv = which.max(.df$qvalue)
+        return(.df$discnum[which(.df$qvalue == maxqv)[1]])
+      })})
   } else {
     suppressWarnings({opt_discnum = dplyr::group_split(qs,variable) |>
-      purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue,
-                                                 .df$discnum)[1])})
-    opt_discdf = purrr::map_dfc(seq_along(opt_discnum),
-                                \(.n) {dn = which(discnum == opt_discnum[.n])
-                                return(dplyr::select(discdf[[dn]],
-                                                     dplyr::all_of(paste0("x",.n))))
-                                })
-    opt_fdv = dplyr::group_split(fdv,Variable) |>
-      purrr::map2_dfr(opt_discnum,
-                      \(.qv,.discn) dplyr::filter(.qv,DiscNum == .discn)) |>
-      dplyr::select(-DiscNum)
+      purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue, .df$discnum,
+                                                 increase_rate = increase_rate)[1])})
   }
-  cores_disc = cores
-  dti = robust_disc(paste0(yname,"~ ."), discdf, discnum, minsize, cores_disc)
+  dti = purrr::map_dfc(seq_along(opt_discnum),
+                       \(.n) {dn = which(dti$discnum == opt_discnum[.n])
+                       return(dti[dn,.n])})
+
   if (!is.null(xundiscname)){
     dti = data %>%
       dplyr::select(dplyr::any_of(c(yname,xundiscname))) %>%
