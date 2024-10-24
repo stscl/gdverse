@@ -18,7 +18,7 @@
 
 Current models and functions provided by **gdverse** are:
 
-| *Model* | *Function* | *Support Status* |
+| *Model* | *Function* | *Support* |
 |----|----|----|
 | [GD](https://doi.org/10.1080/13658810802443457) | `gd()` | ✔️ |
 | [OPGD](https://doi.org/10.1080/15481603.2020.1760434) | `opgd()` | ✔️ |
