@@ -18,8 +18,7 @@
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.
-#' @param increase_rate (optional) The critical increase rate of the number of discretization.
-#' Default is `5%`.
+#' @param increase_rate (optional) The critical increase rate of the number of discretization. Default is `5%`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.

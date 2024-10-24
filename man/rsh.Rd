@@ -36,8 +36,7 @@ Default is \code{and}.}
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
 spatial data are selected by combining LOESS model.}
 
-\item{increase_rate}{(optional) The critical increase rate of the number of discretization.
-Default is \verb{5\%}.}
+\item{increase_rate}{(optional) The critical increase rate of the number of discretization. Default is \verb{5\%}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
