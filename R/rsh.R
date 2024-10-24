@@ -72,7 +72,6 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
     xundiscname = xname[-which(xname %in% discvar)]
   }
   discdf = dplyr::select(data,dplyr::all_of(c(yname,xdiscname)))
-
   rgd_res = gdverse::rgd(paste0(yname," ~ ."), data = discdf,
                          discnum = discnum, minsize = minsize, cores = cores)
   qs = rgd_res[[1]]
@@ -104,9 +103,7 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
       dplyr::select(dplyr::any_of(yname)) %>%
       dplyr::bind_cols(dti)
   }
-
-  cores_rgd = cores
-  cores_shap = cores
+  xname = colnames(dti)[-which(colnames(dti) == yname)]
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
   spfom = overlay
 
@@ -135,9 +132,9 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
   }
 
   doclust = FALSE
-  if (cores_rgd > 1) {
+  if (cores > 1) {
     doclust = TRUE
-    cores = parallel::makeCluster(cores_rgd)
+    cores = parallel::makeCluster(cores)
     on.exit(parallel::stopCluster(cores), add=TRUE)
   }
 
@@ -180,13 +177,6 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
     thetax = sum(thetaxs)
     names(thetax) = 'SPD'
     return(thetax)
-  }
-
-  doclust = FALSE
-  if (cores_shap > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores_shap)
-    on.exit(parallel::stopCluster(cores), add = TRUE)
   }
 
   if (doclust) {
