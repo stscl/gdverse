@@ -60,8 +60,8 @@ names(ndvi)
 
 ```{r}
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
-               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-               discnum = 3:10, cores = 12)
+               discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 3:8, cores = 12)
 ndvi_rgd
 ```
 
@@ -75,7 +75,7 @@ plot(ndvi_rgd)
 
 ```{r}
 ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
-               discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
-               discnum = 10, cores = 12)
+               discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 8, cores = 12)
 ndvi_rid
 ```
