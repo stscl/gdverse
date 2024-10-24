@@ -7,11 +7,7 @@
 #' A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.
 #' https://doi.org/10.1016/j.spasta.2024.100814
 #' @note
-#'
-#' The RID model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
-#' When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
-#' When there are a large number of explanatory variables, the data dimensionality reduction method can be used
-#' to ensure the trade-off between analysis results and calculation speed.
+#' **Please note that all variables in the RID model need to be continuous data**.
 #'
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rid()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.

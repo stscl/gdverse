@@ -6,6 +6,8 @@
 #' Zhang, Z., Song, Y.*, & Wu, P., 2022. Robust geographical detector. International Journal of Applied Earth Observation and Geoinformation. 109, 102782.
 #' DOI: 10.1016/j.jag.2022.102782.
 #' @note
+#' **Please note that all variables in the RGD model need to be continuous data**.
+#'
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'

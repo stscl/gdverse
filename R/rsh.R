@@ -90,6 +90,10 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
       purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue, .df$discnum,
                                                  increase_rate = increase_rate)[1])})
   }
+  factor = dplyr::group_split(rgd_res[[1]],variable) |>
+    purrr::map2_dfr(opt_discnum,
+                    \(.qv,.discn) dplyr::filter(.qv,discnum == .discn)) |>
+    dplyr::select(-discnum)
   dti = purrr::map_dfc(seq_along(opt_discnum),
                        \(.n) {dn = which(dti$discnum == opt_discnum[.n])
                        return(dti[dn,.n])})
@@ -316,7 +320,8 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @export
 #'
 print.rsh_result = \(x, ...) {
-  cat("***       Robust Stratified Heterogeneity Model   ")
+  cat("***      Robust Stratified Heterogeneity Model   ")
+  cat("\n ---------- Global Power of Determinat : ------------\n")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- RSH model performance evaluation: ---------\n",
