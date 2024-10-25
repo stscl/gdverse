@@ -28,6 +28,7 @@
 #' \describe{
 #' \item{\code{factor}}{factor detect results}
 #' \item{\code{interaction}}{interaction detect results}
+#' \item{\code{optdisc}}{independent variable optimal spatial discretization}
 #' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{risk2}}{risk detection result of the input data}
 #' \item{\code{rpd}}{robust power of determinants}
@@ -86,18 +87,18 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
       purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue, .df$discnum,
                                                  increase_rate = increase_rate)[1])})
   }
-  dti = purrr::map_dfc(seq_along(opt_discnum),
+  res_discdf = purrr::map_dfc(seq_along(opt_discnum),
                        \(.n) {dn = which(dti$discnum == opt_discnum[.n])
                        return(dti[dn,.n])})
 
   if (!is.null(xundiscname)){
     dti = data %>%
       dplyr::select(dplyr::any_of(c(yname,xundiscname))) %>%
-      dplyr::bind_cols(dti)
+      dplyr::bind_cols(res_discdf)
   } else {
     dti = data %>%
       dplyr::select(dplyr::any_of(yname)) %>%
-      dplyr::bind_cols(dti)
+      dplyr::bind_cols(res_discdf)
   }
 
   rpd_factor = gd(paste0(yname,' ~ .'),data = dti,type = "factor")[[1]]
@@ -288,9 +289,8 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
     dplyr::arrange(rpd,.by_group=TRUE) %>%
     dplyr::ungroup()
 
-  res = list("factor" = rpd_factor, "interaction" = interaction,
-             "risk1" = risk1, "risk2" = risk2,
-             "rpd" = res_rpd, "spd" = res_spd,
+  res = list("factor" = rpd_factor, "interaction" = interaction, "optdisc" = res_discdf,
+             "risk1" = risk1, "risk2" = risk2, "rpd" = res_rpd, "spd" = res_spd,
              "determination" = determination,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
