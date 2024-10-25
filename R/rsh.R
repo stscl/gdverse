@@ -313,11 +313,11 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
 #'
 print.rsh_result = \(x, ...) {
   cat("***      Robust Stratified Heterogeneity Model     \n")
-  cat("\n ---------- Global Power of Determinat : ------------\n")
+  cat("\n ---------- Global Power of Determinat : ------------")
   print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- Global Variable Interaction : ------------\n")
+  cat("\n ---------- Global Variable Interaction : ------------")
   print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- RSH Model Variable Interaction : ------------\n")
+  cat("\n ---------- RSH Model Variable Interaction : ------------")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- RSH Model Performance Evaluation: ---------\n",
