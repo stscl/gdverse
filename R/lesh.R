@@ -41,7 +41,7 @@ lesh = \(formula,data,cores = 1,...){
                      by = c("variable1" = "variable")) %>%
     dplyr::left_join(dplyr::select(spd,variable,spd2 = spd_theta),
                      by = c("variable2" = "variable")) %>%
-    dplyr::mutate(spd = (spd1 + spd2), spd1 = spd1 / spd, spd2 = spd2 / spd,
+    dplyr::mutate(spd = (abs(spd1) + abs(spd2)), spd1 = abs(spd1) / spd, spd2 = abs(spd2) / spd,
                   `Variable1 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd1,
                   `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
     dplyr::select(-dplyr::starts_with('spd'))
