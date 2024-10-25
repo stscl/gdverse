@@ -50,6 +50,7 @@ A list.
 \describe{
 \item{\code{factor}}{factor detect results}
 \item{\code{interaction}}{interaction detect results}
+\item{\code{optdisc}}{independent variable optimal spatial discretization}
 \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{risk2}}{risk detection result of the input data}
 \item{\code{rpd}}{robust power of determinants}
