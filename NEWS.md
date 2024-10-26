@@ -1,6 +1,6 @@
 # gdverse 1.1-2
 
-* Force `data` to tibble format in **gdverse** GDMs model function (#12).
+* Force `data` to `tibble` format in **gdverse** GDMs model function (#12).
 
 * Align the RID model and algorithm with the original framework presented in paper (#9).
 
