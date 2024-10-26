@@ -56,6 +56,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
       wt_spade = wt
     }
   }
+  data = tibble::as_tibble(data)
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
   }

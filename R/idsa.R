@@ -70,6 +70,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
       wt_idsa = wt
     }
   }
+  data = tibble::as_tibble(data)
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
   }

@@ -42,6 +42,7 @@ rid = \(formula, data, discvar = NULL,
   formula.vars = all.vars(formula)
   yname = formula.vars[1]
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
+  data = tibble::as_tibble(data)
   if (formula.vars[2] != "."){
     dti = dplyr::select(data,dplyr::all_of(formula.vars))
   } else {

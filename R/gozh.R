@@ -35,6 +35,7 @@
 gozh = \(formula, data, cores = 1,
          type = "factor",alpha = 0.95,...){
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
+  data = tibble::as_tibble(data)
   if (length(type) == 1){
     res = gozh_detector(formula, data, cores, type, alpha, ...)
   } else {

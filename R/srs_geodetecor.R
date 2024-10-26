@@ -43,6 +43,7 @@ srs_geodetector = \(formula, data, wt = NULL, type = "factor", alpha = 0.95){
       stop("When data is not a `sf` object, you must provide `wt`!")
     }
   }
+  data = tibble::as_tibble(data)
 
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)

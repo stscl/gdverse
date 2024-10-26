@@ -34,6 +34,7 @@
 #'
 lesh = \(formula,data,cores = 1,...){
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
+  data = tibble::as_tibble(data)
   spd = spd_lesh(formula,data,cores,...)
   pd = gozh(formula,data,cores,type = 'interaction',...)[[1]]
   res = pd %>%
