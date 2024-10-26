@@ -59,6 +59,7 @@ Imports:
     utils
 Suggests: 
     cowplot,
+    GD,
     knitr,
     Rcpp,
     readr,
