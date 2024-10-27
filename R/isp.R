@@ -313,7 +313,7 @@ isp = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @export
 #'
 print.isp_result = \(x, ...) {
-  cat("***       Interpretable Stratified Power Model     \n")
+  cat("***     Interpretable Stratified Power Model     \n")
   cat("\n ---------- Global Power of Determinat : ------------")
   print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- Global Variable Interaction : ------------")
