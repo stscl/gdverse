@@ -6,7 +6,7 @@
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
-#' @param formula A formula of RSH model.
+#' @param formula A formula of ISP model.
 #' @param data A data.frame, tibble or sf object of observation data.
 #' @param discvar (optional) Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are

@@ -18,7 +18,7 @@ isp(
 )
 }
 \arguments{
-\item{formula}{A formula of RSH model.}
+\item{formula}{A formula of ISP model.}
 
 \item{data}{A data.frame, tibble or sf object of observation data.}
 
