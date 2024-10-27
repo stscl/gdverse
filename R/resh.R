@@ -108,7 +108,7 @@ resh = \(formula, data, discvar = NULL, discnum = 3:22,
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
   spfom = overlay
 
-  rpd_rsh = \(formula, discdata, overlaymethod = 'and'){
+  rpd_resh = \(formula, discdata, overlaymethod = 'and'){
     formula = stats::as.formula(formula)
     formula.vars = all.vars(formula)
     if (formula.vars[2] != "."){
@@ -127,7 +127,7 @@ resh = \(formula, data, discvar = NULL, discnum = 3:22,
   }
 
   calcul_rpd = \(.x){
-    qv = rpd_rsh(paste(yname,'~',paste0(.x,collapse = '+')),dti,spfom)
+    qv = rpd_resh(paste(yname,'~',paste0(.x,collapse = '+')),dti,spfom)
     names(qv) = 'RPD'
     return(qv)
   }
