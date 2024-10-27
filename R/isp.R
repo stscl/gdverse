@@ -1,7 +1,7 @@
-#' robust explained stratified heterogeneity(RESH) model
+#' interpretable stratified power(ISP) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for robust explained stratified heterogeneity model.
+#' Function for interpretable stratified power model.
 #' @note
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
@@ -45,12 +45,12 @@
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' sim1 = dplyr::select(sim,-dplyr::any_of(c('lo','la')))
-#' g = resh(y ~ ., data = sim1, discnum = 3:8, cores = 6)
+#' g = isp(y ~ ., data = sim1, discnum = 3:8, cores = 6)
 #' g
 #' }
-resh = \(formula, data, discvar = NULL, discnum = 3:22,
-         overlay = 'and', strategy = 2L, increase_rate = 0.05,
-         minsize = 1, cores = 1, alpha = 0.95){
+isp = \(formula, data, discvar = NULL, discnum = 3:22,
+        overlay = 'and', strategy = 2L, increase_rate = 0.05,
+        minsize = 1, cores = 1, alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
 
@@ -108,7 +108,7 @@ resh = \(formula, data, discvar = NULL, discnum = 3:22,
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
   spfom = overlay
 
-  rpd_resh = \(formula, discdata, overlaymethod = 'and'){
+  rpd_isp = \(formula, discdata, overlaymethod = 'and'){
     formula = stats::as.formula(formula)
     formula.vars = all.vars(formula)
     if (formula.vars[2] != "."){
@@ -127,7 +127,7 @@ resh = \(formula, data, discvar = NULL, discnum = 3:22,
   }
 
   calcul_rpd = \(.x){
-    qv = rpd_resh(paste(yname,'~',paste0(.x,collapse = '+')),dti,spfom)
+    qv = rpd_isp(paste(yname,'~',paste0(.x,collapse = '+')),dti,spfom)
     names(qv) = 'RPD'
     return(qv)
   }
@@ -296,32 +296,32 @@ resh = \(formula, data, discvar = NULL, discnum = 3:22,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
-  class(res) = "resh_result"
+  class(res) = "isp_result"
 
   return(res)
 }
 
-#' @title print RESH result
+#' @title print ISP result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for RESH model from `resh()`.
+#' S3 method to format output for ISP model from `isp()`.
 #'
-#' @param x Return by `resh()`.
+#' @param x Return by `isp()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
 #'
-print.resh_result = \(x, ...) {
+print.isp_result = \(x, ...) {
   cat("***    Robust Explained Stratified Heterogeneity Model     \n")
   cat("\n --------------- Global Power of Determinat : ------------")
   print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
   cat("\n --------------- Global Variable Interaction : ------------")
   print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n --------------- RESH Model Variable Interaction : ------------")
+  cat("\n --------------- ISP Model Variable Interaction : ------------")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n --------------- RESH Model Performance Evaluation: ---------\n",
+  cat("\n --------------- ISP Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
@@ -331,12 +331,12 @@ print.resh_result = \(x, ...) {
   cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
 }
 
-#' @title plot RESH result
+#' @title plot ISP result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for RESH result in `resh()`.
+#' S3 method to plot output for ISP result in `isp()`.
 #'
-#' @param x Return by `resh()`.
+#' @param x Return by `isp()`.
 #' @param low_color (optional) The low color of the color gradient, default is `#6600CC`.
 #' @param high_color (optional) The high color of the color gradient, default is `#FFCC33`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
@@ -344,7 +344,7 @@ print.resh_result = \(x, ...) {
 #' @return A ggplot2 layer
 #' @export
 #'
-plot.resh_result = \(x, low_color = "#6600CC",
+plot.isp_result = \(x, low_color = "#6600CC",
                     high_color = "#FFCC33", ...){
   g = x$determination
   gv1 = dplyr::count(g,name)
