@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # author: Wenbo Lv
+# email: lyu.geosocial@gmail.com
+# date: 2024-10-27
 # references: 
 # https://github.com/Zehua-Zhang-01/Robust_Geographical_Detector/blob/main/CPD_1.ipynb
 # https://rstudio.github.io/reticulate/#type-conversions
