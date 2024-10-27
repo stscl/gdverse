@@ -1,7 +1,7 @@
-#' robust stratified heterogeneity(RSH) model
+#' robust explained stratified heterogeneity(RESH) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for robust stratified heterogeneity model.
+#' Function for robust explained stratified heterogeneity model.
 #' @note
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
@@ -45,12 +45,12 @@
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' sim1 = dplyr::select(sim,-dplyr::any_of(c('lo','la')))
-#' g = rsh(y ~ ., data = sim1, discnum = 3:8, cores = 6)
+#' g = resh(y ~ ., data = sim1, discnum = 3:8, cores = 6)
 #' g
 #' }
-rsh = \(formula, data, discvar = NULL, discnum = 3:22,
-        overlay = 'and', strategy = 2L, increase_rate = 0.05,
-        minsize = 1, cores = 1, alpha = 0.95){
+resh = \(formula, data, discvar = NULL, discnum = 3:22,
+         overlay = 'and', strategy = 2L, increase_rate = 0.05,
+         minsize = 1, cores = 1, alpha = 0.95){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
 
@@ -296,32 +296,32 @@ rsh = \(formula, data, discvar = NULL, discnum = 3:22,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
-  class(res) = "rsh_result"
+  class(res) = "resh_result"
 
   return(res)
 }
 
-#' @title print RSH result
+#' @title print RESH result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to format output for RSH model from `rsh()`.
+#' S3 method to format output for RESH model from `resh()`.
 #'
-#' @param x Return by `rsh()`.
+#' @param x Return by `resh()`.
 #' @param ... (optional) Other arguments passed to `knitr::kable()`.
 #'
 #' @return Formatted string output
 #' @export
 #'
-print.rsh_result = \(x, ...) {
-  cat("***      Robust Stratified Heterogeneity Model     \n")
-  cat("\n ---------- Global Power of Determinat : ------------")
+print.resh_result = \(x, ...) {
+  cat("***    Robust Explained Stratified Heterogeneity Model     \n")
+  cat("\n --------------- Global Power of Determinat : ------------")
   print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- Global Variable Interaction : ------------")
+  cat("\n --------------- Global Variable Interaction : ------------")
   print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- RSH Model Variable Interaction : ------------")
+  cat("\n --------------- RESH Model Variable Interaction : ------------")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- RSH Model Performance Evaluation: ---------\n",
+  cat("\n --------------- RESH Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
@@ -331,12 +331,12 @@ print.rsh_result = \(x, ...) {
   cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
 }
 
-#' @title plot RSH result
+#' @title plot RESH result
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' S3 method to plot output for RSH result in `rsh()`.
+#' S3 method to plot output for RESH result in `resh()`.
 #'
-#' @param x Return by `rsh()`.
+#' @param x Return by `resh()`.
 #' @param low_color (optional) The low color of the color gradient, default is `#6600CC`.
 #' @param high_color (optional) The high color of the color gradient, default is `#FFCC33`.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
@@ -344,7 +344,7 @@ print.rsh_result = \(x, ...) {
 #' @return A ggplot2 layer
 #' @export
 #'
-plot.rsh_result = \(x, low_color = "#6600CC",
+plot.resh_result = \(x, low_color = "#6600CC",
                     high_color = "#FFCC33", ...){
   g = x$determination
   gv1 = dplyr::count(g,name)
