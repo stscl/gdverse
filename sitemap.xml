@@ -28,6 +28,7 @@
 <url><loc>https://stscl.github.io/gdverse/reference/index.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/interaction_detector.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/inverse_distance_weight.html</loc></url>
+<url><loc>https://stscl.github.io/gdverse/reference/isp.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/lesh.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/loess_optscale.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/ndvi.html</loc></url>
@@ -40,9 +41,9 @@
 <url><loc>https://stscl.github.io/gdverse/reference/plot.gozh_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.idsa_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.interaction_detector.html</loc></url>
+<url><loc>https://stscl.github.io/gdverse/reference/plot.isp_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.lesh_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.opgd_result.html</loc></url>
-<url><loc>https://stscl.github.io/gdverse/reference/plot.resh_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.rgd_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.rid_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/plot.risk_detector.html</loc></url>
@@ -59,9 +60,9 @@
 <url><loc>https://stscl.github.io/gdverse/reference/print.gozh_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.idsa_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.interaction_detector.html</loc></url>
+<url><loc>https://stscl.github.io/gdverse/reference/print.isp_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.lesh_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.opgd_result.html</loc></url>
-<url><loc>https://stscl.github.io/gdverse/reference/print.resh_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.rgd_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.rid_result.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/print.risk_detector.html</loc></url>
@@ -77,7 +78,6 @@
 <url><loc>https://stscl.github.io/gdverse/reference/psd_spade.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/psmd_pseudop.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/psmd_spade.html</loc></url>
-<url><loc>https://stscl.github.io/gdverse/reference/resh.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/rgd.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/rid.html</loc></url>
 <url><loc>https://stscl.github.io/gdverse/reference/risk_detector.html</loc></url>
