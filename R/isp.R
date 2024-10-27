@@ -313,15 +313,15 @@ isp = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @export
 #'
 print.isp_result = \(x, ...) {
-  cat("***    Robust Explained Stratified Heterogeneity Model     \n")
-  cat("\n --------------- Global Power of Determinat : ------------")
+  cat("***       Interpretable Stratified Power Model     \n")
+  cat("\n ---------- Global Power of Determinat : ------------")
   print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n --------------- Global Variable Interaction : ------------")
+  cat("\n ---------- Global Variable Interaction : ------------")
   print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n --------------- ISP Model Variable Interaction : ------------")
+  cat("\n ---------- ISP Model Variable Interaction : ------------")
   print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
                      format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n --------------- ISP Model Performance Evaluation: ---------\n",
+  cat("\n ---------- ISP Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
