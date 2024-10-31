@@ -40,7 +40,7 @@ g = gd_bestunidisc(NDVIchange ~ .,
                    data = select(ndvi,-c(Climatezone,Mining)),
                    discnum = 3:15, cores = 6)
 tictoc::toc()
-## 2.32 sec elapsed
+## 2.35 sec elapsed
 ```
 
 
@@ -198,3 +198,17 @@ plot(ndvi_opgd)
 ```
 
 ![](../man/figures/opgd/opgd_plot-1.png)
+
+Use `$opt_param` to get the optimal discretization parameter in OPGD model:
+
+
+``` r
+ndvi_opgd$opt_param
+## # A tibble: 4 × 3
+##   varibale      discnum method  
+##   <chr>           <int> <chr>   
+## 1 GDP                15 quantile
+## 2 Popdensity         15 quantile
+## 3 Precipitation      14 natural 
+## 4 Tempchange         14 equal
+```

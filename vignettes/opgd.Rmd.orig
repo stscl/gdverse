@@ -75,3 +75,9 @@ You can use `plot()` to visualize the result.
 ```{r opgd_plot,fig.width=10.5,fig.height=4.25}
 plot(ndvi_opgd)
 ```
+
+Use `$opt_param` to get the optimal discretization parameter in OPGD model:
+
+```{r}
+ndvi_opgd$opt_param
+```
