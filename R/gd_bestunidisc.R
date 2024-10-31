@@ -86,7 +86,7 @@ gd_bestunidisc = \(formula, data, discnum = 3:22,
 
   if(return_disc){
     suppressMessages({resdisc = purrr::pmap_dfc(out_g,
-                              \(x,k,method) sdsfun::discretize_vector(
+                                \(x,k,method) sdsfun::discretize_vector(
                                 x = explanatory[,x,drop = TRUE],
                                 n = k, method = method, ...)) %>%
       purrr::set_names(out_g[[1]])})

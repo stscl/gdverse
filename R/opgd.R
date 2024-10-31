@@ -26,6 +26,7 @@
 #'
 #' @return A list.
 #' \describe{
+#' \item{\code{opt_param}{optimal discretization parameter}}
 #' \item{\code{factor}}{the result of factor detector}
 #' \item{\code{interaction}}{the result of interaction detector}
 #' \item{\code{risk}}{the result of risk detector}
@@ -53,10 +54,12 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:22,
   if (is.null(discvar)) {
     discvar = colnames(data)[-which(colnames(data) == yname)]
   }
-  discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
+  discdf = dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   g = gd_bestunidisc(paste0(yname,'~',paste0(discvar,collapse = '+')),
                      data = discdf, discnum = discnum,
                      discmethod = discmethod, cores = cores, ...)
+  opt_param = tibble::as_tibble(g[1:3])
+  names(opt_param) = c("varibale","discnum","method")
   discedvar = colnames(data[,-which(colnames(data) %in% discvar)])
   newdata = data %>%
     dplyr::select(dplyr::all_of(discedvar)) %>%
@@ -71,6 +74,7 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:22,
     }
     names(res) = type
   }
+  res = append(list("opt_param" = opt_param),res)
   class(res) = "opgd_result"
   return(res)
 }
@@ -87,6 +91,7 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:22,
 #' @export
 #'
 print.opgd_result = \(x, ...) {
+  x = x[-1] # rm opt_param to print
   cat("                OPGD Model                  \n")
   nx = names(x)
   for (i in seq_along(x)){
@@ -109,6 +114,7 @@ print.opgd_result = \(x, ...) {
 #' @export
 #'
 plot.opgd_result = \(x, ...) {
+  x = x[-1] # rm opt_param to plot
   if (length(x) == 1){
     res = x[1]
     nx = names(x)
