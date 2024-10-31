@@ -22,7 +22,7 @@
 #' determine the optimal analysis scale.
 #'
 #' @param formula A formula of comparison of size effects of spatial units.
-#' @param datalist A list of \code{data.frame} or \code{tibble}.
+#' @param datalist A list of `data.frame` or `tibble`.
 #' @param su A vector of sizes of spatial units.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.

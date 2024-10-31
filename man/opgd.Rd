@@ -19,9 +19,9 @@ opgd(
 \arguments{
 \item{formula}{A formula of OPGD model.}
 
-\item{data}{A data.frame, tibble or sf object of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
-\item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
+\item{discvar}{Names of continuous variable columns that need to be discretized. Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
 variables are used as \code{discvar}.}
 
@@ -33,10 +33,10 @@ variables are used as \code{discvar}.}
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
 
-\item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
+\item{type}{(optional) The type of geographical detector, which must be \code{factor}(default),
 \code{interaction}, \code{risk}, \code{ecological}. You can run one or more types at one time.}
 
-\item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
+\item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 
 \item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}. A useful parameter is \code{seed},
 which is used to set the random number seed.}

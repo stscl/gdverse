@@ -9,7 +9,7 @@ srsgd(formula, data, wt = NULL, type = "factor", alpha = 0.95)
 \arguments{
 \item{formula}{A formula of spatial rough set-based geographical detector model.}
 
-\item{data}{A data.frame, tibble or sf object of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
 \item{wt}{Spatial adjacency matrix. If \code{data} is a \code{sf} polygon object, the queen
 adjacency matrix is used when no \code{wt} object is provided. In other cases, you must

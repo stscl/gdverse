@@ -4,7 +4,7 @@
 #' Function for determining the best univariate discretization based on geodetector q-statistic.
 #'
 #' @param formula A formula of best univariate discretization.
-#' @param data A data.frame or tibble of observation data.
+#' @param data A `data.frame` or `tibble` of observation data.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
@@ -15,8 +15,7 @@
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()`.
 #'
-#' @return A list with the optimal parameter in the provided parameter combination with `k`,
-#' `method` and `disc`(when `return_disc` is `TRUE`).
+#' @return A list.
 #' \describe{
 #' \item{\code{x}}{the name of the variable that needs to be discretized}
 #' \item{\code{k}}{optimal discretization number}

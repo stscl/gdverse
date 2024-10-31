@@ -18,7 +18,7 @@ gd_bestunidisc(
 \arguments{
 \item{formula}{A formula of best univariate discretization.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A \code{data.frame} or \code{tibble} of observation data.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
 
@@ -36,8 +36,7 @@ Default is \code{TRUE}.}
 \item{...}{(optional) Other arguments passed to \code{sdsfun::discretize_vector()}.}
 }
 \value{
-A list with the optimal parameter in the provided parameter combination with \code{k},
-\code{method} and \code{disc}(when \code{return_disc} is \code{TRUE}).
+A list.
 \describe{
 \item{\code{x}}{the name of the variable that needs to be discretized}
 \item{\code{k}}{optimal discretization number}

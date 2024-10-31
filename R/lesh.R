@@ -15,7 +15,7 @@
 #' https://doi.org/10.1080/17538947.2023.2271883
 #'
 #' @param formula A formula of LESH model.
-#' @param data A data.frame, tibble or sf object of observation data.
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.

@@ -11,7 +11,7 @@
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of RID model.
-#' @param data A data.frame, tibble or sf object of observation data.
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param discvar Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent
 #' variables are used as `discvar`.

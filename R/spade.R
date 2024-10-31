@@ -8,7 +8,7 @@
 #' Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 #'
 #' @param formula A formula of spatial association detector (SPADE) model.
-#' @param data A data.frame, tibble or sf object of observation data.
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
 #' @param discvar (optional) Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are

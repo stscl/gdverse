@@ -15,7 +15,7 @@
 #' spatial analysis scale.
 #'
 #' @param formula A formula of comparison of size effects of spatial units.
-#' @param datalist A list of \code{data.frame} or \code{tibble}.
+#' @param datalist A list of `data.frame` or `tibble`.
 #' @param su A vector of sizes of spatial units.
 #' @param discvar Name of continuous variable columns that need to be discretized.Noted that
 #' when `formula` has `discvar`, `data` must have these columns.

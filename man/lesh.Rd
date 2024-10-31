@@ -9,7 +9,7 @@ lesh(formula, data, cores = 1, ...)
 \arguments{
 \item{formula}{A formula of LESH model.}
 
-\item{data}{A data.frame, tibble or sf object of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}

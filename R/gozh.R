@@ -10,7 +10,7 @@
 #' https://doi.org/10.1016/j.isprsjprs.2022.01.009
 #'
 #' @param formula A formula of GOZH model.
-#' @param data A data.frame, tibble or sf object of observation data.
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #' @param type (optional) The type of geographical detector,which must be `factor`(default),

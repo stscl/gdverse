@@ -9,7 +9,7 @@ rid(formula, data, discvar = NULL, discnum = 10, minsize = 1, cores = 1)
 \arguments{
 \item{formula}{A formula of RID model.}
 
-\item{data}{A data.frame, tibble or sf object of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
 \item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent

@@ -9,8 +9,8 @@
 #' doi: 10.1080/15481603.2020.1760434.
 #'
 #' @param formula A formula of OPGD model.
-#' @param data A data.frame, tibble or sf object of observation data.
-#' @param discvar Name of continuous variable columns that need to be discretized. Noted that
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
+#' @param discvar Names of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent
 #' variables are used as `discvar`.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
@@ -18,9 +18,9 @@
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
-#' @param type (optional) The type of geographical detector,which must be `factor`(default),
+#' @param type (optional) The type of geographical detector, which must be `factor`(default),
 #' `interaction`, `risk`, `ecological`. You can run one or more types at one time.
-#' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `gd_bestunidisc()`. A useful parameter is `seed`,
 #'  which is used to set the random number seed.
 #'
