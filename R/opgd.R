@@ -26,7 +26,7 @@
 #'
 #' @return A list.
 #' \describe{
-#' \item{\code{opt_param}{optimal discretization parameter}}
+#' \item{\code{opt_param}}{optimal discretization parameter}
 #' \item{\code{factor}}{the result of factor detector}
 #' \item{\code{interaction}}{the result of interaction detector}
 #' \item{\code{risk}}{the result of risk detector}
