@@ -117,7 +117,7 @@ based on geodetector q-statistic.</p>
 <span>                   data <span class="op">=</span> <span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                   discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 2.32 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 2.35 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
@@ -263,6 +263,17 @@ above.<a class="anchor" aria-label="anchor" href="#you-can-also-use-opgd-in-one-
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_opgd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/opgd/opgd_plot-1.png"></p>
+<p>Use <code>$opt_param</code> to get the optimal discretization
+parameter in OPGD model:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ndvi_opgd</span><span class="op">$</span><span class="va">opt_param</span></span>
+<span><span class="co">## # A tibble: 4 × 3</span></span>
+<span><span class="co">##   varibale      discnum method  </span></span>
+<span><span class="co">##   &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;   </span></span>
+<span><span class="co">## 1 GDP                15 quantile</span></span>
+<span><span class="co">## 2 Popdensity         15 quantile</span></span>
+<span><span class="co">## 3 Precipitation      14 natural </span></span>
+<span><span class="co">## 4 Tempchange         14 equal</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
