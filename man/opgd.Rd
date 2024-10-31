@@ -21,7 +21,7 @@ opgd(
 
 \item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
-\item{discvar}{Names of continuous variable columns that need to be discretized. Noted that
+\item{discvar}{Name of continuous variable columns that need to be discretized. Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
 variables are used as \code{discvar}.}
 
