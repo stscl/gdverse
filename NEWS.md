@@ -1,5 +1,7 @@
 # gdverse 1.2
 
+* Now `opgd()` returns optimal discretization parameters (#13).
+
 * Force `data` to `tibble` format in **gdverse** GDMs model function (#12).
 
 * Align the RID model and algorithm with the original framework presented in paper (#9).
