@@ -40,7 +40,7 @@ g = gd_bestunidisc(NDVIchange ~ .,
                    data = select(ndvi,-c(Climatezone,Mining)),
                    discnum = 3:15, cores = 6)
 tictoc::toc()
-## 2.35 sec elapsed
+## 2.78 sec elapsed
 ```
 
 
