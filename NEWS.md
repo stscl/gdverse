@@ -1,5 +1,7 @@
 # gdverse 1.2
 
+* Set the default number of discretizations in gdverse to range from 3 to 8 (#15).
+
 * Optimize the Python integration setup in gdverse (#14).
 
 * Now `opgd()` returns optimal discretization parameters (#13).
