@@ -48,8 +48,8 @@ data("ndvi")
 
 ``` r
 names(ndvi)
-## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"
-## [6] "GDP"           "Popdensity"
+## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation" "GDP"          
+## [7] "Popdensity"
 ```
 
 ### Run RGD
