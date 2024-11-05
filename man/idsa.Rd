@@ -55,8 +55,7 @@ multi-core parallel computing.}
 A list.
 \describe{
 \item{\code{interaction}}{the interaction result of IDSA model}
-\item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
-\item{\code{risk2}}{risk detection result of the input data}
+\item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 \item{\code{number_overlay_zones}}{the number of overlay zones}
 \item{\code{percentage_finely_divided_zones}}{the percentage of finely divided zones that are determined by the interaction of variables}
