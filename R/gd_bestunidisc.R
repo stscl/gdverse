@@ -5,7 +5,7 @@
 #'
 #' @param formula A formula of best univariate discretization.
 #' @param data A `data.frame` or `tibble` of observation data.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
@@ -30,7 +30,7 @@
 #'                data = sim,
 #'                discnum = 3:6)
 #'
-gd_bestunidisc = \(formula, data, discnum = 3:22,
+gd_bestunidisc = \(formula, data, discnum = 3:8,
                    discmethod = c("sd","equal","geometric","quantile","natural"),
                    cores = 1, return_disc = TRUE, seed = 123456789, ...){
   doclust = FALSE

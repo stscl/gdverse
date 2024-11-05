@@ -15,7 +15,7 @@
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent
 #' variables are used as `discvar`.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
-#' Default all `discvar` use `3:22`.
+#' Default all `discvar` use `3:8`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
@@ -36,7 +36,7 @@
 #'         discnum = 3:6, cores = 6)
 #' g
 #' }
-rgd = \(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1){
+rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}

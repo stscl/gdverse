@@ -17,7 +17,7 @@
 #' @param formula A formula of IDSA model.
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
-#' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
+#' @param discnum (optional) Number of multilevel discretization. Default will use `3:8`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
 #' Others use `sdsfun::discretize_vector()`.
@@ -51,7 +51,7 @@
 #' g = idsa(y ~ ., data = sim1)
 #' g
 #'
-idsa = \(formula,data,wt = NULL,discnum = 3:22,discmethod = "quantile",
+idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
          overlay = 'and', strategy = 2L, increase_rate = 0.05,
          cores = 1, seed = 123456789, alpha = 0.95, ...){
   formula = stats::as.formula(formula)

@@ -12,7 +12,7 @@
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are
 #' used as `discvar`.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
-#' Default all `discvar` use `3:22`.
+#' Default all `discvar` use `3:8`.
 #' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
 #' @param strategy (optional) Optimal discretization strategy. When `strategy` is `1L`, choose the highest q-statistics to
@@ -48,7 +48,7 @@
 #' g = isp(y ~ ., data = sim1, discnum = 3:8, cores = 6)
 #' g
 #' }
-isp = \(formula, data, discvar = NULL, discnum = 3:22,
+isp = \(formula, data, discvar = NULL, discnum = 3:8,
         overlay = 'and', strategy = 2L, increase_rate = 0.05,
         minsize = 1, cores = 1, alpha = 0.95){
   formula = stats::as.formula(formula)

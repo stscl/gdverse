@@ -13,7 +13,7 @@
 #' @param discvar (optional) Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent variables are
 #' used as `discvar`.
-#' @param discnum (optional) Number of multilevel discretization. Default will use `3:22`.
+#' @param discnum (optional) Number of multilevel discretization. Default will use `3:8`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`. Note
 #' that when using different `discmethod` for `discvar`, please ensure that the lengths of
 #' both are consistent. Noted that `robust` will use `robust_disc()`; `rpart` will use
@@ -38,7 +38,7 @@
 #' g = spade(y ~ ., data = sim1)
 #' g
 #'
-spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:22,
+spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:8,
           discmethod = 'quantile', cores = 1, seed = 123456789, permutations = 0, ...){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)

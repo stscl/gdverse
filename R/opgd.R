@@ -13,7 +13,7 @@
 #' @param discvar Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent
 #' variables are used as `discvar`.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
@@ -40,7 +40,7 @@
 #'      discvar = paste0('x',letters[1:3]),
 #'      discnum = 3:6)
 #'
-opgd = \(formula, data, discvar = NULL, discnum = 3:22,
+opgd = \(formula, data, discvar = NULL, discnum = 3:8,
          discmethod = c("sd","equal","geometric","quantile","natural"),
          cores = 1, type = "factor", alpha = 0.95, ...){
   formula = stats::as.formula(formula)

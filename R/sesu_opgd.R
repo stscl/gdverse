@@ -19,7 +19,7 @@
 #' @param su A vector of sizes of spatial units.
 #' @param discvar Name of continuous variable columns that need to be discretized.Noted that
 #' when `formula` has `discvar`, `data` must have these columns.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
@@ -56,7 +56,7 @@
 #'           discvar = names(select(fvc5000,-c(fvc,lulc))),
 #'           cores = 6)
 #' }
-sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:22,
+sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:8,
               discmethod = c("sd","equal","geometric","quantile","natural"),
               cores = 1, increase_rate = 0.05, alpha = 0.95, ...){
   res_sesu = purrr::map2(datalist, su,
@@ -98,7 +98,7 @@ print.sesu_opgd = \(x,...){
   for (i in spunits){
     cat(sprintf("\n Spatial Unit: %s ",i))
     print(knitr::kable(dplyr::filter(g,su==i) %>% dplyr::select(-su),
-                       format = "markdown",digits = 12, align = 'c', ...))
+                       format = "markdown",digits = 12,align = 'c',...))
   }
 }
 
