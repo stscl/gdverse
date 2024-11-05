@@ -66,7 +66,7 @@ idsa.model = idsa(Depression_prevelence ~ .,
                   data = depression,
                   wt = wt, cores = 12)
 tictoc::toc()
-## 61.71 sec elapsed
+## 58.55 sec elapsed
 idsa.model
 ## ***     Interactive Detector For Spatial Associations 
 ## 
@@ -97,7 +97,7 @@ idsa.model
 plot(idsa.model)
 ```
 
-![](../man/figures/idsa/idsa_modeling-1.png)
+![plot of chunk idsa_modeling](man/figures/idsa/idsa_modeling-1.png)
 
 The risk detection outcomes, as determined by IDSA, can be graphically represented on a map.
 
@@ -113,4 +113,4 @@ ggplot(data = depression) +
     theme_bw()
 ```
 
-![](../man/figures/idsa/idsa_map-1.png)
+![plot of chunk idsa_map](man/figures/idsa/idsa_map-1.png)

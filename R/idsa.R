@@ -37,8 +37,7 @@
 #' @return A list.
 #' \describe{
 #' \item{\code{interaction}}{the interaction result of IDSA model}
-#' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
-#' \item{\code{risk2}}{risk detection result of the input data}
+#' \item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 #' \item{\code{number_overlay_zones}}{the number of overlay zones}
 #' \item{\code{percentage_finely_divided_zones}}{the percentage of finely divided zones that are determined by the interaction of variables}
@@ -136,19 +135,11 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
   risk1 = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
-  risk2 = risk1 %>%
-    dplyr::select(dplyr::all_of(c('zone1st','zone2nd','Risk'))) %>%
-    tidyr::pivot_longer(cols = dplyr::all_of(c('zone1st','zone2nd')),
-                        names_to = 'zone', values_to = 'zone_risk') %>%
-    dplyr::distinct(zone_risk,.keep_all = TRUE)
-  risk2 = tibble::tibble(reszone = paste0('zone',reszone)) %>%
-    dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
-    dplyr::pull(Risk)
   out_g = tibble::tibble(variable = xsname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(pid_idsa))
 
-  res = list("interaction" = out_g, "risk1" = risk1, "risk2" = risk2,
+  res = list("interaction" = out_g, "risk" = risk1,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
