@@ -116,12 +116,12 @@ ndvi_opgd
 ## 
 ## |   variable    | Q-statistic | P-value  |
 ## |:-------------:|:-----------:|:--------:|
-## | Precipitation |  0.8842705  | 8.58e-10 |
+## | Precipitation |  0.8693505  | 2.58e-10 |
 ## |  Climatezone  |  0.8218335  | 7.34e-10 |
-## |  Tempchange   |  0.3618595  | 3.31e-10 |
-## |  Popdensity   |  0.2203510  | 9.65e-10 |
+## |  Tempchange   |  0.3330256  | 1.89e-10 |
+## |  Popdensity   |  0.1990773  | 6.60e-11 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
-## |      GDP      |  0.1270466  | 2.00e-09 |
+## |      GDP      |  0.1004568  | 3.07e-10 |
 ```
 
 ### GOZH model
