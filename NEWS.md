@@ -1,5 +1,7 @@
 # gdverse 1.2
 
+* Optimize the Python integration setup in gdverse (#14).
+
 * Now `opgd()` returns optimal discretization parameters (#13).
 
 * Force `data` to `tibble` format in **gdverse** GDMs model function (#12).
