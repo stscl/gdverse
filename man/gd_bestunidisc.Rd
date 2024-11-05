@@ -7,7 +7,7 @@
 gd_bestunidisc(
   formula,
   data,
-  discnum = 3:22,
+  discnum = 3:8,
   discmethod = c("sd", "equal", "geometric", "quantile", "natural"),
   cores = 1,
   return_disc = TRUE,
@@ -20,7 +20,7 @@ gd_bestunidisc(
 
 \item{data}{A \code{data.frame} or \code{tibble} of observation data.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:8}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization, default is using
 \code{c("sd","equal","geometric","quantile","natural")} by invoking \code{sdsfun}.}

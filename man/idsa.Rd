@@ -8,7 +8,7 @@ idsa(
   formula,
   data,
   wt = NULL,
-  discnum = 3:22,
+  discnum = 3:8,
   discmethod = "quantile",
   overlay = "and",
   strategy = 2L,
@@ -26,7 +26,7 @@ idsa(
 
 \item{wt}{(optional) The spatial weight matrix. When \code{data} is not an \code{sf} object, must provide \code{wt}.}
 
-\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:8}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
 Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};

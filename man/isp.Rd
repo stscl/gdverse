@@ -8,7 +8,7 @@ isp(
   formula,
   data,
   discvar = NULL,
-  discnum = 3:22,
+  discnum = 3:8,
   overlay = "and",
   strategy = 2L,
   increase_rate = 0.05,
@@ -27,7 +27,7 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns. By 
 used as \code{discvar}.}
 
 \item{discnum}{A numeric vector of discretized classes of columns that need to be discretized.
-Default all \code{discvar} use \code{3:22}.}
+Default all \code{discvar} use \code{3:8}.}
 
 \item{overlay}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}

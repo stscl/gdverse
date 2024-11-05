@@ -9,7 +9,7 @@ spade(
   data,
   wt = NULL,
   discvar = NULL,
-  discnum = 3:22,
+  discnum = 3:8,
   discmethod = "quantile",
   cores = 1,
   seed = 123456789,
@@ -28,7 +28,7 @@ spade(
 when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent variables are
 used as \code{discvar}.}
 
-\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:8}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}. Note
 that when using different \code{discmethod} for \code{discvar}, please ensure that the lengths of

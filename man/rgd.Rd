@@ -4,7 +4,7 @@
 \alias{rgd}
 \title{robust geographical detector(RGD) model}
 \usage{
-rgd(formula, data, discvar = NULL, discnum = 3:22, minsize = 1, cores = 1)
+rgd(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1)
 }
 \arguments{
 \item{formula}{A formula of RGD model.}
@@ -16,7 +16,7 @@ when \code{formula} has \code{discvar}, \code{data} must have these columns. By 
 variables are used as \code{discvar}.}
 
 \item{discnum}{A numeric vector of discretized classes of columns that need to be discretized.
-Default all \code{discvar} use \code{3:22}.}
+Default all \code{discvar} use \code{3:8}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 

@@ -8,7 +8,7 @@ opgd(
   formula,
   data,
   discvar = NULL,
-  discnum = 3:22,
+  discnum = 3:8,
   discmethod = c("sd", "equal", "geometric", "quantile", "natural"),
   cores = 1,
   type = "factor",
@@ -25,7 +25,7 @@ opgd(
 when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
 variables are used as \code{discvar}.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:8}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization, default is using
 \code{c("sd","equal","geometric","quantile","natural")} by invoking \code{sdsfun}.}

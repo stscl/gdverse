@@ -9,7 +9,7 @@ sesu_opgd(
   datalist,
   su,
   discvar,
-  discnum = 3:22,
+  discnum = 3:8,
   discmethod = c("sd", "equal", "geometric", "quantile", "natural"),
   cores = 1,
   increase_rate = 0.05,
@@ -27,7 +27,7 @@ sesu_opgd(
 \item{discvar}{Name of continuous variable columns that need to be discretized.Noted that
 when \code{formula} has \code{discvar}, \code{data} must have these columns.}
 
-\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:22}.}
+\item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:8}.}
 
 \item{discmethod}{(optional) A vector of methods for discretization, default is using
 \code{c("sd","equal","geometric","quantile","natural")} by invoking \code{sdsfun}.}
