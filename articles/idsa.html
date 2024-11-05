@@ -140,48 +140,36 @@ demonstrate the use of the IDSA model.</p>
 <span>                  data <span class="op">=</span> <span class="va">depression</span>,</span>
 <span>                  wt <span class="op">=</span> <span class="va">wt</span>, cores <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 126.08 sec elapsed</span></span>
+<span><span class="co">## 59.04 sec elapsed</span></span>
 <span><span class="va">idsa.model</span></span>
 <span><span class="co">## ***     Interactive Detector For Spatial Associations </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |                                                                 variable                                                                  |    PID    |</span></span>
-<span><span class="co">## |:-----------------------------------------------------------------------------------------------------------------------------------------:|:---------:|</span></span>
-<span><span class="co">## |                PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ X.HouseRent                 | 0.8609974 |</span></span>
-<span><span class="co">## |                       PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                        | 0.8242240 |</span></span>
-<span><span class="co">## |                     PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ X.HouseRent                      | 0.7945147 |</span></span>
-<span><span class="co">## | PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces ∩ X.HouseRent | 0.7828504 |</span></span>
-<span><span class="co">## |        PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces ∩ X.HouseRent        | 0.7700537 |</span></span>
+<span><span class="co">## |                                                                    variable                                                                     |    PID    |</span></span>
+<span><span class="co">## |:-----------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|</span></span>
+<span><span class="co">## |             PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces             | 0.7273702 |</span></span>
+<span><span class="co">## |        PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces        | 0.7265580 |</span></span>
+<span><span class="co">## |                    PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces                    | 0.7249090 |</span></span>
+<span><span class="co">## | PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces | 0.7225422 |</span></span>
+<span><span class="co">## |                          PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                           | 0.7199171 |</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  --------- IDSA model performance evaluation: --------</span></span>
-<span><span class="co">##  * Number of overlay zones :  46 </span></span>
-<span><span class="co">##  * Percentage of finely divided zones :  0.004664179 </span></span>
-<span><span class="co">##  * Number of individual explanatory variables :  7 </span></span>
+<span><span class="co">##  * Number of overlay zones :  23 </span></span>
+<span><span class="co">##  * Percentage of finely divided zones :  0.002798507 </span></span>
+<span><span class="co">##  * Number of individual explanatory variables :  8 </span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ## Different of response variable between a pair of overlay zones:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |  zone1st   |    zone2nd    | Risk |</span></span>
 <span><span class="co">## |:----------:|:-------------:|:----:|</span></span>
-<span><span class="co">## | zoneBeer_2 |  zoneBeer_6   |  No  |</span></span>
-<span><span class="co">## | zoneBeer_2 |  zoneBeer_7   |  No  |</span></span>
-<span><span class="co">## | zoneBeer_2 |  zoneBeer_8   |  No  |</span></span>
-<span><span class="co">## | zoneBeer_2 | zoneCasinos_1 |  No  |</span></span>
-<span><span class="co">## | zoneBeer_2 | zoneCasinos_2 |  No  |</span></span>
+<span><span class="co">## | zoneBeer_3 |  zoneBeer_4   |  No  |</span></span>
+<span><span class="co">## | zoneBeer_3 |  zoneBeer_5   |  No  |</span></span>
+<span><span class="co">## | zoneBeer_3 |  zoneBeer_6   |  No  |</span></span>
+<span><span class="co">## | zoneBeer_3 | zoneCasinos_2 |  No  |</span></span>
+<span><span class="co">## | zoneBeer_3 | zoneCasinos_3 |  No  |</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  #### Only the first five pairs of interactions and overlay zones are displayed! ####</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">idsa.model</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/idsa/idsa_modeling-1.png"></p>
-<p>The risk detection outcomes, as determined by IDSA, can be
-graphically represented on a map.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">idsa_risk</span> <span class="op">=</span> <span class="va">idsa.model</span><span class="op">$</span><span class="va">risk2</span></span>
-<span><span class="va">depression</span><span class="op">$</span><span class="va">risk</span> <span class="op">=</span> <span class="va">idsa_risk</span></span>
-<span></span>
-<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">depression</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>color <span class="op">=</span> <span class="va">risk</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.65</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"No"</span> <span class="op">=</span> <span class="st">"#7fdbff"</span>,</span>
-<span>                                          <span class="st">"Yes"</span> <span class="op">=</span> <span class="st">"#ffa500"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/idsa/idsa_map-1.png"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
