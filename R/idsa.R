@@ -167,7 +167,7 @@ print.idsa_result = \(x, ...) {
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
       "* Number of individual explanatory variables : ",x$number_individual_explanatory_variables,"\n",
       "\n ## Different of response variable between a pair of overlay zones:")
-  x = dplyr::select(x$risk1,zone1st,zone2nd,Risk)
+  x = dplyr::select(x$risk,zone1st,zone2nd,Risk)
   print(knitr::kable(utils::head(x,5), format = "markdown", align = 'c', ...))
   cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
 }
@@ -184,7 +184,7 @@ print.idsa_result = \(x, ...) {
 #' @export
 #'
 plot.idsa_result = \(x, ...) {
-  grd = dplyr::select(x$risk1,zone1st,zone2nd,Risk) %>%
+  grd = dplyr::select(x$risk,zone1st,zone2nd,Risk) %>%
     dplyr::mutate(risk = forcats::fct_recode(Risk,"Y" = "Yes", "N" = "No"))
   fig_rd = ggplot2::ggplot(data = grd,
                            ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
