@@ -17,7 +17,7 @@
 
 * Migrate the source code from `ausgis/gdverse` to `stscl/gdverse` on GitHub.
 
-# gdverse 1.1
+# gdverse 1.1.0
 
 * The general variable discretization in **gdverse** now utilizes `sdsfun::discretize_vector()` (#6).
 
@@ -55,6 +55,6 @@
 
 * Support for using the `sf` object as input in all models.
 
-# gdverse 1.0
+# gdverse 1.0.0
 
 * First stable release.
