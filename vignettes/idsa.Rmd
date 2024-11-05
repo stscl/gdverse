@@ -66,32 +66,32 @@ idsa.model = idsa(Depression_prevelence ~ .,
                   data = depression,
                   wt = wt, cores = 12)
 tictoc::toc()
-## 126.08 sec elapsed
+## 61.71 sec elapsed
 idsa.model
 ## ***     Interactive Detector For Spatial Associations 
 ## 
-## |                                                                 variable                                                                  |    PID    |
-## |:-----------------------------------------------------------------------------------------------------------------------------------------:|:---------:|
-## |                PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ X.HouseRent                 | 0.8609974 |
-## |                       PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                        | 0.8242240 |
-## |                     PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ X.HouseRent                      | 0.7945147 |
-## | PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces ∩ X.HouseRent | 0.7828504 |
-## |        PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces ∩ X.HouseRent        | 0.7700537 |
+## |                                                                    variable                                                                     |    PID    |
+## |:-----------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|
+## |             PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces             | 0.7273702 |
+## |        PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces        | 0.7265580 |
+## |                    PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces                    | 0.7249090 |
+## | PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces | 0.7225422 |
+## |                          PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                           | 0.7199171 |
 ## 
 ##  --------- IDSA model performance evaluation: --------
-##  * Number of overlay zones :  46 
-##  * Percentage of finely divided zones :  0.004664179 
-##  * Number of individual explanatory variables :  7 
+##  * Number of overlay zones :  23 
+##  * Percentage of finely divided zones :  0.002798507 
+##  * Number of individual explanatory variables :  8 
 ##  
 ##  ## Different of response variable between a pair of overlay zones:
 ## 
 ## |  zone1st   |    zone2nd    | Risk |
 ## |:----------:|:-------------:|:----:|
-## | zoneBeer_2 |  zoneBeer_6   |  No  |
-## | zoneBeer_2 |  zoneBeer_7   |  No  |
-## | zoneBeer_2 |  zoneBeer_8   |  No  |
-## | zoneBeer_2 | zoneCasinos_1 |  No  |
-## | zoneBeer_2 | zoneCasinos_2 |  No  |
+## | zoneBeer_3 |  zoneBeer_4   |  No  |
+## | zoneBeer_3 |  zoneBeer_5   |  No  |
+## | zoneBeer_3 |  zoneBeer_6   |  No  |
+## | zoneBeer_3 | zoneCasinos_2 |  No  |
+## | zoneBeer_3 | zoneCasinos_3 |  No  |
 ## 
 ##  #### Only the first five pairs of interactions and overlay zones are displayed! ####
 plot(idsa.model)
