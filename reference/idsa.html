@@ -58,7 +58,7 @@
 <span>  <span class="va">formula</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  wt <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">22</span>,</span>
+<span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span>,</span>
 <span>  discmethod <span class="op">=</span> <span class="st">"quantile"</span>,</span>
 <span>  overlay <span class="op">=</span> <span class="st">"and"</span>,</span>
 <span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
@@ -87,7 +87,7 @@
 
 
 <dt id="arg-discnum">discnum<a class="anchor" aria-label="anchor" href="#arg-discnum"></a></dt>
-<dd><p>(optional) Number of multilevel discretization. Default will use <code>3:22</code>.</p></dd>
+<dd><p>(optional) Number of multilevel discretization. Default will use <code>3:8</code>.</p></dd>
 
 
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
@@ -180,26 +180,26 @@ DOI:10.1080/13658816.2021.1882680</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |   variable   |    PID    |</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> |:------------:|:---------:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   xb ∩ xc    | 0.7098938 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   xa ∩ xb    | 0.6810028 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |      xc      | 0.6290045 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | xa ∩ xb ∩ xc | 0.6091475 |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   xa ∩ xc    | 0.5247303 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   xa ∩ xb    | 0.5540009 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   xb ∩ xc    | 0.5467294 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |      xc      | 0.5411351 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   xa ∩ xc    | 0.4515003 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | xa ∩ xb ∩ xc | 0.4275805 |</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  --------- IDSA model performance evaluation: --------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  * Number of overlay zones :  20 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  * Percentage of finely divided zones :  0.0125 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  * Number of overlay zones :  9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  * Percentage of finely divided zones :  0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  * Number of individual explanatory variables :  2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  ## Different of response variable between a pair of overlay zones:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zone1st  |  zone2nd  | Risk |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:---------:|:----:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexb_1 | zonexb_10 | Yes  |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexb_1 | zonexb_11 | Yes  |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexb_1 | zonexb_12 | Yes  |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexb_1 | zonexb_13 | Yes  |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexb_1 | zonexb_14 | Yes  |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zone1st  | zone2nd  | Risk |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:--------:|:----:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexa_1 | zonexa_2 |  No  |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexa_1 | zonexa_3 | Yes  |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexa_1 | zonexa_4 |  No  |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexa_1 | zonexb_1 | Yes  |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | zonexa_1 | zonexb_2 |  No  |</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  #### Only the first five pairs of interactions and overlay zones are displayed! ####</span>
 <span class="r-in"><span></span></span>
