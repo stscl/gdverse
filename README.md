@@ -32,15 +32,6 @@ Current models and functions provided by **gdverse** are:
 
 <div class="figure" style="text-align: center">
 
-<img src="./man/figures/gdm.png" alt="Development of Geographical Detector Models" width="100%" />
-<p class="caption">
-Development of Geographical Detector Models
-</p>
-
-</div>
-
-<div class="figure" style="text-align: center">
-
 <img src="./man/figures/gdverse_funs.png" alt="Function organization in gdverse package" width="95%" />
 <p class="caption">
 Function organization in gdverse package
