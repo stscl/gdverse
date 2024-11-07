@@ -1,3 +1,5 @@
+# gdverse 1.2-1
+
 # gdverse 1.2
 
 * Set the default number of discretizations in gdverse to range from 3 to 8 (#15).
