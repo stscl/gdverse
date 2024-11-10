@@ -48,12 +48,10 @@ multi-core parallel computing.}
 \value{
 A list.
 \describe{
-\item{\code{factor}}{factor detect results}
-\item{\code{interaction}}{interaction detect results}
-\item{\code{optdisc}}{independent variable optimal spatial discretization}
-\item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{rpd}}{robust power of determinants}
 \item{\code{spd}}{shap power of determinants}
+\item{\code{optdisc}}{independent variable optimal spatial discretization}
+\item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 \item{\code{determination}}{determination of the optimal interaction of variables}
 \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 \item{\code{number_overlay_zones}}{the number of overlay zones}
