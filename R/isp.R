@@ -257,9 +257,9 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
 #'
 print.isp_result = \(x, ...) {
   cat("***     Interpretable Stratified Power Model     \n")
-  cat("\n ---------- Global Power of Determinant Contribution: ------------")
+  cat("\n ---------- Global SHAP Power of Determinant: ------------")
   print(knitr::kable(x$spd, format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- Global Variable Interaction Result: ------------")
+  cat("\n ---------- Global Variable Interaction: ------------")
   print(knitr::kable(utils::head(x$rpd,10), format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- ISP Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
