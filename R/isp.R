@@ -257,12 +257,10 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
 #'
 print.isp_result = \(x, ...) {
   cat("***     Interpretable Stratified Power Model     \n")
-  cat("\n ---------- Global Power of Determinant : ------------")
-  print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- Global Variable Interaction : ------------")
-  print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
-  cat("\n ---------- ISP Model Variable Interaction : ------------")
-  print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),5),
+  cat("\n ---------- Global Power of Determinant Contribution: ------------")
+  print(knitr::kable(x$spd, format = "markdown", digits = 12, align = 'c', ...))
+  cat("\n ---------- Global Variable Interaction Result: ------------")
+  print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),10),
                      format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- ISP Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
@@ -271,7 +269,7 @@ print.isp_result = \(x, ...) {
       "\n ## Different of response variable between a pair of overlay zones:")
   x = dplyr::select(x$risk,zone1st,zone2nd,Risk)
   print(knitr::kable(utils::head(x,5), format = "markdown", align = 'c', ...))
-  cat("\n #### Only the first five pairs of interactions and overlay zones are displayed! ####")
+  cat("\n #### Only the first ten pairs of interactions and overlay zones are displayed! ####")
 }
 
 #' @title plot ISP result
