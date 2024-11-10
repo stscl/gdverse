@@ -186,7 +186,7 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
 
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
-  interactvar = xs[[which.max(out_rpd)]]
+  interactvar = xs[[which.max(out_rpdv)]]
   if (overlay == 'intersection'){
     reszone = dti %>%
       dplyr::select(dplyr::all_of(interactvar)) %>%
@@ -207,7 +207,7 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
 
   step_interaction = sapply(xs, length)
   max_rpd_names = sapply(unique(step_interaction), function(.s) {
-    step_rpd = out_rpd[which(step_interaction == .s)]
+    step_rpd = out_rpdv[which(step_interaction == .s)]
     step_indice = which.max(step_rpd)
     return(xs[which(step_interaction == .s)][step_indice])
   })
