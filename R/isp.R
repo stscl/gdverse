@@ -26,12 +26,10 @@
 #'
 #' @return A list.
 #' \describe{
-#' \item{\code{factor}}{factor detect results}
-#' \item{\code{interaction}}{interaction detect results}
-#' \item{\code{optdisc}}{independent variable optimal spatial discretization}
-#' \item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{rpd}}{robust power of determinants}
 #' \item{\code{spd}}{shap power of determinants}
+#' \item{\code{optdisc}}{independent variable optimal spatial discretization}
+#' \item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{determination}}{determination of the optimal interaction of variables}
 #' \item{\code{number_individual_explanatory_variables}}{the number of individual explanatory variables used for examining the interaction effects}
 #' \item{\code{number_overlay_zones}}{the number of overlay zones}
@@ -101,8 +99,6 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
       dplyr::bind_cols(res_discdf)
   }
 
-  rpd_factor = gd(paste0(yname,' ~ .'),data = dti,type = "factor")[[1]]
-
   xname = colnames(dti)[-which(colnames(dti) == yname)]
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
   spfom = overlay
@@ -121,13 +117,13 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
     } else {
       fuzzyzone = sdsfun::fuzzyoverlay(formula,discdata,overlaymethod)
     }
-    qtheta = factor_detector(discdata[,yname,drop = TRUE],fuzzyzone)[[1]]
+    gd_fd = factor_detector(discdata[,yname,drop = TRUE],fuzzyzone)
+    qtheta = tibble::tibble(rpd = gd_fd[[1]],qv = gd_fd[[2]])
     return(qtheta)
   }
 
   calcul_rpd = \(.x){
     qv = rpd_isp(paste(yname,'~',paste0(.x,collapse = '+')),dti,spfom)
-    names(qv) = 'RPD'
     return(qv)
   }
 
@@ -140,12 +136,12 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
 
   if (doclust) {
     parallel::clusterExport(cores,c('factor_detector'))
-    out_g = parallel::parLapply(cores, xs, calcul_rpd)
-    out_g = tibble::as_tibble(do.call(rbind, out_g))
+    out_rpd = parallel::parLapply(cores, xs, calcul_rpd)
+    out_rpd = tibble::as_tibble(do.call(rbind, out_rpd))
   } else {
-    out_g = purrr::map_dfr(xs, calcul_rpd)
+    out_rpd = purrr::map_dfr(xs, calcul_rpd)
   }
-  out_rpd = dplyr::pull(out_g,1)
+  out_rpdv = dplyr::pull(out_rpd,1)
   m = length(xname)
   mf = factorial(m)
 
@@ -173,7 +169,7 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
       return(thetax)
     }
 
-    thetaxs = purrr::map_dbl(fullvar, \(.x) calcul_unishap(xvar,.x,xs,out_rpd))
+    thetaxs = purrr::map_dbl(fullvar, \(.x) calcul_unishap(xvar,.x,xs,out_rpdv))
     thetax = sum(thetaxs)
     names(thetax) = 'SPD'
     return(thetax)
@@ -202,54 +198,12 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
   risk1 = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
-  res_rpd = tibble::tibble(variable = xsname,
-                           rpd = out_rpd) %>%
+  res_rpd = tibble::tibble(variable = xsname) %>%
+    dplyr::bind_cols(out_rpd) %>%
     dplyr::arrange(dplyr::desc(rpd))
   res_spd = tibble::tibble(variable = xname,
                            spd = out_spd) %>%
     dplyr::arrange(dplyr::desc(spd))
-
-  interact_type = \(qv1,qv2,qv12){
-    if (qv12 < min(qv1, qv2)) {
-      interaction = c("Weaken, nonlinear")
-    } else if (qv12 >= min(qv1, qv2) & qv12 <= max(qv1, qv2)) {
-      interaction = c("Weaken, uni-")
-    } else if (qv12 > max(qv1, qv2) & (qv12 < qv1 + qv2)) {
-      interaction = c("Enhance, bi-")
-    } else if (qv12 == qv1 + qv2) {
-      interaction = c("Independent")
-    } else {
-      interaction = c("Enhance, nonlinear")
-    }
-    return(interaction)
-  }
-
-  interaction_indice = which(sapply(xs, length) == 2)
-  interaction_qv = out_rpd[interaction_indice]
-  interaction_xv = xs[interaction_indice]
-  variable1 = purrr::map_chr(seq_along(interaction_xv),
-                             \(.x) interaction_xv[[.x]][1])
-  variable2 = purrr::map_chr(seq_along(interaction_xv),
-                             \(.x) interaction_xv[[.x]][2])
-  qv1 = purrr::map_dbl(variable1, \(.x) get_value_by_varname(.x,xs,out_rpd))
-  qv2 = purrr::map_dbl(variable2, \(.x) get_value_by_varname(.x,xs,out_rpd))
-  interaction = tibble::tibble(
-    "Variable1 Q-statistics" = qv1, "Variable2 Q-statistics" = qv2,
-    "Variable1 and Variable2 interact Q-statistics" = interaction_qv,
-    "variable1" = variable1, "variable2" = variable2,
-    "Interaction" = purrr::pmap_chr(list(qv1 = qv1, qv2 = qv2,
-                                         qv12 = interaction_qv),
-                                    interact_type)) %>%
-    dplyr::select(variable1,variable2,Interaction,
-                  dplyr::everything()) %>%
-    dplyr::left_join(dplyr::select(res_spd,variable,spd1 = spd),
-                     by = c("variable1" = "variable")) %>%
-    dplyr::left_join(dplyr::select(res_spd,variable,spd2 = spd),
-                     by = c("variable2" = "variable")) %>%
-    dplyr::mutate(spd = (abs(spd1) + abs(spd2)), spd1 = abs(spd1) / spd, spd2 = abs(spd2) / spd,
-                  `Variable1 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd1,
-                  `Variable2 SPD` = `Variable1 and Variable2 interact Q-statistics`*spd2) %>%
-    dplyr::select(-dplyr::starts_with('spd'))
 
   step_interaction = sapply(xs, length)
   max_rpd_names = sapply(unique(step_interaction), function(.s) {
@@ -274,20 +228,19 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
     }
   }
   determination = tibble::tibble(variable = xsname[new_rpd_indice],
-                                 rpd = out_rpd[new_rpd_indice],
+                                 rpd = out_rpdv[new_rpd_indice],
                                  step = step_interaction[new_rpd_indice],
                                  name = new_xsname[nchar(new_xsname) > 0]) %>%
     dplyr::group_by(step) %>%
     dplyr::arrange(rpd,.by_group=TRUE) %>%
     dplyr::ungroup()
 
-  res = list("factor" = rpd_factor, "interaction" = interaction, "optdisc" = res_discdf,
-             "risk" = risk1, "rpd" = res_rpd, "spd" = res_spd, "determination" = determination,
+  res = list("rpd" = res_rpd, "spd" = res_spd, "optdisc" = res_discdf,
+             "risk" = risk1, "determination" = determination,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
   class(res) = "isp_result"
-
   return(res)
 }
 
