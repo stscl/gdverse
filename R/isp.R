@@ -260,8 +260,7 @@ print.isp_result = \(x, ...) {
   cat("\n ---------- Global Power of Determinant Contribution: ------------")
   print(knitr::kable(x$spd, format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- Global Variable Interaction Result: ------------")
-  print(knitr::kable(utils::head(dplyr::rename(x$rpd, RPD = rpd),10),
-                     format = "markdown", digits = 12, align = 'c', ...))
+  print(knitr::kable(utils::head(x$rpd,10), format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- ISP Model Performance Evaluation: ---------\n",
       "* Number of overlay zones : ", x$number_overlay_zones, "\n",
       "* Percentage of finely divided zones : ",x$percentage_finely_divided_zones,"\n",
