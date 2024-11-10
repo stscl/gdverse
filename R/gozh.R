@@ -13,9 +13,9 @@
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
-#' @param type (optional) The type of geographical detector,which must be `factor`(default),
-#' `interaction`, `risk`, `ecological`.You can run one or more types at one time.
-#' @param alpha (optional) Specifies the size of confidence level.Default is `0.95`.
+#' @param type (optional) The type of geographical detector, which must be `factor`(default),
+#' `interaction`, `risk`, `ecological`. You can run one or more types at one time.
+#' @param alpha (optional) Specifies the size of confidence level. Default is `0.95`.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A list.

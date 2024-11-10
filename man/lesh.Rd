@@ -20,7 +20,7 @@ multi-core parallel computing.}
 A list.
 \describe{
 \item{\code{interaction}}{the interaction result of LESH model}
-\item{\code{spd_lesh}}{a tibble of the SHAP power of determinants}
+\item{\code{spd_lesh}}{a tibble of the shap power of determinants}
 }
 }
 \description{

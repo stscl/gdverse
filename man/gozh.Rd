@@ -14,10 +14,10 @@ gozh(formula, data, cores = 1, type = "factor", alpha = 0.95, ...)
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
 
-\item{type}{(optional) The type of geographical detector,which must be \code{factor}(default),
-\code{interaction}, \code{risk}, \code{ecological}.You can run one or more types at one time.}
+\item{type}{(optional) The type of geographical detector, which must be \code{factor}(default),
+\code{interaction}, \code{risk}, \code{ecological}. You can run one or more types at one time.}
 
-\item{alpha}{(optional) Specifies the size of confidence level.Default is \code{0.95}.}
+\item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
