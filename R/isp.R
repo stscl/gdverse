@@ -308,8 +308,7 @@ plot.isp_result = \(x, low_color = "#6600CC",
     ggplot2::geom_point(data = dplyr::filter(g,rpd == max(g$rpd)),
                         ggplot2::aes(x = step, y = name),
                         color = "red", shape = "*", size = 12.5) +
-    ggplot2::scale_color_gradient(low = low_color,
-                                  high = high_color) +
+    ggplot2::scale_color_gradient(low = low_color, high = high_color) +
     ggplot2::labs(x = "No. of variables in fuzzy overlay", y = "",
                   size = "", color = "Q value") +
     ggplot2::guides(size = "none") +
@@ -317,6 +316,11 @@ plot.isp_result = \(x, low_color = "#6600CC",
     ggplot2::theme_classic() +
     ggplot2::theme(legend.position = "inside",
                    legend.justification = c('right','bottom'),
+                   legend.title = ggplot2::element_text(family = 'serif'),
+                   axis.title.x = ggplot2::element_text(family = 'serif',
+                                                        face = "bold.italic"),
+                   axis.text = ggplot2::element_text(family = 'serif',
+                                                     face = "bold.italic"),
                    ...)
   return(fig_p)
 }
