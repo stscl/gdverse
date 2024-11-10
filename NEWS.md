@@ -1,4 +1,6 @@
-# gdverse 1.2-1
+# gdverse 1.3
+
+* Optimize `isp()` result export and corresponding terminal output format (#16).
 
 # gdverse 1.2
 
