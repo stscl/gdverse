@@ -29,8 +29,7 @@
 #' \item{\code{factor}}{factor detect results}
 #' \item{\code{interaction}}{interaction detect results}
 #' \item{\code{optdisc}}{independent variable optimal spatial discretization}
-#' \item{\code{risk1}}{whether values of the response variable between a pair of overlay zones are significantly different}
-#' \item{\code{risk2}}{risk detection result of the input data}
+#' \item{\code{risk}}{whether values of the response variable between a pair of overlay zones are significantly different}
 #' \item{\code{rpd}}{robust power of determinants}
 #' \item{\code{spd}}{shap power of determinants}
 #' \item{\code{determination}}{determination of the optimal interaction of variables}
@@ -203,14 +202,6 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
   risk1 = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
-  risk2 = risk1 %>%
-    dplyr::select(dplyr::all_of(c('zone1st','zone2nd','Risk'))) %>%
-    tidyr::pivot_longer(cols = dplyr::all_of(c('zone1st','zone2nd')),
-                        names_to = 'zone', values_to = 'zone_risk') %>%
-    dplyr::distinct(zone_risk,.keep_all = TRUE)
-  risk2 = tibble::tibble(reszone = paste0('zone',reszone)) %>%
-    dplyr::left_join(risk2, by = c('reszone' = 'zone_risk')) %>%
-    dplyr::pull(Risk)
   res_rpd = tibble::tibble(variable = xsname,
                            rpd = out_rpd) %>%
     dplyr::arrange(dplyr::desc(rpd))
@@ -291,8 +282,7 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
     dplyr::ungroup()
 
   res = list("factor" = rpd_factor, "interaction" = interaction, "optdisc" = res_discdf,
-             "risk1" = risk1, "risk2" = risk2, "rpd" = res_rpd, "spd" = res_spd,
-             "determination" = determination,
+             "risk" = risk1, "rpd" = res_rpd, "spd" = res_spd, "determination" = determination,
              "number_individual_explanatory_variables" = length(interactvar),
              "number_overlay_zones" = length(zonenum),
              "percentage_finely_divided_zones" =  percentzone)
@@ -314,7 +304,7 @@ isp = \(formula, data, discvar = NULL, discnum = 3:8,
 #'
 print.isp_result = \(x, ...) {
   cat("***     Interpretable Stratified Power Model     \n")
-  cat("\n ---------- Global Power of Determinat : ------------")
+  cat("\n ---------- Global Power of Determinant : ------------")
   print(knitr::kable(x$factor, format = "markdown", digits = 12, align = 'c', ...))
   cat("\n ---------- Global Variable Interaction : ------------")
   print(knitr::kable(x$interaction[,1:3], format = "markdown", digits = 12, align = 'c', ...))
