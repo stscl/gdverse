@@ -299,7 +299,7 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
 #' @export
 #'
 print.factor_detector = \(x, ...) {
-  cat("          Factor Detector            ")
+  cat("                Factor Detector            ")
   # pander::pander(x$factor)
   print(knitr::kable(x$factor,format = "markdown",digits = 12,align = 'c',...))
 }
@@ -316,7 +316,7 @@ print.factor_detector = \(x, ...) {
 #' @export
 #'
 print.interaction_detector = \(x, ...) {
-  cat("        Interaction Detector         ")
+  cat("                Interaction Detector         ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
@@ -339,7 +339,7 @@ print.interaction_detector = \(x, ...) {
 #' @export
 #'
 print.risk_detector = \(x, ...) {
-  cat("            Risk Detector            \n")
+  cat("                Risk Detector            \n")
   x = dplyr::select(x$risk,variable,zone1st,zone2nd,Risk)
   xvar = x %>%
     dplyr::count(variable) %>%
@@ -373,7 +373,7 @@ print.risk_detector = \(x, ...) {
 #' @export
 #'
 print.ecological_detector = \(x, ...) {
-  cat("          Ecological Detector         ")
+  cat("                Ecological Detector         ")
   x = dplyr::select(x$ecological,
                     dplyr::all_of(c('variable1','variable2','Ecological')))
   ed2mat = \(x){
