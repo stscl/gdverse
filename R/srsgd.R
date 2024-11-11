@@ -65,7 +65,7 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
 #' @export
 print.srsgd_result = \(x, ...) {
   nx = names(x)
-  cat("Spatial Rough Set-based Geographical Detector \n")
+  cat("***     Spatial Rough Set-based Geographical Detector      \n")
   for (i in seq_along(x)){
     res = x[i]
     class(res) = paste0(nx[i],"_detector")
