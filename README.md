@@ -107,8 +107,8 @@ discvar
 ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, 
                  discvar = discvar, cores = 6)
 ndvi_opgd
-##                 OPGD Model                  
-## ***          Factor Detector            
+## ***   Optimal Parameters-based Geographical Detector     
+##                 Factor Detector            
 ## 
 ## |   variable    | Q-statistic | P-value  |
 ## |:-------------:|:-----------:|:--------:|
@@ -125,8 +125,8 @@ ndvi_opgd
 ``` r
 g = gozh(NDVIchange ~ ., data = ndvi)
 g
-##                 GOZH Model                  
-## ***          Factor Detector            
+## ***   Geographically Optimal Zones-based Heterogeneity Model       
+##                 Factor Detector            
 ## 
 ## |   variable    | Q-statistic | P-value  |
 ## |:-------------:|:-----------:|:--------:|
