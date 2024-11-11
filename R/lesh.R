@@ -63,13 +63,13 @@ lesh = \(formula,data,cores = 1,...){
 #' @export
 #'
 print.lesh_result = \(x, ...) {
-  cat("***    Locally Explained Stratified Heterogeneity Model      \n")
+  cat("***       Locally Explained Stratified Heterogeneity Model         \n")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
                                                   IntersectionSymbol,
                                                   variable2)) %>%
-    dplyr::select(`Interactive variable`,Interaction)
+    dplyr::select(`Interactive variable`,Interaction,`Variable1 SPD`,`Variable2 SPD`)
   print(knitr::kable(x,format = "markdown",digits = 12,align = 'c',...))
 }
 
