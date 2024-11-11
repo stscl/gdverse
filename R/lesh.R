@@ -63,7 +63,7 @@ lesh = \(formula,data,cores = 1,...){
 #' @export
 #'
 print.lesh_result = \(x, ...) {
-  cat("***       Locally Explained Stratified Heterogeneity Model         \n")
+  cat("***       Locally Explained Stratified Heterogeneity Model         ")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,

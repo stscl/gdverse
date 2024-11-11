@@ -61,7 +61,7 @@ gozh = \(formula, data, cores = 1,
 #' @export
 #'
 print.gozh_result = \(x, ...) {
-  cat("***       Geographically Optimal Zones-based Heterogeneity Model         \n")
+  cat("***       Geographically Optimal Zones-based Heterogeneity Model       ")
   nx = names(x)
   for (i in seq_along(x)){
     res = x[i]

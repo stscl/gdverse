@@ -85,7 +85,7 @@ rid = \(formula, data, discvar = NULL,
 #' @return Formatted string output
 #' @export
 print.rid_result = \(x, ...) {
-  cat("***    Robust Interaction Detector    ")
+  cat("***       Robust Interaction Detector      ")
   print(knitr::kable(dplyr::select(x$interaction,1:3),
                      format = "markdown", digits = 12,
                      align = 'c', ...))
