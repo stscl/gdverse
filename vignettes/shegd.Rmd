@@ -43,7 +43,7 @@ head(ndvi)
 gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
 gozh.uvi
 ## ***   Geographically Optimal Zones-based Heterogeneity Model       
-##           Factor Detector            
+##                 Factor Detector            
 ## 
 ## |   variable    | Q-statistic | P-value  |
 ## |:-------------:|:-----------:|:--------:|
@@ -65,7 +65,7 @@ plot(gozh.uvi)
 gozh.bi = gozh(NDVIchange ~ ., data = ndvi, type = 'interaction')
 gozh.bi
 ## ***   Geographically Optimal Zones-based Heterogeneity Model       
-##         Interaction Detector         
+##                 Interaction Detector         
 ## 
 ## |    Interactive variable     |    Interaction     |
 ## |:---------------------------:|:------------------:|
