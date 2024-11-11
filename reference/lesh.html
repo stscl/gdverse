@@ -111,26 +111,25 @@ https://doi.org/10.1080/17538947.2023.2271883</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'ndvi'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">lesh</span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ***    Locally Explained Stratified Heterogeneity Model      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ***       Locally Explained Stratified Heterogeneity Model         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |    Interactive variable     |    Interaction     |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |:---------------------------:|:------------------:|</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |    Climatezone ∩ Mining     |    Weaken, uni-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |  Climatezone ∩ Tempchange   |    Weaken, uni-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | Climatezone ∩ Precipitation |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |      Climatezone ∩ GDP      |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |  Climatezone ∩ Popdensity   |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |     Mining ∩ Tempchange     |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   Mining ∩ Precipitation    |    Weaken, uni-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |        Mining ∩ GDP         |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |     Mining ∩ Popdensity     |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | Tempchange ∩ Precipitation  |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |      Tempchange ∩ GDP       | Enhance, nonlinear |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |   Tempchange ∩ Popdensity   |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |     Precipitation ∩ GDP     |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> | Precipitation ∩ Popdensity  |    Enhance, bi-    |</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> |      GDP ∩ Popdensity       |    Weaken, uni-    |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    Interactive variable     |    Interaction     | Variable1 SPD | Variable2 SPD |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:---------------------------:|:------------------:|:-------------:|:-------------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    Climatezone ∩ Mining     |    Weaken, uni-    |  0.75353265   |  0.06776285   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |  Climatezone ∩ Tempchange   |    Weaken, uni-    |  0.64437728   |  0.17691822   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | Climatezone ∩ Precipitation |    Enhance, bi-    |  0.39405554   |  0.48986045   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |      Climatezone ∩ GDP      |    Enhance, bi-    |  0.79843017   |  0.05246998   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |  Climatezone ∩ Popdensity   |    Enhance, bi-    |  0.74240657   |  0.11069841   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |     Mining ∩ Tempchange     |    Enhance, bi-    |  0.10161351   |  0.31023743   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   Mining ∩ Precipitation    |    Weaken, uni-    |  0.05886173   |  0.81368883   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |        Mining ∩ GDP         |    Enhance, bi-    |  0.12735177   |  0.09306564   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |     Mining ∩ Popdensity     |    Enhance, bi-    |  0.13123771   |  0.21760488   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | Tempchange ∩ Precipitation  |    Enhance, bi-    |  0.16187198   |  0.73291613   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |      Tempchange ∩ GDP       | Enhance, nonlinear |  0.35277116   |  0.08443737   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |   Tempchange ∩ Popdensity   |    Enhance, bi-    |  0.28786726   |  0.15633619   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |     Precipitation ∩ GDP     |    Enhance, bi-    |  0.84089496   |  0.04445297   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | Precipitation ∩ Popdensity  |    Enhance, bi-    |  0.79267181   |  0.09507756   |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |      GDP ∩ Popdensity       |    Weaken, uni-    |  0.06828443   |  0.15493420   |</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -120,8 +120,8 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.uvi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span><span class="op">)</span></span>
 <span><span class="va">gozh.uvi</span></span>
-<span><span class="co">##                 GOZH Model                  </span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">## ***   Geographically Optimal Zones-based Heterogeneity Model       </span></span>
+<span><span class="co">##           Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
 <span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
@@ -140,8 +140,8 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gozh.bi</span> <span class="op">=</span> <span class="fu"><a href="../reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>, type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">gozh.bi</span></span>
-<span><span class="co">##                 GOZH Model                  </span></span>
-<span><span class="co">## ***        Interaction Detector         </span></span>
+<span><span class="co">## ***   Geographically Optimal Zones-based Heterogeneity Model       </span></span>
+<span><span class="co">##         Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
 <span><span class="co">## |:---------------------------:|:------------------:|</span></span>
@@ -169,26 +169,25 @@ heterogeneity explanation</em> based on <strong>GOZH</strong> and
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lesh.m</span> <span class="op">=</span> <span class="fu"><a href="../reference/lesh.html">lesh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">lesh.m</span></span>
-<span><span class="co">## ***    Spatial Interaction Association Detector      </span></span>
-<span><span class="co">##                      LESH Model                     </span></span>
+<span><span class="co">## ***       Locally Explained Stratified Heterogeneity Model         </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## |    Interactive variable     |    Interaction     |</span></span>
-<span><span class="co">## |:---------------------------:|:------------------:|</span></span>
-<span><span class="co">## |    Climatezone ∩ Mining     |    Weaken, uni-    |</span></span>
-<span><span class="co">## |  Climatezone ∩ Tempchange   |    Weaken, uni-    |</span></span>
-<span><span class="co">## | Climatezone ∩ Precipitation |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      Climatezone ∩ GDP      |    Enhance, bi-    |</span></span>
-<span><span class="co">## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     Mining ∩ Tempchange     |    Enhance, bi-    |</span></span>
-<span><span class="co">## |   Mining ∩ Precipitation    |    Weaken, uni-    |</span></span>
-<span><span class="co">## |        Mining ∩ GDP         |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     Mining ∩ Popdensity     |    Enhance, bi-    |</span></span>
-<span><span class="co">## | Tempchange ∩ Precipitation  |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      Tempchange ∩ GDP       | Enhance, nonlinear |</span></span>
-<span><span class="co">## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |</span></span>
-<span><span class="co">## |     Precipitation ∩ GDP     |    Enhance, bi-    |</span></span>
-<span><span class="co">## | Precipitation ∩ Popdensity  |    Enhance, bi-    |</span></span>
-<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |</span></span>
+<span><span class="co">## |    Interactive variable     |    Interaction     | Variable1 SPD | Variable2 SPD |</span></span>
+<span><span class="co">## |:---------------------------:|:------------------:|:-------------:|:-------------:|</span></span>
+<span><span class="co">## |    Climatezone ∩ Mining     |    Weaken, uni-    |  0.75353265   |  0.06776285   |</span></span>
+<span><span class="co">## |  Climatezone ∩ Tempchange   |    Weaken, uni-    |  0.64437728   |  0.17691822   |</span></span>
+<span><span class="co">## | Climatezone ∩ Precipitation |    Enhance, bi-    |  0.39405554   |  0.48986045   |</span></span>
+<span><span class="co">## |      Climatezone ∩ GDP      |    Enhance, bi-    |  0.79843017   |  0.05246998   |</span></span>
+<span><span class="co">## |  Climatezone ∩ Popdensity   |    Enhance, bi-    |  0.74240657   |  0.11069841   |</span></span>
+<span><span class="co">## |     Mining ∩ Tempchange     |    Enhance, bi-    |  0.10161351   |  0.31023743   |</span></span>
+<span><span class="co">## |   Mining ∩ Precipitation    |    Weaken, uni-    |  0.05886173   |  0.81368883   |</span></span>
+<span><span class="co">## |        Mining ∩ GDP         |    Enhance, bi-    |  0.12735177   |  0.09306564   |</span></span>
+<span><span class="co">## |     Mining ∩ Popdensity     |    Enhance, bi-    |  0.13123771   |  0.21760488   |</span></span>
+<span><span class="co">## | Tempchange ∩ Precipitation  |    Enhance, bi-    |  0.16187198   |  0.73291613   |</span></span>
+<span><span class="co">## |      Tempchange ∩ GDP       | Enhance, nonlinear |  0.35277116   |  0.08443737   |</span></span>
+<span><span class="co">## |   Tempchange ∩ Popdensity   |    Enhance, bi-    |  0.28786726   |  0.15633619   |</span></span>
+<span><span class="co">## |     Precipitation ∩ GDP     |    Enhance, bi-    |  0.84089496   |  0.04445297   |</span></span>
+<span><span class="co">## | Precipitation ∩ Popdensity  |    Enhance, bi-    |  0.79267181   |  0.09507756   |</span></span>
+<span><span class="co">## |      GDP ∩ Popdensity       |    Weaken, uni-    |  0.06828443   |  0.15493420   |</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">lesh.m</span>, pie <span class="op">=</span> <span class="cn">TRUE</span>, scatter <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/shegd/lesh-1.png"></p>
 <p>Compared to <strong>GOZH Interaction Detector</strong>,

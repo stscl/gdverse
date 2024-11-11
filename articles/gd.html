@@ -253,7 +253,7 @@ others are independent and discrete variables.</p>
 <code class="sourceCode R"><span><span class="va">fd</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'factor'</span><span class="op">)</span></span>
 <span><span class="va">fd</span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">##           Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable  | Q-statistic |   P-value   |</span></span>
 <span><span class="co">## |:---------:|:-----------:|:-----------:|</span></span>
@@ -270,7 +270,7 @@ others are independent and discrete variables.</p>
 <code class="sourceCode R"><span><span class="va">id</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'interaction'</span><span class="op">)</span></span>
 <span><span class="va">id</span></span>
-<span><span class="co">## ***        Interaction Detector         </span></span>
+<span><span class="co">##         Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable  | Interaction  |</span></span>
 <span><span class="co">## |:---------------------:|:------------:|</span></span>
@@ -287,7 +287,7 @@ others are independent and discrete variables.</p>
 <code class="sourceCode R"><span><span class="va">rd</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'risk'</span><span class="op">)</span></span>
 <span><span class="va">rd</span></span>
-<span><span class="co">## ***            Risk Detector            </span></span>
+<span><span class="co">##             Risk Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  Variable elevation:</span></span>
 <span><span class="co">## </span></span>
@@ -330,7 +330,7 @@ argument,the default value of <code>alpha</code> argument is
 <code class="sourceCode R"><span><span class="va">rd99</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>          data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'risk'</span>,alpha <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span>
 <span><span class="va">rd99</span></span>
-<span><span class="co">## ***            Risk Detector            </span></span>
+<span><span class="co">##             Risk Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  Variable elevation:</span></span>
 <span><span class="co">## </span></span>
@@ -372,7 +372,7 @@ argument,the default value of <code>alpha</code> argument is
 <code class="sourceCode R"><span><span class="va">ed</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'ecological'</span><span class="op">)</span></span>
 <span><span class="va">ed</span></span>
-<span><span class="co">## ***          Ecological Detector         </span></span>
+<span><span class="co">##           Ecological Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |          | elevation | soiltype |</span></span>
 <span><span class="co">## |:---------|:---------:|:--------:|</span></span>
@@ -387,7 +387,7 @@ argument is <code>0.95</code>.</p>
 <code class="sourceCode R"><span><span class="va">ed99</span> <span class="op">=</span> <span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">watershed</span> <span class="op">+</span> <span class="va">elevation</span> <span class="op">+</span> <span class="va">soiltype</span>,</span>
 <span>          data <span class="op">=</span> <span class="va">NTDs</span>,type <span class="op">=</span> <span class="st">'ecological'</span>,alpha <span class="op">=</span> <span class="fl">0.99</span><span class="op">)</span></span>
 <span><span class="va">ed99</span></span>
-<span><span class="co">## ***          Ecological Detector         </span></span>
+<span><span class="co">##           Ecological Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |          | elevation | soiltype |</span></span>
 <span><span class="co">## |:---------|:---------:|:--------:|</span></span>
@@ -402,7 +402,7 @@ argument is <code>0.95</code>.</p>
 <span>       data <span class="op">=</span> <span class="va">NTDs</span>,</span>
 <span>       type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"factor"</span>, <span class="st">"interaction"</span>, <span class="st">"risk"</span>, <span class="st">"ecological"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">##           Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | variable  | Q-statistic |   P-value   |</span></span>
 <span><span class="co">## |:---------:|:-----------:|:-----------:|</span></span>
@@ -410,7 +410,7 @@ argument is <code>0.95</code>.</p>
 <span><span class="co">## | elevation |  0.6067087  | 0.043382244 |</span></span>
 <span><span class="co">## | soiltype  |  0.3857168  | 0.372145486 |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## ***        Interaction Detector         </span></span>
+<span><span class="co">##         Interaction Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## | Interactive variable  | Interaction  |</span></span>
 <span><span class="co">## |:---------------------:|:------------:|</span></span>
@@ -418,7 +418,7 @@ argument is <code>0.95</code>.</p>
 <span><span class="co">## | watershed ∩ soiltype  | Enhance, bi- |</span></span>
 <span><span class="co">## | elevation ∩ soiltype  | Enhance, bi- |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## ***            Risk Detector            </span></span>
+<span><span class="co">##             Risk Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##  Variable elevation:</span></span>
 <span><span class="co">## </span></span>
@@ -453,7 +453,7 @@ argument is <code>0.95</code>.</p>
 <span><span class="co">## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |</span></span>
 <span><span class="co">## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## ***          Ecological Detector         </span></span>
+<span><span class="co">##           Ecological Detector         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |          | elevation | soiltype |</span></span>
 <span><span class="co">## |:---------|:---------:|:--------:|</span></span>
