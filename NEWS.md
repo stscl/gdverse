@@ -2,6 +2,8 @@
 
 * Optimize `isp()` result export and corresponding terminal output format (#16).
 
+* Now gdverse requires sdsfun with a minimum version of `0.4.2`.
+
 # gdverse 1.2
 
 * Set the default number of discretizations in gdverse to range from 3 to 8 (#15).
