@@ -438,8 +438,7 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
     ggplot2::labs(x = "Q value", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
-                   axis.text.y = ggplot2::element_text(family = 'serif',
-                                                     face = "bold.italic"),
+                   axis.text.y = ggplot2::element_text(family = 'serif',face = "bold"),
                    legend.position = "off", ...)
   return(fig_factor)
 }
@@ -485,8 +484,8 @@ plot.interaction_detector = \(x,alpha = 1,...){
     ggplot2::labs(x = "", y = "", size = "", color = "") +
     ggplot2::coord_fixed() +
     ggplot2::theme_bw() +
-    ggplot2::theme(axis.text.y = ggplot2::element_text(family = "serif",face = "bold.italic"),
-                   axis.text.x = ggplot2::element_text(family = "serif",face = "bold.italic"),
+    ggplot2::theme(axis.text.y = ggplot2::element_text(family = "serif"),
+                   axis.text.x = ggplot2::element_text(family = "serif"),
                    ...)
   return(fig_interaction)
 }
@@ -513,15 +512,14 @@ plot.risk_detector = \(x, ...) {
       ggplot2::theme_minimal() +
       ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                      axis.title.y = ggplot2::element_blank(),
-                     axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black',
-                                                         family = "serif",face = "bold.italic"),
-                     axis.text.y = ggplot2::element_text(color = 'black', family = "serif",
-                                                         face = "bold.italic"),
+                     axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,
+                                                         color = 'black',family = "serif"),
+                     axis.text.y = ggplot2::element_text(color = 'black', family = "serif"),
                      legend.position = "none",
                      panel.grid = ggplot2::element_blank(), ...) +
       ggplot2::annotate("text", x = Inf, y = -Inf, label = gname,
-                        vjust = -1.75, hjust = 1.25, color = "#ff0000",
-                        family = "serif",face = "bold.italic")
+                        vjust = -1.75, hjust = 1.25,
+                        color = "#ff0000", family = "serif")
     return(fig_rd)
   }
   g = dplyr::select(x$risk,variable,zone1st,zone2nd,Risk) %>%
@@ -570,8 +568,8 @@ plot.ecological_detector = \(x, ...) {
     ggplot2::theme_minimal() +
     ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                    axis.title.y = ggplot2::element_blank(),
-                   axis.text.y = ggplot2::element_text(family = "serif",face = "bold.italic"),
-                   axis.text.x = ggplot2::element_text(family = "serif",face = "bold.italic"),
+                   axis.text.y = ggplot2::element_text(family = "serif"),
+                   axis.text.x = ggplot2::element_text(family = "serif"),
                    legend.position = "none",
                    panel.grid = ggplot2::element_blank(), ...)
   return(fig_ed)
