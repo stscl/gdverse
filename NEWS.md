@@ -1,5 +1,7 @@
 # gdverse 1.3
 
+* Modify the default font settings in the gdverse S3 plotting methods (#17).
+
 * Optimize `isp()` result export and corresponding terminal output format (#16).
 
 * Now gdverse requires sdsfun with a minimum version of `0.4.2`.
