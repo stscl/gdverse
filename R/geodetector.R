@@ -438,7 +438,8 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
     ggplot2::labs(x = "Q value", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
-                   axis.text.y = ggplot2::element_text(family = 'serif',face = "bold"),
+                   axis.text.y = ggplot2::element_text(family = "serif"),
+                   axis.text.x = ggplot2::element_text(family = "serif"),
                    legend.position = "off", ...)
   return(fig_factor)
 }

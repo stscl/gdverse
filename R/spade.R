@@ -148,13 +148,15 @@ plot.spade_result = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
                                  values = c("#DE3533","#808080")) +
       ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
                          ggplot2::aes(label = qv_text),
-                         hjust = 1.25, color = "black", fontface = "bold") +
+                         hjust = 1.25, family = "serif", fontface = "bold") +
       ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
                          ggplot2::aes(label = qv_text),
-                         hjust = -0.1, color = "black", fontface = "bold") +
+                         hjust = -0.1, family = "serif", fontface = "bold") +
       ggplot2::labs(x = "Q value", y = "") +
       ggplot2::theme_bw() +
       ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_text(family = "serif"),
+                     axis.text.x = ggplot2::element_text(family = "serif"),
                      legend.position = "off", ...)
   } else {
     class(x) = "factor_detector"
