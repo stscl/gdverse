@@ -71,7 +71,7 @@ devtools::install_github("stscl/gdverse",
 **C++** compilation environment is configured in advance if you want to
 install **gdverse** from github.
 
-✨ gdverse supports the use of robust discretization for the robust
+✨ **gdverse** supports the use of robust discretization for the robust
 geographical detector and robust interaction detector models. For
 details on using them, please refer to
 <https://stscl.github.io/gdverse/articles/rgdrid.html>.
