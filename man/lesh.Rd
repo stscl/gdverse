@@ -2,7 +2,7 @@
 % Please edit documentation in R/lesh.R
 \name{lesh}
 \alias{lesh}
-\title{locally explained heterogeneity(LESH) model}
+\title{locally explained stratified heterogeneity(LESH) model}
 \usage{
 lesh(formula, data, cores = 1, ...)
 }
@@ -24,7 +24,7 @@ A list.
 }
 }
 \description{
-Function for locally explained heterogeneity model.
+Function for locally explained stratified heterogeneity model.
 }
 \note{
 The LESH model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
