@@ -114,7 +114,7 @@ plot_grid(f1,f2,f3,f4, nrow = 2,label_fontfamily = 'serif',
 p
 ```
 
-![](../man/figures/gd/NTDs_map-1.png)
+![plot of chunk NTDs_map](man/figures/gd/NTDs_map-1.png)
 
 Attribute spatial join
 
@@ -206,7 +206,7 @@ NTDs
 fd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'factor')
 fd
-##           Factor Detector            
+##                 Factor Detector            
 ## 
 ## | variable  | Q-statistic |   P-value   |
 ## |:---------:|:-----------:|:-----------:|
@@ -216,7 +216,7 @@ fd
 plot(fd)
 ```
 
-![](../man/figures/gd/fd-1.png)
+![plot of chunk fd](man/figures/gd/fd-1.png)
 
 ### Interaction detector
 
@@ -225,7 +225,7 @@ plot(fd)
 id = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'interaction')
 id
-##         Interaction Detector         
+##                 Interaction Detector         
 ## 
 ## | Interactive variable  | Interaction  |
 ## |:---------------------:|:------------:|
@@ -235,7 +235,7 @@ id
 plot(id)
 ```
 
-![](../man/figures/gd/id-1.png)
+![plot of chunk id](man/figures/gd/id-1.png)
 
 ### Risk detector
 
@@ -244,7 +244,7 @@ plot(id)
 rd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'risk')
 rd
-##             Risk Detector            
+##                 Risk Detector            
 ## 
 ##  Variable elevation:
 ## 
@@ -281,7 +281,7 @@ rd
 plot(rd)
 ```
 
-![](../man/figures/gd/rd-1.png)
+![plot of chunk rd](man/figures/gd/rd-1.png)
 
 You can change the significant interval by assign `alpha` argument,the default value of `alpha` argument is `0.95`.
 
@@ -290,7 +290,7 @@ You can change the significant interval by assign `alpha` argument,the default v
 rd99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'risk',alpha = 0.99)
 rd99
-##             Risk Detector            
+##                 Risk Detector            
 ## 
 ##  Variable elevation:
 ## 
@@ -333,7 +333,7 @@ rd99
 ed = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'ecological')
 ed
-##           Ecological Detector         
+##                 Ecological Detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|
@@ -342,7 +342,7 @@ ed
 plot(ed)
 ```
 
-![](../man/figures/gd/ed-1.png)
+![plot of chunk ed](man/figures/gd/ed-1.png)
 
 You can also change the significant interval by assign `alpha` argument,the default value of `alpha` argument is `0.95`.
 
@@ -351,7 +351,7 @@ You can also change the significant interval by assign `alpha` argument,the defa
 ed99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'ecological',alpha = 0.99)
 ed99
-##           Ecological Detector         
+##                 Ecological Detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|
@@ -367,7 +367,7 @@ g = gd(incidence ~ watershed + elevation + soiltype,
        data = NTDs,
        type = c("factor", "interaction", "risk", "ecological"))
 g
-##           Factor Detector            
+##                 Factor Detector            
 ## 
 ## | variable  | Q-statistic |   P-value   |
 ## |:---------:|:-----------:|:-----------:|
@@ -375,7 +375,7 @@ g
 ## | elevation |  0.6067087  | 0.043382244 |
 ## | soiltype  |  0.3857168  | 0.372145486 |
 ## 
-##         Interaction Detector         
+##                 Interaction Detector         
 ## 
 ## | Interactive variable  | Interaction  |
 ## |:---------------------:|:------------:|
@@ -383,7 +383,7 @@ g
 ## | watershed ∩ soiltype  | Enhance, bi- |
 ## | elevation ∩ soiltype  | Enhance, bi- |
 ## 
-##             Risk Detector            
+##                 Risk Detector            
 ## 
 ##  Variable elevation:
 ## 
@@ -418,7 +418,7 @@ g
 ## | zone8 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  NA   |
 ## | zone9 |  Yes  |  Yes  |  No   |  Yes  |  Yes  |  Yes  |  No   |  Yes  |
 ## 
-##           Ecological Detector         
+##                 Ecological Detector         
 ## 
 ## |          | elevation | soiltype |
 ## |:---------|:---------:|:--------:|
@@ -427,4 +427,4 @@ g
 plot(g)
 ```
 
-![](../man/figures/gd/gd_all-1.png)
+![plot of chunk gd_all](man/figures/gd/gd_all-1.png)
