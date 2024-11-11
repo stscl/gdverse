@@ -92,7 +92,7 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:8,
 #'
 print.opgd_result = \(x, ...) {
   x = x[-1] # rm opt_param to print
-  cat("***       Optimal Parameters-based Geographical Detector          \n")
+  cat("***   Optimal Parameters-based Geographical Detector     \n")
   nx = names(x)
   for (i in seq_along(x)){
     res = x[i]
