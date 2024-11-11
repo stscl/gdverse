@@ -189,14 +189,14 @@ plot.idsa_result = \(x, ...) {
   fig_rd = ggplot2::ggplot(data = grd,
                            ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
     ggplot2::geom_tile(color = "white", size = 0.75) +
-    ggplot2::geom_text(ggplot2::aes(label = risk), color = "black") +
+    ggplot2::geom_text(ggplot2::aes(label = risk), color = "black", family = "serif") +
     ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
     ggplot2::coord_fixed() +
     ggplot2::theme_minimal() +
     ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                    axis.title.y = ggplot2::element_blank(),
-                   axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,color = 'black'),
-                   axis.text.y = ggplot2::element_text(color = 'black'),
+                   axis.text.x = ggplot2::element_text(angle = 60,hjust = 1,family = "serif"),
+                   axis.text.y = ggplot2::element_text(family = "serif"),
                    legend.position = "none",
                    panel.grid = ggplot2::element_blank(), ...)
   return(fig_rd)
