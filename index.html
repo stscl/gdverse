@@ -213,8 +213,8 @@ Function organization in gdverse package
 <span><span class="va">ndvi_opgd</span> <span class="op">=</span> <span class="fu"><a href="reference/opgd.html">opgd</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span>, </span>
 <span>                 discvar <span class="op">=</span> <span class="va">discvar</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="va">ndvi_opgd</span></span>
-<span><span class="co">##                 OPGD Model                  </span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">## ***   Optimal Parameters-based Geographical Detector     </span></span>
+<span><span class="co">##                 Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
 <span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
@@ -231,8 +231,8 @@ Function organization in gdverse package
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="reference/gozh.html">gozh</a></span><span class="op">(</span><span class="va">NDVIchange</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">ndvi</span><span class="op">)</span></span>
 <span><span class="va">g</span></span>
-<span><span class="co">##                 GOZH Model                  </span></span>
-<span><span class="co">## ***          Factor Detector            </span></span>
+<span><span class="co">## ***   Geographically Optimal Zones-based Heterogeneity Model       </span></span>
+<span><span class="co">##                 Factor Detector            </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## |   variable    | Q-statistic | P-value  |</span></span>
 <span><span class="co">## |:-------------:|:-----------:|:--------:|</span></span>
