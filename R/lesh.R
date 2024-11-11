@@ -1,7 +1,7 @@
-#' @title locally explained heterogeneity(LESH) model
+#' @title locally explained stratified heterogeneity(LESH) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for locally explained heterogeneity model.
+#' Function for locally explained stratified heterogeneity model.
 #'
 #' @note
 #' The LESH model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
@@ -63,8 +63,7 @@ lesh = \(formula,data,cores = 1,...){
 #' @export
 #'
 print.lesh_result = \(x, ...) {
-  cat("***    Spatial Interaction Association Detector      \n",
-      "                    LESH Model                     ")
+  cat("***    Locally Explained Stratified Heterogeneity Model      \n")
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   x = x$interaction %>%
     dplyr::mutate(`Interactive variable` = paste0(variable1,
