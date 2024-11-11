@@ -87,7 +87,7 @@ ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 8, cores = 12)
 ndvi_rid
-## ***    Robust Interaction Detector    
+## ***       Robust Interaction Detector      
 ## 
 ## |   variable1   |   variable2   | Interaction  |
 ## |:-------------:|:-------------:|:------------:|
