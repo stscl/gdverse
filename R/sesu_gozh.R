@@ -177,10 +177,10 @@ plot.sesu_gozh = \(x,...){
       ) +
       ggplot2::theme_bw() +
       ggplot2::theme(
-        axis.title.y.right = ggplot2::element_text(color = "#6598cc"),
-        axis.text.y.right = ggplot2::element_text(color = "#6598cc"),
-        axis.title.y.left = ggplot2::element_text(color = "#f8766d"),
-        axis.text.y.left = ggplot2::element_text(color = "#f8766d"),
+        axis.title.y.right = ggplot2::element_text(family = "serif",color = "#6598cc"),
+        axis.text.y.right = ggplot2::element_text(family = "serif",color = "#6598cc"),
+        axis.title.y.left = ggplot2::element_text(family = "serif",color = "#f8766d"),
+        axis.text.y.left = ggplot2::element_text(family = "serif",color = "#f8766d"),
         panel.grid = ggplot2::element_blank(),
         legend.position = "inside",
         legend.justification = c('left','bottom'),

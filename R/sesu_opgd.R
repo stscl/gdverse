@@ -157,7 +157,10 @@ plot.sesu_opgd = \(x,...){
       ggplot2::scale_shape_manual(name = "", values = shapev) +
       ggplot2::scale_color_manual(name = "", values = colv) +
       ggplot2::theme_bw() +
-      ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
+      ggplot2::theme(panel.grid = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_text(family = "serif"),
+                     axis.text.x = ggplot2::element_text(family = "serif"),
+                     ...)
   } else {
     fig_g = ggplot2::ggplot(g, ggplot2::aes(x = su, y = qv)) +
       ggplot2::geom_point(ggplot2::aes(color = variable),
@@ -178,7 +181,10 @@ plot.sesu_opgd = \(x,...){
                                     labels = qv95, breaks = qv95,
                                     transform = ~ .)) +
       ggplot2::theme_bw() +
-      ggplot2::theme(panel.grid = ggplot2::element_blank(), ...)
+      ggplot2::theme(panel.grid = ggplot2::element_blank(),
+                     axis.text.y = ggplot2::element_text(family = "serif"),
+                     axis.text.x = ggplot2::element_text(family = "serif"),
+                     ...)
   }
  return(fig_g)
 }
