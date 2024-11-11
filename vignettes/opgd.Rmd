@@ -40,7 +40,7 @@ g = gd_bestunidisc(NDVIchange ~ .,
                    data = select(ndvi,-c(Climatezone,Mining)),
                    discnum = 3:15, cores = 6)
 tictoc::toc()
-## 3.03 sec elapsed
+## 2.64 sec elapsed
 ```
 
 
@@ -157,7 +157,7 @@ ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
                  discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                  cores = 6, type = c('factor','interaction'))
 ndvi_opgd
-## ***       Optimal Parameters-based Geographical Detector          
+## ***   Optimal Parameters-based Geographical Detector     
 ##           Factor Detector            
 ## 
 ## |   variable    | Q-statistic | P-value  |
