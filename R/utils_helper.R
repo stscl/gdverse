@@ -133,6 +133,8 @@ weight_assign = \(x,w,list = FALSE){
 all2int = \(x){
   if (inherits(x,"factor")){
     x = as.integer(x)
+  } else if (inherits(x,'numeric')) {
+    x = as.integer(x)
   } else if (inherits(x,'character')) {
     x = as.integer(as.factor(x))
   }
