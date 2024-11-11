@@ -158,24 +158,23 @@ By accessing the concrete result through `lesh.m$interaction`, which returns a `
 ``` r
 lesh.m$interaction
 ## # A tibble: 15 × 8
-##    variable1     variable2     Interaction        `Variable1 Q-statistics` Variable2 Q-statisti…¹
-##    <chr>         <chr>         <chr>                                 <dbl>                  <dbl>
-##  1 Climatezone   Mining        Weaken, uni-                         0.821                  0.140 
-##  2 Climatezone   Tempchange    Weaken, uni-                         0.821                  0.333 
-##  3 Climatezone   Precipitation Enhance, bi-                         0.821                  0.873 
-##  4 Climatezone   GDP           Enhance, bi-                         0.821                  0.0917
-##  5 Climatezone   Popdensity    Enhance, bi-                         0.821                  0.223 
-##  6 Mining        Tempchange    Enhance, bi-                         0.140                  0.333 
-##  7 Mining        Precipitation Weaken, uni-                         0.140                  0.873 
-##  8 Mining        GDP           Enhance, bi-                         0.140                  0.0917
-##  9 Mining        Popdensity    Enhance, bi-                         0.140                  0.223 
-## 10 Tempchange    Precipitation Enhance, bi-                         0.333                  0.873 
-## 11 Tempchange    GDP           Enhance, nonlinear                   0.333                  0.0917
-## 12 Tempchange    Popdensity    Enhance, bi-                         0.333                  0.223 
-## 13 Precipitation GDP           Enhance, bi-                         0.873                  0.0917
-## 14 Precipitation Popdensity    Enhance, bi-                         0.873                  0.223 
-## 15 GDP           Popdensity    Weaken, uni-                         0.0917                 0.223 
-## # ℹ abbreviated name: ¹​`Variable2 Q-statistics`
+##    variable1     variable2     Interaction        `Variable1 Q-statistics` `Variable2 Q-statistics`
+##    <chr>         <chr>         <chr>                                 <dbl>                    <dbl>
+##  1 Climatezone   Mining        Weaken, uni-                         0.821                    0.140 
+##  2 Climatezone   Tempchange    Weaken, uni-                         0.821                    0.333 
+##  3 Climatezone   Precipitation Enhance, bi-                         0.821                    0.873 
+##  4 Climatezone   GDP           Enhance, bi-                         0.821                    0.0917
+##  5 Climatezone   Popdensity    Enhance, bi-                         0.821                    0.223 
+##  6 Mining        Tempchange    Enhance, bi-                         0.140                    0.333 
+##  7 Mining        Precipitation Weaken, uni-                         0.140                    0.873 
+##  8 Mining        GDP           Enhance, bi-                         0.140                    0.0917
+##  9 Mining        Popdensity    Enhance, bi-                         0.140                    0.223 
+## 10 Tempchange    Precipitation Enhance, bi-                         0.333                    0.873 
+## 11 Tempchange    GDP           Enhance, nonlinear                   0.333                    0.0917
+## 12 Tempchange    Popdensity    Enhance, bi-                         0.333                    0.223 
+## 13 Precipitation GDP           Enhance, bi-                         0.873                    0.0917
+## 14 Precipitation Popdensity    Enhance, bi-                         0.873                    0.223 
+## 15 GDP           Popdensity    Weaken, uni-                         0.0917                   0.223 
 ## # ℹ 3 more variables: `Variable1 and Variable2 interact Q-statistics` <dbl>,
 ## #   `Variable1 SPD` <dbl>, `Variable2 SPD` <dbl>
 ```
