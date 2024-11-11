@@ -148,8 +148,8 @@ plot.lesh_result = \(x, pie = TRUE,
                                   labels = g_pie$variable2) +
       ggplot2::coord_equal() +
       ggplot2::theme_bw() +
-      ggplot2::theme(axis.text.x = ggplot2::element_text(color = '#75c7af'),
-                     axis.text.y = ggplot2::element_text(color = '#fb9872'),
+      ggplot2::theme(axis.text.x = ggplot2::element_text(family = "serif", color = '#75c7af'),
+                     axis.text.y = ggplot2::element_text(family = "serif", color = '#fb9872'),
                      ...)
     #--- use PieGlyph package ---
   #   fig_pie = ggplot2::ggplot(data = g_pie,
