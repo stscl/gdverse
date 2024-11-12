@@ -43,7 +43,7 @@ See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 data('sim')
 g = rgd(y ~ .,
         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-        discnum = 3:6, cores = 6)
+        discnum = 3:6, cores = 1)
 g
 }
 }

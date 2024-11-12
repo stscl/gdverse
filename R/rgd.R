@@ -33,7 +33,7 @@
 #' data('sim')
 #' g = rgd(y ~ .,
 #'         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-#'         discnum = 3:6, cores = 6)
+#'         discnum = 3:6, cores = 1)
 #' g
 #' }
 rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1){
