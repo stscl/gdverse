@@ -1,6 +1,6 @@
 # gdverse 1.3
 
-* Now gdverse requires sdsfun with a minimum version of `0.4.2`.
+* Now gdverse requires sdsfun with a minimum version of `0.4.2` (#19).
 
 * Transfer `isp`-related concepts and functions to the `cdsp` package (#18).
 
