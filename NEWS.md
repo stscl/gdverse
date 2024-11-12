@@ -2,6 +2,8 @@
 
 * Now gdverse requires sdsfun with a minimum version of `0.4.2`.
 
+* Transfer `isp`-related concepts and functions to the `cdsp` package (#18).
+
 * Modify the default font settings in the gdverse S3 plotting methods (#17).
 
 * Optimize `isp()` result export and corresponding terminal output format (#16).
