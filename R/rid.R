@@ -37,14 +37,18 @@
 #' data('sim')
 #' g = rid(y ~ .,
 #'         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-#'         discnum = 4, cores = 1)
+#'         discnum = 3:6, cores = 1)
 #' g
 #' }
 rid = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
         strategy = 2L, increase_rate = 0.05, cores = 1){
+  yname = sdsfun::formula_varname(formula, data)[[1]]
+  if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   rgd_res = gdverse::rgd(formula, data, discvar, discnum, minsize,
                          strategy, increase_rate, cores)
-  res = gd(formula,data = rgd_res[[2]],type = "interaction")[[1]]
+  res = gd(formula,
+           data = dplyr::bind_cols(dplyr::select(data,yname),rgd_res[[2]]),
+           type = "interaction")[[1]]
   res = list("interaction" = res)
   class(res) = "rid_result"
   return(res)
