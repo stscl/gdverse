@@ -76,7 +76,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
     }
     resdisc[[i]] = newdata
     resqv[[i]] = gd(paste0(yname,' ~ .'),
-                    data = dplyr::bind_cols(data[,yname,drop = TRUE],newdata),
+                    data = dplyr::bind_cols(dplyr::select(data,yname),newdata),
                     type = "factor")[[1]]
   }
   qs = purrr::map2_dfr(resqv, discnum,
