@@ -17,13 +17,19 @@
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
 #' Default all `discvar` use `3:8`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
+#' @param strategy (optional) Optimal discretization strategy. When `strategy` is `1L`, choose the highest
+#' q-statistics to determinate optimal spatial data discretization parameters. When `strategy` is `2L`,
+#' The optimal discrete parameters of spatial data are selected by combining LOESS model.
+#' @param increase_rate (optional) The critical increase rate of the number of discretization. Default is `5%`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #'
 #' @return A list.
 #' \describe{
-#' \item{\code{factor}}{the result of RGD model}
-#' \item{\code{disc}}{robust discrete results}
+#' \item{\code{factor}}{robust power of determinant}
+#' \item{\code{opt_disc}}{optimal robust discrete results}
+#' \item{\code{allfactor}}{factor detection results corresponding to different number of robust discreteizations}
+#' \item{\code{alldisc}}{all robust discrete results}
 #' }
 #' @export
 #'
@@ -36,7 +42,8 @@
 #'         discnum = 3:6, cores = 1)
 #' g
 #' }
-rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1){
+rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
+        strategy = 2L, increase_rate = 0.05, cores = 1){
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
@@ -45,6 +52,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
   }
   yname = formula.vars[1]
+  xnames = sdsfun::formula_varname(formula,data)[[2]]
   if (is.null(discvar)) {
     discvar = colnames(data)[-which(colnames(data) == yname)]
   }
@@ -66,7 +74,27 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1){
                        \(.x,.n) dplyr::mutate(.x,discnum = .n))
   disc = purrr::map2_dfr(resdisc, discnum,
                          \(.x,.n) dplyr::mutate(.x,discnum = .n))
-  res = list("factor" = qv, "disc" = disc)
+  qs = qv
+  qs$variable = factor(qs$variable,levels = xnames)
+  qs = dplyr::rename(qs,qvalue = `Q-statistic`)
+
+  if (strategy == 1L) {
+    opt_discnum = dplyr::group_split(qs,variable) |>
+      purrr::map_dbl(\(.df) .df$discnum[which.max(.df$qvalue)])
+  } else {
+    suppressWarnings({opt_discnum = dplyr::group_split(qs,variable) |>
+      purrr::map_dbl(\(.df) sdsfun::loess_optnum(.df$qvalue, .df$discnum,
+                                                 increase_rate = increase_rate)[1])})
+  }
+  res_discdf = purrr::map_dfc(seq_along(opt_discnum),
+                              \(.n) {dn = which(disc$discnum == opt_discnum[.n])
+                              return(disc[dn,.n])})
+  res_qv = purrr::map_dfc(seq_along(opt_discnum),
+                          \(.n) {dn = which(qv$discnum == opt_discnum[.n])
+                          return(qv[dn,.n])}) %>%
+    dplyr::arrange(dplyr::desc(`Q-statistic`))
+  res = list("factor" = res_qv, 'opt_disc' = res_discdf,
+             "allfactor" = qv, "alldisc" = disc)
   class(res) = "rgd_result"
   return(res)
 }
@@ -83,13 +111,8 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1){
 #' @export
 print.rgd_result = \(x, ...) {
   cat("***      Robust Geographical Detector    ")
-  qv = x[[1]]
-  qv = qv %>%
-    dplyr::filter(discnum == max(qv$discnum)) %>%
-    dplyr::select(1:3)
-  print(knitr::kable(qv,format = "markdown",digits = 12,align = 'c',...))
+  print(knitr::kable(x[[1]],format = "markdown",digits = 12,align = 'c',...))
   cat("\n")
-  cat("#### Only display the results corresponding to the maximum number of discretizations!")
 }
 
 #' @title plot RGD result
@@ -109,9 +132,6 @@ print.rgd_result = \(x, ...) {
 #'
 plot.rgd_result = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
   qv = x[[1]]
-  qv = qv %>%
-    dplyr::filter(discnum == max(qv$discnum)) %>%
-    dplyr::select(1:3)
   res = list("factor" = qv)
   class(res) = "factor_detector"
   fig_p = plot.factor_detector(res, slicenum, alpha, keep, ...)
