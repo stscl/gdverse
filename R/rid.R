@@ -10,14 +10,18 @@
 #' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rid()`.
 #' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
-#' @param formula A formula of RID model.
+#' @param formula A formula of RGD model.
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param discvar Name of continuous variable columns that need to be discretized. Noted that
 #' when `formula` has `discvar`, `data` must have these columns. By default, all independent
 #' variables are used as `discvar`.
-#' @param discnum A numeric vector for the number of discretized classes of columns that need
-#' to be discretized. Default all `discvar` use `10`.
+#' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
+#' Default all `discvar` use `3:8`.
 #' @param minsize (optional) The min size of each discretization group. Default all use `1`.
+#' @param strategy (optional) Optimal discretization strategy. When `strategy` is `1L`, choose the highest
+#' q-statistics to determinate optimal spatial data discretization parameters. When `strategy` is `2L`,
+#' The optimal discrete parameters of spatial data are selected by combining LOESS model.
+#' @param increase_rate (optional) The critical increase rate of the number of discretization. Default is `5%`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #'
@@ -33,42 +37,14 @@
 #' data('sim')
 #' g = rid(y ~ .,
 #'         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-#'         discnum = 4, cores = 6)
+#'         discnum = 4, cores = 1)
 #' g
 #' }
-rid = \(formula, data, discvar = NULL,
-        discnum = 10, minsize = 1, cores = 1){
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  yname = formula.vars[1]
-  if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
-  data = tibble::as_tibble(data)
-  if (formula.vars[2] != "."){
-    dti = dplyr::select(data,dplyr::all_of(formula.vars))
-  } else {
-    dti = data
-  }
-  xname = colnames(dti)[-which(colnames(dti) == yname)]
-  if (is.null(discvar)) {
-    discvar = xname
-  }
-  discdf = dplyr::select(dti,dplyr::all_of(c(yname,discvar)))
-  if (length(discnum)==0) {discnum = rep(discnum,length(discvar))}
-  g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
-                  discdf, discnum, minsize, cores = cores)
-  discedvar = colnames(dti[,-which(colnames(dti) %in% discvar)])
-  newdti = dti %>%
-    dplyr::select(dplyr::all_of(discedvar)) %>%
-    dplyr::bind_cols(g)
-  res = utils::combn(xname, 2, simplify = FALSE) %>%
-    purrr::map_dfr(\(i) interaction_detector(dti[,yname,drop = TRUE],
-                                             newdti[,i[1],drop = TRUE],
-                                             newdti[,i[2],drop = TRUE]) %>%
-                     tibble::as_tibble() %>%
-                     dplyr::mutate(variable1 = i[1],
-                                   variable2 = i[2]) %>%
-                     dplyr::select(variable1,variable2,Interaction,
-                                   dplyr::everything()))
+rid = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
+        strategy = 2L, increase_rate = 0.05, cores = 1){
+  rgd_res = gdverse::rgd(formula, data, discvar, discnum, minsize,
+                         strategy, increase_rate, cores)
+  res = gd(formula,data = rgd_res[[2]],type = "interaction")[[1]]
   res = list("interaction" = res)
   class(res) = "rid_result"
   return(res)

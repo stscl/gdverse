@@ -47,6 +47,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
+  if (length(discnum) == 1) {strategy = 1L}
   data = tibble::as_tibble(data)
   if (formula.vars[2] != "."){
     data = dplyr::select(data,dplyr::all_of(formula.vars))
@@ -76,11 +77,10 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
     resdisc[[i]] = newdata
     resqv[[i]] = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
   }
-  qv = purrr::map2_dfr(resqv, discnum,
+  qs = purrr::map2_dfr(resqv, discnum,
                        \(.x,.n) dplyr::mutate(.x,discnum = .n))
   disc = purrr::map2_dfr(resdisc, discnum,
                          \(.x,.n) dplyr::mutate(.x,discnum = .n))
-  qs = qv
   qs$variable = factor(qs$variable,levels = xvarname)
   qs = dplyr::rename(qs,qvalue = `Q-statistic`)
 
@@ -100,9 +100,10 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
                     \(.qv,.discn) dplyr::filter(.qv,discnum == .discn)) %>%
     dplyr::select(-discnum) %>%
     dplyr::mutate(variable = as.character(variable)) %>%
-    dplyr::arrange(dplyr::desc(`Q-statistic`))
+    dplyr::arrange(dplyr::desc(qvalue)) %>%
+    dplyr::rename(`Q-statistic` = qvalue)
   res = list("factor" = res_qv, 'opt_disc' = res_discdf,
-             "allfactor" = qv, "alldisc" = disc)
+             "allfactor" = qs, "alldisc" = disc)
   class(res) = "rgd_result"
   return(res)
 }
