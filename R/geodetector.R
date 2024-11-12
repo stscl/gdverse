@@ -228,14 +228,9 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
 
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   data = tibble::as_tibble(data)
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
-  }
+  formulaname = sdsfun::formula_varname(formula,data)
+  response = data[, formulaname[[1]], drop = TRUE]
+  explanatory = data[, formulaname[[2]]]
 
   switch(type,
          "factor" = {
