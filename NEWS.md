@@ -2,7 +2,7 @@
 
 * Now gdverse requires sdsfun with a minimum version of `0.4.2` (#19).
 
-* Transfer `isp`-related concepts and functions to the `cdsp` package (#18).
+* Transfer `isp`-related concepts and functions to the `CISP` package (#18).
 
 * Modify the default font settings in the gdverse S3 plotting methods (#17).
 
