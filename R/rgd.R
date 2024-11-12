@@ -57,7 +57,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
     discvar = colnames(data)[-which(colnames(data) == yname)]
   }
   discdf = dplyr::select(data,dplyr::all_of(c(yname,discvar)))
-  discedvar = colnames(data[,-which(colnames(data) %in% discvar)])
+  discedvar = colnames(data[,-which(colnames(data) %in% c(discvar,yname))])
   if (is.null(discedvar)){
     xvarname = discvar
   } else {
@@ -75,7 +75,9 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
       newdata = dplyr::bind_cols(g,dplyr::select(data,dplyr::all_of(discedvar)))
     }
     resdisc[[i]] = newdata
-    resqv[[i]] = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
+    resqv[[i]] = gd(paste0(yname,' ~ .'),
+                    data = dplyr::bind_cols(data[,yname,drop = TRUE],newdata),
+                    type = "factor")[[1]]
   }
   qs = purrr::map2_dfr(resqv, discnum,
                        \(.x,.n) dplyr::mutate(.x,discnum = .n))
