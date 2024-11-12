@@ -4,7 +4,16 @@
 \alias{rgd}
 \title{robust geographical detector(RGD) model}
 \usage{
-rgd(formula, data, discvar = NULL, discnum = 3:8, minsize = 1, cores = 1)
+rgd(
+  formula,
+  data,
+  discvar = NULL,
+  discnum = 3:8,
+  minsize = 1,
+  strategy = 2L,
+  increase_rate = 0.05,
+  cores = 1
+)
 }
 \arguments{
 \item{formula}{A formula of RGD model.}
@@ -20,14 +29,22 @@ Default all \code{discvar} use \code{3:8}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
 
+\item{strategy}{(optional) Optimal discretization strategy. When \code{strategy} is \code{1L}, choose the highest
+q-statistics to determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L},
+The optimal discrete parameters of spatial data are selected by combining LOESS model.}
+
+\item{increase_rate}{(optional) The critical increase rate of the number of discretization. Default is \verb{5\%}.}
+
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
 }
 \value{
 A list.
 \describe{
-\item{\code{factor}}{the result of RGD model}
-\item{\code{disc}}{robust discrete results}
+\item{\code{factor}}{robust power of determinant}
+\item{\code{opt_disc}}{optimal robust discrete results}
+\item{\code{allfactor}}{factor detection results corresponding to different number of robust discreteizations}
+\item{\code{alldisc}}{all robust discrete results}
 }
 }
 \description{
