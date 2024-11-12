@@ -93,8 +93,8 @@ The global Moran'I Index of Depression Prevelence is `0.339557` and the P value 
 depression_opgd = opgd(Depression_prevelence ~ .,
                        data = depression, cores = 12)
 depression_opgd
-##                 OPGD Model                  
-## ***          Factor Detector            
+## ***   Optimal Parameters-based Geographical Detector     
+##                 Factor Detector            
 ## 
 ## |       variable        | Q-statistic |   P-value    |
 ## |:---------------------:|:-----------:|:------------:|
