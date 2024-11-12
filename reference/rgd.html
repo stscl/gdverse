@@ -54,7 +54,16 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rgd</span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span>, discvar <span class="op">=</span> <span class="cn">NULL</span>, discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span>, minsize <span class="op">=</span> <span class="fl">1</span>, cores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">rgd</span><span class="op">(</span></span>
+<span>  <span class="va">formula</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  discvar <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span>,</span>
+<span>  minsize <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
+<span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  cores <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -84,6 +93,16 @@ Default all <code>discvar</code> use <code>3:8</code>.</p></dd>
 <dd><p>(optional) The min size of each discretization group. Default all use <code>1</code>.</p></dd>
 
 
+<dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
+<dd><p>(optional) Optimal discretization strategy. When <code>strategy</code> is <code>1L</code>, choose the highest
+q-statistics to determinate optimal spatial data discretization parameters. When <code>strategy</code> is <code>2L</code>,
+The optimal discrete parameters of spatial data are selected by combining LOESS model.</p></dd>
+
+
+<dt id="arg-increase-rate">increase_rate<a class="anchor" aria-label="anchor" href="#arg-increase-rate"></a></dt>
+<dd><p>(optional) The critical increase rate of the number of discretization. Default is <code>5%</code>.</p></dd>
+
+
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
 <dd><p>(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.</p></dd>
@@ -92,10 +111,16 @@ multi-core parallel computing.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list.</p><dl><dt><code>factor</code></dt>
-<dd><p>the result of RGD model</p></dd>
+<dd><p>robust power of determinant</p></dd>
 
-<dt><code>disc</code></dt>
-<dd><p>robust discrete results</p></dd>
+<dt><code>opt_disc</code></dt>
+<dd><p>optimal robust discrete results</p></dd>
+
+<dt><code>allfactor</code></dt>
+<dd><p>factor detection results corresponding to different number of robust discreteizations</p></dd>
+
+<dt><code>alldisc</code></dt>
+<dd><p>all robust discrete results</p></dd>
 
 
 </dl></div>
@@ -121,7 +146,7 @@ DOI: 10.1016/j.jag.2022.102782.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'sim'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">rgd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span>,</span></span>
 <span class="r-in"><span>        data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sim</span>,<span class="op">-</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lo'</span>,<span class="st">'la'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>, cores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
