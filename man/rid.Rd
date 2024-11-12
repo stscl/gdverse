@@ -4,10 +4,19 @@
 \alias{rid}
 \title{robust interaction detector(RID) model}
 \usage{
-rid(formula, data, discvar = NULL, discnum = 10, minsize = 1, cores = 1)
+rid(
+  formula,
+  data,
+  discvar = NULL,
+  discnum = 3:8,
+  minsize = 1,
+  strategy = 2L,
+  increase_rate = 0.05,
+  cores = 1
+)
 }
 \arguments{
-\item{formula}{A formula of RID model.}
+\item{formula}{A formula of RGD model.}
 
 \item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
@@ -15,10 +24,16 @@ rid(formula, data, discvar = NULL, discnum = 10, minsize = 1, cores = 1)
 when \code{formula} has \code{discvar}, \code{data} must have these columns. By default, all independent
 variables are used as \code{discvar}.}
 
-\item{discnum}{A numeric vector for the number of discretized classes of columns that need
-to be discretized. Default all \code{discvar} use \code{10}.}
+\item{discnum}{A numeric vector of discretized classes of columns that need to be discretized.
+Default all \code{discvar} use \code{3:8}.}
 
 \item{minsize}{(optional) The min size of each discretization group. Default all use \code{1}.}
+
+\item{strategy}{(optional) Optimal discretization strategy. When \code{strategy} is \code{1L}, choose the highest
+q-statistics to determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L},
+The optimal discrete parameters of spatial data are selected by combining LOESS model.}
+
+\item{increase_rate}{(optional) The critical increase rate of the number of discretization. Default is \verb{5\%}.}
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
@@ -42,7 +57,7 @@ See \code{vignette('rgdrid',package = 'gdverse')} for more details.
 data('sim')
 g = rid(y ~ .,
         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-        discnum = 4, cores = 6)
+        discnum = 3:6, cores = 1)
 g
 }
 }
