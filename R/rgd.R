@@ -52,22 +52,28 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
     data = dplyr::select(data,dplyr::all_of(formula.vars))
   }
   yname = formula.vars[1]
-  xnames = sdsfun::formula_varname(formula,data)[[2]]
   if (is.null(discvar)) {
     discvar = colnames(data)[-which(colnames(data) == yname)]
   }
-  discdf =  dplyr::select(data,dplyr::all_of(c(yname,discvar)))
+  discdf = dplyr::select(data,dplyr::all_of(c(yname,discvar)))
   discedvar = colnames(data[,-which(colnames(data) %in% discvar)])
+  if (is.null(discedvar)){
+    xvarname = discvar
+  } else {
+    xvarname = c(discvar,discedvar)
+  }
 
   resqv = vector("list", length(discnum))
   resdisc = vector("list", length(discnum))
   for (i in seq_along(discnum)) {
     g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
                     discdf, discnum[i], minsize, cores = cores)
-    resdisc[[i]] = g
-    newdata = data %>%
-      dplyr::select(dplyr::all_of(discedvar)) %>%
-      dplyr::bind_cols(g)
+    if (is.null(discedvar)){
+      newdata = g
+    } else {
+      newdata = dplyr::bind_cols(g,dplyr::select(data,dplyr::all_of(discedvar)))
+    }
+    resdisc[[i]] = newdata
     resqv[[i]] = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
   }
   qv = purrr::map2_dfr(resqv, discnum,
@@ -75,7 +81,7 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
   disc = purrr::map2_dfr(resdisc, discnum,
                          \(.x,.n) dplyr::mutate(.x,discnum = .n))
   qs = qv
-  qs$variable = factor(qs$variable,levels = xnames)
+  qs$variable = factor(qs$variable,levels = xvarname)
   qs = dplyr::rename(qs,qvalue = `Q-statistic`)
 
   if (strategy == 1L) {
@@ -89,9 +95,11 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
   res_discdf = purrr::map_dfc(seq_along(opt_discnum),
                               \(.n) {dn = which(disc$discnum == opt_discnum[.n])
                               return(disc[dn,.n])})
-  res_qv = purrr::map_dfc(seq_along(opt_discnum),
-                          \(.n) {dn = which(qv$discnum == opt_discnum[.n])
-                          return(qv[dn,.n])}) %>%
+  res_qv = dplyr::group_split(qs,variable) %>%
+    purrr::map2_dfr(opt_discnum,
+                    \(.qv,.discn) dplyr::filter(.qv,discnum == .discn)) %>%
+    dplyr::select(-discnum) %>%
+    dplyr::mutate(variable = as.character(variable)) %>%
     dplyr::arrange(dplyr::desc(`Q-statistic`))
   res = list("factor" = res_qv, 'opt_disc' = res_discdf,
              "allfactor" = qv, "alldisc" = disc)
