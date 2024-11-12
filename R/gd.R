@@ -32,7 +32,6 @@
 gd = \(formula, data, type = "factor", alpha = 0.95){
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   data = tibble::as_tibble(data)
-  data = sdsfun::tbl_all2int(data)
   if (length(type) == 1){
     res = geodetector(formula,data = data,type = type,alpha = alpha)
   } else {

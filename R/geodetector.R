@@ -18,6 +18,7 @@
 #' factor_detector(y = 1:7,x = c('x',rep('y',3),rep('z',3)))
 #'
 factor_detector = \(y,x){
+  x = gdverse::all2int(x)
   gdf = tibble::tibble(x = x, y = y) %>%
     dplyr::group_by(x) %>%
     dplyr::filter(dplyr::n() > 1) %>%
@@ -225,6 +226,8 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
     stop("`type` must be one of `factor`,`interaction`,`risk` and `ecological`!")
   }
 
+  if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
+  data = tibble::as_tibble(data)
   formula = stats::as.formula(formula)
   formula.vars = all.vars(formula)
   response = data[, formula.vars[1], drop = TRUE]
