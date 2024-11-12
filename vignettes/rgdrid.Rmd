@@ -67,11 +67,9 @@ ndvi_rgd
 ## | Precipitation |  0.8883955  | 4.77e-10 |
 ## |  Climatezone  |  0.8218335  | 7.34e-10 |
 ## |  Tempchange   |  0.3722571  | 3.22e-10 |
-## |  Popdensity   |  0.2480558  | 2.10e-10 |
-## |      GDP      |  0.1491878  | 3.63e-10 |
+## |  Popdensity   |  0.2205321  | 9.65e-10 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
-## 
-## #### Only display the results corresponding to the maximum number of discretizations!
+## |      GDP      |  0.1164814  | 1.08e-10 |
 plot(ndvi_rgd)
 ```
 
@@ -91,21 +89,21 @@ ndvi_rid
 ## 
 ## |   variable1   |   variable2   | Interaction  |
 ## |:-------------:|:-------------:|:------------:|
-## |  Climatezone  |    Mining     | Enhance, bi- |
-## |  Climatezone  |  Tempchange   | Enhance, bi- |
-## |  Climatezone  | Precipitation | Enhance, bi- |
-## |  Climatezone  |      GDP      | Enhance, bi- |
-## |  Climatezone  |  Popdensity   | Enhance, bi- |
-## |    Mining     |  Tempchange   | Enhance, bi- |
-## |    Mining     | Precipitation | Enhance, bi- |
-## |    Mining     |      GDP      | Enhance, bi- |
-## |    Mining     |  Popdensity   | Enhance, bi- |
 ## |  Tempchange   | Precipitation | Enhance, bi- |
 ## |  Tempchange   |      GDP      | Enhance, bi- |
 ## |  Tempchange   |  Popdensity   | Enhance, bi- |
+## |  Tempchange   |  Climatezone  | Enhance, bi- |
+## |  Tempchange   |    Mining     | Enhance, bi- |
 ## | Precipitation |      GDP      | Enhance, bi- |
 ## | Precipitation |  Popdensity   | Enhance, bi- |
+## | Precipitation |  Climatezone  | Enhance, bi- |
+## | Precipitation |    Mining     | Enhance, bi- |
 ## |      GDP      |  Popdensity   | Enhance, bi- |
+## |      GDP      |  Climatezone  | Enhance, bi- |
+## |      GDP      |    Mining     | Enhance, bi- |
+## |  Popdensity   |  Climatezone  | Enhance, bi- |
+## |  Popdensity   |    Mining     | Enhance, bi- |
+## |  Climatezone  |    Mining     | Enhance, bi- |
 plot(ndvi_rid)
 ```
 
