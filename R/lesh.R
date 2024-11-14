@@ -35,8 +35,8 @@
 lesh = \(formula,data,cores = 1,...){
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   data = tibble::as_tibble(data)
-  spd = spd_lesh(formula,data,cores,...)
-  pd = gozh(formula,data,cores,type = 'interaction',...)[[1]]
+  spd = gdverse::spd_lesh(formula,data,cores,...)
+  pd = gdverse::gozh(formula,data,cores,type = 'interaction',...)[[1]]
   res = pd %>%
     dplyr::left_join(dplyr::select(spd,variable,spd1 = spd_theta),
                      by = c("variable1" = "variable")) %>%
