@@ -69,9 +69,9 @@ factor_detector = \(y,x){
 #'
 interaction_detector = \(y,x1,x2){
   x12 = paste0(x1,x2,'_')
-  qv1 = factor_detector(y,x1)[[1]]
-  qv2 = factor_detector(y,x2)[[1]]
-  qv12 = factor_detector(y,x12)[[1]]
+  qv1 = gdverse::factor_detector(y,x1)[[1]]
+  qv2 = gdverse::factor_detector(y,x2)[[1]]
+  qv12 = gdverse::factor_detector(y,x12)[[1]]
 
   if (qv12 < min(qv1, qv2)) {
     interaction = c("Weaken, nonlinear")
@@ -235,7 +235,7 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
   switch(type,
          "factor" = {
            res = purrr::map_dfr(names(explanatory),
-                                \(i) factor_detector(response,
+                                \(i) gdverse::factor_detector(response,
                                                      data[,i,drop = TRUE])) %>%
              dplyr::mutate(variable = names(explanatory)) %>%
              dplyr::select(variable,dplyr::everything()) %>%
@@ -245,7 +245,7 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
          },
          "interaction" = {
            res = utils::combn(names(explanatory), 2, simplify = FALSE) %>%
-             purrr::map_dfr(\(i) interaction_detector(response,
+             purrr::map_dfr(\(i) gdverse::interaction_detector(response,
                                                       data[,i[1],drop = TRUE],
                                                       data[,i[2],drop = TRUE]) %>%
                               tibble::as_tibble() %>%
@@ -258,7 +258,7 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
          },
          "risk" = {
            res = purrr::map_dfr(names(explanatory),
-                                \(i) risk_detector(response,
+                                \(i) gdverse::risk_detector(response,
                                                    data[,i,drop = TRUE],
                                                    alpha) %>%
                                   dplyr::mutate(variable = i) %>%
@@ -269,7 +269,7 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
          },
          "ecological" = {
            res = utils::combn(names(explanatory), 2, simplify = FALSE) %>%
-             purrr::map_dfr(\(i) ecological_detector(response,
+             purrr::map_dfr(\(i) gdverse::ecological_detector(response,
                                                      data[,i[1],drop = TRUE],
                                                      data[,i[2],drop = TRUE],
                                                      alpha) %>%

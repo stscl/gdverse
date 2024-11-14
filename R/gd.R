@@ -33,13 +33,12 @@ gd = \(formula, data, type = "factor", alpha = 0.95){
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   data = tibble::as_tibble(data)
   if (length(type) == 1){
-    res = geodetector(formula,data = data,type = type,alpha = alpha)
+    res = gdverse::geodetector(formula,data = data,type = type,alpha = alpha)
   } else {
     res = vector("list", length(type))
     for (i in seq_along(type)){
-      res[[i]] = geodetector(formula,data = data,
-                             type = type[i],
-                             alpha = alpha)[[1]]
+      res[[i]] = gdverse::geodetector(formula, data = data,
+                                      type = type[i], alpha = alpha)[[1]]
     }
     names(res) = type
     class(res) = "gd_result"
