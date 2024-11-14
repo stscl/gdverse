@@ -67,15 +67,15 @@ rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
   resqv = vector("list", length(discnum))
   resdisc = vector("list", length(discnum))
   for (i in seq_along(discnum)) {
-    g = robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
-                    discdf, discnum[i], minsize, cores = cores)
+    g = gdverse::robust_disc(paste0(yname,'~',paste0(discvar,collapse = '+')),
+                             discdf, discnum[i], minsize, cores = cores)
     if (is.null(discedvar)){
       newdata = g
     } else {
       newdata = dplyr::bind_cols(g,dplyr::select(data,dplyr::all_of(discedvar)))
     }
     resdisc[[i]] = newdata
-    resqv[[i]] = gd(paste0(yname,' ~ .'),
+    resqv[[i]] = gdverse::gd(paste0(yname,' ~ .'),
                     data = dplyr::bind_cols(dplyr::select(data,yname),newdata),
                     type = "factor")[[1]]
   }
