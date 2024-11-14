@@ -32,9 +32,9 @@ Current models and functions provided by **gdverse** are:
 
 <div class="figure" style="text-align: center">
 
-<img src="./man/figures/gdverse_funs.png" alt="Function organization in gdverse package" width="95%" />
+<img src="./man/figures/gdverse_funs.png" alt="Functions organization in gdverse package" width="95%" />
 <p class="caption">
-Function organization in gdverse package
+Functions organization in gdverse package
 </p>
 
 </div>
