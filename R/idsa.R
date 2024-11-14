@@ -57,16 +57,12 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {
     if (is.null(wt)){
-      wt_idsa = sdsfun::inverse_distance_swm(data)
-    } else {
-      wt_idsa = wt
+      wt = sdsfun::inverse_distance_swm(data)
     }
     data = sf::st_drop_geometry(data)
   } else if (inherits(data,'data.frame')) {
     if (is.null(wt)){
       stop("When `data` is `data.frame` or `tibble`, please provide `wt`!")
-    } else {
-      wt_idsa = wt
     }
   }
   data = tibble::as_tibble(data)
@@ -76,8 +72,8 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
   yname = formula.vars[1]
   xname = colnames(data)[-which(colnames(data) == yname)]
   discdf =  dplyr::select(data,dplyr::all_of(c(yname,xname)))
-  g = cpsd_disc(paste0(yname,'~',paste0(xname,collapse = '+')),
-                data = discdf, wt = wt_idsa, discnum = discnum,
+  g = gdverse::cpsd_disc(paste0(yname,'~',paste0(xname,collapse = '+')),
+                data = discdf, wt = wt, discnum = discnum,
                 discmethod = discmethod, strategy = strategy,
                 increase_rate = increase_rate,
                 cores = cores, seed = seed, ...)
@@ -86,18 +82,17 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
     dplyr::bind_cols(g$disv)
   dti = dplyr::select(data,dplyr::all_of(names(newdti)))
   xs = generate_subsets(xname,empty = FALSE, self = TRUE)
-  spfom = overlay
 
-  calcul_pid = \(.x){
+  calcul_pid = \(.x,wt,overlay){
     if (length(.x) == 1) {
-      qv = cpsd_spade(
+      qv = gdverse::cpsd_spade(
         dti[,yname,drop = TRUE],
         dti[,.x,drop = TRUE],
         newdti[,.x,drop = TRUE],
-        wt_idsa)
+        wt)
     } else {
-      qv = pid_idsa(paste(yname,'~',paste0(.x,collapse = '+')),
-                    dti, newdti, wt_idsa, spfom)
+      qv = gdverse::pid_idsa(paste(yname,'~',paste0(.x,collapse = '+')),
+                             dti, newdti, wt, overlay)
     }
     names(qv) = 'pid_idsa'
     return(qv)
@@ -113,12 +108,10 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('psd_spade', 'cpsd_spade',
-                                    'psd_iev','pid_idsa'))
-    out_g = parallel::parLapply(cores, xs, calcul_pid)
+    out_g = parallel::parLapply(cores,xs,calcul_pid,wt = wt,overlay = overlay)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
-    out_g = purrr::map_dfr(xs, calcul_pid)
+    out_g = purrr::map_dfr(xs, calcul_pid,wt = wt,overlay = overlay)
   }
   IntersectionSymbol = rawToChar(as.raw(c(0x20, 0xE2, 0x88, 0xA9, 0x20)))
   xsname = purrr::map_chr(xs,\(.x) paste(.x,collapse = IntersectionSymbol))
@@ -130,11 +123,11 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
   } else {
     reszone = sdsfun::fuzzyoverlay(paste(yname,'~',
                                          paste0(interactvar,collapse = '+')),
-                                   newdti, spfom)
+                                   newdti, overlay)
   }
   zonenum = as.numeric(table(reszone))
   percentzone = length(which(zonenum==1)) / length(reszone)
-  risk1 = risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
+  risk1 = gdverse::risk_detector(dti[,yname,drop = TRUE],reszone,alpha)
   out_g = tibble::tibble(variable = xsname) %>%
     dplyr::bind_cols(out_g) %>%
     dplyr::arrange(dplyr::desc(pid_idsa))

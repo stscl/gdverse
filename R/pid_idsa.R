@@ -13,7 +13,7 @@
 #' @param formula A formula of optimal spatial data discretization.
 #' @param data A data.frame or tibble of observation data.
 #' @param wt The spatial weight matrix.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:22`.
+#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
 #' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
 #' Others use `sdsfun::discretize_vector()`.
@@ -49,7 +49,7 @@
 #'           data = sim,
 #'           wt = wt)
 #'
-cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strategy = 2L,
+cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strategy = 2L,
                increase_rate = 0.05, cores = 1, return_disc = TRUE, seed = 123456789, ...){
   if (!(strategy %in% c(1L,2L))){
     stop("`strategy` must `1L` or `2L`!")
@@ -79,15 +79,14 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
                            "k" = discnum,
                            "method" = discmethod)
   parak = split(paradf, seq_len(nrow(paradf)))
-  wtn = wt
 
-  calcul_disc = \(paramgd, ...){
+  calcul_disc = \(paramgd, wtn, ...){
     xobs = explanatory[,paramgd[[1]],drop = TRUE]
     if (paramgd[[3]] == 'rpart'){
       discdf = tibble::tibble(yobs = response,
                               xobs = xobs)
-      xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
-      q = cpsd_spade(response,xobs,xdisc,wtn)
+      xdisc = gdverse::rpart_disc("yobs ~ .", data = discdf, ...)
+      q = gdverse::cpsd_spade(response,xobs,xdisc,wtn)
     } else if (paramgd[[3]] == 'robust') {
       # discdf = tibble::tibble(yobs = response,
       #                         xobs = xobs)
@@ -102,7 +101,7 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
       xdisc = sdsfun::discretize_vector(xobs, n = paramgd[[2]],
                                         method = paramgd[[3]],
                                         seed = seed, ...)
-      q = cpsd_spade(response,xobs,xdisc,wtn)
+      q = gdverse::cpsd_spade(response,xobs,xdisc,wtn)
     }
 
     names(q) = "spade_cpsd"
@@ -110,12 +109,10 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
   }
 
   if (doclust) {
-    parallel::clusterExport(cores,c('robust_disc','rpart_disc',
-                                    'psd_spade','cpsd_spade'))
-    out_g = parallel::parLapply(cores,parak,calcul_disc,...)
+    out_g = parallel::parLapply(cores,parak,calcul_disc,wtn = wt,...)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
-    out_g = purrr::map_dfr(parak,calcul_disc)
+    out_g = purrr::map_dfr(parak,calcul_disc,wtn = wt,...)
   }
 
   if (strategy == 1L) {
@@ -144,15 +141,12 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:22, discmethod = "quantile", strat
       if (method == 'rpart'){
         discdf = tibble::tibble(yobs = response,
                                 xobs = xobs)
-        xdisc = rpart_disc("yobs ~ .", data = discdf, ...)
+        xdisc = gdverse::rpart_disc("yobs ~ .", data = discdf, ...)
       } else if (method == 'robust') {
         discdf = tibble::tibble(yobs = response,
                                 xobs = xobs)
-        xdisc = robust_disc("yobs ~ .",
-                            data = discdf,
-                            discnum = k,
-                            cores = 1,
-                            ...)
+        xdisc = gdverse::robust_disc("yobs ~ .", data = discdf,
+                                     discnum = k, cores = 1, ...)
         xdisc = xdisc[,1,drop = TRUE]
       } else {
         xdisc = sdsfun::discretize_vector(xobs, n = k,
@@ -199,7 +193,7 @@ psd_iev = \(discdata,spzone,wt){
   totalsv = purrr::map_dbl(discdata,
                            \(.x) sdsfun::spvar(.x, wt))
   qv = purrr::map_dbl(discdata,
-                      \(.y) psd_spade(.y,spzone,wt)) %>%
+                      \(.y) gdverse::psd_spade(.y,spzone,wt)) %>%
     {(-1*. + 1)*totalsv}
   return(1 - sum(qv) / sum(totalsv))
 }
@@ -242,9 +236,9 @@ pid_idsa = \(formula, rawdata, discdata,
     fuzzyzone = sdsfun::fuzzyoverlay(formula,discdata,overlaymethod)
   }
 
-  qtheta = psd_spade(rawdata[,yname,drop = TRUE],
-                     fuzzyzone, wt)
-  qphi = psd_iev(dplyr::select(discdata,-dplyr::any_of(yname)),
-                 fuzzyzone, wt)
+  qtheta = gdverse::psd_spade(rawdata[,yname,drop = TRUE],
+                              fuzzyzone, wt)
+  qphi = gdverse::psd_iev(dplyr::select(discdata,-dplyr::any_of(yname)),
+                          fuzzyzone, wt)
   return(qtheta / qphi)
 }
