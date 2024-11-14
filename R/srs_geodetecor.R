@@ -160,9 +160,9 @@ srs_factor_detector = \(y,x,wt){
 #' srs_interaction_detector(srs_table$d,srs_table$a1,srs_table$a2,srs_wt)
 #'
 srs_interaction_detector = \(y,x1,x2,wt){
-  pd1a = srs_factor_detector(y,x1,wt)
+  pd1a = gdverse::srs_factor_detector(y,x1,wt)
   pd1 = pd1a[[1]]
-  pd2a = srs_factor_detector(y,x2,wt)
+  pd2a = gdverse::srs_factor_detector(y,x2,wt)
   pd2 = pd2a[[1]]
 
   y = all2int(y)
