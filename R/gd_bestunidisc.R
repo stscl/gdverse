@@ -61,14 +61,12 @@ gd_bestunidisc = \(formula, data, discnum = 3:8,
     xdisc = sdsfun::discretize_vector(explanatory[,paramgd[[1]],drop = TRUE],
                                       n = paramgd[[2]],method = paramgd[[3]],
                                       seed = seed, ...)
-    fd = factor_detector(response,xdisc)
-    q = fd[[1]]
+    q = gdverse::factor_detector(response,xdisc)[[1]]
     names(q) = "qstatistic"
     return(q)
   }
 
   if (doclust) {
-    parallel::clusterExport(cores, c("factor_detector"))
     out_g = parallel::parLapply(cores,parak,calcul_disc)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
