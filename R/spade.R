@@ -44,16 +44,12 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:8,
   formula.vars = all.vars(formula)
   if (inherits(data,'sf')) {
     if (is.null(wt)){
-      wt_spade = sdsfun::inverse_distance_swm(data)
-    } else {
-      wt_spade = wt
+      wt = sdsfun::inverse_distance_swm(data)
     }
     data = sf::st_drop_geometry(data)
   } else if (inherits(data,'data.frame')) {
     if (is.null(wt)){
       stop("When `data` is `data.frame` or `tibble`, please provide `wt`!")
-    } else {
-      wt_spade = wt
     }
   }
   data = tibble::as_tibble(data)
@@ -74,7 +70,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:8,
   for (i in seq_along(xdiscname)){
     qv_disc[[i]] = psmd_pseudop(data[,yname,drop=TRUE],
                                 data[,xdiscname[i],drop=TRUE],
-                                wt_spade, discnum, discmethod[i],
+                                wt, discnum, discmethod[i],
                                 cores, seed, permutations, ...)
   }
   if (!is.null(xundiscname)) {
@@ -82,7 +78,7 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:8,
     for (i in seq_along(xundiscname)){
       qv_undisc[[i]] = psd_pseudop(data[,yname,drop=TRUE],
                                    data[,xundiscname[i],drop=TRUE],
-                                   wt_spade, cores, seed, permutations)
+                                   wt, cores, seed, permutations)
     }
     qv = purrr::list_cbind(c(qv_disc,qv_undisc))
     xname = c(xdiscname,xundiscname)
