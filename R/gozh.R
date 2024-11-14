@@ -37,11 +37,11 @@ gozh = \(formula, data, cores = 1,
   if (inherits(data,'sf')) {data = sf::st_drop_geometry(data)}
   data = tibble::as_tibble(data)
   if (length(type) == 1){
-    res = gozh_detector(formula, data, cores, type, alpha, ...)
+    res = gdverse::gozh_detector(formula, data, cores, type, alpha, ...)
   } else {
     res = vector("list", length(type))
     for (i in seq_along(type)){
-      res[[i]] = gozh_detector(formula, data, cores, type[i], alpha, ...)[[1]]
+      res[[i]] = gdverse::gozh_detector(formula, data, cores, type[i], alpha, ...)[[1]]
     }
     names(res) = type
   }
@@ -164,11 +164,11 @@ gozh_detector = \(formula, data, cores = 1,
   xname = colnames(dti)[-which(colnames(dti) == yname)]
 
   calcul_rpartdisc = \(xvar,...){
-    rpart_disc(paste(yname,'~',xvar),data = dti,...)
+    gdverse::rpart_disc(paste(yname,'~',xvar),data = dti,...)
   }
   calcul_pd = \(xvar,...){
-    discdf = rpart_disc(paste0(yname,'~',paste(xvar,collapse = '+')),data = dti,...)
-    qv = factor_detector(dti[,yname,drop = TRUE],discdf)[[1]]
+    discdf = gdverse::rpart_disc(paste0(yname,'~',paste(xvar,collapse = '+')),data = dti,...)
+    qv = gdverse::factor_detector(dti[,yname,drop = TRUE],discdf)[[1]]
     return(qv)
   }
   interact_type = \(qv1,qv2,qv12){
@@ -195,19 +195,18 @@ gozh_detector = \(formula, data, cores = 1,
 
   switch(type,
           "factor" = {
-            res = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")
+            res = gdverse::gd(paste0(yname,' ~ .'),data = newdata,type = "factor")
           },
           "interaction" = {
             xinteract = utils::combn(xname,2,simplify = FALSE)
             variable1 = purrr::map_chr(seq_along(xinteract), \(x) xinteract[[x]][1])
             variable2 = purrr::map_chr(seq_along(xinteract), \(x) xinteract[[x]][2])
             if (doclust) {
-              parallel::clusterExport(cores,c('rpart_disc','factor_detector'))
               qv12 = as.numeric(parallel::parLapply(cores,xinteract,calcul_pd))
             } else {
               qv12 = purrr::map_dbl(xinteract,calcul_pd)
             }
-            res = gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
+            res = gdverse::gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
             qv = res[,2,drop = TRUE]
             names(qv) = res[,1,drop = TRUE]
             qv1 = qv[variable1]
@@ -224,10 +223,10 @@ gozh_detector = \(formula, data, cores = 1,
             class(res) = "interaction_detector"
           },
           "risk" = {
-            res = gd(paste0(yname,' ~ .'),data = newdata,type = "risk",alpha = alpha)
+            res = gdverse::gd(paste0(yname,' ~ .'),data = newdata,type = "risk",alpha = alpha)
           },
           "ecological" = {
-            res = gd(paste0(yname,' ~ .'),data = newdata,type = "ecological",alpha = alpha)
+            res = gdverse::gd(paste0(yname,' ~ .'),data = newdata,type = "ecological",alpha = alpha)
           }
   )
   return(res)
