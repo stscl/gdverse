@@ -64,7 +64,7 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
               increase_rate = 0.05, alpha = 0.95, ...){
   if (strategy == 1) {
     res_sesu = purrr::map2(datalist, su,
-                           \(.tbf, .spsu) gozh(formula,.tbf,cores,
+                           \(.tbf, .spsu) gdverse::gozh(formula,.tbf,cores,
                                                type = "factor",
                                                alpha = alpha, ...) %>%
                              purrr::pluck('factor') %>%
@@ -76,7 +76,7 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
       dplyr::filter(`P-value` <= (1 - alpha) | is.na(`P-value`)) %>%
       dplyr::group_by(su) %>%
       dplyr::summarise(qv = mean(`Q-statistic`,na.rm = T))
-    optsu = loess_optscale(optsu$qv,optsu$su,increase_rate)
+    optsu = gdverse::loess_optscale(optsu$qv,optsu$su,increase_rate)
   } else {
     gozh_total = \(formula,data,...){
       formula = stats::as.formula(formula)
@@ -88,7 +88,7 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
       }
       newdti = tibble::tibble("Yvec" = dti[,formula.vars[1],drop = TRUE],
                                'TotalVariable' = rpart_disc(formula,dti,...))
-      return(gd(paste0("Yvec~TotalVariable"), newdti, type = "factor"))
+      return(gdverse::gd(paste0("Yvec~TotalVariable"), newdti, type = "factor"))
     }
     res_sesu = purrr::map2(datalist, su,
                            \(.tbf, .spsu) gozh_total(formula,.tbf, ...) %>%
@@ -99,7 +99,7 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
     qv = res_sesu %>%
       purrr::list_rbind() %>%
       dplyr::pull(`Q-statistic`)
-    optsu = loess_optscale(qv,su,increase_rate)
+    optsu = gdverse::loess_optscale(qv,su,increase_rate)
   }
   res = list('sesu' = sesu,
              'optsu' = optsu[1],

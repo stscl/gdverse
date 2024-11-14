@@ -60,7 +60,7 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:8,
               discmethod = c("sd","equal","geometric","quantile","natural"),
               cores = 1, increase_rate = 0.05, alpha = 0.95, ...){
   res_sesu = purrr::map2(datalist, su,
-                         \(.tbf, .spsu) opgd(formula, .tbf, discvar, discnum,
+                         \(.tbf, .spsu) gdverse::opgd(formula, .tbf, discvar, discnum,
                                              discmethod, cores, type = "factor",
                                              alpha = alpha, ...) %>%
                                 purrr::pluck('factor') %>%
@@ -72,7 +72,7 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:8,
     dplyr::filter(`P-value` <= (1 - alpha) | is.na(`P-value`)) %>%
     dplyr::group_by(su) %>%
     dplyr::summarise(qv = mean(`Q-statistic`,na.rm = T))
-  optsu = loess_optscale(optsu$qv,optsu$su,increase_rate)
+  optsu = gdverse::loess_optscale(optsu$qv,optsu$su,increase_rate)
   res = list('sesu' = sesu,'optsu' = optsu[1],
              'increase_rate' = optsu[2])
   class(res) = 'sesu_opgd'
