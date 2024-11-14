@@ -8,7 +8,7 @@ psmd_spade(
   yobs,
   xobs,
   wt,
-  discnum = 3:22,
+  discnum = 3:8,
   discmethod = "quantile",
   cores = 1,
   seed = 123456789,
@@ -18,13 +18,13 @@ psmd_spade(
 \arguments{
 \item{yobs}{Variable Y}
 
-\item{xobs}{The original undiscretized covariable X.}
+\item{xobs}{The original continuous covariable X.}
 
 \item{wt}{The spatial weight matrix.}
 
-\item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:22}.}
+\item{discnum}{(optional) Number of multilevel discretizations. Default will use \code{3:8}.}
 
-\item{discmethod}{(optional) The discretization methods. Default will use \code{quantile}.
+\item{discmethod}{(optional) The discretize methods. Default will use \code{quantile}.
 If \code{discmethod} is set to \code{robust}, the function \code{robust_disc()} will be used. Conversely,
 if \code{discmethod} is set to \code{rpart}, the \code{rpart_disc()} function will be used. Others use
 \code{sdsfun::discretize_vector()}. Currently, only one \code{discmethod} can be used at a time.}

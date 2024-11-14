@@ -68,17 +68,17 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:8,
   if (length(discmethod) == 1) {discmethod = rep('quantile',length(xdiscname))}
   qv_disc = vector("list",length = length(xdiscname))
   for (i in seq_along(xdiscname)){
-    qv_disc[[i]] = psmd_pseudop(data[,yname,drop=TRUE],
-                                data[,xdiscname[i],drop=TRUE],
-                                wt, discnum, discmethod[i],
-                                cores, seed, permutations, ...)
+    qv_disc[[i]] = gdverse::psmd_pseudop(data[,yname,drop=TRUE],
+                                         data[,xdiscname[i],drop=TRUE],
+                                         wt, discnum, discmethod[i],
+                                         cores, seed, permutations, ...)
   }
   if (!is.null(xundiscname)) {
     qv_undisc = vector("list",length = length(xundiscname))
     for (i in seq_along(xundiscname)){
-      qv_undisc[[i]] = psd_pseudop(data[,yname,drop=TRUE],
-                                   data[,xundiscname[i],drop=TRUE],
-                                   wt, cores, seed, permutations)
+      qv_undisc[[i]] = gdverse::psd_pseudop(data[,yname,drop=TRUE],
+                                            data[,xundiscname[i],drop=TRUE],
+                                            wt, cores, seed, permutations)
     }
     qv = purrr::list_cbind(c(qv_disc,qv_undisc))
     xname = c(xdiscname,xundiscname)
