@@ -1,5 +1,7 @@
 # gdverse 1.3
 
+* Reorganize the parallel computing section in gdverse (#21).
+
 * Align the RGD model and algorithm with the original framework presented in paper (#20).
 
 * Now gdverse requires sdsfun with a minimum version of `0.4.2` (#19).
