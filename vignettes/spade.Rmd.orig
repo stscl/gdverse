@@ -63,23 +63,21 @@ When response variable has a strong spatial dependence, maybe *SPADE* is a best 
 
 The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
-In `spade` function, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
-
-```{r}
-coords = depression |>
-  st_centroid() |>
-  st_coordinates()
-
-wt1 = inverse_distance_weight(coords[,1],coords[,2])
-```
-
-You can also use gravity model weight by assigning the `power` parameter in `inverse_distance_weight()` function.
-
-```{r}
-wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
-```
-
 I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
+
+In `spade` function, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `sdsfun::inverse_distance_swm()`.
+
+```{r}
+wt1 = sdsfun::inverse_distance_swm(depression)
+```
+
+You can also use gravity model weight by assigning the `power` parameter in `sdsfun::inverse_distance_swm()` function.
+
+```{r}
+wt2 = sdsfun::inverse_distance_swm(depression,power = 2)
+```
+
+Or using a spatial weight matrix based on geospatial contiguity.
 
 ```{r}
 wt3 = sdsfun::spdep_contiguity_swm(depression, k = 8)
