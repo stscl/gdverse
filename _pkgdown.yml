@@ -75,7 +75,6 @@ reference:
 - title: Utility Functions
   contents:
   - shuffle_vector
-  - generate_subsets
   - weight_assign
   - all2int
   - F_informationloss
