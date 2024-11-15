@@ -23,7 +23,8 @@
 #'
 #' @examples
 #' data('sim')
-#' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+#' wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')),
+#'                                   power = 2)
 #' psd_pseudop(sim$y,sdsfun::discretize_vector(sim$xa,5),wt)
 #'
 psd_pseudop = \(y,x,wt,cores = 1,
@@ -102,7 +103,7 @@ psd_pseudop = \(y,x,wt,cores = 1,
 #'
 #' @examples
 #' data('sim')
-#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 #' psmd_pseudop(sim$y,sim$xa,wt)
 #'
 psmd_pseudop = \(yobs, xobs, wt, discnum = 3:8,

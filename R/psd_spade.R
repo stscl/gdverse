@@ -20,7 +20,8 @@
 #'
 #' @examples
 #' data('sim')
-#' wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+#' wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')),
+#'                                   power = 2)
 #' psd_spade(sim$y,sdsfun::discretize_vector(sim$xa,5),wt)
 #'
 psd_spade = \(y,x,wt){
@@ -68,7 +69,7 @@ psd_spade = \(y,x,wt){
 #'
 #' @examples
 #' data('sim')
-#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 #' xa = sim$xa
 #' xa_disc = sdsfun::discretize_vector(xa,5)
 #' cpsd_spade(sim$y,xa,xa_disc,wt)
@@ -107,7 +108,7 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 #'
 #' @examples
 #' data('sim')
-#' wt = inverse_distance_weight(sim$lo,sim$la)
+#' wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 #' psmd_spade(sim$y,sim$xa,wt)
 #'
 psmd_spade = \(yobs, xobs, wt, discnum = 3:8,
