@@ -53,7 +53,7 @@ spd_lesh = \(formula,data,cores = 1,...){
     dti = data
   }
   xname = colnames(dti)[-which(colnames(dti) == yname)]
-  xs = gdverse::generate_subsets(xname,empty = FALSE, self = TRUE)
+  xs = sdsfun::generate_subsets(xname,empty = FALSE, self = TRUE)
 
   calcul_theta = \(.x,...){
     discdf = gdverse::rpart_disc(paste0(yname,'~',paste(.x,collapse = '+')),data = dti,...)
@@ -86,7 +86,7 @@ spd_lesh = \(formula,data,cores = 1,...){
 
   calcul_shap = \(xvar){
     fullxvar = xname[-which(xname == xvar)]
-    fullvar = gdverse::generate_subsets(fullxvar,empty = FALSE,self = TRUE)
+    fullvar = sdsfun::generate_subsets(fullxvar,empty = FALSE,self = TRUE)
 
     calcul_unishap = \(xvar,fullxvar,namelist,valuevec){
       n = length(fullxvar)

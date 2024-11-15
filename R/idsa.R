@@ -81,7 +81,7 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
     dplyr::select(dplyr::all_of(yname)) %>%
     dplyr::bind_cols(g$disv)
   dti = dplyr::select(data,dplyr::all_of(names(newdti)))
-  xs = gdverse::generate_subsets(xname,empty = FALSE, self = TRUE)
+  xs = sdsfun::generate_subsets(xname,empty = FALSE, self = TRUE)
 
   calcul_pid = \(.x,wt,overlay){
     if (length(.x) == 1) {

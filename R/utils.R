@@ -36,35 +36,6 @@ shuffle_vector = \(x,shuffle_rate,seed = 123456789){
   }
 }
 
-#' @title generate subsets of a set
-#'
-#' @param set A vector.
-#' @param empty (optional) When `empty` is `TRUE`, the generated subset includes the empty set,
-#' otherwise the empty set is removed. Default is `TRUE`.
-#' @param self (optional) When `self` is `TRUE`, the resulting subset includes the set itself,
-#' otherwise the set itself is removed. Default is `TRUE`.
-#'
-#' @return A list.
-#' @export
-#'
-#' @examples
-#' generate_subsets(letters[1:3])
-#' generate_subsets(letters[1:3],empty = FALSE)
-#' generate_subsets(letters[1:3],self = FALSE)
-#' generate_subsets(letters[1:3],empty = FALSE,self = FALSE)
-#'
-generate_subsets = \(set,empty = TRUE,self = TRUE) {
-  n = length(set)
-  subsets = list(c())
-  for (i in seq(set)) {
-    subsets = c(subsets, utils::combn(set, i, simplify = FALSE))
-  }
-  if (!empty) {subsets = subsets[-1]}
-  if (!self & empty) {subsets = subsets[-2^n]}
-  if (!self & !empty) {subsets = subsets[-(2^n-1)]}
-  return(subsets)
-}
-
 #' @title assign values by weight
 #'
 #' @param x A numeric value
