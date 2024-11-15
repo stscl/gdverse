@@ -294,24 +294,21 @@ discretization.</p>
 <p>The biggest difference between SPADE and native GD and OPGD in actual
 modeling is that SPADE requires a spatial weight matrix to calculate
 spatial variance.</p>
-<p>In <code>spade</code> function, when you not provide a spatial weight
-matrix, it will use <strong>1st order inverse distance weight</strong>
-by default, which can be created by
-<code>inverse_distance_weight()</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">coords</span> <span class="op">=</span> <span class="va">depression</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">wt1</span> <span class="op">=</span> <span class="fu">inverse_distance_weight</span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p>You can also use gravity model weight by assigning the
-<code>power</code> parameter in <code>inverse_distance_weight()</code>
-function.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt2</span> <span class="op">=</span> <span class="fu">inverse_distance_weight</span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>I have also developed the <a href="https://stscl.github.io/sdsfun/" class="external-link">sdsfun</a> package to facilitate
 the construction of spatial weight matrices, which requires an input of
 an sf object.</p>
+<p>In <code>spade</code> function, when you not provide a spatial weight
+matrix, it will use <strong>1st order inverse distance weight</strong>
+by default, which can be created by
+<code><a href="https://stscl.github.io/sdsfun/reference/inverse_distance_swm.html" class="external-link">sdsfun::inverse_distance_swm()</a></code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wt1</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/inverse_distance_swm.html" class="external-link">inverse_distance_swm</a></span><span class="op">(</span><span class="va">depression</span><span class="op">)</span></span></code></pre></div>
+<p>You can also use gravity model weight by assigning the
+<code>power</code> parameter in
+<code><a href="https://stscl.github.io/sdsfun/reference/inverse_distance_swm.html" class="external-link">sdsfun::inverse_distance_swm()</a></code> function.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">wt2</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/inverse_distance_swm.html" class="external-link">inverse_distance_swm</a></span><span class="op">(</span><span class="va">depression</span>,power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p>Or using a spatial weight matrix based on geospatial contiguity.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wt3</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/spdep_contiguity_swm.html" class="external-link">spdep_contiguity_swm</a></span><span class="op">(</span><span class="va">depression</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <p>Or using a spatial weight matrix based on distance kernel
@@ -340,16 +337,16 @@ spatial weight matrix <code>wt1</code>.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## |       variable        | Q-statistic |      P-value      |</span></span>
 <span><span class="co">## |:---------------------:|:-----------:|:-----------------:|</span></span>
-<span><span class="co">## |   PopulationDensity   | 0.21375164  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |    DrinkingPlaces     | 0.18592140  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |        Casinos        | 0.17863165  | No Pseudo-P Value |</span></span>
-<span><span class="co">## | Neighbor_Disadvantage | 0.17400420  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |      NatureParks      | 0.16727659  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |     Population65      | 0.15645381  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |         Beer          | 0.09619354  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   MentalHealthPati    | 0.08027631  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |   NoHealthInsurance   | 0.07921831  | No Pseudo-P Value |</span></span>
-<span><span class="co">## |      X.HouseRent      | 0.05641436  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   PopulationDensity   | 0.21532238  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |    DrinkingPlaces     | 0.18564821  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |        Casinos        | 0.17438646  | No Pseudo-P Value |</span></span>
+<span><span class="co">## | Neighbor_Disadvantage | 0.17235706  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |      NatureParks      | 0.17019859  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |     Population65      | 0.15592529  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |         Beer          | 0.09506759  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   MentalHealthPati    | 0.07956353  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |   NoHealthInsurance   | 0.07753293  | No Pseudo-P Value |</span></span>
+<span><span class="co">## |      X.HouseRent      | 0.05621546  | No Pseudo-P Value |</span></span>
 <span><span class="fu"><a href="https://rspatial.github.io/terra/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">depression_spade</span>, slicenum <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/spade/spade-1.png"></p>
 <p><strong>You can also access the detailed q statistics by
@@ -359,16 +356,16 @@ spatial weight matrix <code>wt1</code>.</p>
 <span><span class="co">## # A tibble: 10 × 3</span></span>
 <span><span class="co">##    variable              `Q-statistic` `P-value`        </span></span>
 <span><span class="co">##    &lt;chr&gt;                         &lt;dbl&gt; &lt;chr&gt;            </span></span>
-<span><span class="co">##  1 PopulationDensity            0.214  No Pseudo-P Value</span></span>
+<span><span class="co">##  1 PopulationDensity            0.215  No Pseudo-P Value</span></span>
 <span><span class="co">##  2 DrinkingPlaces               0.186  No Pseudo-P Value</span></span>
-<span><span class="co">##  3 Casinos                      0.179  No Pseudo-P Value</span></span>
-<span><span class="co">##  4 Neighbor_Disadvantage        0.174  No Pseudo-P Value</span></span>
-<span><span class="co">##  5 NatureParks                  0.167  No Pseudo-P Value</span></span>
+<span><span class="co">##  3 Casinos                      0.174  No Pseudo-P Value</span></span>
+<span><span class="co">##  4 Neighbor_Disadvantage        0.172  No Pseudo-P Value</span></span>
+<span><span class="co">##  5 NatureParks                  0.170  No Pseudo-P Value</span></span>
 <span><span class="co">##  6 Population65                 0.156  No Pseudo-P Value</span></span>
-<span><span class="co">##  7 Beer                         0.0962 No Pseudo-P Value</span></span>
-<span><span class="co">##  8 MentalHealthPati             0.0803 No Pseudo-P Value</span></span>
-<span><span class="co">##  9 NoHealthInsurance            0.0792 No Pseudo-P Value</span></span>
-<span><span class="co">## 10 X.HouseRent                  0.0564 No Pseudo-P Value</span></span></code></pre></div>
+<span><span class="co">##  7 Beer                         0.0951 No Pseudo-P Value</span></span>
+<span><span class="co">##  8 MentalHealthPati             0.0796 No Pseudo-P Value</span></span>
+<span><span class="co">##  9 NoHealthInsurance            0.0775 No Pseudo-P Value</span></span>
+<span><span class="co">## 10 X.HouseRent                  0.0562 No Pseudo-P Value</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
