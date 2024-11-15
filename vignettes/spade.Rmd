@@ -138,25 +138,23 @@ When response variable has a strong spatial dependence, maybe *SPADE* is a best 
 
 The biggest difference between SPADE and native GD and OPGD in actual modeling is that SPADE requires a spatial weight matrix to calculate spatial variance.
 
-In `spade` function, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `inverse_distance_weight()`.
-
-
-``` r
-coords = depression |>
-  st_centroid() |>
-  st_coordinates()
-
-wt1 = inverse_distance_weight(coords[,1],coords[,2])
-```
-
-You can also use gravity model weight by assigning the `power` parameter in `inverse_distance_weight()` function.
-
-
-``` r
-wt2 = inverse_distance_weight(coords[,1],coords[,2],power = 2)
-```
-
 I have also developed the [sdsfun](https://stscl.github.io/sdsfun/) package to facilitate the construction of spatial weight matrices, which requires an input of an sf object.
+
+In `spade` function, when you not provide a spatial weight matrix, it will use **1st order inverse distance weight** by default, which can be created by `sdsfun::inverse_distance_swm()`.
+
+
+``` r
+wt1 = sdsfun::inverse_distance_swm(depression)
+```
+
+You can also use gravity model weight by assigning the `power` parameter in `sdsfun::inverse_distance_swm()` function.
+
+
+``` r
+wt2 = sdsfun::inverse_distance_swm(depression,power = 2)
+```
+
+Or using a spatial weight matrix based on geospatial contiguity.
 
 
 ``` r
@@ -186,16 +184,16 @@ depression_spade
 ## 
 ## |       variable        | Q-statistic |      P-value      |
 ## |:---------------------:|:-----------:|:-----------------:|
-## |   PopulationDensity   | 0.21375164  | No Pseudo-P Value |
-## |    DrinkingPlaces     | 0.18592140  | No Pseudo-P Value |
-## |        Casinos        | 0.17863165  | No Pseudo-P Value |
-## | Neighbor_Disadvantage | 0.17400420  | No Pseudo-P Value |
-## |      NatureParks      | 0.16727659  | No Pseudo-P Value |
-## |     Population65      | 0.15645381  | No Pseudo-P Value |
-## |         Beer          | 0.09619354  | No Pseudo-P Value |
-## |   MentalHealthPati    | 0.08027631  | No Pseudo-P Value |
-## |   NoHealthInsurance   | 0.07921831  | No Pseudo-P Value |
-## |      X.HouseRent      | 0.05641436  | No Pseudo-P Value |
+## |   PopulationDensity   | 0.21532238  | No Pseudo-P Value |
+## |    DrinkingPlaces     | 0.18564821  | No Pseudo-P Value |
+## |        Casinos        | 0.17438646  | No Pseudo-P Value |
+## | Neighbor_Disadvantage | 0.17235706  | No Pseudo-P Value |
+## |      NatureParks      | 0.17019859  | No Pseudo-P Value |
+## |     Population65      | 0.15592529  | No Pseudo-P Value |
+## |         Beer          | 0.09506759  | No Pseudo-P Value |
+## |   MentalHealthPati    | 0.07956353  | No Pseudo-P Value |
+## |   NoHealthInsurance   | 0.07753293  | No Pseudo-P Value |
+## |      X.HouseRent      | 0.05621546  | No Pseudo-P Value |
 plot(depression_spade, slicenum = 6)
 ```
 
@@ -209,14 +207,14 @@ depression_spade$factor
 ## # A tibble: 10 × 3
 ##    variable              `Q-statistic` `P-value`        
 ##    <chr>                         <dbl> <chr>            
-##  1 PopulationDensity            0.214  No Pseudo-P Value
+##  1 PopulationDensity            0.215  No Pseudo-P Value
 ##  2 DrinkingPlaces               0.186  No Pseudo-P Value
-##  3 Casinos                      0.179  No Pseudo-P Value
-##  4 Neighbor_Disadvantage        0.174  No Pseudo-P Value
-##  5 NatureParks                  0.167  No Pseudo-P Value
+##  3 Casinos                      0.174  No Pseudo-P Value
+##  4 Neighbor_Disadvantage        0.172  No Pseudo-P Value
+##  5 NatureParks                  0.170  No Pseudo-P Value
 ##  6 Population65                 0.156  No Pseudo-P Value
-##  7 Beer                         0.0962 No Pseudo-P Value
-##  8 MentalHealthPati             0.0803 No Pseudo-P Value
-##  9 NoHealthInsurance            0.0792 No Pseudo-P Value
-## 10 X.HouseRent                  0.0564 No Pseudo-P Value
+##  7 Beer                         0.0951 No Pseudo-P Value
+##  8 MentalHealthPati             0.0796 No Pseudo-P Value
+##  9 NoHealthInsurance            0.0775 No Pseudo-P Value
+## 10 X.HouseRent                  0.0562 No Pseudo-P Value
 ```
