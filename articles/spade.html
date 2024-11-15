@@ -297,18 +297,18 @@ spatial variance.</p>
 <p>In <code>spade</code> function, when you not provide a spatial weight
 matrix, it will use <strong>1st order inverse distance weight</strong>
 by default, which can be created by
-<code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code>.</p>
+<code>inverse_distance_weight()</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coords</span> <span class="op">=</span> <span class="va">depression</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_centroid</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_coordinates.html" class="external-link">st_coordinates</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">wt1</span> <span class="op">=</span> <span class="fu"><a href="../reference/inverse_distance_weight.html">inverse_distance_weight</a></span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">wt1</span> <span class="op">=</span> <span class="fu">inverse_distance_weight</span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p>You can also use gravity model weight by assigning the
-<code>power</code> parameter in <code><a href="../reference/inverse_distance_weight.html">inverse_distance_weight()</a></code>
+<code>power</code> parameter in <code>inverse_distance_weight()</code>
 function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">wt2</span> <span class="op">=</span> <span class="fu"><a href="../reference/inverse_distance_weight.html">inverse_distance_weight</a></span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">wt2</span> <span class="op">=</span> <span class="fu">inverse_distance_weight</span><span class="op">(</span><span class="va">coords</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,<span class="va">coords</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>,power <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>I have also developed the <a href="https://stscl.github.io/sdsfun/" class="external-link">sdsfun</a> package to facilitate
 the construction of spatial weight matrices, which requires an input of
 an sf object.</p>
