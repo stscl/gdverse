@@ -32,7 +32,7 @@ License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-URL: https://stscl.github.io/gdverse/, https://github.com/stscl/gdverse
+URL: https://github.com/stscl/gdverse, https://stscl.github.io/gdverse/
 BugReports: https://github.com/stscl/gdverse/issues
 Depends: 
     R (>= 4.1.0)
