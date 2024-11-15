@@ -6,7 +6,7 @@
 
 * Align the RGD model with the original algorithm presented in paper (#20).
 
-* Now gdverse requires sdsfun with a minimum version of `0.4.2` (#19).
+* Now gdverse requires sdsfun with a minimum version of `0.4.3` (#19).
 
 * Transfer `isp`-related concepts and functions to the `cisp` package (#18).
 
