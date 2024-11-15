@@ -20,7 +20,7 @@ Current models and functions provided by **gdverse** are:
 
 | *Model* | *Function* | *Support* |
 |----|----|----|
-| [GD](https://doi.org/10.1080/13658810802443457) | `gd()` | ✔️ |
+| [GeoDetector](https://doi.org/10.1080/13658810802443457) | `geodetector()` | ✔️ |
 | [OPGD](https://doi.org/10.1080/15481603.2020.1760434) | `opgd()` | ✔️ |
 | [GOZH](https://doi.org/10.1016/j.isprsjprs.2022.01.009) | `gozh()` | ✔️ |
 | [LESH](https://doi.org/10.1080/17538947.2023.2271883) | `lesh()` | ✔️ |
@@ -71,8 +71,8 @@ devtools::install_github("stscl/gdverse",
 **C++** compilation environment is configured in advance if you want to
 install **gdverse** from github.
 
-✨ **gdverse** supports the use of robust discretization for the robust
-geographical detector and robust interaction detector models. For
+✨ The **gdverse** package supports the use of robust discretization for
+the robust geographical detector and robust interaction detector. For
 details on using them, please refer to
 <https://stscl.github.io/gdverse/articles/rgdrid.html>.
 
