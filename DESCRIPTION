@@ -14,18 +14,18 @@ Authors@R: c(
              email = "Sybill548@163.com", 
              role = c("aut"),
              comment = c(ORCID ="0009-0008-8634-7588")),
-      person(given = "Wufan", family = "Zhao",
-             email = "wufanzhao@hkust-gz.edu.cn", 
+      person(given = "Jianwu", family = "Yan",
+             email = "yanjw2001@163.com", 
              role = c("aut"),
-             comment = c(ORCID = "0000-0002-0265-3465")),
+             comment = c(ORCID = "0000-0001-9411-8453")),
       person(given = "Yongze", family = "Song",
              email = "yongze.song@outlook.com", 
              role = c("aut"),
              comment = c(ORCID = "0000-0003-3420-9622")),
-      person(given = "Jianwu", family = "Yan",
-             email = "yanjw2001@163.com", 
+      person(given = "Wufan", family = "Zhao",
+             email = "wufanzhao@hkust-gz.edu.cn", 
              role = c("aut"),
-             comment = c(ORCID = "0000-0001-9411-8453"))
+             comment = c(ORCID = "0000-0002-0265-3465"))
       )
 Description: Analyzing spatial factors and exploring spatial associations based on the concept of spatial 
              stratified heterogeneity, and also takes into account local spatial dependencies, spatial 
