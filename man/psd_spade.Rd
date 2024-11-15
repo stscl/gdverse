@@ -26,7 +26,8 @@ The power of spatial determinant formula is
 }
 \examples{
 data('sim')
-wt = inverse_distance_weight(sim$lo,sim$la,power = 2)
+wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')),
+                                  power = 2)
 psd_spade(sim$y,sdsfun::discretize_vector(sim$xa,5),wt)
 
 }

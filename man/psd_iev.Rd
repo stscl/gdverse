@@ -24,7 +24,7 @@ PSD of an interaction of explanatory variables (PSD-IEV)
 }
 \examples{
 data('sim')
-wt = inverse_distance_weight(sim$lo,sim$la)
+wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 sim1 = dplyr::mutate(sim,dplyr::across(xa:xc,\(.x) sdsfun::discretize_vector(.x,5)))
 sz = sdsfun::fuzzyoverlay(y ~ xa + xb + xc, data = sim1)
 psd_iev(dplyr::select(sim1,xa:xc),sz,wt)

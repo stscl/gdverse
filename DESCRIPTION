@@ -42,7 +42,6 @@ Depends:
 Imports: 
     dplyr,
     forcats,
-    geosphere,
     ggplot2,
     magrittr,
     parallel,

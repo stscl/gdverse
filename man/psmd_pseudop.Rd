@@ -51,7 +51,7 @@ The power of spatial and multilevel discretization determinant formula is
 }
 \examples{
 data('sim')
-wt = inverse_distance_weight(sim$lo,sim$la)
+wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 psmd_pseudop(sim$y,sim$xa,wt)
 
 }

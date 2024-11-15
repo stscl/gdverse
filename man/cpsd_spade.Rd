@@ -29,7 +29,7 @@ The power of compensated spatial determinant formula is
 }
 \examples{
 data('sim')
-wt = inverse_distance_weight(sim$lo,sim$la)
+wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 xa = sim$xa
 xa_disc = sdsfun::discretize_vector(xa,5)
 cpsd_spade(sim$y,xa,xa_disc,wt)

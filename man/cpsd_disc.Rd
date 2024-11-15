@@ -70,7 +70,7 @@ Consequently, the use of robust discretization is not advised.
 }
 \examples{
 data('sim')
-wt = inverse_distance_weight(sim$lo,sim$la)
+wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
 cpsd_disc(y ~ xa + xb + xc,
           data = sim,
           wt = wt)
