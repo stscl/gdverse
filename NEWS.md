@@ -1,7 +1,5 @@
 # gdverse 1.3-1
 
-
-
 # gdverse 1.3
 
 * Redundant functions consolidated and migrated to `sdsfun` for maintenance (#22).
