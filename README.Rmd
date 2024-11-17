@@ -43,10 +43,6 @@ Current models and functions provided by **gdverse** are:
 |[RID](https://doi.org/10.1016/j.spasta.2024.100814)|`rid()`| ✔️ |
 |[SRSGD](https://doi.org/10.1016/j.ins.2021.12.019)|`srsgd()`| ✔️ |
 
-```{r echo=FALSE, out.width='95%', fig.align="center",fig.cap="Functions organization in gdverse package"}
-knitr::include_graphics('./man/figures/gdverse_funs.png')
-```
-
 ## Installation
 
 - Install from [CRAN](https://CRAN.R-project.org/package=gdverse) with:
