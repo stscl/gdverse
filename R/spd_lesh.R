@@ -1,16 +1,16 @@
-#' @title SHAP power of determinants (SPD)
+#' @title shap power of determinants
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
-#' Function for calculate SHAP power of determinants \eqn{SPD}.
+#' Function for calculate shap power of determinants \eqn{SPD}.
 #' @details
-#' The power of SHAP power of determinants formula is
+#' The power of shap power of determinants formula is
 #'
 #' \eqn{\theta_{x_j} \left( S \right) = \sum\limits_{s \in M \setminus \{x_j\}} \frac{|S|! \left(|M| - |S| - 1\right)!}{|M|!}\left(v \left(S \cup \left\{x_j\right\} \right) - v\left(S\right)\right)}.
 #'
-#' SHAP power of determinants (SPD) is the contribution of variable \eqn{x_j} to the power of determinants.
+#' shap power of determinants (SPD) is the contribution of variable \eqn{x_j} to the power of determinants.
 #'
 #' @note
-#' The SHAP power of determinants (SPD) requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
+#' The shap power of determinants (SPD) requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
 #' When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
 #' When there are a large number of explanatory variables, the data dimensionality reduction method can be used
 #' to ensure the trade-off between analysis results and calculation speed.
@@ -20,7 +20,7 @@
 #' examining wetland disparity. International Journal of Digital Earth, 16(2), 4533–4552.
 #' https://doi.org/10.1080/17538947.2023.2271883
 #'
-#' @param formula A formula of calculate SHAP power of determinants \eqn{SPD}.
+#' @param formula A formula of calculate shap power of determinants.
 #' @param data A data.frame or tibble of observation data.
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
 #' cluster with that many cores is created and used. You can also supply a cluster object.

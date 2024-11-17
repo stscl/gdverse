@@ -2,12 +2,12 @@
 % Please edit documentation in R/spd_lesh.R
 \name{spd_lesh}
 \alias{spd_lesh}
-\title{SHAP power of determinants (SPD)}
+\title{shap power of determinants}
 \usage{
 spd_lesh(formula, data, cores = 1, ...)
 }
 \arguments{
-\item{formula}{A formula of calculate SHAP power of determinants \eqn{SPD}.}
+\item{formula}{A formula of calculate shap power of determinants.}
 
 \item{data}{A data.frame or tibble of observation data.}
 
@@ -20,17 +20,17 @@ cluster with that many cores is created and used. You can also supply a cluster 
 A tibble with variable and its corresponding \eqn{SPD} value.
 }
 \description{
-Function for calculate SHAP power of determinants \eqn{SPD}.
+Function for calculate shap power of determinants \eqn{SPD}.
 }
 \details{
-The power of SHAP power of determinants formula is
+The power of shap power of determinants formula is
 
 \eqn{\theta_{x_j} \left( S \right) = \sum\limits_{s \in M \setminus \{x_j\}} \frac{|S|! \left(|M| - |S| - 1\right)!}{|M|!}\left(v \left(S \cup \left\{x_j\right\} \right) - v\left(S\right)\right)}.
 
-SHAP power of determinants (SPD) is the contribution of variable \eqn{x_j} to the power of determinants.
+shap power of determinants (SPD) is the contribution of variable \eqn{x_j} to the power of determinants.
 }
 \note{
-The SHAP power of determinants (SPD) requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
+The shap power of determinants (SPD) requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
 When there are more than 10 explanatory variables, carefully consider the computational burden of this model.
 When there are a large number of explanatory variables, the data dimensionality reduction method can be used
 to ensure the trade-off between analysis results and calculation speed.
