@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{Return by \code{opgd()}.}
 
-\item{...}{(optional) Other arguments passed to \code{patchwork::wrap_plots()}.}
+\item{...}{(optional) Other arguments.}
 }
 \value{
 A ggplot2 layer
