@@ -1,5 +1,7 @@
 # gdverse 1.3-1
 
+* Fix bugs of `gd`,`opgd`,`gozh`,`srsgd` plot s3 methods (#23).
+
 # gdverse 1.3
 
 * Redundant functions consolidated and migrated to `sdsfun` for maintenance (#22).
