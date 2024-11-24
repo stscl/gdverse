@@ -77,7 +77,7 @@ print.gozh_result = \(x, ...) {
 #' S3 method to plot output for GOZH model result in `gozh()`.
 #'
 #' @param x Return by `gozh()`.
-#' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
+#' @param ... (optional) Other arguments.
 #'
 #' @return A ggplot2 layer
 #' @export
@@ -87,16 +87,16 @@ plot.gozh_result = \(x, ...) {
     res = x[1]
     nx = names(x)
     class(res) = paste0(nx[1],"_detector")
-    fig_p = plot(res)
+    fig_p = plot(res,...)
   } else {
     fig_p = vector("list",length(x))
     nx = names(x)
     for (i in seq_along(x)){
       res = x[i]
       class(res) = paste0(nx[i],"_detector")
-      fig_p[[i]] = plot(res)
+      fig_p[[i]] = plot(res,...)
     }
-    fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
+    fig_p = patchwork::wrap_plots(fig_p, ncol = 2)
   }
   return(fig_p)
 }
