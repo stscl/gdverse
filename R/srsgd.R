@@ -80,7 +80,7 @@ print.srsgd_result = \(x, ...) {
 #' S3 method to plot output for SRSGD model result in `srsgd()`.
 #'
 #' @param x Return by `srsgd()`.
-#' @param ... (optional) Other arguments passed to `patchwork::wrap_plots()`.
+#' @param ... (optional) Other arguments.
 #'
 #' @return A ggplot2 layer
 #' @export
@@ -91,8 +91,8 @@ plot.srsgd_result = \(x, ...) {
   for (i in seq_along(x)){
     res = x[i]
     class(res) = paste0(nx[i],"_detector")
-    fig_p[[i]] = plot(res)
+    fig_p[[i]] = plot(res,...)
   }
-  fig_p = patchwork::wrap_plots(fig_p, ncol = 2, ...)
+  fig_p = patchwork::wrap_plots(fig_p, ncol = 2)
   return(fig_p)
 }
