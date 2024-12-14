@@ -1,4 +1,4 @@
-# gdverse 1.3.2
+# gdverse 1.3-2
 
 # gdverse 1.3-1
 
