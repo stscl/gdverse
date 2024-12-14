@@ -1,3 +1,5 @@
+# gdverse 1.3.2
+
 # gdverse 1.3-1
 
 * Fix bugs of `gd`,`opgd`,`gozh`,`srsgd` plot s3 methods (#23).
