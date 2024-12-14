@@ -47,7 +47,7 @@ Imports:
     reticulate,
     rpart,
     scatterpie,
-    sdsfun (>= 0.5.0),
+    sdsfun (>= 0.6.0),
     sf,
     stats,
     tibble,
