@@ -11,29 +11,20 @@
 #' @export
 NULL
 
-#' @title randomly shuffling vector
+#' @title generate permutations
 #'
 #' @param x A vector.
-#' @param shuffle_rate The shuffling rate.
 #' @param seed (optional) Random seed number. Default is `123456789`.
 #'
-#' @return A shuffled vector.
+#' @return A permutations vector.
 #' @export
 #'
 #' @examples
-#' shuffle_vector(1:100,0.15)
+#' gen_permutations(1:100,42)
 #'
-shuffle_vector = \(x,shuffle_rate,seed = 123456789){
+gen_permutations = \(x,seed = 123456789){
   set.seed(seed)
-  n = length(x)
-  shuffle_size = floor(n * shuffle_rate)
-  if (shuffle_size == 0) {
-    return(x)
-  } else {
-    shuffle_indices = sample(1:n, size = shuffle_size)
-    new_x = c(x[shuffle_indices], x[-shuffle_indices])
-    return(new_x)
-  }
+  return(sample(x))
 }
 
 #' @title assign values by weight
