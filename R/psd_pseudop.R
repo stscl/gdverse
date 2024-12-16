@@ -35,11 +35,9 @@ psd_pseudop = \(y,x,wt,cores = 1,
     fd = tibble::tibble("Q-statistic" = qs, "P-value" = "No Pseudo-P Value")
   } else {
     set.seed(seed)
-    permutation = data.frame(
-      x1 = stats::runif(permutations, min = 0, max = 1),
-      x2 = sdsfun::normalize_vector(stats::rnorm(permutations), 0.001, 0.999)
-    ) %>%
-      split(.,seq_len(nrow(.)))
+    random_seed = sample(1:100, 1)
+    random_seeds = seq(random_seed, by = 1,
+                       length.out = as.integer(permutations))
 
     doclust = FALSE
     if (cores > 1) {
@@ -48,21 +46,16 @@ psd_pseudop = \(y,x,wt,cores = 1,
       on.exit(parallel::stopCluster(cores), add=TRUE)
     }
 
-    set.seed(seed)
-    randomnum = stats::runif(1)
-    xperm = gdverse::shuffle_vector(x,randomnum,seed = seed)
-    yperm = gdverse::shuffle_vector(y,randomnum,seed = seed)
-    calcul_psd = \(y,x,seed){
-      yobs_shffule = gdverse::shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
-      xobs_shffule = gdverse::shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
-      return(gdverse::psd_spade(yobs_shffule,xobs_shffule,wt))
+    calcul_psd = \(seed,y,x){
+      yobs_shffule = gdverse::gen_permutations(y,seed)
+      return(gdverse::psd_spade(yobs_shffule,x,wt))
     }
 
     if (doclust) {
-      out_g = parallel::parLapply(cores,permutation,calcul_psd)
+      out_g = parallel::parLapply(cores,random_seeds,calcul_psd,y = y,x = x)
       out_g = as.numeric(do.call(rbind, out_g))
     } else {
-      out_g = purrr::map_dbl(permutation,calcul_psd)
+      out_g = purrr::map_dbl(random_seeds,calcul_psd,y = y,x = x)
     }
 
     R = sum(out_g >= qs)
