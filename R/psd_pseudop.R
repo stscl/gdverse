@@ -121,19 +121,19 @@ psmd_pseudop = \(yobs, xobs, wt, discnum = 3:8,
     }
 
     seedn = seed
-    calcul_psmd = \(seed,y,x,wt,discnum,discmethod...){
+    calcul_psmd = \(seed,y,x,wt,discnum,discmethod,...){
       yobs_shffule = gdverse::gen_permutations(y,seed)
       return(gdverse::psmd_spade(yobs_shffule,x,wt,discnum,discmethod,
                                  cores = 1, seed = seedn, ...))
     }
 
     if (doclust) {
-      out_g = parallel::parLapply(cores,random_seeds,calcul_psmd,y = y, x = x, wt = wt,
-                                  discnum = discnum,discmethod = discmethod, ...)
+      out_g = parallel::parLapply(cores,random_seeds,calcul_psmd, y = yobs, x = xobs,
+                                  wt = wt, discnum = discnum,discmethod = discmethod, ...)
       out_g = as.numeric(do.call(rbind, out_g))
     } else {
-      out_g = purrr::map_dbl(random_seeds,calcul_psmd,y = y, x = x, wt = wt,
-                             discnum = discnum,discmethod = discmethod, ...)
+      out_g = purrr::map_dbl(random_seeds,calcul_psmd, y = yobs, x = xobs,
+                             wt = wt, discnum = discnum, discmethod = discmethod, ...)
     }
 
     R = sum(out_g >= qs)
