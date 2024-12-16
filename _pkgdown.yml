@@ -74,7 +74,7 @@ reference:
 
 - title: Utility Functions
   contents:
-  - shuffle_vector
+  - gen_permutations
   - weight_assign
   - all2int
   - F_informationloss
