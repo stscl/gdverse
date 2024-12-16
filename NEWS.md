@@ -1,5 +1,7 @@
 # gdverse 1.3-2
 
+* Update the calculation method of pseudo p-values for the SPADE model (#26).
+
 # gdverse 1.3-1
 
 * Fix bugs of `gd`,`opgd`,`gozh`,`srsgd` plot s3 methods (#23).
