@@ -52,7 +52,7 @@ psd_pseudop = \(y,x,wt,cores = 1,
     randomnum = stats::runif(1)
     xperm = gdverse::shuffle_vector(x,randomnum,seed = seed)
     yperm = gdverse::shuffle_vector(y,randomnum,seed = seed)
-    calcul_psd = \(p_shuffle){
+    calcul_psd = \(y,x,seed){
       yobs_shffule = gdverse::shuffle_vector(yperm,p_shuffle[[2]],seed = seed)
       xobs_shffule = gdverse::shuffle_vector(xperm,p_shuffle[[1]],seed = seed)
       return(gdverse::psd_spade(yobs_shffule,xobs_shffule,wt))
