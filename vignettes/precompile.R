@@ -1,5 +1,8 @@
 devtools::load_all()
 
+knitr::knit("vignettes/consistency.Rmd.orig",
+            "vignettes/consistency.Rmd")
+
 knitr::knit("vignettes/gd.Rmd.orig",
             "vignettes/gd.Rmd")
 

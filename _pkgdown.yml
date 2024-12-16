@@ -27,6 +27,8 @@ navbar:
         href: articles/rgdrid.html
       - text: Compare Size Effect of Spatial Units(SESU)
         href: articles/sesu.html
+      - text: Consistency With the Results of Existing GDM R Packages
+        href: articles/consistency.html
 
 reference:
 - title: Geographical Detector Models
