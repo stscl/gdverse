@@ -122,7 +122,7 @@ psmd_pseudop = \(yobs, xobs, wt, discnum = 3:8,
     calcul_psmd = \(.seed,.y,.x,.wt,.discnum,.discmethod,...){
       yobs_shffule = gdverse::gen_permutations(.y,.seed)
       return(gdverse::psmd_spade(yobs = yobs_shffule, xobs = .x, wt = .wt,
-                                 discnum = .discnum,discmethod = .discmethod,
+                                 discnum = .discnum, discmethod = .discmethod,
                                  cores = 1, seed = seedn, ...))
     }
 
