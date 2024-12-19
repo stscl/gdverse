@@ -124,9 +124,10 @@
 environment using <code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> in the R console or R code
 like
 <code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>.</p></li>
-<li><p>Or using <code>usethis::edit_r_environ()</code> to set
-long-available <code>gdverse</code> python dependencies environment
-path.</p></li>
+<li><p>Or using <code>usethis::edit_r_profile()</code> and
+<code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>
+to set long-available <code>gdverse</code> python dependencies
+environment path.</p></li>
 </ul>
 </li>
 </ol>
@@ -135,14 +136,13 @@ path.</p></li>
 <h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stscl.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stscl.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"ndvi"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ndvi</span><span class="op">)</span></span>
-<span><span class="co">## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation" "GDP"          </span></span>
-<span><span class="co">## [7] "Popdensity"</span></span></code></pre></div>
+<span><span class="co">## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"</span></span>
+<span><span class="co">## [6] "GDP"           "Popdensity"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-rgd">Run RGD<a class="anchor" aria-label="anchor" href="#run-rgd"></a>
