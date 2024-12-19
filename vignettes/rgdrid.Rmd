@@ -33,13 +33,12 @@ vignette: >
 
    - Temporarily setting up `gdverse` python dependence environment using `Sys.setenv()` in the R console or R code like `Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")`.
 
-   - Or using `usethis::edit_r_environ()` to set long-available `gdverse` python dependencies environment path.
+   - Or using `usethis::edit_r_profile()` and `Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")` to set long-available `gdverse` python dependencies environment path.
 
 ### Load data and package
 
 
 ``` r
-library(tidyverse)
 library(gdverse)
 
 data("ndvi")
@@ -48,8 +47,8 @@ data("ndvi")
 
 ``` r
 names(ndvi)
-## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation" "GDP"          
-## [7] "Popdensity"
+## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"
+## [6] "GDP"           "Popdensity"
 ```
 
 ### Run RGD
