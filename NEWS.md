@@ -1,5 +1,7 @@
 # gdverse 1.3-2
 
+* Update the documentation on Python dependency configuration in the `rgdrid` vignette (#30).
+
 * Discuss the consistency with the results of existing Geographical Detector R packages (#28).
 
 * Update the calculation method of pseudo p-values for the SPADE model (#26).
