@@ -55,6 +55,7 @@ Imports:
     utils
 Suggests: 
     cowplot,
+    itmsa,
     knitr,
     Rcpp,
     readr,
