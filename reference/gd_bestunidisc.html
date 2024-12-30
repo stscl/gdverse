@@ -61,7 +61,6 @@
 <span>  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">8</span>,</span>
 <span>  discmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sd"</span>, <span class="st">"equal"</span>, <span class="st">"geometric"</span>, <span class="st">"quantile"</span>, <span class="st">"natural"</span><span class="op">)</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  return_disc <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">123456789</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -76,7 +75,7 @@
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A <code>data.frame</code> or <code>tibble</code> of observation data.</p></dd>
+<dd><p>A <code>data.frame</code>, <code>tibble</code> or <code>sf</code> object of observation data.</p></dd>
 
 
 <dt id="arg-discnum">discnum<a class="anchor" aria-label="anchor" href="#arg-discnum"></a></dt>
@@ -91,11 +90,6 @@
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
 <dd><p>(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.</p></dd>
-
-
-<dt id="arg-return-disc">return_disc<a class="anchor" aria-label="anchor" href="#arg-return-disc"></a></dt>
-<dd><p>(optional) Whether or not return discretized result used the optimal parameter.
-Default is <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
