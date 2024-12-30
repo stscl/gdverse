@@ -10,7 +10,6 @@ gd_bestunidisc(
   discnum = 3:8,
   discmethod = c("sd", "equal", "geometric", "quantile", "natural"),
   cores = 1,
-  return_disc = TRUE,
   seed = 123456789,
   ...
 )
@@ -18,7 +17,7 @@ gd_bestunidisc(
 \arguments{
 \item{formula}{A formula of best univariate discretization.}
 
-\item{data}{A \code{data.frame} or \code{tibble} of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:8}.}
 
@@ -27,9 +26,6 @@ gd_bestunidisc(
 
 \item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
 multi-core parallel computing.}
-
-\item{return_disc}{(optional) Whether or not return discretized result used the optimal parameter.
-Default is \code{TRUE}.}
 
 \item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
