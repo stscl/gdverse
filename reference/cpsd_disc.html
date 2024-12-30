@@ -64,7 +64,6 @@
 <span>  strategy <span class="op">=</span> <span class="fl">2L</span>,</span>
 <span>  increase_rate <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  return_disc <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  seed <span class="op">=</span> <span class="fl">123456789</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -79,7 +78,7 @@
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>A data.frame or tibble of observation data.</p></dd>
+<dd><p>A <code>data.frame</code>, <code>tibble</code> or <code>sf</code> object of observation data.</p></dd>
 
 
 <dt id="arg-wt">wt<a class="anchor" aria-label="anchor" href="#arg-wt"></a></dt>
@@ -92,8 +91,7 @@
 
 <dt id="arg-discmethod">discmethod<a class="anchor" aria-label="anchor" href="#arg-discmethod"></a></dt>
 <dd><p>(optional) The discretization methods. Default all use <code>quantile</code>.
-Noted that <code>robust</code> will use <code><a href="robust_disc.html">robust_disc()</a></code>; <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>;
-Others use <code><a href="https://stscl.github.io/sdsfun/reference/discretize_vector.html" class="external-link">sdsfun::discretize_vector()</a></code>.</p></dd>
+Noted that  <code>rpart</code> will use <code><a href="rpart_disc.html">rpart_disc()</a></code>; Others use <code><a href="https://stscl.github.io/sdsfun/reference/discretize_vector.html" class="external-link">sdsfun::discretize_vector()</a></code>.</p></dd>
 
 
 <dt id="arg-strategy">strategy<a class="anchor" aria-label="anchor" href="#arg-strategy"></a></dt>
@@ -108,30 +106,21 @@ Default is <code>5%</code>.</p></dd>
 
 
 <dt id="arg-cores">cores<a class="anchor" aria-label="anchor" href="#arg-cores"></a></dt>
-<dd><p>(optional) A positive integer(default is 1). If cores &gt; 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.</p></dd>
-
-
-<dt id="arg-return-disc">return_disc<a class="anchor" aria-label="anchor" href="#arg-return-disc"></a></dt>
-<dd><p>(optional) Whether or not return discretized result used the optimal parameter.
-Default is <code>TRUE</code>.</p></dd>
+<dd><p>(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.</p></dd>
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
-<dd><p>(optional) Random seed number, default is <code>123456789</code>.Setting random seed is useful when
-the sample size is greater than <code>3000</code>(the default value for <code>largeN</code>) and the data is discretized
-by sampling <code>10%</code>(the default value for <code>samp_prop</code> in <code>st_unidisc()</code>).</p></dd>
+<dd><p>(optional) Random seed number, default is <code>123456789</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>(optional) Other arguments passed to <code>st_unidisc()</code>,<code><a href="robust_disc.html">robust_disc()</a></code> or <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
+<dd><p>(optional) Other arguments passed to <code><a href="https://stscl.github.io/sdsfun/reference/discretize_vector.html" class="external-link">sdsfun::discretize_vector()</a></code> or <code><a href="rpart_disc.html">rpart_disc()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list with the optimal parameter in the provided parameter combination with <code>k</code>,
-<code>method</code> and <code>disc</code>(when <code>return_disc</code> is <code>TRUE</code>).</p><dl><dt><code>x</code></dt>
+    <p>A list.</p><dl><dt><code>x</code></dt>
 <dd><p>discretization variable name</p></dd>
 
 <dt><code>k</code></dt>
@@ -165,9 +154,7 @@ DOI:10.1080/13658816.2021.1882680</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'sim'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">wt</span> <span class="op">=</span> <span class="fu">sdsfun</span><span class="fu">::</span><span class="fu"><a href="https://stscl.github.io/sdsfun/reference/inverse_distance_swm.html" class="external-link">inverse_distance_swm</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sf.html" class="external-link">st_as_sf</a></span><span class="op">(</span><span class="va">sim</span>,coords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lo'</span>,<span class="st">'la'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">cpsd_disc</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">xa</span> <span class="op">+</span> <span class="va">xb</span> <span class="op">+</span> <span class="va">xc</span>,</span></span>
-<span class="r-in"><span>          data <span class="op">=</span> <span class="va">sim</span>,</span></span>
-<span class="r-in"><span>          wt <span class="op">=</span> <span class="va">wt</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">cpsd_disc</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">xa</span> <span class="op">+</span> <span class="va">xb</span> <span class="op">+</span> <span class="va">xc</span>, data <span class="op">=</span> <span class="va">sim</span>, wt <span class="op">=</span> <span class="va">wt</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $x</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "xa" "xb" "xc"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
