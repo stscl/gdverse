@@ -19,8 +19,7 @@
 #' @param wt (optional) The spatial weight matrix. When `data` is not an `sf` object, must provide `wt`.
 #' @param discnum (optional) Number of multilevel discretization. Default will use `3:8`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
-#' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
-#' Others use `sdsfun::discretize_vector()`.
+#' Noted that  `rpart` will use `rpart_disc()`; Others use `sdsfun::discretize_vector()`.
 #' @param overlay (optional) Spatial overlay method. One of `and`, `or`, `intersection`.
 #' Default is `and`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
