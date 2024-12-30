@@ -37,6 +37,7 @@ A list.
 \item{\code{x}}{the name of the variable that needs to be discretized}
 \item{\code{k}}{optimal discretization number}
 \item{\code{method}}{optimal discretization method}
+\item{\code{qstatistic}}{optimal q-statistic}
 \item{\code{disc}}{optimal discretization results}
 }
 }
