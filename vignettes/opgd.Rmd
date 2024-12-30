@@ -40,7 +40,7 @@ g = gd_bestunidisc(NDVIchange ~ .,
                    data = select(ndvi,-c(Climatezone,Mining)),
                    discnum = 3:15, cores = 6)
 tictoc::toc()
-## 2.33 sec elapsed
+## 2.47 sec elapsed
 ```
 
 
@@ -54,6 +54,9 @@ g
 ## 
 ## $method
 ## [1] "quantile" "quantile" "natural"  "equal"   
+## 
+## $qstatistic
+## [1] 0.1096213 0.2100134 0.8809405 0.3478433
 ## 
 ## $disv
 ## # A tibble: 713 × 4

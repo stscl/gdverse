@@ -18,6 +18,7 @@
 #' \item{\code{x}}{the name of the variable that needs to be discretized}
 #' \item{\code{k}}{optimal discretization number}
 #' \item{\code{method}}{optimal discretization method}
+#' \item{\code{qstatistic}}{optimal q-statistic}
 #' \item{\code{disc}}{optimal discretization results}
 #' }
 #' @export
@@ -73,13 +74,13 @@ gd_bestunidisc = \(formula, data, discnum = 3:8,
     dplyr::slice_max(order_by = qstatistic,
                      with_ties = FALSE) %>%
     dplyr::ungroup() %>%
-    dplyr::select(-qstatistic) %>%
+    dplyr::select(dplyr::everything(),qstatistic) %>%
     as.list()
 
-  suppressMessages({resdisc = purrr::pmap_dfc(out_g,
+  suppressMessages({resdisc = purrr::pmap_dfc(out_g[1:3],
                                               \(x,k,method) sdsfun::discretize_vector(
                                                 x = explanatory[,x,drop = TRUE],
-                                                n = k, method = method, ...)) %>%
+                                                n = k, method = method, seed = seed, ...)) %>%
     purrr::set_names(out_g[[1]])})
   out_g = append(out_g,list("disv" = resdisc))
 
