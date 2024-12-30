@@ -22,8 +22,8 @@
 #'
 #' @param formula A formula of calculate shap power of determinants.
 #' @param data A data.frame or tibble of observation data.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster object.
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
 #' @param ... (optional) Other arguments passed to `rpart_disc()`.
 #'
 #' @return A tibble with variable and its corresponding \eqn{SPD} value.
@@ -36,12 +36,10 @@
 #'
 spd_lesh = \(formula,data,cores = 1,...){
   doclust = FALSE
-  if (inherits(cores, "cluster")) {
+  if (cores > 1) {
     doclust = TRUE
-  } else if (cores > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add = TRUE)
+    cl = parallel::makeCluster(cores)
+    on.exit(parallel::stopCluster(cl), add = TRUE)
   }
 
   formula = stats::as.formula(formula)
@@ -63,7 +61,7 @@ spd_lesh = \(formula,data,cores = 1,...){
   }
 
   if (doclust) {
-    out_g = parallel::parLapply(cores,xs,calcul_theta,...)
+    out_g = parallel::parLapply(cl,xs,calcul_theta,...)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
     out_g = purrr::map_dfr(xs,calcul_theta,...)
@@ -102,17 +100,8 @@ spd_lesh = \(formula,data,cores = 1,...){
     return(thetax)
   }
 
-  doclust = FALSE
-  if (inherits(cores, "cluster")) {
-    doclust = TRUE
-  } else if (cores > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add = TRUE)
-  }
-
   if (doclust) {
-    out_g = parallel::parLapply(cores,xname,calcul_shap)
+    out_g = parallel::parLapply(cl,xname,calcul_shap)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
     out_g = purrr::map_dfr(xname,calcul_shap)
