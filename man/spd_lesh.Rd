@@ -11,8 +11,8 @@ spd_lesh(formula, data, cores = 1, ...)
 
 \item{data}{A data.frame or tibble of observation data.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
 \item{...}{(optional) Other arguments passed to \code{rpart_disc()}.}
 }
