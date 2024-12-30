@@ -29,8 +29,7 @@ idsa(
 \item{discnum}{(optional) Number of multilevel discretization. Default will use \code{3:8}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
-Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
-Others use \code{sdsfun::discretize_vector()}.}
+Noted that  \code{rpart} will use \code{rpart_disc()}; Others use \code{sdsfun::discretize_vector()}.}
 
 \item{overlay}{(optional) Spatial overlay method. One of \code{and}, \code{or}, \code{intersection}.
 Default is \code{and}.}

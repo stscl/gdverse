@@ -24,6 +24,7 @@
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
 #' @param seed (optional) Random seed number, default is `123456789`.
+#' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()` or `rpart_disc()`.
 #' @return A list.
 #' \describe{
 #' \item{\code{x}}{discretization variable name}
