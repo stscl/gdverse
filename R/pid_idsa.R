@@ -11,29 +11,21 @@
 #' Consequently, the use of robust discretization is not advised.
 #'
 #' @param formula A formula of optimal spatial data discretization.
-#' @param data A data.frame or tibble of observation data.
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param wt The spatial weight matrix.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
 #' @param discmethod (optional) The discretization methods. Default all use `quantile`.
-#' Noted that `robust` will use `robust_disc()`; `rpart` will use `rpart_disc()`;
-#' Others use `sdsfun::discretize_vector()`.
+#' Noted that  `rpart` will use `rpart_disc()`; Others use `sdsfun::discretize_vector()`.
 #' @param strategy (optional) Discretization strategy. When `strategy` is `1L`, choose the highest SPADE model q-statistics to
 #' determinate optimal spatial data discretization parameters. When `strategy` is `2L`, The optimal discrete parameters of
 #' spatial data are selected by combining LOESS model.
 #' @param increase_rate (optional) The critical increase rate of the number of discretization.
 #' Default is `5%`.
-#' @param cores (optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-#' cluster with that many cores is created and used. You can also supply a cluster
-#' object.
-#' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
-#' Default is `TRUE`.
-#' @param seed (optional) Random seed number, default is `123456789`.Setting random seed is useful when
-#' the sample size is greater than `3000`(the default value for `largeN`) and the data is discretized
-#' by sampling `10%`(the default value for `samp_prop` in `st_unidisc()`).
-#' @param ... (optional) Other arguments passed to `st_unidisc()`,`robust_disc()` or `rpart_disc()`.
-#'
-#' @return A list with the optimal parameter in the provided parameter combination with `k`,
-#' `method` and `disc`(when `return_disc` is `TRUE`).
+#' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
+#' multi-core parallel computing.
+#' @param seed (optional) Random seed number, default is `123456789`.
+#' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()` or `rpart_disc()`.
+#' @return A list.
 #' \describe{
 #' \item{\code{x}}{discretization variable name}
 #' \item{\code{k}}{optimal number of spatial data discreteization}
@@ -45,34 +37,28 @@
 #' @examples
 #' data('sim')
 #' wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
-#' cpsd_disc(y ~ xa + xb + xc,
-#'           data = sim,
-#'           wt = wt)
+#' cpsd_disc(y ~ xa + xb + xc, data = sim, wt = wt)
 #'
 cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strategy = 2L,
-               increase_rate = 0.05, cores = 1, return_disc = TRUE, seed = 123456789, ...){
+               increase_rate = 0.05, cores = 1, seed = 123456789, ...){
   if (!(strategy %in% c(1L,2L))){
     stop("`strategy` must `1L` or `2L`!")
   }
 
   doclust = FALSE
-  if (inherits(cores, "cluster")) {
+  if (cores > 1) {
     doclust = TRUE
-  } else if (cores > 1) {
-    doclust = TRUE
-    cores_rdisc = cores # distinguish between python and r parallel.
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add=TRUE)
+    cl = parallel::makeCluster(cores)
+    on.exit(parallel::stopCluster(cl), add=TRUE)
   }
 
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
+  if (inherits(data,"sf")){
+    data = sf::st_drop_geometry(data)
   }
+
+  formulavars = sdsfun::formula_varname(formula,data)
+  response = data[, formulavars[[1]], drop = TRUE]
+  explanatory = data[, formulavars[[2]]]
 
   discname = names(explanatory)
   paradf = tidyr::crossing("x" = discname,
@@ -80,27 +66,17 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strate
                            "method" = discmethod)
   parak = split(paradf, seq_len(nrow(paradf)))
 
-  calcul_disc = \(paramgd, wtn, ...){
+  calcul_disc = \(paramgd, wtn, seedn, ...){
     xobs = explanatory[,paramgd[[1]],drop = TRUE]
     if (paramgd[[3]] == 'rpart'){
       discdf = tibble::tibble(yobs = response,
                               xobs = xobs)
       xdisc = gdverse::rpart_disc("yobs ~ .", data = discdf, ...)
       q = gdverse::cpsd_spade(response,xobs,xdisc,wtn)
-    } else if (paramgd[[3]] == 'robust') {
-      # discdf = tibble::tibble(yobs = response,
-      #                         xobs = xobs)
-      # xdisc = robust_disc("yobs ~ .",
-      #                      data = discdf,
-      #                      discnum = paramgd[[2]],
-      #                      cores = cores_rdisc,
-      #                      ...)
-      # xdisc = xdisc[,1,drop = TRUE]
-      q = 0.01 * paramgd[[2]] # Subsequent confirmation is required
     } else {
       xdisc = sdsfun::discretize_vector(xobs, n = paramgd[[2]],
                                         method = paramgd[[3]],
-                                        seed = seed, ...)
+                                        seed = seedn, ...)
       q = gdverse::cpsd_spade(response,xobs,xdisc,wtn)
     }
 
@@ -109,10 +85,10 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strate
   }
 
   if (doclust) {
-    out_g = parallel::parLapply(cores,parak,calcul_disc,wtn = wt,...)
+    out_g = parallel::parLapply(cl,parak,calcul_disc,wtn = wt,seedn = seed,...)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
-    out_g = purrr::map_dfr(parak,calcul_disc,wtn = wt,...)
+    out_g = purrr::map_dfr(parak,calcul_disc,wtn = wt,seedn = seed,...)
   }
 
   if (strategy == 1L) {
@@ -136,31 +112,30 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strate
       as.list()
   }
 
-  if(return_disc){
-    calcul_unidisc = \(xobs, k, method, ...){
-      if (method == 'rpart'){
-        discdf = tibble::tibble(yobs = response,
-                                xobs = xobs)
-        xdisc = gdverse::rpart_disc("yobs ~ .", data = discdf, ...)
-      } else if (method == 'robust') {
-        discdf = tibble::tibble(yobs = response,
-                                xobs = xobs)
-        xdisc = gdverse::robust_disc("yobs ~ .", data = discdf,
-                                     discnum = k, cores = 1, ...)
-        xdisc = xdisc[,1,drop = TRUE]
-      } else {
-        xdisc = sdsfun::discretize_vector(xobs, n = k,
-                                          method = method,
-                                          seed = seed, ...)
-      }
-      return(xdisc)
+  calcul_unidisc = \(xobs, k, method, ...){
+    if (method == 'rpart'){
+      discdf = tibble::tibble(yobs = response,
+                              xobs = xobs)
+      xdisc = gdverse::rpart_disc("yobs ~ .", data = discdf, ...)
+    } else if (method == 'robust') {
+      discdf = tibble::tibble(yobs = response,
+                              xobs = xobs)
+      xdisc = gdverse::robust_disc("yobs ~ .", data = discdf,
+                                   discnum = k, cores = 1, ...)
+      xdisc = xdisc[,1,drop = TRUE]
+    } else {
+      xdisc = sdsfun::discretize_vector(xobs, n = k,
+                                        method = method,
+                                        seed = seed, ...)
     }
-    suppressMessages({resdisc = purrr::pmap_dfc(out_g,
-                              \(x,k,method) calcul_unidisc(x = explanatory[,x,drop = TRUE],
-                                                           k = k, method = method, ...)) %>%
-      purrr::set_names(out_g[[1]])})
-    out_g = append(out_g,list("disv" = resdisc))
+    return(xdisc)
   }
+  suppressMessages({resdisc = purrr::pmap_dfc(out_g,
+                                              \(x,k,method) calcul_unidisc(x = explanatory[,x,drop = TRUE],
+                                                                           k = k, method = method, ...)) %>%
+    purrr::set_names(out_g[[1]])})
+  out_g = append(out_g,list("disv" = resdisc))
+
   return(out_g)
 }
 

@@ -13,7 +13,6 @@ cpsd_disc(
   strategy = 2L,
   increase_rate = 0.05,
   cores = 1,
-  return_disc = TRUE,
   seed = 123456789,
   ...
 )
@@ -21,15 +20,14 @@ cpsd_disc(
 \arguments{
 \item{formula}{A formula of optimal spatial data discretization.}
 
-\item{data}{A data.frame or tibble of observation data.}
+\item{data}{A \code{data.frame}, \code{tibble} or \code{sf} object of observation data.}
 
 \item{wt}{The spatial weight matrix.}
 
 \item{discnum}{(optional) A vector of number of classes for discretization. Default is \code{3:8}.}
 
 \item{discmethod}{(optional) The discretization methods. Default all use \code{quantile}.
-Noted that \code{robust} will use \code{robust_disc()}; \code{rpart} will use \code{rpart_disc()};
-Others use \code{sdsfun::discretize_vector()}.}
+Noted that  \code{rpart} will use \code{rpart_disc()}; Others use \code{sdsfun::discretize_vector()}.}
 
 \item{strategy}{(optional) Discretization strategy. When \code{strategy} is \code{1L}, choose the highest SPADE model q-statistics to
 determinate optimal spatial data discretization parameters. When \code{strategy} is \code{2L}, The optimal discrete parameters of
@@ -38,22 +36,15 @@ spatial data are selected by combining LOESS model.}
 \item{increase_rate}{(optional) The critical increase rate of the number of discretization.
 Default is \verb{5\%}.}
 
-\item{cores}{(optional) A positive integer(default is 1). If cores > 1, a 'parallel' package
-cluster with that many cores is created and used. You can also supply a cluster
-object.}
+\item{cores}{(optional) Positive integer (default is 1). When cores are greater than 1, use
+multi-core parallel computing.}
 
-\item{return_disc}{(optional) Whether or not return discretized result used the optimal parameter.
-Default is \code{TRUE}.}
+\item{seed}{(optional) Random seed number, default is \code{123456789}.}
 
-\item{seed}{(optional) Random seed number, default is \code{123456789}.Setting random seed is useful when
-the sample size is greater than \code{3000}(the default value for \code{largeN}) and the data is discretized
-by sampling \verb{10\%}(the default value for \code{samp_prop} in \code{st_unidisc()}).}
-
-\item{...}{(optional) Other arguments passed to \code{st_unidisc()},\code{robust_disc()} or \code{rpart_disc()}.}
+\item{...}{(optional) Other arguments passed to \code{sdsfun::discretize_vector()} or \code{rpart_disc()}.}
 }
 \value{
-A list with the optimal parameter in the provided parameter combination with \code{k},
-\code{method} and \code{disc}(when \code{return_disc} is \code{TRUE}).
+A list.
 \describe{
 \item{\code{x}}{discretization variable name}
 \item{\code{k}}{optimal number of spatial data discreteization}
@@ -71,9 +62,7 @@ Consequently, the use of robust discretization is not advised.
 \examples{
 data('sim')
 wt = sdsfun::inverse_distance_swm(sf::st_as_sf(sim,coords = c('lo','la')))
-cpsd_disc(y ~ xa + xb + xc,
-          data = sim,
-          wt = wt)
+cpsd_disc(y ~ xa + xb + xc, data = sim, wt = wt)
 
 }
 \references{
