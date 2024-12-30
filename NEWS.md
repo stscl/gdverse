@@ -1,7 +1,7 @@
 # gdverse 1.3-2
 
 * Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
-only positive integer inputs (#34,#35).
+only positive integer inputs (#36).
 
 * Update the documentation on Python dependency configuration in the `rgdrid` vignette (#30).
 
