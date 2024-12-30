@@ -117,12 +117,6 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strate
       discdf = tibble::tibble(yobs = response,
                               xobs = xobs)
       xdisc = gdverse::rpart_disc("yobs ~ .", data = discdf, ...)
-    } else if (method == 'robust') {
-      discdf = tibble::tibble(yobs = response,
-                              xobs = xobs)
-      xdisc = gdverse::robust_disc("yobs ~ .", data = discdf,
-                                   discnum = k, cores = 1, ...)
-      xdisc = xdisc[,1,drop = TRUE]
     } else {
       xdisc = sdsfun::discretize_vector(xobs, n = k,
                                         method = method,
