@@ -1,8 +1,11 @@
 # gdverse 1.3-2
 
+* Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
+only positive integer inputs (#34,#35).
+
 * Update the documentation on Python dependency configuration in the `rgdrid` vignette (#30).
 
-* Discuss the consistency with the results of existing Geographical Detector R packages (#28).
+* Discuss the consistency with the results of existing geographical detector R packages (#28).
 
 * Update the calculation method of pseudo p-values for the SPADE model (#26).
 
