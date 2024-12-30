@@ -4,14 +4,12 @@
 #' Function for determining the best univariate discretization based on geodetector q-statistic.
 #'
 #' @param formula A formula of best univariate discretization.
-#' @param data A `data.frame` or `tibble` of observation data.
+#' @param data A `data.frame`, `tibble` or `sf` object of observation data.
 #' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
 #' multi-core parallel computing.
-#' @param return_disc (optional) Whether or not return discretized result used the optimal parameter.
-#' Default is `TRUE`.
 #' @param seed (optional) Random seed number, default is `123456789`.
 #' @param ... (optional) Other arguments passed to `sdsfun::discretize_vector()`.
 #'
@@ -32,24 +30,21 @@
 #'
 gd_bestunidisc = \(formula, data, discnum = 3:8,
                    discmethod = c("sd","equal","geometric","quantile","natural"),
-                   cores = 1, return_disc = TRUE, seed = 123456789, ...){
+                   cores = 1, seed = 123456789, ...){
   doclust = FALSE
-  if (inherits(cores, "cluster")) {
+  if (cores > 1) {
     doclust = TRUE
-  } else if (cores > 1) {
-    doclust = TRUE
-    cores = parallel::makeCluster(cores)
-    on.exit(parallel::stopCluster(cores), add=TRUE)
+    cl = parallel::makeCluster(cores)
+    on.exit(parallel::stopCluster(cl), add=TRUE)
   }
 
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
+  if (inherits(data,"sf")){
+    data = sf::st_drop_geometry(data)
   }
+
+  formulavars = sdsfun::formula_varname(formula,data)
+  response = data[, formulavars[[1]], drop = TRUE]
+  explanatory = data[, formulavars[[2]]]
 
   discname = names(explanatory)
   paradf = tidyr::crossing("x" = discname,
@@ -67,7 +62,7 @@ gd_bestunidisc = \(formula, data, discnum = 3:8,
   }
 
   if (doclust) {
-    out_g = parallel::parLapply(cores,parak,calcul_disc)
+    out_g = parallel::parLapply(cl,parak,calcul_disc)
     out_g = tibble::as_tibble(do.call(rbind, out_g))
   } else {
     out_g = purrr::map_dfr(parak,calcul_disc)
@@ -81,13 +76,12 @@ gd_bestunidisc = \(formula, data, discnum = 3:8,
     dplyr::select(-qstatistic) %>%
     as.list()
 
-  if(return_disc){
-    suppressMessages({resdisc = purrr::pmap_dfc(out_g,
-                                \(x,k,method) sdsfun::discretize_vector(
-                                x = explanatory[,x,drop = TRUE],
-                                n = k, method = method, ...)) %>%
-      purrr::set_names(out_g[[1]])})
-    out_g = append(out_g,list("disv" = resdisc))
-  }
+  suppressMessages({resdisc = purrr::pmap_dfc(out_g,
+                                              \(x,k,method) sdsfun::discretize_vector(
+                                                x = explanatory[,x,drop = TRUE],
+                                                n = k, method = method, ...)) %>%
+    purrr::set_names(out_g[[1]])})
+  out_g = append(out_g,list("disv" = resdisc))
+
   return(out_g)
 }
