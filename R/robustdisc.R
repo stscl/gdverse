@@ -15,29 +15,24 @@
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use `python` `joblib` package to
 #' parallel computation.
 #'
-#' @return A tibble of discretized columns which need to be discretized.
+#' @return A `tibble`.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' ## The following code needs to configure the Python environment to run:
-#' data('ndvi')
-#' robust_disc(NDVIchange ~ GDP,data = ndvi,discnum = 5)
-#' robust_disc(NDVIchange ~ .,
-#'             data = dplyr::select(ndvi,-c(Climatezone,Mining)),
-#'             discnum = 10,cores = 6)
+#' data('sim')
+#' robust_disc(y ~ xa, data = sim, discnum = 5)
+#' robust_disc(y ~ .,
+#'             data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'             discnum = 5, cores = 3)
 #' }
 robust_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
-  }
-  y = formula.vars[1]
-  xvars = names(explanatory)
+  formulavars = sdsfun::formula_varname(formula,data)
+  response = data[, formulavars[[1]], drop = TRUE]
+  explanatory = data[, formulavars[[2]]]
+  y = formulavars[[1]]
+  xvars = formulavars[[2]]
   if (length(minsize)==1) {minsize = rep(1,length(xvars))}
   if (length(discnum)==1) {discnum = rep(discnum,length(xvars))}
   gs = as.integer(discnum)
