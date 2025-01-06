@@ -15,7 +15,7 @@
 #' @param cores (optional) A positive integer(default is 1). If cores > 1, use `python` `joblib` package to
 #' parallel computation.
 #'
-#' @return A tibble of discretized columns which need to be discretized.
+#' @return A `tibble`.
 #' @export
 #'
 #' @examples

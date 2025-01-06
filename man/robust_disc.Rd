@@ -19,7 +19,7 @@ robust_disc(formula, data, discnum, minsize = 1, cores = 1)
 parallel computation.}
 }
 \value{
-A tibble of discretized columns which need to be discretized.
+A \code{tibble}.
 }
 \description{
 Determines discretization interval breaks using an optimization algorithm for variance-based
