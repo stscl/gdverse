@@ -21,11 +21,11 @@
 #' @examples
 #' \dontrun{
 #' ## The following code needs to configure the Python environment to run:
-#' data('ndvi')
-#' robust_disc(NDVIchange ~ GDP,data = ndvi,discnum = 5)
-#' robust_disc(NDVIchange ~ .,
-#'             data = dplyr::select(ndvi,-c(Climatezone,Mining)),
-#'             discnum = 10,cores = 6)
+#' data('sim')
+#' robust_disc(y ~ xa, data = sim, discnum = 5)
+#' robust_disc(y ~ .,
+#'             data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'             discnum = 5, cores = 3)
 #' }
 robust_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
   formulavars = sdsfun::formula_varname(formula,data)
