@@ -1,4 +1,6 @@
 rse_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
+  geom = sf::st_geometry(data)
+  data = sf::st_drop_geometry(data)
   formulavars = sdsfun::formula_varname(formula,data)
   response = data[, formulavars[[1]], drop = TRUE]
   explanatory = data[, formulavars[[2]]]
