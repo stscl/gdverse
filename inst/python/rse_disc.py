@@ -17,7 +17,7 @@ def rse_disc(df,y,xvars,groups,orders,minsizes,cores = 1):
         os = os.astype(int)
         ranks = pd.Series(os, name='ranks')
         b = np.array([y, x]).transpose()
-        sorted_b = b[ranks-1]
+        sorted_b = b[os-1]
         signals = np.array(sorted_b[:, 0])
         algo = rpt.Dynp(model = "l2", min_size = min_size, jump = 1).fit(signals)
         result = algo.predict(n_bkps = gs - 1)

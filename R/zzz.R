@@ -1,7 +1,7 @@
 .onLoad = function(...) {
   loadNamespace("Rcpp")
+  loadNamespace("sf")
   loadNamespace("tibble")
-  loadNamespace("magrittr")
 }
 
 .onAttach = function(...){
