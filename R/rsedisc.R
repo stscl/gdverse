@@ -2,8 +2,8 @@ rse_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
   formulavars = sdsfun::formula_varname(formula,data)
   response = data[, formulavars[[1]], drop = TRUE]
   explanatory = data[, formulavars[[2]]]
-  y = formula.vars[[1]]
-  xvars = formula.vars[[1]]
+  y = formulavars[[1]]
+  xvars = formulavars[[2]]
   if (length(minsize)==1) {minsize = rep(1,length(xvars))}
   if (length(discnum)==1) {discnum = rep(discnum,length(xvars))}
   gs = as.integer(discnum)

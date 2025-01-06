@@ -28,16 +28,11 @@
 #'             discnum = 10,cores = 6)
 #' }
 robust_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
-  }
-  y = formula.vars[1]
-  xvars = names(explanatory)
+  formulavars = sdsfun::formula_varname(formula,data)
+  response = data[, formulavars[[1]], drop = TRUE]
+  explanatory = data[, formulavars[[2]]]
+  y = formulavars[[1]]
+  xvars = formulavars[[2]]
   if (length(minsize)==1) {minsize = rep(1,length(xvars))}
   if (length(discnum)==1) {discnum = rep(discnum,length(xvars))}
   gs = as.integer(discnum)
