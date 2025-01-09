@@ -45,14 +45,9 @@ srs_geodetector = \(formula, data, wt = NULL, type = "factor", alpha = 0.95){
   }
   data = tibble::as_tibble(data)
 
-  formula = stats::as.formula(formula)
-  formula.vars = all.vars(formula)
-  response = data[, formula.vars[1], drop = TRUE]
-  if (formula.vars[2] == "."){
-    explanatory = data[,-which(colnames(data) == formula.vars[1])]
-  } else {
-    explanatory = subset(data, TRUE, match(formula.vars[-1], colnames(data)))
-  }
+  formulavars = sdsfun::formula_varname(formula, data)
+  response = data[, formulavars[[1]], drop = TRUE]
+  explanatory = data[, formulavars[[2]]]
 
   switch(type,
          "factor" = {
