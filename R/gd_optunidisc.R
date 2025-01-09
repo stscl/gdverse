@@ -1,11 +1,9 @@
-#' @title best univariate discretization based on geodetector q-statistic
+#' @title optimal univariate discretization based on geodetector q-statistic
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for determining the best univariate discretization based on geodetector q-statistic.
 #'
-#' @param formula A formula of best univariate discretization.
+#' @param formula A formula.
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.
-#' @param discnum (optional) A vector of number of classes for discretization. Default is `3:8`.
+#' @param discnum (optional) A vector of numbers of discretization. Default is `3:8`.
 #' @param discmethod (optional) A vector of methods for discretization, default is using
 #' `c("sd","equal","geometric","quantile","natural")` by invoking `sdsfun`.
 #' @param cores (optional) Positive integer (default is 1). When cores are greater than 1, use
@@ -25,13 +23,13 @@
 #'
 #' @examples
 #' data('sim')
-#' gd_bestunidisc(y ~ xa + xb + xc,
-#'                data = sim,
-#'                discnum = 3:6)
+#' gd_optunidisc(y ~ xa + xb + xc,
+#'               data = sim,
+#'               discnum = 3:6)
 #'
-gd_bestunidisc = \(formula, data, discnum = 3:8,
-                   discmethod = c("sd","equal","geometric","quantile","natural"),
-                   cores = 1, seed = 123456789, ...){
+gd_optunidisc = \(formula, data, discnum = 3:8,
+                  discmethod = c("sd","equal","geometric","quantile","natural"),
+                  cores = 1, seed = 123456789, ...){
   doclust = FALSE
   if (cores > 1) {
     doclust = TRUE

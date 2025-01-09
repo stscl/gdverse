@@ -52,7 +52,7 @@ A list.
 }
 }
 \description{
-Function for optimal parameters-based geographical detector(OPGD) model.
+optimal parameters-based geographical detector(OPGD) model
 }
 \examples{
 data('sim')

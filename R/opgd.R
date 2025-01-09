@@ -1,7 +1,5 @@
 #' @title optimal parameters-based geographical detector(OPGD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for optimal parameters-based geographical detector(OPGD) model.
 #' @references
 #' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
@@ -55,9 +53,9 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:8,
     discvar = colnames(data)[-which(colnames(data) == yname)]
   }
   discdf = dplyr::select(data,dplyr::all_of(c(yname,discvar)))
-  g = gd_bestunidisc(paste0(yname,'~',paste0(discvar,collapse = '+')),
-                     data = discdf, discnum = discnum,
-                     discmethod = discmethod, cores = cores, ...)
+  g = gd_optunidisc(paste0(yname,'~',paste0(discvar,collapse = '+')),
+                    data = discdf, discnum = discnum,
+                    discmethod = discmethod, cores = cores, ...)
   opt_param = tibble::as_tibble(g[1:3])
   names(opt_param) = c("varibale","discnum","method")
   discedvar = colnames(data[,-which(colnames(data) %in% discvar)])
