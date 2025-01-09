@@ -77,10 +77,6 @@ only positive integer inputs (#36).
   
 * Updating the S3 method for plotting various factor detectors to better conform 
   to academic publication requirements.
-  
-* Using new example data in the vignettes for `spade` and `idsa`.
-
-* Adding the `esp` function to the package.
 
 # gdverse 1.0-1
 
