@@ -1,5 +1,7 @@
 # gdverse 1.3-2
 
+* Rename `gd_besttunidisc` as `gd_optunidisc` (#39).
+
 * Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
 only positive integer inputs (#36).
 
