@@ -45,8 +45,7 @@ A list.
 }
 }
 \description{
-Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
-geographically optimal zones-based heterogeneity(GOZH) model.
+comparison of size effects of spatial units based on GOZH
 }
 \details{
 When \code{strategy} is \code{1}, use the same process as \code{sesu_opgd()}.If not, all explanatory

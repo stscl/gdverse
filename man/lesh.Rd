@@ -24,7 +24,7 @@ A list.
 }
 }
 \description{
-Function for locally explained stratified heterogeneity model.
+locally explained stratified heterogeneity(LESH) model
 }
 \note{
 The LESH model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.

@@ -51,8 +51,7 @@ A list.
 }
 }
 \description{
-Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
-optimal parameters geographical detector(OPGD) model.
+comparison of size effects of spatial units based on OPGD
 }
 \details{
 Firstly, the \code{OPGD} model is executed for each data in the datalist (all \code{significant}

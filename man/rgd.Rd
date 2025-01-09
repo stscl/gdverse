@@ -48,7 +48,7 @@ A list.
 }
 }
 \description{
-Function for robust geographical detector(RGD) model.
+robust geographical detector(RGD) model
 }
 \note{
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.

@@ -17,7 +17,7 @@ geodetector(formula, data, type = "factor", alpha = 0.95)
 \item{alpha}{(optional) Specifies the size of the alpha (confidence level). Default is \code{0.95}.}
 }
 \value{
-A list of tibble with the corresponding result under different detector types.
+A list.
 \describe{
 \item{\code{factor}}{the result of factor detector}
 \item{\code{interaction}}{the result of interaction detector}

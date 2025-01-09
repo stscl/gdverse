@@ -50,7 +50,7 @@ reference:
 
 - title: Variable Discretization Methods
   contents:
-  - gd_bestunidisc
+  - gd_optunidisc
   - rpart_disc
   - robust_disc
   - cpsd_disc

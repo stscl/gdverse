@@ -1,7 +1,5 @@
 #' @title native geographical detector(GD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for native geographical detector model.
 #' @references
 #' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010)
 #' Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study

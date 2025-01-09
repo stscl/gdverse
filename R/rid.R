@@ -1,7 +1,5 @@
 #' @title robust interaction detector(RID) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for robust interaction detector(RID) model.
 #' @references
 #' Zhang, Z., Song, Y., Karunaratne, L., & Wu, P. (2024). Robust interaction detector:
 #' A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.

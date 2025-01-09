@@ -61,7 +61,7 @@ A list.
 }
 }
 \description{
-Function for interactive detector for spatial associations model.
+interactive detector for spatial associations(IDSA) model
 }
 \note{
 \strong{Please note that all variables in the IDSA model need to be continuous data}.

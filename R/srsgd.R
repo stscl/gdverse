@@ -1,7 +1,5 @@
 #' @title spatial rough set-based geographical detector(SRSGD) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for spatial rough set-based geographical detector model.
 #' @references
 #' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
 #' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.

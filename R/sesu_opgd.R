@@ -1,8 +1,5 @@
 #' @title comparison of size effects of spatial units based on OPGD
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for comparison of size effects of spatial units in spatial heterogeneity analysis based on
-#' optimal parameters geographical detector(OPGD) model.
 #' @references
 #' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity

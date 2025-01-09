@@ -1,7 +1,5 @@
 #' @title interactive detector for spatial associations(IDSA) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for interactive detector for spatial associations model.
 #' @references
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,

@@ -1,7 +1,5 @@
 #' @title locally explained stratified heterogeneity(LESH) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for locally explained stratified heterogeneity model.
 #'
 #' @note
 #' The LESH model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.

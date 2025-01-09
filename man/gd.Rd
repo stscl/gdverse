@@ -26,7 +26,7 @@ A list.
 }
 }
 \description{
-Function for native geographical detector model.
+native geographical detector(GD) model
 }
 \examples{
 data("NTDs")

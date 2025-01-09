@@ -1,7 +1,5 @@
 #' @title geographically optimal zones-based heterogeneity(GOZH) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for geographically optimal zones-based heterogeneity(GOZH) model
 #' @references
 #' Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
 #' spatio-temporal disparities in soil moisture of the Northern Hemisphere using a geographically optimal

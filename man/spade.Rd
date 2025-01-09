@@ -53,7 +53,7 @@ A list.
 }
 }
 \description{
-Function for spatial association detector (SPADE) model.
+spatial association detector (SPADE) model
 }
 \examples{
 data('sim')

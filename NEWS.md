@@ -1,5 +1,7 @@
 # gdverse 1.3-2
 
+* Rename `gd_besttunidisc` as `gd_optunidisc` (#39).
+
 * Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
 only positive integer inputs (#36).
 
@@ -75,10 +77,6 @@ only positive integer inputs (#36).
   
 * Updating the S3 method for plotting various factor detectors to better conform 
   to academic publication requirements.
-  
-* Using new example data in the vignettes for `spade` and `idsa`.
-
-* Adding the `esp` function to the package.
 
 # gdverse 1.0-1
 
