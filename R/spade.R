@@ -1,7 +1,5 @@
 #' @title spatial association detector (SPADE) model
 #' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
-#' @description
-#' Function for spatial association detector (SPADE) model.
 #'
 #' @references
 #' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International

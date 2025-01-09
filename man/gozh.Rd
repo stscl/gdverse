@@ -31,7 +31,7 @@ A list.
 }
 }
 \description{
-Function for geographically optimal zones-based heterogeneity(GOZH) model
+geographically optimal zones-based heterogeneity(GOZH) model
 }
 \examples{
 data('ndvi')

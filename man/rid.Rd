@@ -45,7 +45,7 @@ A list.
 }
 }
 \description{
-Function for robust interaction detector(RID) model.
+robust interaction detector(RID) model
 }
 \note{
 Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rid()}.

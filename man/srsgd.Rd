@@ -29,7 +29,7 @@ A list.
 }
 }
 \description{
-Function for spatial rough set-based geographical detector model.
+spatial rough set-based geographical detector(SRSGD) model
 }
 \note{
 The Spatial Rough Set-based Geographical Detector Model (SRSGD) conducts spatial
