@@ -6,5 +6,5 @@
 
 .onAttach = function(...){
   packageStartupMessage("gdverse ", utils::packageVersion("gdverse"))
-  packageStartupMessage("See itmsa package for information entropy-driven spatial stratified heterogeneity measurement.")
+  packageStartupMessage("See itmsa package for entropy-based spatial association measures.")
 }
