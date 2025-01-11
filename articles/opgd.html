@@ -91,7 +91,19 @@
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="co">## ── Attaching core tidyverse packages ─────────────────────────────────────── tidyverse 2.0.0 ──</span></span>
+<span><span class="co">## ✔ dplyr     1.1.4     ✔ readr     2.1.5</span></span>
+<span><span class="co">## ✔ forcats   1.0.0     ✔ stringr   1.5.1</span></span>
+<span><span class="co">## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1</span></span>
+<span><span class="co">## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1</span></span>
+<span><span class="co">## ✔ purrr     1.0.2     </span></span>
+<span><span class="co">## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
+<span><span class="co">## ✖ dplyr::filter() masks stats::filter()</span></span>
+<span><span class="co">## ✖ dplyr::lag()    masks stats::lag()</span></span>
+<span><span class="co">## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stscl.github.io/gdverse/">gdverse</a></span><span class="op">)</span></span>
+<span><span class="co">## gdverse 1.3.2</span></span>
+<span><span class="co">## See itmsa package for entropy-based spatial association measures.</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"ndvi"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ndvi</span><span class="op">)</span></span>
@@ -118,7 +130,7 @@ on geodetector q-statistic.</p>
 <span>                  data <span class="op">=</span> <span class="fu">select</span><span class="op">(</span><span class="va">ndvi</span>,<span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Climatezone</span>,<span class="va">Mining</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                  discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">15</span>, cores <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span><span class="fu">tictoc</span><span class="fu">::</span><span class="fu">toc</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">## 2.38 sec elapsed</span></span></code></pre></div>
+<span><span class="co">## 2.79 sec elapsed</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span></span>
 <span><span class="co">## $x</span></span>
