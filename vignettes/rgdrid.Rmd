@@ -11,7 +11,7 @@ vignette: >
 
 ### Set up python dependence
 
-1. Install **miniconda**
+1. Install **miniconda3**
 2. Open the conda terminal and perform steps `3` to `6`
 3. Create a new conda env `gdverse`
 
