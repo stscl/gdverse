@@ -38,7 +38,7 @@ multi-core parallel computing.}
 
 \item{alpha}{(optional) Specifies the size of confidence level. Default is \code{0.95}.}
 
-\item{...}{(optional) Other arguments passed to \code{gd_bestunidisc()}. A useful parameter is \code{seed},
+\item{...}{(optional) Other arguments passed to \code{gd_optunidisc()}. A useful parameter is \code{seed},
 which is used to set the random number seed.}
 }
 \value{
