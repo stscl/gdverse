@@ -61,7 +61,7 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:8,
   discedvar = colnames(data[,-which(colnames(data) %in% discvar)])
   newdata = data %>%
     dplyr::select(dplyr::all_of(discedvar)) %>%
-    dplyr::bind_cols(g$disv)
+    dplyr::bind_cols(g$disc)
   if (length(type) == 1){
     res = gd(paste0(yname,' ~ .'),data = newdata,type = type,alpha = alpha)
   } else {

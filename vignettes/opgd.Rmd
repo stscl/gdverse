@@ -13,17 +13,6 @@ vignette: >
 
 
 ``` r
-library(tidyverse)
-## ── Attaching core tidyverse packages ─────────────────────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2     
-## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(gdverse)
 ## gdverse 1.3.2
 ## See itmsa package for entropy-based spatial association measures.
@@ -49,10 +38,10 @@ head(ndvi)
 ``` r
 tictoc::tic()
 g = gd_optunidisc(NDVIchange ~ .,
-                  data = select(ndvi,-c(Climatezone,Mining)),
+                  data = dplyr::select(ndvi,-c(Climatezone,Mining)),
                   discnum = 3:15, cores = 6)
 tictoc::toc()
-## 2.79 sec elapsed
+## 2.92 sec elapsed
 ```
 
 
@@ -70,7 +59,7 @@ g
 ## $qstatistic
 ## [1] 0.1096213 0.2100134 0.8809405 0.3478433
 ## 
-## $disv
+## $disc
 ## # A tibble: 713 × 4
 ##      GDP Popdensity Precipitation Tempchange
 ##    <int>      <int>         <int>      <int>
@@ -85,7 +74,7 @@ g
 ##  9    12         12             7          3
 ## 10     9         10             8          3
 ## # ℹ 703 more rows
-new.ndvi = g$disv
+new.ndvi = g$disc
 new.ndvi
 ## # A tibble: 713 × 4
 ##      GDP Popdensity Precipitation Tempchange
@@ -107,7 +96,7 @@ The `new.ndvi` is the discreted result of the optimal discretization parameter b
 
 
 ``` r
-new.ndvi = bind_cols(select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
+new.ndvi = dplyr::bind_cols(dplyr::select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
 new.ndvi
 ## # A tibble: 713 × 7
 ##    NDVIchange Climatezone Mining   GDP Popdensity Precipitation Tempchange
@@ -169,7 +158,7 @@ gd(NDVIchange ~ .,data = new.ndvi,type = 'interaction')
 
 ``` r
 ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
-                 discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+                 discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                  cores = 6, type = c('factor','interaction'))
 ndvi_opgd
 ## ***   Optimal Parameters-based Geographical Detector     
