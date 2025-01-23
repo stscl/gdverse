@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 ### Load data and package
 
 ``` {r}
-library(tidyverse)
 library(gdverse)
 
 data("ndvi")
@@ -32,21 +31,21 @@ head(ndvi)
 ```{r}
 tictoc::tic()
 g = gd_optunidisc(NDVIchange ~ .,
-                  data = select(ndvi,-c(Climatezone,Mining)),
+                  data = dplyr::select(ndvi,-c(Climatezone,Mining)),
                   discnum = 3:15, cores = 6)
 tictoc::toc()
 ```
 
 ```{r}
 g
-new.ndvi = g$disv
+new.ndvi = g$disc
 new.ndvi
 ```
 
 The `new.ndvi` is the discreted result of the optimal discretization parameter based on the Q statistic of the geographical detector (factor detector), we can combine it with other columns in `ndvi` tibble now.
 
 ```{r}
-new.ndvi = bind_cols(select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
+new.ndvi = dplyr::bind_cols(dplyr::select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
 new.ndvi
 ```
 
@@ -63,7 +62,7 @@ gd(NDVIchange ~ .,data = new.ndvi,type = 'interaction')
 
 ```{r}
 ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
-                 discvar = names(select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+                 discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                  cores = 6, type = c('factor','interaction'))
 ndvi_opgd
 ```
