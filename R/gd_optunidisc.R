@@ -80,7 +80,7 @@ gd_optunidisc = \(formula, data, discnum = 3:8,
                                                 x = explanatory[,x,drop = TRUE],
                                                 n = k, method = method, seed = seed, ...)) %>%
     purrr::set_names(out_g[[1]])})
-  out_g = append(out_g,list("disv" = resdisc))
+  out_g = append(out_g,list("disc" = resdisc))
 
   return(out_g)
 }
