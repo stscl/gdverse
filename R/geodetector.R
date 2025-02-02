@@ -398,12 +398,14 @@ print.ecological_detector = \(x, ...) {
 #' @param alpha (optional) Confidence level. Default is `0.95`.
 #' @param keep (optional) Whether to keep Q-value results for insignificant variables,
 #' default is `TRUE`.
+#' @param qlabelsize (optional) Set the font size of the q-value text labels in the plot.
 #' @param ... (optional) Other arguments passed to `ggplot2::theme()`.
 #'
 #' @return A ggplot2 layer.
 #' @export
 #'
-plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
+plot.factor_detector = \(x, slicenum = 2, alpha = 0.95,
+                         keep = TRUE, qlabelsize = 3.88, ...) {
   g = x$factor %>%
     dplyr::select(variable, qv = `Q-statistic`,pv = `P-value`) %>%
     dplyr::filter(!is.na(qv)) %>%
@@ -429,10 +431,10 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...) {
                                values = c("#DE3533","#808080")) +
     ggplot2::geom_text(data = dplyr::slice(g, seq(1,slicenum)),
                        ggplot2::aes(label = qv_text), hjust = 1.25,
-                       family = "serif", fontface = "bold") +
+                       family = "serif", fontface = "bold", size = qlabelsize) +
     ggplot2::geom_text(data = dplyr::slice(g, -seq(1,slicenum)),
                        ggplot2::aes(label = qv_text), hjust = -0.1,
-                       family = "serif", fontface = "bold") +
+                       family = "serif", fontface = "bold", size = qlabelsize) +
     ggplot2::labs(x = "Q value", y = "") +
     ggplot2::theme_bw() +
     ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(),
