@@ -4,7 +4,7 @@
 \alias{plot.factor_detector}
 \title{plot factor detector result}
 \usage{
-\method{plot}{factor_detector}(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...)
+\method{plot}{factor_detector}(x, slicenum = 2, alpha = 0.95, keep = TRUE, qlabelsize = 3.88, ...)
 }
 \arguments{
 \item{x}{Return by \code{geodetector()}.}
@@ -15,6 +15,8 @@
 
 \item{keep}{(optional) Whether to keep Q-value results for insignificant variables,
 default is \code{TRUE}.}
+
+\item{qlabelsize}{(optional) Set the font size of the q-value text labels in the plot.}
 
 \item{...}{(optional) Other arguments passed to \code{ggplot2::theme()}.}
 }
