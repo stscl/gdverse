@@ -1,5 +1,7 @@
 # gdverse 1.3-2
 
+* Support adjusting the font size of q-value labels in the factor detection result plot (#49).
+
 * Rename `gd_besttunidisc` as `gd_optunidisc` (#39).
 
 * Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
