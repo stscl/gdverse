@@ -1,5 +1,7 @@
 # gdverse 1.3-2
 
+* Experimentally support computing confidence intervals for the q statistic in factor_detector (#51).
+
 * Support adjusting the font size of q-value labels in the factor detection result plot (#49).
 
 * Rename `gd_besttunidisc` as `gd_optunidisc` (#39).

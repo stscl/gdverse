@@ -4,18 +4,25 @@
 \alias{factor_detector}
 \title{factor detector}
 \usage{
-factor_detector(y, x)
+factor_detector(y, x, confintv = FALSE, alpha = 0.95)
 }
 \arguments{
 \item{y}{Variable Y, continuous numeric vector.}
 
 \item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
+
+\item{confintv}{(optional) Whether to compute the confidence interval for the q statistic,
+default is \code{FALSE}.}
+
+\item{alpha}{(optional) Confidence level of the interval, default is \code{0.95}.}
 }
 \value{
 A list.
 \describe{
 \item{\code{Q-statistic}}{the q statistic for factor detector}
 \item{\code{P-value}}{the p value for factor detector}
+\item{\code{CIL}}{the confidence interval lower bound}
+\item{\code{CIU}}{the confidence interval upper bound}
 }
 }
 \description{

@@ -69,3 +69,14 @@ all2int = \(x){
   }
   return(x)
 }
+
+.calc_ncfncp = \(Fv, df1, df2, alpha = 0.05, interval = c(0, 10000)) {
+  # Define function to solve for the non-centrality parameter (λ)
+  func = function(lambda) stats::pf(Fv, df1, df2, ncp = lambda) - alpha
+  # Try to find the root, return 0 if uniroot fails
+  root = tryCatch(
+    stats::uniroot(func, interval)$root,
+    error = function(e) 0
+  )
+  return(root)
+}
