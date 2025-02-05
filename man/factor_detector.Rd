@@ -12,7 +12,7 @@ factor_detector(y, x, confintv = FALSE, alpha = 0.95)
 \item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
 \item{confintv}{(optional) Whether to compute the confidence interval for the q statistic,
-default is \code{false}.}
+default is \code{FALSE}.}
 
 \item{alpha}{(optional) Confidence level of the interval, default is \code{0.95}.}
 }

@@ -7,7 +7,7 @@
 #' @param y Variable Y, continuous numeric vector.
 #' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param confintv (optional) Whether to compute the confidence interval for the q statistic,
-#' default is `false`.
+#' default is `FALSE`.
 #' @param alpha (optional) Confidence level of the interval, default is `0.95`.
 #'
 #' @return A list.
