@@ -58,7 +58,7 @@ variable Y, or the determinant power of a covariate X of Y.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">factor_detector</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">factor_detector</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span>, confintv <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -72,6 +72,15 @@ variable Y, or the determinant power of a covariate X of Y.</p>
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
 <dd><p>Covariate X, <code>factor</code>, <code>character</code> or <code>discrete numeric</code>.</p></dd>
 
+
+<dt id="arg-confintv">confintv<a class="anchor" aria-label="anchor" href="#arg-confintv"></a></dt>
+<dd><p>(optional) Whether to compute the confidence interval for the q statistic,
+default is <code>FALSE</code>.</p></dd>
+
+
+<dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
+<dd><p>(optional) Confidence level of the interval, default is <code>0.95</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -80,6 +89,12 @@ variable Y, or the determinant power of a covariate X of Y.</p>
 
 <dt><code>P-value</code></dt>
 <dd><p>the p value for factor detector</p></dd>
+
+<dt><code>CIL</code></dt>
+<dd><p>the confidence interval lower bound</p></dd>
+
+<dt><code>CIU</code></dt>
+<dd><p>the confidence interval upper bound</p></dd>
 
 
 </dl></div>
