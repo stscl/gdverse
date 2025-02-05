@@ -1,6 +1,5 @@
 #' @title Read and evaluate a python script
 #' @noRd
-#'
 utils_source_python = \(oauth_func_path) {
   # Ensure Python environment is initialized
   gdverse_pyinit()
@@ -16,7 +15,6 @@ utils_source_python = \(oauth_func_path) {
 #' Check Python & R sync
 #' @references https://github.com/r-spatial/rgee/blob/master/R/utils-auth.R
 #' @noRd
-#'
 gdverse_pyinit = function(){
   # Check if GDVERSE_PYTHON environment variable is set
   gdverse_python = Sys.getenv("GDVERSE_PYTHON", unset = NA)
@@ -35,7 +33,6 @@ gdverse_pyinit = function(){
 
 #' Check required Python dependencies
 #' @noRd
-#'
 check_python_dependencies = function(){
   required_modules = c('numpy', 'pandas', 'ruptures', 'joblib')
   missing_modules = purrr::keep(required_modules, ~ !reticulate::py_module_available(.))
