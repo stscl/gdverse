@@ -116,8 +116,7 @@ interaction_detector = \(y,x1,x2){
 #' @param x Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.
 #' @param alpha (optional) Confidence level of the interval, default is `0.95`.
 #'
-#' @return A tibble. contains different combinations of covariate \code{X} level and student t-test statistics,
-#' degrees of freedom, p-values, and whether has risk (Yes or No).
+#' @return A tibble.
 #' @export
 #'
 #' @examples

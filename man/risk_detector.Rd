@@ -11,11 +11,10 @@ risk_detector(y, x, alpha = 0.95)
 
 \item{x}{Covariate X, \code{factor}, \code{character} or \code{discrete numeric}.}
 
-\item{alpha}{(optional) Confidence level of the interval,default is \code{0.95}.}
+\item{alpha}{(optional) Confidence level of the interval, default is \code{0.95}.}
 }
 \value{
-A tibble. contains different combinations of covariate \code{X} level and student t-test statistics,
-degrees of freedom, p-values, and whether has risk (Yes or No).
+A tibble.
 }
 \description{
 Determine whether there is a significant difference between the attribute means of two sub regions.
