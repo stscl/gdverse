@@ -23,6 +23,7 @@ knitr::opts_chunk$set(
 [![downloads_month](https://cranlogs.r-pkg.org/badges/gdverse)](https://CRAN.R-project.org/package=gdverse)
 [![r-universe](https://stscl.r-universe.dev/badges/gdverse?color=cyan)](https://stscl.r-universe.dev/gdverse)
 
+[![R-CMD-check](https://github.com/stscl/gdverse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/stscl/gdverse/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 **Analysis of Spatial Stratified Heterogeneity**
