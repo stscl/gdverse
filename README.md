@@ -17,6 +17,7 @@ Checks](https://badges.cranchecks.info/worst/gdverse.svg)](https://cran.r-projec
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-20b2aa.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-universe](https://stscl.r-universe.dev/badges/gdverse?color=cyan)](https://stscl.r-universe.dev/gdverse)
+[![DOI](https://img.shields.io/badge/DOI-10.1111%2Ftgis.70032-63847e?logo=doi&style=flat)](https://onlinelibrary.wiley.com/doi/10.1111/tgis.70032)
 
 <!-- badges: end -->
 
