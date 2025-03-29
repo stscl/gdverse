@@ -86,17 +86,36 @@
 
     
     
-<p>This vignette discusses the consistency of results between the basic
-geographic detector in the <code>gdverse</code> package and existing R
-packages of GDModels (i.e., <code>geodetector</code> and <code>GD</code>
-packages). Use the <code>CollectData</code> data from
-<code>geodetector</code> package as the demo;</p>
+<p>This vignette discusses the consistency of results between the factor
+detector in the <code>gdverse</code> package and existing R packages of
+GDModels (i.e., <code>geodetector</code> and <code>GD</code> packages).
+Use the <code>NTDs</code> data from <code>gdverse</code> package as the
+demo;</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">collectdata</span> <span class="op">=</span> <span class="fu">geodetector</span><span class="fu">::</span><span class="va">CollectData</span></span>
-<span><span class="va">res1</span> <span class="op">=</span> <span class="fu">geodetector</span><span class="fu">::</span><span class="fu">factor_detector</span><span class="op">(</span><span class="st">"incidence"</span>,</span>
-<span>                                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"soiltype"</span>,<span class="st">"watershed"</span>,<span class="st">"elevation"</span><span class="op">)</span>,</span>
-<span>                                    <span class="va">collectdata</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">NTDs</span> <span class="op">=</span> <span class="fu">gdverse</span><span class="fu">::</span><span class="va"><a href="../reference/NTDs.html">NTDs</a></span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">res1</span> <span class="op">=</span> <span class="fu">gdverse</span><span class="fu">::</span><span class="fu"><a href="../reference/gd.html">gd</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">NTDs</span><span class="op">)</span></span>
 <span><span class="va">res1</span></span>
+<span><span class="co">##                 Factor Detector            </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## | variable  | Q-statistic |   P-value   |</span></span>
+<span><span class="co">## |:---------:|:-----------:|:-----------:|</span></span>
+<span><span class="co">## | watershed |  0.6377737  | 0.000128803 |</span></span>
+<span><span class="co">## | elevation |  0.6067087  | 0.043382244 |</span></span>
+<span><span class="co">## | soiltype  |  0.3857168  | 0.372145486 |</span></span>
+<span></span>
+<span><span class="va">res2</span> <span class="op">=</span> <span class="fu">GD</span><span class="fu">::</span><span class="fu">gd</span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">NTDs</span><span class="op">)</span></span>
+<span><span class="va">res2</span></span>
+<span><span class="co">##    variable        qv         sig</span></span>
+<span><span class="co">## 1 watershed 0.6377737 0.000128803</span></span>
+<span><span class="co">## 2 elevation 0.6067087 0.043382244</span></span>
+<span><span class="co">## 3  soiltype 0.3857168 0.372145486</span></span>
+<span></span>
+<span><span class="co"># The geodetector package do not support the `tibble`</span></span>
+<span><span class="va">res3</span> <span class="op">=</span> <span class="fu">geodetector</span><span class="fu">::</span><span class="fu">factor_detector</span><span class="op">(</span><span class="st">"incidence"</span>,</span>
+<span>                                    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"soiltype"</span>,<span class="st">"watershed"</span>,<span class="st">"elevation"</span><span class="op">)</span>,</span>
+<span>                                    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">NTDs</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">res3</span></span>
 <span><span class="co">## [[1]]</span></span>
 <span><span class="co">##          q-statistic   p-value</span></span>
 <span><span class="co">## soiltype   0.3857168 0.3632363</span></span>
@@ -107,22 +126,7 @@ packages). Use the <code>CollectData</code> data from
 <span><span class="co">## </span></span>
 <span><span class="co">## [[3]]</span></span>
 <span><span class="co">##           q-statistic    p-value</span></span>
-<span><span class="co">## elevation   0.6067087 0.04080407</span></span>
-<span><span class="va">res2</span> <span class="op">=</span> <span class="fu">GD</span><span class="fu">::</span><span class="fu">gd</span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">collectdata</span><span class="op">)</span></span>
-<span><span class="va">res2</span></span>
-<span><span class="co">##    variable        qv         sig</span></span>
-<span><span class="co">## 1 watershed 0.6377737 0.000128803</span></span>
-<span><span class="co">## 2  soiltype 0.3857168 0.372145486</span></span>
-<span><span class="co">## 3 elevation 0.6067087 0.043382244</span></span>
-<span><span class="va">res3</span> <span class="op">=</span> <span class="fu">gdverse</span><span class="fu">::</span><span class="fu"><a href="../reference/geodetector.html">geodetector</a></span><span class="op">(</span><span class="va">incidence</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">collectdata</span><span class="op">)</span></span>
-<span><span class="va">res3</span></span>
-<span><span class="co">##                 Factor Detector            </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## | variable  | Q-statistic |   P-value   |</span></span>
-<span><span class="co">## |:---------:|:-----------:|:-----------:|</span></span>
-<span><span class="co">## | watershed |  0.6377737  | 0.000128803 |</span></span>
-<span><span class="co">## | elevation |  0.6067087  | 0.043382244 |</span></span>
-<span><span class="co">## | soiltype  |  0.3857168  | 0.372145486 |</span></span></code></pre></div>
+<span><span class="co">## elevation   0.6067087 0.04080407</span></span></code></pre></div>
 <p>The q-statistic calculations for all variables in the three packages
 are consistent, but there are slight differences in the results of the
 q-values. Among them, <code>gdverse</code> is consistent with the
@@ -133,7 +137,7 @@ the q-statistic; when there is only one sample in a certain
 stratification, it cannot calculate the variance and therefore does not
 contribute to the q-statistic calculation. The <code>gdverse</code> and
 <code>GD</code> packages use the same strategy, which is to directly
-remove these single-sample layers, but the <code>geodetector</code>
+remove these single-sample stratas, but the <code>geodetector</code>
 package calculates the total sample size and stratification number
 directly before data processing, so it causes a slight difference in the
 estimation of the p-value for the q-statistic. In actual problems, this
