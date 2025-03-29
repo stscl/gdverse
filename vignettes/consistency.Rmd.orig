@@ -10,24 +10,29 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = TRUE,
   comment = "##",
   fig.path = "man/figures/consistency/"
 )
 ```
 
-This vignette discusses the consistency of results between the basic geographic detector in the `gdverse` package and existing R packages of GDModels (i.e., `geodetector` and `GD` packages). Use the `CollectData` data from `geodetector` package as the demo;
+This vignette discusses the consistency of results between the factor detector in the `gdverse` package and existing R packages of GDModels (i.e., `geodetector` and `GD` packages). Use the `NTDs` data from `gdverse` package as the demo;
 
 
 ```{r demo}
-collectdata = geodetector::CollectData
-res1 = geodetector::factor_detector("incidence",
-                                    c("soiltype","watershed","elevation"),
-                                    collectdata)
+NTDs = gdverse::NTDs[,1:4]
+
+res1 = gdverse::gd(incidence ~ ., data = NTDs)
 res1
-res2 = GD::gd(incidence ~ ., data = collectdata)
+
+res2 = GD::gd(incidence ~ ., data = NTDs)
 res2
-res3 = gdverse::geodetector(incidence ~ ., data = collectdata)
+
+# The geodetector package do not support the `tibble`
+res3 = geodetector::factor_detector("incidence",
+                                    c("soiltype","watershed","elevation"),
+                                    as.data.frame(NTDs))
 res3
 ```
 
-The q-statistic calculations for all variables in the three packages are consistent, but there are slight differences in the results of the q-values. Among them, `gdverse` is consistent with the `GD` package, and there are differences with the `geodetector` package. This is caused by the inconsistent choice of the non-central F-distribution parameters of the p-value for the q-statistic; when there is only one sample in a certain stratification, it cannot calculate the variance and therefore does not contribute to the q-statistic calculation. The `gdverse` and `GD` packages use the same strategy, which is to directly remove these single-sample layers, but the `geodetector` package calculates the total sample size and stratification number directly before data processing, so it causes a slight difference in the estimation of the p-value for the q-statistic. In actual problems, this situation occurs less frequently. We believe that using the actual number of samples and stratifications participating in the calculation is more prudent, so we chose the same processing strategy as the `GD` package.
+The q-statistic calculations for all variables in the three packages are consistent, but there are slight differences in the results of the q-values. Among them, `gdverse` is consistent with the `GD` package, and there are differences with the `geodetector` package. This is caused by the inconsistent choice of the non-central F-distribution parameters of the p-value for the q-statistic; when there is only one sample in a certain stratification, it cannot calculate the variance and therefore does not contribute to the q-statistic calculation. The `gdverse` and `GD` packages use the same strategy, which is to directly remove these single-sample stratas, but the `geodetector` package calculates the total sample size and stratification number directly before data processing, so it causes a slight difference in the estimation of the p-value for the q-statistic. In actual problems, this situation occurs less frequently. We believe that using the actual number of samples and stratifications participating in the calculation is more prudent, so we chose the same processing strategy as the `GD` package.
