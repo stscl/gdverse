@@ -40,8 +40,6 @@ vignette: >
 
 ``` r
 library(gdverse)
-## gdverse 1.3.2
-## See itmsa package for entropy-based spatial association measures.
 
 data("ndvi")
 ```
