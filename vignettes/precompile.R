@@ -1,4 +1,4 @@
-devtools::load_all()
+# devtools::load_all()
 
 knitr::knit("vignettes/consistency.Rmd.orig",
             "vignettes/consistency.Rmd")

@@ -21,22 +21,8 @@ First, we construct FVC data under different spatial units using the original da
 
 ``` r
 library(terra)
-## terra 1.8.5
 library(tidyverse)
-## ── Attaching core tidyverse packages ─────────────────────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.1.4     ✔ readr     2.1.5
-## ✔ forcats   1.0.0     ✔ stringr   1.5.1
-## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-## ✔ purrr     1.0.2
-## ── Conflicts ───────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract() masks terra::extract()
-## ✖ dplyr::filter()  masks stats::filter()
-## ✖ dplyr::lag()     masks stats::lag()
-## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
 library(gdverse)
-## gdverse 1.3.2
-## See itmsa package for entropy-based spatial association measures.
 fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))
 fvc
@@ -211,7 +197,7 @@ str(fvc)
 
 ``` r
 discvar = names(select(fvc1000,-c(fvc,lulc)))
-g1 = sesu_opgd(fvc ~ ., data = fvc,su = su,discvar = discvar,cores = 6)
+g1 = sesu_opgd(fvc ~ ., data = fvc,su = su,discvar = discvar,cores = 12)
 g1
 ##    Size Effect Of Spatial Units Using OPGD Model   
 ##  ***    Optimal Spatial Unit: 8000
@@ -394,7 +380,7 @@ plot(g1)
 
 ``` r
 g2 = sesu_gozh(fvc ~ ., data = fvc, su = su,
-               cores = 6, increase_rate = 0.005)
+               cores = 12, increase_rate = 0.005)
 g2
 ##    Size Effect Of Spatial Units Using GOZH Model   
 ##  ***        Optimal Spatial Unit: 4000
@@ -470,7 +456,7 @@ You can also use the same strategy as `sesu_opgd()` (use the mean of the individ
 
 
 ``` r
-g3 = sesu_gozh(fvc ~ ., data = fvc, su = su, cores = 6,
+g3 = sesu_gozh(fvc ~ ., data = fvc, su = su, cores = 12,
                strategy = 1, increase_rate = 0.005)
 g3
 ##    Size Effect Of Spatial Units Using GOZH Model   
