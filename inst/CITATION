@@ -3,7 +3,7 @@ citHeader("To cite gdverse package in publications use:")
 bibentry(
   bibtype  = "Article",
   title    = "gdverse: An R Package for Spatial Stratified Heterogeneity Family",
-  author   = "Lv, Wenbo and Lei, Yangyang and Liu, Fangmei and Yan, Jianwu and Song, Yongze and Zhao, Wufan",
+  author   = "Wenbo Lv and Yangyang Lei and Fangmei Liu and Jianwu Yan and Yongze Song and Wufan Zhao",
   journal  = "Transactions in GIS",
   year     = "2025",
   volume   = "29",

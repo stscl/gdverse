@@ -1,5 +1,7 @@
 # gdverse 1.3-3
 
+* Add pkg citation information (#61).
+
 # gdverse 1.3-2
 
 * Experimentally support computing confidence intervals for the q statistic in factor_detector (#51).

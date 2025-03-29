@@ -137,3 +137,26 @@ g
 ## |    Mining     | 0.13982859  | 6.00e-11 |
 ## |      GDP      | 0.09170153  | 3.96e-10 |
 ```
+
+## CITATION
+
+Please cite **gdverse** as:
+
+    Lv, W., Lei, Y., Liu, F., Yan, J., Song, Y. and Zhao, W. (2025), gdverse: An R Package for Spatial Stratified Heterogeneity Family. Transactions in GIS, 29: e70032. https://doi.org/10.1111/tgis.70032
+
+A BibTeX entry for LaTeX users is:
+
+``` bib
+@article{lyu2025gdverse, 
+    title={gdverse: An R Package for Spatial Stratified Heterogeneity Family}, 
+    volume={29}, 
+    ISSN={1467-9671},
+    number={2}, 
+    journal={Transactions in GIS}, 
+    publisher={Wiley}, 
+    pages = {29:e70032},
+    author={Lv, Wenbo and Lei, Yangyang and Liu, Fangmei and Yan, Jianwu and Song, Yongze and Zhao, Wufan},
+    year={2025}, 
+    month={mar}
+}
+```
