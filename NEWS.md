@@ -1,3 +1,5 @@
+# gdverse 1.4.0
+
 # gdverse 1.3-3
 
 * Add pkg citation information (#61).
