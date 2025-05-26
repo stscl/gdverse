@@ -1,4 +1,4 @@
-citHeader("To cite gdverse package in publications use:")
+citHeader("To cite package gdverse in publications, please use:")
 
 bibentry(
   bibtype  = "Article",
