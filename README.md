@@ -148,7 +148,7 @@ A BibTeX entry for LaTeX users is:
 
 ``` bib
 @article{lyu2025gdverse, 
-    title={gdverse: An R Package for Spatial Stratified Heterogeneity Family}, 
+    title={{gdverse}: An {R} Package for Spatial Stratified Heterogeneity Family}, 
     volume={29}, 
     ISSN={1467-9671},
     number={2}, 
