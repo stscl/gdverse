@@ -178,7 +178,7 @@ plot.idsa_result = \(x, ...) {
     dplyr::mutate(risk = forcats::fct_recode(Risk,"Y" = "Yes", "N" = "No"))
   fig_rd = ggplot2::ggplot(data = grd,
                            ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
-    ggplot2::geom_tile(color = "white", size = 0.75) +
+    ggplot2::geom_tile(color = "white", linewidth = 0.75) +
     ggplot2::geom_text(ggplot2::aes(label = risk), color = "black", family = "serif") +
     ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
     ggplot2::coord_fixed() +

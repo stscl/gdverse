@@ -521,7 +521,7 @@ plot.risk_detector = \(x, ...) {
   plot_rduni = \(g,gname,...){
     fig_rd = ggplot2::ggplot(data = g,
                              ggplot2::aes(x = zone1st, y = zone2nd, fill = risk)) +
-      ggplot2::geom_tile(color = "white", size = 0.75) +
+      ggplot2::geom_tile(color = "white", linewidth = 0.75) +
       ggplot2::geom_text(ggplot2::aes(label = risk), color = "black") +
       ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
       ggplot2::coord_fixed() +
@@ -576,7 +576,7 @@ plot.ecological_detector = \(x, ...) {
                   eco = forcats::fct_recode(Ecological,"Y" = "Yes", "N" = "No"))
   fig_ed = ggplot2::ggplot(data = g,
                            ggplot2::aes(x = variable1, y = variable2, fill = eco)) +
-    ggplot2::geom_tile(color = "white", size = 0.75) +
+    ggplot2::geom_tile(color = "white", linewidth = 0.75) +
     ggplot2::geom_text(ggplot2::aes(label = eco), color = "black") +
     ggplot2::scale_fill_manual(values = c("N" = "#7fdbff", "Y" = "#ffa500")) +
     ggplot2::coord_fixed() +
