@@ -1,5 +1,7 @@
 # gdverse 1.5
 
+* Eliminate warnings about the size aesthetic for lines in plot S3 methods (#71).
+
 # gdverse 1.3-3
 
 * Add pkg citation information (#61).
