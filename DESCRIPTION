@@ -44,7 +44,7 @@ Imports:
     parallel,
     patchwork,
     purrr,
-    reticulate,
+    reticulate (>= 1.41.0),
     rpart,
     scatterpie,
     sdsfun (>= 0.7.0),
