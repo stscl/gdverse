@@ -1,3 +1,5 @@
+# gdverse 1.6
+
 # gdverse 1.5
 
 * Refactor `cpd_disc` for improved parallel stability and reticulate compatibility (#77).
