@@ -132,11 +132,6 @@ multi-core parallel computing.</p></dd>
 
 </dl></div>
     <div class="section level2">
-    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Please set up python dependence and configure <code>GDVERSE_PYTHON</code> environment variable if you want to run <code>rgd()</code>.
-See <code><a href="../articles/rgdrid.html">vignette('rgdrid',package = 'gdverse')</a></code> for more details.</p>
-    </div>
-    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Zhang, Z., Song, Y.*, &amp; Wu, P., 2022. Robust geographical detector. International Journal of Applied Earth Observation and Geoinformation. 109, 102782.
 DOI: 10.1016/j.jag.2022.102782.</p>
@@ -148,14 +143,22 @@ DOI: 10.1016/j.jag.2022.102782.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co">## The following code needs to configure the Python environment to run:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">'sim'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">rgd</span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">.</span>,</span></span>
 <span class="r-in"><span>        data <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">sim</span>,<span class="op">-</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html" class="external-link">any_of</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'lo'</span>,<span class="st">'la'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>        discnum <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">6</span>, cores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ***      Robust Geographical Detector    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> | variable | Q-statistic |   P-value    |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |:--------:|:-----------:|:------------:|</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    xc    |  0.7011119  | 7.650000e-10 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    xb    |  0.6032094  | 1.186300e-08 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> |    xa    |  0.4969454  | 4.191848e-06 |</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
