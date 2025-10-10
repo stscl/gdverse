@@ -92,52 +92,6 @@
     
     
 <div class="section level3">
-<h3 id="set-up-python-dependence">Set up python dependence<a class="anchor" aria-label="anchor" href="#set-up-python-dependence"></a>
-</h3>
-<ol style="list-style-type: decimal">
-<li><p>Install <strong>miniconda3</strong></p></li>
-<li><p>Open the conda terminal and perform steps <code>3</code> to
-<code>6</code></p></li>
-<li>
-<p>Create a new conda env <code>gdverse</code></p>
-<blockquote>
-<p><code>conda create -n gdverse python=3.10 -y</code></p>
-</blockquote>
-</li>
-<li>
-<p>Activate this env</p>
-<blockquote>
-<p><code>conda activate gdverse</code></p>
-</blockquote>
-</li>
-<li>
-<p>Install <code>mamba</code></p>
-<blockquote>
-<p><code>conda install -c conda-forge mamba -y</code></p>
-</blockquote>
-</li>
-<li>
-<p>Set up python packages</p>
-<blockquote>
-<p><code>mamba install -c conda-forge numpy joblib pandas ruptures -y</code></p>
-</blockquote>
-</li>
-<li>
-<p>Configure <code>GDVERSE_PYTHON</code> environment variable</p>
-<ul>
-<li><p>Temporarily setting up <code>gdverse</code> python dependence
-environment using <code><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv()</a></code> in the R console or R code
-like
-<code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>.</p></li>
-<li><p>Or using <code>usethis::edit_r_profile()</code> and
-<code>Sys.setenv(GDVERSE_PYTHON = "path/to/python/environment")</code>
-to set long-available <code>gdverse</code> python dependencies
-environment path.</p></li>
-</ul>
-</li>
-</ol>
-</div>
-<div class="section level3">
 <h3 id="load-data-and-package">Load data and package<a class="anchor" aria-label="anchor" href="#load-data-and-package"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -146,8 +100,8 @@ environment path.</p></li>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"ndvi"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ndvi</span><span class="op">)</span></span>
-<span><span class="co">## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"</span></span>
-<span><span class="co">## [6] "GDP"           "Popdensity"</span></span></code></pre></div>
+<span><span class="co">## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"   </span></span>
+<span><span class="co">## [5] "Precipitation" "GDP"           "Popdensity"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-rgd">Run RGD<a class="anchor" aria-label="anchor" href="#run-rgd"></a>
@@ -164,9 +118,9 @@ environment path.</p></li>
 <span><span class="co">## | Precipitation |  0.8883955  | 4.77e-10 |</span></span>
 <span><span class="co">## |  Climatezone  |  0.8218335  | 7.34e-10 |</span></span>
 <span><span class="co">## |  Tempchange   |  0.3722571  | 3.22e-10 |</span></span>
-<span><span class="co">## |  Popdensity   |  0.2205321  | 9.65e-10 |</span></span>
+<span><span class="co">## |  Popdensity   |  0.2193538  | 9.31e-10 |</span></span>
 <span><span class="co">## |    Mining     |  0.1411154  | 6.73e-10 |</span></span>
-<span><span class="co">## |      GDP      |  0.1164814  | 1.08e-10 |</span></span>
+<span><span class="co">## |      GDP      |  0.1406153  | 4.86e-10 |</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi_rgd</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/rgdrid/rgd_id-1.png"></p>
 </div>
