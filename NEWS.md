@@ -1,5 +1,7 @@
 # gdverse 1.5
 
+* Refactor `cpd_disc` for improved parallel stability and reticulate compatibility (#77).
+
 * Update python dependency configuration and usage (#74).
 
 * Eliminate warnings about the size aesthetic for lines in plot S3 methods (#71).
