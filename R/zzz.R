@@ -1,7 +1,7 @@
 .onLoad = function(...) {
-  loadNamespace("Rcpp")
   loadNamespace("sf")
   loadNamespace("tibble")
+  reticulate::py_require(c('numpy','pandas','ruptures','joblib'))
 }
 
 .onAttach = function(...){

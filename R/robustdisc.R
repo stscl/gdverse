@@ -4,10 +4,6 @@
 #' Determines discretization interval breaks using an optimization algorithm for variance-based
 #' change point detection.
 #'
-#' @note
-#' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `robust_disc()`.
-#' See `vignette('rgdrid',package = 'gdverse')` for more details.
-#'
 #' @param formula A formula of univariate discretization.
 #' @param data A data.frame or tibble of observation data.
 #' @param discnum A numeric vector of discretized classes of columns that need to be discretized.
@@ -19,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' robust_disc(y ~ xa, data = sim, discnum = 5)

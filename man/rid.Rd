@@ -47,12 +47,8 @@ A list.
 \description{
 robust interaction detector(RID) model
 }
-\note{
-Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rid()}.
-See \code{vignette('rgdrid',package = 'gdverse')} for more details.
-}
 \examples{
-\dontrun{
+\donttest{
 ## The following code needs to configure the Python environment to run:
 data('sim')
 g = rid(y ~ .,

@@ -4,9 +4,6 @@
 #' Zhang, Z., Song, Y., Karunaratne, L., & Wu, P. (2024). Robust interaction detector:
 #' A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.
 #' https://doi.org/10.1016/j.spasta.2024.100814
-#' @note
-#' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rid()`.
-#' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of RGD model.
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.
@@ -30,7 +27,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' g = rid(y ~ .,

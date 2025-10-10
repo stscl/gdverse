@@ -50,12 +50,8 @@ A list.
 \description{
 robust geographical detector(RGD) model
 }
-\note{
-Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{rgd()}.
-See \code{vignette('rgdrid',package = 'gdverse')} for more details.
-}
 \examples{
-\dontrun{
+\donttest{
 ## The following code needs to configure the Python environment to run:
 data('sim')
 g = rgd(y ~ .,

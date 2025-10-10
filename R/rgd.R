@@ -3,9 +3,6 @@
 #' @references
 #' Zhang, Z., Song, Y.*, & Wu, P., 2022. Robust geographical detector. International Journal of Applied Earth Observation and Geoinformation. 109, 102782.
 #' DOI: 10.1016/j.jag.2022.102782.
-#' @note
-#' Please set up python dependence and configure `GDVERSE_PYTHON` environment variable if you want to run `rgd()`.
-#' See `vignette('rgdrid',package = 'gdverse')` for more details.
 #'
 #' @param formula A formula of RGD model.
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.
@@ -32,7 +29,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## The following code needs to configure the Python environment to run:
 #' data('sim')
 #' g = rgd(y ~ .,

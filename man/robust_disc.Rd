@@ -25,12 +25,8 @@ A \code{tibble}.
 Determines discretization interval breaks using an optimization algorithm for variance-based
 change point detection.
 }
-\note{
-Please set up python dependence and configure \code{GDVERSE_PYTHON} environment variable if you want to run \code{robust_disc()}.
-See \code{vignette('rgdrid',package = 'gdverse')} for more details.
-}
 \examples{
-\dontrun{
+\donttest{
 ## The following code needs to configure the Python environment to run:
 data('sim')
 robust_disc(y ~ xa, data = sim, discnum = 5)
