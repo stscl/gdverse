@@ -33,9 +33,7 @@ tryCatch({
   robust_disc(y ~ .,
               data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
               discnum = 5, cores = 3)
-}, error = function(e) {
-  message("Skipping Python-dependent example: ", e$message)
-})
+}, error = \(e) message("Skipping Python-dependent example: ", e$message))
 }
 }
 \author{
