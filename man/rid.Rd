@@ -55,9 +55,7 @@ tryCatch({
           data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
           discnum = 3:6, cores = 1)
   g
-}, error = function(e) {
-  message("Skipping Python-dependent example: ", e$message)
-})
+}, error = \(e) message("Skipping Python-dependent example: ", e$message))
 }
 }
 \references{

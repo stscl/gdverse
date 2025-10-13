@@ -54,13 +54,11 @@ robust geographical detector(RGD) model
 data('sim')
 \donttest{
 tryCatch({
-  g = rgd(y ~ .,
-          data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-          discnum = 3:6, cores = 1)
-  g
-}, error = function(e) {
-  message("Skipping Python-dependent example: ", e$message)
-})
+    g = rgd(y ~ .,
+           data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+           discnum = 3:6, cores = 1)
+    g
+  }, error = \(e) message("Skipping Python-dependent example: ", e$message))
 }
 }
 \references{
