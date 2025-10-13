@@ -29,13 +29,16 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
-#' ## The following code needs to configure the Python environment to run:
 #' data('sim')
-#' g = rgd(y ~ .,
-#'         data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-#'         discnum = 3:6, cores = 1)
-#' g
+#' \donttest{
+#' tryCatch({
+#'   g = rgd(y ~ .,
+#'           data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'           discnum = 3:6, cores = 1)
+#'   g
+#' }, error = function(e) {
+#'   message("Skipping Python-dependent example: ", e$message)
+#' })
 #' }
 rgd = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
         strategy = 2L, increase_rate = 0.05, cores = 1){

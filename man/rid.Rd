@@ -48,13 +48,16 @@ A list.
 robust interaction detector(RID) model
 }
 \examples{
-\donttest{
-## The following code needs to configure the Python environment to run:
 data('sim')
-g = rid(y ~ .,
-        data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-        discnum = 3:6, cores = 1)
-g
+\donttest{
+tryCatch({
+  g = rid(y ~ .,
+          data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+          discnum = 3:6, cores = 1)
+  g
+}, error = function(e) {
+  message("Skipping Python-dependent example: ", e$message)
+})
 }
 }
 \references{
