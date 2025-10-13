@@ -15,13 +15,16 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
-#' ## The following code needs to configure the Python environment to run:
 #' data('sim')
-#' robust_disc(y ~ xa, data = sim, discnum = 5)
-#' robust_disc(y ~ .,
-#'             data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
-#'             discnum = 5, cores = 3)
+#' \donttest{
+#' tryCatch({
+#'   robust_disc(y ~ xa, data = sim, discnum = 5)
+#'   robust_disc(y ~ .,
+#'               data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
+#'               discnum = 5, cores = 3)
+#' }, error = function(e) {
+#'   message("Skipping Python-dependent example: ", e$message)
+#' })
 #' }
 robust_disc = \(formula,data,discnum,minsize = 1,cores = 1) {
   formulavars = sdsfun::formula_varname(formula,data)
