@@ -1,3 +1,5 @@
+# gdverse 1.6
+
 # gdverse 1.5.1
 
 * Wrap python-dependent examples in `tryCatch` to avoid check failures (#82).
