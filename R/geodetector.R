@@ -85,9 +85,13 @@ factor_detector = \(y,x,confintv = FALSE,alpha = 0.95){
 #'
 interaction_detector = \(y,x1,x2){
   x12 = paste0(x1,x2,'_')
-  qv1 = gdverse::factor_detector(y,x1)[[1]]
-  qv2 = gdverse::factor_detector(y,x2)[[1]]
-  qv12 = gdverse::factor_detector(y,x12)[[1]]
+  g1 = gdverse::factor_detector(y,x1)
+  g2 = gdverse::factor_detector(y,x2)
+  g12 = gdverse::factor_detector(y,x12)
+
+  qv1 = g1[[1]]
+  qv2 = g2[[1]]
+  qv12 = g12[[1]]
 
   if (qv12 < min(qv1, qv2)) {
     interaction = c("Weaken, nonlinear")
@@ -100,10 +104,11 @@ interaction_detector = \(y,x1,x2){
   } else {
     interaction = c("Enhance, nonlinear")
   }
-  interd = list(qv1,qv2,qv12,interaction)
+  interd = list(qv1,qv2,qv12,interaction,g1[[1]],g2[[1]],g12[[1]])
   names(interd) = c("Variable1 Q-statistics","Variable2 Q-statistics",
                     "Variable1 and Variable2 interact Q-statistics",
-                    "Interaction")
+                    "Interaction", "Variable1 P-value","Variable2 P-value",
+                    "Variable1 and Variable2 interact P-value")
   return(interd)
 }
 
