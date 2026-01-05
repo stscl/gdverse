@@ -1,0 +1,61 @@
+# Consistency With the Results of Existing GDM R Packages
+
+This vignette discusses the consistency of results between the factor
+detector in the `gdverse` package and existing R packages of GDModels
+(i.e., `geodetector` and `GD` packages). Use the `NTDs` data from
+`gdverse` package as the demo;
+
+``` r
+NTDs = gdverse::NTDs[,1:4]
+
+res1 = gdverse::gd(incidence ~ ., data = NTDs)
+res1
+##                 Factor Detector            
+## 
+## | variable  | Q-statistic |   P-value   |
+## |:---------:|:-----------:|:-----------:|
+## | watershed |  0.6377737  | 0.000128803 |
+## | elevation |  0.6067087  | 0.043382244 |
+## | soiltype  |  0.3857168  | 0.372145486 |
+
+res2 = GD::gd(incidence ~ ., data = NTDs)
+res2
+##    variable        qv         sig
+## 1 watershed 0.6377737 0.000128803
+## 2 elevation 0.6067087 0.043382244
+## 3  soiltype 0.3857168 0.372145486
+
+# The geodetector package do not support the `tibble`
+res3 = geodetector::factor_detector("incidence",
+                                    c("soiltype","watershed","elevation"),
+                                    as.data.frame(NTDs))
+res3
+## [[1]]
+##          q-statistic   p-value
+## soiltype   0.3857168 0.3632363
+## 
+## [[2]]
+##           q-statistic      p-value
+## watershed   0.6377737 0.0001169914
+## 
+## [[3]]
+##           q-statistic    p-value
+## elevation   0.6067087 0.04080407
+```
+
+The q-statistic calculations for all variables in the three packages are
+consistent, but there are slight differences in the results of the
+q-values. Among them, `gdverse` is consistent with the `GD` package, and
+there are differences with the `geodetector` package. This is caused by
+the inconsistent choice of the non-central F-distribution parameters of
+the p-value for the q-statistic; when there is only one sample in a
+certain stratification, it cannot calculate the variance and therefore
+does not contribute to the q-statistic calculation. The `gdverse` and
+`GD` packages use the same strategy, which is to directly remove these
+single-sample stratas, but the `geodetector` package calculates the
+total sample size and stratification number directly before data
+processing, so it causes a slight difference in the estimation of the
+p-value for the q-statistic. In actual problems, this situation occurs
+less frequently. We believe that using the actual number of samples and
+stratifications participating in the calculation is more prudent, so we
+chose the same processing strategy as the `GD` package.

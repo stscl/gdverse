@@ -1,0 +1,369 @@
+# gdverse
+
+**Analysis of Spatial Stratified Heterogeneity**
+
+## Overview
+
+Current models and functions provided by **gdverse** are:
+
+| *Model*                                                 | *Function*                                                      | *Support* |
+|---------------------------------------------------------|-----------------------------------------------------------------|-----------|
+| [GD](https://doi.org/10.1080/13658810802443457)         | [`gd()`](https://stscl.github.io/gdverse/reference/gd.md)       | ✔️        |
+| [OPGD](https://doi.org/10.1080/15481603.2020.1760434)   | [`opgd()`](https://stscl.github.io/gdverse/reference/opgd.md)   | ✔️        |
+| [GOZH](https://doi.org/10.1016/j.isprsjprs.2022.01.009) | [`gozh()`](https://stscl.github.io/gdverse/reference/gozh.md)   | ✔️        |
+| [LESH](https://doi.org/10.1080/17538947.2023.2271883)   | [`lesh()`](https://stscl.github.io/gdverse/reference/lesh.md)   | ✔️        |
+| [SPADE](https://doi.org/10.1080/13658816.2018.1476693)  | [`spade()`](https://stscl.github.io/gdverse/reference/spade.md) | ✔️        |
+| [IDSA](https://doi.org/10.1080/13658816.2021.1882680)   | [`idsa()`](https://stscl.github.io/gdverse/reference/idsa.md)   | ✔️        |
+| [RGD](https://doi.org/10.1016/j.jag.2022.102782)        | [`rgd()`](https://stscl.github.io/gdverse/reference/rgd.md)     | ✔️        |
+| [RID](https://doi.org/10.1016/j.spasta.2024.100814)     | [`rid()`](https://stscl.github.io/gdverse/reference/rid.md)     | ✔️        |
+| [SRSGD](https://doi.org/10.1016/j.ins.2021.12.019)      | [`srsgd()`](https://stscl.github.io/gdverse/reference/srsgd.md) | ✔️        |
+
+## Installation
+
+- Install from [CRAN](https://CRAN.R-project.org/package=gdverse) with:
+
+``` r
+install.packages("gdverse", dep = TRUE)
+```
+
+- Install development binary version from
+  [R-universe](https://stscl.r-universe.dev/gdverse) with:
+
+``` r
+install.packages('gdverse',
+                 repos = c("https://stscl.r-universe.dev",
+                           "https://cloud.r-project.org"),
+                 dep = TRUE)
+```
+
+- Install development source version from
+  [GitHub](https://github.com/stscl/gdverse) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("stscl/gdverse",
+                         build_vignettes = TRUE,
+                         dep = TRUE)
+```
+
+✨ Please ensure that **Rcpp** is properly installed and the appropriate
+**C++** compilation environment is configured in advance if you want to
+install **gdverse** from github.
+
+✨ The **gdverse** package supports the use of robust discretization for
+the robust geographical detector and robust interaction detector. For
+details on using them, please refer to
+<https://stscl.github.io/gdverse/articles/rgdrid.html>.
+
+## Example
+
+``` r
+library(gdverse)
+data("ndvi")
+ndvi
+## # A tibble: 713 × 7
+##    NDVIchange Climatezone Mining Tempchange Precipitation    GDP Popdensity
+##         <dbl> <chr>       <fct>       <dbl>         <dbl>  <dbl>      <dbl>
+##  1    0.116   Bwk         low         0.256          237.  12.6      1.45  
+##  2    0.0178  Bwk         low         0.273          214.   2.69     0.801 
+##  3    0.138   Bsk         low         0.302          449.  20.1     11.5   
+##  4    0.00439 Bwk         low         0.383          213.   0        0.0462
+##  5    0.00316 Bwk         low         0.357          205.   0        0.0748
+##  6    0.00838 Bwk         low         0.338          201.   0        0.549 
+##  7    0.0335  Bwk         low         0.296          210.  11.9      1.63  
+##  8    0.0387  Bwk         low         0.230          236.  30.2      4.99  
+##  9    0.0882  Bsk         low         0.214          342. 241       20.0   
+## 10    0.0690  Bsk         low         0.245          379.  42.0      7.50  
+## # ℹ 703 more rows
+```
+
+### OPGD model
+
+``` r
+discvar = names(ndvi)[-1:-3]
+discvar
+## [1] "Tempchange"    "Precipitation" "GDP"           "Popdensity"
+ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, 
+                 discvar = discvar, cores = 6)
+ndvi_opgd
+## ***   Optimal Parameters-based Geographical Detector     
+##                 Factor Detector            
+## 
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation |  0.8693505  | 2.58e-10 |
+## |  Climatezone  |  0.8218335  | 7.34e-10 |
+## |  Tempchange   |  0.3330256  | 1.89e-10 |
+## |  Popdensity   |  0.1990773  | 6.60e-11 |
+## |    Mining     |  0.1411154  | 6.73e-10 |
+## |      GDP      |  0.1004568  | 3.07e-10 |
+```
+
+### GOZH model
+
+``` r
+g = gozh(NDVIchange ~ ., data = ndvi)
+g
+## ***   Geographically Optimal Zones-based Heterogeneity Model       
+##                 Factor Detector            
+## 
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation | 0.87255056  | 4.52e-10 |
+## |  Climatezone  | 0.82129550  | 2.50e-10 |
+## |  Tempchange   | 0.33324945  | 1.12e-10 |
+## |  Popdensity   | 0.22321863  | 3.00e-10 |
+## |    Mining     | 0.13982859  | 6.00e-11 |
+## |      GDP      | 0.09170153  | 3.96e-10 |
+```
+
+## CITATION
+
+Please cite **gdverse** as:
+
+``` R
+Lv, W., Lei, Y., Liu, F., Yan, J., Song, Y. and Zhao, W. (2025), gdverse: An R Package for Spatial Stratified Heterogeneity Family. Transactions in GIS, 29: e70032. https://doi.org/10.1111/tgis.70032
+```
+
+A BibTeX entry for LaTeX users is:
+
+``` bib
+@article{lyu2025gdverse, 
+    title={{gdverse}: An {R} Package for Spatial Stratified Heterogeneity Family}, 
+    volume={29}, 
+    ISSN={1467-9671},
+    number={2}, 
+    journal={Transactions in GIS}, 
+    publisher={Wiley}, 
+    pages = {29:e70032},
+    author={Lv, Wenbo and Lei, Yangyang and Liu, Fangmei and Yan, Jianwu and Song, Yongze and Zhao, Wufan},
+    year={2025}, 
+    month={mar}
+}
+```
+
+# Package index
+
+## Geographical Detector Models
+
+- [`gd()`](https://stscl.github.io/gdverse/reference/gd.md) : native
+  geographical detector(GD) model
+- [`opgd()`](https://stscl.github.io/gdverse/reference/opgd.md) :
+  optimal parameters-based geographical detector(OPGD) model
+- [`gozh()`](https://stscl.github.io/gdverse/reference/gozh.md) :
+  geographically optimal zones-based heterogeneity(GOZH) model
+- [`lesh()`](https://stscl.github.io/gdverse/reference/lesh.md) :
+  locally explained stratified heterogeneity(LESH) model
+- [`spade()`](https://stscl.github.io/gdverse/reference/spade.md) :
+  spatial association detector (SPADE) model
+- [`idsa()`](https://stscl.github.io/gdverse/reference/idsa.md) :
+  interactive detector for spatial associations(IDSA) model
+- [`rgd()`](https://stscl.github.io/gdverse/reference/rgd.md) : robust
+  geographical detector(RGD) model
+- [`rid()`](https://stscl.github.io/gdverse/reference/rid.md) : robust
+  interaction detector(RID) model
+- [`srsgd()`](https://stscl.github.io/gdverse/reference/srsgd.md) :
+  spatial rough set-based geographical detector(SRSGD) model
+
+## Compare Size Effect of Spatial Units
+
+- [`sesu_opgd()`](https://stscl.github.io/gdverse/reference/sesu_opgd.md)
+  : comparison of size effects of spatial units based on OPGD
+- [`sesu_gozh()`](https://stscl.github.io/gdverse/reference/sesu_gozh.md)
+  : comparison of size effects of spatial units based on GOZH
+
+## Variable Discretization Methods
+
+- [`gd_optunidisc()`](https://stscl.github.io/gdverse/reference/gd_optunidisc.md)
+  : optimal univariate discretization based on geodetector q-statistic
+- [`rpart_disc()`](https://stscl.github.io/gdverse/reference/rpart_disc.md)
+  : discretization of variables based on recursive partitioning
+- [`robust_disc()`](https://stscl.github.io/gdverse/reference/robust_disc.md)
+  : univariate discretization based on offline change point detection
+- [`cpsd_disc()`](https://stscl.github.io/gdverse/reference/cpsd_disc.md)
+  : optimal spatial data discretization based on SPADE q-statistics
+
+## Important Algorithm Functions
+
+- [`spd_lesh()`](https://stscl.github.io/gdverse/reference/spd_lesh.md)
+  : shap power of determinants
+
+- [`loess_optscale()`](https://stscl.github.io/gdverse/reference/loess_optscale.md)
+  : determine optimal spatial data analysis scale
+
+- [`geodetector()`](https://stscl.github.io/gdverse/reference/geodetector.md)
+  : geographical detector
+
+- [`factor_detector()`](https://stscl.github.io/gdverse/reference/factor_detector.md)
+  : factor detector
+
+- [`interaction_detector()`](https://stscl.github.io/gdverse/reference/interaction_detector.md)
+  : interaction detector
+
+- [`risk_detector()`](https://stscl.github.io/gdverse/reference/risk_detector.md)
+  : risk detector
+
+- [`ecological_detector()`](https://stscl.github.io/gdverse/reference/ecological_detector.md)
+  : ecological detector
+
+- [`srs_geodetector()`](https://stscl.github.io/gdverse/reference/srs_geodetector.md)
+  : spatial rough set-based geographical detector
+
+- [`srs_factor_detector()`](https://stscl.github.io/gdverse/reference/srs_factor_detector.md)
+  : spatial rough set-based factor detector
+
+- [`srs_interaction_detector()`](https://stscl.github.io/gdverse/reference/srs_interaction_detector.md)
+  : spatial rough set-based interaction detector
+
+- [`srs_ecological_detector()`](https://stscl.github.io/gdverse/reference/srs_ecological_detector.md)
+  : spatial rough set-based ecological detector
+
+- [`gozh_detector()`](https://stscl.github.io/gdverse/reference/gozh_detector.md)
+  : geographically optimal zones-based heterogeneity detector
+
+- [`cpsd_spade()`](https://stscl.github.io/gdverse/reference/cpsd_spade.md)
+  : compensated power of spatial determinant(CPSD)
+
+- [`psd_spade()`](https://stscl.github.io/gdverse/reference/psd_spade.md)
+  : power of spatial determinant(PSD)
+
+- [`psmd_spade()`](https://stscl.github.io/gdverse/reference/psmd_spade.md)
+  : power of spatial and multilevel discretization determinant(PSMD)
+
+- [`psd_iev()`](https://stscl.github.io/gdverse/reference/psd_iev.md) :
+  PSD of an interaction of explanatory variables (PSD-IEV)
+
+- [`pid_idsa()`](https://stscl.github.io/gdverse/reference/pid_idsa.md)
+  :
+
+  IDSA Q-saistics `PID`
+
+- [`psd_pseudop()`](https://stscl.github.io/gdverse/reference/psd_pseudop.md)
+  : calculate power of spatial determinant(PSD) and the corresponding
+  pseudo-p value
+
+- [`psmd_pseudop()`](https://stscl.github.io/gdverse/reference/psmd_pseudop.md)
+  : power of spatial and multilevel discretization determinant(PSMD) and
+  the corresponding pseudo-p value
+
+## Utility Functions
+
+- [`gen_permutations()`](https://stscl.github.io/gdverse/reference/gen_permutations.md)
+  : generate permutations
+- [`weight_assign()`](https://stscl.github.io/gdverse/reference/weight_assign.md)
+  : assign values by weight
+- [`all2int()`](https://stscl.github.io/gdverse/reference/all2int.md) :
+  convert all discretized vectors to integer
+- [`F_informationloss()`](https://stscl.github.io/gdverse/reference/F_informationloss.md)
+  : measure information loss by information entropy
+
+## S3 Methods for Geographical Detector Models
+
+- [`plot(`*`<ecological_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.ecological_detector.md)
+  : plot ecological detector
+- [`plot(`*`<factor_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.factor_detector.md)
+  : plot factor detector result
+- [`plot(`*`<gd_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.gd_result.md)
+  : plot GD result
+- [`plot(`*`<gozh_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.gozh_result.md)
+  : plot GOZH result
+- [`plot(`*`<idsa_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.idsa_result.md)
+  : plot IDSA risk result
+- [`plot(`*`<interaction_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.interaction_detector.md)
+  : plot interaction detector result
+- [`plot(`*`<lesh_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.lesh_result.md)
+  : plot LESH model result
+- [`plot(`*`<opgd_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.opgd_result.md)
+  : plot OPGD result
+- [`plot(`*`<rgd_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.rgd_result.md)
+  : plot RGD result
+- [`plot(`*`<rid_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.rid_result.md)
+  : plot RID result
+- [`plot(`*`<risk_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.risk_detector.md)
+  : plot risk detector
+- [`plot(`*`<sesu_gozh>`*`)`](https://stscl.github.io/gdverse/reference/plot.sesu_gozh.md)
+  : plot gozh sesu
+- [`plot(`*`<sesu_opgd>`*`)`](https://stscl.github.io/gdverse/reference/plot.sesu_opgd.md)
+  : plot opgd sesu
+- [`plot(`*`<spade_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.spade_result.md)
+  : plot SPADE power of spatial and multilevel discretization
+  determinant
+- [`plot(`*`<srs_ecological_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.srs_ecological_detector.md)
+  : plot spatial rough set-based ecological detector
+- [`plot(`*`<srs_factor_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.srs_factor_detector.md)
+  : plot spatial rough set-based factor detector result
+- [`plot(`*`<srs_interaction_detector>`*`)`](https://stscl.github.io/gdverse/reference/plot.srs_interaction_detector.md)
+  : plot spatial rough set-based interaction detector result
+- [`plot(`*`<srsgd_result>`*`)`](https://stscl.github.io/gdverse/reference/plot.srsgd_result.md)
+  : plot SRSGD result
+- [`print(`*`<ecological_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.ecological_detector.md)
+  : print ecological detector
+- [`print(`*`<factor_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.factor_detector.md)
+  : print factor detector
+- [`print(`*`<gd_result>`*`)`](https://stscl.github.io/gdverse/reference/print.gd_result.md)
+  : print GD result
+- [`print(`*`<gozh_result>`*`)`](https://stscl.github.io/gdverse/reference/print.gozh_result.md)
+  : print GOZH result
+- [`print(`*`<idsa_result>`*`)`](https://stscl.github.io/gdverse/reference/print.idsa_result.md)
+  : print IDSA result
+- [`print(`*`<interaction_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.interaction_detector.md)
+  : print interaction detector
+- [`print(`*`<lesh_result>`*`)`](https://stscl.github.io/gdverse/reference/print.lesh_result.md)
+  : print LESH model interaction result
+- [`print(`*`<opgd_result>`*`)`](https://stscl.github.io/gdverse/reference/print.opgd_result.md)
+  : print OPGD result
+- [`print(`*`<rgd_result>`*`)`](https://stscl.github.io/gdverse/reference/print.rgd_result.md)
+  : print RGD result
+- [`print(`*`<rid_result>`*`)`](https://stscl.github.io/gdverse/reference/print.rid_result.md)
+  : print RID result
+- [`print(`*`<risk_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.risk_detector.md)
+  : print risk detector
+- [`print(`*`<sesu_gozh>`*`)`](https://stscl.github.io/gdverse/reference/print.sesu_gozh.md)
+  : print gozh sesu
+- [`print(`*`<sesu_opgd>`*`)`](https://stscl.github.io/gdverse/reference/print.sesu_opgd.md)
+  : print opgd sesu
+- [`print(`*`<spade_result>`*`)`](https://stscl.github.io/gdverse/reference/print.spade_result.md)
+  : print SPADE power of spatial and multilevel discretization
+  determinant
+- [`print(`*`<srs_ecological_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.srs_ecological_detector.md)
+  : print spatial rough set-based ecological detector
+- [`print(`*`<srs_factor_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.srs_factor_detector.md)
+  : print spatial rough set-based factor detector
+- [`print(`*`<srs_interaction_detector>`*`)`](https://stscl.github.io/gdverse/reference/print.srs_interaction_detector.md)
+  : print spatial rough set-based interaction detector
+- [`print(`*`<srsgd_result>`*`)`](https://stscl.github.io/gdverse/reference/print.srsgd_result.md)
+  : print SRSGD result
+
+## Data
+
+- [`NTDs`](https://stscl.github.io/gdverse/reference/NTDs.md) : NTDs
+  data
+- [`ndvi`](https://stscl.github.io/gdverse/reference/ndvi.md) : dataset
+  of NDVI changes and its influencing factors
+- [`sim`](https://stscl.github.io/gdverse/reference/sim.md) : Simulation
+  data.
+- [`srs_table`](https://stscl.github.io/gdverse/reference/srs_table.md)
+  : example of spatial information system table
+- [`srs_wt`](https://stscl.github.io/gdverse/reference/srs_wt.md) :
+  example of spatial information system spatial adjacency matrix
+
+# Articles
+
+### All vignettes
+
+- [Consistency With the Results of Existing GDM R
+  Packages](https://stscl.github.io/gdverse/articles/consistency.md):
+- [Geographical
+  Detector(GD)](https://stscl.github.io/gdverse/articles/gd.md):
+- [Interactive Detector For Spatial
+  Associations(IDSA)](https://stscl.github.io/gdverse/articles/idsa.md):
+- [Optimal Parameters-based Geographical
+  Detector(OPGD)](https://stscl.github.io/gdverse/articles/opgd.md):
+- [Robust Geographical Detector & Robust Interaction Detector(RGD &
+  RID)](https://stscl.github.io/gdverse/articles/rgdrid.md):
+- [Compare Size Effect of Spatial
+  Units(SESU)](https://stscl.github.io/gdverse/articles/sesu.md):
+- [Spatial Heterogeneity Explanation(GOZH &
+  LESH)](https://stscl.github.io/gdverse/articles/shegd.md):
+- [Spatial Association
+  Detector(SPADE)](https://stscl.github.io/gdverse/articles/spade.md):

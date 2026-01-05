@@ -1,0 +1,91 @@
+# Interactive Detector For Spatial Associations(IDSA)
+
+The IDSA model is based on the SPADE model, which extends the power of
+spatial determinant of the SPADE model to multivariable interaction and
+takes spatial fuzzy overlay into account.
+
+In this vignette, we used the same data as the SPADE vignette to
+demonstrate the use of the IDSA model.
+
+### Load data and package
+
+``` r
+library(sf)
+library(tidyverse)
+library(gdverse)
+
+depression = system.file('extdata/Depression.csv',package = 'gdverse') %>%
+  read_csv() %>%
+  st_as_sf(coords = c('X','Y'), crs = 4326)
+depression
+## Simple feature collection with 1072 features and 11 fields
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: -83.1795 ymin: 32.11464 xmax: -78.6023 ymax: 35.17354
+## Geodetic CRS:  WGS 84
+## # A tibble: 1,072 × 12
+##    Depression_prevelence PopulationDensity Population65 NoHealthInsurance Neighbor_Disadvantage
+##  *                 <dbl>             <dbl>        <dbl>             <dbl>                 <dbl>
+##  1                  23.1              61.5         22.5              7.98               -0.0525
+##  2                  22.8              58.3         16.8             11.0                -0.254 
+##  3                  23.2              35.9         24.5              9.31               -0.0540
+##  4                  21.8              76.1         21.8             13.2                 0.0731
+##  5                  20.7              47.3         22.0             11                   0.763 
+##  6                  21.3              32.5         19.2             13.0                 0.422 
+##  7                  22                36.9         19.2             10.8                 0.113 
+##  8                  21.2              61.5         15.9              8.57               -0.154 
+##  9                  22.7              67.2         15.7             17.8                -0.320 
+## 10                  20.6             254.          11.3             12.7                 0.457 
+## # ℹ 1,062 more rows
+## # ℹ 7 more variables: Beer <dbl>, MentalHealthPati <dbl>, NatureParks <dbl>, Casinos <dbl>,
+## #   DrinkingPlaces <dbl>, X.HouseRent <dbl>, geometry <POINT [°]>
+```
+
+### Construct spatial Weight
+
+We use the same spatial weight matrix as SPADE vignette.
+
+``` r
+wt = sdsfun::inverse_distance_swm(depression)
+```
+
+### IDSA modeling
+
+``` r
+tictoc::tic()
+idsa.model = idsa(Depression_prevelence ~ .,
+                  data = depression,
+                  wt = wt, cores = 12)
+tictoc::toc()
+## 87 sec elapsed
+idsa.model
+## ***     Interactive Detector For Spatial Associations 
+## 
+## |                                                                    variable                                                                     |    PID    |
+## |:-----------------------------------------------------------------------------------------------------------------------------------------------:|:---------:|
+## |             PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces             | 0.7273702 |
+## |        PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces        | 0.7265580 |
+## |                    PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Beer ∩ MentalHealthPati ∩ Casinos ∩ DrinkingPlaces                    | 0.7249090 |
+## | PopulationDensity ∩ Population65 ∩ NoHealthInsurance ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ NatureParks ∩ Casinos ∩ DrinkingPlaces | 0.7225422 |
+## |                          PopulationDensity ∩ Population65 ∩ Neighbor_Disadvantage ∩ Beer ∩ MentalHealthPati ∩ Casinos                           | 0.7199171 |
+## 
+##  --------- IDSA model performance evaluation: --------
+##  * Number of overlay zones :  23 
+##  * Percentage of finely divided zones :  0.002798507 
+##  * Number of individual explanatory variables :  8 
+##  
+##  ## Different of response variable between a pair of overlay zones:
+## 
+## |  zone1st   |    zone2nd    | Risk |
+## |:----------:|:-------------:|:----:|
+## | zoneBeer_3 |  zoneBeer_4   |  No  |
+## | zoneBeer_3 |  zoneBeer_5   |  No  |
+## | zoneBeer_3 |  zoneBeer_6   |  No  |
+## | zoneBeer_3 | zoneCasinos_2 |  No  |
+## | zoneBeer_3 | zoneCasinos_3 |  No  |
+## 
+##  #### Only the first five pairs of interactions and overlay zones are displayed! ####
+plot(idsa.model)
+```
+
+![](../reference/figures/idsa/idsa_modeling-1.png)

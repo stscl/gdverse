@@ -1,0 +1,72 @@
+# Robust Geographical Detector & Robust Interaction Detector(RGD & RID)
+
+### Load data and package
+
+``` r
+library(gdverse)
+
+data("ndvi")
+```
+
+``` r
+names(ndvi)
+## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"   
+## [5] "Precipitation" "GDP"           "Popdensity"
+```
+
+### Run RGD
+
+``` r
+ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
+               discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 3:8, cores = 12)
+ndvi_rgd
+## ***      Robust Geographical Detector    
+## 
+## |   variable    | Q-statistic | P-value  |
+## |:-------------:|:-----------:|:--------:|
+## | Precipitation |  0.8883955  | 4.77e-10 |
+## |  Climatezone  |  0.8218335  | 7.34e-10 |
+## |  Tempchange   |  0.3722571  | 3.22e-10 |
+## |  Popdensity   |  0.2193538  | 9.31e-10 |
+## |    Mining     |  0.1411154  | 6.73e-10 |
+## |      GDP      |  0.1406153  | 4.86e-10 |
+plot(ndvi_rgd)
+```
+
+![](../reference/figures/rgdrid/rgd_id-1.png)
+
+### Run RID
+
+`RID` allows you to obtain the interactions of all possible combinations
+of variables. By default, `Spatial Intersection` are used to generate a
+new spatial partition of the interaction variables.
+
+``` r
+ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
+               discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
+               discnum = 8, cores = 12)
+ndvi_rid
+## ***       Robust Interaction Detector      
+## 
+## |   variable1   |   variable2   | Interaction  |
+## |:-------------:|:-------------:|:------------:|
+## |  Tempchange   | Precipitation | Enhance, bi- |
+## |  Tempchange   |      GDP      | Enhance, bi- |
+## |  Tempchange   |  Popdensity   | Enhance, bi- |
+## |  Tempchange   |  Climatezone  | Enhance, bi- |
+## |  Tempchange   |    Mining     | Enhance, bi- |
+## | Precipitation |      GDP      | Enhance, bi- |
+## | Precipitation |  Popdensity   | Enhance, bi- |
+## | Precipitation |  Climatezone  | Enhance, bi- |
+## | Precipitation |    Mining     | Enhance, bi- |
+## |      GDP      |  Popdensity   | Enhance, bi- |
+## |      GDP      |  Climatezone  | Enhance, bi- |
+## |      GDP      |    Mining     | Enhance, bi- |
+## |  Popdensity   |  Climatezone  | Enhance, bi- |
+## |  Popdensity   |    Mining     | Enhance, bi- |
+## |  Climatezone  |    Mining     | Enhance, bi- |
+plot(ndvi_rid)
+```
+
+![](../reference/figures/rgdrid/rid_plot-1.png)
