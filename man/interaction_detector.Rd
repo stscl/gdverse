@@ -20,6 +20,9 @@ A list.
 \item{\code{Variable2 Q-statistics}}{Q-statistics for variable2}
 \item{\code{Variable1 and Variable2 interact Q-statistics}}{Q-statistics for variable1 and variable2 interact}
 \item{\code{Interaction}}{the interact result type}
+\item{\code{Variable1 P-value}}{P-value of the Q-statistic for Variable1}
+\item{\code{Variable2 P-value}}{P-value of the Q-statistic for Variable2}
+\item{\code{Variable1 and Variable2 interact P-value}}{P-value of the Q-statistic for variable1 and variable2 interact}
 }
 }
 \description{

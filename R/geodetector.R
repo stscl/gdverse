@@ -75,6 +75,9 @@ factor_detector = \(y,x,confintv = FALSE,alpha = 0.95){
 #' \item{\code{Variable2 Q-statistics}}{Q-statistics for variable2}
 #' \item{\code{Variable1 and Variable2 interact Q-statistics}}{Q-statistics for variable1 and variable2 interact}
 #' \item{\code{Interaction}}{the interact result type}
+#' \item{\code{Variable1 P-value}}{P-value of the Q-statistic for Variable1}
+#' \item{\code{Variable2 P-value}}{P-value of the Q-statistic for Variable2}
+#' \item{\code{Variable1 and Variable2 interact P-value}}{P-value of the Q-statistic for variable1 and variable2 interact}
 #' }
 #' @export
 #'
@@ -85,25 +88,30 @@ factor_detector = \(y,x,confintv = FALSE,alpha = 0.95){
 #'
 interaction_detector = \(y,x1,x2){
   x12 = paste0(x1,x2,'_')
-  qv1 = gdverse::factor_detector(y,x1)[[1]]
-  qv2 = gdverse::factor_detector(y,x2)[[1]]
-  qv12 = gdverse::factor_detector(y,x12)[[1]]
+  g1 = gdverse::factor_detector(y,x1)
+  g2 = gdverse::factor_detector(y,x2)
+  g12 = gdverse::factor_detector(y,x12)
+
+  qv1 = g1[[1]]
+  qv2 = g2[[1]]
+  qv12 = g12[[1]]
 
   if (qv12 < min(qv1, qv2)) {
-    interaction = c("Weaken, nonlinear")
+    interaction = "Weaken, nonlinear"
   } else if (qv12 >= min(qv1, qv2) & qv12 <= max(qv1, qv2)) {
-    interaction = c("Weaken, uni-")
+    interaction = "Weaken, uni-"
   } else if (qv12 > max(qv1, qv2) & (qv12 < qv1 + qv2)) {
-    interaction = c("Enhance, bi-")
+    interaction = "Enhance, bi-"
   } else if (qv12 == qv1 + qv2) {
-    interaction = c("Independent")
+    interaction = "Independent"
   } else {
-    interaction = c("Enhance, nonlinear")
+    interaction = "Enhance, nonlinear"
   }
-  interd = list(qv1,qv2,qv12,interaction)
+  interd = list(qv1,qv2,qv12,interaction,g1[[2]],g2[[2]],g12[[2]])
   names(interd) = c("Variable1 Q-statistics","Variable2 Q-statistics",
                     "Variable1 and Variable2 interact Q-statistics",
-                    "Interaction")
+                    "Interaction", "Variable1 P-value","Variable2 P-value",
+                    "Variable1 and Variable2 interact P-value")
   return(interd)
 }
 
