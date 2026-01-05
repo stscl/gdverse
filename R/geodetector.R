@@ -104,7 +104,7 @@ interaction_detector = \(y,x1,x2){
   } else {
     interaction = c("Enhance, nonlinear")
   }
-  interd = list(qv1,qv2,qv12,interaction,g1[[1]],g2[[1]],g12[[1]])
+  interd = list(qv1,qv2,qv12,interaction,g1[[2]],g2[[2]],g12[[2]])
   names(interd) = c("Variable1 Q-statistics","Variable2 Q-statistics",
                     "Variable1 and Variable2 interact Q-statistics",
                     "Interaction", "Variable1 P-value","Variable2 P-value",
