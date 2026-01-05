@@ -169,15 +169,15 @@ gozh_detector = \(formula, data, cores = 1,
   }
   interact_type = \(qv1,qv2,qv12){
     if (qv12 < min(qv1, qv2)) {
-      interaction = c("Weaken, nonlinear")
+      interaction = "Weaken, nonlinear"
     } else if (qv12 >= min(qv1, qv2) & qv12 <= max(qv1, qv2)) {
-      interaction = c("Weaken, uni-")
+      interaction = "Weaken, uni-"
     } else if (qv12 > max(qv1, qv2) & (qv12 < qv1 + qv2)) {
-      interaction = c("Enhance, bi-")
+      interaction = "Enhance, bi-"
     } else if (qv12 == qv1 + qv2) {
-      interaction = c("Independent")
+      interaction = "Independent"
     } else {
-      interaction = c("Enhance, nonlinear")
+      interaction = "Enhance, nonlinear"
     }
     return(interaction)
   }
