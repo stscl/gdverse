@@ -97,15 +97,15 @@ interaction_detector = \(y,x1,x2){
   qv12 = g12[[1]]
 
   if (qv12 < min(qv1, qv2)) {
-    interaction = c("Weaken, nonlinear")
+    interaction = "Weaken, nonlinear"
   } else if (qv12 >= min(qv1, qv2) & qv12 <= max(qv1, qv2)) {
-    interaction = c("Weaken, uni-")
+    interaction = "Weaken, uni-"
   } else if (qv12 > max(qv1, qv2) & (qv12 < qv1 + qv2)) {
-    interaction = c("Enhance, bi-")
+    interaction = "Enhance, bi-"
   } else if (qv12 == qv1 + qv2) {
-    interaction = c("Independent")
+    interaction = "Independent"
   } else {
-    interaction = c("Enhance, nonlinear")
+    interaction = "Enhance, nonlinear"
   }
   interd = list(qv1,qv2,qv12,interaction,g1[[2]],g2[[2]],g12[[2]])
   names(interd) = c("Variable1 Q-statistics","Variable2 Q-statistics",
