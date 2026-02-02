@@ -70,13 +70,31 @@ all2int = \(x){
   return(x)
 }
 
-.calc_ncfncp = \(Fv, df1, df2, alpha = 0.05, interval = c(0, 10000)) {
-  # Define function to solve for the non-centrality parameter (λ)
-  func = function(lambda) stats::pf(Fv, df1, df2, ncp = lambda) - alpha
-  # Try to find the root, return 0 if uniroot fails
-  root = tryCatch(
-    stats::uniroot(func, interval)$root,
-    error = function(e) 0
-  )
-  return(root)
+.calc_ncfncp = \(Fv, df1, df2, alpha = 0.05) {
+  if (Fv <= 0 || !is.finite(Fv)) return(0)
+  if (df1 <= 0 || df2 <= 0 || alpha <= 0 || alpha >= 1) return(0)
+  p0 = stats::pf(Fv, df1, df2, ncp = 0)
+  if (p0 <= alpha) return(0)
+
+  lambda_upper = 1.0
+  max_iter = 20
+  iter = 0
+
+  while (iter < max_iter) {
+    p_upper = stats::pf(Fv, df1, df2, ncp = lambda_upper)
+    if (is.nan(p_upper) || is.na(p_upper) || p_upper < alpha) break
+    lambda_upper = lambda_upper * 10
+    iter = iter + 1
+  }
+  if (iter == max_iter) lambda_upper = 1e6
+
+  tryCatch({
+    root = stats::uniroot(
+      f = function(lambda) stats::pf(Fv, df1, df2, ncp = lambda) - alpha,
+      interval = c(0, lambda_upper),
+      tol = .Machine$double.eps^0.25,
+      maxiter = 1000
+    )$root
+    if (is.finite(root) && root >= 0) return(root) else 0
+  }, error = function(e) 0)
 }
