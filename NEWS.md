@@ -8,7 +8,7 @@
 
 # gdverse 1.5
 
-* Refactor `cpd_disc` for improved parallel stability and reticulate compatibility (#77).
+* Refactor `cpd_disc()` for improved parallel stability and reticulate compatibility (#77).
 
 * Update python dependency configuration and usage (#74).
 
@@ -85,8 +85,6 @@ only positive integer inputs (#36).
 * Update the `RGD` Model API Settings (#2).
 
 * Fix bug caused by changes in default parameters of `opgd` in `sesu_opgd` (#4).
-
-* Maintain the same results for `st_unidisc` and `ClassInt::classify_intervals` (#5).
 
 * The parameter `overlaymethod` in `rid` and `idsa` has been renamed to `overlay`.
 
