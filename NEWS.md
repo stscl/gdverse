@@ -104,7 +104,7 @@ only positive integer inputs (#36).
 
 # gdverse 1.0-1
 
-* Unify all vignettes filenames to lowercase.
+* Unify all vignettes filename to lowercase.
 
 * Support for using the `sf` object as input in all models.
 
