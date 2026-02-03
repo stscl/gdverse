@@ -53,19 +53,6 @@ tryCatch({
               data = dplyr::select(sim,-dplyr::any_of(c('lo','la'))),
               discnum = 5, cores = 3)
 }, error = \(e) message("Skipping Python-dependent example: ", e$message))
-#> # A tibble: 80 × 3
-#>    xa     xb     xc    
-#>    <chr>  <chr>  <chr> 
-#>  1 group1 group5 group4
-#>  2 group4 group5 group5
-#>  3 group3 group5 group4
-#>  4 group3 group5 group3
-#>  5 group4 group5 group5
-#>  6 group3 group5 group5
-#>  7 group4 group5 group5
-#>  8 group3 group2 group2
-#>  9 group4 group5 group5
-#> 10 group5 group2 group5
-#> # ℹ 70 more rows
+#> Skipping Python-dependent example: cannot coerce class ‘c("pandas.DataFrame", "pandas.core.generic.NDFrame", "pandas.core.base.PandasObject", ’ to a data.frame
 # }
 ```

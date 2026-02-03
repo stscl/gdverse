@@ -105,13 +105,6 @@ tryCatch({
   }, error = \(e) message("Skipping Python-dependent example: ", e$message))
 #> Downloading uv...
 #> Done!
-#> ***      Robust Geographical Detector    
-#> 
-#> | variable | Q-statistic |   P-value    |
-#> |:--------:|:-----------:|:------------:|
-#> |    xc    |  0.7011119  | 7.650000e-10 |
-#> |    xb    |  0.6032094  | 1.186300e-08 |
-#> |    xa    |  0.4969454  | 4.191848e-06 |
-#> 
+#> Skipping Python-dependent example: cannot coerce class ‘c("pandas.DataFrame", "pandas.core.generic.NDFrame", "pandas.core.base.PandasObject", ’ to a data.frame
 # }
 ```

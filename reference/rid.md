@@ -91,12 +91,6 @@ tryCatch({
           discnum = 3:6, cores = 1)
   g
 }, error = \(e) message("Skipping Python-dependent example: ", e$message))
-#> ***       Robust Interaction Detector      
-#> 
-#> | variable1 | variable2 | Interaction  |
-#> |:---------:|:---------:|:------------:|
-#> |    xa     |    xb     | Enhance, bi- |
-#> |    xa     |    xc     | Enhance, bi- |
-#> |    xb     |    xc     | Enhance, bi- |
+#> Skipping Python-dependent example: cannot coerce class ‘c("pandas.DataFrame", "pandas.core.generic.NDFrame", "pandas.core.base.PandasObject", ’ to a data.frame
 # }
 ```
