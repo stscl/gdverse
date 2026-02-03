@@ -1,12 +1,14 @@
 # gdverse 1.6
 
+- Improve robustness of non-centrality parameter estimation for q-statistic confidence intervals (#93).
+
 # gdverse 1.5.1
 
 * Wrap python-dependent examples in `tryCatch` to avoid check failures (#82).
 
 # gdverse 1.5
 
-* Refactor `cpd_disc` for improved parallel stability and reticulate compatibility (#77).
+* Refactor `cpd_disc()` for improved parallel stability and reticulate compatibility (#77).
 
 * Update python dependency configuration and usage (#74).
 
@@ -22,7 +24,7 @@
 
 * Support adjusting the font size of q-value labels in the factor detection result plot (#49).
 
-* Rename `gd_bestunidisc` as `gd_optunidisc` (#39).
+* Rename `gd_bestunidisc()` as `gd_optunidisc()` (#39).
 
 * Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
 only positive integer inputs (#36).
@@ -84,8 +86,6 @@ only positive integer inputs (#36).
 
 * Fix bug caused by changes in default parameters of `opgd` in `sesu_opgd` (#4).
 
-* Maintain the same results for `st_unidisc` and `ClassInt::classify_intervals` (#5).
-
 * The parameter `overlaymethod` in `rid` and `idsa` has been renamed to `overlay`.
 
 * Add `readr` as a dependence of type `Suggests`.
@@ -102,7 +102,7 @@ only positive integer inputs (#36).
 
 # gdverse 1.0-1
 
-* Unify all vignettes filenames to lowercase.
+* Unify all vignettes filename to lowercase.
 
 * Support for using the `sf` object as input in all models.
 
