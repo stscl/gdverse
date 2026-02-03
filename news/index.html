@@ -56,14 +56,15 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.6" id="gdverse-16">gdverse 1.6<a class="anchor" aria-label="anchor" href="#gdverse-16"></a></h2>
-</div>
+<ul><li>Improve robustness of non-centrality parameter estimation for q-statistic confidence intervals (<a href="https://github.com/stscl/gdverse/issues/93" class="external-link">#93</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5.1" id="gdverse-151">gdverse 1.5.1<a class="anchor" aria-label="anchor" href="#gdverse-151"></a></h2><p class="text-muted">CRAN release: 2025-10-15</p>
 <ul><li>Wrap python-dependent examples in <code>tryCatch</code> to avoid check failures (<a href="https://github.com/stscl/gdverse/issues/82" class="external-link">#82</a>).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.5" id="gdverse-15">gdverse 1.5<a class="anchor" aria-label="anchor" href="#gdverse-15"></a></h2><p class="text-muted">CRAN release: 2025-10-10</p>
-<ul><li><p>Refactor <code>cpd_disc</code> for improved parallel stability and reticulate compatibility (<a href="https://github.com/stscl/gdverse/issues/77" class="external-link">#77</a>).</p></li>
+<ul><li><p>Refactor <code>cpd_disc()</code> for improved parallel stability and reticulate compatibility (<a href="https://github.com/stscl/gdverse/issues/77" class="external-link">#77</a>).</p></li>
 <li><p>Update python dependency configuration and usage (<a href="https://github.com/stscl/gdverse/issues/74" class="external-link">#74</a>).</p></li>
 <li><p>Eliminate warnings about the size aesthetic for lines in plot S3 methods (<a href="https://github.com/stscl/gdverse/issues/71" class="external-link">#71</a>).</p></li>
 </ul></div>
@@ -75,7 +76,7 @@
 <h2 class="pkg-version" data-toc-text="1.3-2" id="gdverse-13-2">gdverse 1.3-2<a class="anchor" aria-label="anchor" href="#gdverse-13-2"></a></h2><p class="text-muted">CRAN release: 2025-02-17</p>
 <ul><li><p>Experimentally support computing confidence intervals for the q statistic in factor_detector (<a href="https://github.com/stscl/gdverse/issues/51" class="external-link">#51</a>).</p></li>
 <li><p>Support adjusting the font size of q-value labels in the factor detection result plot (<a href="https://github.com/stscl/gdverse/issues/49" class="external-link">#49</a>).</p></li>
-<li><p>Rename <code>gd_bestunidisc</code> as <code>gd_optunidisc</code> (<a href="https://github.com/stscl/gdverse/issues/39" class="external-link">#39</a>).</p></li>
+<li><p>Rename <code>gd_bestunidisc()</code> as <code><a href="../reference/gd_optunidisc.html">gd_optunidisc()</a></code> (<a href="https://github.com/stscl/gdverse/issues/39" class="external-link">#39</a>).</p></li>
 <li><p>Specify that the <code>cores</code> parameter in all functions of the <code>gdverse</code> package currently supports only positive integer inputs (<a href="https://github.com/stscl/gdverse/issues/36" class="external-link">#36</a>).</p></li>
 <li><p>Update the documentation on Python dependency configuration in the <code>rgdrid</code> vignette (<a href="https://github.com/stscl/gdverse/issues/30" class="external-link">#30</a>).</p></li>
 <li><p>Discuss the consistency with the results of existing geographical detector R packages (<a href="https://github.com/stscl/gdverse/issues/28" class="external-link">#28</a>).</p></li>
@@ -117,7 +118,6 @@
 <h2 class="pkg-version" data-toc-text="1.0-3" id="gdverse-10-3">gdverse 1.0-3<a class="anchor" aria-label="anchor" href="#gdverse-10-3"></a></h2><p class="text-muted">CRAN release: 2024-09-30</p>
 <ul><li><p>Update the <code>RGD</code> Model API Settings (<a href="https://github.com/stscl/gdverse/issues/2" class="external-link">#2</a>).</p></li>
 <li><p>Fix bug caused by changes in default parameters of <code>opgd</code> in <code>sesu_opgd</code> (<a href="https://github.com/stscl/gdverse/issues/4" class="external-link">#4</a>).</p></li>
-<li><p>Maintain the same results for <code>st_unidisc</code> and <code>ClassInt::classify_intervals</code> (<a href="https://github.com/stscl/gdverse/issues/5" class="external-link">#5</a>).</p></li>
 <li><p>The parameter <code>overlaymethod</code> in <code>rid</code> and <code>idsa</code> has been renamed to <code>overlay</code>.</p></li>
 <li><p>Add <code>readr</code> as a dependence of type <code>Suggests</code>.</p></li>
 <li><p>Recompile vignettes due to internal function changes.</p></li>
@@ -129,7 +129,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0-1" id="gdverse-10-1">gdverse 1.0-1<a class="anchor" aria-label="anchor" href="#gdverse-10-1"></a></h2><p class="text-muted">CRAN release: 2024-09-16</p>
-<ul><li><p>Unify all vignettes filenames to lowercase.</p></li>
+<ul><li><p>Unify all vignettes filename to lowercase.</p></li>
 <li><p>Support for using the <code>sf</code> object as input in all models.</p></li>
 </ul></div>
     <div class="section level2">

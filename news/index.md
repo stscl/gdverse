@@ -2,6 +2,10 @@
 
 ## gdverse 1.6
 
+- Improve robustness of non-centrality parameter estimation for
+  q-statistic confidence intervals
+  ([\#93](https://github.com/stscl/gdverse/issues/93)).
+
 ## gdverse 1.5.1
 
 CRAN release: 2025-10-15
@@ -13,7 +17,7 @@ CRAN release: 2025-10-15
 
 CRAN release: 2025-10-10
 
-- Refactor `cpd_disc` for improved parallel stability and reticulate
+- Refactor `cpd_disc()` for improved parallel stability and reticulate
   compatibility ([\#77](https://github.com/stscl/gdverse/issues/77)).
 
 - Update python dependency configuration and usage
@@ -41,7 +45,8 @@ CRAN release: 2025-02-17
   detection result plot
   ([\#49](https://github.com/stscl/gdverse/issues/49)).
 
-- Rename `gd_bestunidisc` as `gd_optunidisc`
+- Rename `gd_bestunidisc()` as
+  [`gd_optunidisc()`](https://stscl.github.io/gdverse/reference/gd_optunidisc.md)
   ([\#39](https://github.com/stscl/gdverse/issues/39)).
 
 - Specify that the `cores` parameter in all functions of the `gdverse`
@@ -142,10 +147,6 @@ CRAN release: 2024-09-30
 - Fix bug caused by changes in default parameters of `opgd` in
   `sesu_opgd` ([\#4](https://github.com/stscl/gdverse/issues/4)).
 
-- Maintain the same results for `st_unidisc` and
-  `ClassInt::classify_intervals`
-  ([\#5](https://github.com/stscl/gdverse/issues/5)).
-
 - The parameter `overlaymethod` in `rid` and `idsa` has been renamed to
   `overlay`.
 
@@ -168,7 +169,7 @@ CRAN release: 2024-09-23
 
 CRAN release: 2024-09-16
 
-- Unify all vignettes filenames to lowercase.
+- Unify all vignettes filename to lowercase.
 
 - Support for using the `sf` object as input in all models.
 
