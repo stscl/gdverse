@@ -24,7 +24,7 @@
 
 * Support adjusting the font size of q-value labels in the factor detection result plot (#49).
 
-* Rename `gd_bestunidisc` as `gd_optunidisc` (#39).
+* Rename `gd_bestunidisc()` as `gd_optunidisc()` (#39).
 
 * Specify that the `cores` parameter in all functions of the `gdverse` package currently supports 
 only positive integer inputs (#36).
