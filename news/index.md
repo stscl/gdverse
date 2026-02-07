@@ -2,6 +2,9 @@
 
 ## gdverse 1.6
 
+- Update package startup message and citation guidance
+  ([\#97](https://github.com/stscl/gdverse/issues/97)).
+
 - Report significance of interaction detection results in geographical
   detector ([\#95](https://github.com/stscl/gdverse/issues/95)).
 
