@@ -60,6 +60,7 @@ Suggests:
     Rcpp,
     readr,
     rmarkdown,
+    spEDM,
     terra,
     testthat (>= 3.0.0)
 LinkingTo: 
