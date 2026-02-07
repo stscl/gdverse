@@ -15,7 +15,6 @@ List SRS_PD(IntegerVector yobs, IntegerMatrix xobs, IntegerMatrix wt);
 RcppExport SEXP _gdverse_SRS_PD(SEXP yobsSEXP, SEXP xobsSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type yobs(yobsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type xobs(xobsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type wt(wtSEXP);
@@ -28,7 +27,6 @@ List SRS_MULTIPD(IntegerVector yobs, IntegerMatrix xobs, IntegerMatrix wt);
 RcppExport SEXP _gdverse_SRS_MULTIPD(SEXP yobsSEXP, SEXP xobsSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type yobs(yobsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type xobs(xobsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type wt(wtSEXP);
@@ -41,7 +39,6 @@ NumericVector SRS_PDTEST(IntegerVector yobs, IntegerMatrix xobs, IntegerMatrix w
 RcppExport SEXP _gdverse_SRS_PDTEST(SEXP yobsSEXP, SEXP xobsSEXP, SEXP wtSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type yobs(yobsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type xobs(xobsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type wt(wtSEXP);
