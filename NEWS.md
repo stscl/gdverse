@@ -1,5 +1,7 @@
 # gdverse 1.6
 
+* Loading gdverse no longer initializes the RNG state (#99).
+
 * Update package startup message and citation guidance (#97).
 
 * Report significance of interaction detection results in geographical detector (#95).

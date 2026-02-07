@@ -1,14 +1,13 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// [[Rcpp::plugins(cpp11)]]
-
-IntegerVector rcpp_which(LogicalVector x){
-  IntegerVector v = seq(0,x.size()-1);
+Rcpp::IntegerVector rcpp_which(Rcpp::LogicalVector x){
+  Rcpp::IntegerVector v = seq(0,x.size()-1);
   return v[x];
 }
 
-bool AnyCommonElementVec2(IntegerVector vec1, IntegerVector vec2) {
+bool AnyCommonElementVec2(Rcpp::IntegerVector vec1,
+                          Rcpp::IntegerVector vec2) {
   for (int i = 0; i < vec1.size(); ++i) {
     if (vec1[i] == vec2[i]) {
       return true;
@@ -17,9 +16,10 @@ bool AnyCommonElementVec2(IntegerVector vec1, IntegerVector vec2) {
   return false;
 }
 
-bool AnyCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+bool AnyCommonElementVecMat(Rcpp::IntegerVector vec1,
+                            Rcpp::IntegerMatrix mat1) {
   for (int i = 0; i < mat1.nrow(); ++i) {
-    IntegerVector vec2 = mat1(i,_);
+    Rcpp::IntegerVector vec2 = mat1(i,_);
     if (AnyCommonElementVec2(vec1,vec2)) {
       return true;
     }
@@ -27,7 +27,8 @@ bool AnyCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
   return false;
 }
 
-bool AllCommonElementVec2(IntegerVector vec1, IntegerVector vec2) {
+bool AllCommonElementVec2(Rcpp::IntegerVector vec1,
+                          Rcpp::IntegerVector vec2) {
   for (int i = 0; i < vec1.size(); ++i) {
     if (vec1[i] != vec2[i]) {
       return false;
@@ -36,9 +37,10 @@ bool AllCommonElementVec2(IntegerVector vec1, IntegerVector vec2) {
   return true;
 }
 
-bool AllCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+bool AllCommonElementVecMat(Rcpp::IntegerVector vec1,
+                            Rcpp::IntegerMatrix mat1) {
   for (int i = 0; i < mat1.nrow(); ++i) {
-    IntegerVector vec2 = mat1(i,_);
+    Rcpp::IntegerVector vec2 = mat1(i,_);
     if (!AllCommonElementVec2(vec1,vec2)) {
       return false;
     }
@@ -46,9 +48,10 @@ bool AllCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
   return true;
 }
 
-bool AnyRowCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+bool AnyRowCommonElementVecMat(Rcpp::IntegerVector vec1,
+                               Rcpp::IntegerMatrix mat1) {
   for (int i = 0; i < mat1.nrow(); ++i) {
-    IntegerVector vec2 = mat1(i,_);
+    Rcpp::IntegerVector vec2 = mat1(i,_);
     if (AllCommonElementVec2(vec1,vec2)) {
       return true;
     }
@@ -56,9 +59,10 @@ bool AnyRowCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
   return false;
 }
 
-bool AnyRowColCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
+bool AnyRowColCommonElementVecMat(Rcpp::IntegerVector vec1,
+                                  Rcpp::IntegerMatrix mat1) {
   for (int i = 0; i < mat1.nrow(); ++i) {
-    IntegerVector vec2 = mat1(i,_);
+    Rcpp::IntegerVector vec2 = mat1(i,_);
     if (AnyCommonElementVec2(vec1,vec2)) {
       return true;
     }
@@ -66,8 +70,9 @@ bool AnyRowColCommonElementVecMat(IntegerVector vec1, IntegerMatrix mat1) {
   return false;
 }
 
-IntegerMatrix slice_matrix_rows(IntegerMatrix mat, IntegerVector rows) {
-  IntegerMatrix new_mat(rows.size(), mat.ncol());
+Rcpp::IntegerMatrix slice_matrix_rows(Rcpp::IntegerMatrix mat,
+                                      Rcpp::IntegerVector rows) {
+  Rcpp::IntegerMatrix new_mat(rows.size(), mat.ncol());
   for (int i = 0; i < rows.size(); ++i) {
     for (int j = 0; j < mat.ncol(); ++j) {
       new_mat(i, j) = mat(rows[i], j);
@@ -76,8 +81,9 @@ IntegerMatrix slice_matrix_rows(IntegerMatrix mat, IntegerVector rows) {
   return new_mat;
 }
 
-IntegerMatrix slice_matrix_cols(IntegerMatrix mat, IntegerVector cols) {
-  IntegerMatrix new_mat(mat.nrow(), cols.size());
+Rcpp::IntegerMatrix slice_matrix_cols(Rcpp::IntegerMatrix mat,
+                                      Rcpp::IntegerVector cols) {
+  Rcpp::IntegerMatrix new_mat(mat.nrow(), cols.size());
   for (int i = 0; i < cols.size(); ++i) {
     for (int j = 0; j < mat.nrow(); ++j) {
       new_mat(j, i) = mat(j, cols[i]);
@@ -86,15 +92,15 @@ IntegerMatrix slice_matrix_cols(IntegerMatrix mat, IntegerVector cols) {
   return new_mat;
 }
 
-NumericVector rcpp_log2(NumericVector vec) {
-  NumericVector res(vec.size());
+Rcpp::NumericVector rcpp_log2(Rcpp::NumericVector vec) {
+  Rcpp::NumericVector res(vec.size());
   for (int i = 0; i < vec.size(); ++i) {
     res[i] = std::log2(vec[i]);
   }
   return res;
 }
 
-bool rcpp_alleuqal(IntegerVector xvec, int x){
+bool rcpp_alleuqal(Rcpp::IntegerVector xvec, int x){
   for (int i = 0; i < xvec.size(); ++i) {
     bool xi = xvec[i] == x;
     if (!xi) {
@@ -104,20 +110,19 @@ bool rcpp_alleuqal(IntegerVector xvec, int x){
   return true;
 }
 
-// [[Rcpp::export]]
-
-List SRS_PD(IntegerVector yobs,
-            IntegerMatrix xobs,
-            IntegerMatrix wt){
-  NumericVector res(xobs.nrow());
+// [[Rcpp::export(rng = false)]]
+Rcpp::List SRS_PD(Rcpp::IntegerVector yobs,
+                  Rcpp::IntegerMatrix xobs,
+                  Rcpp::IntegerMatrix wt){
+  Rcpp::NumericVector res(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i){
-    IntegerVector wti = wt(i,_);
+    Rcpp::IntegerVector wti = wt(i,_);
     wti = rcpp_which(wti != 0);
     double wti_size = wti.size();
-    IntegerVector apprx(wti.size());
+    Rcpp::IntegerVector apprx(wti.size());
     for (int n = 0; n < wti.size(); ++n){
-      IntegerVector vec1 = xobs(wti[n],_);
-      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      Rcpp::IntegerVector vec1 = xobs(wti[n],_);
+      Rcpp::IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
       if (AnyRowCommonElementVecMat(vec1,mat1) and (yobs[i] == yobs[n])){
         apprx[n] = 1;
       }
@@ -132,27 +137,26 @@ List SRS_PD(IntegerVector yobs,
   }
   // Rcout << "res: " << res << "\n";
   double pd = Rcpp::sum(res) / xobs.nrow();
-  NumericVector pdN = res / Rcpp::sum(res);
+  Rcpp::NumericVector pdN = res / Rcpp::sum(res);
   double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
-  List out = List::create(Named("PD",pd),
-                          Named("SE_PD",sepd));
+  Rcpp::List out = Rcpp::List::create(Rcpp::Named("PD",pd),
+                                      Rcpp::Named("SE_PD",sepd));
   return out;
 }
 
-// [[Rcpp::export]]
-
-List SRS_MULTIPD(IntegerVector yobs,
-                 IntegerMatrix xobs,
-                 IntegerMatrix wt){
-  NumericVector res(xobs.nrow());
+// [[Rcpp::export(rng = false)]]
+Rcpp::List SRS_MULTIPD(Rcpp::IntegerVector yobs,
+                       Rcpp::IntegerMatrix xobs,
+                       Rcpp::IntegerMatrix wt){
+  Rcpp::NumericVector res(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i){
-    IntegerVector wti = wt(i,_);
+    Rcpp::IntegerVector wti = wt(i,_);
     wti = rcpp_which(wti != 0);
     double wti_size = wti.size();
-    IntegerVector apprx(wti.size());
+    Rcpp::IntegerVector apprx(wti.size());
     for (int n = 0; n < wti.size(); ++n){
-      IntegerVector vec1 = xobs(wti[n],_);
-      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      Rcpp::IntegerVector vec1 = xobs(wti[n],_);
+      Rcpp::IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
       if (AnyRowColCommonElementVecMat(vec1,mat1) and (yobs[i] == yobs[n])){
         apprx[n] = 1;
       }
@@ -166,27 +170,26 @@ List SRS_MULTIPD(IntegerVector yobs,
   }
   // Rcout << "res: " << res << "\n";
   double pd = Rcpp::sum(res) / xobs.nrow();
-  NumericVector pdN = res / Rcpp::sum(res);
+  Rcpp::NumericVector pdN = res / Rcpp::sum(res);
   double sepd = -1 * Rcpp::sum(pdN * rcpp_log2(pdN));
-  List out = List::create(Named("PD",pd),
-                          Named("SE_PD",sepd));
+  Rcpp::List out = Rcpp::List::create(Rcpp::Named("PD",pd),
+                                      Rcpp::Named("SE_PD",sepd));
   return out;
 }
 
-// [[Rcpp::export]]
-
-NumericVector SRS_PDTEST(IntegerVector yobs,
-                         IntegerMatrix xobs,
-                         IntegerMatrix wt){
-  NumericVector res(xobs.nrow());
+// [[Rcpp::export(rng = false)]]
+Rcpp::NumericVector SRS_PDTEST(Rcpp::IntegerVector yobs,
+                               Rcpp::IntegerMatrix xobs,
+                               Rcpp::IntegerMatrix wt){
+  Rcpp::NumericVector res(xobs.nrow());
   for (int i = 0; i < xobs.nrow(); ++i){
-    IntegerVector wti = wt(i,_);
+    Rcpp::IntegerVector wti = wt(i,_);
     wti = rcpp_which(wti != 0);
     double wti_size = wti.size();
-    IntegerVector apprx(wti.size());
+    Rcpp::IntegerVector apprx(wti.size());
     for (int n = 0; n < wti.size(); ++n){
-      IntegerVector vec1 = xobs(wti[n],_);
-      IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
+      Rcpp::IntegerVector vec1 = xobs(wti[n],_);
+      Rcpp::IntegerMatrix mat1 = slice_matrix_rows(xobs,wti[wti!=wti[n]]);
       if (AnyRowCommonElementVecMat(vec1,mat1) and (yobs[i] == yobs[n])){
         apprx[n] = 1;
       }
