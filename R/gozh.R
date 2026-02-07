@@ -204,15 +204,20 @@ gozh_detector = \(formula, data, cores = 1,
             }
             res = gdverse::gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
             qv = res[,2,drop = TRUE]
-            names(qv) = res[,1,drop = TRUE]
+            pv = res[,2,drop = TRUE]
+            names(qv) = names(pv) = res[,1,drop = TRUE]
             qv1 = qv[variable1]
             qv2 = qv[variable2]
+            pv1 = pv[variable1]
+            pv2 = pv[variable2]
             res = tibble::tibble(
               "Variable1 Q-statistics" = qv1,"Variable2 Q-statistics" = qv2,
               "Variable1 and Variable2 interact Q-statistics" = qv12[,1,drop = TRUE],
               "variable1" = variable1, "variable2" = variable2,
               "Interaction" = purrr::pmap_chr(list(qv1 = qv1,qv2 = qv2,qv12 = qv12[,1,drop = TRUE]),
-                                              interact_type)) %>%
+                                              interact_type),
+              "Variable1 P-value" = pv1, "Variable2 P-value" = pv2,
+              "Variable1 and Variable2 interact P-value" = qv12[,2,drop = TRUE]) %>%
                                dplyr::select(variable1,variable2,Interaction,
                                              dplyr::everything())
             res = list("interaction" = res)
