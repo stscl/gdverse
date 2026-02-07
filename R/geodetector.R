@@ -87,7 +87,7 @@ factor_detector = \(y,x,confintv = FALSE,alpha = 0.95){
 #'                      x2 = c(rep('a',2),rep('b',2),rep('c',3)))
 #'
 interaction_detector = \(y,x1,x2){
-  x12 = paste0(x1,x2,'_')
+  x12 = paste0(x1,'_',x2)
   g1 = gdverse::factor_detector(y,x1)
   g2 = gdverse::factor_detector(y,x2)
   g12 = gdverse::factor_detector(y,x12)
