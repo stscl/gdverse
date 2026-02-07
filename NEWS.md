@@ -1,5 +1,7 @@
 # gdverse 1.6
 
+* Fix stratification collision in interaction detection (#101).
+
 * Loading gdverse no longer initializes the RNG state (#99).
 
 * Update package startup message and citation guidance (#97).
