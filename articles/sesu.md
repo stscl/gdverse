@@ -26,7 +26,7 @@ fvcpath = "https://github.com/SpatLyu/rdevdata/raw/main/FVC.tif"
 fvc = terra::rast(paste0("/vsicurl/",fvcpath))
 fvc
 ## class       : SpatRaster 
-## dimensions  : 418, 568, 13  (nrow, ncol, nlyr)
+## size        : 418, 568, 13  (nrow, ncol, nlyr)
 ## resolution  : 1000, 1000  (x, y)
 ## extent      : -92742.16, 475257.8, 3591385, 4009385  (xmin, xmax, ymin, ymax)
 ## coord. ref. : Asia_North_Albers_Equal_Area_Conic 

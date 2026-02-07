@@ -10,8 +10,8 @@ data("ndvi")
 
 ``` r
 names(ndvi)
-## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"   
-## [5] "Precipitation" "GDP"           "Popdensity"
+## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"
+## [6] "GDP"           "Popdensity"
 ```
 
 ### Run RGD
@@ -28,9 +28,9 @@ ndvi_rgd
 ## | Precipitation |  0.8883955  | 4.77e-10 |
 ## |  Climatezone  |  0.8218335  | 7.34e-10 |
 ## |  Tempchange   |  0.3722571  | 3.22e-10 |
-## |  Popdensity   |  0.2193538  | 9.31e-10 |
+## |  Popdensity   |  0.2205321  | 9.65e-10 |
 ## |    Mining     |  0.1411154  | 6.73e-10 |
-## |      GDP      |  0.1406153  | 4.86e-10 |
+## |      GDP      |  0.1164814  | 1.08e-10 |
 plot(ndvi_rgd)
 ```
 
