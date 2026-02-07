@@ -1,5 +1,7 @@
 # gdverse 1.6
 
+* Update package startup message and citation guidance (#97).
+
 * Report significance of interaction detection results in geographical detector (#95).
 
 * Improve robustness of non-centrality parameter estimation for q-statistic confidence intervals (#93).
