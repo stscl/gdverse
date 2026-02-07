@@ -1,6 +1,8 @@
 # gdverse 1.6
 
-- Improve robustness of non-centrality parameter estimation for q-statistic confidence intervals (#93).
+* Report significance of interaction detection results in geographical detector (#95).
+
+* Improve robustness of non-centrality parameter estimation for q-statistic confidence intervals (#93).
 
 # gdverse 1.5.1
 
