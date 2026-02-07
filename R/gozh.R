@@ -211,7 +211,7 @@ gozh_detector = \(formula, data, cores = 1,
             pv1 = pv[variable1]
             pv2 = pv[variable2]
             res = tibble::tibble(
-              "Variable1 Q-statistics" = qv1,"Variable2 Q-statistics" = qv2,
+              "Variable1 Q-statistics" = qv1, "Variable2 Q-statistics" = qv2,
               "Variable1 and Variable2 interact Q-statistics" = qv12[,1,drop = TRUE],
               "variable1" = variable1, "variable2" = variable2,
               "Interaction" = purrr::pmap_chr(list(qv1 = qv1,qv2 = qv2,qv12 = qv12[,1,drop = TRUE]),
