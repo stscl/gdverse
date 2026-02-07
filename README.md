@@ -151,6 +151,7 @@ A BibTeX entry for LaTeX users is:
     title={{gdverse}: An {R} Package for Spatial Stratified Heterogeneity Family}, 
     volume={29}, 
     ISSN={1467-9671},
+    DOI={10.1111/tgis.70032},
     number={2}, 
     journal={Transactions in GIS}, 
     publisher={Wiley}, 
