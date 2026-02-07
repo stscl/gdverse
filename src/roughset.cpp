@@ -1,8 +1,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// [[Rcpp::plugins(cpp11)]]
-
 IntegerVector rcpp_which(LogicalVector x){
   IntegerVector v = seq(0,x.size()-1);
   return v[x];
@@ -104,8 +102,7 @@ bool rcpp_alleuqal(IntegerVector xvec, int x){
   return true;
 }
 
-// [[Rcpp::export]]
-
+// [[Rcpp::export(rng = false)]]
 List SRS_PD(IntegerVector yobs,
             IntegerMatrix xobs,
             IntegerMatrix wt){
@@ -139,8 +136,7 @@ List SRS_PD(IntegerVector yobs,
   return out;
 }
 
-// [[Rcpp::export]]
-
+// [[Rcpp::export(rng = false)]]
 List SRS_MULTIPD(IntegerVector yobs,
                  IntegerMatrix xobs,
                  IntegerMatrix wt){
@@ -173,8 +169,7 @@ List SRS_MULTIPD(IntegerVector yobs,
   return out;
 }
 
-// [[Rcpp::export]]
-
+// [[Rcpp::export(rng = false)]]
 NumericVector SRS_PDTEST(IntegerVector yobs,
                          IntegerMatrix xobs,
                          IntegerMatrix wt){
