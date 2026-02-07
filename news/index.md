@@ -2,6 +2,9 @@
 
 ## gdverse 1.6
 
+- Loading gdverse no longer initializes the RNG state
+  ([\#99](https://github.com/stscl/gdverse/issues/99)).
+
 - Update package startup message and citation guidance
   ([\#97](https://github.com/stscl/gdverse/issues/97)).
 
