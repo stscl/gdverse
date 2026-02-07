@@ -204,7 +204,7 @@ gozh_detector = \(formula, data, cores = 1,
             }
             res = gdverse::gd(paste0(yname,' ~ .'),data = newdata,type = "factor")[[1]]
             qv = res[,2,drop = TRUE]
-            pv = res[,2,drop = TRUE]
+            pv = res[,3,drop = TRUE]
             names(qv) = names(pv) = res[,1,drop = TRUE]
             qv1 = qv[variable1]
             qv2 = qv[variable2]
