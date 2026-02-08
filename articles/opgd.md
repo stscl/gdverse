@@ -31,7 +31,7 @@ g = gd_optunidisc(NDVIchange ~ .,
                   data = dplyr::select(ndvi,-c(Climatezone,Mining)),
                   discnum = 3:15, cores = 6)
 tictoc::toc()
-## 4.05 sec elapsed
+## 3.31 sec elapsed
 ```
 
 ``` r
