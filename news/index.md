@@ -2,6 +2,8 @@
 
 ## gdverse 1.6
 
+CRAN release: 2026-02-09
+
 - Fix stratification collision in interaction detection
   ([\#101](https://github.com/stscl/gdverse/issues/101)).
 
