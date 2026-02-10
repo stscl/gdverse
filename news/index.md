@@ -1,5 +1,7 @@
 # Changelog
 
+## gdverse 1.7
+
 ## gdverse 1.6
 
 CRAN release: 2026-02-09
