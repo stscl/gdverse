@@ -1,3 +1,5 @@
+# gdverse 1.7
+
 # gdverse 1.6
 
 * Fix stratification collision in interaction detection (#101).
