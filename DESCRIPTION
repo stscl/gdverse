@@ -1,6 +1,6 @@
 Package: gdverse
 Title: Analysis of Spatial Stratified Heterogeneity
-Version: 1.6
+Version: 1.7
 Authors@R: c(
       person(given = "Wenbo", family = "Lv",
              email = "lyu.geosocial@gmail.com", 
