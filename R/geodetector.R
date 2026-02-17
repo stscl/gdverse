@@ -1,5 +1,4 @@
 #' @title factor detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' The factor detector q-statistic measures the spatial stratified heterogeneity of a
 #' variable Y, or the determinant power of a covariate X of Y.
@@ -59,7 +58,6 @@ factor_detector = \(y,x,confintv = FALSE,alpha = 0.95){
 }
 
 #' @title interaction detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Identify the interaction between different risk factors, that is, assess whether factors X1 and X2 together
 #' increase or decrease the explanatory power of the dependent variable Y, or whether the effects of these factors
@@ -116,7 +114,6 @@ interaction_detector = \(y,x1,x2){
 }
 
 #' @title risk detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Determine whether there is a significant difference between the attribute means of two sub regions.
 #'
@@ -165,7 +162,6 @@ risk_detector = \(y,x,alpha = 0.95){
 }
 
 #' @title ecological detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Compare the effects of two factors \eqn{X_1} and \eqn{X_2} on the spatial distribution of the attribute \eqn{Y}.
 #'
@@ -201,7 +197,6 @@ ecological_detector = \(y,x1,x2,alpha = 0.95){
 }
 
 #' @title geographical detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @note
 #' Note that only one type of geodetector is supported at a time in `geodetector()`.
 #'
@@ -309,7 +304,6 @@ geodetector = \(formula,data,type = "factor",alpha = 0.95){
 }
 
 #' @title print factor detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for factor detector in `geodetector()`.
 #'
@@ -326,7 +320,6 @@ print.factor_detector = \(x, ...) {
 }
 
 #' @title print interaction detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for interaction detector in `geodetector()`.
 #'
@@ -349,7 +342,6 @@ print.interaction_detector = \(x, ...) {
 }
 
 #' @title print risk detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for risk detector in `geodetector()`.
 #'
@@ -383,7 +375,6 @@ print.risk_detector = \(x, ...) {
 }
 
 #' @title print ecological detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for ecological detector in `geodetector()`.
 #'
@@ -412,7 +403,6 @@ print.ecological_detector = \(x, ...) {
 }
 
 #' @title plot factor detector result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for factor detector in `geodetector()`.
 #'
@@ -468,7 +458,6 @@ plot.factor_detector = \(x, slicenum = 2, alpha = 0.95,
 }
 
 #' @title plot interaction detector result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for interaction detector in `geodetector()`.
 #'
@@ -515,7 +504,6 @@ plot.interaction_detector = \(x,alpha = 1,...){
 }
 
 #' @title plot risk detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for risk detector in `geodetector()`.
 #'
@@ -560,7 +548,6 @@ plot.risk_detector = \(x, ...) {
 }
 
 #' @title plot ecological detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for ecological detector in `geodetector()`.
 #'

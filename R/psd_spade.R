@@ -1,5 +1,4 @@
 #' @title power of spatial determinant(PSD)
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for calculate power of spatial determinant `q_s`
 #' @details
@@ -46,7 +45,6 @@ psd_spade = \(y,x,wt){
 }
 
 #' @title compensated power of spatial determinant(CPSD)
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for calculate compensated power of spatial determinant `Q_s`.
 #' @details
@@ -79,7 +77,6 @@ cpsd_spade = \(yobs,xobs,xdisc,wt){
 }
 
 #' @title power of spatial and multilevel discretization determinant(PSMD)
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for calculate power of spatial and multilevel discretization determinant `PSMDQ_s`.
 #' @details
@@ -168,7 +165,6 @@ psmd_spade = \(yobs, xobs, wt, discnum = 3:8,
 }
 
 #' @title measure information loss by information entropy
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for measure information loss by shannon information entropy.
 #' @details

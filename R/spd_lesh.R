@@ -1,5 +1,4 @@
 #' @title shap power of determinants
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for calculate shap power of determinants \eqn{SPD}.
 #' @details

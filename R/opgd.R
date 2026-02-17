@@ -1,5 +1,4 @@
 #' @title optimal parameters-based geographical detector(OPGD) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
@@ -78,7 +77,6 @@ opgd = \(formula, data, discvar = NULL, discnum = 3:8,
 }
 
 #' @title print OPGD result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for OPGD model from `opgd()`.
 #'
@@ -101,7 +99,6 @@ print.opgd_result = \(x, ...) {
 }
 
 #' @title plot OPGD result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for OPGD model result in `opgd()`.
 #'

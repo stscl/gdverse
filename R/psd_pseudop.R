@@ -1,5 +1,4 @@
 #' @title calculate power of spatial determinant(PSD) and the corresponding pseudo-p value
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for calculate power of spatial determinant \eqn{q_s}.
 #' @details
@@ -66,7 +65,6 @@ psd_pseudop = \(y,x,wt,cores = 1,seed = 123456789,permutations = 0){
 }
 
 #' @title power of spatial and multilevel discretization determinant(PSMD) and the corresponding pseudo-p value
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for calculate power of spatial and multilevel discretization determinant and the corresponding pseudo-p value.
 #' @details

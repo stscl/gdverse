@@ -1,5 +1,4 @@
 #' @title locally explained stratified heterogeneity(LESH) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #'
 #' @note
 #' The LESH model requires at least \eqn{2^n-1} calculations when has \eqn{n} explanatory variables.
@@ -50,7 +49,6 @@ lesh = \(formula,data,cores = 1,...){
 }
 
 #' @title print LESH model interaction result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for LESH model interaction result in `lesh()`.
 #'
@@ -72,7 +70,6 @@ print.lesh_result = \(x, ...) {
 }
 
 #' @title plot LESH model result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for LESH model interaction result in `lesh()`.
 #' @note

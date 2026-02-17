@@ -1,5 +1,4 @@
 #' @title spatial rough set-based geographical detector(SRSGD) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
 #' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
@@ -52,7 +51,6 @@ srsgd = \(formula,data,wt = NULL,type = "factor",alpha = 0.95){
 }
 
 #' @title print SRSGD result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for SRSGD model from `srsgd()`.
 #'
@@ -73,7 +71,6 @@ print.srsgd_result = \(x, ...) {
 }
 
 #' @title plot SRSGD result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for SRSGD model result in `srsgd()`.
 #'

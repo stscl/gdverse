@@ -1,5 +1,4 @@
 #' @title optimal univariate discretization based on geodetector q-statistic
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #'
 #' @param formula A formula.
 #' @param data A `data.frame`, `tibble` or `sf` object of observation data.

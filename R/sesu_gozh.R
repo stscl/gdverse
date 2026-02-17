@@ -1,5 +1,4 @@
 #' @title comparison of size effects of spatial units based on GOZH
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
@@ -107,7 +106,6 @@ sesu_gozh = \(formula,datalist,su,cores = 1,strategy = 2L,
 }
 
 #' @title print gozh sesu
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for gozh sesu from `sesu_gozh()`.
 #'
@@ -130,7 +128,6 @@ print.sesu_gozh = \(x,...){
 }
 
 #' @title plot gozh sesu
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for gozh sesu in `sesu_gozh()`.
 #'

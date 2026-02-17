@@ -1,5 +1,4 @@
 #' @title interactive detector for spatial associations(IDSA) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,
@@ -138,7 +137,6 @@ idsa = \(formula,data,wt = NULL,discnum = 3:8,discmethod = "quantile",
 }
 
 #' @title print IDSA result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for IDSA model from `idsa()`.
 #'
@@ -163,7 +161,6 @@ print.idsa_result = \(x, ...) {
 }
 
 #' @title plot IDSA risk result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for IDSA risk result in `idsa()`.
 #'
