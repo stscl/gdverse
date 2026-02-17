@@ -35,6 +35,3 @@ Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 International Journal of Geographical Information Science, 35:8, 1676-1701,
 DOI:10.1080/13658816.2021.1882680
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

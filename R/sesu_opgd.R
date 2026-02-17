@@ -1,5 +1,4 @@
 #' @title comparison of size effects of spatial units based on OPGD
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Song, Y., Wang, J., Ge, Y. & Xu, C. (2020) An optimal parameters-based geographical detector
 #' model enhances geographic characteristics of explanatory variables for spatial heterogeneity
@@ -77,7 +76,6 @@ sesu_opgd = \(formula,datalist,su,discvar,discnum = 3:8,
 }
 
 #' @title print opgd sesu
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for opgd sesu from `sesu_opgd()`.
 #'
@@ -100,7 +98,6 @@ print.sesu_opgd = \(x,...){
 }
 
 #' @title plot opgd sesu
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for opgd sesu in `sesu_opgd()`.
 #'

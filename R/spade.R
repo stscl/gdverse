@@ -1,5 +1,4 @@
 #' @title spatial association detector (SPADE) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #'
 #' @references
 #' Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
@@ -93,7 +92,6 @@ spade = \(formula, data, wt = NULL, discvar = NULL, discnum = 3:8,
 }
 
 #' @title print SPADE power of spatial and multilevel discretization determinant
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for SPADE power of spatial and multilevel discretization
 #' determinant from `spade()`.
@@ -110,7 +108,6 @@ print.spade_result = \(x, ...) {
 }
 
 #' @title plot SPADE power of spatial and multilevel discretization determinant
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for SPADE power of spatial and multilevel discretization
 #' determinant from `spade()`.

@@ -46,6 +46,3 @@ Li, Y., Luo, P., Song, Y., Zhang, L., Qu, Y., & Hou, Z. (2023). A locally explai
 examining wetland disparity. International Journal of Digital Earth, 16(2), 4533–4552.
 https://doi.org/10.1080/17538947.2023.2271883
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

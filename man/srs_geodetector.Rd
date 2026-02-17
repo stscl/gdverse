@@ -41,6 +41,3 @@ srs_geodetector(d ~ a1 + a2 + a3, data = srs_table,
                 wt = srs_wt, type = 'ecological')
 
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

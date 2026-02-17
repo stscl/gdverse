@@ -17,6 +17,3 @@ Formatted string output
 \description{
 S3 method to format output for opgd sesu from \code{sesu_opgd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

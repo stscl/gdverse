@@ -24,6 +24,3 @@ A ggplot2 layer
 \description{
 S3 method to plot output for RGD model result in \code{rgd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

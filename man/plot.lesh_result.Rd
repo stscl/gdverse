@@ -45,6 +45,3 @@ S3 method to plot output for LESH model interaction result in \code{lesh()}.
 When both \code{scatter} and \code{pie} are set to \code{TRUE} in RStudio, enlarge the drawing frame
 for normal display.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

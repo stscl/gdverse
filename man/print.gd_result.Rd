@@ -17,6 +17,3 @@ Formatted string output
 \description{
 S3 method to format output for GD model from \code{gd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

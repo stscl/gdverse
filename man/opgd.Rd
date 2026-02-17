@@ -67,6 +67,3 @@ model enhances geographic characteristics of explanatory variables for spatial h
 analysis: Cases with different types of spatial data, GIScience & Remote Sensing, 57(5), 593-610.
 doi: 10.1080/15481603.2020.1760434.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

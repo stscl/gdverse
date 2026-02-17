@@ -1,5 +1,4 @@
 #' @title geographically optimal zones-based heterogeneity(GOZH) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Luo, P., Song, Y., Huang, X., Ma, H., Liu, J., Yao, Y., & Meng, L. (2022). Identifying determinants of
 #' spatio-temporal disparities in soil moisture of the Northern Hemisphere using a geographically optimal
@@ -48,7 +47,6 @@ gozh = \(formula, data, cores = 1,
 }
 
 #' @title print GOZH result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for GOZH model from `gozh()`.
 #'
@@ -70,7 +68,6 @@ print.gozh_result = \(x, ...) {
 }
 
 #' @title plot GOZH result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for GOZH model result in `gozh()`.
 #'
@@ -101,7 +98,6 @@ plot.gozh_result = \(x, ...) {
 
 
 #' @title geographically optimal zones-based heterogeneity detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for geographically optimal zones-based heterogeneity detector.
 #' @references

@@ -25,6 +25,3 @@ A ggplot2 layer.
 S3 method to plot output for SPADE power of spatial and multilevel discretization
 determinant from \code{spade()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

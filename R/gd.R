@@ -1,5 +1,4 @@
 #' @title native geographical detector(GD) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Jin‐Feng Wang, Xin‐Hu Li, George Christakos, Yi‐Lan Liao, Tin Zhang, XueGu & Xiao‐Ying Zheng (2010)
 #' Geographical Detectors‐Based Health Risk Assessment and its Application in the Neural Tube Defects Study
@@ -45,7 +44,6 @@ gd = \(formula, data, type = "factor", alpha = 0.95){
 }
 
 #' @title print GD result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for GD model from `gd()`.
 #'
@@ -65,7 +63,6 @@ print.gd_result = \(x, ...) {
 }
 
 #' @title plot GD result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for GD model result in `gd()`.
 #'

@@ -41,6 +41,3 @@ Geographical Detectors‐Based Health Risk Assessment and its Application in the
 of the Heshun Region, China, International Journal of Geographical Information Science, 24:1, 107-127,
 DOI: 10.1080/13658810802443457
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

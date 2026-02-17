@@ -36,6 +36,3 @@ tryCatch({
 }, error = \(e) message("Skipping Python-dependent example: ", e$message))
 }
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

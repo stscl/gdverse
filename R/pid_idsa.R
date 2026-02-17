@@ -1,5 +1,4 @@
 #' @title optimal spatial data discretization based on SPADE q-statistics
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' Function for determining the optimal spatial data discretization based on SPADE q-statistics.
 #' @references
@@ -134,7 +133,6 @@ cpsd_disc =  \(formula, data, wt, discnum = 3:8, discmethod = "quantile", strate
 }
 
 #' PSD of an interaction of explanatory variables (PSD-IEV)
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Yongze Song & Peng Wu (2021) An interactive detector for spatial associations,
 #' International Journal of Geographical Information Science, 35:8, 1676-1701,

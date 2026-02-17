@@ -17,6 +17,3 @@ Formatted string output
 \description{
 S3 method to format output for RID model from \code{rid()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

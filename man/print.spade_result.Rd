@@ -18,6 +18,3 @@ Formatted string output
 S3 method to format output for SPADE power of spatial and multilevel discretization
 determinant from \code{spade()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

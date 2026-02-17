@@ -1,5 +1,4 @@
 #' @title robust interaction detector(RID) model
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Zhang, Z., Song, Y., Karunaratne, L., & Wu, P. (2024). Robust interaction detector:
 #' A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.
@@ -51,7 +50,6 @@ rid = \(formula, data, discvar = NULL, discnum = 3:8, minsize = 1,
 }
 
 #' @title print RID result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for RID model from `rid()`.
 #'
@@ -68,7 +66,6 @@ print.rid_result = \(x, ...) {
 }
 
 #' @title plot RID result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for RID model from `rid()`.
 #'

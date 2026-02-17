@@ -2,7 +2,6 @@
 #' @description
 #' Function for determining optimal spatial data analysis scale based on locally
 #' estimated scatter plot smoothing (LOESS) model.
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #'
 #' @param qvec A numeric vector of q statistics.
 #' @param spscalevec A numeric vector of spatial scales corresponding to `qvec`.

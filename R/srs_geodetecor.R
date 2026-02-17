@@ -1,5 +1,4 @@
 #' @title spatial rough set-based geographical detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #'
 #' @param formula A formula of spatial rough set-based geographical detector model.
 #' @param data A data.frame, tibble or sf object of observation data.
@@ -94,7 +93,6 @@ srs_geodetector = \(formula, data, wt = NULL, type = "factor", alpha = 0.95){
 }
 
 #' @title spatial rough set-based factor detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
 #' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
@@ -126,7 +124,6 @@ srs_factor_detector = \(y,x,wt){
 }
 
 #' @title spatial rough set-based interaction detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
 #' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
@@ -189,7 +186,6 @@ srs_interaction_detector = \(y,x1,x2,wt){
 }
 
 #' @title spatial rough set-based ecological detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @references
 #' Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
 #' geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
@@ -238,7 +234,6 @@ srs_ecological_detector = \(y,x1,x2,wt,alpha = 0.95){
 }
 
 #' @title print spatial rough set-based factor detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for spatial rough set-based factor detector in `srsgd()`.
 #'
@@ -256,7 +251,6 @@ print.srs_factor_detector = \(x, ...) {
 }
 
 #' @title print spatial rough set-based interaction detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for spatial rough set-based interaction detector in `srsgd()`.
 #'
@@ -274,7 +268,6 @@ print.srs_interaction_detector = \(x, ...) {
 }
 
 #' @title print spatial rough set-based ecological detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to format output for spatial rough set-based ecological detector in `srsgd()`.
 #'
@@ -292,7 +285,6 @@ print.srs_ecological_detector = \(x, ...) {
 }
 
 #' @title plot spatial rough set-based factor detector result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for spatial rough set-based factor detector in `srsgd()`.
 #'
@@ -332,7 +324,6 @@ plot.srs_factor_detector = \(x, slicenum = 2, ...) {
 }
 
 #' @title plot spatial rough set-based interaction detector result
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for spatial rough set-based interaction detector in `srsgd()`.
 #'
@@ -353,7 +344,6 @@ plot.srs_interaction_detector = \(x,alpha = 1,...){
 }
 
 #' @title plot spatial rough set-based ecological detector
-#' @author Wenbo Lv \email{lyu.geosocial@gmail.com}
 #' @description
 #' S3 method to plot output for spatial rough set-based ecological detector in `srsgd()`.
 #'

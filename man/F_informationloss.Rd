@@ -25,6 +25,3 @@ The information loss measured by information entropy formula is
 F_informationloss(1:7,c('x',rep('y',3),rep('z',3)))
 
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

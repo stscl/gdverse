@@ -17,6 +17,3 @@ A ggplot2 layer
 \description{
 S3 method to plot output for spatial rough set-based ecological detector in \code{srsgd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

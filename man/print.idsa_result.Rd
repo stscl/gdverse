@@ -17,6 +17,3 @@ Formatted string output
 \description{
 S3 method to format output for IDSA model from \code{idsa()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}
