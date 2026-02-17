@@ -56,6 +56,3 @@ geodetector(y ~ x1 + x2,
    type = 'ecological',alpha = 0.95)
 
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

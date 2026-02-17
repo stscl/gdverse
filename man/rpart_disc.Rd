@@ -31,6 +31,3 @@ zones-based heterogeneity model. ISPRS Journal of Photogrammetry and Remote Sens
 Publication of the International Society for Photogrammetry and Remote Sensing (ISPRS), 185, 111–128.
 https://doi.org/10.1016/j.isprsjprs.2022.01.009
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

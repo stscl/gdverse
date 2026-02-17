@@ -36,6 +36,3 @@ interaction_detector(y = 1:7,
                      x2 = c(rep('a',2),rep('b',2),rep('c',3)))
 
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

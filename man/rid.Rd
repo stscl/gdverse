@@ -63,6 +63,3 @@ Zhang, Z., Song, Y., Karunaratne, L., & Wu, P. (2024). Robust interaction detect
 A case of road life expectancy analysis. Spatial Statistics, 59(100814), 100814.
 https://doi.org/10.1016/j.spasta.2024.100814
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

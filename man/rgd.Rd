@@ -65,6 +65,3 @@ tryCatch({
 Zhang, Z., Song, Y.*, & Wu, P., 2022. Robust geographical detector. International Journal of Applied Earth Observation and Geoinformation. 109, 102782.
 DOI: 10.1016/j.jag.2022.102782.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

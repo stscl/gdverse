@@ -19,6 +19,3 @@ A ggplot2 layer.
 \description{
 S3 method to plot output for spatial rough set-based factor detector in \code{srsgd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

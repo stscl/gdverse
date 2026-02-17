@@ -42,6 +42,3 @@ qv5000 = factor_detector(fvc5000$fvc,
 loess_optscale(c(qv1000,qv5000),c(1000,5000))
 }
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

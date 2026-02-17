@@ -33,6 +33,3 @@ variable Y, or the determinant power of a covariate X of Y.
 factor_detector(y = 1:7,x = c('x',rep('y',3),rep('z',3)))
 
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

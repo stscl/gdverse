@@ -19,6 +19,3 @@ A ggplot2 layer
 \description{
 S3 method to plot output for RID model from \code{rid()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

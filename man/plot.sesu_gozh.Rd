@@ -17,6 +17,3 @@ A ggplot2 layer.
 \description{
 S3 method to plot output for gozh sesu in \code{sesu_gozh()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

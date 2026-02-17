@@ -56,6 +56,3 @@ psmd_spade(sim$y,sim$xa,wt)
 Xuezhi Cang & Wei Luo (2018) Spatial association detector (SPADE),International
 Journal of Geographical Information Science, 32:10, 2055-2075, DOI:  10.1080/13658816.2018.1476693
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

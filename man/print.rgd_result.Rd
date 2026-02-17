@@ -17,6 +17,3 @@ Formatted string output
 \description{
 S3 method to format output for RGD model from \code{rgd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

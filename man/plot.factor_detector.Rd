@@ -26,6 +26,3 @@ A ggplot2 layer.
 \description{
 S3 method to plot output for factor detector in \code{geodetector()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

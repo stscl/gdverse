@@ -17,6 +17,3 @@ A ggplot2 layer
 \description{
 S3 method to plot output for OPGD model result in \code{opgd()}.
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

@@ -51,6 +51,3 @@ gd_optunidisc(y ~ xa + xb + xc,
               discnum = 3:6)
 
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}

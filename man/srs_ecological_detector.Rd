@@ -39,6 +39,3 @@ Bai, H., Li, D., Ge, Y., Wang, J., & Cao, F. (2022). Spatial rough set-based
 geographical detectors for nominal target variables. Information Sciences, 586, 525–539.
 https://doi.org/10.1016/j.ins.2021.12.019
 }
-\author{
-Wenbo Lv \email{lyu.geosocial@gmail.com}
-}
