@@ -25,6 +25,12 @@ stable](https://img.shields.io/badge/lifecycle-stable-20b2aa.svg)](https://lifec
 
 ## Overview
 
+*gdverse* consolidates cutting-edge SSH methodologies into a unified
+toolkit, redefining spatial association measurement as the evolutionary
+successor to
+[geodetector](https://CRAN.R-project.org/package=geodetector) and
+[GD](https://CRAN.R-project.org/package=GD) in the R ecosystem.
+
 Current models and functions provided by **gdverse** are:
 
 | *Model* | *Function* | *Support* |
