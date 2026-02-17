@@ -102,10 +102,6 @@ Remote Sensing: Official Publication of the International Society for
 Photogrammetry and Remote Sensing (ISPRS), 185, 111–128.
 https://doi.org/10.1016/j.isprsjprs.2022.01.009
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

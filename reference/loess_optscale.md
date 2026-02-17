@@ -29,10 +29,6 @@ loess_optscale(qvec, spscalevec, increase_rate = 0.05)
 A numeric vector about optimal number of spatial scale and the critical
 increase rate of q value.
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

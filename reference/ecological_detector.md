@@ -44,10 +44,6 @@ A list.
   is there a significant difference between the two factors \\X_1\\ and
   \\X_2\\ on the spatial distribution of the attribute \\Y\\
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

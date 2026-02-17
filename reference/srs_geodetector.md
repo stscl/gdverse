@@ -50,10 +50,6 @@ A list.
 
   the result of spatial rough set-based ecological detector
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

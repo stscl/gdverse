@@ -57,10 +57,6 @@ A list.
 
   P-value of the Q-statistic for variable1 and variable2 interact
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

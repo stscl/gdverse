@@ -28,10 +28,6 @@ The information loss measured by information entropy formula is \\F =
 -\sum\limits\_{i=1}^N p\_{(i)}\log_2 p\_{(i)} -
 \left(-\sum\limits\_{h=1}^L p\_{(h)}\log_2 p\_{(h)}\right)\\
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

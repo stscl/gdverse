@@ -26,7 +26,3 @@ print(x, ...)
 ## Value
 
 Formatted string output
-
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>

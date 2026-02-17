@@ -49,10 +49,6 @@ A list.
 
   the confidence interval upper bound
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

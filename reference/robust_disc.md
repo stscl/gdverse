@@ -38,10 +38,6 @@ robust_disc(formula, data, discnum, minsize = 1, cores = 1)
 
 A `tibble`.
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

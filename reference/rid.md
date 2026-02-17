@@ -76,10 +76,6 @@ interaction detector: A case of road life expectancy analysis. Spatial
 Statistics, 59(100814), 100814.
 https://doi.org/10.1016/j.spasta.2024.100814
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

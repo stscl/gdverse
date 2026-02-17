@@ -23,7 +23,3 @@ plot(x, ...)
 ## Value
 
 A ggplot2 layer
-
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>

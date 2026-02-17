@@ -53,10 +53,6 @@ A list.
 Note that only one type of geodetector is supported at a time in
 `geodetector()`.
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

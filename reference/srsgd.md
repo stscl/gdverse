@@ -68,10 +68,6 @@ set-based geographical detectors for nominal target variables.
 Information Sciences, 586, 525–539.
 https://doi.org/10.1016/j.ins.2021.12.019
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

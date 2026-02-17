@@ -74,10 +74,6 @@ A list.
 
   optimal discretization results
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

@@ -27,10 +27,6 @@ risk_detector(y, x, alpha = 0.95)
 
 A tibble.
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

@@ -99,10 +99,6 @@ explanatory variables for spatial heterogeneity analysis: Cases with
 different types of spatial data, GIScience & Remote Sensing, 57(5),
 593-610. doi: 10.1080/15481603.2020.1760434.
 
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
-
 ## Examples
 
 ``` r

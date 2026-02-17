@@ -74,7 +74,3 @@ A ggplot2 layer.
 
 When both `scatter` and `pie` are set to `TRUE` in RStudio, enlarge the
 drawing frame for normal display.
-
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>

@@ -40,7 +40,3 @@ plot(x, slicenum = 2, alpha = 0.95, keep = TRUE, ...)
 ## Value
 
 A ggplot2 layer.
-
-## Author
-
-Wenbo Lv <lyu.geosocial@gmail.com>
