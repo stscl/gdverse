@@ -2,7 +2,7 @@ Package: gdverse
 Title: Analysis of Spatial Stratified Heterogeneity
 Version: 1.7
 Authors@R: c(
-      person(given = "Wenbo", family = "Lv",
+      person(given = "Wenbo", family = "Lyu",
              email = "lyu.geosocial@gmail.com", 
              role = c("aut", "cre", "cph"),
              comment = c(ORCID = "0009-0002-6003-3800")),
