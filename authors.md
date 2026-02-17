@@ -2,8 +2,8 @@
 
 ## Authors
 
-- **[Wenbo Lv](https://spatlyu.github.io/)**. Author, maintainer,
-  copyright holder. [](https://orcid.org/0009-0002-6003-3800)
+- **Wenbo Lyu**. Author, maintainer, copyright holder.
+  [](https://orcid.org/0009-0002-6003-3800)
 
 - **[Yangyang Lei](https://layeyo.github.io/)**. Author.
   [](https://orcid.org/0009-0002-6518-3613)
