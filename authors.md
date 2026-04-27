@@ -25,9 +25,9 @@
 Source:
 [`inst/CITATION`](https://github.com/stscl/gdverse/blob/main/inst/CITATION)
 
-Lv W, Lei Y, Liu F, Yan J, Song Y, Zhao W (2025). “gdverse: An R Package
-for Spatial Stratified Heterogeneity Family.” *Transactions in GIS*,
-**29**(2). [doi:10.1111/tgis.70032](https://doi.org/10.1111/tgis.70032).
+Lv, W., Lei, Y., Liu, F., Yan, J., Song, Y., Zhao, W., 2025. gdverse: An
+R Package for Spatial Stratified Heterogeneity Family. Transactions in
+GIS 29. https://doi.org/10.1111/tgis.70032
 
     @Article{,
       title = {gdverse: An R Package for Spatial Stratified Heterogeneity Family},
