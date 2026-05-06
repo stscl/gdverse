@@ -1,4 +1,4 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
@@ -10,7 +10,7 @@ articles:
   sesu: sesu.html
   shegd: shegd.html
   spade: spade.html
-last_built: 2026-04-27T15:07Z
+last_built: 2026-05-06T04:52Z
 urls:
   reference: https://stscl.github.io/gdverse/reference
   article: https://stscl.github.io/gdverse/articles

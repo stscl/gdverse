@@ -5,6 +5,7 @@ Due to the time-consuming computations involved in the vignettes of the
 package submission.
 
 ``` r
+
 .prebuild_vignettes = \(name){
   out = paste0("vignettes/",name,".Rmd")
   inp = paste0(out,".orig")
@@ -15,6 +16,7 @@ package submission.
 - Compile all vignettes at once
 
 ``` r
+
 for (v in c("consistency", "gd", "opgd", "sesu", "shegd", "spade", "idsa", "rgdrid")) {
   .prebuild_vignettes(v)
 }
@@ -23,6 +25,7 @@ for (v in c("consistency", "gd", "opgd", "sesu", "shegd", "spade", "idsa", "rgdr
 - Build vignettes separately
 
 ``` r
+
 .prebuild_vignettes("consistency")
 .prebuild_vignettes("gd")
 .prebuild_vignettes("opgd")

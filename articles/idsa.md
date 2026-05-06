@@ -10,6 +10,7 @@ demonstrate the use of the IDSA model.
 ### Load data and package
 
 ``` r
+
 library(sf)
 library(tidyverse)
 library(gdverse)
@@ -46,12 +47,14 @@ depression
 We use the same spatial weight matrix as SPADE vignette.
 
 ``` r
+
 wt = sdsfun::inverse_distance_swm(depression)
 ```
 
 ### IDSA modeling
 
 ``` r
+
 tictoc::tic()
 idsa.model = idsa(Depression_prevelence ~ .,
                   data = depression,

@@ -3,6 +3,7 @@
 ### Load data and package
 
 ``` r
+
 library(gdverse)
 
 data("ndvi")
@@ -26,6 +27,7 @@ head(ndvi)
 to discretize them based on geodetector q-statistic.
 
 ``` r
+
 tictoc::tic()
 g = gd_optunidisc(NDVIchange ~ .,
                   data = dplyr::select(ndvi,-c(Climatezone,Mining)),
@@ -35,6 +37,7 @@ tictoc::toc()
 ```
 
 ``` r
+
 g
 ## $x
 ## [1] "GDP"           "Popdensity"    "Precipitation" "Tempchange"   
@@ -86,6 +89,7 @@ parameter based on the Q statistic of the geographical detector (factor
 detector), we can combine it with other columns in `ndvi` tibble now.
 
 ``` r
+
 new.ndvi = dplyr::bind_cols(dplyr::select(ndvi,NDVIchange,Climatezone,Mining),new.ndvi)
 new.ndvi
 ## # A tibble: 713 × 7
@@ -110,6 +114,7 @@ Then, we can run geodetector model by
 [`gd()`](https://stscl.github.io/gdverse/reference/gd.md) function.
 
 ``` r
+
 gd(NDVIchange ~ .,data = new.ndvi,type = 'factor')
 ##                 Factor Detector            
 ## 
@@ -146,6 +151,7 @@ gd(NDVIchange ~ .,data = new.ndvi,type = 'interaction')
 ### You can also use `opgd()` in one time to get result above.
 
 ``` r
+
 ndvi_opgd = opgd(NDVIchange ~ ., data = ndvi, discnum = 3:15,
                  discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                  cores = 6, type = c('factor','interaction'))
@@ -187,6 +193,7 @@ You can use [`plot()`](https://rdrr.io/r/graphics/plot.default.html) to
 visualize the result.
 
 ``` r
+
 plot(ndvi_opgd)
 ```
 
@@ -196,6 +203,7 @@ Use `$opt_param` to get the optimal discretization parameter in OPGD
 model:
 
 ``` r
+
 ndvi_opgd$opt_param
 ## # A tibble: 4 × 3
 ##   varibale      discnum method  

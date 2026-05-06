@@ -19,6 +19,7 @@ First, we construct FVC data under different spatial units using the
 original data.
 
 ``` r
+
 library(terra)
 library(tidyverse)
 library(gdverse)
@@ -40,6 +41,7 @@ The original data resolution is `1000`m, and then we construct the data
 under `2000-10000` m spatial units with 1000 spatial unit interval.
 
 ``` r
+
 su = seq(1000,10000,by = 1000)
 fvc1000 = tibble::as_tibble(terra::as.data.frame(fvc,na.rm = T))
 fvc_other = 2:10 %>%
@@ -194,6 +196,7 @@ str(fvc)
 ## Comparison of Size Effect of Spatial Units based on OPGD model
 
 ``` r
+
 discvar = names(select(fvc1000,-c(fvc,lulc)))
 g1 = sesu_opgd(fvc ~ ., data = fvc,su = su,discvar = discvar,cores = 12)
 g1
@@ -376,6 +379,7 @@ plot(g1)
 ## Comparison of Size Effect of Spatial Units based on GOZH model
 
 ``` r
+
 g2 = sesu_gozh(fvc ~ ., data = fvc, su = su,
                cores = 12, increase_rate = 0.005)
 g2
@@ -457,6 +461,7 @@ variables) in
 by assign `strategy` to `1`.
 
 ``` r
+
 g3 = sesu_gozh(fvc ~ ., data = fvc, su = su, cores = 12,
                strategy = 1, increase_rate = 0.005)
 g3

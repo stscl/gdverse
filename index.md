@@ -12,23 +12,24 @@ successor to
 
 Current models and functions provided by **gdverse** are:
 
-| *Model*                                                 | *Function*                                                      | *Support* |
-|---------------------------------------------------------|-----------------------------------------------------------------|-----------|
-| [GD](https://doi.org/10.1080/13658810802443457)         | [`gd()`](https://stscl.github.io/gdverse/reference/gd.md)       | ✔️        |
-| [OPGD](https://doi.org/10.1080/15481603.2020.1760434)   | [`opgd()`](https://stscl.github.io/gdverse/reference/opgd.md)   | ✔️        |
-| [GOZH](https://doi.org/10.1016/j.isprsjprs.2022.01.009) | [`gozh()`](https://stscl.github.io/gdverse/reference/gozh.md)   | ✔️        |
-| [LESH](https://doi.org/10.1080/17538947.2023.2271883)   | [`lesh()`](https://stscl.github.io/gdverse/reference/lesh.md)   | ✔️        |
-| [SPADE](https://doi.org/10.1080/13658816.2018.1476693)  | [`spade()`](https://stscl.github.io/gdverse/reference/spade.md) | ✔️        |
-| [IDSA](https://doi.org/10.1080/13658816.2021.1882680)   | [`idsa()`](https://stscl.github.io/gdverse/reference/idsa.md)   | ✔️        |
-| [RGD](https://doi.org/10.1016/j.jag.2022.102782)        | [`rgd()`](https://stscl.github.io/gdverse/reference/rgd.md)     | ✔️        |
-| [RID](https://doi.org/10.1016/j.spasta.2024.100814)     | [`rid()`](https://stscl.github.io/gdverse/reference/rid.md)     | ✔️        |
-| [SRSGD](https://doi.org/10.1016/j.ins.2021.12.019)      | [`srsgd()`](https://stscl.github.io/gdverse/reference/srsgd.md) | ✔️        |
+| *Model* | *Function* | *Support* |
+|----|----|----|
+| [GD](https://doi.org/10.1080/13658810802443457) | [`gd()`](https://stscl.github.io/gdverse/reference/gd.md) | ✔️ |
+| [OPGD](https://doi.org/10.1080/15481603.2020.1760434) | [`opgd()`](https://stscl.github.io/gdverse/reference/opgd.md) | ✔️ |
+| [GOZH](https://doi.org/10.1016/j.isprsjprs.2022.01.009) | [`gozh()`](https://stscl.github.io/gdverse/reference/gozh.md) | ✔️ |
+| [LESH](https://doi.org/10.1080/17538947.2023.2271883) | [`lesh()`](https://stscl.github.io/gdverse/reference/lesh.md) | ✔️ |
+| [SPADE](https://doi.org/10.1080/13658816.2018.1476693) | [`spade()`](https://stscl.github.io/gdverse/reference/spade.md) | ✔️ |
+| [IDSA](https://doi.org/10.1080/13658816.2021.1882680) | [`idsa()`](https://stscl.github.io/gdverse/reference/idsa.md) | ✔️ |
+| [RGD](https://doi.org/10.1016/j.jag.2022.102782) | [`rgd()`](https://stscl.github.io/gdverse/reference/rgd.md) | ✔️ |
+| [RID](https://doi.org/10.1016/j.spasta.2024.100814) | [`rid()`](https://stscl.github.io/gdverse/reference/rid.md) | ✔️ |
+| [SRSGD](https://doi.org/10.1016/j.ins.2021.12.019) | [`srsgd()`](https://stscl.github.io/gdverse/reference/srsgd.md) | ✔️ |
 
 ## Installation
 
 - Install from [CRAN](https://CRAN.R-project.org/package=gdverse) with:
 
 ``` r
+
 install.packages("gdverse", dep = TRUE)
 ```
 
@@ -36,6 +37,7 @@ install.packages("gdverse", dep = TRUE)
   [R-universe](https://stscl.r-universe.dev/gdverse) with:
 
 ``` r
+
 install.packages('gdverse',
                  repos = c("https://stscl.r-universe.dev",
                            "https://cloud.r-project.org"),
@@ -46,6 +48,7 @@ install.packages('gdverse',
   [GitHub](https://github.com/stscl/gdverse) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("stscl/gdverse",
                          build_vignettes = TRUE,
@@ -66,6 +69,7 @@ details on using them, please refer to
 ## Example
 
 ``` r
+
 library(gdverse)
 data("ndvi")
 ndvi
@@ -88,6 +92,7 @@ ndvi
 ### OPGD model
 
 ``` r
+
 discvar = names(ndvi)[-1:-3]
 discvar
 ## [1] "Tempchange"    "Precipitation" "GDP"           "Popdensity"
@@ -110,6 +115,7 @@ ndvi_opgd
 ### GOZH model
 
 ``` r
+
 g = gozh(NDVIchange ~ ., data = ndvi)
 g
 ## ***   Geographically Optimal Zones-based Heterogeneity Model       

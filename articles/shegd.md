@@ -14,6 +14,7 @@ heterogeneity explanation* based on **GOZH** and **LESH** model.
 ### Load data and package
 
 ``` r
+
 library(tidyverse)
 library(gdverse)
 
@@ -33,6 +34,7 @@ head(ndvi)
 ### Univariate power of determinants detection
 
 ``` r
+
 gozh.uvi = gozh(NDVIchange ~ ., data = ndvi)
 gozh.uvi
 ## ***   Geographically Optimal Zones-based Heterogeneity Model       
@@ -54,6 +56,7 @@ plot(gozh.uvi)
 ### Variable interaction detection
 
 ``` r
+
 gozh.bi = gozh(NDVIchange ~ ., data = ndvi, type = 'interaction')
 gozh.bi
 ## ***   Geographically Optimal Zones-based Heterogeneity Model       
@@ -84,6 +87,7 @@ plot(gozh.bi)
 ### Variable interaction contribution
 
 ``` r
+
 lesh.m = lesh(NDVIchange ~ ., data = ndvi, cores = 6)
 lesh.m
 ## ***       Locally Explained Stratified Heterogeneity Model         
@@ -119,6 +123,7 @@ adding subfigure annotations and adjusting the size of the text on the
 x-y axis:
 
 ``` r
+
 plot(lesh.m, pie = TRUE, scatter = TRUE,
      pielegend_x = 0.98, pielegend_y = 0.15) +
   patchwork::plot_annotation(tag_levels = 'a',
@@ -138,6 +143,7 @@ And you can only look at the contribution part of the variable
 interaction:
 
 ``` r
+
 plot(lesh.m, pie = TRUE, scatter = FALSE)
 ```
 
@@ -147,6 +153,7 @@ By accessing the concrete result through `lesh.m$interaction`, which
 returns a `tibble`.
 
 ``` r
+
 lesh.m$interaction
 ## # A tibble: 15 × 11
 ##    variable1     variable2     Interaction        Variable1 Q-statisti…¹ Variable2 Q-statisti…²
@@ -176,6 +183,7 @@ lesh.m$interaction
 Use `lesh.m$spd_lesh` to access the SHAP power of determinants:
 
 ``` r
+
 lesh.m$spd_lesh
 ## # A tibble: 6 × 2
 ##   variable      spd_theta

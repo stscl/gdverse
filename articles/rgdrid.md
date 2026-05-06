@@ -3,12 +3,14 @@
 ### Load data and package
 
 ``` r
+
 library(gdverse)
 
 data("ndvi")
 ```
 
 ``` r
+
 names(ndvi)
 ## [1] "NDVIchange"    "Climatezone"   "Mining"        "Tempchange"    "Precipitation"
 ## [6] "GDP"           "Popdensity"
@@ -17,6 +19,7 @@ names(ndvi)
 ### Run RGD
 
 ``` r
+
 ndvi_rgd = rgd(NDVIchange ~ ., data = ndvi,
                discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 3:8, cores = 12)
@@ -43,6 +46,7 @@ of variables. By default, `Spatial Intersection` are used to generate a
 new spatial partition of the interaction variables.
 
 ``` r
+
 ndvi_rid = rid(NDVIchange ~ ., data = ndvi,
                discvar = names(dplyr::select(ndvi,-c(NDVIchange,Climatezone,Mining))),
                discnum = 8, cores = 12)

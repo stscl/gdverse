@@ -6,6 +6,7 @@ detector in the `gdverse` package and existing R packages of GDModels
 `gdverse` package as the demo;
 
 ``` r
+
 NTDs = gdverse::NTDs[,1:4]
 
 res1 = gdverse::gd(incidence ~ ., data = NTDs)

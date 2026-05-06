@@ -6,6 +6,7 @@ This vignette explains how to run **native geographic detector(GD)** in
 ### Load package and pre-processing data.
 
 ``` r
+
 library(sf)
 library(tidyverse)
 library(gdverse)
@@ -14,6 +15,7 @@ library(gdverse)
 See layers in `NTDs.gpkg`:
 
 ``` r
+
 ntdspath = system.file("extdata", "NTDs.gpkg",package = 'gdverse')
 st_layers(ntdspath)
 ## Driver: GPKG 
@@ -32,6 +34,7 @@ discrete variables.
 Now we need to combine these layers together:
 
 ``` r
+
 watershed = read_sf(ntdspath,layer = 'watershed')
 elevation = read_sf(ntdspath,layer = 'elevation')
 soiltype = read_sf(ntdspath,layer = 'soiltype')
@@ -41,6 +44,7 @@ disease = read_sf(ntdspath,layer = 'disease')
 Plot them together:
 
 ``` r
+
 library(cowplot)
 
 f1 = ggplot(data = disease) +
@@ -109,6 +113,7 @@ p
 Attribute spatial join
 
 ``` r
+
 NTDs = disease %>%
   st_centroid() %>%
   st_join(watershed[,"watershed"]) %>%
@@ -120,6 +125,7 @@ NTDs = disease %>%
 Check whether has `NA` in `NTDs`:
 
 ``` r
+
 NTDs %>%
   dplyr::filter(if_any(everything(),~is.na(.x)))
 ## Simple feature collection with 4 features and 5 fields
@@ -139,6 +145,7 @@ NTDs %>%
 Filter out all rows with no `NA` values:
 
 ``` r
+
 NTDs %>%
   dplyr::filter(if_all(everything(),~!is.na(.x))) -> NTDs
 NTDs
@@ -166,6 +173,7 @@ NTDs
 Remove unnecessary columns of data:
 
 ``` r
+
 NTDs = NTDs %>%
   st_drop_geometry() %>%
   dplyr::select(-SP_ID)
@@ -189,6 +197,7 @@ NTDs
 ### Factor detector
 
 ``` r
+
 fd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'factor')
 fd
@@ -207,6 +216,7 @@ plot(fd)
 ### Interaction detector
 
 ``` r
+
 id = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'interaction')
 id
@@ -225,6 +235,7 @@ plot(id)
 ### Risk detector
 
 ``` r
+
 rd = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'risk')
 rd
@@ -271,6 +282,7 @@ You can change the significant interval by assign `alpha` argument,the
 default value of `alpha` argument is `0.95`.
 
 ``` r
+
 rd99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'risk',alpha = 0.99)
 rd99
@@ -313,6 +325,7 @@ rd99
 ### Ecological detector
 
 ``` r
+
 ed = gd(incidence ~ watershed + elevation + soiltype,
         data = NTDs,type = 'ecological')
 ed
@@ -331,6 +344,7 @@ You can also change the significant interval by assign `alpha`
 argument,the default value of `alpha` argument is `0.95`.
 
 ``` r
+
 ed99 = gd(incidence ~ watershed + elevation + soiltype,
           data = NTDs,type = 'ecological',alpha = 0.99)
 ed99
@@ -345,6 +359,7 @@ ed99
 ### Running four basic geodetectors simultaneously
 
 ``` r
+
 g = gd(incidence ~ watershed + elevation + soiltype,
        data = NTDs,
        type = c("factor", "interaction", "risk", "ecological"))

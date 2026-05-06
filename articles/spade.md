@@ -3,6 +3,7 @@
 ### Load data and package
 
 ``` r
+
 library(sf)
 library(tidyverse)
 library(gdverse)
@@ -37,6 +38,7 @@ depression
 ### Spatial Autocorrelation of Depression Prevelence
 
 ``` r
+
 set.seed(123456789)
 
 gmi = sdsfun::moran_test(depression)
@@ -65,6 +67,7 @@ moderate level of positive spatial autocorrelation in the global scale.
 ### OPGD modeling
 
 ``` r
+
 depression_opgd = opgd(Depression_prevelence ~ .,
                        data = depression, cores = 12)
 depression_opgd
@@ -88,6 +91,7 @@ depression_opgd
 **You can access the detailed q statistics by `depression_opgd$factor`**
 
 ``` r
+
 depression_opgd$factor
 ## # A tibble: 10 × 3
 ##    variable              `Q-statistic` `P-value`
@@ -129,6 +133,7 @@ created by
 [`sdsfun::inverse_distance_swm()`](https://stscl.github.io/sdsfun/reference/inverse_distance_swm.html).
 
 ``` r
+
 wt1 = sdsfun::inverse_distance_swm(depression)
 ```
 
@@ -138,18 +143,21 @@ in
 function.
 
 ``` r
+
 wt2 = sdsfun::inverse_distance_swm(depression,power = 2)
 ```
 
 Or using a spatial weight matrix based on geospatial contiguity.
 
 ``` r
+
 wt3 = sdsfun::spdep_contiguity_swm(depression, k = 8)
 ```
 
 Or using a spatial weight matrix based on distance kernel functions.
 
 ``` r
+
 wt4 = sdsfun::spdep_distance_swm(depression, k = 6, kernel = 'gaussian')
 ```
 
@@ -166,6 +174,7 @@ weight matrix `wt1`.
 ### SPADE modeling
 
 ``` r
+
 depression_spade = spade(Depression_prevelence ~ .,
                          data = depression,
                          wt = wt1, cores = 12)
@@ -193,6 +202,7 @@ plot(depression_spade, slicenum = 6)
 `depression_spade$factor`**
 
 ``` r
+
 depression_spade$factor
 ## # A tibble: 10 × 3
 ##    variable              `Q-statistic` `P-value`        
