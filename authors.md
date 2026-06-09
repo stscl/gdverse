@@ -36,5 +36,6 @@ GIS 29. https://doi.org/10.1111/tgis.70032
       year = {2025},
       volume = {29},
       number = {2},
+      pages = {e70032},
       doi = {10.1111/tgis.70032},
     }

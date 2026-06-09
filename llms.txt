@@ -30,7 +30,7 @@ Current models and functions provided by **gdverse** are:
 
 ``` r
 
-install.packages("gdverse", dep = TRUE)
+install.packages("gdverse", dependencies = TRUE)
 ```
 
 - Install development binary version from
@@ -38,10 +38,10 @@ install.packages("gdverse", dep = TRUE)
 
 ``` r
 
-install.packages('gdverse',
+install.packages("gdverse",
                  repos = c("https://stscl.r-universe.dev",
                            "https://cloud.r-project.org"),
-                 dep = TRUE)
+                 dependencies = TRUE)
 ```
 
 - Install development source version from
@@ -49,10 +49,10 @@ install.packages('gdverse',
 
 ``` r
 
-# install.packages("devtools")
-devtools::install_github("stscl/gdverse",
-                         build_vignettes = TRUE,
-                         dep = TRUE)
+if (!requireNamespace("pak", quietly = TRUE)) {
+    install.packages("pak")
+}
+pak::pak("stscl/gdverse", dependencies = TRUE)
 ```
 
 ✨ Please ensure that **Rcpp** is properly installed and the appropriate
@@ -152,7 +152,8 @@ A BibTeX entry for LaTeX users is:
     publisher={Wiley}, 
     author={Lv, Wenbo and Lei, Yangyang and Liu, Fangmei and Yan, Jianwu and Song, Yongze and Zhao, Wufan},
     year={2025}, 
-    month={mar}
+    month={mar},
+    pages={e70032}
 }
 ```
 
